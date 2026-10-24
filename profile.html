@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg-color: var(--tg-theme-bg-color, #ffffff);
+    --text-color: var(--tg-theme-text-color, #000000);
+    --hint-color: var(--tg-theme-hint-color, #999999);
+    --card-bg: var(--tg-theme-secondary-bg-color, #f1f1f1);
+    --btn-color: var(--tg-theme-button-color, #2481cc);
+    --btn-text: var(--tg-theme-button-text-color, #ffffff);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px 20px 90px 20px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+  }
+
+  .user-info h2 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+  }
+
+  .user-info p {
+    margin: 0;
+    color: var(--hint-color);
+    font-size: 14px;
+  }
+
+  .stat-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-card h3 { margin: 0; font-size: 16px; }
+  .stat-card span { font-size: 20px; font-weight: 800; color: var(--btn-color); }
+
+  .danger-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: transparent;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .danger-btn:active { background-color: rgba(239, 68, 68, 0.1); }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 70px;
+    background-color: var(--bg-color);
+    border-top: 1px solid rgba(128, 128, 128, 0.15);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .nav-item {
+    display: flex; flex-direction: column; align-items: center;
+    color: var(--hint-color); text-decoration: none;
+    font-size: 10px; font-weight: 600; gap: 4px;
+  }
+
+  .nav-item.active { color: var(--btn-color); }
+  .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
+</style>
+</head>
+<body>
+
+  <div class="profile-header">
+    <div class="avatar" id="user-avatar">👤</div>
+    <div class="user-info">
+      <h2 id="user-name">Привіт!</h2>
+      <p>Вивчаємо німецьку 🇩🇪</p>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <h3>Загальний досвід (XP)</h3>
+    <span id="total-xp">0</span>
+  </div>
+
+  <button class="danger-btn" onclick="resetAll()">🗑 Очистити весь прогрес</button>
+
+  <!-- Нижнее меню -->
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M4 19h16v-2H4v2zm0-4h16v-2H4v2zm0-4h16v-2H4v2zm0-6v2h16V5H4z"/></svg>
+      <span>Бібліотека</span>
+    </a>
+    <a href="#" class="nav-item active">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+      <span>Профіль</span>
+    </a>
+  </div>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    
+    // 1. Отримуємо ім'я з Telegram
+    if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+      const user = tg.initDataUnsafe.user;
+      document.getElementById('user-name').textContent = user.first_name;
+      if (user.photo_url) {
+        document.getElementById('user-avatar').style.background = `url('${user.photo_url}') center/cover`;
+        document.getElementById('user-avatar').textContent = ''; // Прибираємо емодзі, якщо є фото
+      } else {
+        document.getElementById('user-avatar').textContent = user.first_name.charAt(0).toUpperCase();
+      }
+    }
+
+    // 2. Рахуємо загальний XP з тренажерів
+    function updateStats() {
+      let totalXP = 0;
+      
+      const insertData = JSON.parse(localStorage.getItem('tp_v2_insert') || '{}');
+      const translateData = JSON.parse(localStorage.getItem('tp_v2_translate') || '{}');
+      
+      totalXP += (insertData.x || 0);
+      totalXP += (translateData.x || 0);
+      
+      document.getElementById('total-xp').textContent = totalXP;
+    }
+    
+    updateStats();
+
+    // 3. Очищення прогресу
+    function resetAll() {
+      if (confirm('Ви впевнені, що хочете скинути прогрес ВСІХ тренажерів? Цю дію не можна скасувати.')) {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('tp_v2_')) {
+            localStorage.removeItem(key);
+          }
+        }
+        alert('Прогрес успішно скинуто!');
+        updateStats(); 
+      }
+    }
+
+    // Кнопка "Назад" в Telegram веде в меню
+    tg.BackButton.show();
+    tg.BackButton.onClick(() => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
