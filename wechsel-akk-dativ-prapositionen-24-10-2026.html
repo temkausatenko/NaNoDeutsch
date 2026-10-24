@@ -984,7 +984,7 @@ GROUPS.forEach(g=>{
 
 /* ============ STATE ============ */
 const XP_MAX=500;
-const KEY=(g,m)=>`praep_v6_${g}_${m}`;
+const KEY=(g,m)=>`tp_v2_praep_${g}_${m}`;
 const blankState=()=>({k:{},r:0,w:0,err:{},x:0});
 const S={};
 function readLS(key){try{const v=JSON.parse(localStorage.getItem(key));return v&&v.k?v:null}catch(e){return null}}
