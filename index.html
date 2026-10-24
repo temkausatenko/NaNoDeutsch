@@ -12,6 +12,7 @@
     --hint-color: var(--tg-theme-hint-color, #999999);
     --card-bg: var(--tg-theme-secondary-bg-color, #f1f1f1);
     --btn-color: var(--tg-theme-button-color, #2481cc);
+    --btn-text: var(--tg-theme-button-text-color, #ffffff);
   }
 
   body {
@@ -19,7 +20,7 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 20px; /* Отступы со всех сторон, так как нижнего меню больше нет */
+    padding: 20px; /* Убрали лишний отступ снизу для меню */
     transition: background-color 0.3s, color 0.3s;
   }
 
@@ -104,13 +105,13 @@
 <body>
 
   <div class="header">
-    <h1>Тренажери</h1>
-    <p>Оберіть тему для тренування</p>
+    <h1>Тренажеры</h1>
+    <p>Выбери тему для тренировки</p>
   </div>
 
   <div class="grid">
-    <!-- Карточка 1 -->
-    <a href="Temporale Präpositionen 07.10.2026.html" class="card">
+    <!-- Карточка 1: Temporale Präpositionen -->
+    <a href="temporale-prapositionen-07-10-2026.html" class="card">
       <div class="card-image">⏱️</div>
       <div class="card-content">
         <h2 class="card-title">Temporale Präpositionen</h2>
@@ -121,8 +122,8 @@
       </div>
     </a>
 
-    <!-- Карточка 2: Konnektoren -->
-    <a href="konnektoren-trainer.html" class="card">
+    <!-- Карточка 2: Alle Konnektoren -->
+    <a href="alle-konnektoren-24-10-2026.html" class="card">
       <div class="card-image">🔗</div>
       <div class="card-content">
         <h2 class="card-title">Konnektoren Meister</h2>
@@ -136,8 +137,8 @@
 
   <script>
     const tg = window.Telegram.WebApp;
-    tg.expand(); 
-    tg.ready();  
+    tg.expand(); // Разворачиваем на весь экран
+    tg.ready();  // Сообщаем Telegram, что приложение готово
   </script>
 </body>
 </html>
