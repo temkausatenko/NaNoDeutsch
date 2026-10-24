@@ -1,0 +1,1268 @@
+<!doctype html><html><head><meta charset=utf8><script src="https://telegram.org/js/telegram-web-app.js"></script><script src="sync.js"></script><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Worauf? Darauf!</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{
+  --bg:#090b10;
+  --bg-grad:#151b2b;
+  --card:#12161f;
+  --card-hover:#1a202c;
+  --tx:#f1f5f9;
+  --mu:#94a3b8;
+  --pr:#6366f1;
+  --pr-glow:rgba(99,102,241,.4);
+  --pl:#1e293b;
+  --ok:#10b981;
+  --okb:rgba(16,185,129,.1);
+  --no:#ef4444;
+  --nob:rgba(239,68,68,.1);
+  --go:#f59e0b;
+  --gob:rgba(245,158,11,.1);
+  --bd:#2a3441;
+  --sa:#a78bfa;
+  --pe:#f9a8d4;
+  --sa-bg:rgba(167,139,250,.1);
+  --pe-bg:rgba(249,168,212,.1);
+  --radius:16px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f8fafc;--bg-grad:#e2e8f0;--card:#ffffff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);
+  --pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;
+  --nob:rgba(220,38,38,.1);--go:#d97706;--gob:rgba(217,119,6,.1);
+  --bd:#cbd5e1;--sa:#7c3aed;--pe:#db2777;
+  --sa-bg:rgba(124,58,237,.1);--pe-bg:rgba(219,39,119,.1);
+color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f8fafc;--bg-grad:#e2e8f0;--card:#ffffff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);
+  --pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;
+  --nob:rgba(220,38,38,.1);--go:#d97706;--gob:rgba(217,119,6,.1);
+  --bd:#cbd5e1;--sa:#7c3aed;--pe:#db2777;
+  --sa-bg:rgba(124,58,237,.1);--pe-bg:rgba(219,39,119,.1);
+color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
+  color:var(--tx);
+  font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  transition:background-color .3s,color .3s;
+}
+.w{max-width:720px;margin:0 auto;padding-block:24px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
+.header-wrap{position:relative;text-align:center;margin-bottom:16px;padding-top:8px}
+h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
+
+.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
+.theme-toggle{right:0}
+.sound-toggle{right:48px}
+.theory-top-toggle{right:96px}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+
+/* ===== EXP (під карткою, як у temporal trainer, max 500) ===== */
+.xp{--xa:#475569;--xz:#94a3b8;margin:20px 0 0;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s;animation:slideUp .4s cubic-bezier(.16,1,.3,1)}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{position:relative;display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;transition:width .7s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
+.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+@keyframes xgold{to{background-position:200% 0}}
+
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
+.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
+.tab.on small{color:#fff;background:rgba(255,255,255,.2)}
+
+.pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.stat-box{background:var(--card);padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:2px;font-weight:600}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--tx);line-height:1.1}
+.stat-val.ok{color:var(--ok)}
+.stat-val.no{color:var(--no)}
+
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
+@keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:88px;text-transform:uppercase}
+.reset,.speak{position:absolute;top:16px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2}
+.reset{right:16px;font-size:1.05rem}
+.speak{right:54px;font-size:.95rem}
+.reset:hover,.speak:hover{color:var(--tx);border-color:var(--pr)}
+
+.sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.sent:hover{opacity:.85}
+.sent:active{opacity:.7}
+.u{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--sa)}
+.u.P{text-decoration-color:var(--pe)}
+
+.lab{margin:18px 0 4px;font-size:.66rem;letter-spacing:.16em;font-weight:600;color:var(--mu);text-transform:uppercase}
+.scheme{font-size:.95rem;color:var(--mu);margin:8px 0 0;line-height:1.5}
+.scheme .np{color:var(--tx);font-weight:500}
+.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
+.blank.ok{color:var(--ok);border-color:var(--ok)}
+.blank.no{color:var(--no);border-color:var(--no)}
+
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.opt{flex:1 1 auto;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
+.opt.ok,.opt.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.opt.er,.opt.er:hover{border-color:var(--no);background:var(--nob);color:var(--no);animation:shake .4s}
+.opt:disabled{cursor:default}
+.opt:disabled:not(.ok):not(.er){opacity:.45}
+
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;font-size:1rem;outline:none;transition:border-color .2s}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 2px var(--pr-glow)}
+.chk,.next{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
+.chk{border:2px solid var(--pr);background:var(--pr);color:#fff}
+.chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.next{border:2px solid var(--bd);background:transparent;color:var(--tx)}
+.next:hover{border-color:var(--pr)}
+
+.card:not(.mc) .opts{display:none}
+.card.mc .row input,.card.mc .chk,.card.mc .um-row .um{display:none}
+.card.mc .row .next{padding:12px 20px}
+
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.um{width:36px;height:34px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-size:.95rem;cursor:pointer;transition:all .18s}
+.um:hover{color:var(--tx);border-color:var(--pr)}
+.tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
+.tool:hover{color:var(--tx)}
+
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
+.fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
+.fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
+.fb.hint{display:block;background:var(--gob);border-color:var(--go)}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}
+.fb.er .k{color:var(--no)}
+.fb.hint .k{color:var(--go)}
+.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
+.fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
+.fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
+.fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2s linear forwards;width:100%}
+@keyframes shrink{to{width:0}}
+
+.foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
+.foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
+.btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
+.btn:hover{border-color:var(--pr);transform:translateY(-1px)}
+.btn.g{font-weight:500;font-size:.82rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
+.btn.g:hover{color:var(--tx);background:var(--pl);transform:none}
+.btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+
+.todo{margin-top:28px}
+.todo h2{font-size:.68rem;font-weight:600;letter-spacing:.16em;margin:0;color:var(--mu);text-transform:uppercase}
+.todo h2 b{color:var(--tx);margin-left:6px}
+.todo p{margin:6px 0 14px;color:var(--mu);font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:6px}
+.it{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;border:1px solid var(--bd);background:transparent;color:var(--tx);font:inherit;font-size:.85rem;text-align:left;cursor:pointer;transition:all .18s}
+.it:hover{border-color:var(--pr);background:var(--card-hover)}
+.it.cur{border-color:var(--pr);background:var(--card-hover)}
+.it.done{opacity:.4}
+.it i{flex:none;width:8px;height:8px;border-radius:50%;background:color-mix(in srgb,var(--mu) 45%,transparent);transition:background .3s}
+.it.c1 i{background:var(--pr)}
+.it.c2 i{background:var(--go)}
+.it.c3 i{background:var(--ok)}
+.it span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it em{font-style:normal;color:var(--mu);font-size:.75rem}
+
+.glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px;margin:28px 0;padding:14px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);font-size:.75rem;color:var(--mu)}
+.glossary div{padding:6px 8px;border-radius:6px;background:var(--pl)}
+.glossary b{display:block;color:var(--sa);font-weight:600;font-size:.85rem;margin-bottom:1px}
+
+.complete{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;z-index:100;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-card .cmax{color:var(--tx);font-weight:600}
+.complete-card p b{color:var(--tx)}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover{border-color:var(--pr)}
+
+#theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
+#theory-section.show{display:block}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.theory-card h2{font-size:1.2rem;color:var(--sa);border-bottom:1px solid var(--bd);padding-bottom:6px;margin-top:24px}
+.theory-card h2:first-child{margin-top:0}
+.theory-card h3{font-size:1rem;color:var(--tx);margin-top:18px}
+.theory-card p,.theory-card li{color:var(--mu);font-size:.92rem;line-height:1.6}
+.theory-card ul{padding-left:20px;margin:10px 0}
+.theory-card .rule-box{background:var(--gob);border-left:4px solid var(--go);padding:11px 14px;margin:16px 0;border-radius:6px;color:var(--go);font-size:.92rem}
+.theory-card .example{background:var(--pl);border-left:4px solid var(--sa);padding:11px 14px;margin:10px 0;font-style:italic;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .example.P{border-left-color:var(--pe)}
+.theory-card .example span.hl{color:var(--sa);font-weight:bold}
+.theory-card .example.P span.hl{color:var(--pe)}
+.table-wrap{overflow-x:auto}
+.theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
+.theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
+.theory-card th{background:var(--pl);color:var(--tx)}
+.theory-card tr:nth-child(even){background:rgba(0,0,0,.02)}
+
+@media(max-width:480px){
+  .row{flex-direction:column}
+  .chk,.next{padding:12px}
+  .card.mc .next{padding:12px 20px}
+  .tool{margin-left:0}
+  .card{padding:18px}
+  h1{font-size:1.4rem}
+  .complete-card{padding:22px 18px}
+  .theory-card{padding:16px}
+  .theory-top-toggle{right:96px}
+  .sound-toggle{right:48px}
+  .theme-toggle{right:0}
+  .stat-label{font-size:.6rem}
+  .stat-val{font-size:1.05rem}
+}
+@media(hover:hover) and (pointer:fine){
+  .tab:hover{border-color:var(--pr);color:var(--tx)}
+  .tab.on:hover{background:#4f46e5}
+  .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.g:hover{transform:none}
+}
+button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+@media(max-width:480px){.header-wrap{padding-top:48px}}
+.trw{margin:2px 0 0}.trw:empty{display:none}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:.9rem;line-height:1.4;color:var(--mu)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div class="w">
+  <div class="header-wrap">
+    <h1>Worauf? Darauf!<small>Займенникові прислівники · річ чи людина?</small></h1>
+    <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Тихий режим">🔔</button>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="pg"><i id="bar"></i></div>
+
+  <div class="stats-panel">
+    <div class="stat-box"><div class="stat-label">Речення</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+    <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
+    <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
+  </div>
+
+  <div class="card" id="card">
+    <h2 id="title"></h2>
+    <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
+    <button class="reset" id="reset" title="Скинути прогрес цієї вкладки">↺</button>
+    <p class="sent" id="sent"></p>
+    <div class="trw" id="trw"></div>
+    <div class="lab" id="lab"></div>
+    <div class="scheme" id="scheme"></div>
+    <div class="opts" id="opts"></div>
+    <div class="row">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи повне речення …" enterkeyhint="done">
+      <button class="chk" id="chk">Перевірити ✓</button>
+      <button class="next" id="next">Далі →</button>
+    </div>
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <!-- 👇 EXP тепер тут, під карткою, як у temporal trainer -->
+  <div class="xp" id="xp" data-r="0">
+    <div class="xh">
+      <span class="xl"><i class="xg"></i>EXP цієї вкладки</span>
+      <span class="xv"><b id="xt">0</b><small id="xn">/ 500</small><em class="xpop" id="xpop"></em></span>
+    </div>
+    <div class="xrank">
+      <span class="xrn" id="xr">🌱 Новачок</span>
+      <span class="xnx" id="xnext"></span>
+    </div>
+    <div class="xb"><i id="xf"></i><s id="xticks"></s></div>
+  </div>
+
+  <div class="foot">
+    <div class="foot-row">
+      <button class="btn danger" id="reviewBtn" style="display:none" onclick="startReview()"></button>
+    </div>
+    <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Теорія</button>
+  </div>
+
+  <div class="glossary" id="glossary"></div>
+
+  <div class="todo">
+    <h2>ЩЕ ТРЕНУВАТИ <b id="left"></b></h2>
+    <p>Речення залишається в списку, доки ти не відповіси на нього правильно <b>3 рази поспіль</b>.</p>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div id="theory-section">
+    <div class="theory-card">
+      <h1 style="margin-bottom:14px;font-size:1.4rem;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Займенникові прислівники</h1>
+      <p style="text-align:center;margin-bottom:18px"><em>Повний розбір: worauf / darauf та wen / wem</em></p>
+
+      <div class="rule-box">🚨 <strong>ЗОЛОТЕ ПРАВИЛО:</strong> 
+      Річ/Ситуація → <strong>wo(r)+прийменник</strong> (питання) та <strong>da(r)+прийменник</strong> (відповідь).<br>
+      Людина → <strong>прийменник + wen/wem</strong> (питання) та <strong>прийменник + займенник</strong> (відповідь).
+      </div>
+
+      <h2>1. Річ (Sache) vs Людина (Person)</h2>
+      <p>Головна складність — визначити, з чим ми маємо справу. Від цього залежить, яке питальне слово і який займенник ми використаємо.</p>
+      
+      <div class="table-wrap">
+        <table>
+          <tr><th>Контекст</th><th>Питання</th><th>Відповідь</th><th>Приклад</th></tr>
+          <tr>
+            <td><strong>Річ</strong><br><em>(Sache, Situation)</em></td>
+            <td>Wo(r) + Präp</td>
+            <td>da(r) + Präp</td>
+            <td>Worauf wartest du? — Ich warte <strong>darauf</strong>. (На автобус)</td>
+          </tr>
+          <tr>
+            <td><strong>Людина</strong><br><em>(Person)</em></td>
+            <td>Präp + wen / wem</td>
+            <td>Präp + Pronomen</td>
+            <td>Auf wen wartest du? — Ich warte <strong>auf ihn</strong>. (На друга)</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>2. Коли додається літера -r-?</h2>
+      <p>Літера <strong>r</strong> додається <strong>тільки тоді</strong>, коли прийменник починається з голосної (a, e, i, o, u, ä, ö, ü):</p>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Прийменник</th><th>Питання</th><th>Відповідь</th></tr>
+          <tr><td>auf (голосна)</td><td>wo<b style="color:var(--sa)">r</b>auf</td><td>da<b style="color:var(--sa)">r</b>auf</td></tr>
+          <tr><td>an (голосна)</td><td>wo<b style="color:var(--sa)">r</b>an</td><td>da<b style="color:var(--sa)">r</b>an</td></tr>
+          <tr><td>über (голосна)</td><td>wo<b style="color:var(--sa)">r</b>über</td><td>da<b style="color:var(--sa)">r</b>über</td></tr>
+          <tr><td>mit (приголосна)</td><td>womit</td><td>damit</td></tr>
+          <tr><td>von (приголосна)</td><td>wovon</td><td>davon</td></tr>
+          <tr><td>zu (приголосна)</td><td>wozu</td><td>dazu</td></tr>
+        </table>
+      </div>
+
+      <h2>3. Akkusativ чи Dativ?</h2>
+      <p>Відмінок залежить від прийменника, який вимагає дієслово.</p>
+      <ul>
+        <li><strong>Akkusativ</strong> (<strong>wen</strong>?): прийменники durch, für, gegen, ohne, um, bis, entlang. У цих сполуках Akkusativ вимагають і Wechselpräpositionen an, auf, über, in: warten <strong>auf</strong>, sich freuen <strong>auf</strong>, denken <strong>an</strong>, sprechen <strong>über</strong>, sich verlieben <strong>in</strong>.</li>
+        <li><strong>Dativ</strong> (<strong>wem</strong>?): прийменники aus, bei, mit, nach, seit, von, zu. Dativ вимагають також vor і unter у сполуках Angst haben <strong>vor</strong> та leiden <strong>unter</strong>.</li>
+      </ul>
+      <p>Для речей відмінок не впливає на форму: da(r) + прийменник і wo(r) + прийменник завжди залишаються незмінними.</p>
+      <div class="example"><strong>Akkusativ (wen):</strong> Ich interessiere mich für <span class="hl">meinen Nachbarn</span>. → Für <span class="hl">wen</span>? → Ich interessiere mich für <span class="hl">ihn</span>.</div>
+      <div class="example"><strong>Dativ (wem):</strong> Ich spreche mit <span class="hl">meiner Chefin</span>. → Mit <span class="hl">wem</span>? → Ich spreche mit <span class="hl">ihr</span>.</div>
+
+      <h2>4. da- як зв'язка речень (Konnektor)</h2>
+      <p>Займенникові прислівники з da- можуть замінювати цілі речення або частини тексту. Це робить мову більш природною.</p>
+      <div class="example">Ich habe morgen eine Prüfung. <span class="hl">Davor</span> habe ich Angst.<br><em>(Завтра у мене іспит. Я цього боюся.)</em></div>
+      <div class="example">Er hat viel geübt. <span class="hl">Damit</span> hat er gute Chancen.<br><em>(Він багато тренувався. Завдяки цьому / з цим у нього хороші шанси.)</em></div>
+
+      <h2>5. Специфіка: damit і darum</h2>
+      <p>Ці два слова можуть виступати як займенникові прислівники (вказівка) і як сполучники (мета / причина).</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Слово</th><th>Як займенниковий прислівник (вказівка)</th><th>Як сполучник</th></tr>
+          <tr>
+            <td><strong>damit</strong></td>
+            <td>з цим <br><em>Hier ist der Schlüssel. <strong>Damit</strong> kannst du die Tür öffnen.</em></td>
+            <td>щоб <br><em>Ich lerne Deutsch, <strong>damit</strong> ich in Berlin arbeiten kann.</em></td>
+          </tr>
+          <tr>
+            <td><strong>darum</strong></td>
+            <td>про це / за це <br><em>Worum geht es? Es geht <strong>darum</strong>, pünktlich zu sein.</em></td>
+            <td>тому <br><em>Es regnet stark. <strong>Darum</strong> bleiben wir zu Hause.</em></td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>6. Розмовні скорочення (Umgangssprache)</h2>
+      <p>У розмовній німецькій часто замість wo(r)+прийменник кажуть "was + прийменник", але на письмі та в іспитах використовується стандартна форма.</p>
+      <div class="example">Umgangssprache: <strong>Auf was</strong> wartest du?<br>Standard: <span class="hl">Worauf</span> wartest du?</div>
+      <div class="example">Umgangssprache: <strong>Mit was</strong> beschäftigst du dich?<br>Standard: <span class="hl">Womit</span> beschäftigst du dich?</div>
+
+      <h2>7. Типові помилки</h2>
+      <div class="example">❌ <strong>Woauf</strong> wartest du? → ✅ <span class="hl">Worauf</span> wartest du? <em>(auf з голосної → +r)</em></div>
+      <div class="example">❌ Worauf wartest du <strong>auf ihn</strong>? → ✅ <span class="hl">Auf wen</span> wartest du? <em>(людина → wen)</em></div>
+      <div class="example">❌ Ich freue mich <strong>auf es</strong>. → ✅ Ich freue mich <span class="hl">darauf</span>. <em>(для речей/подій використовується da-, а не "es")</em></div>
+    </div>
+  </div>
+</div>
+
+<div class="complete" id="complete" hidden>
+  <div class="complete-card">
+    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
+    <p id="complete-text">Кожне речення пройдено: <span class="cmax">3</span> правильні відповіді поспіль. Гарна робота!</p>
+    <div class="complete-actions" id="complete-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ============ THEME ============ */
+const store={
+  get(k){try{return localStorage.getItem(k)}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+};
+const mqLight=window.matchMedia('(prefers-color-scheme: light)');
+function effTheme(){return document.documentElement.getAttribute('data-theme')||(mqLight.matches?'light':'dark')}
+function paintThemeIcon(){document.getElementById('theme-toggle').textContent=effTheme()==='light'?'☀️':'🌙'}
+const savedTheme=store.get('pt-theme');
+if(savedTheme==='light'||savedTheme==='dark')document.documentElement.setAttribute('data-theme',savedTheme);
+paintThemeIcon();
+if(mqLight.addEventListener)mqLight.addEventListener('change',paintThemeIcon);
+function toggleTheme(){
+  const n=effTheme()==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',n);
+  store.set('pt-theme',n);
+  paintThemeIcon();
+}
+
+/* ============ SOUND TOGGLE (🔔/🔕) ============ */
+let soundEnabled = store.get('pt-sound') !== 'off';
+function updateSoundIcon() {
+  const btn = document.getElementById('sound-toggle');
+  btn.textContent = soundEnabled ? '🔔' : '🔕';
+  btn.title = soundEnabled ? 'Тихий режим' : 'Увімкнути звук';
+}
+updateSoundIcon();
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  store.set('pt-sound', soundEnabled ? 'on' : 'off');
+  updateSoundIcon();
+  if (soundEnabled) playSound('correct');
+}
+
+/* ============ HAPTIC (Telegram) ============ */
+function haptic(type){
+  try{
+    const tg = window.Telegram && window.Telegram.WebApp;
+    if(!tg || !tg.HapticFeedback) return;
+    if(type==='success') tg.HapticFeedback.notificationOccurred('success');
+    else if(type==='error') tg.HapticFeedback.notificationOccurred('error');
+    else if(type==='warning') tg.HapticFeedback.notificationOccurred('warning');
+    else if(type==='light') tg.HapticFeedback.impactOccurred('light');
+    else if(type==='medium') tg.HapticFeedback.impactOccurred('medium');
+  }catch(e){}
+}
+
+/* ============ НЕЖНЫЕ ЗВУКИ (WEB AUDIO API) ============ */
+let audioCtx;
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    const now = audioCtx.currentTime;
+    
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.06, now + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now);
+      osc.stop(now + 0.6);
+    } else {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(200, now); 
+      osc.frequency.exponentialRampToValueAtTime(100, now + 0.2); 
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.08, now + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    }
+  } catch(e) {}
+}
+
+/* ============ DATA ============ */
+const D=[
+["Ich spreche mit meiner Chefin.","mit meiner Chefin","P","Mit wem sprichst du?","Ich spreche auch mit ihr."],
+["Ich frage nach dem Weg.","nach dem Weg","S","Wonach fragst du?","Ich frage auch danach."],
+["Ich warte auf einen Bus.","auf einen Bus","S","Worauf wartest du?","Ich warte auch darauf."],
+["Ich spreche über die Chefin.","über die Chefin","P","Über wen sprichst du?","Ich spreche auch über sie."],
+["Ich erzähle von meinem Bruder.","von meinem Bruder","P","Von wem erzählst du?","Ich erzähle auch von ihm."],
+["Ich bitte um Hilfe.","um Hilfe","S","Worum bittest du?","Ich bitte auch darum."],
+["Ich kümmere mich um die Kinder.","um die Kinder","P","Um wen kümmerst du dich?","Ich kümmere mich auch um sie."],
+["Ich rede mit dem Arzt.","mit dem Arzt","P","Mit wem redest du?","Ich rede auch mit ihm."],
+["Ich fange mit der Arbeit an.","mit der Arbeit","S","Womit fängst du an?","Ich fange auch damit an."],
+["Ich warte auf meinen Freund.","auf meinen Freund","P","Auf wen wartest du?","Ich warte auch auf ihn."],
+["Ich denke an den Urlaub.","an den Urlaub","S","Woran denkst du?","Ich denke auch daran."],
+["Ich denke an meine Mutter.","an meine Mutter","P","An wen denkst du?","Ich denke auch an sie."],
+["Ich freue mich auf das Wochenende.","auf das Wochenende","S","Worauf freust du dich?","Ich freue mich auch darauf."],
+["Ich ärgere mich über den Lärm.","über den Lärm","S","Worüber ärgerst du dich?","Ich ärgere mich auch darüber."],
+["Ich ärgere mich über meinen Nachbarn.","über meinen Nachbarn","P","Über wen ärgerst du dich?","Ich ärgere mich auch über ihn."],
+["Ich interessiere mich für Musik.","für Musik","S","Wofür interessierst du dich?","Ich interessiere mich auch dafür."],
+["Ich interessiere mich für den neuen Kollegen.","für den neuen Kollegen","P","Für wen interessierst du dich?","Ich interessiere mich auch für ihn."],
+["Ich träume von einem Haus.","von einem Haus","S","Wovon träumst du?","Ich träume auch davon."],
+["Ich nehme an dem Kurs teil.","an dem Kurs","S","Woran nimmst du teil?","Ich nehme auch daran teil."],
+["Ich bedanke mich für das Geschenk.","für das Geschenk","S","Wofür bedankst du dich?","Ich bedanke mich auch dafür."],
+["Ich bedanke mich bei der Lehrerin.","bei der Lehrerin","P","Bei wem bedankst du dich?","Ich bedanke mich auch bei ihr."],
+["Ich habe Angst vor der Prüfung.","vor der Prüfung","S","Wovor hast du Angst?","Ich habe auch Angst davor."],
+["Ich frage nach der Lehrerin.","nach der Lehrerin","P","Nach wem fragst du?","Ich frage auch nach ihr."],
+["Ich bin mit dem Ergebnis zufrieden.","mit dem Ergebnis","S","Womit bist du zufrieden?","Ich bin auch damit zufrieden."],
+["Ich glaube an die Zukunft.","an die Zukunft","S","Woran glaubst du?","Ich glaube auch daran."],
+["Ich beschäftige mich mit Chemie.","mit Chemie","S","Womit beschäftigst du dich?","Ich beschäftige mich auch damit."],
+["Ich ärgere mich über die Kollegin.","über die Kollegin","P","Über wen ärgerst du dich?","Ich ärgere mich auch über sie."],
+["Ich telefoniere mit meinen Eltern.","mit meinen Eltern","P","Mit wem telefonierst du?","Ich telefoniere auch mit ihnen."],
+["Ich achte auf die Aussprache.","auf die Aussprache","S","Worauf achtest du?","Ich achte auch darauf."],
+["Ich verliebe mich in den Nachbarn.","in den Nachbarn","P","In wen verliebst du dich?","Ich verliebe mich auch in ihn."],
+["Ich warte auf die Antwort.","auf die Antwort","S","Worauf wartest du?","Ich warte auch darauf."],
+["Ich denke oft an meinen Opa.","an meinen Opa","P","An wen denkst du oft?","Ich denke auch oft an ihn."],
+["Ich freue mich über das Geschenk.","über das Geschenk","S","Worüber freust du dich?","Ich freue mich auch darüber."],
+["Ich suche nach meinem Schlüssel.","nach meinem Schlüssel","S","Wonach suchst du?","Ich suche auch danach."],
+["Ich schreibe an meine Oma.","an meine Oma","P","An wen schreibst du?","Ich schreibe auch an sie."],
+["Ich sorge für meine Familie.","für meine Familie","P","Für wen sorgst du?","Ich sorge auch für sie."],
+["Ich spiele mit meiner Schwester.","mit meiner Schwester","P","Mit wem spielst du?","Ich spiele auch mit ihr."],
+["Ich rechne mit Regen.","mit Regen","S","Womit rechnest du?","Ich rechne auch damit."],
+["Ich diskutiere über Politik.","über Politik","S","Worüber diskutierst du?","Ich diskutiere auch darüber."],
+["Ich streite mit meinem Bruder.","mit meinem Bruder","P","Mit wem streitest du?","Ich streite auch mit ihm."],
+["Ich verlasse mich auf meinen Chef.","auf meinen Chef","P","Auf wen verlässt du dich?","Ich verlasse mich auch auf ihn."],
+["Ich lache über den Witz.","über den Witz","S","Worüber lachst du?","Ich lache auch darüber."]
+];
+
+const SP='an auf aus bei durch für gegen in mit nach neben um unter über von zu vor'.split(' '),
+near={über:'von an auf',von:'über an',an:'über von unter bei',auf:'über',bei:'mit an',mit:'bei',unter:'an',für:'gegen',gegen:'für',aus:'in'},
+oth=(p,n)=>sh(SP.filter(x=>x!=p&&!(near[p]||'').split(' ').includes(x))).slice(0,n),
+AK=['an','auf','über','für','um','gegen'],
+rows=s=>s.trim().split('\n').map(l=>l.split('|')),
+V=rows(`denken|an|думати про|Ich denke oft ___.|Я часто думаю про це.|___ denkst du?|1
+warten|auf|чекати на|Ich warte schon lange ___.|Я вже давно цього чекаю.|___ wartest du?|1
+sich freuen|über|радіти з|Ich freue mich sehr ___.|Я дуже з цього радію.|___ freust du dich?|1
+sich freuen|auf|радіти наперед (майбутньому)|Ich freue mich schon ___.|Я вже радію цьому наперед.|___ freust du dich?|1
+sich interessieren|für|цікавитися|Ich interessiere mich sehr ___.|Я дуже цим цікавлюся.|___ interessierst du dich?|1
+sich erinnern|an|згадувати, пам'ятати|Ich erinnere mich gut ___.|Я добре це пам'ятаю.|___ erinnerst du dich?|1
+bitten|um|просити про|Ich bitte dich ___.|Я прошу тебе про це.|___ bittest du ihn?|
+Angst haben|vor|боятися|Ich habe große Angst ___.|Я цього дуже боюся.|___ hast du Angst?|1
+sprechen|über|говорити про|Wir sprechen morgen ___.|Ми поговоримо про це завтра.|___ sprecht ihr?|1
+sich ärgern|über|злитися на|Ich ärgere mich total ___.|Я страшенно на це злюся.|___ ärgerst du dich?|1
+achten|auf|звертати увагу на|Ich achte immer ___.|Я завжди звертаю на це увагу.|___ achtest du?|1
+träumen|von|мріяти про|Ich träume oft ___.|Я часто про це мрію.|___ träumst du?|1
+abhängen|von|залежати від|Das hängt ___ ab.|Це залежить від цього.|___ hängt das ab?|1
+gehören|zu|належати до|Das gehört auch ___.|Це теж до цього належить.|___ gehört das?|1
+sich beschäftigen|mit|займатися чимось|Ich beschäftige mich gern ___.|Я охоче цим займаюся.|___ beschäftigst du dich?|1
+aufhören|mit|припиняти|Ich höre jetzt ___ auf.|Я зараз із цим припиняю.|___ hörst du auf?|
+anfangen|mit|починати|Ich fange morgen ___ an.|Я завтра з цього починаю.|___ fängst du an?|
+helfen|bei|допомагати з|Ich helfe dir gern ___.|Я охоче допоможу тобі з цим.|___ hilfst du mir?|
+teilnehmen|an|брати участь у|Ich nehme morgen ___ teil.|Я завтра в цьому беру участь.|___ nimmst du teil?|
+sich verlassen|auf|покладатися на|Ich verlasse mich ___.|Я на це покладаюся.|___ verlässt du dich?|1
+suchen|nach|шукати|Ich suche schon lange ___.|Я вже давно цього шукаю.|___ suchst du?|1
+sich entscheiden|für|обирати|Ich habe mich ___ entschieden.|Я обрав(-ла) це.|___ hast du dich entschieden?|1
+diskutieren|über|обговорювати|Wir diskutieren gerade ___.|Ми саме це обговорюємо.|___ diskutiert ihr?|1
+sich konzentrieren|auf|зосереджуватися на|Ich konzentriere mich ganz ___.|Я повністю на цьому зосереджуюсь.|___ konzentrierst du dich?|1
+sich kümmern|um|піклуватися про|Ich kümmere mich gleich ___.|Я зараз цим займуся.|___ kümmerst du dich?|1
+leiden|unter|страждати від|Ich leide sehr ___.|Я дуже від цього страждаю.|___ leidest du?|1`),
+RF=Object.fromEntries(rows(`denken an|meine Arbeit|mein Bruder|m
+warten auf|der Bus|meine Schwester|f
+sich freuen über|das Geschenk||
+sich freuen auf|das Wochenende|meine Schwester|f
+sich interessieren für|Musik|mein neuer Kollege|m
+sich erinnern an|der Urlaub|meine Oma|f
+Angst haben vor|die Prüfung|mein Chef|m
+sprechen über|das Problem|unsere Chefin|f
+sich ärgern über|der Lärm|mein Nachbar|m
+achten auf|der Preis|mein kleiner Bruder|m
+träumen von|ein Haus|meine Freundin|f
+abhängen von|das Wetter|mein Chef|m
+sich beschäftigen mit|das Thema|mein Sohn|m
+sich verlassen auf|mein Gefühl|mein Bruder|m
+suchen nach|meine Schlüssel|meine alte Freundin|f
+sich entscheiden für|das blaue Auto|der erste Bewerber|m
+diskutieren über|der neue Plan|unser Chef|m
+leiden unter|die Hitze|mein Chef|m
+sich kümmern um|der Haushalt|meine Mutter|f
+bitten um|Hilfe||
+aufhören mit|das Rauchen||
+anfangen mit|der Sprachkurs||
+helfen bei|die Hausaufgaben||
+teilnehmen an|der Kurs||
+gehören zu|der Kurs||
+sich konzentrieren auf|die Arbeit||`).map(r=>[r[0],r.slice(1)])),
+LK=rows(`Ich habe morgen eine Prüfung.|___ habe ich Angst.|vor
+Mein Bruder kommt heute zu Besuch.|___ freue ich mich sehr.|über
+Wir fahren im Sommer nach Italien.|___ freue ich mich schon.|auf
+Er kommt schon wieder zu spät.|___ ärgere ich mich jeden Tag.|über
+Heute Abend gibt es ein Konzert.|___ interessiere ich mich nicht.|für
+Der Chef hat eine Entscheidung versprochen.|___ warte ich schon seit Tagen.|auf
+Wir hatten einen tollen Urlaub.|___ erinnere ich mich gern.|an
+Ich habe Mehl, Zucker und Eier.|___ mache ich einen Kuchen.|aus
+Ich muss umziehen.|___ helfen mir meine Freunde.|bei
+Er hat viel geübt.|___ ist er besser geworden.|durch
+Ich habe Kopfschmerzen.|___ nehme ich eine Tablette.|gegen
+Ich habe einen neuen Rucksack.|___ ist mein Laptop.|in
+Ich habe ein neues Hobby.|___ beschäftige ich mich jeden Abend.|mit
+Ich habe meinen Schlüssel verloren.|___ suche ich schon eine Stunde.|nach
+Ich brauche Hilfe.|___ möchte ich dich bitten.|um
+Im Sommer ist es sehr heiß.|___ leide ich.|unter
+Ich war im Urlaub in Spanien.|___ erzähle ich dir später.|von
+Das ist ein neuer Kurs.|___ gehören auch Hausaufgaben.|zu
+Mein Chef hat eine Idee.|___ sprechen wir morgen.|über
+Der Hund ist riesig.|___ habe ich Angst.|vor`),
+MM=rows(`Ich lerne Deutsch, damit ich in Berlin arbeiten kann.|1
+Ich lerne Deutsch. Damit habe ich gute Chancen.|0
+Er spart Geld, damit er ein Auto kaufen kann.|1
+Hier ist der Schlüssel. Damit kannst du die Tür öffnen.|0
+Ich erkläre es langsam, damit du es verstehst.|1
+Ich brauche Hilfe. Ich bitte dich darum.|0
+Es regnet stark. Darum bleiben wir zu Hause.|1
+Das Wetter ist schlecht, darum fällt das Fest aus.|1
+Worum geht es? Es geht darum, pünktlich zu sein.|0
+Das Kind war müde. Darum ist es früh ins Bett gegangen.|1`),
+KK=rows(`auf|wartest du
+mit|beschäftigst du dich
+an|denkst du
+über|ärgerst du dich
+für|interessierst du dich
+von|träumst du
+vor|hast du Angst
+für|brauchst du das
+um|bittest du ihn
+bei|hilfst du mir`),
+UU=rows(`Про кого ти думаєш?|An wen denkst du?|Woran denkst du?|Wovon denkst du?|an
+На що ти чекаєш?|Worauf wartest du?|Auf wen wartest du?|Wofür wartest du?|auf
+На кого ти чекаєш?|Auf wen wartest du?|Worauf wartest du?|Wofür wartest du?|auf
+Про що ви говорите?|Worüber sprecht ihr?|Über wen sprecht ihr?|Woran sprecht ihr?|über
+Чим ти займаєшся?|Womit beschäftigst du dich?|Mit wem beschäftigst du dich?|Wobei beschäftigst du dich?|mit
+З ким ти розмовляєш?|Mit wem sprichst du?|Womit sprichst du?|Wozu sprichst du?|mit`),
+MN={damit:['з цим (вказівка)','щоб (мета)'],darum:['про це / за це (вказівка)','тому (причина)']};
+
+const $=id=>document.getElementById(id);
+const cap=s=>s[0].toUpperCase()+s.slice(1);
+const sh=a=>{a=[...a];for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const nm=s=>s.toLowerCase().replace(/[.,?!]/g,"").replace(/\s+/g," ").trim();
+const norm=s=>s.toLowerCase().replace(/\s+/g," ").trim().replace(/[.?!\s]+$/,"").trim();
+const VOW=/^[aeiouäöü]/,daF=p=>"da"+(VOW.test(p)?"r":"")+p,woF=p=>"wo"+(VOW.test(p)?"r":"")+p,C=(q,x)=>q.startsWith("___")?cap(x):x;
+
+const TABS=[
+ {id:"frage",label:"Питання",title:"ПОБУДУВАТИ ПИТАННЯ",lab:"ПИТАННЯ",ph:"Введи повне питання …",full:1,cmp:norm},
+ {id:"antwort",label:"Відповідь",title:"ЗАМІНИТИ ВІДПОВІДЬ",lab:"ВІДПОВІДЬ",ph:"Введи повне речення …",full:1,cmp:norm},
+ {id:"mensch_ding",label:"Річ/людина",title:"ЛЮДИНА ЧИ РІЧ?",lab:"ЩО СТОЇТЬ ЗАМІСТЬ ПРОПУСКУ?",mc:1},
+ {id:"da_wo",label:"da-/wo-",title:"DA- ЧИ WO-?",lab:"ОБЕРИ ПРАВИЛЬНУ ФОРМУ",mc:1},
+ {id:"zusammensetzen",label:"Склади слово",title:"СКЛАДИ СЛОВО",lab:"ЗІБРАТИ СЛОВО",ph:"Введи слово …",cmp:nm},
+ {id:"einsetzen",label:"Встав слово",title:"ВСТАВ СЛОВО",lab:"СЛОВО У ПРОПУСК",ph:"Введи слово …",cmp:nm},
+ {id:"verb_praep",label:"Дієслово+",title:"ДІЄСЛОВО + ПРИЙМЕННИК",lab:"ЯКИЙ ПРИЙМЕННИК?",ph:"Введи прийменник …",cmp:nm},
+ {id:"uebersetzen",label:"Переклад",title:"ПЕРЕКЛАД UA → DE",lab:"ПЕРЕКЛАД НІМЕЦЬКОЮ",ph:"Введи фразу …",cmp:nm},
+ {id:"umgangssprache",label:"Розмовне",title:"РОЗМОВНЕ → ЛІТЕРАТУРНЕ",lab:"ЛІТЕРАТУРНА ФОРМА",ph:"Введи фразу …",cmp:nm},
+ {id:"bruecke",label:"da-зв'язка",title:"DA- ЯК ЗВ'ЯЗКА",lab:"DA-СЛОВО",ph:"Введи слово …",cmp:nm},
+ {id:"damit_darum",label:"damit/darum",title:"DAMIT / DARUM",lab:"ЩО ОЗНАЧАЄ СЛОВО?",mc:1}
+];
+const TB=()=>TABS.find(t=>t.id===tab);
+
+const DTR=['Я розмовляю зі своєю начальницею.', 'Я питаю дорогу.', 'Я чекаю на автобус.', 'Я розмовляю про начальницю.', 'Я розповідаю про свого брата.', 'Я прошу про допомогу.', 'Я піклуюся про дітей.', 'Я розмовляю з лікарем.', 'Я починаю роботу.', 'Я чекаю на свого друга.', 'Я думаю про відпустку.', 'Я думаю про свою маму.', 'Я радію вихідним, що попереду.', 'Я злюся через шум.', 'Я злюся на свого сусіда.', 'Я цікавлюся музикою.', 'Я цікавлюся новим колегою.', 'Я мрію про будинок.', 'Я беру участь у курсі.', 'Я дякую за подарунок.', 'Я дякую вчительці.', 'Я боюся іспиту.', 'Я питаю про вчительку.', 'Я задоволений(-а) результатом.', 'Я вірю в майбутнє.', 'Я займаюся хімією.', 'Я злюся на колегу.', 'Я розмовляю телефоном зі своїми батьками.', 'Я звертаю увагу на вимову.', 'Я закохуюся в сусіда.', 'Я чекаю на відповідь.', 'Я часто думаю про свого діда.', 'Я радію подарунку.', 'Я шукаю свій ключ.', 'Я пишу своїй бабусі.', "Я турбуюся про свою сім'ю.", 'Я граю зі своєю сестрою.', 'Я розраховую на дощ.', 'Я обговорюю політику.', 'Я сварюся зі своїм братом.', 'Я покладаюся на свого начальника.', 'Я сміюся з жарту.'],LKT=['У мене завтра іспит. Я цього боюся.', 'Мій брат сьогодні приїздить у гості. Я дуже цьому радію.', 'Ми влітку їдемо до Італії. Я вже цьому радію.', 'Він знову спізнюється. Я щодня на це злюся.', 'Сьогодні ввечері буде концерт. Я цим не цікавлюся.', 'Начальник пообіцяв рішення. Я вже кілька днів цього чекаю.', 'У нас була чудова відпустка. Я охоче це згадую.', 'У мене є борошно, цукор і яйця. З цього я печу торт.', 'Мені треба переїжджати. З цим мені допомагають друзі.', 'Він багато тренувався. Завдяки цьому він став кращим.', "У мене болить голова. Від цього я п'ю таблетку.", 'У мене новий рюкзак. У ньому мій ноутбук.', 'У мене нове хобі. Цим я займаюся щовечора.', 'Я загубив(-ла) ключ. Його я шукаю вже годину.', 'Мені потрібна допомога. Про неї я хочу тебе попросити.', 'Влітку дуже жарко. Від цього я страждаю.', 'Я була у відпустці в Іспанії. Про це я розповім тобі пізніше.', 'Це новий курс. До нього теж належать домашні завдання.', 'У мого начальника є ідея. Про неї ми поговоримо завтра.', 'Собака величезний. Його я боюся.'],MMT=['Я вчу німецьку, щоб працювати в Берліні.', 'Я вчу німецьку. З цим у мене гарні шанси.', 'Він заощаджує гроші, щоб купити авто.', 'Ось ключ. Ним ти можеш відчинити двері.', 'Я пояснюю повільно, щоб ти зрозумів.', 'Мені потрібна допомога. Я прошу тебе про це.', 'Іде сильний дощ. Тому ми залишаємося вдома.', 'Погода погана, тому свято скасовується.', 'Про що йдеться? Йдеться про те, щоб бути пунктуальним.', 'Дитина була втомлена. Тому вона рано лягла спати.'],KKT=['На що ти чекаєш?', 'Чим ти займаєшся?', 'Про що ти думаєш?', 'На що ти злишся?', 'Чим ти цікавишся?', 'Про що ти мрієш?', 'Чого ти боїшся?', 'Для чого тобі це?', 'Про що ти його просиш?', 'З чим ти мені допомагаєш?'];
+const DT=Object.fromEntries(D.map((d,i)=>[d[0],DTR[i]]));
+
+/* ============ ITEM GENERATION ============ */
+const I={};TABS.forEach(t=>I[t.id]=[]);
+const add=(id,o)=>I[id].push(o);
+const bl=s=>s.replace(/___/g,'<span class="blank"></span>');
+const sentHTML=d=>d[0].replace(d[1],`<span class="u ${d[2]}">${d[1]}</span>`);
+
+I.frage=D.map(d=>({s:sentHTML(d),sch:'<span class="blank"></span> ?',a:d[3],lbl:d[0],tr:DT[d[0]],
+ ex:d[2]==="S"?`Річ → wo(r) + прийменник → ${d[3].split(" ")[0]} …?`:`Людина → прийменник + wen/wem → ${d[3].split(" ").slice(0,2).join(" ")} …?`}));
+I.antwort=D.map(d=>({s:sentHTML(d),sch:"<span>Ich … auch …</span>",a:d[4],lbl:d[0],tr:DT[d[0]],
+ ex:d[2]==="S"?"Річ → da(r) + прийменник":"Людина → прийменник + особовий займенник"}));
+
+V.forEach(([v,p,ua,ds,us,wq])=>{
+ const d=daF(p),w=woF(p),acc=AK.includes(p),mp=acc?"ihn":"ihm",fp=acc?"sie":"ihr",se=ds.replace("___",d);
+ const ex=`${v} + ${p} → ${d} (відповідь) / ${w} (питання) — ${ua}`;
+ const r=RF[v+" "+p];
+ if(r){const [th,pn,g]=r;
+  add("mensch_ding",{s:bl(ds),sch:`Замість пропуску: <span class="np">${th}</span>`,o:["Річ","Людина"],fix:1,a:"Річ",ans:`Річ → ${d}`,
+   ex:`${th} — річ → da(r) + прийменник → ${d}`,lbl:`${ds} (${th})`});
+  if(pn){const f=`${p} ${g==="m"?mp:fp}`;
+   add("mensch_ding",{s:bl(ds),sch:`Замість пропуску: <span class="np">${pn}</span>`,o:["Річ","Людина"],fix:1,a:"Людина",ans:`Людина → ${f}`,
+    ex:`${pn} — людина → прийменник + займенник → ${f}`,lbl:`${ds} (${pn})`})}}
+ add("da_wo",{s:bl(ds),sch:`Підказка: ${ua} · відповідь → da-`,o:[d,w],a:d,ex,lbl:ds,tr:us});
+ add("da_wo",{s:bl(wq),sch:`Підказка: ${ua} · питання → wo-`,o:[C(wq,w),C(wq,d)],a:C(wq,w),ex,lbl:`${wq} · ${ua}`});
+ add("einsetzen",{s:bl(ds),sch:`Підказка: ${ua}`,a:d,ex,lbl:ds,tr:us});
+ add("verb_praep",{s:`${v} → <span class="blank"></span>`,sch:`Підказка: ${ua}`,a:p,alt:[d],ans:`${p} → ${d}`,ex,lbl:`${v} · ${ua}`});
+ add("uebersetzen",{s:us,sch:"Напиши німецькою, повним реченням",a:se,ex,lbl:us});
+});
+UU.forEach(([q,a])=>add("uebersetzen",{s:q,sch:"Напиши німецькою, повним реченням",a,
+ ex:"Людина → прийменник + wen/wem; річ → wo(r) + прийменник",lbl:q}));
+
+SP.concat("hinter","zwischen").forEach(p=>{const n=/hinter|zwischen/.test(p),r=VOW.test(p);
+ [["da",daF],["wo",woF]].forEach(([x,F])=>{if(x==="wo"&&n)return;
+  add("zusammensetzen",{s:`${x} + ${p} = <span class="blank"></span>`,sch:"da(r) / wo(r) + прийменник — пиши разом",a:F(p),lbl:`${x} + ${p}`,
+   ex:r?`${p} починається з голосної → ${x} + r + ${p} = ${F(p)}`:`${p} починається з приголосної → без r: ${F(p)}`})})});
+
+LK.forEach(([a,b,p],n)=>add("bruecke",{tr:LKT[n],s:bl(`${a}<br>${b}`),sch:"Встав da-слово, що відсилає до цілого попереднього речення",a:cap(daF(p)),
+ ex:`${b.replace("___",cap(daF(p)))} — da- відсилає до цілого речення`,lbl:`${a} ${b}`}));
+
+MM.forEach(([s,n],k)=>{const w=s.match(/damit|darum/i)[0].toLowerCase();
+ add("damit_darum",{tr:MMT[k],s:s.replace(/(damit|darum)/i,'<span class="u">$1</span>'),sch:"Значення видно з контексту речення",o:MN[w],a:MN[w][+n],
+  ex:`${cap(w)} = ${MN[w][+n]}`,lbl:s})});
+
+KK.forEach(([p,r],k)=>add("umgangssprache",{tr:KKT[k],s:`${cap(p)} was ${r}?`,sch:"Перепиши літературною мовою: wo(r) + Präposition",a:`${cap(woF(p))} ${r}?`,
+ ex:`${p} was — розмовна форма; ${woF(p)} — літературна`,lbl:`${cap(p)} was ${r}?`}));
+
+/* ============ STATE ============ */
+const KEY=id=>"worauf_darauf_v3_"+id;
+const blank=()=>({k:{},r:0,w:0,err:{},x:0});
+const S={};
+TABS.forEach(t=>{
+ try{
+  const v=JSON.parse(localStorage.getItem(KEY(t.id)));
+  if(v&&v.k){
+   if(!v.err)v.err={};
+   if(typeof v.x !== 'number') v.x = 0;
+   S[t.id]=v;
+  }
+ }catch(e){}
+});
+TABS.forEach(t=>{if(!S[t.id])S[t.id]=blank()});
+const save=()=>{try{localStorage.setItem(KEY(tab),JSON.stringify(S[tab]))}catch(e){}};
+
+let tab=TABS[0].id,cur=0,answered=false,picked=-1,curOpts=[],tm,reviewMode=false;
+const items=()=>I[tab];
+const T=()=>S[tab];
+const pool=()=>items().map((_,i)=>i);
+const streak=i=>T().k[i]||0;
+const maxStreak=()=>3;
+const errCount=()=>Object.keys(T().err).filter(k=>T().err[k]).length;
+
+/* ============ EXP (per-tab, 500) ============ */
+const XP_MAX = 500;
+const RANKS = [[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','Дослідник'],[.44,'⚡','Знавець'],[.68,'🔥','Профі'],[.92,'💎','Майстер'],[1,'🏆','Легенда']]
+  .map(q=>[Math.round(q[0]*XP_MAX),q[1],q[2]]);
+const rankOf = x => { let r=0; RANKS.forEach((q,i)=>{ if(x>=q[0]) r=i }); return r };
+
+function updateXp(xv){
+  const box = document.getElementById('xp');
+  if(!box) return;
+  xv = Math.max(0, Math.min(XP_MAX, xv|0));
+  const r = rankOf(xv), R = RANKS[r], N = RANKS[r+1];
+  box.dataset.r = r;
+  box.classList.toggle('max', xv >= XP_MAX);
+  document.getElementById('xf').style.width = (xv/XP_MAX*100) + '%';
+  document.getElementById('xt').textContent = xv;
+  document.getElementById('xn').textContent = xv >= XP_MAX ? 'MAX' : ('/ ' + XP_MAX);
+  document.getElementById('xr').textContent = R[1] + ' ' + R[2];
+  document.getElementById('xnext').textContent = N ? ('ще ' + (N[0]-xv) + ' до «' + N[2] + '»') : 'максимальний ранг';
+  const tk = document.getElementById('xticks');
+  if(tk && !tk.firstChild) tk.innerHTML = RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join('');
+}
+
+function popXp(d, up){
+  const p = document.getElementById('xpop');
+  const b = document.getElementById('xt');
+  const box = document.getElementById('xp');
+  if(!p || !b || !box) return;
+  p.textContent = (d>0?'+':'−') + Math.abs(d);
+  p.className = 'xpop ' + (d>0?'up':'dn');
+  void p.offsetWidth;
+  p.classList.add('go');
+  b.classList.remove('bump');
+  void b.offsetWidth;
+  b.classList.add('bump');
+  if(up){ box.classList.remove('lvl'); void box.offsetWidth; box.classList.add('lvl'); }
+}
+
+/* ============ SPEECH ============ */
+function speak(text){
+ if(!soundEnabled) return;
+ if(!window.speechSynthesis||!text)return;
+ try{
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(String(text));
+  u.lang="de-DE";u.rate=0.9;u.pitch=1;u.volume=1;
+  if('audioSession' in navigator){navigator.audioSession.type='playback'}
+  speechSynthesis.speak(u);
+ }catch(e){}
+}
+function stripHTML(s){
+ return String(s||"").replace(/<br\s*\/?>/gi," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+}
+function getSpeechText(){
+ const it=items()[cur],tb=TB();
+ if(!it)return null;
+ switch(tb.id){
+  case "frage":
+  case "antwort":
+  case "damit_darum":
+   return it.lbl;
+  case "umgangssprache":
+   return it.a;
+  case "einsetzen":
+  case "da_wo":
+  case "bruecke":{
+   let s=String(it.s||"").replace(/<span class="blank"><\/span>/g,"___");
+   s=stripHTML(s);
+   const parts=String(it.a||"").split(/\s+/);
+   let i=0;
+   return s.replace(/___/g,()=>parts[i++]||"___");
+  }
+  default:
+   return null;
+ }
+}
+function speakCurrent(){speak(getSpeechText());}
+
+/* ============ RENDER ============ */
+function renderTabs(){
+ $("tabs").innerHTML=TABS.map(t=>{
+  const s=S[t.id],ms=maxStreak();
+  const done=Object.keys(s.k).filter(k=>s.k[k]>=ms).length;
+  return `<button class="tab ${t.id===tab?'on':''}" data-t="${t.id}">${t.label}<small>${done}/${I[t.id].length}</small></button>`;
+ }).join("");
+}
+function renderCard(){
+ const i=cur,it=items()[i],t=T(),tb=TB();
+ $("title").textContent=tb.title;
+ $("sent").innerHTML=it.s;
+ $("sent").title="Натисни, щоб почути німецькою";
+ $("lab").textContent=tb.lab;
+ $("scheme").innerHTML=it.sch;
+ renderTr();
+ $("inp").placeholder=tb.ph||"";
+ const total=items().length,ms=maxStreak();
+ const done=Object.keys(t.k).filter(k=>t.k[k]>=ms).length;
+ $("stat-done").textContent=`${done} / ${total}`;
+ $("stat-correct").textContent=t.r;
+ $("stat-wrong").textContent=t.w;
+ $("bar").style.width=`${Math.min(done,total)/total*100}%`;
+ if(reviewMode){
+  $("title").textContent="🔁 РОБОТА НАД ПОМИЛКАМИ";
+ }
+ renderTabs();
+ updateXp(t.x || 0);
+}
+let trShown=false;
+function renderTr(){
+ const it=items()[cur],w=$("trw");
+ if(!it||!it.tr){w.innerHTML="";return}
+ w.innerHTML=trShown?`<div class="tr-text">${it.tr}</div>`:'<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
+}
+function renderOpts(){
+ const it=items()[cur];
+ curOpts=it.o?(it.fix?it.o.slice():sh(it.o)):[];
+ $("opts").innerHTML=curOpts.map((x,j)=>`<button class="chip opt" data-o="${j}">${x}</button>`).join("");
+}
+function markOpts(){
+ const a=items()[cur].a;
+ document.querySelectorAll("#opts .opt").forEach((b,j)=>{
+  b.disabled=true;
+  if(curOpts[j]===a)b.classList.add("ok");
+  else if(j===picked)b.classList.add("er");
+ });
+}
+function renderList(){
+ const p=pool(),ms=maxStreak(),left=p.filter(i=>streak(i)<ms).length;
+ $("left").textContent=`Залишилося: ${left}`;
+ $("grid").innerHTML=p.map(i=>{
+  const s=Math.min(streak(i),3);
+  return `<button class="it c${s}${streak(i)>=ms?" done":""}${i===cur?" cur":""}" data-i="${i}"><i></i><span>${items()[i].lbl}</span><em>${streak(i)}/${ms}</em></button>`;
+ }).join("");
+}
+function renderReviewBtn(){
+ const n=errCount();
+ const btn=$("reviewBtn");
+ if(n>0 && !reviewMode){
+  btn.style.display="inline-block";
+  btn.textContent=`🔁 Помилки (${n})`;
+ } else {
+  btn.style.display="none";
+ }
+}
+function renderFoot(){
+ renderReviewBtn();
+}
+
+/* ============ FEEDBACK ============ */
+function showFb(ok,i){
+ const f=$("fb"),it=items()[i];
+ f.className="fb "+(ok?"ok":"er");
+ f.innerHTML=`<div class="k">${ok?"✓ ПРАВИЛЬНО":"✗ НЕПРАВИЛЬНО"}</div><div class="ans" title="Натисни, щоб почути">${it.ans||it.a}</div><div class="ex">${it.ex}</div>${ok?'<div class="bar"></div>':''}`;
+ const ansEl=f.querySelector(".ans");
+ if(ansEl){
+  ansEl.onclick=()=>{const txt=stripHTML(it.ans||it.a);if(txt)speak(txt)};
+ }
+}
+
+/* ============ NAVIGATION ============ */
+function load(i){
+ clearTimeout(tm);
+ $("card").classList.remove("win");
+ cur=i;answered=false;picked=-1;trShown=false;
+ $("inp").value="";$("fb").className="fb";$("fb").innerHTML="";
+ renderOpts();renderCard();renderList();renderReviewBtn();
+ if(!TB().mc)$("inp").focus({preventScroll:true});
+}
+function reviewPool(){
+ const t=T();
+ return items().map((_,i)=>i).filter(i=>t.err[i]);
+}
+function nextIdx(){
+ if(reviewMode){
+  const rp=reviewPool();
+  if(rp.length===0)return -1;
+  if(!rp.includes(cur))return rp[0];
+  const idx=rp.indexOf(cur);
+  return rp[(idx+1)%rp.length];
+ }
+ const p=pool(),ms=maxStreak(),unl=p.filter(i=>streak(i)<ms),list=unl.length?unl:p;
+ if(list.length===1)return list[0];
+ return list.find(i=>i>cur)??list[0];
+}
+function allDone(){
+ if(reviewMode)return reviewPool().length===0;
+ const ms=maxStreak();
+ return pool().every(i=>streak(i)>=ms);
+}
+
+/* ============ COMPLETION MODAL ============ */
+function showComplete(){
+ const xv = T().x || 0;
+ $("complete-title").textContent="🎉 Вкладку пройдено!";
+ $("complete-text").innerHTML=`Кожне речення пройдено: <span class="cmax">${maxStreak()}</span> правильні відповіді поспіль. Гарна робота!<br><br>⚡ EXP: <b>${xv} / ${XP_MAX}</b>`;
+ $("complete-actions").innerHTML=`
+  <button class="go" onclick="resetTab()">По колу ↔</button>
+  <button class="cancel" onclick="hideComplete()">Закрити</button>`;
+ $("complete").hidden=false;
+}
+function showReviewComplete(){
+ const xv = T().x || 0;
+ $("complete-title").textContent="✅ Помилки виправлено!";
+ $("complete-text").innerHTML=`Усі раніше неправильні відповіді опрацьовано. Молодець!<br><br>⚡ EXP: <b>${xv} / ${XP_MAX}</b>`;
+ $("complete-actions").innerHTML=`
+  <button class="cancel" onclick="exitReview()">Продовжити тренування</button>`;
+ $("complete").hidden=false;
+}
+function hideComplete(){$("complete").hidden=true;}
+
+/* ============ FINISH ============ */
+let completedShown = {};
+TABS.forEach(t=>completedShown[t.id]=false);
+
+function finish(ok){
+ const t=T(),ms=maxStreak();
+ answered=true;
+
+ playSound(ok ? 'correct' : 'wrong');
+ haptic(ok ? 'success' : 'error');
+
+ const xBefore = t.x || 0;
+ if(ok){
+  t.r++;
+  t.k[cur]=Math.min(ms,streak(cur)+1);
+  delete t.err[cur];
+  t.x = Math.min(XP_MAX, xBefore + 1);
+ }else{
+  t.w++;
+  t.k[cur]=0;
+  t.err[cur]=true;
+  t.x = Math.max(0, xBefore - 1);
+ }
+ const dx = t.x - xBefore;
+
+ save();showFb(ok,cur);markOpts();renderCard();renderList();renderReviewBtn();
+
+ if(dx !== 0){
+  popXp(dx, rankOf(t.x) > rankOf(xBefore));
+ }
+
+ if(ok){
+  const c=$("card");
+  c.classList.remove("win");void c.offsetWidth;c.classList.add("win");
+  clearTimeout(tm);
+  if(reviewMode){
+   if(Object.keys(T().err).filter(k=>T().err[k]).length===0){
+    tm=setTimeout(()=>{if(answered)showReviewComplete()},1200);
+   }else{
+    tm=setTimeout(()=>{if(answered){const ni=nextIdx();if(ni>=0)load(ni);else showReviewComplete()}},1800);
+   }
+  }else{
+   if(allDone()&&!completedShown[tab]){
+    completedShown[tab]=true;
+    tm=setTimeout(()=>{if(answered)showComplete()},1200);
+   }else{
+    tm=setTimeout(()=>{if(answered)load(nextIdx())},2000);
+   }
+  }
+ }else{
+  completedShown[tab]=false;
+ }
+}
+
+/* ============ CHECK / PICK ============ */
+function check(){
+ if(answered){load(nextIdx());return}
+ const tb=TB(),it=items()[cur],v=$("inp").value;
+ if(!tb.cmp(v))return;
+ if(tb.full&&norm(v).split(" ").length<3){
+  const f=$("fb");f.className="fb hint";
+  f.innerHTML='<div class="k">ПОВНЕ РЕЧЕННЯ</div><div class="ex">Спочатку напиши повне речення, а не лише слово.</div>';
+  return;
+ }
+ finish([it.a,...(it.alt||[])].some(x=>tb.cmp(v)===tb.cmp(x)));
+}
+function pick(j){
+ if(answered||!TB().mc)return;
+ picked=j;finish(curOpts[j]===items()[cur].a);
+}
+function showSol(){
+ if(answered)return;
+ answered=true;
+ const t=T();
+ t.k[cur]=0;t.err[cur]=true;
+ save();showFb(false,cur);markOpts();renderCard();renderList();renderReviewBtn();
+ completedShown[tab]=false;
+}
+
+/* ============ RESET / RESTART ============ */
+function resetTab(){
+ S[tab]=blank();
+ save();
+ hideComplete();
+ completedShown[tab]=false;
+ reviewMode=false;
+ load(pool()[0]);
+}
+function askConfirm(msg,yes){
+ $("complete-title").textContent="Скинути прогрес?";
+ $("complete-text").textContent=msg;
+ $("complete-actions").innerHTML='<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
+ $("cf-yes").onclick=()=>{hideComplete();yes()};
+ $("cf-no").onclick=hideComplete;
+ $("complete").hidden=false;
+}
+function restartTab(){
+ askConfirm("Прогрес цієї вкладки буде скинуто разом з EXP.",resetTab);
+}
+function resetAllTabs(){
+ askConfirm("Прогрес усіх вкладок буде скинуто разом з EXP.",()=>{
+  TABS.forEach(t=>{S[t.id]=blank();completedShown[t.id]=false});
+  TABS.forEach(t=>{try{localStorage.removeItem(KEY(t.id))}catch(e){}});
+  reviewMode=false;
+  hideComplete();
+  setTab(TABS[0].id);
+ });
+}
+
+/* ============ REVIEW ============ */
+function startReview(){
+ const n=errCount();
+ if(n===0)return;
+ reviewMode=true;
+ const rp=reviewPool();
+ if(rp.length>0)load(rp[0]);
+}
+function exitReview(){
+ reviewMode=false;
+ hideComplete();
+ const ms=maxStreak();
+ const p=pool();
+ const next=p.find(i=>streak(i)<ms)??p[0];
+ load(next);
+}
+
+/* ============ TAB SWITCH ============ */
+function setTab(t){
+ hideComplete();
+ reviewMode=false;
+ tab=t;
+ renderTabs();
+ renderFoot();
+ $("card").classList.toggle("mc",!!TB().mc);
+ const p=pool();
+ load(p.find(i=>streak(i)<maxStreak())??p[0]);
+}
+
+/* ============ THEORY ============ */
+function openTheory() {
+  const sec = $("theory-section");
+  if (!sec.classList.contains("show")) {
+    sec.classList.add("show");
+    $("theory-btn").innerHTML = "❌ Закрити теорію";
+  }
+  setTimeout(() => sec.scrollIntoView({behavior: "smooth", block: "start"}), 100);
+}
+
+function toggleTheory() {
+  const sec = $("theory-section");
+  const btn = $("theory-btn");
+  if (sec.classList.contains("show")) {
+    sec.classList.remove("show");
+    btn.innerHTML = "📖 Теорія";
+    $("card").scrollIntoView({behavior: "smooth", block: "start"});
+  } else {
+    openTheory();
+  }
+}
+
+/* ============ GLOSSARY ============ */
+$("glossary").innerHTML=[
+ ["warten auf","чекати на"],
+ ["denken an","думати про"],
+ ["sich freuen auf","радіти наперед"],
+ ["sich freuen über","радіти з"],
+ ["sich interessieren für","цікавитися"],
+ ["sich erinnern an","пам'ятати"],
+ ["Angst haben vor","боятися"],
+ ["sprechen über","говорити про"],
+ ["sich ärgern über","злитися на"],
+ ["achten auf","звертати увагу"],
+ ["träumen von","мріяти про"],
+ ["abhängen von","залежати від"],
+ ["sich beschäftigen mit","займатися"],
+ ["sich verlassen auf","покладатися"],
+ ["suchen nach","шукати"],
+ ["sich kümmern um","піклуватися"],
+ ["bitten um","просити"],
+ ["teilnehmen an","брати участь"],
+ ["leiden unter","страждати від"]
+].map(([d,u])=>`<div><b>${d}</b>${u}</div>`).join("");
+
+/* ============ EVENTS ============ */
+$("tabs").innerHTML=TABS.map(t=>`<button class="tab" data-t="${t.id}">${t.label}</button>`).join("");
+$("tabs").onclick=e=>{const b=e.target.closest("[data-t]");if(b)setTab(b.dataset.t)};
+
+$("trw").onclick=e=>{if(e.target.closest("[data-tr]")){trShown=true;renderTr()}};
+$("opts").onclick=e=>{const b=e.target.closest("[data-o]");if(b&&!b.disabled)pick(+b.dataset.o)};
+$("grid").onclick=e=>{
+ const b=e.target.closest("[data-i]");
+ if(b){
+  reviewMode=false;
+  load(+b.dataset.i);
+  $("card").scrollIntoView({behavior:"smooth",block:"start"});
+ }
+};
+$("next").onclick=()=>{
+ if(answered){
+  const ni=nextIdx();
+  if(ni>=0)load(ni);
+  else if(reviewMode)showReviewComplete();
+ }else{
+  const ni=nextIdx();
+  if(ni>=0)load(ni);
+ }
+};
+$("chk").onclick=check;
+$("reset").onclick=restartTab;
+$("speakBtn").onclick=speakCurrent;
+
+$("sent").addEventListener("click", () => {
+  if (window.getSelection().toString().trim().length === 0) {
+    speakCurrent();
+  }
+});
+
+$("complete").addEventListener("click",e=>{if(e.target.id==="complete")hideComplete()});
+$("inp").addEventListener("keydown",e=>{
+ if(e.key==="Enter"||e.keyCode===13){e.preventDefault();check()}
+});
+document.addEventListener("keydown",e=>{
+ if(!TB().mc||e.ctrlKey||e.metaKey||e.altKey)return;
+ if(e.target.closest&&e.target.closest("button,input,textarea"))return;
+ if(answered){
+  if(e.key==="Enter"){e.preventDefault();const ni=nextIdx();if(ni>=0)load(ni)}
+  return;
+ }
+ const j=+e.key-1;
+ if(j>=0&&j<curOpts.length)pick(j);
+});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"&&!$("complete").hidden)hideComplete();
+});
+
+/* ============ TELEGRAM ============ */
+document.addEventListener('touchstart',function unlockAudio(){
+ try{
+  if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
+  if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+ }catch(e){}
+ document.removeEventListener('touchstart',unlockAudio);
+},{once:true});
+
+(function initTelegram(){
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if(!tg) return;
+  try{ tg.ready(); }catch(e){}
+  try{ tg.expand(); }catch(e){}
+  try{ tg.disableVerticalSwipes(); }catch(e){}
+  try{
+    if(tg.colorScheme === 'light' && !store.get('pt-theme')){
+      document.documentElement.setAttribute('data-theme','light');
+      paintThemeIcon();
+    } else if(tg.colorScheme === 'dark' && !store.get('pt-theme')){
+      document.documentElement.setAttribute('data-theme','dark');
+      paintThemeIcon();
+    }
+  }catch(e){}
+  try{
+    const isDark = effTheme()==='dark';
+    const bg = isDark ? '#090b10' : '#f8fafc';
+    if(tg.setHeaderColor) tg.setHeaderColor(bg);
+    if(tg.setBackgroundColor) tg.setBackgroundColor(bg);
+  }catch(e){}
+  try{
+    if(tg.BackButton){
+      tg.BackButton.show();
+      tg.BackButton.onClick(()=>{
+        if(history.length>1) history.back();
+        else window.location.href='index.html';
+      });
+    }
+  }catch(e){}
+})();
+
+/* ============ INIT ============ */
+setTab(TABS[0].id);
+</script>
+</body></html>
