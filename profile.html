@@ -31,184 +31,65 @@
   }
 
   /* ---------- Шапка профілю ---------- */
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 24px;
-  }
-
+  .profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 24px; }
   .avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
+    width: 70px; height: 70px; border-radius: 50%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: #fff;
-    font-weight: bold;
-    overflow: hidden;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: #fff; font-weight: bold; overflow: hidden; flex-shrink: 0;
   }
   .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
   .user-info { min-width: 0; }
-  .user-info h2 {
-    margin: 0 0 4px 0;
-    font-size: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .user-info h2 { margin: 0 0 4px 0; font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .user-info p { margin: 0; color: var(--hint-color); font-size: 14px; }
 
   /* ---------- Синхронізація ---------- */
-  .sync-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin: -8px 0 16px 0;
-    font-size: 12px;
-    color: var(--hint-color);
-  }
-  .sync-row button {
-    background: var(--card-bg);
-    color: var(--text-color);
-    border: none;
-    border-radius: 10px;
-    padding: 6px 12px;
-    font-size: 13px;
-    cursor: pointer;
-  }
+  .sync-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: -8px 0 16px 0; font-size: 12px; color: var(--hint-color); }
+  .sync-row button { background: var(--card-bg); color: var(--text-color); border: none; border-radius: 10px; padding: 6px 12px; font-size: 13px; cursor: pointer; }
   .sync-row button:active { opacity: 0.6; }
 
   /* ---------- Рівень ---------- */
-  .level-card {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 18px 20px;
-    margin-bottom: 15px;
-  }
-  .level-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 12px;
-  }
+  .level-card { background-color: var(--card-bg); border-radius: 16px; padding: 18px 20px; margin-bottom: 15px; }
+  .level-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
   .level-top .lvl { font-size: 18px; font-weight: 800; }
   .level-top .xp { font-size: 14px; color: var(--hint-color); }
-
-  .bar {
-    height: 10px;
-    border-radius: 6px;
-    background: rgba(128, 128, 128, 0.2);
-    overflow: hidden;
-  }
-  .bar > div {
-    height: 100%;
-    width: 0;
-    border-radius: 6px;
-    background: var(--btn-color);
-    transition: width 0.6s ease;
-  }
+  .bar { height: 10px; border-radius: 6px; background: rgba(128, 128, 128, 0.2); overflow: hidden; }
+  .bar > div { height: 100%; width: 0; border-radius: 6px; background: var(--btn-color); transition: width 0.6s ease; }
   .level-sub { margin-top: 8px; font-size: 12px; color: var(--hint-color); }
 
   /* ---------- Плитки ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 15px;
-  }
-  .tile {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 16px;
-  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+  .tile { background-color: var(--card-bg); border-radius: 16px; padding: 16px; }
   .tile .label { font-size: 13px; color: var(--hint-color); margin-bottom: 6px; }
   .tile .value { font-size: 24px; font-weight: 800; color: var(--btn-color); }
   .tile .value small { font-size: 14px; font-weight: 600; color: var(--hint-color); }
   .tile .bar { margin-top: 10px; height: 6px; }
 
   /* ---------- Секції ---------- */
-  .section-title {
-    margin: 24px 0 10px 4px;
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--hint-color);
-  }
-
-  .stat-card {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-  }
+  .section-title { margin: 24px 0 10px 4px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--hint-color); }
+  .stat-card { background-color: var(--card-bg); border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .stat-card h3 { margin: 0; font-size: 16px; font-weight: 600; }
   .stat-card span { font-size: 18px; font-weight: 800; color: var(--btn-color); white-space: nowrap; }
-
   .empty { color: var(--hint-color); font-size: 14px; padding: 4px; }
 
   /* ---------- Досягнення ---------- */
   .badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .badge {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 14px 6px;
-    text-align: center;
-    font-size: 11px;
-    line-height: 1.3;
-    color: var(--hint-color);
-    opacity: 0.5;
-    filter: grayscale(1);
-    transition: opacity 0.3s, filter 0.3s;
-  }
+  .badge { background-color: var(--card-bg); border-radius: 16px; padding: 14px 6px; text-align: center; font-size: 11px; line-height: 1.3; color: var(--hint-color); opacity: 0.5; filter: grayscale(1); transition: opacity 0.3s, filter 0.3s; }
   .badge .ico { font-size: 26px; margin-bottom: 6px; display: block; }
   .badge.on { opacity: 1; filter: none; color: var(--text-color); }
 
   /* ---------- Небезпечна зона ---------- */
-  .danger-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: transparent;
-    color: var(--danger);
-    border: 1px solid var(--danger);
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 28px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
+  .danger-btn { width: 100%; padding: 15px; background-color: transparent; color: var(--danger); border: 1px solid var(--danger); border-radius: 12px; font-size: 16px; font-weight: 600; margin-top: 28px; cursor: pointer; transition: background 0.2s; }
   .danger-btn:active { background-color: rgba(239, 68, 68, 0.1); }
 
   /* ---------- Нижнє меню ---------- */
   .bottom-nav {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: calc(var(--nav-h) + var(--safe-bottom));
-    padding-bottom: var(--safe-bottom);
-    background-color: var(--bg-color);
-    border-top: 1px solid rgba(128, 128, 128, 0.15);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    height: calc(var(--nav-h) + var(--safe-bottom)); padding-bottom: var(--safe-bottom);
+    background-color: var(--bg-color); border-top: 1px solid rgba(128, 128, 128, 0.15);
+    display: flex; justify-content: space-around; align-items: center;
   }
-  .nav-item {
-    display: flex; flex-direction: column; align-items: center;
-    color: var(--hint-color); text-decoration: none;
-    font-size: 10px; font-weight: 600; gap: 4px;
-    min-width: 80px;
-  }
+  .nav-item { display: flex; flex-direction: column; align-items: center; color: var(--hint-color); text-decoration: none; font-size: 10px; font-weight: 600; gap: 4px; min-width: 70px; }
   .nav-item.active { color: var(--btn-color); }
   .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
 </style>
@@ -265,11 +146,15 @@
 
   <button type="button" class="danger-btn" id="reset-btn">🗑 Очистити весь прогрес</button>
 
-  <!-- Нижнє меню -->
+  <!-- Нижнє меню (додано Топ-10) -->
   <nav class="bottom-nav" aria-label="Навігація">
     <a href="index.html" class="nav-item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16v-2H4v2zm0-4h16v-2H4v2zm0-4h16v-2H4v2zm0-6v2h16V5H4z"/></svg>
       <span>Бібліотека</span>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+      <span>Топ-10</span>
     </a>
     <a href="profile.html" class="nav-item active" aria-current="page">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -280,13 +165,13 @@
   <script>
     // ================= Налаштування =================
     const PREFIX = 'tp_v2_';
-    const PROFILE_KEY = PREFIX + 'profile';    // службові дані профілю (знімок XP)
-    const ACTIVITY_KEY = PREFIX + 'activity';  // XP по днях: { "2026-10-24": 40 }
+    const PROFILE_KEY = PREFIX + 'profile';
+    const ACTIVITY_KEY = PREFIX + 'activity';
     const SERVICE_KEYS = [PROFILE_KEY, ACTIVITY_KEY];
     const DAILY_GOAL = 50;
-    const XP_PER_LEVEL_BASE = 50; // XP для рівня L = 50 * (L-1)^2
+    const XP_PER_LEVEL_BASE = 50;
+    const PROJECT_ID = 'nanodeutsch'; // Ваш ID Firebase
 
-    // Красиві назви тренажерів (ключ localStorage -> назва)
     const TRAINER_NAMES = {
       [PREFIX + 'insert']: '✍️ Вставити слово',
       [PREFIX + 'translate']: '🔤 Переклад'
@@ -295,71 +180,31 @@
     // ================= Telegram =================
     const tg = window.Telegram && window.Telegram.WebApp;
     if (tg) {
-      tg.ready();
-      tg.expand();
-      tg.BackButton.hide(); // це вкладка нижнього меню, "Назад" тут не потрібна
+      tg.ready(); tg.expand(); tg.BackButton.hide();
       try { tg.setHeaderColor('bg_color'); } catch (e) {}
-      tg.onEvent('themeChanged', () => {
-        try { tg.setHeaderColor('bg_color'); } catch (e) {}
-      });
+      tg.onEvent('themeChanged', () => { try { tg.setHeaderColor('bg_color'); } catch (e) {} });
     }
 
     // ================= Допоміжні =================
     function readJSON(key, fallback) {
-      try {
-        const raw = localStorage.getItem(key);
-        if (!raw) return fallback;
-        const parsed = JSON.parse(raw);
-        return (parsed && typeof parsed === 'object') ? parsed : fallback;
-      } catch (e) {
-        return fallback;
-      }
+      try { const raw = localStorage.getItem(key); if (!raw) return fallback; const parsed = JSON.parse(raw); return (parsed && typeof parsed === 'object') ? parsed : fallback; } catch (e) { return fallback; }
     }
-
-    function writeJSON(key, value) {
-      try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
-    }
-
-    function dateKey(d) {
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
-      return `${y}-${m}-${day}`;
-    }
-
-    function fmt(n) {
-      return Number(n).toLocaleString('uk-UA');
-    }
-
-    function pluralDays(n) {
-      const a = Math.abs(n) % 100, b = a % 10;
-      if (a > 10 && a < 20) return 'днів';
-      if (b === 1) return 'день';
-      if (b >= 2 && b <= 4) return 'дні';
-      return 'днів';
-    }
-
-    function haptic(type) {
-      try { tg && tg.HapticFeedback.notificationOccurred(type); } catch (e) {}
-    }
+    function writeJSON(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} }
+    function dateKey(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+    function fmt(n) { return Number(n).toLocaleString('uk-UA'); }
+    function pluralDays(n) { const a = Math.abs(n) % 100, b = a % 10; if (a > 10 && a < 20) return 'днів'; if (b === 1) return 'день'; if (b >= 2 && b <= 4) return 'дні'; return 'днів'; }
+    function haptic(type) { try { tg && tg.HapticFeedback.notificationOccurred(type); } catch (e) {} }
 
     // ================= Користувач =================
     function renderUser() {
       const avatar = document.getElementById('user-avatar');
       const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
       if (!user) return;
-
       document.getElementById('user-name').textContent = user.first_name || 'Привіт!';
-
       if (user.photo_url) {
-        const img = document.createElement('img');
-        img.alt = '';
-        img.src = user.photo_url;
-        img.onerror = () => {
-          avatar.textContent = (user.first_name || '?').charAt(0).toUpperCase();
-        };
-        avatar.textContent = '';
-        avatar.appendChild(img);
+        const img = document.createElement('img'); img.alt = ''; img.src = user.photo_url;
+        img.onerror = () => { avatar.textContent = (user.first_name || '?').charAt(0).toUpperCase(); };
+        avatar.textContent = ''; avatar.appendChild(img);
       } else {
         avatar.textContent = (user.first_name || '?').charAt(0).toUpperCase();
       }
@@ -367,33 +212,20 @@
 
     // ================= Збір даних =================
     function collectTrainers() {
-      const list = [];
-      // Робимо знімок ключів для надійності
-      const keys = Object.keys(localStorage);
-      
+      const list = []; const keys = Object.keys(localStorage);
       for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         if (!key || !key.startsWith(PREFIX) || SERVICE_KEYS.includes(key)) continue;
-        
-        const data = readJSON(key, {});
-        const xp = Number(data.x) || 0;
-        list.push({
-          key,
-          name: TRAINER_NAMES[key] || ('📘 ' + key.slice(PREFIX.length)),
-          xp
-        });
+        const data = readJSON(key, {}); const xp = Number(data.x) || 0;
+        list.push({ key, name: TRAINER_NAMES[key] || ('📘 ' + key.slice(PREFIX.length)), xp });
       }
-      list.sort((a, b) => b.xp - a.xp);
-      return list;
+      list.sort((a, b) => b.xp - a.xp); return list;
     }
 
-    // Рахуємо XP по днях. Якщо тренажери самі не пишуть ACTIVITY_KEY,
-    // то приріст XP з моменту останнього відкриття профілю зараховується на сьогодні.
     function updateActivity(totalXP) {
       const today = dateKey(new Date());
       const profile = readJSON(PROFILE_KEY, {});
       const activity = readJSON(ACTIVITY_KEY, {});
-
       const last = Number(profile.lastXP);
       if (Number.isFinite(last) && totalXP > last) {
         activity[today] = (Number(activity[today]) || 0) + (totalXP - last);
@@ -405,43 +237,29 @@
 
     function calcStreak(activity) {
       const d = new Date();
-      // Якщо сьогодні ще нічого не робили, серія не втрачається до кінця дня:
-      // рахуємо від учора.
       if (!(Number(activity[dateKey(d)]) > 0)) d.setDate(d.getDate() - 1);
       let streak = 0;
-      while (Number(activity[dateKey(d)]) > 0) {
-        streak++;
-        d.setDate(d.getDate() - 1);
-      }
+      while (Number(activity[dateKey(d)]) > 0) { streak++; d.setDate(d.getDate() - 1); }
       return streak;
     }
 
     // ================= Рівні =================
     function levelInfo(xp) {
-      // XP для входу на рівень L: 50 * (L-1)^2
       let level = Math.floor(Math.sqrt(xp / XP_PER_LEVEL_BASE)) + 1;
       const from = XP_PER_LEVEL_BASE * Math.pow(level - 1, 2);
       const to = XP_PER_LEVEL_BASE * Math.pow(level, 2);
-      return {
-        level,
-        from,
-        to,
-        into: xp - from,
-        span: to - from,
-        left: to - xp,
-        pct: Math.min(100, Math.max(0, ((xp - from) / (to - from)) * 100))
-      };
+      return { level, from, to, into: xp - from, span: to - from, left: to - xp, pct: Math.min(100, Math.max(0, ((xp - from) / (to - from)) * 100)) };
     }
 
     // ================= Досягнення =================
     function buildBadges(totalXP, streak, level) {
       return [
-        { ico: '🌱', name: 'Перші 10 XP',    on: totalXP >= 10 },
-        { ico: '⭐', name: '100 XP',          on: totalXP >= 100 },
-        { ico: '🏆', name: '500 XP',          on: totalXP >= 500 },
-        { ico: '🔥', name: '3 дні поспіль',   on: streak >= 3 },
-        { ico: '💪', name: '7 днів поспіль',  on: streak >= 7 },
-        { ico: '🚀', name: 'Рівень 5',        on: level >= 5 }
+        { ico: '🌱', name: 'Перші 10 XP', on: totalXP >= 10 },
+        { ico: '⭐', name: '100 XP', on: totalXP >= 100 },
+        { ico: '🏆', name: '500 XP', on: totalXP >= 500 },
+        { ico: '🔥', name: '3 дні поспіль', on: streak >= 3 },
+        { ico: '💪', name: '7 днів поспіль', on: streak >= 7 },
+        { ico: '🚀', name: 'Рівень 5', on: level >= 5 }
       ];
     }
 
@@ -453,6 +271,25 @@
       const today = Number(activity[dateKey(new Date())]) || 0;
       const streak = calcStreak(activity);
       const lv = levelInfo(totalXP);
+
+      // === ОТПРАВКА В ТОП-10 (FIREBASE) ===
+      const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
+      if (user && user.id && totalXP > 0) {
+        const dbUrl = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/leaderboard?documentId=${user.id}`;
+        const payload = {
+          fields: {
+            name: { stringValue: user.first_name || 'User' },
+            photo: { stringValue: user.photo_url || '' },
+            xp: { integerValue: String(totalXP) }
+          }
+        };
+        fetch(dbUrl, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(e => console.log('Ошибка отправки в Топ:', e));
+      }
+      // ====================================
 
       // Рівень
       document.getElementById('level-label').textContent = 'Рівень ' + lv.level;
@@ -472,48 +309,32 @@
       const box = document.getElementById('trainers');
       box.textContent = '';
       if (!trainers.length) {
-        const empty = document.createElement('div');
-        empty.className = 'empty';
-        empty.textContent = 'Поки що немає даних. Пройдіть перший тренажер!';
+        const empty = document.createElement('div'); empty.className = 'empty'; empty.textContent = 'Поки що немає даних. Пройдіть перший тренажер!';
         box.appendChild(empty);
       } else {
         trainers.forEach(t => {
-          const card = document.createElement('div');
-          card.className = 'stat-card';
-          const h = document.createElement('h3');
-          h.textContent = t.name;
-          const s = document.createElement('span');
-          s.textContent = fmt(t.xp) + ' XP';
-          card.append(h, s);
-          box.appendChild(card);
+          const card = document.createElement('div'); card.className = 'stat-card';
+          const h = document.createElement('h3'); h.textContent = t.name;
+          const s = document.createElement('span'); s.textContent = fmt(t.xp) + ' XP';
+          card.append(h, s); box.appendChild(card);
         });
       }
 
       // Досягнення
-      const badgesBox = document.getElementById('badges');
-      badgesBox.textContent = '';
+      const badgesBox = document.getElementById('badges'); badgesBox.textContent = '';
       buildBadges(totalXP, streak, lv.level).forEach(b => {
-        const el = document.createElement('div');
-        el.className = 'badge' + (b.on ? ' on' : '');
-        const i = document.createElement('span');
-        i.className = 'ico';
-        i.textContent = b.ico;
-        el.append(i, document.createTextNode(b.name));
-        badgesBox.appendChild(el);
+        const el = document.createElement('div'); el.className = 'badge' + (b.on ? ' on' : '');
+        const i = document.createElement('span'); i.className = 'ico'; i.textContent = b.ico;
+        el.append(i, document.createTextNode(b.name)); badgesBox.appendChild(el);
       });
     }
 
     // ================= Скидання прогресу =================
     async function doReset() {
-      if (window.TPSync) {
-        await TPSync.reset(); // чистить і локально, і в хмарі Telegram
-      } else {
-        Object.keys(localStorage)
-          .filter(k => k.startsWith(PREFIX))
-          .forEach(k => localStorage.removeItem(k));
+      if (window.TPSync) { await TPSync.reset(); } else {
+        Object.keys(localStorage).filter(k => k.startsWith(PREFIX)).forEach(k => localStorage.removeItem(k));
       }
-      haptic('success');
-      render();
+      haptic('success'); render();
     }
 
     // ================= Статус синхронізації =================
@@ -523,10 +344,7 @@
       ok: '☁️ Прогрес збережено в акаунті Telegram',
       error: '⚠️ Не вдалося синхронізувати, спробуємо ще раз'
     };
-
-    function showStatus(s) {
-      document.getElementById('sync-status').textContent = STATUS_TEXT[s] || '';
-    }
+    function showStatus(s) { document.getElementById('sync-status').textContent = STATUS_TEXT[s] || ''; }
 
     window.addEventListener('tpsync:status', e => showStatus(e.detail));
     window.addEventListener('tpsync:updated', () => render());
@@ -546,7 +364,6 @@
       }
     });
 
-    // Оновлюємо дані, коли користувач повертається на вкладку
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) render();
     });
@@ -554,7 +371,6 @@
     renderUser();
     if (window.TPSync) {
       showStatus(TPSync.status);
-      // Спочатку підтягуємо дані з хмари, потім малюємо
       TPSync.ready.then(render);
     } else {
       showStatus('off');
