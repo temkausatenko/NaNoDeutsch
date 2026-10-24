@@ -58,7 +58,6 @@
     <div class="empty">Завантаження... ⏳</div>
   </div>
 
-  <!-- Нижнее меню -->
   <nav class="bottom-nav" aria-label="Навігація">
     <a href="index.html" class="nav-item">
       <svg viewBox="0 0 24 24"><path d="M4 19h16v-2H4v2zm0-4h16v-2H4v2zm0-4h16v-2H4v2zm0-6v2h16V5H4z"/></svg>
@@ -75,47 +74,64 @@
   </nav>
 
   <script>
-    const PROJECT_ID = 'nanodeutsch'; // Ваш ID Firebase
+    const PROJECT_ID = 'nanodeutsch';
     
     async function loadLeaderboard() {
       const listEl = document.getElementById('list');
       try {
-        const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/leaderboard?orderBy=fields.xp%20desc&pageSize=10`;
+        // ВАЖНО: Здесь мы убрали сложные параметры (orderBy) из ссылки!
+        const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/leaderboard`;
         const res = await fetch(url);
         const data = await res.json();
+
+        // Если Firebase вернул ошибку (например, из-за правил)
+        if (data.error) {
+          listEl.innerHTML = `<div class="empty" style="color: #ef4444;">Помилка доступу. Перевірте правила у Firebase.</div>`;
+          console.error(data.error);
+          return;
+        }
         
         if (!data.documents || data.documents.length === 0) {
           listEl.innerHTML = '<div class="empty">Тут поки порожньо. Станьте першим!</div>';
           return;
         }
 
+        // Скачиваем всех, сортируем вручную и берем топ-10
+        let users = data.documents.map(doc => {
+          const fields = doc.fields || {};
+          return {
+            name: fields.name?.stringValue || 'Анонім',
+            xp: parseInt(fields.xp?.integerValue || '0', 10),
+            photo: fields.photo?.stringValue || ''
+          };
+        });
+
+        users.sort((a, b) => b.xp - a.xp); // Сортировка от большего к меньшему
+        users = users.slice(0, 10); // Берем только 10 человек
+
+        // Отрисовываем список
         listEl.innerHTML = '';
-        data.documents.forEach((doc, index) => {
-          const fields = doc.fields;
-          const name = fields.name?.stringValue || 'Анонім';
-          const xp = fields.xp?.integerValue || 0;
-          const photo = fields.photo?.stringValue;
-          
+        users.forEach((user, index) => {
           const rankClass = index === 0 ? 'top1' : index === 1 ? 'top2' : index === 2 ? 'top3' : '';
           const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : (index + 1);
           
-          const avatarHtml = photo 
-            ? `<img src="${photo}" class="avatar" alt="">` 
-            : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;background:var(--btn-color)">${name.charAt(0).toUpperCase()}</div>`;
+          const avatarHtml = user.photo 
+            ? `<img src="${user.photo}" class="avatar" alt="">` 
+            : `<div class="avatar" style="display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;background:var(--btn-color)">${user.name.charAt(0).toUpperCase()}</div>`;
 
           const card = document.createElement('div');
           card.className = 'user-card';
           card.innerHTML = `
             <div class="rank ${rankClass}">${medal}</div>
             ${avatarHtml}
-            <div class="name">${name}</div>
-            <div class="xp">${xp} XP</div>
+            <div class="name">${user.name}</div>
+            <div class="xp">${user.xp} XP</div>
           `;
           listEl.appendChild(card);
         });
       } catch (e) {
         console.error(e);
-        listEl.innerHTML = '<div class="empty">Помилка завантаження. Спробуйте пізніше.</div>';
+        listEl.innerHTML = '<div class="empty" style="color: #ef4444;">Помилка завантаження.</div>';
       }
     }
 
