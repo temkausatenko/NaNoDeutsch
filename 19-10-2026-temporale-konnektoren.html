@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Temporale Konnektoren – Trainer 19.10.2026</title>
+<!-- Telegram Mini App SDK -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- Синхронизация прогресса -->
+<script src="sync.js"></script>
+<style>
+:root{
+  --bg: #090b10;
+  --bg-grad: #151b2b;
+  --card: #12161f;
+  --card-hover: #1a202c;
+  --tx: #f1f5f9;
+  --mu: #94a3b8;
+  --pr: #6366f1;
+  --pr-glow: rgba(99, 102, 241, 0.4);
+  --pl: #1e293b;
+  --ok: #10b981;
+  --okb: rgba(16, 185, 129, 0.1);
+  --no: #ef4444;
+  --nob: rgba(239, 68, 68, 0.1);
+  --bd: #2a3441;
+  --go: #f59e0b;
+  --gob: rgba(245, 158, 11, 0.12);
+  --radius: 16px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --bg-grad: #e2e8f0;
+  --card: #ffffff;
+  --card-hover: #f1f5f9;
+  --tx: #0f172a;
+  --mu: #64748b;
+  --pr: #4f46e5;
+  --pr-glow: rgba(79, 70, 229, 0.2);
+  --pl: #e2e8f0;
+  --ok: #059669;
+  --okb: rgba(5, 150, 105, 0.1);
+  --no: #dc2626;
+  --nob: rgba(220, 38, 38, 0.1);
+  --bd: #cbd5e1;
+  --go: #d97706;
+  --gob: rgba(217, 119, 6, 0.1);
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior: smooth;}
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image: radial-gradient(circle at top, var(--bg-grad) 0%, var(--bg) 100%);
+  color:var(--tx);
+  font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+.w{max-width:720px;margin:0 auto;padding:24px 16px 60px;position:relative;}
+.header-wrap { position: relative; text-align: center; margin-bottom: 8px; }
+h1{font-size:1.8rem;font-weight:700;letter-spacing:-0.5px;margin:0;background:linear-gradient(135deg, var(--tx), var(--mu));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-wrap{padding-top:8px;margin-bottom:16px}
+.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
+.theme-toggle{right:0}
+.sound-toggle{right:48px}
+.theory-top-toggle{right:96px}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+@media(max-width:480px){.header-wrap{padding-top:48px}}
+.card{position:relative}
+.card .q{padding-right:44px}
+.speak{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;font-size:.95rem;line-height:1;z-index:2}
+.speak:hover{color:var(--tx);border-color:var(--pr)}
+
+.glossary{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px 4px;
+  margin:24px 0;
+  padding:16px 8px;
+  background:var(--card);
+  border:1px solid var(--bd);
+  border-radius:var(--radius);
+  font-size:.7rem;
+  color:var(--mu);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  text-align:center;
+}
+.glossary div { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+.glossary b { display: block; color:var(--tx); font-weight:600; font-size: .8rem; margin-bottom: 2px; }
+.glossary span { line-height: 1.2; }
+
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom: 20px;justify-content:center;}
+.tab{
+  border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
+  padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;
+  transition: all 0.2s ease;display: inline-flex;align-items: center;gap: 7px;line-height: 1.2;
+}
+.tab small{font-weight:500;color:var(--mu);font-size:.7rem;margin: 0;padding: 1px 7px;background: var(--pl);border-radius: 99px;line-height: 1.4;}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow: 0 2px 8px var(--pr-glow);}
+.tab.on small{color:#fff;background:rgba(255,255,255,0.2)}
+
+.pg{margin:16px 0 12px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pr),var(--ok));border-radius:99px;transition:width 0.6s cubic-bezier(0.4, 0, 0.2, 1)}
+
+.stats-panel {display: grid;grid-template-columns: repeat(3, 1fr);gap: 1px;background: var(--bd);border: 1px solid var(--bd);border-radius: 12px;overflow: hidden;margin-bottom: 24px;}
+.stat-box {background: var(--card);padding: 12px 8px;text-align: center;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+.stat-label {font-size: 0.75rem;text-transform: uppercase;letter-spacing: 0.5px;color: var(--mu);margin-bottom: 4px;font-weight: 600;}
+.stat-val {font-size: 1.4rem;font-weight: 800;color: var(--tx);line-height: 1.1;}
+.stat-val.ok { color: var(--ok); }
+.stat-val.no { color: var(--no); }
+
+.card{
+  background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:24px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);animation:slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:none} }
+@keyframes shake { 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+.q{font-size:1.25rem;font-weight:500;margin:0 0 20px;line-height:1.5}
+.ua{font-size:.8rem;color:var(--mu);margin:-10px 0 20px;line-height:1.4;font-style:italic}
+.blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--pr);text-align:center;color:var(--pr);transition: all 0.3s;}
+.blank.ok{color:var(--ok);border-color:var(--ok)}
+.blank.no{color:var(--no);border-color:var(--no)}
+
+.opts{display:flex;flex-wrap:wrap;gap:12px}
+.o,.btn{
+  font:inherit;font-weight:600;border-radius:12px;padding:12px 20px;cursor:pointer;
+  border:2px solid var(--bd);background:var(--card);color:var(--tx);transition:all 0.2s ease;
+}
+.o.ok{background:var(--okb);border-color:var(--ok);color:var(--ok)}
+.o.no{background:var(--nob);border-color:var(--no);color:var(--no);animation:shake 0.4s}
+.o:disabled{cursor:default;opacity:0.8}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.g{font-weight:500;font-size:.85rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
+
+@media (hover: hover) and (pointer: fine) {
+  .o:hover:not(:disabled),.btn:hover:not(:disabled){border-color:var(--pr);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+  .tab:hover{border-color:var(--pr);color:var(--tx)}
+  .tab.on:hover{background:#4f46e5;border-color:#4f46e5}
+  .btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+  .btn.g:hover{color:var(--tx);background:var(--pl);transform:none;box-shadow:none}
+  .t:hover{transform:translateY(-2px);border-color:var(--pr)}
+}
+
+.fb{margin-top:20px;padding:16px;border-radius:12px;animation:slideUp 0.3s ease}
+.fb.ok{background:var(--okb);border:1px solid var(--ok)}
+.fb.no{background:var(--nob);border:1px solid var(--no)}
+.fb b{display:block;margin-bottom:4px;font-size:1.05rem}
+.fb.ok b{color:var(--ok)}.fb.no b{color:var(--no)}
+
+.advance-bar {height: 3px;background: var(--pl);border-radius: 99px;overflow: hidden;margin: 14px auto 0;max-width: 220px;width: 100%;}
+.advance-bar i {display: block;height: 100%;width: 0;background: linear-gradient(90deg, var(--pr), var(--ok));border-radius: 99px;animation: fillBar 2s linear forwards;}
+@keyframes fillBar { from{width:0%} to{width:100%} }
+
+.inp{
+  font-family: inherit;font-size: 15px;width: 150px;padding: 4px 10px;margin: 0 3px;
+  border: 1.5px solid var(--bd);border-radius: 7px;background: var(--bg);color: var(--tx);
+  text-align: center;transition: all 0.2s;line-height: 1.4;height: 30px;vertical-align: middle;
+}
+@supports (field-sizing: content) {
+  .inp {width: auto;field-sizing: content;min-width: 55px;max-width: 220px;}
+}
+.inp:focus{outline:none;border-color:var(--pr);box-shadow:0 0 0 2px var(--pr-glow);}
+.inp.ok{border-color:var(--ok);background:var(--okb)}
+.inp.no{border-color:var(--no);background:var(--nob)}
+.sent{line-height:2.2}
+.tr{color:var(--mu);font-size:.95rem;margin:-8px 0 16px;font-style:italic}
+
+.area{min-height:60px;border:2px dashed var(--bd);border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;transition:all 0.3s;}
+.area.ok{border-color:var(--ok);background:var(--okb);border-style:solid}
+.area.no{border-color:var(--no);background:var(--nob);border-style:solid}
+.t{font:inherit;padding:8px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--pl);color:var(--tx);cursor:pointer;transition:all 0.15s;font-weight:500;}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;align-items:center;justify-content:center}
+.sum{text-align:center}.big{font-size:3rem;font-weight:800;color:var(--pr);margin:10px 0;text-shadow:0 0 20px var(--pr-glow)}
+
+.foot{display:flex;flex-direction: column;align-items: center;justify-content: center;margin-top: 30px;width: 100%;}
+
+#theory-section { display: none; margin-top: 30px; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+#theory-section.show { display: block; }
+.theory-card { background: var(--card); border: 1px solid var(--bd); border-radius: var(--radius); padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+.theory-card h2 { font-size: 1.4rem; color: var(--pr); border-bottom: 1px solid var(--bd); padding-bottom: 8px; margin-top: 30px; }
+.theory-card h2:first-child { margin-top: 0; }
+.theory-card h3 { font-size: 1.1rem; color: var(--tx); margin-top: 20px; }
+.theory-card p { color: var(--mu); font-size: 0.95rem; line-height: 1.6; }
+.theory-card .rule-box { background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; padding: 12px 16px; margin: 20px 0; border-radius: 8px; color: #d97706; font-size: 0.95rem; }
+.theory-card .example { background: var(--pl); border-left: 4px solid var(--pr); padding: 12px 16px; margin: 12px 0; font-style: italic; border-radius: 0 8px 8px 0; font-size: 0.95rem; color: var(--tx); }
+.theory-card .example span.highlight { color: var(--pr); font-weight: bold; }
+.table-wrap { overflow-x: auto; }
+.theory-card table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+.theory-card th, .theory-card td { border: 1px solid var(--bd); padding: 10px 12px; text-align: left; }
+.theory-card table.compact { font-size: 0.82em; margin: 12px 0; }
+.theory-card table.compact th, .theory-card table.compact td { padding: 6px 8px; }
+.theory-card th { background: var(--pl); color: var(--tx); }
+.theory-card tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+.theory-card .timeline { display: flex; justify-content: space-between; background: var(--bg); padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 0.85em; text-align: center; border: 1px solid var(--bd); }
+.theory-card .timeline div { flex: 1; padding: 8px; border-radius: 6px; margin: 0 4px; }
+.theory-card .t-past { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #dc2626; }
+.theory-card .t-mid { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #d97706; }
+.theory-card .t-now { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #059669; }
+[hidden]{display:none!important}
+.lab{margin:-8px 0 18px;font-size:.85rem;line-height:1.4;min-height:1px}
+.lab:empty{display:none}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{color:var(--mu);font-style:italic}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
+.btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
+.foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
+.rv-pill{text-align:center;padding:8px 14px;background:var(--nob);color:var(--no);border:1px solid var(--no);border-radius:99px;font-weight:500;font-size:.85rem}
+.rv-count{display:inline-block;margin-left:6px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;box-shadow:0 2px 8px var(--pr-glow)}
+.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
+
+/* EXP */
+.xp{--xa:#475569;--xz:#94a3b8;margin-top:18px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{position:relative;display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;transition:width .7s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
+.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+@keyframes xgold{to{background-position:200% 0}}
+
+/* Модальні вікна: завершення, підтвердження, помилки */
+.complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-card p b{color:var(--tx)}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button,.errs-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover,.errs-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel,.errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover,.errs-actions .cancel:hover{border-color:var(--pr)}
+.errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
+.errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
+.errs-list{overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:2px;min-height:0}
+.err-item{background:var(--nob);border:1px solid var(--bd);border-left:4px solid var(--no);border-radius:10px;padding:10px 12px}
+.err-item .e-de{color:var(--tx);font-size:.95rem;line-height:1.45}
+.err-item .e-de b{color:var(--ok)}
+.err-item .e-ua{color:var(--mu);font-size:.82rem;margin-top:3px}
+.err-item .e-ex{color:var(--mu);font-size:.8rem;margin-top:3px;font-style:italic}
+.errs-empty{text-align:center;color:var(--mu);padding:26px 8px;font-size:.95rem}
+.errs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
+html.in-tg,html.in-tg body{overscroll-behavior-y:none}
+</style></head><body><div class="w">
+
+<div class="header-wrap">
+  <h1>Temporale Konnektoren</h1>
+  <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
+  <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Увімкнути/Вимкнути звук">🔊</button>
+  <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div class="pg"><i id="bar"></i></div>
+
+<div class="stats-panel">
+  <div class="stat-box"><div class="stat-label">Речення</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+  <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
+  <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
+</div>
+
+<div id="main"></div>
+
+<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP цієї вкладки</span><span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+
+<div class="foot" id="foot"></div>
+
+<div class="complete" id="errs" hidden>
+  <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
+    <h2 id="errs-title">🔁 Мої помилки</h2>
+    <p class="errs-sub" id="errs-sub"></p>
+    <div class="errs-list" id="errs-list"></div>
+    <div class="errs-actions" id="errs-actions"></div>
+  </div>
+</div>
+
+<div class="complete" id="complete" hidden>
+  <div class="complete-card">
+    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
+    <p id="complete-text"></p>
+    <div class="complete-actions" id="complete-actions"></div>
+  </div>
+</div>
+
+<div class="glossary">
+  <div><b>wenn</b><span>коли / якщо</span></div>
+  <div><b>als</b><span>коли (один раз у мин.)</span></div>
+  <div><b>nachdem</b><span>після того як</span></div>
+  <div><b>bevor / ehe</b><span>перед тим як</span></div>
+  <div><b>während</b><span>у той час як</span></div>
+  <div><b>solange</b><span>доти, поки</span></div>
+  <div><b>bis</b><span>поки не / до</span></div>
+  <div><b>seit / seitdem</b><span>з тих пір як</span></div>
+  <div><b>sobald / sowie</b><span>як тільки</span></div>
+  <div><b>sooft</b><span>щоразу як</span></div>
+  <div><b>immer wenn</b><span>щоразу, коли</span></div>
+  <div><b>jedes Mal wenn</b><span>кожного разу</span></div>
+</div>
+
+<div id="theory-section">
+  <div class="theory-card">
+    <h1 style="margin-bottom: 20px; font-size: 1.5rem;">🇩🇪 Temporale Konnektoren / Konjunktionen</h1>
+    <p style="text-align: center; margin-bottom: 20px;"><em>Повний розбір теми: від А до Я</em></p>
+
+    <div class="rule-box">
+        🚨 <strong>ЗОЛОТЕ ПРАВИЛО:</strong> Всі ці союзи є підрядними (Nebensatz). Це означає, що <strong>дієслово (Verb) завжди йде в кінець речення!</strong>
+    </div>
+
+    <h2>1. Послідовність дій: ПІСЛЯ та ДО</h2>
+
+    <h3>🔹 nachdem (після того, як)</h3>
+    <p>Дії відбуваються послідовно (спочатку одна, потім інша). Тут діє <strong>строге правило часів (Zeitenfolge)</strong>: час у підрядному реченні має бути на один крок у минулому відносно головного.</p>
+
+    <div class="timeline">
+        <div class="t-past"><strong>Plusquamperfekt</strong><br>(hatte gekauft)</div>
+        <div class="t-mid"><strong>Präteritum / Perfekt</strong><br>(war / habe gefunden)</div>
+        <div class="t-now"><strong>Präsens</strong><br>(koche)</div>
+    </div>
+
+    <p><strong>Минулий час (Vergangenheit):</strong> Plusquamperfekt + Präteritum/Perfekt</p>
+    <div class="example">
+        <span class="highlight">Nachdem</span> ich einen Apfel gekauft <strong>hatte</strong>, <strong>war</strong> der Apfel schlecht. <br>
+        <em>(Після того як я купив яблуко, воно було поганим).</em><br><br>
+        <span class="highlight">Nachdem</span> ich studiert <strong>hatte</strong>, <strong>habe</strong> ich einen Job gefunden. <br>
+        <em>(Після того як я закінчив навчання, я знайшов роботу).</em>
+    </div>
+
+    <p><strong>Теперішній час (Gegenwart):</strong> Perfekt + Präsens</p>
+    <div class="example">
+        <span class="highlight">Nachdem</span> ich eingekauft <strong>habe</strong>, <strong>koche</strong> ich. <br>
+        <em>(Після того як я зробив покупки, я готую).</em>
+    </div>
+
+    <h3>🔹 bevor / ehe (перед тим, як / до того, як)</h3>
+    <p>Вказує на дію, яка відбудеться <em>раніше</em> іншої. Це повні синоніми; <strong>ehe</strong> звучить трохи офіційніше/книжніше. Суворих правил часів, як у nachdem, тут немає.</p>
+    <div class="example">
+        <span class="highlight">Bevor</span> ich zu Mittag <strong>esse</strong>, <strong>muss</strong> ich meine Hände <strong>waschen</strong>. <br>
+        <em>(Перед тим як я обідаю, я мушу помити руки).</em><br><br>
+        <span class="highlight">Ehe</span> wir <strong>losfahren</strong>, <strong>prüfe</strong> ich den Reifendruck. <br>
+        <em>(Перед тим як ми поїдемо, я перевіряю тиск у шинах).</em>
+    </div>
+
+    <h2>2. Одночасність та тривалість</h2>
+
+    <h3>🔹 während (в той час, як / поки)</h3>
+    <p>Дві паралельні дії відбуваються одночасно.</p>
+    <div class="example">
+        <span class="highlight">Während</span> ich <strong>koche</strong>, <strong>sieht</strong> mich meine Katze die ganze Zeit <strong>an</strong>. <br>
+        <em>(В той час як я готую, мій кіт весь час дивиться на мене).</em>
+    </div>
+
+    <h3>🔹 solange (доти, поки / поки)</h3>
+    <p>Дві дії тривають паралельно до моменту завершення однієї з них.</p>
+    <div class="example">
+        <span class="highlight">Solange</span> ich <strong>koche</strong>, <strong>bleibt</strong> die Katze neben mir <strong>sitzen</strong>. <br>
+        <em>(Поки я готую, кіт сидить поруч зі мною).</em>
+    </div>
+
+    <h2>3. Початок та кінець</h2>
+
+    <h3>🔹 seit / seitdem (з тих пір, як)</h3>
+    <p>Дія почалася в минулому і <strong>триває до сьогодні</strong>. Тому в головній частині майже завжди використовується <strong>Präsens</strong>.</p>
+    <div class="example">
+        <span class="highlight">Seitdem</span> ich in Deutschland <strong>wohne</strong>, <strong>lerne</strong> ich Deutsch. <br>
+        <em>(З тих пір як я живу в Німеччині, я вчу німецьку).</em>
+    </div>
+
+    <h3>🔹 bis (до того як / поки не)</h3>
+    <p>Вказує на кінець дії (Signalisiert das Ende).</p>
+    <div class="example">
+        <span class="highlight">Bis</span> die Pause <strong>anfängt</strong>, sind es noch 25 Minuten. <br>
+        <em>(Поки не почнеться перерва, залишилося 25 хвилин).</em>
+    </div>
+
+    <h3>🔹 sobald / sowie (як тільки)</h3>
+    <p>Вказує на негайний початок дії (Anfang einer Aktion). Це повні синоніми; <strong>sowie</strong> звучить трохи офіційніше.</p>
+    <div class="example">
+        <span class="highlight">Sobald</span> ich <strong>esse</strong>, will die Katze auch ihr Futter <strong>haben</strong>. <br>
+        <em>(Як тільки я їм, кіт теж хоче свою їжу).</em>
+    </div>
+
+    <h2>4. Повторюваність (Частота)</h2>
+
+    <h3>🔹 sooft / immer wenn / jedes Mal wenn (щоразу як / кожного разу, коли)</h3>
+    <p>Використовуються, коли дія повторюється (Wiederholung). Це синоніми; <strong>sooft</strong> — трохи офіційніше.</p>
+    <div class="example">
+        <span class="highlight">Sooft</span> wir ein Thema <strong>üben</strong>, <strong>wird</strong> es verständlicher. <br>
+        <em>(Щоразу як ми практикуємо тему, вона стає зрозумілішою).</em>
+    </div>
+
+    <h2>5. БИТВА ТИТАНІВ: WENN vs. ALS</h2>
+    <p>Обидва перекладаються як "коли", але різниця колосальна!</p>
+
+    <div class="table-wrap">
+      <table>
+          <tr>
+              <th style="width: 50%;">WENN</th>
+              <th style="width: 50%;">ALS</th>
+          </tr>
+          <tr>
+              <td>
+                  <strong>1. Теперішній та майбутній час</strong><br>
+                  <em>Wenn ich morgen Zeit habe...</em>
+              </td>
+              <td>
+                  <strong>ТІЛЬКИ минулий час (Vergangenheit)</strong>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                  <strong>2. Повторювані дії в минулому</strong><br>
+                  (часто з <em>immer, jedes Mal</em>)<br>
+                  <em>Immer wenn ich Schokolade aß, hatte ich Bauchweh.</em>
+              </td>
+              <td>
+                  <strong>Одноразова подія в минулому</strong><br>
+                  (1 раз -> passiert)<br>
+                  <em>Als ich Kind war, habe ich den ganzen Tag draußen gespielt.</em>
+              </td>
+          </tr>
+      </table>
+    </div>
+
+    <h2>💡 Шпаргалка-таблиця (всі коннектори)</h2>
+    <div class="table-wrap">
+      <table class="compact">
+          <tr>
+              <th>Коннектор</th>
+              <th>Значення</th>
+              <th>Приклад</th>
+          </tr>
+          <tr><td><strong>während</strong></td><td>паралельні дії</td><td>Während ich koche, sehe ich fern.</td></tr>
+          <tr><td><strong>nachdem</strong></td><td>після (Zeitenfolge!)</td><td>Nachdem ich gekocht hatte, habe ich gegessen.</td></tr>
+          <tr><td><strong>bevor / ehe</strong></td><td>перед тим як</td><td>Bevor ich esse, wasche ich meine Hände.</td></tr>
+          <tr><td><strong>bis</strong></td><td>кінець дії</td><td>Bis das Essen fertig ist, verlasse ich die Küche nicht.</td></tr>
+          <tr><td><strong>seit / seitdem</strong></td><td>початок у минулому, триває</td><td>Seit ich eine Katze habe, habe ich viel Spaß.</td></tr>
+          <tr><td><strong>wenn</strong></td><td>теперішнє/майбутнє або повторення</td><td>Wenn ich koche, kommt die Katze.</td></tr>
+          <tr><td><strong>als</strong></td><td>одноразова дія в минулому</td><td>Als ich gestern Fisch gekocht habe, war die Katze aufgeregt.</td></tr>
+          <tr><td><strong>solange</strong></td><td>паралельні дії до кінця</td><td>Solange ich koche, bleibt die Katze sitzen.</td></tr>
+          <tr><td><strong>sobald / sowie</strong></td><td>негайний початок</td><td>Sobald ich esse, will die Katze Futter.</td></tr>
+          <tr><td><strong>sooft / immer wenn / jedes Mal wenn</strong></td><td>повторювана дія</td><td>Sooft ich koche, steht sie neben mir.</td></tr>
+      </table>
+    </div>
+
+    <div class="rule-box" style="background-color: rgba(99, 102, 241, 0.1); border-left-color: var(--pr); color: var(--pr);">
+        📌 <strong>Порада для екзамену:</strong> Якщо підрядне речення стоїть першим, то в головній частині (після коми) дієслово стоїть <strong>відразу</strong> (перед підметом).
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+/* === Тема === */
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+const savedTheme = store.get('tp_v2_tk_theme') || ((window.Telegram && Telegram.WebApp && Telegram.WebApp.colorScheme) || 'dark');
+if (savedTheme === 'light') {
+  document.documentElement.setAttribute('data-theme', 'light');
+  document.getElementById('theme-toggle').textContent = '☀️';
+}
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  if (isLight) {
+    document.documentElement.removeAttribute('data-theme');
+    store.set('tp_v2_tk_theme', 'dark');
+    document.getElementById('theme-toggle').textContent = '🌙';
+    tgChrome();
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    store.set('tp_v2_tk_theme', 'light');
+    document.getElementById('theme-toggle').textContent = '☀️';
+    tgChrome();
+  }
+}
+
+/* === Звук === */
+let soundEnabled = store.get('tp_v2_tk_sound') !== 'off';
+function updateSoundIcon() {
+  const b = document.getElementById('sound-toggle');
+  if (b) b.textContent = soundEnabled ? '🔊' : '🔇';
+}
+updateSoundIcon();
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  store.set('tp_v2_tk_sound', soundEnabled ? 'on' : 'off');
+  updateSoundIcon();
+  if (soundEnabled) playSound('correct');
+}
+let audioCtx;
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.06, now + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now); osc.stop(now + 0.6);
+    } else {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.08, now + 0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.4);
+    }
+  } catch(e) {}
+}
+
+/* === Озвучка === */
+let deVoice = null;
+function pickVoice() {
+  try {
+    const v = speechSynthesis.getVoices();
+    deVoice = v.find(x => /^de[-_]DE/i.test(x.lang)) || v.find(x => /^de/i.test(x.lang)) || null;
+  } catch(e) {}
+}
+if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+function speak(text) {
+  if (!window.speechSynthesis || !text) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.lang = 'de-DE';
+    if (deVoice) u.voice = deVoice;
+    u.rate = 0.9;
+    speechSynthesis.speak(u);
+  } catch(e) {}
+}
+function getSpeechText() {
+  try {
+    const ctx = getContext();
+    if (!ctx || !ctx.it) return '';
+    const it = ctx.it, t = T(ctx.L, it);
+    let s;
+    if (t === 'o') {
+      s = it[0];
+    } else if (t === 'c') {
+      s = it[0].replace(/\([^)]*\)\s*/g, '').replace('___', it[1]);
+    } else {
+      let k = 0;
+      s = it[0].replace(/\([^)]*\)\s*/g, '').replace(/___/g, () => String(it[1][k++] || '').split('|')[0]);
+    }
+    s = s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,!?])/g, '$1').trim();
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  } catch(e) { return ''; }
+}
+function speakCurrent() { speak(getSpeechText()); }
+
+/* === Допоміжні функції для даних === */
+function merge(s, a){
+  const parts = s.split('___');
+  if (a.length < 2) return [s, a];
+  const outParts = [parts[0]], outA = [];
+  let cur = a[0];
+  for (let j = 0; j < a.length - 1; j++) {
+    if (parts[j+1] === ' ') { cur += ' ' + a[j+1]; }
+    else { outA.push(cur); outParts.push(parts[j+1]); cur = a[j+1]; }
+  }
+  outA.push(cur);
+  outParts.push(parts[a.length]);
+  return [outParts.join('___'), outA];
+}
+const P = raw => { const m = merge(raw[0], raw[1]); return [m[0], m[1], raw[2], raw[3]]; };
+const C = (s,a,e,opts,ua,acc) => [s,a,e,'c',opts,ua,acc];
+const I = (s,a,e,ua) => { const m = merge(s,a); return [m[0],m[1],e,'i',null,ua]; };
+const O = (s,ua,e) => [s,ua,e,'o'];
+
+function seededShuffle(arr, seed){
+  const a = arr.slice();
+  let t = seed >>> 0;
+  const rnd = () => {
+    t += 0x6D2B79F5;
+    let r = Math.imul(t ^ (t >>> 15), 1 | t);
+    r ^= r + Math.imul(r ^ (r >>> 7), 61 | r);
+    return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+  };
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* === Категорії-тренажери === */
+const CATS = [
+{
+  n:'Nachdem', re:/\bnachdem\b/i, acc:['nachdem'],
+  tip:'Nachdem = крок назад у часі: головне речення Präsens → nachdem + Perfekt; головне Perfekt/Präteritum → nachdem + Plusquamperfekt.',
+  mixExpl:'Спочатку відбулась дія з підрядного речення → nachdem (у підрядному Perfekt або Plusquamperfekt).',
+  items:[
+    ['Ich koche ein leckeres Essen, nachdem ich (einkaufen) ___ ___.',['eingekauft','habe'],'Головне речення в Präsens → у nachdem-частині Perfekt: eingekauft habe.','Я готую смачну страву після того, як закупився.'],
+    ['Nachdem meine Frau von der Arbeit (kommen) ___ ___, essen wir zusammen.',['gekommen','ist'],'Головне в Präsens → Perfekt. «kommen» з sein: gekommen ist.','Після того як моя дружина повертається з роботи, ми їмо разом.'],
+    ['Nachdem wir gut gegessen hatten, ___ wir ins Kino ___.',['sind','gegangen'],'У nachdem-частині Plusquamperfekt → головне в Perfekt: sind … gegangen.','Після того як ми добре поїли, ми пішли в кіно.'],
+    ['Nachdem der Wecker (klingeln) ___ ___, ist sie ganz langsam aufgestanden.',['geklingelt','hatte'],'Головне в Perfekt → у nachdem-частині Plusquamperfekt: geklingelt hatte.','Після того як задзвонив будильник, вона дуже повільно встала.'],
+    ['Nachdem ich einen Arzttermin (machen) ___ ___, bin ich zur Apotheke gegangen.',['gemacht','hatte'],'Головне в Perfekt (bin gegangen) → Plusquamperfekt: gemacht hatte.','Після того як я записався до лікаря, я пішов в аптеку.'],
+    ['Ich gehe nach Hause, nachdem ich bei der Bank (sein) ___ ___.',['gewesen','bin'],'Головне в Präsens → Perfekt. «sein» з sein: gewesen bin.','Я піду додому після того, як побуваю в банку.'],
+    ['Nachdem wir die Wohnung (besichtigen) ___ ___, haben wir den Mietvertrag unterschrieben.',['besichtigt','hatten'],'Головне в Perfekt → Plusquamperfekt: besichtigt hatten.','Після того як ми оглянули квартиру, ми підписали договір оренди.'],
+    ['Nachdem er sich beim Bürgeramt (anmelden) ___ ___, hat er die Steuer-ID bekommen.',['angemeldet','hatte'],'Головне в Perfekt → Plusquamperfekt: angemeldet hatte.','Після того як він зареєструвався в бюргерамті, він отримав податковий ідентифікаційний номер.'],
+    ['Ich schreibe dir, nachdem ich das Meeting (beenden) ___ ___.',['beendet','habe'],'Головне в Präsens → Perfekt: beendet habe.','Я напишу тобі після того, як закінчу нараду.'],
+    ['Nachdem es lange (regnen) ___ ___, ist die Sonne herausgekommen.',['geregnet','hatte'],'Головне в Perfekt → Plusquamperfekt: geregnet hatte.','Після того як довго йшов дощ, визирнуло сонце.'],
+    ['Nachdem sie das Paket (abholen) ___ ___, ist sie zur Arbeit gefahren.',['abgeholt','hatte'],'Головне в Perfekt → Plusquamperfekt: abgeholt hatte.','Після того як вона забрала посилку, вона поїхала на роботу.']
+  ]
+},
+{
+  n:'Bevor', re:/\b(bevor|ehe)\b/i, acc:['bevor','ehe'],
+  tip:'bevor = «перед тим як»: спочатку відбувається дія з головного речення. Суворого правила часів немає; дієслово в підрядному — в кінці.',
+  mixExpl:'Дія з головного речення відбувається РАНІШЕ → bevor / ehe («перед тим як»). Це повні синоніми.',
+  items:[
+    ['Bevor ich ins Bett (gehen) ___, putze ich mir die Zähne.',['gehe'],'Präsens: «gehe» в кінці підрядного; головне починається з дієслова.','Перш ніж лягти спати, я чищу зуби.'],
+    ['Ich trinke einen Kaffee, bevor ich zur Arbeit (fahren) ___.',['fahre'],'Підрядне після коми: «fahre» в кінці.','Я п’ю каву, перш ніж поїхати на роботу.'],
+    ['Bevor wir ins Restaurant (gehen) ___ ___, hat er einen Tisch reserviert.',['gegangen','sind'],'Perfekt: gegangen sind (рух → sein).','Перш ніж ми пішли в ресторан, він забронював столик.'],
+    ['Bevor du das Haus (verlassen) ___, schalte bitte das Licht aus.',['verlässt'],'verlassen → du verlässt (змінюється кореневий голосний).','Перш ніж ти вийдеш з дому, вимкни, будь ласка, світло.'],
+    ['Er hat noch schnell gefrühstückt, bevor er zum Bahnhof (rennen) ___ ___.',['gerannt','ist'],'Perfekt: gerannt ist (рух → sein).','Він ще швидко поснідав, перш ніж побіг на вокзал.'],
+    ['Bevor ich eine Entscheidung (treffen) ___, möchte ich mit meiner Frau sprechen.',['treffe'],'treffen → ich treffe; дієслово в кінці.','Перш ніж ухвалити рішення, я хочу поговорити з дружиною.'],
+    ['Lies den Vertrag gründlich, bevor du ihn (unterschreiben) ___.',['unterschreibst'],'du unterschreibst; після коми — підрядне, дієслово в кінці.','Уважно прочитай договір, перш ніж його підписати.'],
+    ['Bevor sie nach Deutschland (ziehen) ___ ___, hat sie in Kiew gearbeitet.',['gezogen','ist'],'Perfekt: gezogen ist (переїзд → sein).','Перш ніж переїхати до Німеччини, вона працювала в Києві.'],
+    ['Wir müssen noch einkaufen, bevor die Geschäfte (schließen) ___.',['schließen'],'Präsens, 3-тя особа мн.: «schließen» в кінці.','Нам ще треба зробити покупки, перш ніж зачиняться магазини.'],
+    ['Bevor der Zug (abfahren) ___ ___, haben wir noch ein Brötchen gekauft.',['abgefahren','ist'],'Perfekt: abgefahren ist (рух → sein).','Перш ніж поїзд рушив, ми ще купили булочку.']
+  ]
+},
+{
+  n:'Solange', re:/\bsolange\b/i, acc:['solange'],
+  tip:'solange = «поки / доти, доки»: дія з головного речення триває весь час, поки триває дія в підрядному.',
+  mixExpl:'Дії тривають паралельно, «доти, поки» → solange.',
+  items:[
+    ['Ich bleibe hier, solange du mich (brauchen) ___.',['brauchst'],'solange = «поки»; «brauchst» в кінці підрядного.','Я залишаюся тут, поки я тобі потрібен.'],
+    ['Solange das Wetter schön (sein) ___, gehen wir im Park spazieren.',['ist'],'Präsens: «ist» в кінці; головне з «gehen».','Поки погода гарна, ми гуляємо в парку.'],
+    ['Solange ich in Deutschland (wohnen) ___, möchte ich jeden Tag Deutsch sprechen.',['wohne'],'«wohne» в кінці; головне з «möchte».','Поки я живу в Німеччині, я хочу щодня говорити німецькою.'],
+    ['Du kannst bei uns wohnen, solange du eine Wohnung (suchen) ___.',['suchst'],'du suchst; дієслово в кінці.','Ти можеш жити в нас, поки шукаєш квартиру.'],
+    ['Solange das Kind (schlafen) ___, müssen wir leise sein.',['schläft'],'schlafen → es schläft.','Поки дитина спить, ми маємо бути тихими.'],
+    ['Ich kann nicht gehen, solange der Chef im Büro (sein) ___.',['ist'],'«ist» в кінці підрядного.','Я не можу піти, поки шеф в офісі.'],
+    ['Du darfst nicht fernsehen, solange deine Hausaufgaben nicht fertig (sein) ___.',['sind'],'Підмет у множині → «sind» в кінці.','Тобі не можна дивитися телевізор, поки уроки не зроблені.'],
+    ['Wir bleiben im Café, solange es (regnen) ___.',['regnet'],'es regnet; дієслово в кінці.','Ми залишаємося в кафе, поки йде дощ.'],
+    ['Ich bleibe im Bett, solange ich Fieber (haben) ___.',['habe'],'ich habe; дієслово в кінці.','Я лежу в ліжку, поки в мене температура.'],
+    ['Solange die Straße gesperrt (sein) ___, müssen wir einen Umweg fahren.',['ist'],'«ist» в кінці; головне з «müssen».','Поки вулиця перекрита, нам доводиться їхати в об’їзд.']
+  ]
+},
+{
+  n:'Sooft', re:/\bsooft\b/i, acc:['sooft'],
+  tip:'sooft = «щоразу, коли» (синонім immer wenn / jedes Mal wenn). Дія повторюється; дієслово в підрядному — в кінці.',
+  mixExpl:'Повторювана дія, «щоразу, коли» → sooft.',
+  items:[
+    ['Sooft ich nach Berlin (kommen) ___, besuche ich immer das Brandenburger Tor.',['komme'],'Повторюваність → sooft; «komme» в кінці.','Щоразу, коли я приїжджаю до Берліна, я завжди відвідую Бранденбурзькі ворота.'],
+    ['Sooft er Zeit (haben) ___, geht er immer schwimmen.',['hat'],'er hat; дієслово в кінці.','Щоразу, коли в нього є час, він іде плавати.'],
+    ['Ich esse immer einen Apfel, sooft ich Hunger (haben) ___.',['habe'],'ich habe; підрядне після головного.','Я завжди їм яблуко, щоразу, коли голодний.'],
+    ['Sooft du mich (anrufen) ___, freue ich mich jedes Mal.',['anrufst'],'Роздільне дієслово в підрядному — разом: du anrufst.','Щоразу, коли ти мені телефонуєш, я дуже радію.'],
+    ['Sooft wir ein Thema (üben) ___, wird es jedes Mal verständlicher.',['üben'],'wir üben; дієслово в кінці.','Щоразу, коли ми відпрацьовуємо тему, вона стає зрозумілішою.'],
+    ['Sooft der Zug Verspätung (haben) ___, komme ich jedes Mal zu spät zur Arbeit.',['hat'],'der Zug hat; головне з «komme».','Щоразу, коли поїзд запізнюється, я спізнююся на роботу.'],
+    ['Sooft meine Oma uns (besuchen) ___, bringt sie immer selbstgebackenen Kuchen mit.',['besucht'],'sie besucht; дієслово в кінці.','Щоразу, коли до нас приходить бабуся, вона приносить домашній пиріг.'],
+    ['Sooft ich ihn (sehen) ___, trägt er dieselbe Jacke.',['sehe'],'ich sehe; дієслово в кінці.','Щоразу, коли я його бачу, на ньому та сама куртка.'],
+    ['Sooft wir früher am Meer (sein) ___, haben wir Eis gegessen.',['waren'],'Минуле повторюване: Präteritum «waren».','Щоразу, коли ми раніше були на морі, ми їли морозиво.'],
+    ['Sooft es im Winter (schneien) ___, bauen die Kinder einen Schneemann.',['schneit'],'es schneit; дієслово в кінці.','Щоразу, коли взимку йде сніг, діти ліплять сніговика.']
+  ]
+},
+{
+  n:'Ehe', re:/\b(ehe|bevor)\b/i, acc:['ehe','bevor'],
+  tip:'ehe = bevor («перед тим як»), але звучить офіційніше/книжніше. Дієслово в підрядному — в кінці.',
+  mixExpl:'Дія з головного речення відбувається РАНІШЕ → ehe / bevor («перед тим як»). Це повні синоніми.',
+  items:[
+    ['Ehe ich ins Bett (gehen) ___, lese ich immer ein Kapitel.',['gehe'],'ehe = bevor; «gehe» в кінці.','Перш ніж лягти спати, я завжди читаю розділ.'],
+    ['Ehe ich (losfahren) ___, prüfe ich den Reifendruck.',['losfahre'],'Роздільне дієслово в підрядному пишеться разом: losfahre.','Перш ніж виїхати, я перевіряю тиск у шинах.'],
+    ['Wir müssen das Formular abgeben, ehe das Bürgeramt (schließen) ___.',['schließt'],'das Bürgeramt schließt; дієслово в кінці.','Ми повинні здати формуляр, перш ніж бюргерамт зачиниться.'],
+    ['Ehe er eine Antwort (geben) ___, dachte er lange nach.',['gab'],'Präteritum: gab (книжний стиль, як і ehe).','Перш ніж дати відповідь, він довго думав.'],
+    ['Ehe du das Auto (kaufen) ___, solltest du eine Probefahrt machen.',['kaufst'],'du kaufst; головне з «solltest».','Перш ніж купити авто, тобі варто зробити тест-драйв.'],
+    ['Es dauerte nicht lange, ehe der erste Gast (kommen) ___.',['kam'],'Типова конструкція: «es dauerte nicht lange, ehe …» + Präteritum.','Не минуло й багато часу, як прийшов перший гість.'],
+    ['Ehe die Sonne (aufgehen) ___, sind wir schon auf dem Gipfel.',['aufgeht'],'Роздільне дієслово разом: aufgeht.','Ще до того, як зійде сонце, ми вже на вершині.'],
+    ['Ich dusche noch schnell, ehe mein Besuch (ankommen) ___.',['ankommt'],'Роздільне дієслово разом: ankommt.','Я ще швидко приймаю душ, перш ніж прийдуть гості.'],
+    ['Ehe der Film (beginnen) ___, kaufen wir noch Popcorn.',['beginnt'],'der Film beginnt; головне з «kaufen».','Перш ніж почнеться фільм, ми ще купуємо попкорн.'],
+    ['Sie hat das Fenster geschlossen, ehe sie das Haus (verlassen) ___ ___.',['verlassen','hat'],'Perfekt: verlassen hat.','Вона зачинила вікно, перш ніж вийшла з дому.']
+  ]
+},
+{
+  n:'Sobald', re:/\bsobald\b/i, acc:['sobald','sowie'],
+  tip:'sobald = «щойно, як тільки»: негайний початок дії. Дієслово в підрядному — в кінці.',
+  mixExpl:'Негайна реакція, «щойно / як тільки» → sobald / sowie. Це повні синоніми.',
+  items:[
+    ['Sobald ich Feierabend (haben) ___, gehe ich sofort ins Fitnessstudio.',['habe'],'Präsens: «habe» в кінці.','Щойно в мене закінчиться робочий день, я одразу йду у фітнес-зал.'],
+    ['Ich rufe dich sofort an, sobald ich zu Hause (sein) ___.',['bin'],'ich bin; дієслово в кінці.','Я одразу тобі зателефоную, щойно буду вдома.'],
+    ['Sobald der Bus (kommen) ___, steigen wir sofort ein.',['kommt'],'der Bus kommt; головне з «steigen».','Щойно прийде автобус, ми одразу сядемо.'],
+    ['Sobald ich im Büro (ankommen) ___, trinke ich als Erstes einen Kaffee.',['ankomme'],'Роздільне дієслово разом: ankomme.','Щойно я приходжу в офіс, перше, що я роблю, — п’ю каву.'],
+    ['Sobald die Ampel grün (werden) ___, fährt der Bus gleich los.',['wird'],'die Ampel wird grün.','Щойно світлофор стане зеленим, автобус одразу рушає.'],
+    ['Sobald ich (essen) ___, will die Katze sofort auch ihr Futter haben.',['esse'],'essen → ich esse.','Щойно я починаю їсти, кіт одразу теж хоче свою їжу.'],
+    ['Sobald das Wasser (kochen) ___, gebe ich die Nudeln gleich hinein.',['kocht'],'das Wasser kocht.','Щойно закипить вода, я одразу кладу макарони.'],
+    ['Sobald der Unterricht (anfangen) ___, schalten alle sofort ihre Handys aus.',['anfängt'],'anfangen → er/es fängt … an; в підрядному разом: anfängt.','Щойно починається урок, усі одразу вимикають телефони.'],
+    ['Sobald du bereit (sein) ___, können wir direkt losgehen.',['bist'],'du bist; дієслово в кінці.','Щойно ти будеш готовий, ми можемо одразу вирушати.'],
+    ['Sobald mein Mann (einschlafen) ___, fängt er sofort an zu schnarchen.',['einschläft'],'einschlafen → er schläft ein; в підрядному разом: einschläft.','Щойно мій чоловік засинає, він одразу починає хропіти.']
+  ]
+},
+{
+  n:'Sowie', re:/\bsowie\b/i, acc:['sowie','sobald'],
+  tip:'sowie = sobald («щойно»), але звучить трохи офіційніше. Дієслово в підрядному — в кінці.',
+  mixExpl:'Негайна реакція, «щойно / як тільки» → sowie / sobald. Це повні синоніми.',
+  items:[
+    ['Ich schreibe dir sofort, sowie ich in Frankfurt (ankommen) ___.',['ankomme'],'sowie = sobald; «ankomme» в кінці.','Я одразу напишу тобі, щойно приїду до Франкфурта.'],
+    ['Sowie der Film zu Ende (sein) ___, gehen wir gleich schlafen.',['ist'],'der Film ist zu Ende.','Щойно фільм закінчиться, ми одразу підемо спати.'],
+    ['Sowie ich die Prüfungsergebnisse (haben) ___, rufe ich dich sofort an.',['habe'],'ich habe; головне з «rufe … an».','Щойно я матиму результати іспитів, я одразу тобі зателефоную.'],
+    ['Sowie der Chef (kommen) ___, beginnt die Besprechung.',['kommt'],'der Chef kommt.','Щойно прийде шеф, почнеться нарада.'],
+    ['Sowie die Sonne (untergehen) ___, wird es kalt.',['untergeht'],'Роздільне дієслово разом: untergeht.','Щойно заходить сонце, стає холодно.'],
+    ['Sowie das Paket (ankommen) ___, informieren wir Sie sofort.',['ankommt'],'das Paket kommt an → в підрядному: ankommt.','Щойно прийде посилка, ми одразу повідомимо Вас.'],
+    ['Sowie ich einen freien Termin (finden) ___, melde ich mich gleich bei Ihnen.',['finde'],'ich finde; дієслово в кінці.','Щойно я знайду вільний термін, я одразу з Вами зв’яжуся.'],
+    ['Sowie es (klingeln) ___, öffne ich sofort die Tür.',['klingelt'],'es klingelt.','Щойно задзвонять у двері, я одразу відчиню.'],
+    ['Sowie der Kuchen fertig (sein) ___, nehme ich ihn gleich aus dem Ofen.',['ist'],'der Kuchen ist fertig.','Щойно пиріг буде готовий, я одразу дістану його з духовки.'],
+    ['Sowie du (aufstehen) ___, ruf mich bitte sofort an.',['aufstehst'],'du stehst auf → в підрядному: aufstehst. Головне — наказовий спосіб (дієслово на 1-му місці).','Щойно ти встанеш, одразу зателефонуй мені.']
+  ]
+}
+];
+
+const MIXOPTS = ['nachdem','bevor','ehe','solange','sooft','sobald','sowie'];
+const mixRaw = [];
+CATS.forEach(c => c.items.forEach(raw => {
+  const p = P(raw);
+  const s = p[0], a = p[1];
+  let k = 0;
+  const full = s.replace(/\([^)]*\)\s*/g, '').replace(/___/g, () => a[k++].split('|')[0]);
+  const blank = full.replace(c.re, '___');
+  mixRaw.push([blank, c.acc[0], c.mixExpl, 'c', MIXOPTS, p[3], c.acc]);
+}));
+const mixItems = seededShuffle(mixRaw, 20261021);
+
+const WA = ['wenn','als'];
+const N4 = ['Nachdem','Bevor','Während','Sobald'];
+const textItems = [
+  C('___ das Münchner Orchester eine Reise macht, ist es üblich, dass die Musiker nur ihre Instrumente mitnehmen.','wenn','Регулярна дія → wenn.',WA,'Коли Мюнхенський оркестр вирушає в поїздку, зазвичай музиканти беруть із собою лише свої інструменти.'),
+  C('___ er am nächsten Morgen aufwachte, bemerkte er, dass er nichts mehr hatte.','als','Одноразова подія в минулому → als.',WA,'Коли він наступного ранку прокинувся, він помітив, що в нього більше нічого немає.'),
+  C('Immer ___ im Münchner Orchester Sätze fallen, die das Wort „Wien“ beinhalten, erinnern sich alle daran.','wenn','Повторюваність (immer) → wenn.',WA,'Щоразу, коли в Мюнхенському оркестрі звучать фрази зі словом «Відень», усі про це згадують.'),
+  C('Die Polizei stand vor der Tür. ___ ich die Tür öffnete, fragten sie nach Anne Meyer.','als','Одноразова подія в минулому → als.',WA,'Поліція стояла під дверима. Коли я відчинив двері, вони запитали про Анне Маєр.'),
+  C('___ ich im Mittelpunkt stehe, fühle ich mich nicht wohl.','wenn','Теперішній час → wenn.',WA,'Коли я перебуваю в центрі уваги, мені некомфортно.'),
+  C('Immer ___ mein Handy in den letzten Wochen geklingelt hat, war ich ganz nervös.','wenn','Повторюваність (immer) → wenn.',WA,'Щоразу, коли мій телефон дзвонив останніми тижнями, я дуже нервував.'),
+  C('Aber ___ es am letzten Freitag klingelte, war es Sophie.','als','Одноразова подія в минулому → als.',WA,'Але коли він у минулу п’ятницю задзвонив, це була Софі.'),
+
+  C('___ der Wecker 5 Minuten lang geklingelt hat, stehe ich auf.','Nachdem','Спочатку дзвонить будильник → nachdem.',N4,'Після того як будильник дзвонив 5 хвилин, я встаю.'),
+  C('___ ich frühstücke, bade ich.','Bevor','Спочатку ванна → bevor.',N4,'Перш ніж поснідати, я приймаю ванну.'),
+  C('___ das Badewasser läuft, mache ich mir Kaffee.','Während','Одночасно → während.',N4,'Поки набирається вода у ванну, я роблю собі каву.'),
+  C('___ die Badewanne voll ist, setze ich mich ins Wasser.','Sobald','Одразу, як тільки → sobald.',N4,'Щойно ванна наповниться, я сідаю у воду.'),
+
+  C('___ ich Kinder habe, stehe ich morgens immer früher auf.','Seit','Відтоді й досі → seit.',['Seit','Als','Bis','Ehe'],'З тих пір, як у мене є діти, я вранці завжди встаю раніше.'),
+  C('___ ich noch kinderlos war, konnte ich lange fernsehen.','Als','Одноразовий період у минулому → als.',['Seit','Als','Bis','Ehe'],'Коли в мене ще не було дітей, я міг довго дивитися телевізор.'),
+
+  C('Warte hier, ___ ich zurückkomme.','bis','До моменту → bis.',['bis','bevor','seit','als'],'Чекай тут, поки я не повернуся.'),
+  C('Ich muss noch duschen, ___ ich zur Arbeit gehe.','bevor','Спочатку душ → bevor.',['während','bevor','seit','als'],'Мені ще треба прийняти душ, перш ніж піду на роботу.'),
+
+  C('Du darfst gern bei uns wohnen, ___ du eine eigene Wohnung suchst.','solange','Тривалість «поки» → solange.',['solange','bevor','nachdem','sobald'],'Ти можеш жити в нас, поки шукаєш власну квартиру.'),
+  C('___ das Baby schläft, müssen wir leise sein.','Solange','Тривалість «поки» → solange.',['Solange','Nachdem','Seit','Bevor'],'Поки дитина спить, ми маємо бути тихими.'),
+  C('Ich darf nicht ins Kino gehen, ___ ich meine Hausaufgaben nicht gemacht habe.','solange','«Доти, поки не» → solange … nicht.',['solange','sobald','sooft','seit'],'Мені не можна йти в кіно, поки я не зроблю домашнє завдання.'),
+
+  C('___ ich meine Oma anrufe, erzählt sie mir von ihrem Garten.','Sooft','Повторюваність → sooft.',['Sooft','Nachdem','Ehe','Seit'],'Щоразу, коли я телефоную бабусі, вона розповідає мені про свій сад.'),
+  C('___ er in die Stadt kommt, besucht er uns.','Sooft','Повторюваність → sooft.',['Sooft','Bevor','Nachdem','Seit'],'Щоразу, коли він приїжджає в місто, він нас відвідує.'),
+  C('Er ruft mich an, ___ er ein Problem mit dem Computer hat.','sooft','Повторюваність → sooft.',['sooft','bevor','nachdem','bis'],'Він телефонує мені щоразу, коли в нього проблема з комп’ютером.'),
+
+  C('___ du die Reise buchst, solltest du die Preise vergleichen.','Ehe','Спочатку порівняти ціни → ehe / bevor.',['Ehe','Nachdem','Seit','Sobald'],'Перш ніж ти забронюєш подорож, тобі слід порівняти ціни.'),
+  C('Wir müssen den Antrag abgeben, ___ die Frist abläuft.','ehe','Раніше, ніж мине термін → ehe / bevor.',['ehe','nachdem','seit','sobald'],'Ми повинні подати заяву, перш ніж мине термін.'),
+  C('___ sie den Vertrag unterschrieb, las sie ihn dreimal durch.','Ehe','Спочатку читала → ehe / bevor.',['Ehe','Nachdem','Seit','Sobald'],'Перш ніж підписати договір, вона тричі його перечитала.'),
+
+  C('___ du in Berlin ankommst, schick mir bitte eine Nachricht.','Sobald','Одразу, як тільки → sobald.',['Sobald','Bevor','Solange','Seit'],'Щойно ти приїдеш до Берліна, надішли мені, будь ласка, повідомлення.'),
+  C('Ich gehe sofort ins Bett, ___ ich nach Hause komme.','sobald','Одразу, як тільки → sobald.',['sobald','solange','ehe','seit'],'Я одразу лягаю спати, щойно приходжу додому.'),
+  C('___ die Tür aufgeht, strömen die Kunden in den Laden.','Sowie','Одразу, як тільки → sowie / sobald.',['Sowie','Solange','Bevor','Seit'],'Щойно відчиняються двері, покупці вливаються в магазин.'),
+  C('Ich melde mich bei Ihnen, ___ ich etwas Neues weiß.','sowie','Одразу, як тільки → sowie / sobald.',['sowie','ehe','solange','seit'],'Я зв’яжуся з Вами, щойно дізнаюся щось нове.'),
+  I('Sowie das Essen (fertig sein) ___, rufe ich euch.',['ist'],'sowie = щойно; «ist» в кінці.','Щойно їжа буде готова, я вас покличу.'),
+
+  C('Ich höre Musik, ___ ich im Zug sitze.','während','Одночасно → während.',['während','nachdem','ehe','sobald'],'Я слухаю музику, поки їду в поїзді.'),
+  I('Ich warte hier, ___ der Bus kommt. (доки, 3 Buchstaben)',['bis'],'bis = «доки не».','Я чекаю тут, доки не прийде автобус.'),
+
+  I('Ich kann nicht gehen, ___ der Chef im Büro ist. (поки, 7 Buchstaben)',['solange'],'solange = «поки».','Я не можу піти, поки шеф в офісі.'),
+  I('___ du mich anrufst, freue ich mich. (щоразу, 5 Buchstaben)',['sooft'],'sooft = «щоразу, коли».','Щоразу, коли ти мені телефонуєш, я радію.'),
+  I('Ich dusche, ___ ich zur Arbeit gehe. (= bevor, 3 Buchstaben)',['ehe'],'ehe = bevor.','Я приймаю душ, перш ніж піти на роботу.'),
+  I('Ich schreibe dir, ___ ich in Frankfurt angekommen bin. (= sobald, 5 Buchstaben)',['sowie'],'sowie = sobald.','Я напишу тобі, щойно приїду до Франкфурта.'),
+
+  I('Nachdem ich eine Eintrittskarte gekauft ___, ___ ich ins Kino. (Präsens)',['habe','gehe'],'Präsens: nachdem + Perfekt (habe gekauft), головне в Präsens (gehe).','Після того як я купив квиток, я йду в кіно.'),
+  I('Nachdem ich eine Eintrittskarte gekauft ___, ___ ich ins Kino ___. (Vergangenheit)',['hatte','bin','gegangen'],'Vergangenheit: nachdem + Plusquamperfekt (hatte gekauft), головне в Perfekt (bin gegangen).','Після того як я купив квиток, я пішов у кіно.'),
+
+  C('Er hat fünf Kilogramm abgenommen, ___ er keine Schokolade mehr isst.','seitdem','Відтоді → seitdem.',['seitdem','bevor','nachdem','bis'],'Він схуд на п’ять кілограмів відтоді, як більше не їсть шоколад.'),
+  C('Er fühlt sich wohler, ___ er fünf Kilogramm abgenommen hat.','seitdem','Відтоді → seitdem.',['seitdem','bevor','nachdem','bis'],'Він почувається краще відтоді, як схуд на п’ять кілограмів.'),
+  C('Er ist glücklich, ___ er eine nette Freundin hat.','seitdem','Відтоді → seitdem.',['seitdem','bevor','nachdem','bis'],'Він щасливий відтоді, як у нього є мила дівчина.'),
+
+  O('Ich putze mir die Zähne, bevor ich ins Bett gehe.','Я чищу зуби, перш ніж лягти спати.','Hauptsatz zuerst: «putze» на 2-му місці, «gehe» в кінці підрядного.'),
+  O('Bevor ich ins Bett gehe, putze ich mir die Zähne.','Перш ніж лягти спати, я чищу зуби.','Nebensatz zuerst: після коми головне з дієслова «putze».'),
+  O('Ich schließe die Fenster, bevor ich aus dem Haus gehe.','Я зачиняю вікна, перш ніж вийти з дому.','Hauptsatz zuerst: «schließe» на 2-му місці, «gehe» в кінці.'),
+  O('Bevor ich aus dem Haus gehe, schließe ich die Fenster.','Перш ніж вийти з дому, я зачиняю вікна.','Nebensatz zuerst: після коми головне з дієслова «schließe».')
+];
+
+const D = [
+  { n:'Mix', t:'m',
+    tip:'Усі речення з категорій впереміш: обери коннектор (nachdem, bevor/ehe, solange, sooft, sobald/sowie). Синоніми bevor/ehe та sobald/sowie приймаються обидва.',
+    it: mixItems }
+].concat(
+  CATS.map(c => ({ n:c.n, t:'i', tip:c.tip, it:c.items.map(P) }))
+).concat([
+  { n:'Text & Kontrast', t:'m',
+    tip:'Міні-тексти, мінімальні пари на контраст (wenn/als та інші коннектори), переклад під реченням і Satzbau у двох порядках.',
+    it: textItems }
+]);
+
+const K='tp_v2_temporale_konnektoren';
+const T=(L,it)=>L.t=='m'?it[3]:L.t;
+const UA=(L,it)=>L.t=='m'?it[5]:it[3];
+
+/* === EXP === */
+const XP_MAX=300;
+const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','Дослідник'],[.44,'⚡','Знавець'],[.68,'🔥','Профі'],[.92,'💎','Майстер'],[1,'🏆','Легенда']]
+  .map(q=>[Math.round(q[0]*XP_MAX),q[1],q[2]]);
+const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
+
+const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:D.map(()=>0),errors:{}});
+
+let S=blank();
+let autoAdvanceTimer=null;
+let rvMode=false, rvCur=-1, trShown=false;
+const rvDoneSets={};
+
+try{
+  let s=JSON.parse(localStorage.getItem(K));
+  if(s){
+    if(!s.errors) s.errors={};
+    if(!s.i) s.i=[];
+    if(!s.r) s.r=[];
+    if(!Array.isArray(s.x)) s.x=[];
+    while(s.i.length < D.length) s.i.push(0);
+    while(s.r.length < D.length) s.r.push([]);
+    while(s.x.length < D.length) s.x.push(0);
+    s.i = s.i.slice(0, D.length);
+    s.r = s.r.slice(0, D.length);
+    s.i = s.i.map((v,k) => Math.min(Math.max(parseInt(v)||0, 0), D[k].it.length));
+    s.x = s.x.slice(0, D.length).map(v => Math.min(Math.max(parseInt(v)||0, 0), XP_MAX));
+    if(s.l===undefined||s.l>=D.length) s.l=0;
+    delete s.reviewMode; delete s.reviewQueue; delete s.reviewIndex;
+    S=s;
+  }
+}catch(e){console.error("Error loading save", e);}
+
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const $=id=>document.getElementById(id);
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
+const okv=(v,a)=>a.split('|').map(norm).includes(norm(v||''));
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+let st={};
+
+const errIdx=l=>Object.keys(S.errors)
+  .filter(k=>S.errors[k])
+  .map(k=>{const p=k.split('_');return {l:parseInt(p[0]),i:parseInt(p[1])}})
+  .filter(q=>q.l===l&&D[q.l]&&D[q.l].it[q.i])
+  .map(q=>q.i)
+  .sort((a,b)=>a-b);
+const rvSet=l=>rvDoneSets[l]||(rvDoneSets[l]=new Set());
+const rvPool=()=>errIdx(S.l);
+const rvQueue=()=>{const d=rvSet(S.l);return rvPool().filter(i=>!d.has(i))};
+function rvNext(){
+  const q=rvQueue();
+  if(!q.length) return -1;
+  if(!q.includes(rvCur)) return q.find(i=>i>rvCur) ?? q[0];
+  return q[(q.indexOf(rvCur)+1)%q.length];
+}
+
+function getContext() {
+  const l=S.l;
+  if (rvMode) {
+    if (rvCur>=0 && D[l].it[rvCur]) {
+      return { L: D[l], it: D[l].it[rvCur], l: l, i: rvCur, n: D[l].it.length, idx: rvCur };
+    }
+    rvMode=false;
+  }
+  const i=S.i[l];
+  return { L: D[l], it: D[l].it[i], l: l, i: i, n: D[l].it.length, idx: i };
+}
+
+function fresh(){
+  try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch(e) {}
+  st={done:false,ok:false,dx:0,pick:null,vals:[],pool:[],ans:[]};
+  trShown=false;
+  const ctx = getContext();
+  const L = ctx.L, it = ctx.it;
+  if(it && T(L,it)=='o'){
+    const w=it[0].split(' ');
+    let p;
+    do{p=w.map((x,k)=>({x,k})).sort(()=>Math.random()-.5)}
+    while(p.map(a=>a.x).join(' ')==it[0]&&w.length>1);
+    st.pool=p;
+  }
+}
+
+function go(k){
+  clearTimeout(autoAdvanceTimer);
+  rvMode=false; hideComplete(); closeErrors();
+  S.l=k; save(); fresh(); render();
+}
+
+function nextQ(){
+  clearTimeout(autoAdvanceTimer);
+  if (rvMode) {
+    const ni=rvNext();
+    if (ni>=0) { rvCur=ni; fresh(); render(); }
+    else showReviewComplete();
+    return;
+  }
+  const ctx=getContext();
+  if (!ctx.it) return;
+  S.i[S.l]++;
+  save(); fresh(); render();
+  if (S.i[S.l]>=D[S.l].it.length) showComplete();
+}
+
+function askConfirm(msg, yes){
+  $('complete-title').textContent='Скинути прогрес?';
+  $('complete-text').textContent=msg;
+  $('complete-actions').innerHTML='<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
+  $('cf-yes').onclick=()=>{hideComplete();yes()};
+  $('cf-no').onclick=hideComplete;
+  $('complete').hidden=false;
+}
+function restartTab(){ askConfirm('Прогрес цієї вкладки буде скинуто разом з EXP і списком помилок.', resetTab); }
+function resetTab(){
+  clearTimeout(autoAdvanceTimer);
+  const l=S.l;
+  S.i[l]=0; S.r[l]=[]; S.x[l]=0;
+  Object.keys(S.errors).forEach(k=>{ if(k.startsWith(l+'_')) delete S.errors[k]; });
+  rvMode=false; rvDoneSets[l]=new Set();
+  save(); hideComplete(); fresh(); render();
+}
+function finalRestart(){
+  clearTimeout(autoAdvanceTimer);
+  const l=S.l;
+  S.i[l]=0; S.r[l]=[];
+  rvMode=false; rvDoneSets[l]=new Set();
+  save(); hideComplete(); fresh(); render();
+}
+
+function hideComplete(){ $('complete').hidden=true; }
+function showComplete(){
+  const l=S.l, r=S.r[l];
+  const c=r.filter(Boolean).length, w=r.filter(x=>x===false).length, n=errIdx(l).length;
+  const hasNext=l<D.length-1;
+  $('complete-title').textContent='🎉 Вкладку пройдено!';
+  $('complete-text').innerHTML=`Усі речення цієї вкладки пройдено.<br>Правильно: <b>${c}</b> · Неправильно: <b>${w}</b> · У списку помилок: <b>${n}</b>.<br>Тренажер зупинено — обери, що робити далі.`;
+  let btns='';
+  if(n>0) btns+=`<button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button>`;
+  if(hasNext) btns+=`<button class="${n>0?'cancel':'go'}" onclick="go(${l+1})">Наступна вкладка →</button>`;
+  btns+=`<button class="${(n>0||hasNext)?'cancel':'go'}" onclick="finalRestart()">↻ Почати заново</button>`;
+  $('complete-actions').innerHTML=btns;
+  $('complete').hidden=false;
+}
+function showReviewComplete(){
+  $('complete-title').textContent='✅ Помилки пройдено!';
+  $('complete-text').innerHTML='Ти повторив усі помилки зі списку. Вони залишаються у списку «Помилки» — можна повторити ще раз.';
+  $('complete-actions').innerHTML='<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button><button class="cancel" onclick="exitReview()">Продовжити тренування</button>';
+  $('complete').hidden=false;
+}
+function repeatReview(){ hideComplete(); startReview(); }
+
+function errText(L,it){
+  const t=T(L,it);
+  if(t==='o') return it[0];
+  if(t==='c'){
+    const acc=it[6]||[it[1]];
+    const w=acc.map(x=>it[0].startsWith('___')?cap(x):x).join(' / ');
+    return it[0].replace('___','<b>'+w+'</b>');
+  }
+  let k=0;
+  return it[0].replace(/\([^)]*\)\s*/g,'').replace(/___/g,()=>'<b>'+String(it[1][k++]||'').split('|')[0]+'</b>');
+}
+function openErrors(){
+  const L=D[S.l], rp=rvPool();
+  $('errs-sub').textContent=`Вкладка «${L.n}» · помилок: ${rp.length}`;
+  if(rp.length===0){
+    $('errs-list').innerHTML='<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
+    $('errs-actions').innerHTML='<button class="cancel" onclick="closeErrors()">Закрити</button>';
+  } else {
+    $('errs-list').innerHTML=rp.map(i=>{
+      const it=L.it[i];
+      const ua=T(L,it)==='o'?it[1]:UA(L,it);
+      return `<div class="err-item"><div class="e-de">${errText(L,it)}</div>${ua?`<div class="e-ua">${ua}</div>`:''}${it[2]&&T(L,it)!=='o'?`<div class="e-ex">${it[2]}</div>`:''}</div>`;
+    }).join('');
+    $('errs-actions').innerHTML='<button class="go" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="cancel" id="errs-clear" onclick="clearErrors()">🗑 Очистити список</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
+  }
+  $('errs').hidden=false;
+}
+function closeErrors(){ $('errs').hidden=true; }
+let clearArmed=false;
+function clearErrors(){
+  const b=$('errs-clear');
+  if(!clearArmed){
+    clearArmed=true; b.textContent='Точно очистити?';
+    setTimeout(()=>{clearArmed=false;const bb=$('errs-clear');if(bb)bb.textContent='🗑 Очистити список'},3000);
+    return;
+  }
+  clearArmed=false;
+  Object.keys(S.errors).forEach(k=>{ if(k.startsWith(S.l+'_')) delete S.errors[k]; });
+  rvDoneSets[S.l]=new Set();
+  save(); render(); openErrors();
+}
+function trainErrors(){ closeErrors(); startReview(); try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){} }
+
+function startReview(){
+  const pool=rvPool();
+  if(!pool.length) return;
+  clearTimeout(autoAdvanceTimer);
+  rvMode=true; rvDoneSets[S.l]=new Set(); rvCur=pool[0];
+  fresh(); render();
+}
+function exitReview(){
+  clearTimeout(autoAdvanceTimer);
+  rvMode=false; hideComplete();
+  fresh(); render();
+}
+
+const haptic=(()=>{
+  let lbl=null;
+  function tap(){
+    try{
+      if(!lbl){
+        const i=document.createElement('input');
+        i.type='checkbox';i.setAttribute('switch','');i.id='hpt-sw';
+        const l=document.createElement('label');l.htmlFor='hpt-sw';
+        l.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+        l.appendChild(i);document.body.appendChild(l);lbl=l;
+      }
+      lbl.click();
+    }catch(e){}
+  }
+  return ok=>{
+    try{
+      if(navigator.vibrate){navigator.vibrate(ok?30:[120,60,120]);return}
+      if(ok){tap()}else{tap();setTimeout(tap,90);setTimeout(tap,180)}
+    }catch(e){}
+  };
+})();
+function hapticAll(ok){ if(tg && tg.HapticFeedback){ try{ tg.HapticFeedback.notificationOccurred(ok?'success':'error'); }catch(e){} } else haptic(ok); }
+
+function updateXp(xv){
+  const r=rankOf(xv), R=RANKS[r], N=RANKS[r+1], box=$('xp');
+  box.dataset.r=r;
+  box.classList.toggle('max', xv>=XP_MAX);
+  $('xf').style.width=(xv/XP_MAX*100)+'%';
+  $('xt').textContent=xv;
+  $('xn').textContent=xv>=XP_MAX?'MAX':('/ '+XP_MAX);
+  $('xr').textContent=R[1]+' '+R[2];
+  $('xnext').textContent=N?('ще '+(N[0]-xv)+' до «'+N[2]+'»'):'максимальний ранг';
+  const tk=$('xticks');
+  if(!tk.firstChild) tk.innerHTML=RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join('');
+}
+function popXp(d,up){
+  const p=$('xpop'), b=$('xt'), box=$('xp');
+  p.textContent=(d>0?'+':'−')+Math.abs(d);
+  p.className='xpop '+(d>0?'up':'dn'); void p.offsetWidth; p.classList.add('go');
+  b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+  if(up){ box.classList.remove('lvl'); void box.offsetWidth; box.classList.add('lvl'); }
+}
+
+function done(ok){
+  hapticAll(ok);
+  playSound(ok ? 'correct' : 'wrong');
+  const ctx = getContext();
+  const l=ctx.l, i=ctx.i;
+  const xBefore=S.x[l]||0;
+  S.r[l][i] = ok;
+  const key = `${l}_${i}`;
+  if (ok) {
+    S.x[l]=Math.min(XP_MAX, xBefore+1);
+    if (rvMode) rvSet(l).add(i);
+  } else {
+    S.x[l]=Math.max(0, xBefore-1);
+    S.errors[key] = true;
+    if (rvMode) rvSet(l).delete(i);
+  }
+  const dx=S.x[l]-xBefore;
+  st.done=true; st.ok=ok; st.dx=dx;
+  save(); render();
+  if (dx) popXp(dx, rankOf(S.x[l])>rankOf(xBefore));
+  if (ok) {
+    const c=document.querySelector('#main .card');
+    if (c) { c.classList.remove('win'); void c.offsetWidth; c.classList.add('win'); }
+    autoAdvanceTimer = setTimeout(() => { nextQ(); }, 2000);
+  }
+}
+
+function pickC(o){
+  if(st.done)return;
+  st.pick=o;
+  const it=getContext().it;
+  const acc=it[6]||[it[1]];
+  done(acc.includes(o));
+}
+function chkI(){
+  if(st.done)return;
+  const ctx=getContext(), a=ctx.it[1];
+  st.vals=a.map((_,k)=>$('in'+k).value);
+  const perField = a.every((x,k)=>okv(st.vals[k],x));
+  const joined = !a.some(x=>x.indexOf('|')>=0) && norm(st.vals.join(' '))===norm(a.join(' '));
+  done(perField || joined);
+}
+function put(k){if(st.done)return;const j=st.pool.findIndex(p=>p.k===k);st.ans.push(st.pool.splice(j,1)[0]);render()}
+function back(k){if(st.done)return;const j=st.ans.findIndex(p=>p.k===k);st.pool.push(st.ans.splice(j,1)[0]);render()}
+function chkO(){
+  if(st.done||!st.ans.length)return;
+  const ctx=getContext();
+  done(st.ans.map(p=>p.x).join(' ')===ctx.it[0]);
+}
+
+function trHTML(ua){
+  if(!ua) return '';
+  return `<div class="lab" id="tr-lab">${trShown?`<div class="tr-text">${ua}</div>`:'<button class="tr-btn" type="button" onclick="showTr()">🌐 Перекласти</button>'}</div>`;
+}
+function showTr(){
+  const ctx=getContext();
+  if(!ctx.it) return;
+  const ua=UA(ctx.L,ctx.it), el=$('tr-lab');
+  trShown=true;
+  if(el && ua) el.innerHTML=`<div class="tr-text">${ua}</div>`;
+}
+
+function fb(L,it){
+  const t=T(L,it);
+  let right;
+  if(t=='c'){
+    const acc=it[6]||[it[1]];
+    right=acc.map(x=>it[0].startsWith('___')?cap(x):x).join(' / ');
+  } else if(t=='i'){
+    right=it[1].join(' … ').replace(/\|/g,' / ');
+  } else {
+    right=it[0];
+  }
+  const xpTag = st.ok ? (st.dx>0?' · +1 EXP':' · EXP MAX') : (st.dx<0?' · −1 EXP':'');
+  const left = rvMode ? rvQueue().length : 0;
+  const nextLabel = rvMode ? (left===0 ? 'Помилки виправлено' : 'Weiter') : (S.i[S.l]+1>=L.it.length?'Ergebnis anzeigen':'Weiter');
+  return `<div class="fb ${st.ok?'ok':'no'}">
+    <b>${st.ok?'✓ Richtig!':'✗ Leider falsch.'}${xpTag}</b>
+    ${st.ok?'':'Правильно: <b style="display:inline">'+right+'</b><br>'}
+    ${it[2]}
+  </div>
+  <div class="row">
+    <button class="btn p" onclick="nextQ()">${nextLabel} →
+  </div>
+  ${st.ok ? '<div class="advance-bar"><i></i></div>' : ''}`;
+}
+
+function render(){
+ const ctx = getContext();
+ const L = ctx.L, n = ctx.n, i = ctx.idx, r = S.r[ctx.l];
+
+ if (rvMode) {
+   const pool=rvPool().length, left=rvQueue().length;
+   $('tabs').innerHTML = `<div class="rv-pill">🔁 Робота над помилками · залишилось <span class="rv-count">${left}<i>/</i>${pool}</span></div>`;
+ } else {
+   $('tabs').innerHTML = D.map((d,k)=>`<button class="tab ${k==S.l?'on':''}" onclick="go(${k})">${d.n}<small>${S.r[k].filter(Boolean).length}/${d.it.length}</small></button>`).join('');
+ }
+
+ const correctCount = r.filter(Boolean).length;
+ const wrongCount = r.filter(x => x === false).length;
+ const doneCount = correctCount + wrongCount;
+
+ $('stat-done').textContent = `${doneCount} / ${n}`;
+ $('stat-correct').textContent = correctCount;
+ $('stat-wrong').textContent = wrongCount;
+
+ if (rvMode) {
+   const pool=rvPool().length, left=rvQueue().length;
+   $('bar').style.width = (pool ? (pool-left)/pool*100 : 0)+'%';
+ } else {
+   $('bar').style.width=(Math.min(i+(st.done?1:0),n)/n*100)+'%';
+ }
+ updateXp(S.x[S.l]||0);
+
+ const theoryBtn = `<button class="btn p" id="theory-btn" onclick="toggleTheory()" style="width:100%; padding:16px; font-size:1.1rem;">📖 Теорія</button>`;
+ if (rvMode) {
+   $('foot').innerHTML = `
+     <div class="foot-row">
+       <button class="btn g" onclick="exitReview()">Повернутися до тренування</button>
+     </div>
+     ${theoryBtn}`;
+ } else {
+   const totalErrs = rvPool().length;
+   $('foot').innerHTML = `
+     <div class="foot-row">
+       <button class="btn danger" onclick="openErrors()">🔁 Помилки (${totalErrs})</button>
+       <button class="btn g" onclick="restartTab()">↻ Скинути прогрес</button>
+     </div>
+     ${theoryBtn}`;
+ }
+
+ syncTheoryBtn();
+ const m=$('main');
+
+ if(i>=n){
+   const p=Math.round(correctCount/n*100);
+   const levelErrors = rvPool().length;
+   let revBtn = levelErrors > 0 ? `<button class="btn danger" onclick="startReview()">🔁 Пройти помилки (${levelErrors})</button>` : '';
+   m.innerHTML=`<div class="card sum"><div class="big">${correctCount} / ${n}</div><p><b>${p}%</b> richtig – ${p>=90?'Ausgezeichnet! 🎉':p>=70?'Gut gemacht! 👍':'Übung macht den Meister. Спробуй ще раз 💪'}</p><div class="row" style="justify-content:center">${revBtn}<button class="btn" onclick="finalRestart()">↻ Nochmal</button>${S.l<D.length-1?'<button class="btn p" onclick="go('+(S.l+1)+')">Nächstes Level →</button>':''}</div></div>`;
+   return;
+ }
+
+ const it=L.it[i];
+ const ua=UA(L,it);
+ const uaLine = trHTML(ua);
+ let h=`<div class="card"><button class="speak" onclick="speakCurrent()" title="Озвучити німецькою">🔊</button>`;
+ const t=T(L,it);
+
+ if(t=='c'){
+  const acc=it[6]||[it[1]];
+  const q=it[0].replace('___',`<span class="blank ${st.done?(st.ok?'ok':'no'):''}">${st.done?(it[0].startsWith('___')?cap(st.pick):st.pick):'&nbsp;&nbsp;&nbsp;'}</span>`);
+  h+=`<p class="q">${q}</p>${uaLine}<div class="opts">${(L.o||it[4]).map(o=>`<button class="o ${st.done?(acc.includes(o)?'ok':o===st.pick?'no':''):''}" ${st.done?'disabled':''} onclick="pickC('${o}')">${o}</button>`).join('')}</div>`;
+ } else if(t=='i'){
+  let k=0;const parts=it[0].split('___');
+  h+=`<p class="q sent">`+parts.map((p,j)=>p+(j<parts.length-1?(()=>{const x=k++;return `<input class="inp ${st.done?(st.ok||okv(st.vals[x],it[1][x])?'ok':'no'):''}" id="in${x}" value="${(st.vals[x]||'').replace(/"/g,'&quot;')}" ${st.done?'disabled':''} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();var n=document.getElementById('in${x+1}');n?n.focus():chkI()}">`})():'')).join('')+`</p>${uaLine}`;
+  if(!st.done)h+=`<div class="row"><button class="btn p" onclick="chkI()">Prüfen</button></div>`;
+ } else {
+  h+=`<p class="q">Bringe die Wörter in die richtige Reihenfolge:</p><p class="tr">🇺🇦 ${it[1]}</p><div class="area ${st.done?(st.ok?'ok':'no'):''}">${st.ans.map(p=>`<button class="t" onclick="back(${p.k})">${p.x}</button>`).join('')}</div><div class="opts">${st.pool.map(p=>`<button class="t" onclick="put(${p.k})">${p.x}</button>`).join('')}</div>`;
+  if(!st.done)h+=`<div class="row"><button class="btn p" onclick="chkO()">Prüfen</button><button class="btn g" onclick="st.pool=st.pool.concat(st.ans);st.ans=[];render()">Leeren</button></div>`;
+ }
+
+ if(st.done)h+=fb(L,it);
+ m.innerHTML=h+'</div>';
+
+ if(t=='i'&&!st.done){const f=$('in0');if(f&&!st.vals.length)f.focus({preventScroll:true})}
+}
+
+function toggleTheory() {
+  const sec = $('theory-section');
+  const btn = $('theory-btn');
+  if (sec.classList.contains('show')) {
+    sec.classList.remove('show');
+    if(btn) btn.innerHTML = '📖 Теорія';
+    const mainEl = $('main');
+    if(mainEl) {
+      const y = mainEl.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
+  } else {
+    sec.classList.add('show');
+    if(btn) btn.innerHTML = '❌ Закрити теорію';
+    setTimeout(() => { sec.scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100);
+  }
+}
+
+function syncTheoryBtn() {
+  const sec = $('theory-section'), btn = $('theory-btn');
+  if (btn && sec) btn.innerHTML = sec.classList.contains('show') ? '❌ Закрити теорію' : '📖 Теорія';
+}
+
+function openTheory() {
+  const sec = $('theory-section');
+  if (!sec.classList.contains('show')) {
+    sec.classList.add('show');
+    syncTheoryBtn();
+  }
+  setTimeout(() => sec.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+}
+
+
+const modalOpen=()=>!$('complete').hidden||!$('errs').hidden;
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
+  if(e.key==='Escape'){ hideComplete(); closeErrors(); return; }
+  if(modalOpen()) return;
+  const tag=(e.target&&e.target.tagName)||'';
+  if(e.key==='Enter'){
+    if(tag==='BUTTON'||tag==='INPUT'||tag==='TEXTAREA') return;
+    const ctx=getContext();
+    if(!ctx||!ctx.it) return;
+    if(st.done){ e.preventDefault(); nextQ(); return; }
+    const t=T(ctx.L,ctx.it);
+    if(t==='i'){ e.preventDefault(); chkI(); }
+    else if(t==='o'){ e.preventDefault(); chkO(); }
+    return;
+  }
+  if(/^[1-9]$/.test(e.key) && tag!=='INPUT' && tag!=='TEXTAREA' && !st.done){
+    const ctx=getContext();
+    if(!ctx||!ctx.it||T(ctx.L,ctx.it)!=='c') return;
+    const o=(ctx.L.o||ctx.it[4])[+e.key-1];
+    if(o){ e.preventDefault(); pickC(o); }
+  }
+});
+$('complete').addEventListener('click',e=>{ if(e.target.id==='complete') hideComplete(); });
+$('errs').addEventListener('click',e=>{ if(e.target.id==='errs') closeErrors(); });
+
+/* === Telegram Mini App === */
+const tg=(window.Telegram&&window.Telegram.WebApp)||null;
+function tgChrome(){
+  if(!tg) return;
+  try{
+    const light=document.documentElement.getAttribute('data-theme')==='light';
+    const col=light?'#f8fafc':'#090b10';
+    if(tg.setHeaderColor) tg.setHeaderColor(col);
+    if(tg.setBackgroundColor) tg.setBackgroundColor(col);
+    if(tg.setBottomBarColor) tg.setBottomBarColor(col);
+  }catch(e){}
+}
+if(tg){
+  try{ tg.ready(); }catch(e){}
+  try{ tg.expand(); }catch(e){}
+  try{ if(tg.disableVerticalSwipes) tg.disableVerticalSwipes(); }catch(e){}
+  document.documentElement.classList.add('in-tg');
+  tgChrome();
+  
+  // Кнопка "Назад"
+  tg.BackButton.show();
+  tg.BackButton.onClick(()=>{ window.location.href = 'index.html'; });
+}
+
+/* Розблокування аудіо на iOS при першому дотику */
+document.addEventListener('touchstart', function unlockAudio() {
+  try {
+    if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+  } catch(e) {}
+  document.removeEventListener('touchstart', unlockAudio);
+}, { once: true });
+
+fresh();render();
+</script></body></html>
