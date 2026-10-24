@@ -1,0 +1,280 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Partizip I · Trainer 24.10.2026</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+:root{--bg:#0c0f16;--bg2:#1a2035;--card:#131a24;--tx:#e8eef5;--mu:#8892a7;--pr:#6366f1;--glow:rgba(99,102,241,.35);--pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.12);--no:#ef4444;--nob:rgba(239,68,68,.12);--go:#f59e0b;--gob:rgba(245,158,11,.12);--bd:#1e293b;--sa:#818cf8;--pe:#a78bfa;color-scheme:dark}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f8fafc;--bg2:#eef2ff;--card:#fff;--tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--glow:rgba(79,70,229,.2);--pl:#eef2ff;--ok:#059669;--no:#dc2626;--go:#d97706;--bd:#e2e8f0;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f8fafc;--bg2:#eef2ff;--card:#fff;--tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--glow:rgba(79,70,229,.2);--pl:#eef2ff;--ok:#059669;--no:#dc2626;--go:#d97706;--bd:#e2e8f0;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at top,var(--bg2),var(--bg));background-color:var(--bg);color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.w{max-width:720px;margin:0 auto;padding-block:24px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hd{position:relative;text-align:center;margin-bottom:16px;padding:8px 0 0}
+h1{font-size:1.6rem;margin:0;line-height:1.2;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
+.ib{position:absolute;top:0;width:38px;height:38px;border-radius:50%;border:1px solid var(--bd);background:var(--card);color:var(--mu);cursor:pointer;font-size:1.05rem;padding:0}
+.ib:hover{border-color:var(--pr);color:var(--tx)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.tab{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 14px;cursor:pointer;font:inherit;font-weight:500;font-size:.85rem;display:inline-flex;gap:6px;align-items:center}
+.tab small{font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--glow)}
+.tab.on small{background:rgba(255,255,255,.2);color:#fff}
+.pg{height:6px;background:var(--pl);border-radius:99px;overflow:hidden;margin:10px 0 14px}
+.pg i{display:block;height:100%;background:linear-gradient(90deg,var(--sa),var(--pe));transition:width .6s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.stats div{background:var(--card);padding:10px 4px;text-align:center}
+.stats span{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);font-weight:600}
+.stats b{font-size:1.2rem}.ok{color:var(--ok)}.no{color:var(--no)}.go{color:var(--go)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.25);position:relative;animation:up .4s}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+.card h2{margin:0 0 16px;font-size:.66rem;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;padding-right:56px}
+.sp,.rs{position:absolute;top:16px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;padding:0}
+.rs{right:16px}.sp{right:16px}.sp:hover,.rs:hover{border-color:var(--pr);color:var(--tx)}
+.q{font-size:1.25rem;font-weight:500;margin:0 0 8px;line-height:1.6;cursor:pointer}
+.bl{display:inline-block;min-width:80px;border-bottom:2px solid var(--sa);margin:0 4px;text-align:center;color:var(--sa)}
+.bl.ok{color:var(--ok);border-color:var(--ok)}.bl.no{color:var(--no);border-color:var(--no)}
+.t.er{border:1px solid var(--no);background:var(--nob);color:var(--no);border-radius:12px;padding:8px 16px;font-weight:600}
+.t.er:hover{color:var(--no);filter:brightness(1.15)}
+.trt{font-size:.85rem;font-weight:400;color:var(--mu);margin-top:8px}
+.opts,.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.opt{flex:1 1 auto;min-height:44px;padding:11px 18px;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--pr)}
+.opt.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.opt.er{border-color:var(--no);background:var(--nob);color:var(--no);animation:sh .4s}
+.opt:disabled{cursor:default}.opt:disabled:not(.ok):not(.er){opacity:.45}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;outline:none}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--glow)}
+.b{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;cursor:pointer;border:2px solid var(--bd);background:transparent;color:var(--tx)}
+.b.p{background:var(--pr);border-color:var(--pr);color:#fff}.b:hover{filter:brightness(1.1)}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;animation:up .3s}
+.fb.ok{background:var(--okb);border-color:var(--ok)}.fb.er{background:var(--nob);border-color:var(--no)}.fb.hint{background:var(--gob);border-color:var(--go)}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}.fb.hint .k{color:var(--go)}
+.fb .a{font-size:1.1rem;font-weight:600;margin:6px 0 4px;cursor:pointer;display:inline-block}.fb .a::after{content:" 🔊";font-size:.8em;opacity:.6}.fb .a:hover{text-decoration:underline;text-underline-offset:4px}.fb.sk{cursor:pointer}.fb .e{color:var(--mu);font-size:.9rem}
+.tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.t{border:0;background:none;color:var(--mu);font:inherit;font-size:.85rem;text-decoration:none;cursor:pointer;padding:6px 8px}.t:hover{color:var(--tx)}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 2px),var(--card) calc(20% - 2px),var(--card) 20%)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
+.xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
+@keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.fb .bar{height:3px;background:var(--ok);border-radius:3px;margin-top:12px;width:100%;animation:shr 2s linear forwards}@keyframes shr{to{width:0}}
+.fb.er .bar{background:var(--no);animation-duration:3.5s}
+.foot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.bt{font:inherit;font-weight:600;font-size:.85rem;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx)}.bt:hover{border-color:var(--pr)}
+.th{margin:18px 0 0;padding:18px 20px;background:var(--card);border:1px solid var(--bd);border-radius:16px}
+.th h3{margin:18px 0 6px;font-size:1rem;color:var(--sa)}.th h3:first-child{margin-top:0}
+.th p{margin:6px 0}.th .x{padding:8px 12px;border-left:3px solid var(--sa);background:var(--pl);border-radius:8px;margin:8px 0;font-size:.95rem}
+.th b.g{color:var(--pe)}.th code{background:var(--pl);padding:1px 7px;border-radius:6px;font-size:.92em}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:8px 0}th,td{border:1px solid var(--bd);padding:6px 8px;text-align:center}th{background:var(--pl);color:var(--mu);font-weight:600}
+td b{color:var(--ok)}details summary{cursor:pointer;color:var(--sa);font-weight:600}
+button{-webkit-tap-highlight-color:transparent}.th{overflow-x:auto}.opt{overflow-wrap:anywhere}
+.rv{display:inline-block;margin-left:6px;padding:2px 10px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--glow)}
+.rv i{font-style:normal;opacity:.7;margin:0 2px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;z-index:100;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:pop .3s}
+.md{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:24px 22px;width:min(480px,100%);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+.md.dg{border-color:var(--no)}
+.md h2{margin:0 0 8px;font-size:1.25rem;font-weight:600;color:var(--ok)}
+.md.dg h2{color:var(--no)}
+.md p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.md p b{color:var(--tx)}
+.md .ma{justify-content:center;margin-top:18px}
+.md .b{flex:0 1 auto}
+.b.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.b.no{background:var(--no);border-color:var(--no);color:#fff}
+.el{overflow-y:auto;display:flex;flex-direction:column;gap:8px;margin-top:12px;min-height:0;text-align:left}
+.ei{background:var(--nob);border-left:4px solid var(--no);border-radius:10px;padding:10px 12px}
+.ei .d{font-size:.95rem;line-height:1.45}.ei .d b{color:var(--ok)}
+.ei .u,.ei .x{color:var(--mu);font-size:.82rem;margin-top:3px}.ei .x{font-style:italic}
+.em{text-align:center;color:var(--mu);padding:26px 8px}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(max-width:520px){
+.w{padding-top:14px;padding-bottom:40px}
+.hd{padding-top:48px}
+.ib{width:42px;height:42px}
+h1{font-size:1.45rem}
+.tabs{gap:6px}.tab{padding:7px 11px;font-size:.8rem}
+.card{padding:16px}.q{font-size:1.1rem}
+.opt{flex:1 1 calc(50% - 5px);padding:11px 8px}
+.row input{flex:1 1 100%;font-size:16px}.row .b{flex:1 1 100%}
+.t{padding:10px 8px}.t.er{padding:10px 14px}
+.th{padding:14px}table{font-size:.8rem}th,td{padding:5px 3px}
+.stats b{font-size:1.05rem}
+}
+</style>
+<div class="w">
+<div class="hd"><button class="ib" style="right:96px" id="bth" onclick="toggleTh()" title="Теорія">📖</button><button class="ib" style="right:48px" id="bs" onclick="toggleSnd()">🔊</button><button class="ib" style="right:0" id="bm" onclick="toggleTheme()">🌙</button>
+<h1>Partizip I<small>ТЕОРІЯ · ТРЕНАЖЕР · ДО АВТОМАТИЗМУ</small></h1></div>
+
+<div class="tabs" id="tabs"></div>
+<div class="pg"><i id="pg"></i></div>
+<div class="stats"><div><span>Речення</span><b id="sm">0 / 0</b></div><div><span>Правильно</span><b class="ok" id="sr">0</b></div><div><span>Неправильно</span><b class="no" id="sw">0</b></div></div>
+<div class="card" id="card"></div>
+<div class="xp" id="xp"><div class="xh"><span class="xl"><i class="xg"></i>EXP цієї категорії</span><span class="xv"><b id="xt">0</b><small id="xn">/ 50</small></span></div><div class="xb"><i id="xf"></i></div></div>
+<div class="foot"><button class="bt" onclick="toggleTh()">📖 Теорія</button></div>
+<div class="th" id="th">
+<h3>1. Що це таке?</h3>
+<p><b class="g">Partizip I</b> — це дієслово, яке стало «описом»: <i>той, що щось робить просто зараз</i>.</p>
+<div class="x">lachen → <b>lachend</b> = «той, що сміється»<br>der <b>lachende</b> Mann = чоловік, який сміється</div>
+<p>Дія відбувається <b>одночасно</b> з головною дією речення і завжди <b>активна</b> (хтось сам щось робить).</p>
+<h3>2. Як утворити — одне правило</h3>
+<p><code>Infinitiv + d</code></p>
+<div class="x">spielen → spiel<b>en</b>d · arbeiten → arbeitend · sammeln → sammelnd · wandern → wandernd<br>Неправильні теж: <b>sein → seiend</b>, <b>tun → tuend</b></div>
+<h3>3. Три ролі</h3>
+<p><b>Прислівник</b> (без закінчень): <i>Lachend kam sie herein.</i> — «Сміючись, вона зайшла».</p>
+<p><b>Прикметник</b> (із закінченнями): <i>das schlafende Kind</i>, <i>ein bellender Hund</i>.</p>
+<p><b>Іменник</b> (з великої літери): <i>der Reisende</i> (мандрівник), <i>die Studierende</i>, <i>ein Vorsitzender</i>.</p>
+<h3>4. Закінчення — як у звичайних прикметників</h3>
+<table><tr><th></th><th>m</th><th>f</th><th>n</th><th>Pl</th></tr>
+<tr><td>der / die / das</td><td><b>-e</b></td><td><b>-e</b></td><td><b>-e</b></td><td><b>-en</b></td></tr>
+<tr><td>ein / kein</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-en</b></td></tr>
+<tr><td>без артикля</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-e</b></td></tr></table>
+<p>Це <b>Nominativ</b>. Простий лайфхак: після der/die/das та ein <b>Dativ і Genitiv — завжди -en</b>; Akkusativ m — теж <b>-en</b> (<i>den lachenden Mann</i>). Без артикля Dativ f / Genitiv f — <b>-er</b> (<i>mit zitternder Stimme</i>).</p>
+<h3>5. Partizip I чи Partizip II?</h3>
+<div class="x"><b>I</b> = робить зараз, активно: das <b>kochende</b> Wasser (вода кипить)<br><b>II</b> = вже зроблено, пасивно: das <b>gekochte</b> Ei (яйце зварене)</div>
+<p>Питання-тест: «Хтось/щось <i>зараз це робить</i>?» Так → Partizip I.</p>
+<h3>6. zu + Partizip I («який треба/можна зробити»)</h3>
+<div class="x">die Aufgabe, die gelöst werden muss → die <b>zu lösende</b> Aufgabe<br>Відокремлюваний префікс: ausfüllen → das <b>auszufüllende</b> Formular</div>
+<p>Тільки від дієслів, що мають пасив (з Akkusativ).</p>
+<details><summary>🧠 Перевір себе: як сказати «дитина, що спить» (das Kind)?</summary><p class="x">das <b>schlafende</b> Kind — schlafen + d, плюс <b>-e</b> після das. Вийшло? Тоді переходь до вправ!</p></details>
+</div>
+
+</div>
+<div class="ov" id="ovE" hidden onclick="if(event.target===this)closeMd()"><div class="md dg" role="dialog" aria-modal="true" aria-labelledby="eT"><h2 id="eT">🔁 Мої помилки</h2><p id="eSub"></p><div class="el" id="eList"></div><div class="row ma" id="eAct"></div></div></div>
+<div class="ov" id="ovC" hidden onclick="if(event.target===this)closeMd()"><div class="md" id="mdC" role="dialog" aria-modal="true" aria-labelledby="cT"><h2 id="cT"></h2><p id="cP"></p><div class="row ma" id="cAct"></div></div></div>
+<script>
+const $=id=>document.getElementById(id);
+const st={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const mq=matchMedia("(prefers-color-scheme: light)");
+const eff=()=>document.documentElement.getAttribute("data-theme")||(mq.matches?"light":"dark");
+const icon=()=>$("bm").textContent=eff()==="light"?"☀️":"🌙";
+const sv=st.get("pi-theme");if(sv==="light"||sv==="dark")document.documentElement.setAttribute("data-theme",sv);icon();
+function toggleTheme(){const n=eff()==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n);st.set("pi-theme",n);icon()}
+let snd=st.get("pi-snd")!=="off";const si=()=>$("bs").textContent=snd?"🔊":"🔇";si();
+function toggleSnd(){snd=!snd;st.set("pi-snd",snd?"on":"off");si();if(snd)beep(1)}
+let ac;function beep(ok){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.connect(g);g.connect(ac.destination);o.type=ok?"sine":"triangle";o.frequency.setValueAtTime(ok?523:200,n);if(ok)o.frequency.setValueAtTime(659,n+.1);else o.frequency.exponentialRampToValueAtTime(100,n+.2);g.gain.setValueAtTime(.07,n);g.gain.exponentialRampToValueAtTime(.001,n+.45);o.start(n);o.stop(n+.5)}catch(e){}}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function toggleTh(){const t=$("th");t.hidden=!t.hidden;st.set("pi-th",t.hidden?"0":"1");if(!t.hidden)t.scrollIntoView({behavior:"smooth"})}
+$("th").hidden=st.get("pi-th")==="0";
+
+const E=["e","en","er","es","em"];
+const TABS=[
+{id:"f",n:"Утворення",h:"Infinitiv + d. Завжди! Навіть sein → seiend, tun → tuend.",it:[
+["lachen → ___","lachend",0,"lachen + d."],["spielen → ___","spielend",0,"spielen + d."],["schlafen → ___","schlafend",0,"schlafen + d. Ніяких змін кореня."],["arbeiten → ___","arbeitend",0,"arbeiten + d."],["sammeln → ___","sammelnd",0,"sammeln + d (не sammelend!)."],["wandern → ___","wandernd",0,"wandern + d."],["lächeln → ___","lächelnd",0,"lächeln + d."],["weinen → ___","weinend",0,"weinen + d."],["sein → ___","seiend",["gewesen","seind","seiende"],"Неправильне дієслово, але правило те саме: sein + d."],["tun → ___","tuend",["getan","tunend","tuende"],"tun + d = tuend."]]},
+{id:"e",n:"Закінчення",end:1,h:"Визнач рід, відмінок і тип артикля. der-група: -e (Nom/Akk f,n,m-Nom), -en в інших. ein: -er / -e / -es.",it:[
+["Der ___ Mann (lachen) ist mein Onkel.","lachend","e","der + Nom m → -e."],["Ich sehe das ___ Kind (weinen).","weinend","e","das + Akk n → -e."],["Sie hilft dem ___ Mann (warten).","wartend","en","Dativ після артикля → завжди -en."],["Ein ___ Hund (bellen) läuft vorbei.","bellend","er","ein + Nom m → -er."],["Die ___ Kinder (spielen) sind laut.","spielend","en","Plural після артикля → -en."],["Wir helfen den ___ Schülern (lernen).","lernend","en","Dativ Pl → -en."],["Ich höre ein ___ Baby (schreien).","schreiend","es","ein + Akk n → -es."],["Das Auto der ___ Frau (fahren) ist neu.","fahrend","en","Genitiv → -en."],["Sie trägt ___ Kinder (schlafen) ins Bett.","schlafend","e","Без артикля, Akk Pl → -e."],["Mit ___ Stimme (zittern) sprach er.","zitternd","er","Без артикля, Dativ f → -er."]]},
+{id:"r",n:"Relativsatz → Partizip",end:1,h:"Relativsatz («який …») стискаємо: дієслово → Partizip I перед іменником із закінченням.",it:[
+["die Frau, die telefoniert → die ___ Frau","telefonierend","e","telefonieren + d, die + Nom f → -e."],["der Hund, der bellt → der ___ Hund","bellend","e","der + Nom m → -e."],["das Kind, das schläft → das ___ Kind","schlafend","e","das + Nom n → -e."],["die Kinder, die spielen → die ___ Kinder","spielend","en","Plural → -en."],["ein Mann, der wartet → ein ___ Mann","wartend","er","ein + Nom m → -er."],["ein Kind, das lacht → ein ___ Kind","lachend","es","ein + Nom n → -es."],["Ich helfe dem Mann, der weint → dem ___ Mann","weinend","en","Dativ → -en."],["die Studenten, die lernen → die ___ Studenten","lernend","en","Plural → -en."]]},
+{id:"c",n:"I чи II?",h:"Зараз робить (активно) → Partizip I. Вже зроблено (пасивно) → Partizip II.",it:[
+["Das ___ Kind (weinen) braucht Trost.","weinende",["geweinte"],"Дитина плаче зараз → Partizip I."],["Der ___ Brief (schreiben) liegt auf dem Tisch.","geschriebene",["schreibende"],"Лист уже написаний → Partizip II."],["Der ___ Zug (ankommen) hat Verspätung.","ankommende",["angekommene"],"Поїзд прибуває зараз → Partizip I."],["Das ___ Fenster (zerbrechen) muss repariert werden.","zerbrochene",["zerbrechende"],"Вікно вже розбите → Partizip II."],["Vorsicht, das ___ Wasser (kochen)!","kochende",["gekochte"],"Вода кипить зараз → Partizip I."],["Das ___ Ei (kochen) schmeckt gut.","gekochte",["kochende"],"Яйце вже зварене → Partizip II."],["Ein ___ Vogel (singen) weckte mich.","singender",["gesungener"],"Птах співає → Partizip I."],["Die ___ Hausaufgaben (machen) sind richtig.","gemachten",["machenden"],"Вже зроблені → Partizip II."]]},
+{id:"z",n:"zu + Partizip I",h:"«який треба/можна зробити»: zu + Partizip I + закінчення. Відокремлюваний префікс: auszufüllende.",it:[
+["die Aufgabe, die gelöst werden muss → die ___ Aufgabe","zu lösende",["gelöste","lösende","zu gelöste"],"gelöst werden muss = zu lösend + e."],["der Text, der übersetzt werden muss → der ___ Text","zu übersetzende",["übersetzende","zu übersetzte","übersetzte"],"zu + übersetzen + d + e."],["die Regeln, die beachtet werden müssen → die ___ Regeln","zu beachtenden",["beachtenden","zu beachtende","beachteten"],"Plural → -en."],["das Formular, das ausgefüllt werden muss → das ___ Formular","auszufüllende",["zu ausfüllende","ausgefüllte","zuausfüllende"],"Префікс відокремлюваний: aus-zu-füllend, пишемо разом."],["der Brief, der geschrieben werden muss → der ___ Brief","zu schreibende",["schreibende","geschriebene","zu schreibenden"],"der + Nom m → -e."],["ein Fehler, der vermieden werden kann → ein ___ Fehler","zu vermeidender",["vermeidender","zu vermeidende","vermiedener"],"ein + Nom m → -er."]]},
+{id:"t",n:"Переклад",tr:1,h:"",it:[]}];
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const S={};
+TABS.forEach(t=>{let s;try{s=JSON.parse(st.get("pi1_"+t.id))}catch(e){}S[t.id]=s&&s.k?s:{k:{},r:0,w:0,err:{}};S[t.id].x=S[t.id].x||0;
+t.items=t.it.map(x=>{const q=x[0];let a,w,e;
+if(t.end){a=x[1]+x[2];w=E.map(z=>x[1]+z).filter(z=>z!==a);e=x[3]}
+else{a=x[1];w=x[2]||[];e=x[3];if(!w.length){const inf=q.split(" ")[0],s=inf.replace(/e?n$/,"");w=[inf,"ge"+s+"t",a+"e"]}}
+return{q,a,w,e}})});
+let trOn=false;const TR={"lachen → ___":"сміятися → той, що сміється","spielen → ___":"грати → той, що грає","schlafen → ___":"спати → той, що спить","arbeiten → ___":"працювати → той, що працює","sammeln → ___":"збирати → той, що збирає","wandern → ___":"мандрувати → той, що мандрує","lächeln → ___":"усміхатися → той, що усміхається","weinen → ___":"плакати → той, що плаче","sein → ___":"бути → той, що є","tun → ___":"робити → той, що робить",
+"Der ___ Mann (lachen) ist mein Onkel.":"Чоловік, що сміється, — мій дядько.","Ich sehe das ___ Kind (weinen).":"Я бачу дитину, що плаче.","Sie hilft dem ___ Mann (warten).":"Вона допомагає чоловікові, що чекає.","Ein ___ Hund (bellen) läuft vorbei.":"Повз біжить собака, що гавкає.","Die ___ Kinder (spielen) sind laut.":"Діти, що граються, галасливі.","Wir helfen den ___ Schülern (lernen).":"Ми допомагаємо учням, які вчаться.","Ich höre ein ___ Baby (schreien).":"Я чую немовля, що кричить.","Das Auto der ___ Frau (fahren) ist neu.":"Автомобіль жінки, яка за кермом, новий.","Sie trägt ___ Kinder (schlafen) ins Bett.":"Вона несе дітей, що сплять, у ліжко.","Mit ___ Stimme (zittern) sprach er.":"Тремтячим голосом він говорив.",
+"die Frau, die telefoniert → die ___ Frau":"жінка, яка розмовляє телефоном","der Hund, der bellt → der ___ Hund":"собака, що гавкає","das Kind, das schläft → das ___ Kind":"дитина, що спить","die Kinder, die spielen → die ___ Kinder":"діти, що граються","ein Mann, der wartet → ein ___ Mann":"чоловік, що чекає","ein Kind, das lacht → ein ___ Kind":"дитина, що сміється","Ich helfe dem Mann, der weint → dem ___ Mann":"Я допомагаю чоловікові, що плаче","die Studenten, die lernen → die ___ Studenten":"студенти, що вчаться",
+"Das ___ Kind (weinen) braucht Trost.":"Дитина, що плаче, потребує розради.","Der ___ Brief (schreiben) liegt auf dem Tisch.":"Написаний лист лежить на столі.","Der ___ Zug (ankommen) hat Verspätung.":"Поїзд, що прибуває, запізнюється.","Das ___ Fenster (zerbrechen) muss repariert werden.":"Розбите вікно треба полагодити.","Vorsicht, das ___ Wasser (kochen)!":"Обережно, кипляча вода!","Das ___ Ei (kochen) schmeckt gut.":"Зварене яйце смачне.","Ein ___ Vogel (singen) weckte mich.":"Птах, що співав, розбудив мене.","Die ___ Hausaufgaben (machen) sind richtig.":"Зроблені домашні завдання правильні.",
+"die Aufgabe, die gelöst werden muss → die ___ Aufgabe":"завдання, яке треба розв’язати","der Text, der übersetzt werden muss → der ___ Text":"текст, який треба перекласти","die Regeln, die beachtet werden müssen → die ___ Regeln":"правила, яких треба дотримуватися","das Formular, das ausgefüllt werden muss → das ___ Formular":"бланк, який треба заповнити","der Brief, der geschrieben werden muss → der ___ Brief":"лист, який треба написати","ein Fehler, der vermieden werden kann → ein ___ Fehler":"помилка, якої можна уникнути"};
+const fixTr=x=>x.replace(/\s*\([^)]*\)/g,"").replace(/\s+([!?.,])/g,"$1");
+TABS.find(x=>x.id==="t").items=TABS.filter(x=>x.id==="e"||x.id==="c").flatMap(x=>x.items).filter(it=>TR[it.q]).map(it=>({q:TR[it.q],a:fixTr(it.q.replace("___",it.a)),w:[],e:it.e,hn:it.q,vb:(it.q.match(/\(([^)]*)\)/)||[])[1]||""}));
+let tm;function trTog(){trOn=!trOn;$("trt").hidden=!trOn}
+let ti=Math.max(0,TABS.findIndex(x=>x.id===st.get("pi-tab"))),cur=-1,done=false,ok=false,pk="",opts=[],rev=false,hint=false,resume=true,rvTot=0,revDone=false,shortMsg=false,clrArm=false,mc=st.get("pi-mc")!=="0";
+const T=()=>TABS[ti],Sx=()=>S[T().id],isMc=()=>mc&&!T().tr;
+const save=()=>st.set("pi1_"+T().id,JSON.stringify(Sx()));
+const mast=t=>t.items.filter((_,i)=>(S[t.id].k[i]||0)>=2).length;
+const errN=()=>Object.keys(Sx().err).length;
+function setTab(i){closeMd();ti=i;st.set("pi-tab",T().id);rev=false;cur=-1;resume=true;load()}
+function load(){clearTimeout(tm);const t=T(),s=Sx();let pool=t.items.map((_,i)=>i).filter(i=>rev?s.err[i]:(s.k[i]||0)<2);
+if(!pool.length&&rev){rev=false;revDone=true;return load()}
+if(pool.length){if(resume&&!rev&&Number.isInteger(s.pos)&&pool.includes(s.pos))cur=s.pos;else{const p=pool.filter(i=>i!==cur),L=p.length?p:pool;cur=L[Math.random()*L.length|0]}
+resume=false;const it=t.items[cur];opts=sh([it.a,...sh(it.w).slice(0,3)]);s.pos=cur;save()}else cur=-1;
+done=false;hint=false;trOn=false;shortMsg=false;pk="";render();
+if(cur<0){revDone=false;showComplete()}else if(revDone){revDone=false;showRevDone()}}
+function render(){const t=T(),s=Sx(),n=t.items.length,m=mast(t),c=$("card");
+$("tabs").innerHTML=TABS.map((x,i)=>`<button class="tab${i===ti?" on":""}" onclick="setTab(${i})">${x.n}<small>${mast(x)}/${x.items.length}</small></button>`).join("");
+$("pg").style.width=m/n*100+"%";$("xf").style.width=s.x/50*100+"%";$("xt").textContent=s.x;$("xn").textContent=s.x>=50?"MAX":"/ 50";$("xp").classList.toggle("max",s.x>=50);$("sr").textContent=s.r;$("sw").textContent=s.w;$("sm").textContent=m+" / "+n;
+
+c.className="card"+(done&&ok?" win":"");
+if(cur<0){c.innerHTML=`<h2>${t.n}</h2><div class="q" style="cursor:default">🎉 Вкладку засвоєно!</div><p class="e" style="color:var(--mu)">Кожне завдання виконано правильно двічі поспіль. Для автоматизму поверни до неї ще завтра.</p><div class="row"><button class="b p" onclick="finalRestart()">Почати знову</button>${ti<TABS.length-1?`<button class="b" onclick="setTab(${ti+1})">Наступна вкладка →</button>`:""}</div>`;return}
+const it=t.items[cur],mcOn=isMc(),bl=`<span class="bl${done?ok?" ok":" no":""}">${done?(ok?it.a:pk||"?"):""}</span>`;
+let h=`<h2>${t.n} · ${rev?`робота над помилками · залишилось <span class="rv">${errN()}<i>/</i>${rvTot}</span>`:"завдання"}</h2><button class="sp" onclick="speakIt()">🔊</button><div class="q" onclick="speakIt()">${it.q.replace("___",bl)}</div>`;
+h+=t.tr?`<div class="trt" style="margin-top:0">✍️ Напиши німецькою${it.vb?` · дієслово: <b>${it.vb}</b>`:""}</div>`:`<div class="tools" style="margin-top:0"><button class="t" onclick="trTog()">🌐 Перекласти</button></div><div class="trt" id="trt"${trOn?"":" hidden"}>${TR[it.q]||""}</div>`;
+if(mcOn)h+=`<div class="opts">${opts.map((o,i)=>`<button class="opt${done?o===it.a?" ok":o===pk?" er":"":""}" ${done?"disabled":""} onclick="pick(${i})">${o}</button>`).join("")}</div>`;
+else if(!done)h+=`<div class="row"><input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${t.tr?"Введи повне речення…":"Впиши форму…"}"><button class="b p" onclick="chk()">Перевірити</button></div>`;
+if(hint&&!done)h+=`<div class="fb hint"><div class="k">ПІДКАЗКА</div><div class="e">${t.tr?"Порядок слів: "+it.hn:t.h}</div></div>`;
+if(shortMsg&&!done)h+=`<div class="fb hint"><div class="k">ПОВНЕ РЕЧЕННЯ</div><div class="e">Спочатку напиши повне речення, а не лише слово.</div></div>`;
+if(done)h+=`<div class="fb ${ok?"ok":"er"}${mcOn?" sk":""}"${mcOn?' onclick="skipFb()"':""}><div class="k">${ok?"ВІРНО · +1 EXP":"ПОМИЛКА · −1 EXP"}</div><div class="a" title="Натисни, щоб почути" onclick="event.stopPropagation();speakIt()">${it.a}</div><div class="e">${it.e}</div>${ok||mcOn?'<div class="bar"></div>':""}</div><div class="row"><button class="b p" onclick="load()">Далі →</button></div>`;
+h+=`<div class="tools">${done?"":'<button class="t" onclick="hint=true;render()">💡 Підказка</button>'}${t.tr?"":`<button class="t" onclick="toggleMode()">${mc?"⌨️ Вводити самому":"🔘 Вибір варіантів"}</button>`}${rev?'<button class="t" onclick="exitRev()">← До тренування</button>':`<button class="t er" onclick="openErrors()">🔁 Помилки (${errN()})</button>`}<button class="t" onclick="askReset()">↻ Скинути прогрес</button></div>`;
+c.innerHTML=h;const i=$("in");if(i){i.focus();i.onkeydown=e=>{if(e.key==="Enter")chk()}}}
+function fin(good,val){if(done)return;done=true;ok=good;pk=val;shortMsg=false;const s=Sx();
+if(good){s.r++;s.x=Math.min(50,(s.x||0)+1);s.k[cur]=(s.k[cur]||0)+1;if(rev)delete s.err[cur]}else{s.w++;s.x=Math.max(0,(s.x||0)-1);s.k[cur]=0;s.err[cur]=1}
+save();beep(good);render();clearTimeout(tm);
+if(good)tm=setTimeout(()=>{if(done&&ok)load()},2000);
+else if(isMc())tm=setTimeout(()=>{if(done&&!ok)load()},3500)}
+const norm=x=>x.trim().toLowerCase().replace(/\s+/g," ");
+const trNorm=x=>x.trim().toLowerCase().replace(/ß/g,"ss").replace(/[.,!?;:—–]/g," ").replace(/\s+/g," ").trim();
+function pick(i){fin(opts[i]===T().items[cur].a,opts[i])}
+function chk(){const t=T(),v=$("in").value,f=t.tr?trNorm:norm,n=f(v);if(!n)return;
+if(t.tr&&n.split(" ").length<3){shortMsg=true;render();$("in").value=v;return}
+fin(n===f(t.items[cur].a),v)}
+function giveUp(){fin(false,"")}
+function speakIt(){const t=T(),it=t.items[cur];if(it)say(t.tr?it.a:it.q.split("→").pop().replace("___",it.a).replace(/\(.*?\)/g,""))}
+function skipFb(){clearTimeout(tm);load()}
+function startRev(){if(!errN())return;rev=true;rvTot=errN();load();$("card").scrollIntoView({behavior:"smooth",block:"start"})}
+function exitRev(){rev=false;load()}
+function toggleMode(){mc=!mc;st.set("pi-mc",mc?"1":"0");render()}
+function resetTab(){S[T().id]={k:{},r:0,w:0,err:{},x:0};save();rev=false;cur=-1;resume=false;load()}
+function finalRestart(){const o=Sx();S[T().id]={k:{},r:0,w:0,err:o.err,x:o.x||0};save();closeMd();rev=false;cur=-1;resume=false;load()}
+
+/* ---- вікна ---- */
+const modalOpen=()=>!$("ovE").hidden||!$("ovC").hidden;
+function closeMd(){$("ovE").hidden=true;$("ovC").hidden=true}
+function focusMd(id){setTimeout(()=>{const b=document.querySelector("#"+id+" .b");if(b)b.focus()},0)}
+function showC(t,p,a,dg){$("mdC").className="md"+(dg?" dg":"");$("cT").textContent=t;$("cP").innerHTML=p;$("cAct").innerHTML=a;$("ovC").hidden=false;focusMd("ovC")}
+function showComplete(){const s=Sx(),n=errN();
+showC("🎉 Вкладку засвоєно!",`Усі завдання цієї вкладки виконано.<br>Правильно: <b>${s.r}</b> · Неправильно: <b>${s.w}</b> · У списку помилок: <b>${n}</b>.<br>Тренажер зупинено — обери, що робити далі.`,
+(n?`<button class="b ok" onclick="closeMd();startRev()">🔁 Пройти помилки (${n})</button>`:"")+`<button class="b${n?"":" ok"}" onclick="finalRestart()">↻ Почати заново</button>`+(ti<TABS.length-1?`<button class="b" onclick="closeMd();setTab(${ti+1})">Наступна вкладка →</button>`:""))}
+function showRevDone(){showC("✅ Помилки пройдено!","Ти виправив усі помилки зі списку.<br>Можна продовжити тренування.",'<button class="b ok" onclick="closeMd()">Продовжити тренування</button>')}
+function askReset(){showC("Скинути прогрес?","Прогрес цієї вкладки буде скинуто разом із EXP і списком помилок.",'<button class="b no" onclick="closeMd();resetTab()">Так, скинути</button><button class="b" onclick="closeMd()">Скасувати</button>',1)}
+function openErrors(){const t=T(),e=Sx().err,ids=Object.keys(e).filter(i=>e[i]).map(Number);
+$("eSub").textContent=`Вкладка «${t.n}» · помилок: ${ids.length}`;
+if(!ids.length){$("eList").innerHTML='<div class="em">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';$("eAct").innerHTML='<button class="b" onclick="closeMd()">Закрити</button>'}
+else{$("eList").innerHTML=ids.map(i=>{const it=t.items[i],de=t.tr?it.a:it.q.replace("___",`<b>${it.a}</b>`),ua=t.tr?it.q:(TR[it.q]||"");
+return `<div class="ei"><div class="d">${de}</div>${ua?`<div class="u">${ua}</div>`:""}${it.e?`<div class="x">${it.e}</div>`:""}</div>`}).join("");
+$("eAct").innerHTML='<button class="b no" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="b" id="eClr" onclick="clearErrors()">🗑 Очистити список</button><button class="b" onclick="closeMd()">Закрити</button>'}
+$("ovE").hidden=false;focusMd("ovE")}
+function trainErrors(){closeMd();startRev()}
+function clearErrors(){const b=$("eClr");if(!clrArm){clrArm=true;b.textContent="Точно очистити?";setTimeout(()=>{clrArm=false;const x=$("eClr");if(x)x.textContent="🗑 Очистити список"},3000);return}
+clrArm=false;Sx().err={};save();render();openErrors()}
+
+/* ---- клавіатура ---- */
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape"){closeMd();return}
+if(modalOpen()||e.ctrlKey||e.metaKey||e.altKey)return;
+if(e.key==="Enter"&&done&&e.target.tagName!=="BUTTON"){load();return}
+if(isMc()&&!done&&cur>=0&&!/INPUT|TEXTAREA/.test(e.target.tagName)&&e.key.length===1){const j=+e.key-1;if(j>=0&&j<opts.length)pick(j)}});
+load();
+</script>
+
+</body></html>
