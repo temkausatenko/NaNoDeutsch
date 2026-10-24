@@ -272,11 +272,12 @@
       const streak = calcStreak(activity);
       const lv = levelInfo(totalXP);
 
-      // === ОТПРАВКА В ТОП-10 (FIREBASE) ===
+      // === ОТПРАВКА В ТОП-10 (ИСПРАВЛЕНО) ===
       const user = tg && tg.initDataUnsafe && tg.initDataUnsafe.user;
       if (user && user.id && totalXP > 0) {
-        // Добавлен updateMask для исправления ошибки 400
-        const dbUrl = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/leaderboard?documentId=${user.id}&updateMask.fieldPaths=name&updateMask.fieldPaths=photo&updateMask.fieldPaths=xp`;
+        // ВАЖНО: ID документа передается через слеш перед знаком вопроса
+        const dbUrl = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/leaderboard/${user.id}?updateMask.fieldPaths=name&updateMask.fieldPaths=photo&updateMask.fieldPaths=xp`;
+        
         const payload = {
           fields: {
             name: { stringValue: user.first_name || 'User' },
