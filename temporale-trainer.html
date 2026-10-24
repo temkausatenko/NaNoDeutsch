@@ -83,15 +83,18 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
-.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:150px;text-transform:uppercase}
 
-/* Обновленные стили для кнопок внутри карточки */
-.reset,.speak,.mode-toggle{position:absolute;top:14px;height:32px;border-radius:16px;border:1px solid var(--bd);
-  background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2}
-.reset{right:16px;width:32px;font-size:1.05rem}
-.speak{right:54px;width:32px;font-size:.95rem}
-.mode-toggle{right:92px;padding:0 12px;font-size:.75rem;font-weight:600;gap:4px}
-.reset:hover,.speak:hover,.mode-toggle:hover{color:var(--tx);border-color:var(--pr)}
+/* Выравнивание заголовка и кнопок */
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
+
+/* Кнопки внутри карточки - теперь обе круглые и без текста */
+.speak,.mode-toggle{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
+  background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
+  
+.speak{right:22px;}
+.mode-toggle{right:62px;font-size:1.1rem;}
+
+.speak:hover,.mode-toggle:hover{color:var(--tx);border-color:var(--pr)}
 
 .sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
@@ -201,6 +204,11 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
   .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
   .tool{margin-left:0}.card{padding:18px}h1{font-size:1.35rem}.complete-card{padding:22px 18px}
   .theory-card{padding:16px}.header-wrap{padding-top:48px}
+  /* Адаптация кнопок на мобильных */
+  .speak,.mode-toggle{top:18px;height:32px;width:32px;}
+  .speak{right:18px;}
+  .mode-toggle{right:58px;}
+  .card h2{padding-right:82px;line-height:32px;height:32px;}
 }
 @media(hover:hover) and (pointer:fine){
   .tab:hover{border-color:var(--pr);color:var(--tx)}.tab.on:hover{background:#4338ca}
@@ -247,9 +255,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
   <div class="card" id="card">
     <h2 id="title"></h2>
+    <!-- Кнопка сброса убрана, кнопка режима стала круглой и без текста -->
     <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
-    <button class="reset" id="reset" title="Скинути прогрес цієї вкладки">↺</button>
+    
     <p class="sent" id="sent"></p>
     <div class="lab" id="lab"></div>
     <div class="scheme" id="scheme"></div>
@@ -712,7 +721,8 @@ function renderTabs(){
 function renderModes(){
   const b = $("modeBtn");
   b.style.display = tab === "insert" ? "flex" : "none";
-  b.textContent = mode === "mc" ? "⌨️ Режим" : "🔘 Режим";
+  // Теперь кнопка содержит только иконку
+  b.textContent = mode === "mc" ? "⌨️" : "🔘"; 
   b.title = mode === "mc" ? "Зараз режим вводу. Натисніть, щоб обрати варіанти." : "Зараз режим вибору. Натисніть, щоб вводити самому.";
 }
 let trShown = false;
@@ -724,7 +734,7 @@ function renderLab(){
 function renderCard(){
   const it = items()[cur], t = T(), tb = TB();
   if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
-  else $("title").textContent = isMc() ? "ОБЕРИ ПРАВИЛЬНИЙ ВАРІАНТ" : tb.title;
+  else $("title").textContent = isMc() ? "ОБЕРИ ВАРІАНТ" : tb.title;
   $("sent").innerHTML = it.s;
   $("sent").title = "Натисни, щоб почути німецькою";
   renderLab();
@@ -1004,7 +1014,6 @@ $("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.di
 $("next").onclick = () => advance();
 $("chk").onclick = check;
 $("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
-$("reset").onclick = restartTab;
 $("speakBtn").onclick = speakCurrent;
 $("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
 $("complete").addEventListener("click", e => { if(e.target.id === "complete") hideComplete(); });
