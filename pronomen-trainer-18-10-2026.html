@@ -1,278 +1,133 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><!-- === ІНТЕГРАЦІЯ З TELEGRAM: SDK === -->
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 </head><body>
 <title>Pronomen - Trainer 18.10.2026</title>
 <style>
-:root{
-  --bg:#090b10; --bg-grad:#151b2b; --card:#12161f; --card-hover:#1a202c;
-  --tx:#f1f5f9; --mu:#94a3b8;
-  --pr:#6366f1; --pr-glow:rgba(99,102,241,.4);
-  --pl:#1e293b;
-  --ok:#10b981; --okb:rgba(16,185,129,.1);
-  --no:#ef4444; --nob:rgba(239,68,68,.1);
-  --bd:#2a3441; --radius:16px;
-  --c-a:#7aa2f7; --c-d:#e5c07b; --c-p:#a78bfa; --c-r:#e9a3c9;
-  --c-x:#f87171; --c-w:#5eead4; --c-m:#fb923c; --c-man:#b4bccb;
-}
-[data-theme="light"]{
-  --bg:#f8fafc; --bg-grad:#e2e8f0; --card:#fff; --card-hover:#f1f5f9;
-  --tx:#0f172a; --mu:#64748b;
-  --pr:#4f46e5; --pr-glow:rgba(79,70,229,.2);
-  --pl:#e2e8f0;
-  --ok:#059669; --okb:rgba(5,150,105,.1);
-  --no:#dc2626; --nob:rgba(220,38,38,.1);
-  --bd:#cbd5e1;
-}
+:root{--bg:#090b10;--bg-grad:#151b2b;--card:#12161f;--card-hover:#1a202c;--tx:#f1f5f9;--mu:#94a3b8;--pr:#6366f1;--pr-glow:rgba(99,102,241,.4);--pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.1);--no:#ef4444;--nob:rgba(239,68,68,.1);--bd:#2a3441;--radius:16px;--c-a:#7aa2f7;--c-d:#e5c07b;--c-p:#a78bfa;--c-r:#e9a3c9;--c-x:#f87171;--c-w:#5eead4;--c-m:#fb923c;--c-man:#b4bccb}
+[data-theme="light"]{--bg:#f8fafc;--bg-grad:#e2e8f0;--card:#fff;--card-hover:#f1f5f9;--tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);--bd:#cbd5e1}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-body{
-  margin:0;
-  background-color:var(--bg);
-  background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
-  color:var(--tx);
-  font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  -webkit-font-smoothing:antialiased;min-height:100vh;
-  transition:background-color .3s,color .3s;
-}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;transition:background-color .3s,color .3s}
 .app{max-width:720px;margin:0 auto;padding:24px 16px 60px;position:relative}
-
 .header-wrap{position:relative;text-align:center;margin-bottom:24px}
 h1{font-size:2.2rem;font-weight:700;letter-spacing:-.5px;margin:0 0 4px 0;background:linear-gradient(135deg,var(--tx),var(--mu));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .lead{color:var(--mu);font-size:.95rem;margin:0}
-
 .header-tools{position:absolute;top:0;right:0;display:flex;gap:10px;z-index:2}
-.theme-toggle,.sound-toggle,.theory-top-toggle{
-  background:var(--card);border:1px solid var(--bd);color:var(--mu);
-  border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0;font-family:inherit;line-height:1;
-}
+.theme-toggle,.sound-toggle,.theory-top-toggle{background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0;font-family:inherit;line-height:1}
 .theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
-.speak{
-  position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;
-  border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;
-  transition:all .18s;display:flex;align-items:center;justify-content:center;
-  padding:0;font-size:.95rem;line-height:1;z-index:2;font-family:inherit;
-}
+.speak{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;font-size:.95rem;line-height:1;z-index:2;font-family:inherit}
 .speak:hover{color:var(--tx);border-color:var(--pr)}
-@media(max-width:560px){
-  .header-tools{position:static;justify-content:center;margin:0 0 14px}
-}
-
+@media(max-width:560px){.header-tools{position:static;justify-content:center;margin:0 0 14px}}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center;align-items:center}
-.tab{
-  border:1px solid var(--bd);background:transparent;color:var(--mu);
-  border-radius:99px;padding:7px 14px;cursor:pointer;font-family:inherit;
-  font-weight:500;font-size:.85rem;transition:all .2s ease;
-  display:inline-flex;align-items:center;gap:7px;line-height:1.2;
-}
+.tab{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;display:inline-flex;align-items:center;gap:7px;line-height:1.2}
 .tab small{font-weight:500;color:var(--mu);font-size:.7rem;margin:0;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
 .tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
 .tab.on small{color:#fff;background:rgba(255,255,255,.2)}
-
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center;align-items:center}
-.filter-btn{
-  border:1px solid var(--bd);background:transparent;color:var(--mu);
-  border-radius:99px;padding:6px 12px;cursor:pointer;font-family:inherit;
-  font-weight:500;font-size:.8rem;transition:all .2s ease;
-  display:inline-flex;align-items:center;gap:6px;
-}
+.filter-btn{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:6px 12px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.8rem;transition:all .2s ease;display:inline-flex;align-items:center;gap:6px}
 .filter-btn small{font-size:.7rem;opacity:.7;font-variant-numeric:tabular-nums;margin-left:3px}
 .filter-btn.on{background:var(--pl);border-color:var(--pr);color:var(--tx)}
 .filter-btn:hover{border-color:var(--pr);color:var(--tx)}
 .filter-btn .dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex:none}
-
-.dot.a,.dot.d,.dot.ad{background:var(--c-a)}
-.dot.p{background:var(--c-p)}
-.dot.r{background:var(--c-r)}
-.dot.x{background:var(--c-x)}
-.dot.w{background:var(--c-w)}
-.dot.m{background:var(--c-m)}
-.dot.man{background:var(--c-man)}
-
+.dot.a,.dot.d,.dot.ad{background:var(--c-a)}.dot.p{background:var(--c-p)}.dot.r{background:var(--c-r)}.dot.x{background:var(--c-x)}.dot.w{background:var(--c-w)}.dot.m{background:var(--c-m)}.dot.man{background:var(--c-man)}
 .pg{margin:16px 0 12px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
 .pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pr),var(--ok));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-
-.stats-panel{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--bd);border:1px solid var(--bd);border-radius:12px;
-  overflow:hidden;margin-bottom:20px;
-}
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:20px}
 .stat-box{background:var(--card);padding:12px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .stat-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:4px;font-weight:600}
 .stat-val{font-size:1.4rem;font-weight:800;color:var(--tx);line-height:1.1}
-.stat-val.ok{color:var(--ok)}
-.stat-val.no{color:var(--no)}
-
-.card{
-  background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);
-  padding:24px;box-shadow:0 8px 30px rgba(0,0,0,.1);position:relative;
-  animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;
-}
+.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:24px;box-shadow:0 8px 30px rgba(0,0,0,.1);position:relative;animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.35)}100%{box-shadow:0 0 0 22px rgba(16,185,129,0)}}
-
 .cue{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .cue small{font-size:.66rem;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.16em}
 .src{font-size:clamp(1.3rem,4.4vw,1.7rem);font-weight:500;line-height:1.3;overflow-wrap:anywhere}
 .src span{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:6px;text-decoration-color:var(--pr)}
-
 .task{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .tpl{font-size:clamp(1.15rem,3.6vw,1.4rem);font-weight:500;line-height:1.5;overflow-wrap:anywhere;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .blank{display:inline-block;min-width:90px;border-bottom:1px dashed var(--mu);color:var(--pr);font-weight:600;text-align:center;padding:0 4px}
-.blank.ok{color:var(--ok);border-color:var(--ok)}
-.blank.no{color:var(--no);border-color:var(--no)}
-
+.blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-#in{
-  font:inherit;font-size:1.02rem;flex:1 1 220px;min-width:0;padding:12px 16px;
-  border:2px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);
-  outline:none;transition:border-color .18s;
-}
+#in{font:inherit;font-size:1.02rem;flex:1 1 220px;min-width:0;padding:12px 16px;border:2px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);outline:none;transition:border-color .18s}
 #in:focus{border-color:var(--pr);box-shadow:0 0 0 2px var(--pr-glow)}
 #in:disabled{opacity:.6}
 #in::placeholder{color:var(--mu);opacity:.8}
-.pri{
-  background:var(--pr);color:#fff;border-color:var(--pr);min-width:150px;
-  font-weight:600;padding:12px 20px;border-radius:12px;border:2px solid var(--pr);
-  cursor:pointer;font-family:inherit;font-size:1rem;transition:all .2s;
-}
+.pri{background:var(--pr);color:#fff;border-color:var(--pr);min-width:150px;font-weight:600;padding:12px 20px;border-radius:12px;border:2px solid var(--pr);cursor:pointer;font-family:inherit;font-size:1rem;transition:all .2s}
 .pri:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
-
-.btn{
-  font:inherit;font-weight:600;border-radius:12px;padding:10px 18px;cursor:pointer;
-  border:2px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s ease;
-}
+.btn{font:inherit;font-weight:600;border-radius:12px;padding:10px 18px;cursor:pointer;border:2px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s ease}
 .btn.g{font-weight:500;font-size:.85rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
 .btn.g:hover{color:var(--tx);background:var(--pl)}
-
 .opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.opt{
-  flex:1 1 130px;display:flex;align-items:center;justify-content:center;
-  min-height:52px;padding:10px 16px;font-size:1.15rem;font-weight:500;
-  border-radius:12px;background:var(--bg);border:2px solid var(--bd);
-  color:var(--tx);cursor:pointer;font-family:inherit;transition:all .2s;
-}
+.opt{flex:1 1 130px;display:flex;align-items:center;justify-content:center;min-height:52px;padding:10px 16px;font-size:1.15rem;font-weight:500;border-radius:12px;background:var(--bg);border:2px solid var(--bd);color:var(--tx);cursor:pointer;font-family:inherit;transition:all .2s}
 .opt:hover:not(:disabled){border-color:var(--pr)}
 .opt:disabled{cursor:default}
 .opt.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
 .opt.no{border-color:var(--no);background:var(--nob);color:var(--no);animation:shake .4s}
-
 .fb{margin-top:20px;padding:16px;border-radius:12px;animation:slideUp .3s ease}
 .fb.ok{background:var(--okb);border:1px solid var(--ok)}
 .fb.no{background:var(--nob);border:1px solid var(--no)}
 .fb b{display:block;margin-bottom:4px;font-size:1.05rem}
-.fb.ok b{color:var(--ok)}
-.fb.no b{color:var(--no)}
+.fb.ok b{color:var(--ok)}.fb.no b{color:var(--no)}
 .fb .solution{margin-top:8px;font-weight:600;font-size:1.05rem}
 .fb .solution b{display:inline;color:var(--ok);margin:0}
 .fb .why{color:var(--mu);font-size:.88rem;margin-top:6px}
 .fb .why .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
-.fb .why .dot.a,.fb .why .dot.d,.fb .why .dot.ad{background:var(--c-a)}
-.fb .why .dot.p{background:var(--c-p)}
-.fb .why .dot.r{background:var(--c-r)}
-.fb .why .dot.x{background:var(--c-x)}
-.fb .why .dot.w{background:var(--c-w)}
-.fb .why .dot.m{background:var(--c-m)}
-.fb .why .dot.man{background:var(--c-man)}
-
+.fb .why .dot.a,.fb .why .dot.d,.fb .why .dot.ad{background:var(--c-a)}.fb .why .dot.p{background:var(--c-p)}.fb .why .dot.r{background:var(--c-r)}.fb .why .dot.x{background:var(--c-x)}.fb .why .dot.w{background:var(--c-w)}.fb .why .dot.m{background:var(--c-m)}.fb .why .dot.man{background:var(--c-man)}
 .advance-bar{height:3px;background:var(--pl);border-radius:99px;overflow:hidden;margin:14px auto 0;max-width:220px;width:100%}
 .advance-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pr),var(--ok));border-radius:99px;animation:fillBar 2s linear forwards}
 @keyframes fillBar{from{width:0%}to{width:100%}}
-
 #ls{margin-top:20px;font-size:.95rem;color:var(--mu);line-height:1.6}
 #ls:empty{display:none}
 .lsh{font-size:.66rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;margin-bottom:6px;color:var(--tx)}
 .lsl{margin:0;padding:0;list-style:none;color:var(--tx)}
 .lsl li{padding:4px 0}
-
 .sum{text-align:center}
 .big{font-size:3rem;font-weight:800;color:var(--pr);margin:10px 0;text-shadow:0 0 20px var(--pr-glow)}
 .foot{margin-top:20px}
-
 .ref{margin-top:30px}
-.refbtn{
-  width:100%;display:flex;justify-content:space-between;align-items:center;
-  padding:14px 18px;color:var(--tx);font-size:.95rem;font-weight:600;
-  border:1px solid var(--bd);border-radius:var(--radius);background:var(--card);
-  cursor:pointer;font-family:inherit;transition:all .2s;
-}
+.refbtn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;color:var(--tx);font-size:.95rem;font-weight:600;border:1px solid var(--bd);border-radius:var(--radius);background:var(--card);cursor:pointer;font-family:inherit;transition:all .2s}
 .refbtn:hover{border-color:var(--pr)}
 .refbtn::after{content:"▾";transition:transform .18s}
 .refbtn[aria-expanded="true"]::after{transform:rotate(180deg)}
-
 #refpanel{margin-top:16px;animation:slideUp .4s ease}
 #refpanel[hidden]{display:none}
 .reftabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center}
-.reftab{
-  border:1px solid var(--bd);background:transparent;color:var(--mu);
-  border-radius:99px;padding:6px 14px;cursor:pointer;font-family:inherit;
-  font-weight:500;font-size:.82rem;transition:all .2s;
-}
+.reftab{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:6px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.82rem;transition:all .2s}
 .reftab.on{background:var(--pr);border-color:var(--pr);color:#fff}
 .reftab:hover{border-color:var(--pr);color:var(--tx)}
-
 .refp{padding:20px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius)}
 .refp[hidden]{display:none}
 .refp h3{font-size:1rem;color:var(--pr);margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid var(--bd)}
-
-.uk{
-  margin:0 0 16px;font-size:.9rem;line-height:1.6;color:var(--mu);
-  padding:8px 14px;border-left:2px solid var(--c-w);background:rgba(94,234,212,.05);
-  border-radius:0 8px 8px 0;
-}
+.uk{margin:0 0 16px;font-size:.9rem;line-height:1.6;color:var(--mu);padding:8px 14px;border-left:2px solid var(--c-w);background:rgba(94,234,212,.05);border-radius:0 8px 8px 0}
 .uk b{color:var(--tx);font-weight:600}
-
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .demo{padding:16px;background:var(--bg);border:1px solid var(--bd);border-radius:12px}
 .demo h3{margin:0 0 10px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);border:0;padding:0}
 .demo table{width:100%;border-collapse:collapse;font-size:.9rem}
 .demo th,.demo td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--bd)}
 .demo thead th{font-size:.7rem;color:var(--mu);font-weight:500;text-transform:uppercase}
-.demo td.a{color:var(--c-a)}
-.demo td.d{color:var(--c-d)}
-.demo td.p{color:var(--c-p)}
-.demo td.r{color:var(--c-r)}
-.demo td.x{color:var(--c-x)}
-.demo td.w{color:var(--c-w)}
-.demo td.m{color:var(--c-m)}
-.demo td.n{color:var(--tx)}
+.demo td.a{color:var(--c-a)}.demo td.d{color:var(--c-d)}.demo td.p{color:var(--c-p)}.demo td.r{color:var(--c-r)}.demo td.x{color:var(--c-x)}.demo td.w{color:var(--c-w)}.demo td.m{color:var(--c-m)}.demo td.n{color:var(--tx)}
 .demo .fix{font-size:.85rem;color:var(--mu);margin:8px 0 0}
 .demo .fix b{color:var(--tx)}
-
 .rule{padding:16px;background:var(--bg);border:1px solid var(--bd);border-radius:12px;margin-bottom:12px}
 .rule .tag{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--pr);margin-bottom:6px;display:block}
 .rule .formula{font-weight:500;display:block;margin-bottom:6px;color:var(--tx)}
 .rule .ex{font-size:.9rem;line-height:1.6;color:var(--mu)}
 .rule .ex b{color:var(--tx);font-weight:600}
-
 .table-wrap{overflow-x:auto;margin:12px 0}
 table.full{width:100%;border-collapse:collapse;font-size:.85rem;background:var(--bg);border-radius:8px;overflow:hidden;min-width:520px}
 table.full th,table.full td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd);white-space:nowrap}
 table.full thead th{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);font-weight:500}
 table.full thead tr.q th{font-size:.85rem;text-transform:none;letter-spacing:0;color:var(--pr);font-weight:500}
 table.full tbody th{font-weight:500;color:var(--mu);font-size:.8rem}
-table.full td.a{color:var(--c-a)}
-table.full td.d{color:var(--c-d)}
-table.full td.p{color:var(--c-p)}
-table.full td.r{color:var(--c-r)}
-table.full td.sich{font-weight:600}
+table.full td.a{color:var(--c-a)}table.full td.d{color:var(--c-d)}table.full td.p{color:var(--c-p)}table.full td.r{color:var(--c-r)}table.full td.sich{font-weight:600}
 table.full tr.pl th,table.full tr.pl td{border-top:1px solid var(--pr)}
 table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
-
-@media(max-width:640px){
-  .pair{grid-template-columns:1fr}
-  .row{flex-direction:column;align-items:stretch}
-  #in{flex:0 0 auto;width:100%;height:auto;font-size:16px}
-  .pri{width:100%}
-  .stat-val{font-size:1.1rem}
-  .stat-label{font-size:.65rem}
-}
-@media(prefers-reduced-motion:reduce){
-  .card,.fb,.advance-bar,.opt.no{animation:none}
-}
-/* EXP */
+@media(max-width:640px){.pair{grid-template-columns:1fr}.row{flex-direction:column;align-items:stretch}#in{flex:0 0 auto;width:100%;height:auto;font-size:16px}.pri{width:100%}.stat-val{font-size:1.1rem}.stat-label{font-size:.65rem}}
+@media(prefers-reduced-motion:reduce){.card,.fb,.advance-bar,.opt.no{animation:none}}
 .xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
 .xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
 .xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
@@ -287,8 +142,6 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
 .xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
 .xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
 @keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-
-/* ранги EXP */
 .xv{position:relative}
 .xp{--xa:#475569;--xz:#94a3b8}
 .xp[data-r="1"]{--xa:#047857;--xz:#34d399}
@@ -316,7 +169,6 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
 .xp.lvl .xrn{animation:xbump .6s ease-out}
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
 @keyframes xgold{to{background-position:200% 0}}
-
 :root{--go:#f59e0b}
 [data-theme="light"]{--go:#d97706}
 .btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
@@ -332,9 +184,6 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
 .complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
 .complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .complete-actions .cancel:hover{border-color:var(--pr)}
-.errs-card .e-ua b{color:var(--tx)}
-.err-item .e-cue{color:var(--mu);font-size:.82rem;margin-bottom:2px}
-/* Помилки */
 .errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
 .errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
@@ -351,10 +200,12 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
 .errs-actions .go:hover{filter:brightness(1.1)}
 .errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .errs-actions .cancel:hover{border-color:var(--pr)}
-
+.trans-wrap{margin-top:10px}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:.9rem;line-height:1.5;color:var(--mu);padding:8px 12px;background:var(--bg);border-left:3px solid var(--c-w);border-radius:0 8px 8px 0;margin-top:4px}
 </style>
 <div class="app">
-
 <div class="header-wrap">
   <div class="header-tools">
     <button class="theory-top-toggle" id="ref-top" type="button" onclick="openRef()" title="Перейти до таблиці" aria-label="Перейти до таблиці">📖</button>
@@ -364,43 +215,23 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
   <h1>Pronomen</h1>
   <p class="lead">Тренажер з німецьких займенників: Akkusativ, Dativ, Wechselpräpositionen та інші</p>
 </div>
-
-<!-- Mode tabs -->
 <div class="tabs" id="dirs"></div>
-
-<!-- Filter chips -->
 <div class="filters" id="filters"></div>
-
-<!-- Progress -->
 <div class="pg"><i id="bar"></i></div>
-
-<!-- Stats -->
 <div class="stats-panel">
   <div class="stat-box"><div class="stat-label">Завдання</div><div class="stat-val" id="stat-done">0 / 0</div></div>
   <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
   <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
 </div>
-
-<!-- Main card -->
 <div id="main"></div>
-
-<!-- EXP -->
 <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 600</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
-
-<!-- Review list -->
 <div id="ls"></div>
-
-<!-- Помилки / скидання -->
 <div class="foot-row">
   <button class="btn danger" id="reviewBtn" type="button">🔁 Помилки (0)</button>
   <button class="btn g" id="resetBtn" type="button">↻ Скинути прогрес</button>
 </div>
-
-<!-- Reference / Theory -->
 <section class="ref" aria-label="Tafeln und Regeln">
-  <button id="refbtn" class="refbtn" type="button" aria-expanded="false" aria-controls="refpanel">
-    <span id="reflab">📖 Таблиці та правила</span>
-  </button>
+  <button id="refbtn" class="refbtn" type="button" aria-expanded="false" aria-controls="refpanel"><span id="reflab">📖 Таблиці та правила</span></button>
   <div id="refpanel" hidden>
     <div class="reftabs" id="reftabs" role="group" aria-label="Thema">
       <button class="reftab" data-r="f" type="button">Formen</button>
@@ -409,115 +240,32 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
       <button class="reftab" data-r="m" type="button">Wechselpräpositionen</button>
       <button class="reftab" data-r="r" type="button">Regeln</button>
     </div>
-
     <div class="refp" data-r="f">
       <p class="uk" lang="uk"><b>Таблиця форм.</b> Називний (wer?) — підмет, Akk. (wen?) — «кого/що», Dat. (wem?) — «кому/чому». Присвійні: основа залежить від власника (sein / ihr), а закінчення -e — від предмета (die Tasche → seine Tasche). Зворотні в 3-й особі завжди <b>sich</b>. <b>man</b> — безособовий займенник («людина, хтось, усі»).</p>
-      <div class="table-wrap">
-      <table class="full">
-        <thead>
-          <tr><th></th><th>Subjekt</th><th class="sep" colspan="2">Objekt</th><th class="sep">Possessiv</th><th class="sep" colspan="2">Reflexiv</th></tr>
-          <tr><th></th><th>Nom.</th><th class="sep">Akk.</th><th>Dat.</th><th class="sep">—</th><th class="sep">Akk.</th><th>Dat.</th></tr>
-          <tr class="q"><th></th><th>Wer?</th><th class="sep">Wen?</th><th>Wem?</th><th class="sep">Wessen?</th><th class="sep">Wen?</th><th>Wem?</th></tr>
-        </thead>
-        <tbody id="tb"></tbody>
-      </table>
-      </div>
+      <div class="table-wrap"><table class="full"><thead><tr><th></th><th>Subjekt</th><th class="sep" colspan="2">Objekt</th><th class="sep">Possessiv</th><th class="sep" colspan="2">Reflexiv</th></tr><tr><th></th><th>Nom.</th><th class="sep">Akk.</th><th>Dat.</th><th class="sep">—</th><th class="sep">Akk.</th><th>Dat.</th></tr><tr class="q"><th></th><th>Wer?</th><th class="sep">Wen?</th><th>Wem?</th><th class="sep">Wessen?</th><th class="sep">Wen?</th><th>Wem?</th></tr></thead><tbody id="tb"></tbody></table></div>
     </div>
-
     <div class="refp" data-r="x" hidden>
       <p class="uk" lang="uk"><b>Вказівні займенники</b> der / die / das замінюють іменник («цей, той»). Форми як в артикля, але в давальному множини — <b>denen</b> (mit denen). Справа — Genitiv-артикль des / der: відповідає на <b>wessen?</b> («чий?»).</p>
-      <div class="pair">
-        <div class="demo">
-          <h3>Demonstrativ</h3>
-          <table>
-            <thead><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th></tr></thead>
-            <tbody>
-              <tr><th>mask.</th><td class="x">der</td><td class="x">den</td><td class="x">dem</td></tr>
-              <tr><th>fem.</th><td class="x">die</td><td class="x">die</td><td class="x">der</td></tr>
-              <tr><th>neutr.</th><td class="x">das</td><td class="x">das</td><td class="x">dem</td></tr>
-              <tr><th>Plural</th><td class="x">die</td><td class="x">die</td><td class="x">denen</td></tr>
-            </tbody>
-          </table>
-          <p class="fix">Dativ Plural heißt <b>denen</b>: Mit den Kindern? Mit <b>denen</b> spiele ich.</p>
-        </div>
-        <div class="demo">
-          <h3>Wessen? (Genitiv-Artikel)</h3>
-          <table>
-            <thead><tr><th></th><th>Gen.</th></tr></thead>
-            <tbody>
-              <tr><th>mask.</th><td class="x">des</td></tr>
-              <tr><th>fem.</th><td class="x">der</td></tr>
-              <tr><th>neutr.</th><td class="x">des</td></tr>
-              <tr><th>Plural</th><td class="x">der</td></tr>
-            </tbody>
-          </table>
-          <p class="fix">Das Auto <b>des</b> Mannes = <b>sein</b> Auto.</p>
-        </div>
-      </div>
+      <div class="pair"><div class="demo"><h3>Demonstrativ</h3><table><thead><tr><th></th><th>Nom.</th><th>Akk.</th><th>Dat.</th></tr></thead><tbody><tr><th>mask.</th><td class="x">der</td><td class="x">den</td><td class="x">dem</td></tr><tr><th>fem.</th><td class="x">die</td><td class="x">die</td><td class="x">der</td></tr><tr><th>neutr.</th><td class="x">das</td><td class="x">das</td><td class="x">dem</td></tr><tr><th>Plural</th><td class="x">die</td><td class="x">die</td><td class="x">denen</td></tr></tbody></table><p class="fix">Dativ Plural heißt <b>denen</b>: Mit den Kindern? Mit <b>denen</b> spiele ich.</p></div><div class="demo"><h3>Wessen? (Genitiv-Artikel)</h3><table><thead><tr><th></th><th>Gen.</th></tr></thead><tbody><tr><th>mask.</th><td class="x">des</td></tr><tr><th>fem.</th><td class="x">der</td></tr><tr><th>neutr.</th><td class="x">des</td></tr><tr><th>Plural</th><td class="x">der</td></tr></tbody></table><p class="fix">Das Auto <b>des</b> Mannes = <b>sein</b> Auto.</p></div></div>
     </div>
-
     <div class="refp" data-r="w" hidden>
       <p class="uk" lang="uk"><b>Питальні слова про особу:</b> wer? — хто, wen? — кого, wem? — кому, wessen? — чий. Питання і відповідь стоять в одному відмінку: <b>Wen</b> siehst du? — Ich sehe <b>ihn</b>.</p>
-      <div class="demo">
-        <h3>Fragewörter (Person)</h3>
-        <table>
-          <thead><tr><th></th><th>Frage</th><th>Antwort</th></tr></thead>
-          <tbody>
-            <tr><th>Nom.</th><td class="n">wer?</td><td class="n">er</td></tr>
-            <tr><th>Akk.</th><td class="a">wen?</td><td class="a">ihn</td></tr>
-            <tr><th>Dat.</th><td class="d">wem?</td><td class="d">ihm</td></tr>
-            <tr><th>Gen.</th><td class="w">wessen?</td><td class="w">sein/e</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="rule">
-        <span class="tag">Wer? Wen? Wem?</span>
-        <span class="formula">Frage und Antwort haben denselben Kasus</span>
-        <span class="ex"><b>Wen</b> siehst du? – Ich sehe <b>ihn</b>.<br><b>Wem</b> hilfst du? – Ich helfe <b>ihm</b>.</span>
-      </div>
+      <div class="demo"><h3>Fragewörter (Person)</h3><table><thead><tr><th></th><th>Frage</th><th>Antwort</th></tr></thead><tbody><tr><th>Nom.</th><td class="n">wer?</td><td class="n">er</td></tr><tr><th>Akk.</th><td class="a">wen?</td><td class="a">ihn</td></tr><tr><th>Dat.</th><td class="d">wem?</td><td class="d">ihm</td></tr><tr><th>Gen.</th><td class="w">wessen?</td><td class="w">sein/e</td></tr></tbody></table></div>
+      <div class="rule"><span class="tag">Wer? Wen? Wem?</span><span class="formula">Frage und Antwort haben denselben Kasus</span><span class="ex"><b>Wen</b> siehst du? – Ich sehe <b>ihn</b>.<br><b>Wem</b> hilfst du? – Ich helfe <b>ihm</b>.</span></div>
     </div>
-
     <div class="refp" data-r="m" hidden>
       <p class="uk" lang="uk"><b>Прийменники з двома відмінками:</b> in, an, auf, über, unter (також vor, hinter, neben, zwischen). <b>Wo?</b> («де», стан) → Dativ, <b>Wohin?</b> («куди», рух) → Akkusativ. У сталих сполуках відмінок визначає дієслово: warten auf + Akk., liegen an + Dat.</p>
-      <div class="demo">
-        <h3>Wechselpräpositionen</h3>
-        <table>
-          <thead><tr><th></th><th>Wo? · Dat.</th><th>Wohin? · Akk.</th></tr></thead>
-          <tbody>
-            <tr><th>in</th><td class="d">in dir</td><td class="a">in dich</td></tr>
-            <tr><th>an</th><td class="d">an dir</td><td class="a">an dich</td></tr>
-            <tr><th>auf</th><td class="d">auf dir</td><td class="a">auf dich</td></tr>
-            <tr><th>über</th><td class="d">über dir</td><td class="a">über dich</td></tr>
-            <tr><th>unter</th><td class="d">unter dir</td><td class="a">unter dich</td></tr>
-          </tbody>
-        </table>
-        <p class="fix">Auch so: <b>vor, hinter, neben, zwischen</b>.</p>
-      </div>
-      <div class="rule">
-        <span class="tag">Wechselpräpositionen</span>
-        <span class="formula">Wo? → Dativ · Wohin? → Akkusativ</span>
-        <span class="ex">in · an · auf · über · unter<br>Die Katze liegt auf <b>mir</b>. (Wo?)<br>Sie springt auf <b>mich</b>. (Wohin?)<br>Feste Verben: warten <b>auf</b> + Akk., liegen <b>an</b> + Dat.</span>
-      </div>
+      <div class="demo"><h3>Wechselpräpositionen</h3><table><thead><tr><th></th><th>Wo? · Dat.</th><th>Wohin? · Akk.</th></tr></thead><tbody><tr><th>in</th><td class="d">in dir</td><td class="a">in dich</td></tr><tr><th>an</th><td class="d">an dir</td><td class="a">an dich</td></tr><tr><th>auf</th><td class="d">auf dir</td><td class="a">auf dich</td></tr><tr><th>über</th><td class="d">über dir</td><td class="a">über dich</td></tr><tr><th>unter</th><td class="d">unter dir</td><td class="a">unter dich</td></tr></tbody></table><p class="fix">Auch so: <b>vor, hinter, neben, zwischen</b>.</p></div>
+      <div class="rule"><span class="tag">Wechselpräpositionen</span><span class="formula">Wo? → Dativ · Wohin? → Akkusativ</span><span class="ex">in · an · auf · über · unter<br>Die Katze liegt auf <b>mir</b>. (Wo?)<br>Sie springt auf <b>mich</b>. (Wohin?)<br>Feste Verben: warten <b>auf</b> + Akk., liegen <b>an</b> + Dat.</span></div>
     </div>
-
     <div class="refp" data-r="r" hidden>
       <p class="uk" lang="uk"><b>Akk. чи Dat.?</b> Відмінок задає дієслово або прийменник. Зворотний займенник стоїть у Dativ, якщо в реченні вже є прямий додаток: Ich wasche <b>mir</b> die Hände. У зворотних займенників різні форми Akk. і Dat. є лише в ich і du (mich/mir, dich/dir). У <b>man</b>: einen (Akk.), einem (Dat.), sein/e, sich.</p>
-      <div class="rule">
-        <span class="tag">Akkusativ oder Dativ?</span>
-        <span class="formula">Verb oder Präposition entscheidet</span>
-        <span class="ex">sehen, kennen, für, ohne, um → <b>Akk.</b><br>helfen, danken, gefallen, mit, bei, von, zu → <b>Dat.</b></span>
-      </div>
-      <div class="rule">
-        <span class="tag">Reflexiv: Akk. oder Dat.?</span>
-        <span class="formula">Gibt es schon ein Akk.-Objekt? → Dativ</span>
-        <span class="ex">Ich wasche <b>mich</b>.<br>Ich wasche <b>mir</b> die Hände.</span>
-      </div>
+      <div class="rule"><span class="tag">Akkusativ oder Dativ?</span><span class="formula">Verb oder Präposition entscheidet</span><span class="ex">sehen, kennen, für, ohne, um → <b>Akk.</b><br>helfen, danken, gefallen, mit, bei, von, zu → <b>Dat.</b></span></div>
+      <div class="rule"><span class="tag">Reflexiv: Akk. oder Dat.?</span><span class="formula">Gibt es schon ein Akk.-Objekt? → Dativ</span><span class="ex">Ich wasche <b>mich</b>.<br>Ich wasche <b>mir</b> die Hände.</span></div>
     </div>
   </div>
 </section>
-
 <div class="foot" id="foot"></div>
-
 <div class="complete" id="errs" hidden>
   <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
     <h2 id="errs-title">🔁 Мої помилки</h2>
@@ -533,26 +281,14 @@ table.full td.sep,table.full th.sep{border-left:1px solid var(--bd)}
     <div class="complete-actions" id="complete-actions"></div>
   </div>
 </div>
-
 </div>
-
 <script>
 /* ================= Sound / Speech ================= */
 let soundEnabled=true;
 try{soundEnabled=localStorage.getItem('tp_v2_pronomen_sound')!=='off'}catch(e){}
-function updateSoundIcon(){
-  const b=document.getElementById('sound-toggle');
-  b.textContent=soundEnabled?'🔔':'🔕';
-  b.setAttribute('aria-pressed',String(!soundEnabled));
-}
+function updateSoundIcon(){const b=document.getElementById('sound-toggle');b.textContent=soundEnabled?'🔔':'🔕';b.setAttribute('aria-pressed',String(!soundEnabled));}
 updateSoundIcon();
-function toggleSound(){
-  soundEnabled=!soundEnabled;
-  try{localStorage.setItem('tp_v2_pronomen_sound',soundEnabled?'on':'off')}catch(e){}
-  updateSoundIcon();
-  if(soundEnabled)playSound('correct');
-}
-
+function toggleSound(){soundEnabled=!soundEnabled;try{localStorage.setItem('tp_v2_pronomen_sound',soundEnabled?'on':'off')}catch(e){}updateSoundIcon();if(soundEnabled)playSound('correct');}
 let audioCtx;
 function playSound(type){
   if(!soundEnabled)return;
@@ -563,26 +299,10 @@ function playSound(type){
     const osc=audioCtx.createOscillator(),gainNode=audioCtx.createGain();
     osc.connect(gainNode);gainNode.connect(audioCtx.destination);
     const now=audioCtx.currentTime;
-    if(type==='correct'){
-      osc.type='sine';
-      osc.frequency.setValueAtTime(523.25,now);
-      osc.frequency.setValueAtTime(659.25,now+0.1);
-      gainNode.gain.setValueAtTime(0,now);
-      gainNode.gain.linearRampToValueAtTime(0.4,now+0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.001,now+0.5);
-      osc.start(now);osc.stop(now+0.6);
-    }else{
-      osc.type='triangle';
-      osc.frequency.setValueAtTime(200,now);
-      osc.frequency.exponentialRampToValueAtTime(100,now+0.2);
-      gainNode.gain.setValueAtTime(0,now);
-      gainNode.gain.linearRampToValueAtTime(0.4,now+0.05);
-      gainNode.gain.exponentialRampToValueAtTime(0.001,now+0.3);
-      osc.start(now);osc.stop(now+0.4);
-    }
+    if(type==='correct'){osc.type='sine';osc.frequency.setValueAtTime(523.25,now);osc.frequency.setValueAtTime(659.25,now+0.1);gainNode.gain.setValueAtTime(0,now);gainNode.gain.linearRampToValueAtTime(0.4,now+0.05);gainNode.gain.exponentialRampToValueAtTime(0.001,now+0.5);osc.start(now);osc.stop(now+0.6);}
+    else{osc.type='triangle';osc.frequency.setValueAtTime(200,now);osc.frequency.exponentialRampToValueAtTime(100,now+0.2);gainNode.gain.setValueAtTime(0,now);gainNode.gain.linearRampToValueAtTime(0.4,now+0.05);gainNode.gain.exponentialRampToValueAtTime(0.001,now+0.3);osc.start(now);osc.stop(now+0.4);}
   }catch(e){}
 }
-
 let speakTok=0,advOn=false;
 function stopSpeech(){speakTok++;try{if(window.speechSynthesis)speechSynthesis.cancel()}catch(e){}}
 function speak(text,onend){
@@ -598,51 +318,14 @@ function speak(text,onend){
     speechSynthesis.speak(u);
   }catch(e){if(onend)onend()}
 }
-function ttsClean(s){
-  return String(s).replace(/([?!.])\s*[–—]\s*/g,'$1 ').replace(/\s*[–—]\s*/g,', ')
-    .replace(/\s+/g,' ').replace(/\s+([.,!?])/g,'$1').trim();
-}
-function cueSpeech(c){
-  return String(c||'').replace(/\(Sg\.\)/g,'Singular').replace(/\(Pl\.\)/g,'Plural')
-    .replace(/\([^)]*\)/g,'').replace(/·/g,',').replace(/\+/g,' plus ').replace(/\s+/g,' ').trim();
-}
-function speechText(){
-  const r=q[k];if(!r)return '';
-  const w=r.a.split('|')[0];
-  if(r.m==='t')return done?w:cueSpeech(r.cue);
-  const t=r.tpl;
-  const atS=/^_|[.!?–]\s_/.test(t);
-  const fill=done?(atS?w.charAt(0).toUpperCase()+w.slice(1):w):'';
-  return ttsClean(t.replace('_',fill));
-}
-function speakCurrent(){
-  if(!q||k>=q.length)return;
-  const txt=speechText();if(!txt)return;
-  if(done&&advOn){
-    clearT();
-    const ab=document.querySelector('.advance-bar');if(ab)ab.remove();
-    const r=q[k];
-    speak(txt,()=>{if(done&&q[k]===r&&!timer)timer=setTimeout(()=>{if(done&&q[k]===r){k++;show()}},900)});
-  }else speak(txt);
-}
-
-/* ================= Theme ================= */
-let savedTheme = 'dark';
-try { savedTheme = localStorage.getItem('tp_v2_pronomen_theme') || 'dark'; } catch (e) {}
-if (savedTheme === 'light') {
-  document.documentElement.setAttribute('data-theme','light');
-  document.getElementById('theme-toggle').textContent = '☀️';
-}
-function toggleTheme(){
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const next = isLight ? 'dark' : 'light';
-  if (isLight) document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme','light');
-  document.getElementById('theme-toggle').textContent = isLight ? '🌙' : '☀️';
-  try { localStorage.setItem('tp_v2_pronomen_theme', next); } catch (e) {}
-}
-
-/* ================= Data ================= */
+function ttsClean(s){return String(s).replace(/([?!.])\s*[–—]\s*/g,'$1 ').replace(/\s*[–—]\s*/g,', ').replace(/\s+/g,' ').replace(/\s+([.,!?])/g,'$1').trim();}
+function cueSpeech(c){return String(c||'').replace(/\(Sg\.\)/g,'Singular').replace(/\(Pl\.\)/g,'Plural').replace(/\([^)]*\)/g,'').replace(/·/g,',').replace(/\+/g,' plus ').replace(/\s+/g,' ').trim();}
+function speechText(){const r=q[k];if(!r)return '';const w=r.a.split('|')[0];if(r.m==='t')return done?w:cueSpeech(r.cue);const t=r.tpl;const atS=/^_|[.!?–]\s_/.test(t);const fill=done?(atS?w.charAt(0).toUpperCase()+w.slice(1):w):'';return ttsClean(t.replace('_',fill));}
+function speakCurrent(){if(!q||k>=q.length)return;const txt=speechText();if(!txt)return;if(done&&advOn){clearT();const ab=document.querySelector('.advance-bar');if(ab)ab.remove();const r=q[k];speak(txt,()=>{if(done&&q[k]===r&&!timer)timer=setTimeout(()=>{if(done&&q[k]===r){k++;show()}},900)});}else speak(txt);}
+let savedTheme='dark';
+try{savedTheme=localStorage.getItem('tp_v2_pronomen_theme')||'dark'}catch(e){}
+if(savedTheme==='light'){document.documentElement.setAttribute('data-theme','light');document.getElementById('theme-toggle').textContent='☀️';}
+function toggleTheme(){const isLight=document.documentElement.getAttribute('data-theme')==='light';const next=isLight?'dark':'light';if(isLight)document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme','light');document.getElementById('theme-toggle').textContent=isLight?'🌙':'☀️';try{localStorage.setItem('tp_v2_pronomen_theme',next)}catch(e){}}
 const PERS=["ich","du","er","sie (Sg.)","es","wir","ihr","sie (Pl.) / Sie","man"];
 const NOM=["ich","du","er","sie","es","wir","ihr","sie / Sie","man"];
 const AKK=["mich","dich","ihn","sie","es","uns","euch","sie / Sie","einen"];
@@ -650,322 +333,299 @@ const DAT=["mir","dir","ihm","ihr","ihm","uns","euch","ihnen / Ihnen","einem"];
 const POS=["mein/e","dein/e","sein/e","ihr/e","sein/e","unser/e","euer/eure","ihr/e · Ihr/e","sein/e"];
 const RA=["mich","dich","sich","sich","sich","uns","euch","sich","sich"];
 const RD=["mir","dir","sich","sich","sich","uns","euch","sich","sich"];
-
-(function(){
-  const tb=document.getElementById("tb");
-  tb.innerHTML=PERS.map((p,i)=>'<tr'+(i===5||i===8?' class="pl"':'')+'><th>'+(i===0?'Sg.':i===5?'Pl.':i===8?'unpers.':'')+'</th><td>'+NOM[i]+'</td><td class="a sep">'+AKK[i]+'</td><td class="d">'+DAT[i]+'</td><td class="p sep">'+POS[i]+'</td><td class="r sep'+(RA[i]==="sich"?' sich':'')+'">'+RA[i]+'</td><td class="r'+(RD[i]==="sich"?' sich':'')+'">'+RD[i]+'</td></tr>').join("");
-})();
-
+(function(){const tb=document.getElementById("tb");tb.innerHTML=PERS.map((p,i)=>'<tr'+(i===5||i===8?' class="pl"':'')+'><th>'+(i===0?'Sg.':i===5?'Pl.':i===8?'unpers.':'')+'</th><td>'+NOM[i]+'</td><td class="a sep">'+AKK[i]+'</td><td class="d">'+DAT[i]+'</td><td class="p sep">'+POS[i]+'</td><td class="r sep'+(RA[i]==="sich"?' sich':'')+'">'+RA[i]+'</td><td class="r'+(RD[i]==="sich"?' sich':'')+'">'+RD[i]+'</td></tr>').join("");})();
 const FW="wer · wen · wem · wessen";
 const SENT=[
- ["Ich sehe _ morgen im Büro.","du","dich","a","sehen + Akkusativ (wen?)"],
- ["Kennst du _? Er ist mein Nachbar.","er","ihn","a","kennen + Akkusativ"],
- ["Wir besuchen _ am Wochenende.","sie (Pl.)","sie","a","besuchen + Akkusativ"],
- ["Der Lehrer fragt _.","wir","uns","a","fragen + Akkusativ"],
- ["Ich rufe _ heute Abend an.","ihr","euch","a","anrufen + Akkusativ"],
- ["Liebst du _?","ich","mich","a","lieben + Akkusativ"],
- ["Das Buch? Ich kaufe _ morgen.","es","es","a","das Buch → es (Akk. = Nom.)"],
- ["Die Tasche? Ich finde _ nicht.","sie (Sg.)","sie","a","die Tasche → sie (Akk.)"],
- ["Der Film? Ich habe _ schon gesehen.","er","ihn","a","der Film → ihn (Akk.)"],
- ["Ich warte auf _.","du","dich","a","warten auf + Akkusativ"],
- ["Das Geschenk ist für _.","ihr","euch","a","für + Akkusativ"],
- ["Ohne _ gehe ich nicht.","er","ihn","a","ohne + Akkusativ"],
- ["Das nervt _ manchmal.","man","einen","a","nerven + Akkusativ; man → einen"],
- ["Hier kennt _ niemand.","man","einen","a","kennen + Akkusativ; man → einen"],
- ["Der Lärm stört _.","man","einen","a","stören + Akkusativ; man → einen"],
- ["Das interessiert _ nicht.","man","einen","a","interessieren + Akkusativ; man → einen"],
- ["Das Wetter macht _ müde.","man","einen","a","machen + Akkusativ; man → einen"],
- ["Kannst du _ helfen?","ich","mir","d","helfen + Dativ (wem?)"],
- ["Ich gebe _ das Buch.","du","dir","d","geben: Person im Dativ, Sache im Akkusativ"],
- ["Das Kleid gefällt _.","sie (Sg.)","ihr","d","gefallen + Dativ"],
- ["Wir danken _.","sie (Pl.)","ihnen","d","danken + Dativ"],
- ["Der Lehrer antwortet _.","er","ihm","d","antworten + Dativ"],
- ["Ich schreibe _ eine E-Mail.","ihr","euch","d","schreiben: Person im Dativ"],
- ["Das Essen schmeckt _.","wir","uns","d","schmecken + Dativ"],
- ["Ich fahre mit _ nach Berlin.","er","ihm","d","mit + Dativ"],
- ["Wie geht es _?","du","dir","d","Wie geht es + Dativ"],
- ["Das Spielzeug gehört _.","es (das Kind)","ihm","d","gehören + Dativ; das Kind → ihm"],
- ["Ich wohne bei _.","sie (Pl.)","ihnen","d","bei + Dativ"],
- ["Ich spreche morgen mit _.","sie (Sg.)","ihr","d","mit + Dativ"],
- ["Im Urlaub gefällt _ das Meer.","man","einem","d","gefallen + Dativ; man → einem"],
- ["Manchmal hilft _ niemand.","man","einem","d","helfen + Dativ; man → einem"],
- ["Hier schmeckt _ das Essen.","man","einem","d","schmecken + Dativ; man → einem"],
- ["Nach dem Sport tut _ alles weh.","man","einem","d","wehtun + Dativ; man → einem"],
- ["Bei Stress fällt _ nichts ein.","man","einem","d","einfallen + Dativ; man → einem"],
- ["_ Name ist Mahdi.","ich","mein","p","der Name → mein (ohne -e)"],
- ["Wo ist _ Tasche?","du","deine","p","die Tasche → deine (+ e)"],
- ["Peter und _ Frau kommen heute.","er","seine","p","er → sein; die Frau → seine"],
- ["Anna liebt _ Kinder.","sie (Sg.)","ihre","p","sie → ihr; Plural → ihre"],
- ["Das ist _ Haus.","wir","unser","p","das Haus → unser"],
- ["Ist das _ Lehrerin?","ihr","eure","p","euer + e → eure"],
- ["Die Kinder spielen. _ Eltern sind im Garten.","sie (Pl.)","ihre","p","sie (Pl.) → ihr; Plural → ihre"],
- ["Das Baby schläft. _ Mutter liest.","es","seine","p","es → sein; die Mutter → seine"],
- ["Wo sind _ Bücher?","du","deine","p","Plural → deine"],
- ["Das ist _ Wohnung.","wir","unsere","p","die Wohnung → unsere"],
- ["Ist das _ Auto?","ihr","euer","p","das Auto → euer"],
- ["Mein Bruder sucht _ Handy.","er","sein","p","das Handy → sein"],
- ["Man soll _ Eltern respektieren.","man","seine","p","man → sein; Plural → seine"],
- ["Man sollte immer _ Meinung sagen.","man","seine","p","man → sein; die Meinung → seine"],
- ["Wenn man krank ist, braucht man _ Ruhe.","man","seine","p","man → sein; die Ruhe → seine"],
- ["Man muss _ Hausaufgaben selbst machen.","man","seine","p","man → sein; Plural → seine"],
- ["Man verliert schnell _ Geduld.","man","seine","p","man → sein; die Geduld → seine"],
- ["Man darf _ Handy hier nicht benutzen.","man","sein","p","man → sein; das Handy → sein"],
- ["Ich wasche _.","ich","mich","r","kein anderes Akk.-Objekt → Akkusativ"],
- ["Ich wasche _ die Hände.","ich","mir","r","die Hände = Akk.-Objekt → Reflexiv im Dativ"],
- ["Freust du _ auf den Urlaub?","du","dich","r","sich freuen → Akkusativ"],
- ["Du putzt _ die Zähne.","du","dir","r","die Zähne = Akk.-Objekt → Dativ"],
- ["Er rasiert _ jeden Morgen.","er","sich","r","3. Person → immer sich"],
- ["Sie kämmt _ die Haare.","sie (Sg.)","sich","r","3. Person → sich (Akk. und Dat.)"],
- ["Wir treffen _ um acht Uhr.","wir","uns","r","wir → uns (Akk. = Dat.)"],
- ["Beeilt _! Der Zug fährt gleich.","ihr","euch","r","ihr → euch (Akk. = Dat.)"],
- ["Die Kinder ärgern _.","sie (Pl.)","sich","r","sie (Pl.) → sich"],
- ["Ich kaufe _ ein neues Handy.","ich","mir","r","ein Handy = Akk.-Objekt → Dativ"],
- ["Zieh _ schnell an!","du","dich","r","kein anderes Akk.-Objekt → dich"],
- ["Ich ziehe _ eine Jacke an.","ich","mir","r","eine Jacke = Akk.-Objekt → mir"],
- ["Wenn man _ beeilt, schafft man alles.","man","sich","r","sich beeilen → Akkusativ; man → sich"],
- ["Man wäscht _ vor dem Essen die Hände.","man","sich","r","die Hände = Akk.-Objekt → Dativ; man → sich"],
- ["Man sollte _ nicht ärgern.","man","sich","r","sich ärgern → Akkusativ; man → sich"],
- ["Man kauft _ nicht jeden Tag ein Auto.","man","sich","r","ein Auto = Akk.-Objekt → Dativ; man → sich"],
- ["Kennst du den Mann? – Ja, _ kenne ich.","der Mann","den","x","Akkusativ maskulin → den"],
- ["Wo ist Anna? – _ ist zu Hause.","die Frau","die","x","Nominativ feminin → die"],
- ["Hilfst du deinem Bruder? – Ja, _ helfe ich.","der Bruder","dem","x","helfen + Dativ, maskulin → dem"],
- ["Spielst du mit den Kindern? – Ja, mit _ spiele ich oft.","die Kinder","denen","x","Dativ Plural → denen (nicht: den)"],
- ["Wie findest du das Buch? – _ finde ich super.","das Buch","das","x","Akkusativ neutral → das"],
- ["Gefällt dir die Jacke? – Ja, _ gefällt mir.","die Jacke","die","x","Nominativ feminin → die"],
- ["Sprichst du mit der Chefin? – Ja, mit _ spreche ich morgen.","die Chefin","der","x","Dativ feminin → der"],
- ["Wo ist der Schlüssel? – _ liegt auf dem Tisch.","der Schlüssel","der","x","Nominativ maskulin → der"],
- ["_ siehst du da? – Ich sehe meinen Bruder.",FW,"wen","w","sehen + Akkusativ → wen? (meinen Bruder = Akk.)"],
- ["_ besucht dich morgen? – Mein Onkel besucht mich.",FW,"wer","w","Subjekt → wer? (mein Onkel = Nom.)"],
- ["_ hilfst du? – Ich helfe meiner Schwester.",FW,"wem","w","helfen + Dativ → wem?"],
- ["_ Tasche ist das? – Das ist Annas Tasche.",FW,"wessen","w","Besitz → wessen? (Annas Tasche)"],
- ["_ wartet auf dich? – Meine Freundin wartet auf mich.",FW,"wer","w","Subjekt → wer?"],
- ["_ rufst du an? – Ich rufe meine Mutter an.",FW,"wen","w","anrufen + Akkusativ → wen?"],
- ["_ gehört das Handy? – Es gehört meinem Vater.",FW,"wem","w","gehören + Dativ → wem?"],
- ["Mit _ fährst du nach Berlin? – Mit meinem Freund.",FW,"wem","w","mit + Dativ → wem?"],
- ["Für _ ist das Geschenk? – Für meine Oma.",FW,"wen","w","für + Akkusativ → wen?"],
- ["_ Buch liest du? – Ich lese Annas Buch.",FW,"wessen","w","Besitz → wessen?"],
- ["_ liebt Anna? – Anna liebt ihren Mann.",FW,"wen","w","lieben + Akkusativ → wen?"],
- ["_ schmeckt das Essen? – Es schmeckt den Kindern.",FW,"wem","w","schmecken + Dativ → wem?"],
- ["_ hat den Schlüssel? – Der Lehrer hat ihn.",FW,"wer","w","Subjekt → wer? (der Lehrer = Nom.)"],
- ["Auf _ wartest du? – Auf meinen Bruder.",FW,"wen","w","warten auf + Akkusativ → wen?"],
- ["Bei _ wohnst du? – Bei meiner Tante.",FW,"wem","w","bei + Dativ → wem?"],
- ["Von _ ist die E-Mail? – Von meinem Chef.",FW,"wem","w","von + Dativ → wem?"],
- ["Um _ kümmerst du dich? – Um meinen Opa.",FW,"wen","w","sich kümmern um + Akkusativ → wen?"],
- ["_ Auto ist das? – Das ist das Auto des Lehrers.",FW,"wessen","w","Genitiv (des Lehrers) → wessen?"],
- ["_ ruft man bei Feuer an? – Die Feuerwehr.",FW,"wen","w","anrufen + Akkusativ → wen? (man ist das Subjekt)"],
- ["Mit _ spricht man in der Firma Englisch? – Mit den Kollegen.",FW,"wem","w","mit + Dativ → wem?"],
- ["Wen siehst du? – Ich sehe _.","Peter","ihn","w","wen? → Akkusativ → ihn"],
- ["Wem hilfst du? – Ich helfe _.","meine Schwester","ihr","w","wem? → Dativ → ihr"],
- ["Wer kommt heute? – _ kommt heute.","mein Vater","er","w","wer? → Nominativ → er"],
- ["Wen fragst du? – Ich frage _.","die Lehrerin","sie","w","wen? → Akkusativ → sie"],
- ["Wem gehört das Auto? – Es gehört _.","meine Eltern","ihnen","w","wem? → Dativ → ihnen"],
- ["Wen liebst du? – Ich liebe _.","meine Frau","sie","w","wen? → Akkusativ → sie"],
- ["Wem schreibst du? – Ich schreibe _ eine E-Mail.","Anna und Tom","ihnen","w","wem? → Dativ → ihnen"],
- ["Wen rufst du an? – Ich rufe _ an.","das Kind","es","w","wen? → Akkusativ → es"],
- ["Wem dankst du? – Ich danke _.","der Arzt","ihm","w","wem? → Dativ → ihm"],
- ["Wer ruft an? – _ rufen an.","meine Freundinnen","sie","w","wer? → Nominativ → sie"],
- ["Wem gehört das Fahrrad? – Es gehört _.","der Junge","ihm","w","wem? → Dativ → ihm"],
- ["Wessen Tasche ist das? – Das ist _ Tasche.","Anna","ihre","w","wessen? → Possessiv: Anna → ihr + e (die Tasche)"],
- ["Wessen Auto ist das? – Das ist _ Auto.","Peter","sein","w","wessen? → Possessiv: Peter → sein (das Auto)"],
- ["Wem muss man helfen? – Man muss _ helfen.","die Nachbarn","ihnen","w","wem? → Dativ → ihnen"],
- ["Der Hund springt auf _.","du · Wohin?","dich","m","auf + Akkusativ: Wohin? (Bewegung)"],
- ["Die Katze liegt auf _.","ich · Wo?","mir","m","auf + Dativ: Wo? (Position)"],
- ["Die Katze springt auf _.","er · Wohin?","ihn","m","auf + Akkusativ: Wohin? (Bewegung)"],
- ["Das Baby schläft auf _.","er · Wo?","ihm","m","auf + Dativ: Wo? (Position)"],
- ["Das Kind klettert auf _.","ich · Wohin?","mich","m","auf + Akkusativ: Wohin? (Bewegung)"],
- ["Die Katze schmiegt sich an _.","du · Wohin?","dich","m","an + Akkusativ: Wohin? (Bewegung)"],
- ["Das Kind lehnt an _.","er · Wo?","ihm","m","an + Dativ: Wo? (Position)"],
- ["Die Lampe hängt über _.","ich · Wo?","mir","m","über + Dativ: Wo? (Position)"],
- ["Ein Vogel fliegt über _ hinweg.","ich · Wohin?","mich","m","über + Akkusativ: Wohin? (Bewegung)"],
- ["Er arbeitet unter _.","sie (Sg.) · Wo?","ihr","m","unter + Dativ: Wo? (Position)"],
- ["Der Tourist mischt sich unter _.","sie (Pl.) · Wohin?","sie","m","unter + Akkusativ: Wohin? (Richtung)"],
- ["In _ steckt viel Talent.","er · Wo?","ihm","m","in + Dativ: Wo? (Position)"],
- ["Ich habe in _ einen guten Freund.","du · Wo?","dir","m","in + Dativ: Wo? (Position)"],
- ["Wir warten auf _.","er · feste Verbindung","ihn","m","warten auf + Akkusativ"],
- ["Ich freue mich auf _.","ihr · feste Verbindung","euch","m","sich freuen auf + Akkusativ"],
- ["Du kannst dich auf _ verlassen.","ich · feste Verbindung","mich","m","sich verlassen auf + Akkusativ"],
- ["Der Hund hört nur auf _.","ich · feste Verbindung","mich","m","hören auf + Akkusativ"],
- ["Ich denke oft an _.","du · feste Verbindung","dich","m","denken an + Akkusativ"],
- ["Wir erinnern uns an _.","sie (Pl.) · feste Verbindung","sie","m","sich erinnern an + Akkusativ"],
- ["Das liegt an _.","du · feste Verbindung","dir","m","liegen an + Dativ"],
- ["Ich zweifle an _.","er · feste Verbindung","ihm","m","zweifeln an + Dativ"],
- ["Sie hat sich in _ verliebt.","ich · feste Verbindung","mich","m","sich verlieben in + Akkusativ"],
- ["Ich habe mich in _ getäuscht.","du · feste Verbindung","dir","m","sich täuschen in + Dativ"],
- ["Wir sprechen über _.","er · feste Verbindung","ihn","m","sprechen über + Akkusativ"],
- ["Ich ärgere mich über _.","du · feste Verbindung","dich","m","sich ärgern über + Akkusativ"],
- ["Alle lachen über _.","ich · feste Verbindung","mich","m","lachen über + Akkusativ"],
- ["Ich leide unter _.","er · feste Verbindung","ihm","m","leiden unter + Dativ"],
- ["Wenn man liegt, springt die Katze auf _.","man · Wohin?","einen","m","auf + Akkusativ: Wohin?; man → einen"],
- ["Wenn man im Wald liegt, hängen Äste über _.","man · Wo?","einem","m","über + Dativ: Wo?; man → einem"]
+["Ich sehe _ morgen im Büro.","du","dich","a","sehen + Akkusativ (wen?)"],
+["Kennst du _? Er ist mein Nachbar.","er","ihn","a","kennen + Akkusativ"],
+["Wir besuchen _ am Wochenende.","sie (Pl.)","sie","a","besuchen + Akkusativ"],
+["Der Lehrer fragt _.","wir","uns","a","fragen + Akkusativ"],
+["Ich rufe _ heute Abend an.","ihr","euch","a","anrufen + Akkusativ"],
+["Liebst du _?","ich","mich","a","lieben + Akkusativ"],
+["Das Buch? Ich kaufe _ morgen.","es","es","a","das Buch → es (Akk. = Nom.)"],
+["Die Tasche? Ich finde _ nicht.","sie (Sg.)","sie","a","die Tasche → sie (Akk.)"],
+["Der Film? Ich habe _ schon gesehen.","er","ihn","a","der Film → ihn (Akk.)"],
+["Ich warte auf _.","du","dich","a","warten auf + Akkusativ"],
+["Das Geschenk ist für _.","ihr","euch","a","für + Akkusativ"],
+["Ohne _ gehe ich nicht.","er","ihn","a","ohne + Akkusativ"],
+["Das nervt _ manchmal.","man","einen","a","nerven + Akkusativ; man → einen"],
+["Hier kennt _ niemand.","man","einen","a","kennen + Akkusativ; man → einen"],
+["Der Lärm stört _.","man","einen","a","stören + Akkusativ; man → einen"],
+["Das interessiert _ nicht.","man","einen","a","interessieren + Akkusativ; man → einen"],
+["Das Wetter macht _ müde.","man","einen","a","machen + Akkusativ; man → einen"],
+["Kannst du _ helfen?","ich","mir","d","helfen + Dativ (wem?)"],
+["Ich gebe _ das Buch.","du","dir","d","geben: Person im Dativ, Sache im Akkusativ"],
+["Das Kleid gefällt _.","sie (Sg.)","ihr","d","gefallen + Dativ"],
+["Wir danken _.","sie (Pl.)","ihnen","d","danken + Dativ"],
+["Der Lehrer antwortet _.","er","ihm","d","antworten + Dativ"],
+["Ich schreibe _ eine E-Mail.","ihr","euch","d","schreiben: Person im Dativ"],
+["Das Essen schmeckt _.","wir","uns","d","schmecken + Dativ"],
+["Ich fahre mit _ nach Berlin.","er","ihm","d","mit + Dativ"],
+["Wie geht es _?","du","dir","d","Wie geht es + Dativ"],
+["Das Spielzeug gehört _.","es (das Kind)","ihm","d","gehören + Dativ; das Kind → ihm"],
+["Ich wohne bei _.","sie (Pl.)","ihnen","d","bei + Dativ"],
+["Ich spreche morgen mit _.","sie (Sg.)","ihr","d","mit + Dativ"],
+["Im Urlaub gefällt _ das Meer.","man","einem","d","gefallen + Dativ; man → einem"],
+["Manchmal hilft _ niemand.","man","einem","d","helfen + Dativ; man → einem"],
+["Hier schmeckt _ das Essen.","man","einem","d","schmecken + Dativ; man → einem"],
+["Nach dem Sport tut _ alles weh.","man","einem","d","wehtun + Dativ; man → einem"],
+["Bei Stress fällt _ nichts ein.","man","einem","d","einfallen + Dativ; man → einem"],
+["_ Name ist Mahdi.","ich","mein","p","der Name → mein (ohne -e)"],
+["Wo ist _ Tasche?","du","deine","p","die Tasche → deine (+ e)"],
+["Peter und _ Frau kommen heute.","er","seine","p","er → sein; die Frau → seine"],
+["Anna liebt _ Kinder.","sie (Sg.)","ihre","p","sie → ihr; Plural → ihre"],
+["Das ist _ Haus.","wir","unser","p","das Haus → unser"],
+["Ist das _ Lehrerin?","ihr","eure","p","euer + e → eure"],
+["Die Kinder spielen. _ Eltern sind im Garten.","sie (Pl.)","ihre","p","sie (Pl.) → ihr; Plural → ihre"],
+["Das Baby schläft. _ Mutter liest.","es","seine","p","es → sein; die Mutter → seine"],
+["Wo sind _ Bücher?","du","deine","p","Plural → deine"],
+["Das ist _ Wohnung.","wir","unsere","p","die Wohnung → unsere"],
+["Ist das _ Auto?","ihr","euer","p","das Auto → euer"],
+["Mein Bruder sucht _ Handy.","er","sein","p","das Handy → sein"],
+["Man soll _ Eltern respektieren.","man","seine","p","man → sein; Plural → seine"],
+["Man sollte immer _ Meinung sagen.","man","seine","p","man → sein; die Meinung → seine"],
+["Wenn man krank ist, braucht man _ Ruhe.","man","seine","p","man → sein; die Ruhe → seine"],
+["Man muss _ Hausaufgaben selbst machen.","man","seine","p","man → sein; Plural → seine"],
+["Man verliert schnell _ Geduld.","man","seine","p","man → sein; die Geduld → seine"],
+["Man darf _ Handy hier nicht benutzen.","man","sein","p","man → sein; das Handy → sein"],
+["Ich wasche _.","ich","mich","r","kein anderes Akk.-Objekt → Akkusativ"],
+["Ich wasche _ die Hände.","ich","mir","r","die Hände = Akk.-Objekt → Reflexiv im Dativ"],
+["Freust du _ auf den Urlaub?","du","dich","r","sich freuen → Akkusativ"],
+["Du putzt _ die Zähne.","du","dir","r","die Zähne = Akk.-Objekt → Dativ"],
+["Er rasiert _ jeden Morgen.","er","sich","r","3. Person → immer sich"],
+["Sie kämmt _ die Haare.","sie (Sg.)","sich","r","3. Person → sich (Akk. und Dat.)"],
+["Wir treffen _ um acht Uhr.","wir","uns","r","wir → uns (Akk. = Dat.)"],
+["Beeilt _! Der Zug fährt gleich.","ihr","euch","r","ihr → euch (Akk. = Dat.)"],
+["Die Kinder ärgern _.","sie (Pl.)","sich","r","sie (Pl.) → sich"],
+["Ich kaufe _ ein neues Handy.","ich","mir","r","ein Handy = Akk.-Objekt → Dativ"],
+["Zieh _ schnell an!","du","dich","r","kein anderes Akk.-Objekt → dich"],
+["Ich ziehe _ eine Jacke an.","ich","mir","r","eine Jacke = Akk.-Objekt → mir"],
+["Wenn man _ beeilt, schafft man alles.","man","sich","r","sich beeilen → Akkusativ; man → sich"],
+["Man wäscht _ vor dem Essen die Hände.","man","sich","r","die Hände = Akk.-Objekt → Dativ; man → sich"],
+["Man sollte _ nicht ärgern.","man","sich","r","sich ärgern → Akkusativ; man → sich"],
+["Man kauft _ nicht jeden Tag ein Auto.","man","sich","r","ein Auto = Akk.-Objekt → Dativ; man → sich"],
+["Kennst du den Mann? – Ja, _ kenne ich.","der Mann","den","x","Akkusativ maskulin → den"],
+["Wo ist Anna? – _ ist zu Hause.","die Frau","die","x","Nominativ feminin → die"],
+["Hilfst du deinem Bruder? – Ja, _ helfe ich.","der Bruder","dem","x","helfen + Dativ, maskulin → dem"],
+["Spielst du mit den Kindern? – Ja, mit _ spiele ich oft.","die Kinder","denen","x","Dativ Plural → denen (nicht: den)"],
+["Wie findest du das Buch? – _ finde ich super.","das Buch","das","x","Akkusativ neutral → das"],
+["Gefällt dir die Jacke? – Ja, _ gefällt mir.","die Jacke","die","x","Nominativ feminin → die"],
+["Sprichst du mit der Chefin? – Ja, mit _ spreche ich morgen.","die Chefin","der","x","Dativ feminin → der"],
+["Wo ist der Schlüssel? – _ liegt auf dem Tisch.","der Schlüssel","der","x","Nominativ maskulin → der"],
+["_ siehst du da? – Ich sehe meinen Bruder.",FW,"wen","w","sehen + Akkusativ → wen? (meinen Bruder = Akk.)"],
+["_ besucht dich morgen? – Mein Onkel besucht mich.",FW,"wer","w","Subjekt → wer? (mein Onkel = Nom.)"],
+["_ hilfst du? – Ich helfe meiner Schwester.",FW,"wem","w","helfen + Dativ → wem?"],
+["_ Tasche ist das? – Das ist Annas Tasche.",FW,"wessen","w","Besitz → wessen? (Annas Tasche)"],
+["_ wartet auf dich? – Meine Freundin wartet auf mich.",FW,"wer","w","Subjekt → wer?"],
+["_ rufst du an? – Ich rufe meine Mutter an.",FW,"wen","w","anrufen + Akkusativ → wen?"],
+["_ gehört das Handy? – Es gehört meinem Vater.",FW,"wem","w","gehören + Dativ → wem?"],
+["Mit _ fährst du nach Berlin? – Mit meinem Freund.",FW,"wem","w","mit + Dativ → wem?"],
+["Für _ ist das Geschenk? – Für meine Oma.",FW,"wen","w","für + Akkusativ → wen?"],
+["_ Buch liest du? – Ich lese Annas Buch.",FW,"wessen","w","Besitz → wessen?"],
+["_ liebt Anna? – Anna liebt ihren Mann.",FW,"wen","w","lieben + Akkusativ → wen?"],
+["_ schmeckt das Essen? – Es schmeckt den Kindern.",FW,"wem","w","schmecken + Dativ → wem?"],
+["_ hat den Schlüssel? – Der Lehrer hat ihn.",FW,"wer","w","Subjekt → wer? (der Lehrer = Nom.)"],
+["Auf _ wartest du? – Auf meinen Bruder.",FW,"wen","w","warten auf + Akkusativ → wen?"],
+["Bei _ wohnst du? – Bei meiner Tante.",FW,"wem","w","bei + Dativ → wem?"],
+["Von _ ist die E-Mail? – Von meinem Chef.",FW,"wem","w","von + Dativ → wem?"],
+["Um _ kümmerst du dich? – Um meinen Opa.",FW,"wen","w","sich kümmern um + Akkusativ → wen?"],
+["_ Auto ist das? – Das ist das Auto des Lehrers.",FW,"wessen","w","Genitiv (des Lehrers) → wessen?"],
+["_ ruft man bei Feuer an? – Die Feuerwehr.",FW,"wen","w","anrufen + Akkusativ → wen? (man ist das Subjekt)"],
+["Mit _ spricht man in der Firma Englisch? – Mit den Kollegen.",FW,"wem","w","mit + Dativ → wem?"],
+["Wen siehst du? – Ich sehe _.","Peter","ihn","w","wen? → Akkusativ → ihn"],
+["Wem hilfst du? – Ich helfe _.","meine Schwester","ihr","w","wem? → Dativ → ihr"],
+["Wer kommt heute? – _ kommt heute.","mein Vater","er","w","wer? → Nominativ → er"],
+["Wen fragst du? – Ich frage _.","die Lehrerin","sie","w","wen? → Akkusativ → sie"],
+["Wem gehört das Auto? – Es gehört _.","meine Eltern","ihnen","w","wem? → Dativ → ihnen"],
+["Wen liebst du? – Ich liebe _.","meine Frau","sie","w","wen? → Akkusativ → sie"],
+["Wem schreibst du? – Ich schreibe _ eine E-Mail.","Anna und Tom","ihnen","w","wem? → Dativ → ihnen"],
+["Wen rufst du an? – Ich rufe _ an.","das Kind","es","w","wen? → Akkusativ → es"],
+["Wem dankst du? – Ich danke _.","der Arzt","ihm","w","wem? → Dativ → ihm"],
+["Wer ruft an? – _ rufen an.","meine Freundinnen","sie","w","wer? → Nominativ → sie"],
+["Wem gehört das Fahrrad? – Es gehört _.","der Junge","ihm","w","wem? → Dativ → ihm"],
+["Wessen Tasche ist das? – Das ist _ Tasche.","Anna","ihre","w","wessen? → Possessiv: Anna → ihr + e (die Tasche)"],
+["Wessen Auto ist das? – Das ist _ Auto.","Peter","sein","w","wessen? → Possessiv: Peter → sein (das Auto)"],
+["Wem muss man helfen? – Man muss _ helfen.","die Nachbarn","ihnen","w","wem? → Dativ → ihnen"],
+["Der Hund springt auf _.","du · Wohin?","dich","m","auf + Akkusativ: Wohin? (Bewegung)"],
+["Die Katze liegt auf _.","ich · Wo?","mir","m","auf + Dativ: Wo? (Position)"],
+["Die Katze springt auf _.","er · Wohin?","ihn","m","auf + Akkusativ: Wohin? (Bewegung)"],
+["Das Baby schläft auf _.","er · Wo?","ihm","m","auf + Dativ: Wo? (Position)"],
+["Das Kind klettert auf _.","ich · Wohin?","mich","m","auf + Akkusativ: Wohin? (Bewegung)"],
+["Die Katze schmiegt sich an _.","du · Wohin?","dich","m","an + Akkusativ: Wohin? (Bewegung)"],
+["Das Kind lehnt an _.","er · Wo?","ihm","m","an + Dativ: Wo? (Position)"],
+["Die Lampe hängt über _.","ich · Wo?","mir","m","über + Dativ: Wo? (Position)"],
+["Ein Vogel fliegt über _ hinweg.","ich · Wohin?","mich","m","über + Akkusativ: Wohin? (Bewegung)"],
+["Er arbeitet unter _.","sie (Sg.) · Wo?","ihr","m","unter + Dativ: Wo? (Position)"],
+["Der Tourist mischt sich unter _.","sie (Pl.) · Wohin?","sie","m","unter + Akkusativ: Wohin? (Richtung)"],
+["In _ steckt viel Talent.","er · Wo?","ihm","m","in + Dativ: Wo? (Position)"],
+["Ich habe in _ einen guten Freund.","du · Wo?","dir","m","in + Dativ: Wo? (Position)"],
+["Wir warten auf _.","er · feste Verbindung","ihn","m","warten auf + Akkusativ"],
+["Ich freue mich auf _.","ihr · feste Verbindung","euch","m","sich freuen auf + Akkusativ"],
+["Du kannst dich auf _ verlassen.","ich · feste Verbindung","mich","m","sich verlassen auf + Akkusativ"],
+["Der Hund hört nur auf _.","ich · feste Verbindung","mich","m","hören auf + Akkusativ"],
+["Ich denke oft an _.","du · feste Verbindung","dich","m","denken an + Akkusativ"],
+["Wir erinnern uns an _.","sie (Pl.) · feste Verbindung","sie","m","sich erinnern an + Akkusativ"],
+["Das liegt an _.","du · feste Verbindung","dir","m","liegen an + Dativ"],
+["Ich zweifle an _.","er · feste Verbindung","ihm","m","zweifeln an + Dativ"],
+["Sie hat sich in _ verliebt.","ich · feste Verbindung","mich","m","sich verlieben in + Akkusativ"],
+["Ich habe mich in _ getäuscht.","du · feste Verbindung","dir","m","sich täuschen in + Dativ"],
+["Wir sprechen über _.","er · feste Verbindung","ihn","m","sprechen über + Akkusativ"],
+["Ich ärgere mich über _.","du · feste Verbindung","dich","m","sich ärgern über + Akkusativ"],
+["Alle lachen über _.","ich · feste Verbindung","mich","m","lachen über + Akkusativ"],
+["Ich leide unter _.","er · feste Verbindung","ihm","m","leiden unter + Dativ"],
+["Wenn man liegt, springt die Katze auf _.","man · Wohin?","einen","m","auf + Akkusativ: Wohin?; man → einen"],
+["Wenn man im Wald liegt, hängen Äste über _.","man · Wo?","einem","m","über + Dativ: Wo?; man → einem"]
 ];
-
+const TR_SENT=[
+"Завтра я побачу тебе в офісі.","Ти знаєш його? Він мій сусід.","Ми відвідаємо їх на вихідних.","Учитель питає нас.","Я подзвоню вам сьогодні ввечері.","Ти кохаєш мене?","Книжку? Я куплю її завтра.","Сумку? Я не можу її знайти.","Фільм? Я вже його бачив.","Я чекаю на тебе.","Подарунок для вас.","Без нього я не піду.","Це іноді дратує.","Тут ніхто не знає.","Шум заважає.","Це не цікавить.","Погода робить втомленим.","Ти можеш мені допомогти?","Я даю тобі книжку.","Сукня їй подобається.","Ми дякуємо їм.","Учитель відповідає йому.","Я пишу вам листа.","Їжа нам смакує.","Я їду з ним до Берліна.","Як у тебе справи?","Іграшка належить йому.","Я живу в них.","Завтра я поговорю з нею.","У відпустці моря подобається.","Іноді ніхто не допомагає.","Тут їжа смакує.","Після спорту все болить.","При стресі нічого не спадає на думку.","Мене звати Махді.","Де твоя сумка?","Петер і його дружина приходять сьогодні.","Анна любить своїх дітей.","Це наш дім.","Це ваша вчителька?","Діти граються. Їхні батьки в саду.","Малюк спить. Його мама читає.","Де твої книжки?","Це наша квартира.","Це ваша машина?","Мій брат шукає свій телефон.","Треба поважати своїх батьків.","Треба завжди говорити свою думку.","Коли хворієш, потрібен спокій.","Треба самому робити домашні завдання.","Швидко втрачаєш терпіння.","Тут не можна користуватися телефоном.","Я миюся.","Я мию руки.","Ти радієш відпустці?","Ти чистиш зуби.","Він голиться щоранку.","Вона розчісує волосся.","Ми зустрічаємося о восьмій.","Поспішайте! Поїзд скоро від'їжджає.","Діти сваряться.","Я купую собі новий телефон.","Швидко вдягайся!","Я вдягаю куртку.","Якщо поспішаєш, все встигаєш.","Перед їжею миють руки.","Не треба дратуватися.","Не щодня купують машину.","Ти знаєш чоловіка? – Так, я його знаю.","Де Анна? – Вона вдома.","Ти допомагаєш братові? – Так, я йому допомагаю.","Ти граєш з дітьми? – Так, я з ними часто граю.","Як тобі книжка? – Я вважаю її супер.","Тобі подобається куртка? – Так, вона мені подобається.","Ти говориш з начальницею? – Так, я з нею завтра поговорю.","Де ключ? – Він лежить на столі.","Кого ти там бачиш? – Я бачу свого брата.","Хто відвідає тебе завтра? – Мій дядько.","Кому ти допомагаєш? – Я допомагаю сестрі.","Чия це сумка? – Це сумка Анни.","Хто чекає на тебе? – Моя подруга.","Кому ти дзвониш? – Я дзвоню мамі.","Кому належить телефон? – Він належить моєму батькові.","З ким ти їдеш до Берліна? – З моїм другом.","Для кого подарунок? – Для моєї бабусі.","Чию книжку ти читаєш? – Я читаю книжку Анни.","Кого кохає Анна? – Анна кохає свого чоловіка.","Кому смакує їжа? – Дітям.","У кого ключ? – У вчителя.","На кого ти чекаєш? – На свого брата.","У кого ти живеш? – У тітки.","Від кого лист? – Від мого шефа.","Про кого ти піклуєшся? – Про дідуся.","Чия це машина? – Це машина вчителя.","Кого викликають при пожежі? – Пожежників.","З ким у фірмі розмовляють англійською? – З колегами.","Кого ти бачиш? – Я бачу його.","Кому ти допомагаєш? – Я допомагаю їй.","Хто приходить сьогодні? – Він приходить.","Кого ти питаєш? – Я питаю її.","Кому належить машина? – Вона належить їм.","Кого ти кохаєш? – Я кохаю її.","Кому ти пишеш? – Я пишу їм листа.","Кому ти дзвониш? – Я дзвоню йому.","Кому ти дякуєш? – Я дякую йому.","Хто дзвонить? – Вони дзвонять.","Кому належить велосипед? – Він належить йому.","Чия це сумка? – Це її сумка.","Чия це машина? – Це його машина.","Кому треба допомагати? – Треба допомагати їм.","Собака стрибає на тебе.","Кішка лежить на мені.","Кішка стрибає на нього.","Малюк спить на ньому.","Дитина залазить на мене.","Кішка тулиться до тебе.","Дитина притулилася до нього.","Лампа висить наді мною.","Птах пролітає наді мною.","Він працює під нею.","Турист змішується з ними.","У ньому багато таланту.","У тобі я маю хорошого друга.","Ми чекаємо на нього.","Я радію зустрічі з вами.","Ти можеш на мене покластися.","Собака слухається лише мене.","Я часто думаю про тебе.","Ми згадуємо їх.","Це залежить від тебе.","Я сумніваюся в ньому.","Вона закохалася в мене.","Я помилився в тобі.","Ми говоримо про нього.","Я злюся на тебе.","Всі сміються з мене.","Я страждаю від нього.","Коли лежиш, кішка стрибає на тебе.","Коли лежиш у лісі, гілки висять над тобою."
+];
 const CH=[
- ["Ich sehe _.","","ihn","ihm","a","sehen + Akkusativ (wen?)"],
- ["Ich helfe _.","","ihm","ihn","d","helfen + Dativ (wem?)"],
- ["Ich kenne _ gut.","","ihn","ihm","a","kennen + Akkusativ"],
- ["Ich glaube _ nicht.","","ihm","ihn","d","glauben (einer Person) + Dativ"],
- ["Wir besuchen _ morgen.","","sie","ihr","a","besuchen + Akkusativ"],
- ["Wir danken _.","","ihr","sie","d","danken + Dativ"],
- ["Er ruft _ an.","","mich","mir","a","anrufen + Akkusativ"],
- ["Er antwortet _.","","mir","mich","d","antworten + Dativ"],
- ["Ich vermisse _.","","dich","dir","a","vermissen + Akkusativ"],
- ["Ich gratuliere _.","","dir","dich","d","gratulieren + Dativ"],
- ["Sie liebt _.","","ihn","ihm","a","lieben + Akkusativ"],
- ["Sie folgt _.","","ihm","ihn","d","folgen + Dativ"],
- ["Ich begleite _ nach Hause.","","dich","dir","a","begleiten + Akkusativ"],
- ["Das gehört _.","","mir","mich","d","gehören + Dativ"],
- ["Ich verstehe _ nicht.","","dich","dir","a","verstehen + Akkusativ"],
- ["Das Essen schmeckt _.","","mir","mich","d","schmecken + Dativ"],
- ["Ich frage _.","","ihn","ihm","a","fragen + Akkusativ"],
- ["Ich zeige _ das Foto.","","ihm","ihn","d","zeigen: Person im Dativ, Sache im Akkusativ"],
- ["Ich höre _ zu.","","ihm","ihn","d","zuhören + Dativ"],
- ["Ich bitte _ um Hilfe.","","ihn","ihm","a","bitten + Akkusativ (+ um)"],
- ["Ich schenke _ Blumen.","","ihr","sie","d","schenken: Person im Dativ"],
- ["Ich unterstütze _.","","sie","ihr","a","unterstützen + Akkusativ"],
- ["Ich lade _ zur Party ein.","","dich","dir","a","einladen + Akkusativ"],
- ["Ich rate _ zum Arzt.","","dir","dich","d","raten + Dativ"],
- ["Das Kleid steht _ gut.","","ihr","sie","d","stehen + Dativ"],
- ["Ich sage _ die Wahrheit.","","ihm","ihn","d","sagen: Person im Dativ, Sache im Akkusativ"],
- ["Ich wasche _.","","mich","mir","r","kein anderes Akk.-Objekt → Akkusativ"],
- ["Ich wasche _ die Hände.","","mir","mich","r","die Hände = Akk.-Objekt → Dativ"],
- ["Ich ziehe _ an.","","mich","mir","r","kein anderes Akk.-Objekt → Akkusativ"],
- ["Ich ziehe _ eine Jacke an.","","mir","mich","r","eine Jacke = Akk.-Objekt → Dativ"],
- ["Du putzt _ die Zähne.","","dir","dich","r","die Zähne = Akk.-Objekt → Dativ"],
- ["Du beeilst _.","","dich","dir","r","sich beeilen → Akkusativ"],
- ["Ich kaufe _ ein Eis.","","mir","mich","r","ein Eis = Akk.-Objekt → Dativ"],
- ["Ich freue _ auf den Urlaub.","","mich","mir","r","sich freuen → Akkusativ"],
- ["Ich stelle _ vor.","","mich","mir","r","sich vorstellen (die eigene Person) → Akkusativ"],
- ["Ich stelle _ einen Hund vor.","","mir","mich","r","einen Hund = Akk.-Objekt → Dativ"],
- ["Peter rasiert _ jeden Morgen.","er (selbst)","sich","ihn","r","Peter rasiert Peter → reflexiv: sich"],
- ["Peter sieht _ im Spiegel.","er (selbst)","sich","ihn","r","Peter sieht Peter → reflexiv: sich"],
- ["Die Kinder freuen _.","","sich","sie","r","sie (Pl.) reflexiv → sich"],
- ["Anna kauft _ ein Kleid.","sie (selbst)","sich","ihr","r","3. Person reflexiv → sich"],
- ["Ich merke _ den Namen.","","mir","mich","r","den Namen = Akk.-Objekt → Dativ"],
- ["Du kämmst _ die Haare.","","dir","dich","r","die Haare = Akk.-Objekt → Dativ"],
- ["Peter und _ Frau kommen.","","seine","ihre","p","Peter → sein; die Frau → seine"],
- ["Anna und _ Mann kommen.","","ihr","sein","p","Anna → ihr; der Mann → ihr (ohne -e)"],
- ["Herr Müller und _ Sohn sind da.","","sein","ihr","p","Herr Müller → sein; der Sohn → sein"],
- ["Wo ist _ Tasche?","du","deine","dein","p","die Tasche → deine"],
- ["Wo ist _ Handy?","du","dein","deine","p","das Handy → dein"],
- ["Ist das _ Lehrerin?","ihr","eure","euer","p","euer + e → eure"],
- ["Ist das _ Auto?","ihr","euer","eure","p","das Auto → euer"],
- ["Das ist _ Haus.","wir","unser","unsere","p","das Haus → unser"],
- ["Das ist _ Wohnung.","wir","unsere","unser","p","die Wohnung → unsere"],
- ["Wo sind _ Bücher?","du","deine","dein","p","Plural → deine"],
- ["Die Kinder und _ Eltern sind da.","","ihre","seine","p","die Kinder = sie (Pl.) → ihre"],
- ["Das ist _ Name.","ich","mein","meine","p","der Name → mein"],
- ["Ich liebe _ Familie.","ich","meine","mein","p","die Familie → meine"],
- ["Spielst du mit den Kindern? – Ja, mit _ spiele ich.","","denen","den|dem","x","Dativ Plural → denen"],
- ["Kennst du den Mann? – Ja, _ kenne ich.","","den","dem|der","x","Akkusativ maskulin → den"],
- ["Hilfst du dem Mann? – Ja, _ helfe ich.","","dem","den|der","x","helfen + Dativ, maskulin → dem"],
- ["Sprichst du mit der Chefin? – Ja, mit _ spreche ich.","","der","die|dem","x","Dativ feminin → der"],
- ["Kennst du die Kinder? – Ja, _ kenne ich.","","die","denen|den","x","Akkusativ Plural → die"],
- ["Hilfst du den Kindern? – Ja, _ helfe ich.","","denen","die|den","x","helfen + Dativ, Plural → denen"],
- ["Gefällt dir das Kleid? – Ja, _ gefällt mir.","","das","dem|die","x","Nominativ neutral → das"],
- ["Gibst du dem Kind ein Eis? – Ja, _ gebe ich ein Eis.","","dem","das|den","x","geben + Dativ, neutral → dem"],
- ["Siehst du die Frau? – Ja, _ sehe ich.","","die","der|den","x","Akkusativ feminin → die"],
- ["_ siehst du? – Ich sehe Peter.","","wen","wem|wer","w","sehen + Akkusativ → wen?"],
- ["_ hilfst du? – Ich helfe Peter.","","wem","wen|wer","w","helfen + Dativ → wem?"],
- ["_ kommt heute? – Peter kommt heute.","","wer","wen|wem","w","Subjekt → wer?"],
- ["_ Tasche ist das? – Das ist Annas Tasche.","","wessen","wem|wen","w","Besitz → wessen?"],
- ["Mit _ sprichst du? – Mit meinem Chef.","","wem","wen|wer","w","mit + Dativ → wem?"],
- ["Für _ kaufst du das? – Für meine Mutter.","","wen","wem|wer","w","für + Akkusativ → wen?"],
- ["_ gehört das Buch? – Es gehört Maria.","","wem","wen|wessen","w","gehören + Dativ → wem?"],
- ["_ besuchst du? – Ich besuche meine Oma.","","wen","wem|wer","w","besuchen + Akkusativ → wen?"],
- ["Von _ hast du das Geschenk? – Von meiner Tante.","","wem","wen|wer","w","von + Dativ → wem?"],
- ["_ liebt Anna? – Anna liebt Tom.","","wen","wem|wer","w","lieben + Akkusativ → wen?"],
- ["Wen siehst du? – Ich sehe _.","","ihn","ihm","w","wen? → Akkusativ → ihn"],
- ["Wem hilfst du? – Ich helfe _.","","ihm","ihn","w","wem? → Dativ → ihm"],
- ["Wer kommt heute? – _ kommt heute.","","er","ihn|ihm","w","wer? → Nominativ → er"],
- ["Wen fragst du? – Ich frage _.","","sie","ihr","w","wen? → Akkusativ → sie"],
- ["Der Hund springt auf _.","du · Wohin?","dich","dir","m","auf + Akkusativ: Wohin? (Bewegung)"],
- ["Die Katze liegt auf _.","ich · Wo?","mir","mich","m","auf + Dativ: Wo? (Position)"],
- ["Die Katze schmiegt sich an _.","du · Wohin?","dich","dir","m","an + Akkusativ: Wohin? (Bewegung)"],
- ["Das Kind lehnt an _.","er · Wo?","ihm","ihn","m","an + Dativ: Wo? (Position)"],
- ["Ein Vogel fliegt über _ hinweg.","ich · Wohin?","mich","mir","m","über + Akkusativ: Wohin? (Bewegung)"],
- ["Die Lampe hängt über _.","ich · Wo?","mir","mich","m","über + Dativ: Wo? (Position)"],
- ["Er arbeitet unter _.","sie (Sg.) · Wo?","ihr","sie","m","unter + Dativ: Wo? (Position)"],
- ["Der Tourist mischt sich unter _.","sie (Pl.) · Wohin?","sie","ihnen","m","unter + Akkusativ: Wohin? (Richtung)"],
- ["In _ steckt viel Talent.","er · Wo?","ihm","ihn","m","in + Dativ: Wo? (Position)"],
- ["Wir warten auf _.","","ihn","ihm","m","warten auf + Akkusativ"],
- ["Ich freue mich auf _.","","dich","dir","m","sich freuen auf + Akkusativ"],
- ["Das liegt an _.","","dir","dich","m","liegen an + Dativ"],
- ["Ich denke oft an _.","","dich","dir","m","denken an + Akkusativ"],
- ["Ich habe mich in _ getäuscht.","","dir","dich","m","sich täuschen in + Dativ"],
- ["Ich habe mich in _ verliebt.","","dich","dir","m","sich verlieben in + Akkusativ"],
- ["Wir sprechen über _.","","ihn","ihm","m","sprechen über + Akkusativ"],
- ["Ich zweifle an _.","","ihm","ihn","m","zweifeln an + Dativ"],
- ["Ich leide unter _.","","ihm","ihn","m","leiden unter + Dativ"],
- ["Das nervt _.","man","einen","einem|man","a","nerven + Akkusativ; man → einen"],
- ["Der Lärm stört _.","man","einen","einem|man","a","stören + Akkusativ; man → einen"],
- ["Das gefällt _.","man","einem","einen|man","d","gefallen + Dativ; man → einem"],
- ["Im Urlaub schmeckt _ alles besser.","man","einem","einen|man","d","schmecken + Dativ; man → einem"],
- ["Wenn man _ beeilt, schafft man alles.","man","sich","einen|einem","r","sich beeilen; man → sich"],
- ["Man wäscht _ die Hände.","man","sich","einem|einen","r","Dativ-Reflexiv; man → sich"],
- ["Man soll _ Eltern respektieren.","man","seine","ihre|deine","p","man → sein; Plural → seine"],
- ["Man sollte _ Meinung sagen.","man","seine","sein|ihre","p","man → sein; die Meinung → seine"],
- ["Wenn man liegt, springt die Katze auf _.","man · Wohin?","einen","einem","m","auf + Akkusativ: Wohin?; man → einen"],
- ["Wenn man im Wald liegt, hängen Äste über _.","man · Wo?","einem","einen","m","über + Dativ: Wo?; man → einem"]
+["Ich sehe _.","","ihn","ihm","a","sehen + Akkusativ (wen?)"],
+["Ich helfe _.","","ihm","ihn","d","helfen + Dativ (wem?)"],
+["Ich kenne _ gut.","","ihn","ihm","a","kennen + Akkusativ"],
+["Ich glaube _ nicht.","","ihm","ihn","d","glauben (einer Person) + Dativ"],
+["Wir besuchen _ morgen.","","sie","ihr","a","besuchen + Akkusativ"],
+["Wir danken _.","","ihr","sie","d","danken + Dativ"],
+["Er ruft _ an.","","mich","mir","a","anrufen + Akkusativ"],
+["Er antwortet _.","","mir","mich","d","antworten + Dativ"],
+["Ich vermisse _.","","dich","dir","a","vermissen + Akkusativ"],
+["Ich gratuliere _.","","dir","dich","d","gratulieren + Dativ"],
+["Sie liebt _.","","ihn","ihm","a","lieben + Akkusativ"],
+["Sie folgt _.","","ihm","ihn","d","folgen + Dativ"],
+["Ich begleite _ nach Hause.","","dich","dir","a","begleiten + Akkusativ"],
+["Das gehört _.","","mir","mich","d","gehören + Dativ"],
+["Ich verstehe _ nicht.","","dich","dir","a","verstehen + Akkusativ"],
+["Das Essen schmeckt _.","","mir","mich","d","schmecken + Dativ"],
+["Ich frage _.","","ihn","ihm","a","fragen + Akkusativ"],
+["Ich zeige _ das Foto.","","ihm","ihn","d","zeigen: Person im Dativ, Sache im Akkusativ"],
+["Ich höre _ zu.","","ihm","ihn","d","zuhören + Dativ"],
+["Ich bitte _ um Hilfe.","","ihn","ihm","a","bitten + Akkusativ (+ um)"],
+["Ich schenke _ Blumen.","","ihr","sie","d","schenken: Person im Dativ"],
+["Ich unterstütze _.","","sie","ihr","a","unterstützen + Akkusativ"],
+["Ich lade _ zur Party ein.","","dich","dir","a","einladen + Akkusativ"],
+["Ich rate _ zum Arzt.","","dir","dich","d","raten + Dativ"],
+["Das Kleid steht _ gut.","","ihr","sie","d","stehen + Dativ"],
+["Ich sage _ die Wahrheit.","","ihm","ihn","d","sagen: Person im Dativ, Sache im Akkusativ"],
+["Ich wasche _.","","mich","mir","r","kein anderes Akk.-Objekt → Akkusativ"],
+["Ich wasche _ die Hände.","","mir","mich","r","die Hände = Akk.-Objekt → Dativ"],
+["Ich ziehe _ an.","","mich","mir","r","kein anderes Akk.-Objekt → Akkusativ"],
+["Ich ziehe _ eine Jacke an.","","mir","mich","r","eine Jacke = Akk.-Objekt → Dativ"],
+["Du putzt _ die Zähne.","","dir","dich","r","die Zähne = Akk.-Objekt → Dativ"],
+["Du beeilst _.","","dich","dir","r","sich beeilen → Akkusativ"],
+["Ich kaufe _ ein Eis.","","mir","mich","r","ein Eis = Akk.-Objekt → Dativ"],
+["Ich freue _ auf den Urlaub.","","mich","mir","r","sich freuen → Akkusativ"],
+["Ich stelle _ vor.","","mich","mir","r","sich vorstellen (die eigene Person) → Akkusativ"],
+["Ich stelle _ einen Hund vor.","","mir","mich","r","einen Hund = Akk.-Objekt → Dativ"],
+["Peter rasiert _ jeden Morgen.","er (selbst)","sich","ihn","r","Peter rasiert Peter → reflexiv: sich"],
+["Peter sieht _ im Spiegel.","er (selbst)","sich","ihn","r","Peter sieht Peter → reflexiv: sich"],
+["Die Kinder freuen _.","","sich","sie","r","sie (Pl.) reflexiv → sich"],
+["Anna kauft _ ein Kleid.","sie (selbst)","sich","ihr","r","3. Person reflexiv → sich"],
+["Ich merke _ den Namen.","","mir","mich","r","den Namen = Akk.-Objekt → Dativ"],
+["Du kämmst _ die Haare.","","dir","dich","r","die Haare = Akk.-Objekt → Dativ"],
+["Peter und _ Frau kommen.","","seine","ihre","p","Peter → sein; die Frau → seine"],
+["Anna und _ Mann kommen.","","ihr","sein","p","Anna → ihr; der Mann → ihr (ohne -e)"],
+["Herr Müller und _ Sohn sind da.","","sein","ihr","p","Herr Müller → sein; der Sohn → sein"],
+["Wo ist _ Tasche?","du","deine","dein","p","die Tasche → deine"],
+["Wo ist _ Handy?","du","dein","deine","p","das Handy → dein"],
+["Ist das _ Lehrerin?","ihr","eure","euer","p","euer + e → eure"],
+["Ist das _ Auto?","ihr","euer","eure","p","das Auto → euer"],
+["Das ist _ Haus.","wir","unser","unsere","p","das Haus → unser"],
+["Das ist _ Wohnung.","wir","unsere","unser","p","die Wohnung → unsere"],
+["Wo sind _ Bücher?","du","deine","dein","p","Plural → deine"],
+["Die Kinder und _ Eltern sind da.","","ihre","seine","p","die Kinder = sie (Pl.) → ihre"],
+["Das ist _ Name.","ich","mein","meine","p","der Name → mein"],
+["Ich liebe _ Familie.","ich","meine","mein","p","die Familie → meine"],
+["Spielst du mit den Kindern? – Ja, mit _ spiele ich.","","denen","den|dem","x","Dativ Plural → denen"],
+["Kennst du den Mann? – Ja, _ kenne ich.","","den","dem|der","x","Akkusativ maskulin → den"],
+["Hilfst du dem Mann? – Ja, _ helfe ich.","","dem","den|der","x","helfen + Dativ, maskulin → dem"],
+["Sprichst du mit der Chefin? – Ja, mit _ spreche ich.","","der","die|dem","x","Dativ feminin → der"],
+["Kennst du die Kinder? – Ja, _ kenne ich.","","die","denen|den","x","Akkusativ Plural → die"],
+["Hilfst du den Kindern? – Ja, _ helfe ich.","","denen","die|den","x","helfen + Dativ, Plural → denen"],
+["Gefällt dir das Kleid? – Ja, _ gefällt mir.","","das","dem|die","x","Nominativ neutral → das"],
+["Gibst du dem Kind ein Eis? – Ja, _ gebe ich ein Eis.","","dem","das|den","x","geben + Dativ, neutral → dem"],
+["Siehst du die Frau? – Ja, _ sehe ich.","","die","der|den","x","Akkusativ feminin → die"],
+["_ siehst du? – Ich sehe Peter.","","wen","wem|wer","w","sehen + Akkusativ → wen?"],
+["_ hilfst du? – Ich helfe Peter.","","wem","wen|wer","w","helfen + Dativ → wem?"],
+["_ kommt heute? – Peter kommt heute.","","wer","wen|wem","w","Subjekt → wer?"],
+["_ Tasche ist das? – Das ist Annas Tasche.","","wessen","wem|wen","w","Besitz → wessen?"],
+["Mit _ sprichst du? – Mit meinem Chef.","","wem","wen|wer","w","mit + Dativ → wem?"],
+["Für _ kaufst du das? – Für meine Mutter.","","wen","wem|wer","w","für + Akkusativ → wen?"],
+["_ gehört das Buch? – Es gehört Maria.","","wem","wen|wessen","w","gehören + Dativ → wem?"],
+["_ besuchst du? – Ich besuche meine Oma.","","wen","wem|wer","w","besuchen + Akkusativ → wen?"],
+["Von _ hast du das Geschenk? – Von meiner Tante.","","wem","wen|wer","w","von + Dativ → wem?"],
+["_ liebt Anna? – Anna liebt Tom.","","wen","wem|wer","w","lieben + Akkusativ → wen?"],
+["Wen siehst du? – Ich sehe _.","","ihn","ihm","w","wen? → Akkusativ → ihn"],
+["Wem hilfst du? – Ich helfe _.","","ihm","ihn","w","wem? → Dativ → ihm"],
+["Wer kommt heute? – _ kommt heute.","","er","ihn|ihm","w","wer? → Nominativ → er"],
+["Wen fragst du? – Ich frage _.","","sie","ihr","w","wen? → Akkusativ → sie"],
+["Der Hund springt auf _.","du · Wohin?","dich","dir","m","auf + Akkusativ: Wohin? (Bewegung)"],
+["Die Katze liegt auf _.","ich · Wo?","mir","mich","m","auf + Dativ: Wo? (Position)"],
+["Die Katze schmiegt sich an _.","du · Wohin?","dich","dir","m","an + Akkusativ: Wohin? (Bewegung)"],
+["Das Kind lehnt an _.","er · Wo?","ihm","ihn","m","an + Dativ: Wo? (Position)"],
+["Ein Vogel fliegt über _ hinweg.","ich · Wohin?","mich","mir","m","über + Akkusativ: Wohin? (Bewegung)"],
+["Die Lampe hängt über _.","ich · Wo?","mir","mich","m","über + Dativ: Wo? (Position)"],
+["Er arbeitet unter _.","sie (Sg.) · Wo?","ihr","sie","m","unter + Dativ: Wo? (Position)"],
+["Der Tourist mischt sich unter _.","sie (Pl.) · Wohin?","sie","ihnen","m","unter + Akkusativ: Wohin? (Richtung)"],
+["In _ steckt viel Talent.","er · Wo?","ihm","ihn","m","in + Dativ: Wo? (Position)"],
+["Wir warten auf _.","","ihn","ihm","m","warten auf + Akkusativ"],
+["Ich freue mich auf _.","","dich","dir","m","sich freuen auf + Akkusativ"],
+["Das liegt an _.","","dir","dich","m","liegen an + Dativ"],
+["Ich denke oft an _.","","dich","dir","m","denken an + Akkusativ"],
+["Ich habe mich in _ getäuscht.","","dir","dich","m","sich täuschen in + Dativ"],
+["Ich habe mich in _ verliebt.","","dich","dir","m","sich verlieben in + Akkusativ"],
+["Wir sprechen über _.","","ihn","ihm","m","sprechen über + Akkusativ"],
+["Ich zweifle an _.","","ihm","ihn","m","zweifeln an + Dativ"],
+["Ich leide unter _.","","ihm","ihn","m","leiden unter + Dativ"],
+["Das nervt _.","man","einen","einem|man","a","nerven + Akkusativ; man → einen"],
+["Der Lärm stört _.","man","einen","einem|man","a","stören + Akkusativ; man → einen"],
+["Das gefällt _.","man","einem","einen|man","d","gefallen + Dativ; man → einem"],
+["Im Urlaub schmeckt _ alles besser.","man","einem","einen|man","d","schmecken + Dativ; man → einem"],
+["Wenn man _ beeilt, schafft man alles.","man","sich","einen|einem","r","sich beeilen; man → sich"],
+["Man wäscht _ die Hände.","man","sich","einem|einen","r","Dativ-Reflexiv; man → sich"],
+["Man soll _ Eltern respektieren.","man","seine","ihre|deine","p","man → sein; Plural → seine"],
+["Man sollte _ Meinung sagen.","man","seine","sein|ihre","p","man → sein; die Meinung → seine"],
+["Wenn man liegt, springt die Katze auf _.","man · Wohin?","einen","einem","m","auf + Akkusativ: Wohin?; man → einen"],
+["Wenn man im Wald liegt, hängen Äste über _.","man · Wo?","einem","einen","m","über + Dativ: Wo?; man → einem"]
 ];
-
-/* ================= TAB ================= */
+const TR_CH=[
+"Я бачу його.","Я допомагаю йому.","Я добре його знаю.","Я йому не вірю.","Ми відвідаємо їх завтра.","Ми дякуємо їй.","Він дзвонить мені.","Він відповідає мені.","Я сумую за тобою.","Я вітаю тебе.","Вона кохає його.","Вона слідує за ним.","Я проводжаю тебе додому.","Це належить мені.","Я тебе не розумію.","Їжа мені смакує.","Я питаю його.","Я показую йому фото.","Я слухаю його.","Я прошу його про допомогу.","Я дарую їй квіти.","Я підтримую її.","Я запрошую тебе на вечірку.","Я раджу тобі піти до лікаря.","Сукня їй личить.","Я кажу йому правду.","Я миюся.","Я мию руки.","Я вдягаюся.","Я вдягаю куртку.","Ти чистиш зуби.","Ти поспішаєш.","Я купую собі морозиво.","Я радію відпустці.","Я представляюся.","Я уявляю собі собаку.","Петер голиться щоранку.","Петер бачить себе в дзеркалі.","Діти радіють.","Анна купує собі сукню.","Я запам'ятовую ім'я.","Ти розчісуєш волосся.","Петер і його дружина приходять.","Анна і її чоловік приходять.","Пан Мюллер і його син тут.","Де твоя сумка?","Де твій телефон?","Це ваша вчителька?","Це ваша машина?","Це наш дім.","Це наша квартира.","Де твої книжки?","Діти та їхні батьки тут.","Це моє ім'я.","Я люблю свою сім'ю.","Ти граєш з дітьми? – Так, я з ними граю.","Ти знаєш чоловіка? – Так, я його знаю.","Ти допомагаєш чоловікові? – Так, я йому допомагаю.","Ти говориш з начальницею? – Так, я з нею говорю.","Ти знаєш дітей? – Так, я їх знаю.","Ти допомагаєш дітям? – Так, я їм допомагаю.","Тобі подобається сукня? – Так, вона мені подобається.","Ти даєш дитині морозиво? – Так, я їй даю морозиво.","Ти бачиш жінку? – Так, я її бачу.","Кого ти бачиш? – Я бачу Петера.","Кому ти допомагаєш? – Я допомагаю Петеру.","Хто приходить сьогодні? – Петер приходить сьогодні.","Чия це сумка? – Це сумка Анни.","З ким ти говориш? – З моїм шефом.","Для кого ти це купуєш? – Для моєї мами.","Кому належить книжка? – Вона належить Марії.","Кого ти відвідуєш? – Я відвідую бабусю.","Від кого ти отримав подарунок? – Від тітки.","Кого кохає Анна? – Анна кохає Тома.","Кого ти бачиш? – Я бачу його.","Кому ти допомагаєш? – Я допомагаю йому.","Хто приходить сьогодні? – Він приходить.","Кого ти питаєш? – Я питаю її.","Собака стрибає на тебе.","Кішка лежить на мені.","Кішка тулиться до тебе.","Дитина притулилася до нього.","Птах пролітає наді мною.","Лампа висить наді мною.","Він працює під нею.","Турист змішується з ними.","У ньому багато таланту.","Ми чекаємо на нього.","Я радію зустрічі з тобою.","Це залежить від тебе.","Я часто думаю про тебе.","Я помилився в тобі.","Я закохався в тебе.","Ми говоримо про нього.","Я сумніваюся в ньому.","Я страждаю від нього.","Це дратує.","Шум заважає.","Це подобається.","У відпустці все смакує краще.","Якщо поспішаєш, все встигаєш.","Миють руки.","Треба поважати своїх батьків.","Треба говорити свою думку.","Коли лежиш, кішка стрибає на тебе.","Коли лежиш у лісі, гілки висять над тобою."
+];
 const TAB=[];
 const posAlt=i=>{const b=["mein","dein","sein","ihr","sein","unser","euer","ihr","sein"][i],e=i===6?"eure":b+"e";return [b,e,b+"/e",b+"/"+e,b+" / "+e].join("|")};
 const tc=["ich","du","er","sie (Sg.)","es","wir","ihr","sie (Pl.)","man"];
 const tA=["mich","dich","ihn","sie","es","uns","euch","sie","einen"],tD=["mir","dir","ihm","ihr","ihm","uns","euch","ihnen","einem"];
-tc.forEach((p,i)=>{
-  TAB.push({cue:p,col:"Akkusativ",a:tA[i],t:"a",why:"Akkusativ von "+p});
-  TAB.push({cue:p,col:"Dativ",a:tD[i],t:"d",why:"Dativ von "+p});
-  TAB.push({cue:p,col:"Possessiv",a:posAlt(i),t:"p",why:"Possessiv: "+POS[i].split(" · ")[0]});
-  TAB.push({cue:p,col:"Reflexiv Akk.",a:RA[i],t:"r",why:"Reflexiv Akk. von "+p+" (z. B. sich waschen)"});
-  TAB.push({cue:p,col:"Reflexiv Dat.",a:RD[i],t:"r",why:"Reflexiv Dat. von "+p+" (z. B. sich etwas kaufen)"});
-});
-[["der Mann (mask.)",["der","den","dem"]],["die Frau (fem.)",["die","die","der"]],["das Kind (neutr.)",["das","das","dem"]],["die Kinder (Pl.)",["die","die","denen"]]].forEach(([c,f])=>{
-  ["Nominativ","Akkusativ","Dativ"].forEach((k,j)=>TAB.push({cue:c,col:"Demonstrativ "+k,a:f[j],t:"x",why:"Demonstrativ "+k+": "+f[j]}))
-});
-
-/* ================= ALL ================= */
+tc.forEach((p,i)=>{TAB.push({cue:p,col:"Akkusativ",a:tA[i],t:"a",why:"Akkusativ von "+p});TAB.push({cue:p,col:"Dativ",a:tD[i],t:"d",why:"Dativ von "+p});TAB.push({cue:p,col:"Possessiv",a:posAlt(i),t:"p",why:"Possessiv: "+POS[i].split(" · ")[0]});TAB.push({cue:p,col:"Reflexiv Akk.",a:RA[i],t:"r",why:"Reflexiv Akk. von "+p+" (z. B. sich waschen)"});TAB.push({cue:p,col:"Reflexiv Dat.",a:RD[i],t:"r",why:"Reflexiv Dat. von "+p+" (z. B. sich etwas kaufen)"});});
+[["der Mann (mask.)",["der","den","dem"]],["die Frau (fem.)",["die","die","der"]],["das Kind (neutr.)",["das","das","dem"]],["die Kinder (Pl.)",["die","die","denen"]]].forEach(([c,f])=>{["Nominativ","Akkusativ","Dativ"].forEach((k,j)=>TAB.push({cue:c,col:"Demonstrativ "+k,a:f[j],t:"x",why:"Demonstrativ "+k+": "+f[j]}))});
 const isMan=r=>/^man\b/.test(r.cue)||/\bman\b/i.test(r.tpl);
 const labOf=(t,cue)=>t==="w"?(/^wer\b/.test(cue)?"Fragewort":"Bezug"):t==="x"?"Bezug":"Pronomen";
 const mk=r=>({...r,lab:r.lab||labOf(r.t,r.cue),man:isMan(r)});
 const ALL={
-  s:SENT.map(([tpl,cue,a,t,why])=>mk({id:tpl+" ("+cue+")",tpl,cue,a,t,why})),
-  c:CH.map(([tpl,cue,a,wr,t,why])=>mk({id:tpl+(cue?" ("+cue+")":""),tpl,cue,a,o:[a].concat(wr.split("|")),t,why}))
+  s:SENT.map(([tpl,cue,a,t,why],i)=>mk({id:tpl+" ("+cue+")",tpl,cue,a,t,why,tr:TR_SENT[i]||""})),
+  c:CH.map(([tpl,cue,a,wr,t,why],i)=>mk({id:tpl+(cue?" ("+cue+")":""),tpl,cue,a,o:[a].concat(wr.split("|")),t,why,tr:TR_CH[i]||""}))
 };
-
 const TYPES={a:"Akkusativ",d:"Dativ",p:"Possessiv",r:"Reflexiv",x:"Demonstrativ",w:"Wer/Wen/Wem",m:"Wechselpräposition",man:"man"};
 const DIRL={s:"Доповни речення",c:"Обери правильно"};
 const FILTERS_ORDER=[["all","Alle"],["ad","Akk+Dat"],["m","Wechselpräpositionen"],["w","Wer/Wen/Wem"],["p","Possessiv"],["r","Reflexiv"],["x","Demonstrativ"],["man","man"]];
 const KEY="tp_v2_pronomen_stats",NEED=3;
 const PKEY="tp_v2_pronomen_progress",BKEY="tp_v2_pronomen_best";
-
-/* ================= State ================= */
 let st={s:{},c:{}};
 try{const v=JSON.parse(localStorage.getItem(KEY)||"null");if(v&&v.s)st={s:v.s||{},c:v.c||{}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
-
 let dir="s",sel="all",q=[],k=0,ok=0,no=0,sk=0,done=false,wrong=[];
-let score=0,streak=0,best=0,timer=null;
+let score=0,streak=0,best=0,timer=null,trShown=false;
 function clearT(){if(timer){clearTimeout(timer);timer=null}}
 try{best=Math.max(0,parseInt(localStorage.getItem(BKEY),10)||0)}catch(e){}
 function clearProgress(){try{localStorage.removeItem(PKEY)}catch(e){}}
-function persist(next){
-  try{
-    localStorage.setItem(PKEY,JSON.stringify({v:1,dir:dir,sel:sel,k:next===undefined?k:next,ok:ok,no:no,sk:sk,score:score,streak:streak,best:best,q:q.map(r=>r.id),wrong:wrong.map(r=>r.id)}));
-    localStorage.setItem(BKEY,String(best));
-  }catch(e){}
-}
+function persist(next){try{localStorage.setItem(PKEY,JSON.stringify({v:1,dir:dir,sel:sel,k:next===undefined?k:next,ok:ok,no:no,sk:sk,score:score,streak:streak,best:best,q:q.map(r=>r.id),wrong:wrong.map(r=>r.id)}));localStorage.setItem(BKEY,String(best));}catch(e){}}
 function restore(){
   try{
-    let d=null;
-    try{d=JSON.parse(localStorage.getItem(PKEY)||"null")}catch(e){d=null}
+    let d=null;try{d=JSON.parse(localStorage.getItem(PKEY)||"null")}catch(e){d=null}
     if(!d||d.v!==1||(d.dir!=="s"&&d.dir!=="c")||!Array.isArray(d.q)||!d.q.length)return false;
     const m=new Map(ALL[d.dir].map(r=>[r.id,r]));
     const list=d.q.map(i=>m.get(i));
     if(list.some(x=>!x))return false;
     const n=x=>Number.isFinite(x)&&x>=0?Math.floor(x):0;
-    dir=d.dir;
-    sel=(d.sel==="all"||d.sel==="ad"||TYPES[d.sel])?d.sel:"all";
+    dir=d.dir;sel=(d.sel==="all"||d.sel==="ad"||TYPES[d.sel])?d.sel:"all";
     q=list.map(r=>({...r,m:dir}));
     k=Math.min(n(d.k),q.length);ok=n(d.ok);no=n(d.no);sk=n(d.sk);score=n(d.score);streak=n(d.streak);
     best=Math.max(best,n(d.best),streak);
@@ -973,32 +633,22 @@ function restore(){
     return true;
   }catch(e){return false}
 }
-
-/* ================= Per-filter round cache ================= */
 const roundCache={};
 function rk(){return dir+"_"+sel}
-function cacheRound(){
-  if(q&&q.length){
-    roundCache[rk()]={q:q.map(r=>r.id),k,ok,no,sk,score,streak,wrong:wrong.map(r=>r.id)};
-  }
-}
+function cacheRound(){if(q&&q.length){roundCache[rk()]={q:q.map(r=>r.id),k,ok,no,sk,score,streak,wrong:wrong.map(r=>r.id)};}}
 function restoreRound(){
-  const c=roundCache[rk()];
-  if(!c)return false;
+  const c=roundCache[rk()];if(!c)return false;
   const m=new Map(ALL[dir].map(r=>[r.id,r]));
   const list=c.q.map(id=>m.get(id)).filter(Boolean);
   if(list.length!==c.q.length)return false;
   q=list.map(r=>({...r,m:dir}));
-  k=Math.min(c.k||0,q.length);ok=c.ok||0;no=c.no||0;sk=c.sk||0;
-  score=c.score||0;streak=c.streak||0;
+  k=Math.min(c.k||0,q.length);ok=c.ok||0;no=c.no||0;sk=c.sk||0;score=c.score||0;streak=c.streak||0;
   wrong=(c.wrong||[]).map(id=>m.get(id)).filter(Boolean).map(r=>({...r,m:dir}));
   return true;
 }
-
-/* ================= Helpers ================= */
 const $=id=>document.getElementById(id);
 const norm=v=>v.trim().toLowerCase().replace(/[?.!]/g,"").replace(/\s*\/\s*/g,"/").replace(/\s+/g," ");
-const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function sh(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 const pool=(s,d=dir)=>ALL[d].filter(r=>s==="all"?true:s==="ad"?(r.t==="a"||r.t==="d"):s==="man"?r.man:r.t===s);
 const main=r=>{const alts=r.a.split("|");return r.m==="t"&&r.t==="p"?alts[3]:alts[0]};
@@ -1006,101 +656,74 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const atStart=tpl=>/^_|[.!?–]\s_/.test(tpl);
 function filled(r){const w=main(r);return esc(r.tpl).replace("_","<b>"+(atStart(r.tpl)?cap(w):w)+"</b>")}
 const selLabel=s=>s==="all"?"Alle":s==="ad"?"Akk+Dat":TYPES[s];
-
-/* ================= Weak ================= */
 function record(r,good){const t=st[r.m],s=t[r.id]||(t[r.id]={r:0,w:0,s:0});if(good){s.r++;s.s++}else{s.w++;s.s=0}save();renderWeak()}
 function weakList(){const t=st[dir];return ALL[dir].filter(r=>t[r.id]&&t[r.id].w>0&&t[r.id].s<NEED).sort((x,y)=>t[y.id].w-t[x.id].w)}
 function renderWeak(){$("reviewBtn").textContent="🔁 Помилки ("+weakList().length+")"}
-
-/* ================= Render ================= */
 function tplHtml(r){return esc(r.tpl).replace("_",'<span class="blank">?</span>')}
-
+function renderTrans(r){
+  const box=$("trans");
+  if(!box)return;
+  if(!r||!r.tr){box.innerHTML="";return;}
+  if(trShown){box.innerHTML='<div class="tr-text">'+esc(r.tr)+'</div>';}
+  else{
+    box.innerHTML='<button class="tr-btn" type="button">🌐 Перекласти</button>';
+    const btn=box.querySelector(".tr-btn");
+    if(btn)btn.onclick=()=>{trShown=true;renderTrans(r);};
+  }
+}
 function show(){
-  try {
-    clearT();stopSpeech();advOn=false;done=false;updateXp();
-    if(!q || k>=q.length){
-      renderEnd();return;
-    }
+  try{
+    clearT();stopSpeech();advOn=false;done=false;trShown=false;updateXp();
+    if(!q||k>=q.length){renderEnd();return}
     const r=q[k];
     let h='<div class="card" id="card">';
     h+='<button class="speak" id="speakBtn" type="button" title="Озвучити німецькою" aria-label="Озвучити німецькою">🔊</button>';
-    if(r.cue){
-      h+='<div class="cue"><small>'+esc(r.lab||"Pronomen")+'</small><div class="src"><span>'+esc(r.cue)+'</span></div></div>';
-    }
-    h+='<div class="task"><div class="tpl">'+tplHtml(r)+'</div></div>';
-
+    if(r.cue){h+='<div class="cue"><small>'+esc(r.lab||"Pronomen")+'</small><div class="src"><span>'+esc(r.cue)+'</span></div></div>';}
+    h+='<div class="task"><div class="tpl">'+tplHtml(r)+'</div><div class="trans-wrap" id="trans"></div></div>';
     if(dir==="c"){
       h+='<div class="opts" id="opts">';
       sh(r.o).forEach(o=>{h+='<button type="button" class="opt" data-v="'+esc(o)+'">'+esc(o)+'</button>'});
       h+='</div>';
-    } else {
+    }else{
       h+='<div class="row"><input id="in" type="text" placeholder="'+(r.ph||(r.t==="p"?"z. B. mein/e":"Form eingeben"))+'" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><button id="nx" class="pri" type="button">Показати відповідь</button></div>';
     }
-    h+='<div id="fb"></div>';
-    h+='</div>';
+    h+='<div id="fb"></div></div>';
     $("main").innerHTML=h;
     $("stat-done").textContent=Math.min(k+1,q.length)+" / "+q.length;
-    $("stat-correct").textContent=ok;
-    $("stat-wrong").textContent=no;
+    $("stat-correct").textContent=ok;$("stat-wrong").textContent=no;
     $("bar").style.width=(Math.min(k+(done?1:0),q.length)/q.length*100)+"%";
-
     $("speakBtn").onclick=speakCurrent;
     const tplEl=document.querySelector("#card .tpl");
     if(tplEl)tplEl.onclick=()=>{if(!String(window.getSelection()).trim())speakCurrent()};
-
+    renderTrans(r);
     if(dir==="c"){
       document.querySelectorAll("#opts .opt").forEach(b=>{b.onclick=()=>pick(b.dataset.v)});
-    } else {
+    }else{
       const inp=$("in");
       inp.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.repeat){e.preventDefault();go()}});
-      inp.addEventListener("input",()=>{
-        if(!done){
-          $("fb").innerHTML="";
-          $("nx").textContent=$("in").value.trim()?"Перевірити ✓":"Показати відповідь";
-        }
-      });
+      inp.addEventListener("input",()=>{if(!done){$("fb").innerHTML="";$("nx").textContent=$("in").value.trim()?"Перевірити ✓":"Показати відповідь";}});
       $("nx").onclick=go;
       inp.focus({preventScroll:true});
     }
-  } catch (e) {
-    $("main").innerHTML = '<div class="card" style="color:var(--no)">Fehler beim Laden: ' + e.message + '</div>';
-    console.error(e);
-  }
+  }catch(e){$("main").innerHTML='<div class="card" style="color:var(--no)">Fehler beim Laden: '+e.message+'</div>';console.error(e);}
 }
-
 function renderEnd(){
   let h='<div class="card sum"><div class="big">'+(q.length?ok+" / "+q.length:"—")+'</div>';
-  if(q.length){
-    const p=Math.round(ok/q.length*100);
-    h+='<p><b>'+p+'%</b> richtig – '+(p>=90?'Ausgezeichnet! 🎉':p>=70?'Gut gemacht! 👍':'Übung macht den Meister. Спробуй ще раз 💪')+'</p>';
-  } else {
-    h+='<p>Keine Aufgaben in dieser Auswahl. Bitte wähle einen anderen Filter.</p>';
-  }
+  if(q.length){const p=Math.round(ok/q.length*100);h+='<p><b>'+p+'%</b> richtig – '+(p>=90?'Ausgezeichnet! 🎉':p>=70?'Gut gemacht! 👍':'Übung macht den Meister. Спробуй ще раз 💪')+'</p>';}
+  else{h+='<p>Keine Aufgaben in dieser Auswahl. Bitte wähle einen anderen Filter.</p>';}
   h+='<div class="row" style="justify-content:center">';
-  if(q.length){
-    h+='<button class="btn g" onclick="start(pool(sel),selLabel(sel))">↻ Nochmal</button>';
-  }
+  if(q.length){h+='<button class="btn g" onclick="start(pool(sel),selLabel(sel))">↻ Nochmal</button>';}
   h+='</div></div>';
-  $("main").innerHTML=h;
-  updateXp();
+  $("main").innerHTML=h;updateXp();
   $("stat-done").textContent=(q.length?ok+" / "+q.length:"0 / 0");
-  $("stat-correct").textContent=ok;
-  $("stat-wrong").textContent=no;
+  $("stat-correct").textContent=ok;$("stat-wrong").textContent=no;
   $("bar").style.width="100%";
-
-  if(wrong.length){
-    $("ls").innerHTML='<div class="lsh">Zum Wiederholen</div><ul class="lsl">'+wrong.map(w=>'<li><span class="dot '+w.t+'"></span>'+(w.m==="t"?esc(w.cue)+" → ":"")+filled(w)+'</li>').join("")+'</ul>';
-  } else if(q.length){
-    $("ls").innerHTML="";
-  }
+  if(wrong.length){$("ls").innerHTML='<div class="lsh">Zum Wiederholen</div><ul class="lsl">'+wrong.map(w=>'<li><span class="dot '+w.t+'"></span>'+(w.m==="t"?esc(w.cue)+" → ":"")+filled(w)+'</li>').join("")+'</ul>';}
+  else if(q.length){$("ls").innerHTML="";}
 }
-
-/* ================= Interaction ================= */
 function start(list,label){clearProgress();q=sh(list).map(r=>({...r,m:dir}));k=0;ok=0;no=0;sk=0;score=0;streak=0;wrong=[];$("ls").innerHTML="";show();persist(0);renderWeak()}
-
 function lock(){persist(k+1);done=true;if($("in"))$("in").disabled=true;if($("nx"))$("nx").textContent="Далі →";updateStats()}
 function updateStats(){$("stat-correct").textContent=ok;$("stat-wrong").textContent=no;$("bar").style.width=(Math.min(k+(done?1:0),q.length)/q.length*100)+"%"}
-
 function fbBox(cls,label,extra,r){
   const t=TYPES[r.t]||r.t;
   let h='<div class="fb '+cls+'"><b>'+label+'</b>';
@@ -1108,116 +731,61 @@ function fbBox(cls,label,extra,r){
   h+='<div class="solution">'+filled(r)+'</div>';
   h+='<div class="why"><span class="dot '+r.t+'"></span>'+t+': '+esc(r.why)+'</div>';
   if(cls==="ok")h+='<div class="advance-bar"><i></i></div>';
-  h+='</div>';
-  return h;
+  h+='</div>';return h;
 }
-
 function grade(raw){
   const r=q[k],v=norm(raw);let good=false;
   if(r.a.split("|").some(a=>norm(a)===v)){
-    playSound('correct');
-    good=true;ok++;streak++;best=Math.max(best,streak);score+=10+Math.min(streak-1,4)*2;
+    playSound('correct');good=true;ok++;streak++;best=Math.max(best,streak);score+=10+Math.min(streak-1,4)*2;
     record(r,true);addXp(1);
     $("fb").innerHTML=fbBox("ok","✓ Richtig","",r);
-  } else {
-    playSound('wrong');
-    no++;streak=0;wrong.push(r);record(r,false);addXp(-1);
+  }else{
+    playSound('wrong');no++;streak=0;wrong.push(r);record(r,false);addXp(-1);
     $("fb").innerHTML=fbBox("no","✗ Nicht richtig",'<div style="margin-bottom:6px">Deine Antwort: <s>'+esc(raw.trim())+'</s></div>',r);
   }
-  if(dir==="c"){
-    document.querySelectorAll("#opts .opt").forEach(b=>{
-      b.disabled=true;
-      const bv=norm(b.dataset.v);
-      if(r.a.split("|").some(a=>norm(a)===bv))b.classList.add("ok");
-      else if(norm(raw)===bv)b.classList.add("no");
-    });
-  }
+  if(dir==="c"){document.querySelectorAll("#opts .opt").forEach(b=>{b.disabled=true;const bv=norm(b.dataset.v);if(r.a.split("|").some(a=>norm(a)===bv))b.classList.add("ok");else if(norm(raw)===bv)b.classList.add("no");});}
   lock();
   if(good){advOn=true;timer=setTimeout(()=>{if(done&&q[k]===r){k++;show()}},2000)}
 }
-
 function pick(v){if(done||k>=q.length)return;grade(v)}
-
 function reveal(){
   if(done||k>=q.length)return;
   const r=q[k];sk++;streak=0;wrong.push(r);record(r,false);addXp(-1);
   $("fb").innerHTML=fbBox("no","Lösung",'<div style="margin-bottom:6px">Richtige Antwort:</div>',r);
-  if(dir==="c"){
-    document.querySelectorAll("#opts .opt").forEach(b=>{
-      b.disabled=true;
-      if(r.a.split("|").some(a=>norm(a)===norm(b.dataset.v)))b.classList.add("ok");
-    });
-  }
+  if(dir==="c"){document.querySelectorAll("#opts .opt").forEach(b=>{b.disabled=true;if(r.a.split("|").some(a=>norm(a)===norm(b.dataset.v)))b.classList.add("ok");});}
   lock();
 }
-
-function go(){
-  if(k>=q.length)return;
-  if(done){k++;show();return}
-  if(q[k].m==="c"){reveal();return}
-  const raw=$("in").value;
-  if(!norm(raw)){reveal();return}
-  grade(raw);
-}
-
-/* ================= Filter UI ================= */
+function go(){if(k>=q.length)return;if(done){k++;show();return}if(q[k].m==="c"){reveal();return}const raw=$("in").value;if(!norm(raw)){reveal();return}grade(raw);}
 function buildFilters(){
   const f=$("filters");f.innerHTML="";
   FILTERS_ORDER.forEach(([c,l])=>{
     const b=document.createElement("button");b.type="button";b.className="filter-btn";b.dataset.c=c;
     b.innerHTML=(c==="all"?"":'<span class="dot '+c+'"></span>')+l+"<small>"+pool(c).length+"</small>";
-    b.onclick=()=>{
-      if(c===sel)return;
-      cacheRound();
-      sel=c;
-      markFilters(c);
-      if(!restoreRound()){start(pool(sel),selLabel(sel));}
-      else { show(); persist(k); renderWeak(); }
-    };
+    b.onclick=()=>{if(c===sel)return;cacheRound();sel=c;markFilters(c);if(!restoreRound()){start(pool(sel),selLabel(sel));}else{show();persist(k);renderWeak();}};
     f.appendChild(b);
   });
   markFilters(sel);
 }
 function markFilters(c){document.querySelectorAll("#filters .filter-btn").forEach(b=>b.classList.toggle("on",b.dataset.c===c))}
-
 function markDir(){document.querySelectorAll("#dirs .tab").forEach(b=>{const on=b.dataset.d===dir;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)})}
 function buildDirs(){
   const d=$("dirs");d.innerHTML="";
   [["s",DIRL.s],["c",DIRL.c]].forEach(([code,label])=>{
-    const b=document.createElement("button");b.type="button";b.className="tab";b.dataset.d=code;
-    b.innerHTML=label;
-    b.onclick=()=>{
-      if(b.dataset.d===dir)return;
-      cacheRound();
-      dir=b.dataset.d;sel="all";
-      markDir();buildFilters();renderWeak();
-      if(!restoreRound()){start(pool(sel),selLabel(sel));}
-      else { show(); persist(k); }
-    };
+    const b=document.createElement("button");b.type="button";b.className="tab";b.dataset.d=code;b.innerHTML=label;
+    b.onclick=()=>{if(b.dataset.d===dir)return;cacheRound();dir=b.dataset.d;sel="all";markDir();buildFilters();renderWeak();if(!restoreRound()){start(pool(sel),selLabel(sel));}else{show();persist(k);}};
     d.appendChild(b);
   });
   markDir();
 }
-
-/* ================= Reference UI ================= */
 (function(){
   const btn=$("refbtn"),pn=$("refpanel");
-  function setOpen(open){
-    pn.hidden=!open;
-    btn.setAttribute("aria-expanded",String(open));
-    $("reflab").textContent=open?"📖 Сховати таблиці та правила":"📖 Таблиці та правила";
-  }
+  function setOpen(open){pn.hidden=!open;btn.setAttribute("aria-expanded",String(open));$("reflab").textContent=open?"📖 Сховати таблиці та правила":"📖 Таблиці та правила";}
   btn.onclick=()=>setOpen(pn.hidden);
-  window.openRef=function(){
-    if(pn.hidden){setOpen(true);setR("f")}
-    btn.scrollIntoView({behavior:"smooth",block:"start"});
-  };
+  window.openRef=function(){if(pn.hidden){setOpen(true);setR("f")}btn.scrollIntoView({behavior:"smooth",block:"start"});};
   const tabs=document.querySelectorAll("#reftabs .reftab"),ps=document.querySelectorAll(".refp");
   function setR(r){tabs.forEach(b=>b.classList.toggle("on",b.dataset.r===r));ps.forEach(p=>{p.hidden=p.dataset.r!==r})}
   tabs.forEach(b=>b.onclick=()=>setR(b.dataset.r));setR("f");
 })();
-
-/* ================= EXP та ранги ================= */
 const XP_MAX=600,XKEY="tp_v2_pronomen_xp";
 const RANKS=[[0,'🌱','Новачок'],[60,'🌿','Учень'],[140,'🧭','Дослідник'],[240,'⚡','Знавець'],[360,'🔥','Профі'],[480,'💎','Майстер'],[600,'🏆','Легенда']];
 let xp={s:0,c:0};
@@ -1226,8 +794,7 @@ const saveXp=()=>{try{localStorage.setItem(XKEY,JSON.stringify(xp))}catch(e){}};
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 function updateXp(){
   const xv=xp[dir]||0,r=rankOf(xv),R=RANKS[r],N=RANKS[r+1],box=$("xp");
-  box.dataset.r=r;
-  box.classList.toggle("max",xv>=XP_MAX);
+  box.dataset.r=r;box.classList.toggle("max",xv>=XP_MAX);
   $("xf").style.width=`${xv/XP_MAX*100}%`;
   $("xt").textContent=xv;
   $("xn").textContent=xv>=XP_MAX?"MAX":`/ ${XP_MAX}`;
@@ -1246,14 +813,10 @@ function addXp(d){
   b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");
   if(rankOf(after)>rankOf(before)){box.classList.remove("lvl");void box.offsetWidth;box.classList.add("lvl")}
 }
-
-/* ================= Помилки (вікно) та скидання ================= */
 function askConfirm(title,msg,yes){
-  $("complete-title").textContent=title;
-  $("complete-text").textContent=msg;
+  $("complete-title").textContent=title;$("complete-text").textContent=msg;
   $("complete-actions").innerHTML='<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
-  $("cf-yes").onclick=()=>{hideComplete();yes()};
-  $("cf-no").onclick=hideComplete;
+  $("cf-yes").onclick=()=>{hideComplete();yes()};$("cf-no").onclick=hideComplete;
   $("complete").hidden=false;
 }
 function hideComplete(){$("complete").hidden=true}
@@ -1264,10 +827,7 @@ function openErrors(){
     $("errs-list").innerHTML='<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
     $("errs-actions").innerHTML='<button class="cancel" onclick="closeErrors()">Закрити</button>';
   }else{
-    $("errs-list").innerHTML=w.map(r=>{
-      const x={...r,m:dir};
-      return '<div class="err-item"><div class="e-de">'+filled(x)+'</div><div class="e-ex">'+esc(r.why)+'</div><div class="e-ua">Серія: <b>'+t[r.id].s+'/'+NEED+'</b></div></div>';
-    }).join("");
+    $("errs-list").innerHTML=w.map(r=>{const x={...r,m:dir};return '<div class="err-item"><div class="e-de">'+filled(x)+'</div><div class="e-ex">'+esc(r.why)+'</div><div class="e-ua">Серія: <b>'+t[r.id].s+'/'+NEED+'</b></div></div>';}).join("");
     $("errs-actions").innerHTML='<button class="go" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="cancel" id="errs-clear" onclick="clearErrors()">🗑 Очистити список</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
   }
   $("errs").hidden=false;
@@ -1276,64 +836,21 @@ function closeErrors(){$("errs").hidden=true}
 let clearArmed=false;
 function clearErrors(){
   const b=$("errs-clear");
-  if(!clearArmed){
-    clearArmed=true;b.textContent="Точно очистити?";
-    setTimeout(()=>{clearArmed=false;const bb=$("errs-clear");if(bb)bb.textContent="🗑 Очистити список"},3000);
-    return;
-  }
+  if(!clearArmed){clearArmed=true;b.textContent="Точно очистити?";setTimeout(()=>{clearArmed=false;const bb=$("errs-clear");if(bb)bb.textContent="🗑 Очистити список"},3000);return;}
   clearArmed=false;st[dir]={};save();renderWeak();openErrors();
 }
-function trainErrors(){
-  const w=weakList();closeErrors();
-  if(!w.length)return;
-  start(w,"Помилки");
-  try{$("main").scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}
-}
+function trainErrors(){const w=weakList();closeErrors();if(!w.length)return;start(w,"Помилки");try{$("main").scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}}
 $("reviewBtn").onclick=openErrors;
-$("resetBtn").onclick=()=>askConfirm("Скинути прогрес?","Прогрес режиму «"+DIRL[dir]+"» буде скинуто разом з EXP і списком помилок.",()=>{
-  st[dir]={};save();xp[dir]=0;saveXp();renderWeak();start(pool(sel),selLabel(sel));
-});
+$("resetBtn").onclick=()=>askConfirm("Скинути прогрес?","Прогрес режиму «"+DIRL[dir]+"» буде скинуто разом з EXP і списком помилок.",()=>{st[dir]={};save();xp[dir]=0;saveXp();renderWeak();start(pool(sel),selLabel(sel));});
 $("complete").addEventListener("click",e=>{if(e.target.id==="complete")hideComplete()});
 $("errs").addEventListener("click",e=>{if(e.target.id==="errs")closeErrors()});
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){if(!$("complete").hidden)hideComplete();if(!$("errs").hidden)closeErrors()}
-});
-
-/* ================= Init ================= */
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("complete").hidden)hideComplete();if(!$("errs").hidden)closeErrors()}});
 const restored=restore();
 buildDirs();buildFilters();renderWeak();
 if(restored){show()}else{start(pool(sel),selLabel(sel))}
-
-/* Enter: next task after an answer */
-document.addEventListener("keydown",e=>{
-  if(e.key!=="Enter"||e.repeat||e.defaultPrevented||!done||k>=q.length)return;
-  if(e.target&&e.target.tagName==="BUTTON")return;
-  e.preventDefault();go();
-});
-
-/* Keyboard shortcuts for choice mode (1-4) */
-document.addEventListener("keydown",e=>{
-  if(dir!=="c"||done||k>=q.length||e.ctrlKey||e.metaKey||e.altKey)return;
-  const n=parseInt(e.key,10),bs=$("opts")?$("opts").children:[];
-  if(n>=1&&n<=bs.length){e.preventDefault();bs[n-1].click()}
-});
-
-/* === iOS: розблокування аудіо при першому дотику === */
-document.addEventListener('touchstart',function unlockAudio(){
-  if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-  if(audioCtx.state==='suspended')audioCtx.resume();
-  document.removeEventListener('touchstart',unlockAudio);
-},{once:true});
-
-/* === ІНТЕГРАЦІЯ З TELEGRAM: розгортання та кнопка «Назад» === */
-if(window.Telegram&&window.Telegram.WebApp){
-  const tg=window.Telegram.WebApp;
-  try{tg.ready()}catch(e){}
-  tg.expand();
-  try{if(tg.disableVerticalSwipes)tg.disableVerticalSwipes()}catch(e){}
-  tg.BackButton.show();
-  tg.BackButton.onClick(()=>{window.location.href='index.html'});
-}
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"||e.repeat||e.defaultPrevented||!done||k>=q.length)return;if(e.target&&e.target.tagName==="BUTTON")return;e.preventDefault();go();});
+document.addEventListener("keydown",e=>{if(dir!=="c"||done||k>=q.length||e.ctrlKey||e.metaKey||e.altKey)return;const n=parseInt(e.key,10),bs=$("opts")?$("opts").children:[];if(n>=1&&n<=bs.length){e.preventDefault();bs[n-1].click()}});
+document.addEventListener('touchstart',function unlockAudio(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();document.removeEventListener('touchstart',unlockAudio);},{once:true});
+if(window.Telegram&&window.Telegram.WebApp){const tg=window.Telegram.WebApp;try{tg.ready()}catch(e){}tg.expand();try{if(tg.disableVerticalSwipes)tg.disableVerticalSwipes()}catch(e){}tg.BackButton.show();tg.BackButton.onClick(()=>{window.location.href='index.html'});}
 </script>
-
 </body></html>
