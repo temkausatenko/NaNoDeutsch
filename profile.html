@@ -146,7 +146,7 @@
 
   <button type="button" class="danger-btn" id="reset-btn">🗑 Очистити весь прогрес</button>
 
-  <!-- Нижнє меню (ТЕПЕРЬ ТОЛЬКО 2 КНОПКИ) -->
+  <!-- Нижнє меню -->
   <nav class="bottom-nav" aria-label="Навігація">
     <a href="index.html" class="nav-item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16v-2H4v2zm0-4h16v-2H4v2zm0-4h16v-2H4v2zm0-6v2h16V5H4z"/></svg>
@@ -166,9 +166,19 @@
     const DAILY_GOAL = 50;
     const XP_PER_LEVEL_BASE = 50;
 
+    // === ДОБАВЛЕНЫ НАЗВАНИЯ ДЛЯ НОВОГО ТРЕНАЖЕРА ===
     const TRAINER_NAMES = {
       [PREFIX + 'insert']: '✍️ Вставити слово',
-      [PREFIX + 'translate']: '🔤 Переклад'
+      [PREFIX + 'translate']: '🔤 Переклад',
+      [PREFIX + 'konnektoren_pos0']: '🔗 Konnektoren: Pos 0',
+      [PREFIX + 'konnektoren_pos1']: '🔗 Konnektoren: Pos 1',
+      [PREFIX + 'konnektoren_nebensatz']: '🔗 Konnektoren: Nebensatz',
+      [PREFIX + 'konnektoren_indirekt']: '🔗 Konnektoren: Indirekt',
+      [PREFIX + 'konnektoren_doppel']: '🔗 Konnektoren: Doppel',
+      [PREFIX + 'konnektoren_jedesto']: '🔗 Konnektoren: Je...desto',
+      [PREFIX + 'konnektoren_temporal']: '🔗 Konnektoren: Temporal',
+      [PREFIX + 'konnektoren_kausal']: '🔗 Konnektoren: Kausal',
+      [PREFIX + 'konnektoren_modal']: '🔗 Konnektoren: Modal'
     };
 
     const tg = window.Telegram && window.Telegram.WebApp;
@@ -259,13 +269,11 @@
       const streak = calcStreak(activity);
       const lv = levelInfo(totalXP);
 
-      // Рівень
       document.getElementById('level-label').textContent = 'Рівень ' + lv.level;
       document.getElementById('level-xp').textContent = `${fmt(totalXP)} / ${fmt(lv.to)} XP`;
       document.getElementById('level-sub').textContent = `До наступного рівня: ${fmt(lv.left)} XP`;
       document.getElementById('level-bar').style.width = lv.pct + '%';
 
-      // Плитки
       document.getElementById('total-xp').textContent = fmt(totalXP);
       document.getElementById('streak').textContent = streak;
       document.getElementById('streak-unit').textContent = pluralDays(streak);
@@ -273,7 +281,6 @@
       document.getElementById('goal-xp').textContent = DAILY_GOAL;
       document.getElementById('goal-bar').style.width = Math.min(100, (today / DAILY_GOAL) * 100) + '%';
 
-      // Тренажери
       const box = document.getElementById('trainers');
       box.textContent = '';
       if (!trainers.length) {
@@ -288,7 +295,6 @@
         });
       }
 
-      // Досягнення
       const badgesBox = document.getElementById('badges'); badgesBox.textContent = '';
       buildBadges(totalXP, streak, lv.level).forEach(b => {
         const el = document.createElement('div'); el.className = 'badge' + (b.on ? ' on' : '');
