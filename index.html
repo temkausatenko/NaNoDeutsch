@@ -54,6 +54,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
     gap: 14px;
     animation: fadeIn 0.8s var(--ease) 0.1s both;
   }
@@ -63,6 +64,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
+    min-height: 160px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 20px;
@@ -78,18 +81,6 @@
     background: var(--surface-hover);
   }
 
-  /* Пятая карточка на всю ширину */
-  .card.full-width {
-    grid-column: span 2;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .card.full-width .card-content {
-    flex: 1;
-  }
-
   /* Иконка */
   .icon-wrapper {
     width: 48px;
@@ -99,17 +90,10 @@
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     position: relative;
     z-index: 2;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  .card.full-width .icon-wrapper {
-    margin-bottom: 0;
-    width: 56px;
-    height: 56px;
-    font-size: 28px;
   }
 
   /* Градиенты для иконок */
@@ -135,17 +119,13 @@
     margin: 0 0 4px 0;
   }
 
-  .card.full-width .card-title {
-    font-size: 17px;
-  }
-
   .card-sub {
     font-size: 12px;
     color: var(--muted);
     line-height: 1.3;
   }
 
-  /* Обновленная плашка с датой */
+  /* Плашка с датой */
   .date-chip {
     position: absolute;
     top: 12px;
@@ -164,14 +144,6 @@
     align-items: center;
     gap: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  }
-
-  /* Для широкой карточки дата стоит под текстом */
-  .card.full-width .date-chip {
-    position: static;
-    margin-top: 10px;
-    display: inline-flex;
-    background: rgba(255, 255, 255, 0.1);
   }
 
   /* Свечение внутри карточки */
@@ -231,7 +203,7 @@
       </div>
     </a>
 
-    <!-- 15.10 Konjunktiv II -->
+    <!-- 15.10 -->
     <a href="15.10.2026-konjuktiv-II.html" class="card">
       <div class="date-chip">📅 15.10</div>
       <div class="icon-wrapper icon-6">🎭</div>
@@ -241,7 +213,7 @@
       </div>
     </a>
 
-    <!-- 16.10 Pronominaladverbien -->
+    <!-- 16.10 -->
     <a href="16-10-2026-pronominaladverbien.html" class="card">
       <div class="date-chip">📅 16.10</div>
       <div class="icon-wrapper icon-7">🧩</div>
@@ -261,23 +233,23 @@
       </div>
     </a>
 
-    <!-- 19.10 Temporale Konnektoren (на всю ширину) -->
-    <a href="19-10-2026-temporale-konnektoren.html" class="card full-width">
+    <!-- 19.10 -->
+    <a href="19-10-2026-temporale-konnektoren.html" class="card">
+      <div class="date-chip">📅 19.10</div>
       <div class="icon-wrapper icon-5">⏳</div>
       <div class="card-content">
         <h2 class="card-title">Temporale Konnektoren</h2>
         <div class="card-sub">Часові сполучники</div>
-        <span class="date-chip">📅 19.10</span>
       </div>
     </a>
 
-    <!-- 24.10 Partizip I (на всю ширину) -->
-    <a href="24-10-2026-partizip-I.html" class="card full-width">
+    <!-- 24.10 -->
+    <a href="24-10-2026-partizip-I.html" class="card">
+      <div class="date-chip">📅 24.10</div>
       <div class="icon-wrapper icon-8">📖</div>
       <div class="card-content">
         <h2 class="card-title">Partizip I</h2>
         <div class="card-sub">Дієприкметник I</div>
-        <span class="date-chip">📅 24.10</span>
       </div>
     </a>
   </div>
