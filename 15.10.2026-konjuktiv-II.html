@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Konjunktiv II – Trainer 15.10.2026</title>
+<!-- Telegram Web App SDK -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<!-- Синхронизация прогресса -->
+<script src="sync.js"></script>
+<style>
+:root{
+  --bg:#090b10; --bg-grad:#151b2b; --card:#12161f; --card-hover:#1a202c;
+  --tx:#f1f5f9; --mu:#94a3b8; --pr:#6366f1; --pr-glow:rgba(99,102,241,.4);
+  --pl:#1e293b; --ok:#10b981; --okb:rgba(16,185,129,.1); --no:#ef4444;
+  --nob:rgba(239,68,68,.1); --go:#f59e0b; --gob:rgba(245,158,11,.1);
+  --bd:#2a3441; --sa:#a78bfa; --pe:#f9a8d4;
+  --radius:16px; color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+[data-theme="light"]{
+  --bg:#f8fafc; --bg-grad:#e2e8f0; --card:#ffffff; --card-hover:#f1f5f9;
+  --tx:#0f172a; --mu:#64748b; --pr:#4f46e5; --pr-glow:rgba(79,70,229,.2);
+  --pl:#e2e8f0; --ok:#059669; --okb:rgba(5,150,105,.1); --no:#dc2626;
+  --nob:rgba(220,38,38,.1); --go:#d97706; --gob:rgba(217,119,6,.1);
+  --bd:#cbd5e1; --sa:#7c3aed; --pe:#db2777; color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{
+  margin:0; background-color:var(--bg);
+  background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
+  color:var(--tx); font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+  transition:background-color .3s,color .3s;
+}
+.w{max-width:720px;margin:0 auto;padding:24px 16px 60px;position:relative}
+
+.header-wrap{position:relative;text-align:center;margin-bottom:16px;padding-top:8px}
+h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
+  background:linear-gradient(135deg,var(--sa),var(--pe));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);
+  -webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
+
+.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;
+  background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
+.theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+@media(max-width:480px){.header-wrap{padding-top:48px}}
+
+.tabs{display:flex;gap:8px;margin:0 0 10px;flex-wrap:wrap;justify-content:center}
+.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);
+  border-radius:99px;padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;
+  font-size:.85rem;transition:all .2s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;
+  background:var(--pl);border-radius:99px;line-height:1.4}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
+.tab.on small{color:#fff;background:rgba(255,255,255,.2)}
+
+.chips-row{display:flex;gap:6px;justify-content:center;margin:0 0 14px;flex-wrap:wrap}
+.chip{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
+  padding:5px 12px;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;
+  font-family:inherit;line-height:1.2}
+.chip.on{background:var(--pl);border-color:var(--sa);color:var(--sa)}
+
+.pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));
+  border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.stat-box{background:var(--card);padding:10px 4px;text-align:center;display:flex;
+  flex-direction:column;align-items:center;justify-content:center}
+.stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);
+  margin-bottom:2px;font-weight:600}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--tx);line-height:1.1}
+.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}
+
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);
+  padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1);
+  animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
+@keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;
+  color:var(--mu);padding-right:88px;text-transform:uppercase}
+
+/* Кнопки в карточці */
+.speak,.reset{position:absolute;top:16px;width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;
+  transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;
+  line-height:1;z-index:2}
+.speak{right:16px;font-size:.95rem;}
+.reset{right:54px;font-size:1.05rem;}
+.speak:hover,.reset:hover{color:var(--tx);border-color:var(--pr)}
+
+.sent{font-size:1.2rem;font-weight:500;margin:0 0 6px;line-height:1.5;
+  cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.sent:hover{opacity:.85}.sent:active{opacity:.7}
+
+/* Кнопка Перекласти */
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;
+  border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s;margin-bottom: 14px;}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:.85rem;line-height:1.4;color:var(--mu);margin-bottom: 14px; font-style: italic;}
+
+.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);
+  margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
+.blank.ok{color:var(--ok);border-color:var(--ok)}
+.blank.no{color:var(--no);border-color:var(--no)}
+
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;
+  border:2px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;
+  font-size:1rem;outline:none;transition:border-color .2s}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 2px var(--pr-glow)}
+.chk{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;
+  cursor:pointer;white-space:nowrap;transition:all .2s}
+.chk{border:2px solid var(--pr);background:var(--pr);color:#fff}
+.chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;
+  display:none;animation:pop .4s ease}
+.fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
+.fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}
+.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;
+  user-select:none;display:inline-block}
+.fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
+.fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
+.fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;
+  animation:shrink 1.8s linear forwards;width:100%}
+@keyframes shrink{to{width:0}}
+
+.foot{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin-top:24px;width:100%}
+.foot-row{display:flex;gap:10px;justify-content:center;width:100%;
+  flex-wrap:wrap;margin-bottom:12px}
+.btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;
+  cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);
+  transition:all .2s;font-size:.85rem}
+.btn:hover{border-color:var(--pr);transform:translateY(-1px)}
+.btn.g{font-weight:500;font-size:.82rem;padding:8px 14px;color:var(--mu);
+  border-color:transparent;background:transparent}
+.btn.g:hover{color:var(--tx);background:var(--pl);transform:none}
+.btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+
+.todo{margin-top:28px}
+.todo h2{font-size:.68rem;font-weight:600;letter-spacing:.16em;margin:0;
+  color:var(--mu);text-transform:uppercase}
+.todo h2 b{color:var(--tx);margin-left:6px}
+.todo p{margin:6px 0 14px;color:var(--mu);font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+  gap:6px;max-height:420px;overflow-y:auto;padding-right:4px}
+.it{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;
+  border:1px solid var(--bd);background:transparent;color:var(--tx);font:inherit;
+  font-size:.82rem;text-align:left;cursor:pointer;transition:all .18s}
+.it:hover{border-color:var(--pr);background:var(--card-hover)}
+.it.cur{border-color:var(--pr);background:var(--card-hover)}
+.it.done{opacity:.4}
+.it i{flex:none;width:8px;height:8px;border-radius:50%;
+  background:color-mix(in srgb,var(--mu) 45%,transparent);transition:background .3s}
+.it.c1 i{background:var(--pr)}.it.c2 i{background:var(--go)}.it.c3 i{background:var(--ok)}
+.it span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it em{font-style:normal;color:var(--mu);font-size:.72rem;flex:none}
+
+.complete{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;
+  align-items:center;justify-content:center;z-index:100;
+  padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px))
+          max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;
+  padding:28px 24px;max-width:440px;width:100%;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-card .cmax{color:var(--tx);font-weight:600}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;
+  font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover{border-color:var(--pr)}
+
+#theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
+#theory-section.show{display:block}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);
+  padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.theory-card h2{font-size:1.15rem;color:var(--sa);border-bottom:1px solid var(--bd);
+  padding-bottom:6px;margin-top:24px}
+.theory-card h2:first-of-type{margin-top:0}
+.theory-card h3{font-size:1rem;color:var(--tx);margin-top:18px}
+.theory-card p,.theory-card li{color:var(--mu);font-size:.92rem;line-height:1.6}
+.theory-card ul{padding-left:20px;margin:10px 0}
+.theory-card .rule-box{background:var(--gob);border-left:4px solid var(--go);
+  padding:11px 14px;margin:16px 0;border-radius:6px;color:var(--go);font-size:.92rem}
+.theory-card .example{background:var(--pl);border-left:4px solid var(--sa);
+  padding:11px 14px;margin:10px 0;font-style:italic;border-radius:0 8px 8px 0;
+  font-size:.9rem;color:var(--tx)}
+.theory-card .example span.hl{color:var(--sa);font-weight:bold}
+.table-wrap{overflow-x:auto}
+.theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
+.theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
+.theory-card th{background:var(--pl);color:var(--tx)}
+.theory-card tr:nth-child(even){background:color-mix(in srgb,var(--pl) 35%,transparent)}
+
+/* EXP BAR */
+.xp{--xa:#475569;--xz:#94a3b8;margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{position:relative;display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;transition:width .7s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
+.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+@keyframes xgold{to{background-position:200% 0}}
+
+@media(max-width:480px){
+  .stats-panel{grid-template-columns:repeat(3,1fr)}
+  .row{flex-direction:column}
+  .chk{padding:12px}
+  .card{padding:18px}
+  .card h2{padding-right:88px;}
+  h1{font-size:1.4rem}
+  .complete-card{padding:22px 18px}
+  .theory-card{padding:16px}
+}
+@media(hover:hover) and (pointer:fine){
+  .tab:hover{border-color:var(--pr);color:var(--tx)}
+  .tab.on:hover{filter:brightness(1.1)}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.g:hover{transform:none}
+}
+button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="header-wrap">
+    <h1>Konjunktiv II<small>Gegenwart · Vergangenheit</small></h1>
+    <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Увімкнути/Вимкнути звук">🔊</button>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="chips-row" id="chips"></div>
+  <div class="pg"><i id="bar"></i></div>
+
+  <div class="stats-panel">
+    <div class="stat-box"><div class="stat-label">Завдань</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+    <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
+    <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
+  </div>
+
+  <div class="card" id="card">
+    <h2 id="title"></h2>
+    <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
+    <button class="reset" id="reset" title="Скинути прогрес цієї вкладки">↺</button>
+    <p class="sent" id="sent" tabindex="0" role="button"></p>
+    <div id="trans-box"></div>
+    
+    <div class="row">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false"
+        placeholder="Konjunktiv II …" enterkeyhint="done">
+      <button class="chk" id="chk">Перевірити ✓</button>
+    </div>
+    
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <div class="xp" id="xp" data-r="0">
+    <div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span></div>
+    <div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div>
+    <div class="xb"><i id="xf"></i><s id="xticks"></s></div>
+  </div>
+
+  <div class="foot">
+    <div class="foot-row">
+      <button class="btn danger" id="reviewBtn" style="display:none" onclick="startReview()"></button>
+    </div>
+    <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Теорія</button>
+  </div>
+
+  <div class="todo">
+    <h2>ЩЕ ТРЕНУВАТИ <b id="left"></b></h2>
+    <p>Завдання залишається в списку, доки ти не відповіси правильно <b>3 рази поспіль</b>.</p>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div id="theory-section">
+    <div class="theory-card">
+      <h1 style="margin-bottom:14px;font-size:1.4rem;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Konjunktiv II</h1>
+      <p style="text-align:center;margin-bottom:18px"><em>Умовний спосіб: нереальність, побажання, ввічливість</em></p>
+
+      <div class="rule-box">🚨 <strong>КОЛИ ВЖИВАТИ:</strong>
+        Нереальні умови (Wenn ich Zeit <strong>hätte</strong>…), побажання (Ich <strong>wäre</strong> gern reich),
+        ввічливі прохання (<strong>Könnten</strong> Sie…? Ich <strong>hätte</strong> gern…).
+      </div>
+
+      <h2>1. Gegenwart (теперішній)</h2>
+      <p>Три способи утворення:</p>
+      <ul>
+        <li><strong>würde + Infinitiv</strong> — для більшості дієслів: <em>ich würde machen, du würdest kommen</em></li>
+        <li><strong>Умлаут у Präteritum</strong> — для сильних дієслів: <em>kommen → käme, wissen → wüsste, geben → gäbe</em></li>
+        <li><strong>Особливі форми</strong> без würde: <em>sein → wäre, haben → hätte, werden → würde</em></li>
+      </ul>
+
+      <div class="rule-box">⚠️ <strong>ЗАЗВИЧАЙ НЕ:</strong> ❌ „würde sein", „würde haben"<br>
+        ✅ <strong>wäre, hätte, würde</strong> — sein, haben і werden мають власні форми Konjunktiv II, тому з ними зазвичай обходяться без würde + Infinitiv.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Infinitiv</th><th>Konjunktiv II</th><th>Приклад</th></tr>
+          <tr><td>sein</td><td><strong>wäre</strong></td><td>Ich wäre gern Lehrer.</td></tr>
+          <tr><td>haben</td><td><strong>hätte</strong></td><td>Ich hätte gern einen Hund.</td></tr>
+          <tr><td>werden</td><td><strong>würde</strong></td><td>Ich würde gern reisen.</td></tr>
+          <tr><td>können</td><td><strong>könnte</strong></td><td>Könntest du mir helfen?</td></tr>
+          <tr><td>müssen</td><td><strong>müsste</strong></td><td>Du müsstest mehr lernen.</td></tr>
+          <tr><td>dürfen</td><td><strong>dürfte</strong></td><td>Dürfte ich etwas fragen?</td></tr>
+          <tr><td>sollen</td><td><strong>sollte</strong></td><td>Du solltest weniger rauchen.</td></tr>
+          <tr><td>mögen</td><td><strong>möchte</strong></td><td>Ich möchte einen Kaffee.</td></tr>
+        </table>
+      </div>
+
+      <h2>2. Vergangenheit (минулий)</h2>
+      <p>Утворюється за схемою: <strong>hätte / wäre + Partizip II</strong></p>
+      <ul>
+        <li><strong>hätte</strong> — з більшістю дієслів: <em>hätte gemacht, hätte gesehen, hätte gewusst</em></li>
+        <li><strong>wäre</strong> — з дієсловами руху/зміни стану: <em>wäre gekommen, wäre gegangen, wäre geblieben</em></li>
+      </ul>
+      <p>Вибір допоміжного дієслова такий самий, як у Perfekt.</p>
+
+      <div class="example">
+        <strong>Gegenwart:</strong> Wenn ich Zeit <span class="hl">hätte</span>, würde ich kommen.<br>
+        <strong>Vergangenheit:</strong> Wenn ich Zeit <span class="hl">gehabt hätte</span>, wäre ich gekommen.
+      </div>
+
+      <h2>3. Ввічливість (Höflichkeit)</h2>
+      <p>Konjunktiv II пом'якшує прохання та запитання:</p>
+      <div class="example">
+        <strong>Könnten</strong> Sie mir bitte helfen? (Чи могли б ви мені допомогти?)<br>
+        <strong>Würden</strong> Sie bitte Platz nehmen? (Чи не сіли б ви?)<br>
+        Ich <strong>hätte</strong> gern einen Kaffee. (Я хотів би каву.)
+      </div>
+
+      <h2>4. Типові помилки</h2>
+      <div class="example">❌ Ich würde Lehrer sein. → ✅ Ich <span class="hl">wäre</span> Lehrer.</div>
+      <div class="example">❌ Ich würde haben Zeit. → ✅ Ich <span class="hl">hätte</span> Zeit.</div>
+      <div class="example">❌ Wenn ich Zeit habe, würde ich kommen. → ✅ Wenn ich Zeit <span class="hl">hätte</span>, würde ich kommen.</div>
+      <div class="example">❌ Ich hätte gekommt. → ✅ Ich <span class="hl">wäre gekommen</span>.</div>
+    </div>
+  </div>
+</div>
+
+<div class="complete" id="complete" hidden>
+  <div class="complete-card">
+    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
+    <p id="complete-text">Усі завдання пройдено: <span class="cmax">3</span> правильні відповіді поспіль. Гарна робота!</p>
+    <div class="complete-actions" id="complete-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== THEME ===================== */
+const store = {
+  get(k){ try{return localStorage.getItem(k)}catch(e){return null} },
+  set(k,v){ try{localStorage.setItem(k,v)}catch(e){} }
+};
+const mqLight = window.matchMedia('(prefers-color-scheme: light)');
+function effTheme(){ return document.documentElement.getAttribute('data-theme')||(mqLight.matches?'light':'dark'); }
+function paintThemeIcon(){ document.getElementById('theme-toggle').textContent = effTheme()==='light'?'☀️':'🌙'; }
+const savedTheme = store.get('tp_v2_konj2_theme');
+if(savedTheme==='light'||savedTheme==='dark') document.documentElement.setAttribute('data-theme',savedTheme);
+paintThemeIcon();
+if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
+function toggleTheme(){
+  const n = effTheme()==='light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', n);
+  store.set('tp_v2_konj2_theme', n);
+  paintThemeIcon();
+}
+
+/* ===================== SOUND ===================== */
+let soundEnabled = store.get('tp_v2_konj2_sound') !== 'off';
+function updateSoundIcon(){ document.getElementById('sound-toggle').textContent = soundEnabled?'🔊':'🔇'; }
+updateSoundIcon();
+function toggleSound(){
+  soundEnabled = !soundEnabled;
+  store.set('tp_v2_konj2_sound', soundEnabled?'on':'off');
+  updateSoundIcon();
+  if(soundEnabled) playSound('correct');
+}
+let audioCtx;
+function playSound(type){
+  if(!soundEnabled) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx.state==='suspended') audioCtx.resume();
+    if ('audioSession' in navigator) { try { navigator.audioSession.type = 'playback'; } catch(e) {} }
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode); gainNode.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    if(type==='correct'){
+      osc.type='sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now+0.1);
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.4, now+0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now+0.5);
+      osc.start(now); osc.stop(now+0.6);
+    } else {
+      osc.type='triangle';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.exponentialRampToValueAtTime(100, now+0.2);
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(0.4, now+0.05);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, now+0.3);
+      osc.start(now); osc.stop(now+0.4);
+    }
+  }catch(e){}
+}
+
+/* ===================== SPEECH ===================== */
+function speak(text){
+  if(!window.speechSynthesis||!text) return;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.lang='de-DE'; u.rate=0.9; u.pitch=1; u.volume=1;
+    if ('audioSession' in navigator) { try { navigator.audioSession.type = 'playback'; } catch(e) {} }
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+/* ===================== DATA ===================== */
+const G1 = [
+  {s:"Ich ___ gern Lehrer.", h:"sein", a:"wäre", t:"Я хотів би бути вчителем."},
+  {s:"Lukas ___ gern einen Hund.", h:"haben", a:"hätte", t:"Лукас хотів би мати собаку."},
+  {s:"Wir ___ gern in Berlin wohnen.", h:"werden", a:"würden", t:"Ми хотіли б жити в Берліні."},
+  {s:"Du ___ gern größer.", h:"sein", a:"wärst", alts:["wärest"], t:"Ти хотів би бути вищим."},
+  {s:"Lena ___ gern ein Buch schreiben.", h:"werden", a:"würde", t:"Лена хотіла б написати книгу."},
+  {s:"Ihr ___ gern im Urlaub.", h:"sein", a:"wärt", alts:["wäret"], t:"Ви хотіли б бути у відпустці."},
+  {s:"Du ___ gern ein großes Haus.", h:"haben", a:"hättest", t:"Ти хотів би мати великий будинок."},
+  {s:"Wir ___ gern reich.", h:"sein", a:"wären", t:"Ми хотіли б бути багатими."},
+  {s:"Ich ___ gern einen Balkon.", h:"haben", a:"hätte", t:"Я хотів би мати балкон."},
+  {s:"Die Kinder ___ gern Eis essen.", h:"werden", a:"würden", t:"Діти хотіли б їсти морозиво."},
+  {s:"Ich ___ gern einen Tanzkurs machen.", h:"werden", a:"würde", t:"Я хотів би піти на курси танців."},
+  {s:"Maria ___ gern berühmt.", h:"sein", a:"wäre", t:"Марія хотіла б бути відомою."},
+  {s:"Ihr ___ gern Kinder.", h:"haben", a:"hättet", t:"Ви хотіли б мати дітей."},
+  {s:"Du ___ gern Deutsch lernen.", h:"werden", a:"würdest", t:"Ти хотів би вчити німецьку."},
+  {s:"Meine Eltern ___ gern ein Boot.", h:"haben", a:"hätten", t:"Мої батьки хотіли б мати човен."}
+];
+const G2 = [
+  {s:"___ du mir helfen?", h:"können", a:"könntest", t:"Ти міг би мені допомогти?"},
+  {s:"Du ___ weniger rauchen.", h:"sollen", a:"solltest", t:"Тобі слід би менше палити."},
+  {s:"Was ___ ihr trinken?", h:"möchten", a:"möchtet", t:"Що ви хотіли б випити?"},
+  {s:"Ich ___ mal deine Hilfe.", h:"brauchen", a:"bräuchte", t:"Мені знадобилася б твоя допомога."},
+  {s:"Wir ___ morgen ins Theater gehen.", h:"können", a:"könnten", t:"Ми могли б завтра піти в театр."},
+  {s:"Ich ___ gern mehr über dich.", h:"wissen", a:"wüsste", t:"Я хотів би більше дізнатися про тебе."},
+  {s:"Wo ___ du sitzen?", h:"möchten", a:"möchtest", t:"Де ти хотів би сидіти?"},
+  {s:"___ ich Sie etwas fragen?", h:"dürfen", a:"dürfte", t:"Можна вас дещо запитати?"},
+  {s:"Du ___ heute früher nach Hause kommen.", h:"müssen", a:"müsstest", t:"Тобі довелося б сьогодні прийти додому раніше."},
+  {s:"Ihr ___ mehr Sport machen.", h:"sollen", a:"solltet", t:"Вам слід би більше займатися спортом."},
+  {s:"Ich ___ es gut, wenn du mir mal schreibst.", h:"finden", a:"fände", t:"Я вважав би за добре, якби ти мені іноді писав."},
+  {s:"Er ___ einen Kaffee.", h:"möchten", a:"möchte", t:"Він хотів би каву."},
+  {s:"___ Sie bitte die Tür schließen?", h:"können", a:"könnten", t:"Чи могли б ви, будь ласка, зачинити двері?"},
+  {s:"Ich ___ mal telefonieren.", h:"müssen", a:"müsste", t:"Мені треба було б зателефонувати."},
+  {s:"___ Sie mir bitte eine Serviette geben?", h:"werden", a:"würden", t:"Чи не дали б ви мені, будь ласка, серветку?"}
+];
+const V3 = [
+  {s:"Wenn ich das ___ !", h:"wissen", a:"gewusst hätte", t:"Якби я це знав!"},
+  {s:"___ du das ___ ?", h:"denken", a:"hättest gedacht", t:"Ти б так подумав?"},
+  {s:"Bei der Hochzeit ___ ich gern dabei ___.", h:"sein", a:"wäre gewesen", t:"На весіллі я хотів би бути присутнім."},
+  {s:"Er ___ fast den Zug ___.", h:"verpassen", a:"hätte verpasst", t:"Він мало не пропустив поїзд."},
+  {s:"Ich ___ gern den ganzen Abend ___.", h:"tanzen", a:"hätte getanzt", t:"Я хотів би танцювати весь вечір."},
+  {s:"Wir ___ lieber ins Kino ___.", h:"gehen", a:"wären gegangen", t:"Ми радше пішли б у кіно."},
+  {s:"Ich wünschte, du ___ mich ___.", h:"anrufen", a:"hättest angerufen", t:"Я хотів би, щоб ти мені зателефонував."},
+  {s:"Wenn ihr nur mehr ___ !", h:"lernen", a:"gelernt hättet", t:"Якби ви тільки більше вчилися!"},
+  {s:"Beinahe ___ ein Unfall ___.", h:"passieren", a:"wäre passiert", t:"Мало не сталася аварія."},
+  {s:"Wenn du bloß mehr Geld ___ !", h:"haben", a:"gehabt hättest", t:"Якби в тебе тільки було більше грошей!"},
+  {s:"Ich wünschte, er ___ zu Hause ___.", h:"bleiben", a:"wäre geblieben", t:"Я хотів би, щоб він залишився вдома."},
+  {s:"Wenn wir doch bloß das rote Auto ___ !", h:"kaufen", a:"gekauft hätten", t:"Якби ми тільки купили ту червону машину!"},
+  {s:"Ich wünschte, Sie ___ mir früher Bescheid ___.", h:"sagen", a:"hätten gesagt", t:"Я хотів би, щоб ви мені раніше повідомили."},
+  {s:"Wir ___ dich beinahe ___.", h:"vergessen", a:"hätten vergessen", t:"Ми мало не забули тебе."},
+  {s:"Fast ___ die Mülleimer ___.", h:"umfallen", a:"wären umgefallen", t:"Мало не перекинулися сміттєві відра."}
+];
+const G3 = [
+  {s:"Es ___ schön, wenn du am Wochenende Zeit hättest.", h:"sein", a:"wäre", t:"Було б чудово, якби в тебе був час на вихідних."},
+  {s:"Das ___ mir sehr recht.", h:"sein", a:"wäre", t:"Це було б мені дуже зручно."},
+  {s:"Ohne dich ___ die Party langweilig.", h:"sein", a:"wäre", t:"Без тебе вечірка була б нудною."},
+  {s:"Es ___ besser, wenn wir uns früher treffen.", h:"sein", a:"wäre", t:"Було б краще, якби ми зустрілися раніше."},
+  {s:"Ich ___ gern einen Kaffee, bitte.", h:"haben", a:"hätte", t:"Я хотів би каву, будь ласка."},
+  {s:"___ du kurz Zeit für mich?", h:"haben", a:"hättest", t:"Мав би ти хвилинку для мене?"},
+  {s:"Wir ___ gern einen Tisch am Fenster.", h:"haben", a:"hätten", t:"Ми хотіли б столик біля вікна."},
+  {s:"Ich ___ gern die Speisekarte.", h:"haben", a:"hätte", t:"Я хотів би меню."},
+  {s:"___ ihr Lust, am Sonntag spazieren zu gehen?", h:"haben", a:"hättet", t:"Чи мали б ви бажання прогулятися в неділю?"},
+  {s:"Ich ___ nichts dagegen, wenn du später kommst.", h:"haben", a:"hätte", t:"Я не мав би нічого проти, якби ти прийшов пізніше."},
+  {s:"Ich ___ dir ja helfen, aber ich habe keine Zeit.", h:"werden", a:"würde", t:"Я б тобі допоміг, але в мене немає часу."},
+  {s:"Es ___ mich freuen, wenn du am Samstag kommst.", h:"werden", a:"würde", t:"Я був би радий, якби ти прийшов у суботу."},
+  {s:"Wir ___ gern am Freitag bei euch vorbeikommen.", h:"werden", a:"würden", t:"Ми хотіли б зайти до вас у п'ятницю."},
+  {s:"Das ___ ich an deiner Stelle nicht machen.", h:"werden", a:"würde", t:"На твоєму місці я б цього не робив."},
+  {s:"___ du mir bitte den Schlüssel geben?", h:"werden", a:"würdest", t:"Чи не дав би ти мені, будь ласка, ключ?"},
+  {s:"Es ___ reichen, wenn du bis 18 Uhr Bescheid sagst.", h:"werden", a:"würde", t:"Було б достатньо, якби ти повідомив до 18-ї."},
+  {s:"Es ___ eine einfache Lösung, wenn alle mitmachen.", h:"geben", a:"gäbe", t:"Було б просте рішення, якби всі брали участь."},
+  {s:"___ es hier in der Nähe eine Apotheke?", h:"geben", a:"gäbe", t:"Чи є тут поблизу аптека?"},
+  {s:"Ohne Internet ___ es viele Probleme.", h:"geben", a:"gäbe", t:"Без інтернету було б багато проблем."},
+  {s:"Es ___ weniger Stress, wenn wir früher planen.", h:"geben", a:"gäbe", t:"Було б менше стресу, якби ми планували раніше."},
+  {s:"Es ___ darauf an, wie viel Zeit wir haben.", h:"kommen", a:"käme", t:"Залежало б від того, скільки в нас часу."},
+  {s:"___ für dich auch Dienstag infrage?", h:"kommen", a:"käme", t:"Чи підійшов би тобі також вівторок?"},
+  {s:"Das ___ mir sehr gelegen.", h:"kommen", a:"käme", t:"Це було б мені дуже зручно."},
+  {s:"___ es dir gelegen, wenn wir uns um 18 Uhr treffen?", h:"kommen", a:"käme", t:"Чи було б тобі зручно, якби ми зустрілися о 18-й?"},
+  {s:"Das ___ sich machen.", h:"lassen", a:"ließe", t:"Це можна було б зробити."},
+  {s:"___ sich der Termin auf Freitag verschieben?", h:"lassen", a:"ließe", t:"Чи можна було б перенести зустріч на п'ятницю?"},
+  {s:"Das ___ sich leider nicht ändern.", h:"lassen", a:"ließe", t:"Це, на жаль, не можна було б змінити."},
+  {s:"___ sich das auch online erledigen?", h:"lassen", a:"ließe", t:"Чи можна було б це також зробити онлайн?"},
+  {s:"Wir ___ noch zwei Stühle für die Gäste.", h:"brauchen", a:"bräuchten", t:"Нам знадобилися б ще два стільці для гостей."},
+  {s:"Für das Projekt ___ wir mehr Zeit.", h:"brauchen", a:"bräuchten", t:"Для проєкту нам знадобилося б більше часу."},
+  {s:"Wir ___ Ihre Unterschrift, bitte.", h:"brauchen", a:"bräuchten", t:"Нам потрібен був би ваш підпис, будь ласка."},
+  {s:"___ Sie noch eine Tüte?", h:"brauchen", a:"bräuchten", t:"Чи потрібен вам був би ще пакет?"},
+  {s:"Ich ___ gern, wann der Zug ankommt.", h:"wissen", a:"wüsste", t:"Я хотів би знати, коли прибуває поїзд."},
+  {s:"___ du, wo hier eine Bank ist?", h:"wissen", a:"wüsstest", t:"Чи знав би ти, де тут банк?"},
+  {s:"Ich ___ gern deine Meinung dazu.", h:"wissen", a:"wüsste", t:"Я хотів би знати твою думку з цього приводу."},
+  {s:"___ Sie, ob das Geschäft heute geöffnet ist?", h:"wissen", a:"wüssten", t:"Чи знали б ви, чи відкритий сьогодні магазин?"},
+  {s:"Ich ___ es besser, wenn wir morgen telefonieren.", h:"finden", a:"fände", t:"Я вважав би кращим, якби ми завтра поговорили по телефону."},
+  {s:"___ du es okay, wenn ich später komme?", h:"finden", a:"fändest", t:"Чи вважав би ти нормальним, якби я прийшов пізніше?"},
+  {s:"Ich ___ es schön, wenn du mitkommst.", h:"finden", a:"fände", t:"Я вважав би чудовим, якби ти пішов з нами."},
+  {s:"Wie ___ du das?", h:"finden", a:"fändest", t:"Як би ти до цього поставився?"},
+  {s:"Wir ___ es fair, wenn alle die gleiche Chance bekommen.", h:"finden", a:"fänden", t:"Ми вважали б справедливим, якби всі отримали однаковий шанс."},
+  {s:"Es ___ schneller, wenn wir die Abkürzung nehmen.", h:"gehen", a:"ginge", t:"Було б швидше, якби ми пішли коротшим шляхом."},
+  {s:"___ es dir am Donnerstag?", h:"gehen", a:"ginge", t:"Чи підійшов би тобі четвер?"},
+  {s:"Das ___ auch ohne Termin.", h:"gehen", a:"ginge", t:"Це можна було б і без запису."},
+  {s:"___ es auch eine Stunde später?", h:"gehen", a:"ginge", t:"Чи можна було б на годину пізніше?"},
+  {s:"Wenn es nach mir ___, würden wir früher anfangen.", h:"gehen", a:"ginge", t:"Якби залежало від мене, ми б почали раніше."}
+];
+const V3KI = [
+  {s:"Ich ___ dir geholfen, wenn ich Zeit gehabt hätte.", h:"haben", a:"hätte", t:"Я б тобі допоміг, якби мав час."},
+  {s:"Wir ___ früher gekommen, aber der Zug hatte Verspätung.", h:"sein", a:"wären", t:"Ми прийшли б раніше, але поїзд запізнився."},
+  {s:"Er ___ den Job bekommen, wenn er sich beworben hätte.", h:"haben", a:"hätte", t:"Він отримав би роботу, якби подав заявку."},
+  {s:"Ich ___ nicht gedacht, dass es so schwer wird.", h:"haben", a:"hätte", t:"Я б не подумав, що це буде так важко."},
+  {s:"Sie ___ gern mitgekommen, aber sie war krank.", h:"sein", a:"wäre", t:"Вона охоче пішла б з нами, але була хвора."},
+  {s:"Wenn wir das früher ___ !", h:"wissen", a:"gewusst hätten", t:"Якби ми знали про це раніше!"},
+  {s:"Ich ___ fast eingeschlafen.", h:"sein", a:"wäre", t:"Я мало не заснув."},
+  {s:"Wir ___ den Film gesehen, wenn wir früher da gewesen wären.", h:"haben", a:"hätten", t:"Ми подивилися б фільм, якби прийшли раніше."},
+  {s:"Er ___ beinahe zu spät gekommen.", h:"sein", a:"wäre", t:"Він мало не запізнився."},
+  {s:"Ich ___ das anders gemacht.", h:"haben", a:"hätte", t:"Я б зробив це інакше."},
+  {s:"Sie ___ die Wohnung genommen, wenn sie billiger gewesen wäre.", h:"haben", a:"hätten", t:"Вони взяли б квартиру, якби вона була дешевшою."},
+  {s:"___ du das wirklich gemacht?", h:"haben", a:"hättest", t:"Ти б справді це зробив?"},
+  {s:"Wir ___ lieber zu Hause geblieben.", h:"sein", a:"wären", t:"Ми радше залишилися б удома."},
+  {s:"Ich ___ nie gedacht, dass wir uns so gut verstehen.", h:"haben", a:"hätte", t:"Я б ніколи не подумав, що ми так добре порозуміємося."},
+  {s:"Das ___ eine gute Idee gewesen.", h:"sein", a:"wäre", t:"Це була б гарна ідея."}
+];
+
+G1.forEach(v=>v.cat="kr"); G2.forEach(v=>v.cat="kr"); G3.forEach(v=>v.cat="ki");
+V3.forEach(v=>v.cat="kr"); V3KI.forEach(v=>v.cat="ki");
+
+const POOLS = {
+  geg: [...G1, ...G2, ...G3],
+  ver: [...V3, ...V3KI]
+};
+
+const TABS = [
+  {id:"geg", label:"Gegenwart", title:"Konjunktiv II — Gegenwart", ph:"Konjunktiv II …"},
+  {id:"ver", label:"Vergangenheit", title:"Konjunktiv II — Vergangenheit", ph:"hätte / wäre + Partizip II …"}
+];
+const CHIPS = [
+  {id:"all", label:"Усі"},
+  {id:"kr", label:"Von Kristina"},
+  {id:"ki", label:"Von KI"}
+];
+
+/* ===================== STATE ===================== */
+const STORE_KEY = "tp_v2_konj2_w_";
+function defaultState(){
+  return {
+    chip:"all",
+    k:{}, err:{},
+    stats:{
+      all:{r:0,w:0},
+      kr:{r:0,w:0},
+      ki:{r:0,w:0}
+    },
+    x: 0
+  };
+}
+function loadState(id){
+  try{
+    const v = JSON.parse(localStorage.getItem(STORE_KEY + id));
+    if(v && typeof v === "object" && v.stats) { 
+      if(!v.stats.all) v.stats = defaultState().stats;
+      v.x = v.x || 0;
+      return v;
+    }
+  }catch(e){}
+  return defaultState();
+}
+const S = { geg: loadState("geg"), ver: loadState("ver") };
+
+let tab = "geg";
+let cur = 0;
+let answered = false;
+let reviewMode = false;
+let completedShown = { geg:false, ver:false };
+let advTimer = null;
+let trShown = false;
+
+const $ = id => document.getElementById(id);
+
+/* ===================== HELPERS ===================== */
+const norm = s => s.toLowerCase().trim().replace(/\s+/g," ")
+  .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss");
+
+function items(){ return POOLS[tab]; }
+function streak(idx){ return S[tab].k[idx] || 0; }
+function isMastered(idx){ return streak(idx) >= 3; }
+function getStats(){ return S[tab].stats[S[tab].chip] || (S[tab].stats[S[tab].chip] = {r:0,w:0}); }
+function filteredIndices(){
+  const chip = S[tab].chip;
+  return POOLS[tab].map((_,i)=>i).filter(i => chip==="all" || POOLS[tab][i].cat===chip);
+}
+function errCount(){
+  return filteredIndices().filter(i => S[tab].err[i]).length;
+}
+function reviewPool(){
+  return filteredIndices().filter(i => S[tab].err[i]);
+}
+const save = () => { try { localStorage.setItem(STORE_KEY + tab, JSON.stringify(S[tab])); } catch(e){} };
+
+/* ===================== TABS / CHIPS ===================== */
+function renderTabs(){
+  $("tabs").innerHTML = TABS.map(t=>{
+    const s = S[t.id];
+    const mastered = POOLS[t.id].filter((_,i)=> (s.k[i]||0) >= 3).length;
+    return `<button class="tab ${t.id===tab?'on':''}" data-t="${t.id}">${t.label}<small>${mastered}/${POOLS[t.id].length}</small></button>`;
+  }).join("");
+}
+function renderChips(){
+  $("chips").innerHTML = CHIPS.map(c=>{
+    return `<button class="chip ${S[tab].chip===c.id?'on':''}" data-c="${c.id}">${c.label}</button>`;
+  }).join("");
+}
+
+/* ===================== EXP ===================== */
+const XP_MAX = 300;
+const RANKS = [[0,'🌱','Новачок'],[30,'🌿','Учень'],[72,'🧭','Дослідник'],[132,'⚡','Знавець'],[204,'🔥','Профі'],[276,'💎','Майстер'],[300,'🏆','Легенда']];
+const rankOf = x => { let r = 0; RANKS.forEach((q,i) => { if(x >= q[0]) r = i; }); return r; };
+
+function updateXp(){
+  const xv = S[tab].x || 0;
+  const r = rankOf(xv), R = RANKS[r], N = RANKS[r+1], box = $("xp");
+  box.dataset.r = r;
+  box.classList.toggle("max", xv >= XP_MAX);
+  $("xf").style.width = `${xv / XP_MAX * 100}%`;
+  $("xt").textContent = xv;
+  $("xn").textContent = xv >= XP_MAX ? "MAX" : `/ ${XP_MAX}`;
+  $("xr").textContent = `${R[1]} ${R[2]}`;
+  $("xnext").textContent = N ? `ще ${N[0]-xv} до «${N[2]}»` : "максимальний ранг";
+  const tk = $("xticks");
+  if(!tk.firstChild) tk.innerHTML = RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join('');
+}
+function popXp(d,up){
+  const p = $("xpop"), b = $("xt"), box = $("xp");
+  p.textContent = (d>0?'+':'−') + Math.abs(d);
+  p.className = "xpop " + (d>0?'up':'dn'); void p.offsetWidth; p.classList.add("go");
+  b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+  if(up){ box.classList.remove("lvl"); void box.offsetWidth; box.classList.add("lvl"); }
+}
+
+/* ===================== RENDER ===================== */
+function renderCard(){
+  const it = items()[cur];
+  const tb = TABS.find(t=>t.id===tab);
+  $("title").textContent = reviewMode ? "🔁 РОБОТА НАД ПОМИЛКАМИ" : tb.title;
+  $("sent").innerHTML = it.s.replace(/___/g, '<span class="blank"></span>');
+  $("sent").title = "Натисни, щоб почути німецькою";
+  
+  // Translation logic
+  if (trShown) {
+    $("trans-box").innerHTML = `<div class="tr-text">${it.t || ""}</div>`;
+  } else {
+    $("trans-box").innerHTML = `<button class="tr-btn" type="button" onclick="showTr()">🌐 Перекласти</button>`;
+  }
+  
+  $("inp").placeholder = tb.ph;
+  
+  const f = filteredIndices();
+  $("stat-done").textContent = `${f.filter(isMastered).length} / ${f.length}`;
+  const st = getStats();
+  $("stat-correct").textContent = st.r;
+  $("stat-wrong").textContent = st.w;
+  
+  const done = f.filter(isMastered).length;
+  $("bar").style.width = `${f.length ? done/f.length*100 : 0}%`;
+  
+  updateXp();
+  renderTabs();
+}
+
+function showTr() {
+  trShown = true;
+  renderCard();
+}
+
+function renderList(){
+  const f = filteredIndices();
+  const left = f.filter(i=>!isMastered(i)).length;
+  $("left").textContent = `Залишилося: ${left}`;
+  $("grid").innerHTML = f.map(i=>{
+    const s = Math.min(streak(i),3);
+    const it = items()[i];
+    return `<button class="it c${s}${isMastered(i)?' done':''}${i===cur?' cur':''}" data-i="${i}">
+      <i></i><span>${it.s}</span><em>${s}/3</em></button>`;
+  }).join("");
+}
+function renderReviewBtn(){
+  const n = errCount();
+  const btn = $("reviewBtn");
+  if(n>0 && !reviewMode){
+    btn.style.display = "inline-block";
+    btn.textContent = `🔁 Помилки (${n})`;
+  } else {
+    btn.style.display = "none";
+  }
+}
+function renderAll(){
+  renderTabs(); renderChips(); renderCard(); renderList(); renderReviewBtn();
+}
+
+/* ===================== NAVIGATION ===================== */
+function nextIdx(){
+  if(reviewMode){
+    const rp = reviewPool();
+    if(rp.length===0) return -1;
+    if(!rp.includes(cur)) return rp[0];
+    const idx = rp.indexOf(cur);
+    return rp[(idx+1)%rp.length];
+  }
+  const f = filteredIndices();
+  if(f.length===0) return -1;
+  const unmastered = f.filter(i=>!isMastered(i));
+  const list = unmastered.length ? unmastered : f;
+  if(list.length===1) return list[0];
+  return list.find(i=>i>cur) ?? list[0];
+}
+function allDone(){
+  if(reviewMode) return reviewPool().length===0;
+  const f = filteredIndices();
+  return f.length>0 && f.every(isMastered);
+}
+function load(idx){
+  if(idx<0) return;
+  clearTimeout(advTimer);
+  cur = idx;
+  answered = false;
+  trShown = false;
+  $("inp").value = "";
+  $("fb").className = "fb";
+  $("fb").innerHTML = "";
+  $("card").classList.remove("win");
+  renderCard();
+  renderList();
+  renderReviewBtn();
+  $("inp").focus({preventScroll:true});
+}
+
+/* ===================== FEEDBACK ===================== */
+function fillText(s, answer, fmt){
+  const n = (s.match(/___/g) || []).length;
+  const words = answer.split(/\s+/);
+  const parts = n <= 1 ? [answer] : [...words.slice(0, n - 1), words.slice(n - 1).join(" ")];
+  let i = 0;
+  return s.replace(/___/g, () => fmt(parts[i++] ?? ""));
+}
+function fillSentence(s, answer){
+  return fillText(s, answer, p => `<b>${p}</b>`);
+}
+function sentenceText(it){
+  return fillText(it.s, it.a, p => p);
+}
+function getExplanation(it){
+  if(tab==="geg") return `${it.h} → ${it.a} (Konjunktiv II Gegenwart)`;
+  return `${it.h} → ${it.a} (Konjunktiv II Vergangenheit)`;
+}
+function showFb(ok, idx){
+  const it = items()[idx];
+  const f = $("fb");
+  f.className = "fb " + (ok ? "ok" : "er");
+  const filled = fillSentence(it.s, it.a);
+  f.innerHTML = `
+    <div class="k">${ok ? "✓ ПРАВИЛЬНО · +1 EXP" : "✗ НЕПРАВИЛЬНО · −1 EXP"}</div>
+    <div class="ans" title="Натисни, щоб почути">${ok ? filled : it.a}</div>
+    <div class="ex">${getExplanation(it)}</div>
+    ${ok ? '<div class="bar"></div>' : ''}
+  `;
+  const ansEl = f.querySelector(".ans");
+  if(ansEl) ansEl.onclick = () => {
+    const txt = ansEl.textContent.replace(" 🔊","").trim();
+    if(txt) speak(txt);
+  };
+}
+
+/* ===================== CHECK / FINISH ===================== */
+function check(){
+  if(answered){ next(); return; }
+  const val = $("inp").value.trim();
+  if(!val){ $("inp").focus(); return; }
+  const it = items()[cur];
+  const ok = [it.a, ...(it.alts||[])].some(a => norm(a) === norm(val));
+  finish(ok, cur);
+}
+function finish(ok, idx){
+  answered = true;
+  playSound(ok ? 'correct' : 'wrong');
+  const s = S[tab];
+  const st = getStats();
+  const xBefore = s.x || 0;
+  
+  if(ok){
+    st.r++;
+    s.k[idx] = Math.min(3, (s.k[idx]||0) + 1);
+    s.x = Math.min(XP_MAX, xBefore + 1);
+    delete s.err[idx];
+  } else {
+    st.w++;
+    s.k[idx] = 0;
+    s.x = Math.max(0, xBefore - 1);
+    s.err[idx] = true;
+  }
+  const dx = s.x - xBefore;
+  save();
+  
+  showFb(ok, idx);
+  renderCard();
+  renderList();
+  renderReviewBtn();
+  
+  if (dx) popXp(dx, rankOf(s.x) > rankOf(xBefore));
+
+  if(ok){
+    const card = $("card");
+    card.classList.remove("win");
+    void card.offsetWidth;
+    card.classList.add("win");
+
+    if(reviewMode){
+      if(reviewPool().length===0){
+        advTimer = setTimeout(()=>{ if(answered) showReviewComplete(); }, 1200);
+      } else {
+        advTimer = setTimeout(()=>{
+          if(!answered) return;
+          const ni = nextIdx();
+          if(ni>=0) load(ni);
+          else showReviewComplete();
+        }, 1800);
+      }
+    } else {
+      if(allDone() && !completedShown[tab]){
+        completedShown[tab] = true;
+        advTimer = setTimeout(()=>{ if(answered) showComplete(); }, 1200);
+      } else {
+        advTimer = setTimeout(()=>{
+          if(!answered) return;
+          const ni = nextIdx();
+          if(ni>=0) load(ni);
+        }, 1800);
+      }
+    }
+  } else {
+    completedShown[tab] = false;
+  }
+}
+
+/* ===================== NEXT ===================== */
+function next(){
+  const ni = nextIdx();
+  if(ni>=0){
+    load(ni);
+  } else if(reviewMode){
+    showReviewComplete();
+  } else if(allDone()){
+    showComplete();
+  }
+}
+
+/* ===================== REVIEW ===================== */
+function startReview(){
+  if(errCount()===0) return;
+  reviewMode = true;
+  const rp = reviewPool();
+  if(rp.length>0) load(rp[0]);
+}
+function exitReview(){
+  reviewMode = false;
+  hideComplete();
+  const f = filteredIndices();
+  const next = f.find(i=>!isMastered(i)) ?? f[0] ?? 0;
+  load(next);
+}
+
+/* ===================== COMPLETE MODAL ===================== */
+function showComplete(){
+  $("complete-title").textContent = "🎉 Вкладку пройдено!";
+  $("complete-text").innerHTML = `Усі завдання в цій категорії пройдено: <span class="cmax">3</span> правильні відповіді поспіль. Гарна робота!`;
+  $("complete-actions").innerHTML = `
+    <button class="go" onclick="resetTab()">По колу ↔</button>
+    <button class="cancel" onclick="hideComplete()">Закрити</button>
+  `;
+  $("complete").hidden = false;
+}
+function showReviewComplete(){
+  $("complete-title").textContent = "✅ Помилки виправлено!";
+  $("complete-text").innerHTML = "Усі раніше неправильні відповіді опрацьовано. Молодець!";
+  $("complete-actions").innerHTML = `
+    <button class="cancel" onclick="exitReview()">Продовжити тренування</button>
+  `;
+  $("complete").hidden = false;
+}
+function hideComplete(){ $("complete").hidden = true; }
+
+/* ===================== RESET ===================== */
+function askConfirm(msg, yes){
+  $("complete-title").textContent = "Скинути прогрес?";
+  $("complete-text").textContent = msg;
+  $("complete-actions").innerHTML = `
+    <button class="go" id="cf-yes">Так, скинути</button>
+    <button class="cancel" id="cf-no">Скасувати</button>
+  `;
+  $("cf-yes").onclick = () => { hideComplete(); yes(); };
+  $("cf-no").onclick = hideComplete;
+  $("complete").hidden = false;
+}
+function resetTab(){
+  S[tab] = defaultState();
+  save();
+  renderChips();
+  hideComplete();
+  completedShown[tab] = false;
+  reviewMode = false;
+  const f = filteredIndices();
+  load(f[0] ?? 0);
+}
+function restartTab(){
+  askConfirm("Прогрес цієї вкладки буде скинуто разом з EXP та помилками.", resetTab);
+}
+
+/* ===================== TAB SWITCH ===================== */
+function setTab(t){
+  hideComplete();
+  reviewMode = false;
+  tab = t;
+  const f = filteredIndices();
+  const next = f.find(i=>!isMastered(i)) ?? f[0] ?? 0;
+  load(next);
+  renderAll();
+}
+function setChip(c){
+  reviewMode = false;
+  hideComplete();
+  S[tab].chip = c;
+  save();
+  renderChips();
+  const f = filteredIndices();
+  const next = f.find(i=>!isMastered(i)) ?? f[0] ?? 0;
+  load(next);
+}
+
+/* ===================== THEORY ===================== */
+function openTheory(){
+  const sec = $("theory-section");
+  if(!sec.classList.contains("show")){
+    sec.classList.add("show");
+    $("theory-btn").innerHTML = "❌ Закрити теорію";
+  }
+  setTimeout(()=> sec.scrollIntoView({behavior:"smooth",block:"start"}), 100);
+}
+function toggleTheory(){
+  const sec = $("theory-section");
+  const btn = $("theory-btn");
+  if(sec.classList.contains("show")){
+    sec.classList.remove("show");
+    btn.innerHTML = "📖 Теорія";
+    $("card").scrollIntoView({behavior:"smooth",block:"start"});
+  } else {
+    openTheory();
+  }
+}
+
+/* ===================== EVENTS ===================== */
+$("tabs").onclick = e => {
+  const b = e.target.closest("[data-t]");
+  if(b) setTab(b.dataset.t);
+};
+$("chips").onclick = e => {
+  const b = e.target.closest("[data-c]");
+  if(b) setChip(b.dataset.c);
+};
+$("grid").onclick = e => {
+  const b = e.target.closest("[data-i]");
+  if(b){
+    reviewMode = false;
+    load(+b.dataset.i);
+    $("card").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+};
+$("chk").onclick = check;
+$("reset").onclick = restartTab;
+$("speakBtn").onclick = () => speak(sentenceText(items()[cur]));
+$("sent").addEventListener("click", () => {
+  if(window.getSelection().toString().trim().length===0) speak(sentenceText(items()[cur]));
+});
+$("sent").addEventListener("keydown", e => {
+  if(e.key==="Enter" || e.key===" "){
+    e.preventDefault();
+    speak(sentenceText(items()[cur]));
+  }
+});
+$("complete").addEventListener("click", e => {
+  if(e.target.id==="complete") hideComplete();
+});
+$("inp").addEventListener("keydown", e => {
+  if(e.key==="Enter" || e.keyCode===13){
+    e.preventDefault();
+    check();
+  }
+});
+document.addEventListener("keydown", e => {
+  if(e.key==="Escape" && !$("complete").hidden) hideComplete();
+  if(e.key==="Enter" && answered && !e.target.closest("button,input,textarea,.sent")){
+    e.preventDefault(); next();
+  }
+});
+
+/* ===================== INIT ===================== */
+{
+  const f0 = filteredIndices();
+  cur = f0.find(i=>!isMastered(i)) ?? f0[0] ?? 0;
+}
+renderAll();
+
+/* Розблокування аудіо на iOS при першому дотику */
+document.addEventListener('touchstart', function unlockAudio() {
+  try {
+    if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+    if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+  } catch(e) {}
+  document.removeEventListener('touchstart', unlockAudio);
+}, { once: true });
+
+/* === ІНТЕГРАЦІЯ З TELEGRAM === */
+if(window.Telegram && window.Telegram.WebApp){
+  const tg = window.Telegram.WebApp;
+  try{ tg.ready(); }catch(e){}
+  tg.expand();
+  tg.BackButton.show();
+  tg.BackButton.onClick(()=>{ window.location.href = 'index.html'; });
+}
+</script>
+</body></html>
