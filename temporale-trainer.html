@@ -430,21 +430,32 @@ let soundEnabled = store.get('tp-sound') !== 'off';
 function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔊' : '🔇'; }
 updateSoundIcon();
 function toggleSound(){ soundEnabled = !soundEnabled; store.set('tp-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
+
+// ГЛОБАЛЬНАЯ ПЕРЕМЕННАЯ ДЛЯ АУДИО
 let audioCtx;
+
 function playSound(type){
   if(!soundEnabled) return;
   try{
     if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if(audioCtx.state === 'suspended') audioCtx.resume();
+    
+    // ХАК ДЛЯ iOS: заставляем звук идти в основной динамик
+    if ('audioSession' in navigator) {
+      navigator.audioSession.type = 'playback';
+    }
+
     const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
     osc.connect(gain); gain.connect(audioCtx.destination);
     const now = audioCtx.currentTime;
+    
     if(type === 'correct'){
       osc.type = 'sine';
       osc.frequency.setValueAtTime(523.25, now);
       osc.frequency.setValueAtTime(659.25, now + 0.1);
       gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.06, now + 0.05);
+      // Увеличиваем громкость с 0.06 до 0.4
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05); 
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
       osc.start(now); osc.stop(now + 0.6);
     } else {
@@ -452,7 +463,8 @@ function playSound(type){
       osc.frequency.setValueAtTime(200, now);
       osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
       gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.08, now + 0.05);
+      // Увеличиваем громкость с 0.08 до 0.4
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05); 
       gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
       osc.start(now); osc.stop(now + 0.4);
     }
@@ -657,9 +669,19 @@ const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])
 function speak(text){
   if(!window.speechSynthesis || !text) return;
   try {
-    speechSynthesis.cancel();
+    // В iOS голос может прерываться, если до этого играл звук
+    speechSynthesis.cancel(); 
     const u = new SpeechSynthesisUtterance(String(text));
-    u.lang = "de-DE"; u.rate = 0.9; u.pitch = 1;
+    u.lang = "de-DE"; 
+    u.rate = 0.9; 
+    u.pitch = 1;
+    u.volume = 1.0; // Максимальная громкость
+    
+    // Попытка переключить аудиосессию на громкую связь (работает в новых Safari)
+    if ('audioSession' in navigator) {
+      navigator.audioSession.type = 'playback';
+    }
+    
     speechSynthesis.speak(u);
   } catch(e){}
 }
@@ -992,6 +1014,17 @@ document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("compl
 
 /* ============ INIT ============ */
 { const st = store.get('tp-tab'); setTab(TABS.some(t => t.id === st) ? st : TABS[0].id); }
+
+// === РАЗБЛОКИРОВКА АУДИО НА iOS ПРИ ПЕРВОМ КАСАНИИ ===
+document.addEventListener('touchstart', function unlockAudio() {
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  document.removeEventListener('touchstart', unlockAudio);
+}, { once: true });
 
 /* === ИНТЕГРАЦИЯ С TELEGRAM: РАЗВОРОТ И КНОПКА "НАЗАД" === */
 if (window.Telegram && window.Telegram.WebApp) {
