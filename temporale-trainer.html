@@ -83,11 +83,16 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
-.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:88px;text-transform:uppercase}
-.reset,.speak{position:absolute;top:16px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:150px;text-transform:uppercase}
+
+/* Обновленные стили для кнопок внутри карточки */
+.reset,.speak,.mode-toggle{position:absolute;top:14px;height:32px;border-radius:16px;border:1px solid var(--bd);
   background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2}
-.reset{right:16px;font-size:1.05rem}.speak{right:54px;font-size:.95rem}
-.reset:hover,.speak:hover{color:var(--tx);border-color:var(--pr)}
+.reset{right:16px;width:32px;font-size:1.05rem}
+.speak{right:54px;width:32px;font-size:.95rem}
+.mode-toggle{right:92px;padding:0 12px;font-size:.75rem;font-weight:600;gap:4px}
+.reset:hover,.speak:hover,.mode-toggle:hover{color:var(--tx);border-color:var(--pr)}
+
 .sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
 .u{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--sa)}
@@ -227,7 +232,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   <div class="header-wrap">
     <h1>Temporale Präpositionen<small>Часові прийменники · тренажер</small></h1>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
-    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Увімкнути/Вимкнути звук">🔊</button>
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
   </div>
 
@@ -242,6 +247,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
   <div class="card" id="card">
     <h2 id="title"></h2>
+    <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="reset" id="reset" title="Скинути прогрес цієї вкладки">↺</button>
     <p class="sent" id="sent"></p>
@@ -260,7 +266,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
   <div class="foot">
     <div class="foot-row">
-      <button class="btn g" id="modeBtn" type="button"></button>
       <button class="btn danger" id="reviewBtn" style="display:none" onclick="openErrors()"></button>
       <button class="btn g" onclick="restartTab()">↻ Скинути прогрес</button>
     </div>
@@ -428,7 +433,7 @@ function toggleTheme(){
 
 /* ============ SOUND ============ */
 let soundEnabled = store.get('tp-sound') !== 'off';
-function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔊' : '🔇'; }
+function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
 updateSoundIcon();
 function toggleSound(){ soundEnabled = !soundEnabled; store.set('tp-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
 
@@ -706,8 +711,9 @@ function renderTabs(){
 }
 function renderModes(){
   const b = $("modeBtn");
-  b.style.display = tab === "insert" ? "inline-block" : "none";
-  b.textContent = mode === "mc" ? "⌨️ Вводити самому" : "🔘 Вибір варіантів";
+  b.style.display = tab === "insert" ? "flex" : "none";
+  b.textContent = mode === "mc" ? "⌨️ Режим" : "🔘 Режим";
+  b.title = mode === "mc" ? "Зараз режим вводу. Натисніть, щоб обрати варіанти." : "Зараз режим вибору. Натисніть, щоб вводити самому.";
 }
 let trShown = false;
 function renderLab(){
