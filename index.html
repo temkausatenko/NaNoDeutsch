@@ -6,7 +6,6 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <style>
-  /* Используем переменные Telegram для цветов */
   :root {
     --bg-color: var(--tg-theme-bg-color, #ffffff);
     --text-color: var(--tg-theme-text-color, #000000);
@@ -21,33 +20,15 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 20px 20px 90px 20px; /* Отступ снизу для меню */
+    padding: 20px 20px 90px 20px;
     transition: background-color 0.3s, color 0.3s;
   }
 
-  .header {
-    margin-bottom: 24px;
-  }
+  .header { margin-bottom: 24px; }
+  .header h1 { font-size: 26px; font-weight: 800; margin: 0 0 5px 0; letter-spacing: -0.5px; }
+  .header p { color: var(--hint-color); margin: 0; font-size: 15px; }
 
-  .header h1 {
-    font-size: 26px;
-    font-weight: 800;
-    margin: 0 0 5px 0;
-    letter-spacing: -0.5px;
-  }
-
-  .header p {
-    color: var(--hint-color);
-    margin: 0;
-    font-size: 15px;
-  }
-
-  /* Сетка для карточек */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
 
   .card {
     background-color: var(--card-bg);
@@ -62,11 +43,8 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   }
 
-  .card:active {
-    transform: scale(0.96);
-  }
+  .card:active { transform: scale(0.96); }
 
-  /* Имитация картинки карточки (градиент) */
   .card-image {
     height: 120px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -76,7 +54,6 @@
     font-size: 40px;
   }
 
-  /* Разные градиенты для разных карточек */
   .card:nth-child(2n) .card-image {
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   }
@@ -89,25 +66,12 @@
     justify-content: space-between;
   }
 
-  .card-title {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 6px 0;
-    line-height: 1.3;
-  }
+  .card-title { font-size: 15px; font-weight: 700; margin: 0 0 6px 0; line-height: 1.3; }
+  .card-subtitle { font-size: 12px; color: var(--hint-color); font-weight: 500; }
 
-  .card-subtitle {
-    font-size: 12px;
-    color: var(--hint-color);
-    font-weight: 500;
-  }
-
-  /* Нижняя навигация */
   .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0; left: 0; right: 0;
     height: 70px;
     background-color: var(--bg-color);
     border-top: 1px solid rgba(128, 128, 128, 0.15);
@@ -118,26 +82,14 @@
   }
 
   .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--hint-color);
-    text-decoration: none;
-    font-size: 10px;
-    font-weight: 600;
-    gap: 4px;
+    display: flex; flex-direction: column; align-items: center;
+    color: var(--hint-color); text-decoration: none;
+    font-size: 10px; font-weight: 600; gap: 4px;
     transition: color 0.2s;
   }
 
-  .nav-item.active {
-    color: var(--btn-color);
-  }
-
-  .nav-item svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-  }
+  .nav-item.active { color: var(--btn-color); }
+  .nav-item svg { width: 24px; height: 24px; fill: currentColor; }
 </style>
 </head>
 <body>
@@ -148,7 +100,7 @@
   </div>
 
   <div class="grid">
-        <!-- Карточка 1 -->
+    <!-- Карточка 1 -->
     <a href="Temporale Präpositionen 07.10.2026.html" class="card">
       <div class="card-image">⏱️</div>
       <div class="card-content">
@@ -160,17 +112,20 @@
       </div>
     </a>
 
-    <!-- Карточка 2 (заглушка) -->
-    <a href="#" class="card" onclick="alert('Скоро появится!')">
-      <div class="card-image">📚</div>
+    <!-- Карточка 2: Новый тренажер Konnektoren -->
+    <a href="Alle Konnektoren 24.10.2026.html" class="card">
+      <div class="card-image">🔗</div>
       <div class="card-content">
-        <h2 class="card-title">Dativ / Akkusativ</h2>
-        <span class="card-subtitle">У розробці...</span>
+        <h2 class="card-title">Konnektoren Meister</h2>
+        <div style="font-size: 13px; font-weight: 500; color: var(--text-color); margin-bottom: 6px; opacity: 0.85;">
+          Всі коннектори
+        </div>
+        <span class="card-subtitle">📅 24.10.2026</span>
       </div>
     </a>
   </div>
 
-  <!-- Нижнее меню (ТЕПЕРЬ ТОЛЬКО 2 КНОПКИ) -->
+  <!-- Нижнее меню -->
   <div class="bottom-nav">
     <a href="index.html" class="nav-item active">
       <svg viewBox="0 0 24 24"><path d="M4 19h16v-2H4v2zm0-4h16v-2H4v2zm0-4h16v-2H4v2zm0-6v2h16V5H4z"/></svg>
