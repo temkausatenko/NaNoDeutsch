@@ -87,7 +87,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 /* Выравнивание заголовка и кнопок */
 .card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
 
-/* Кнопки внутри карточки - теперь обе круглые и без текста */
+/* Кнопки внутри карточки */
 .speak,.mode-toggle{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
   background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
   
@@ -418,7 +418,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <div class="row">
       <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
-      <button class="next" id="next">Далі →</button>
     </div>
     <div class="fb" id="fb"></div>
   </div>
@@ -1175,7 +1174,6 @@ $("modeBtn").onclick = () => {
 };
 $("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
 $("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
-$("next").onclick = () => advance();
 $("chk").onclick = check;
 $("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
 $("speakBtn").onclick = speakCurrent;
