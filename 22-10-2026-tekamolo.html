@@ -1,0 +1,238 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TEKAMOLO · тренажер</title><script src="https://telegram.org/js/telegram-web-app.js"></script><script src="sync.js"></script><style>
+:root{--bg:#f8fafc;--bg2:#e2e8f0;--cd:#fff;--tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pg:rgba(79,70,229,.25);--pl:#e8edf4;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);--bd:#cbd5e1;--sa:#7c3aed;--pe:#db2777;--TE:#b45309;--KA:#be123c;--MO:#7c3aed;--LO:#0f766e;--D:#1d4ed8;--A:#4d7c0f;--P:#475569;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#090b10;--bg2:#151b2b;--cd:#12161f;--tx:#f1f5f9;--mu:#94a3b8;--pr:#6366f1;--pg:rgba(99,102,241,.4);--pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.12);--no:#ef4444;--nob:rgba(239,68,68,.12);--bd:#2a3441;--sa:#a78bfa;--pe:#f9a8d4;--TE:#fbbf24;--KA:#fb7185;--MO:#c4b5fd;--LO:#2dd4bf;--D:#7dbbff;--A:#bef264;--P:#aab7cd;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#090b10;--bg2:#151b2b;--cd:#12161f;--tx:#f1f5f9;--mu:#94a3b8;--pr:#6366f1;--pg:rgba(99,102,241,.4);--pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.12);--no:#ef4444;--nob:rgba(239,68,68,.12);--bd:#2a3441;--sa:#a78bfa;--pe:#f9a8d4;--TE:#fbbf24;--KA:#fb7185;--MO:#c4b5fd;--LO:#2dd4bf;--D:#7dbbff;--A:#bef264;--P:#aab7cd;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);background-image:radial-gradient(circle at top,var(--bg2),var(--bg));color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.w{max-width:760px;margin:0 auto;padding:18px max(14px,env(safe-area-inset-right,0px)) 60px max(14px,env(safe-area-inset-left,0px))}
+.hd{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:14px}.hd h1{flex:0 0 100%;text-align:center;margin-top:2px}
+h1{margin:0;font-size:1.5rem;line-height:1.2;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1 small{display:block;font-size:.72rem;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:4px;font-weight:500}
+.ib{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--bd);background:var(--cd);color:var(--mu);font-size:1.05rem;cursor:pointer;padding:0}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+@media(min-width:700px){.tabs{flex-wrap:wrap;overflow:visible}}
+.tab{flex:none;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:8px 14px;font:inherit;font-size:.85rem;font-weight:500;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.tab small{font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pg)}.tab.on small{background:rgba(255,255,255,.22)}
+.pg{height:6px;background:var(--pl);border-radius:99px;overflow:hidden;margin:6px 0 12px}.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));transition:width .5s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin:10px 0 16px}
+.stat{background:var(--cd);padding:10px 6px;text-align:center;font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mu)}.stat b{display:block;font-size:1.2rem;letter-spacing:0;text-transform:none;color:var(--tx);margin-top:2px}.stat b.ok{color:var(--ok)}.stat b.no{color:var(--no)}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:18px;box-shadow:0 8px 24px -16px rgba(0,0,0,.35)}
+.card.win{animation:wn .5s}@keyframes wn{40%{box-shadow:0 0 0 3px var(--ok)}}
+.ct{display:flex;align-items:center;gap:6px;margin-bottom:14px}.ct h2{flex:1;margin:0;font-size:.74rem;letter-spacing:.08em;color:var(--mu);font-weight:600;min-width:0}
+.sb{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 13px;font:inherit;font-size:.8rem;cursor:pointer}
+.sent{font-size:clamp(1.1rem,3.6vw,1.35rem);line-height:1.6;font-weight:700;cursor:pointer}
+.sent u{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px;text-decoration-color:var(--pr)}
+.bl{display:inline-block;min-width:3.6em;border-bottom:2px solid var(--pr);margin:0 6px}
+.tr{margin:0;font-size:.92rem;color:var(--mu)}.lab{margin-top:16px;min-height:8px}
+.hint{margin:10px 0;padding:8px 12px;border-left:3px solid var(--sa);background:var(--pl);border-radius:0 10px 10px 0;font-size:.85rem;color:var(--mu)}
+.ch{--c:var(--P);display:inline-flex;align-items:center;gap:6px;padding:9px 15px;border-radius:12px;border:1px solid var(--bd);border-bottom-width:3px;background:var(--cd);color:var(--tx);font:inherit;font-size:1rem;font-weight:600;line-height:1.3;text-align:center}
+button.ch{cursor:pointer;touch-action:manipulation;transition:border-color .15s,transform .1s}button.ch:hover{border-color:var(--pr)}button.ch:active{transform:scale(.96)}
+.ch.on{border-color:var(--pr);background:color-mix(in srgb,var(--pr) 14%,transparent)}.ch.lk{background:var(--pl);color:var(--mu)}
+.ch.r{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);padding:7px 12px;font-size:.95rem}.ch i{font-style:normal;font-size:.58rem;font-weight:700;letter-spacing:.05em;color:var(--c);text-transform:uppercase}
+
+.TE{--c:var(--TE)}.KA{--c:var(--KA)}.MO{--c:var(--MO)}.LO{--c:var(--LO)}.D{--c:var(--D)}.A{--c:var(--A)}.P{--c:var(--P)}.S,.V1,.V2,.X{--c:var(--mu)}.N{--c:var(--tx)}
+.zone{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:64px;padding:6px 0 12px;border-bottom:2px solid var(--bd);margin:14px 0}.zone.fx{border:0;padding:0;min-height:0;margin:8px 0}#pool{justify-content:center;gap:8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.opts.one{grid-template-columns:1fr}
+.opt{text-align:center;padding:20px 10px;border:1px solid var(--bd);background:transparent;color:var(--tx);border-radius:14px;font:inherit;font-size:1rem;font-weight:700;cursor:pointer;touch-action:manipulation;transition:border-color .15s}.opt:hover:not(:disabled){border-color:var(--pr)}
+.opt.ok{border-color:var(--ok);background:var(--okb)}.opt.er{border-color:var(--no);background:var(--nob)}
+.row{display:flex;gap:8px;margin:12px 0}.row input{flex:1;min-width:0;padding:13px;font:inherit;font-size:16px;border:1px solid var(--bd);border-radius:12px;background:var(--cd);color:var(--tx)}
+.go{padding:13px 22px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;touch-action:manipulation}.go:disabled{opacity:.4}.row .go{flex:none}#inp[hidden]+.go{flex:1}#next{width:100%;margin-top:12px}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:.92rem}.fb.ok{background:var(--okb);border:1px solid var(--ok)}.fb.er{background:var(--nob);border:1px solid var(--no)}.fb .k{font-weight:700;font-size:.75rem;letter-spacing:.06em;margin-bottom:4px}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid var(--bd);border-radius:14px;background:var(--cd);font-size:.78rem;color:var(--mu)}.xh{display:flex;justify-content:space-between;align-items:baseline;letter-spacing:.06em;font-weight:700;font-size:.68rem}.xh b{font-size:1.2rem;color:var(--tx);letter-spacing:0}.xh small{font-size:.75rem;font-weight:500;margin-left:3px}.rk{display:flex;justify-content:space-between;gap:8px;margin:6px 0}.rk b{color:var(--tx)}.foot{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}.xb{height:8px;background:var(--pl);border-radius:99px;overflow:hidden;margin-top:5px}.xb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#f59e0b,var(--pe));transition:width .4s}
+.md{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center;padding:12px;padding-bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:50}
+@media(min-width:700px){.md{align-items:center}}
+.bx{background:var(--cd);border:1px solid var(--bd);border-radius:18px;max-width:640px;width:100%;max-height:86vh;overflow:auto;padding:18px}.bx h3{margin:0 0 8px}.bx p,.bx li{color:var(--mu);font-size:.92rem}.bx b{color:var(--tx)}.bx ol{padding-left:20px;margin:8px 0}
+.ma{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.zone.fx.ex{gap:6px;margin:8px 0}
+.bx.th{padding:0}.th-h{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 18px;background:var(--cd);border-bottom:1px solid var(--bd)}.th-h h3{margin:0;font-size:1.05rem}.th-b{padding:4px 18px 18px}
+.th-b h4{margin:22px 0 10px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sa)}
+.fg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}@media(min-width:620px){.fg{grid-template-columns:repeat(4,1fr)}}
+.fc{padding:12px;border-radius:14px;border:1px solid var(--c,var(--P));background:color-mix(in srgb,var(--c,var(--P)) 12%,transparent)}.bx .fc b{display:block;font-size:1.7rem;line-height:1;color:var(--c,var(--P))}.fc span{display:block;font-weight:700;color:var(--tx);margin-top:6px}.fc small{display:block;color:var(--mu);font-size:.78rem;margin-top:2px}.fc em{display:block;font-style:normal;font-size:.8rem;margin-top:6px;color:var(--tx)}
+.sx{overflow-x:auto;padding-bottom:6px}.sx .zone{flex-wrap:nowrap;width:max-content}
+.rl{display:flex;gap:12px;padding:12px;border:1px solid var(--bd);border-radius:14px;margin-bottom:8px}.rl>i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--pr);color:#fff;font:700 .8rem/26px system-ui;text-align:center;font-style:normal}.rl>div{min-width:0}.rl p{margin:2px 0 8px}.rl .e{padding:9px 11px;background:var(--pl);border-radius:10px;color:var(--tx);font-size:.93rem;line-height:1.8}
+.bx .hl{color:var(--c,var(--P));font-weight:700;border-bottom:2px solid var(--c,var(--P))}
+.cmp div{padding:10px 12px;border-radius:12px;margin-bottom:6px;font-size:.92rem;color:var(--tx)}.cmp .x{background:var(--nob)}.cmp .y{background:var(--okb);margin-bottom:14px}.cmp small{display:block;color:var(--mu);margin-top:2px}
+</style></head><body><div class="w">
+<div class="hd"><button class="ib" data-a="th" title="Теорія">📖</button><button class="ib" id="snb" data-a="sn" title="Звукові ефекти">🔔</button><button class="ib" id="thb" data-a="tm" title="Тема">🌙</button><h1>TEKAMOLO<small>Порядок слів у реченні · обставини й доповнення · B2</small></h1></div>
+<div class="tabs" id="tabs"></div><div class="pg"><i id="pg"></i></div>
+<div class="stats"><div class="stat">Речення<b id="sd">0 / 0</b></div><div class="stat">Правильно<b class="ok" id="sr">0</b></div><div class="stat">Неправильно<b class="no" id="sw">0</b></div></div>
+<div class="card" id="card"><div class="ct"><h2 id="title"></h2><button class="sb" id="mode" data-a="md"></button><button class="sb" data-a="sp" title="Озвучити німецькою">🔊</button><button class="sb" data-a="rs" title="Скинути прогрес цієї вкладки">↻</button></div>
+<div class="sent" id="q"></div><div class="lab" id="lab"></div>
+<div class="zone" id="zone"></div><div class="zone fx" id="pool"></div><div class="opts" id="opts"></div><div class="row" id="row"><input id="inp" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Впиши відповідь…"><button class="go" id="chk" data-a="ck">Перевірити ✓</button></div><div class="fb" id="fb"></div><button class="go" id="next" data-a="ck" hidden>Далі →</button></div>
+<div class="xp"><div class="xh"><span>EXP ЦІЄЇ КАТЕГОРІЇ</span><span><b id="xt">0</b><small id="xn">/ 200</small></span></div><div class="rk"><b id="xr"></b><span id="xnx"></span></div><div class="xb"><i id="xf"></i></div></div>
+<div class="foot"><button class="sb" data-a="th">📖 Теорія</button></div></div>
+<div class="md" id="md" hidden data-a="x"><div class="bx" id="bx"></div></div>
+<script>
+const $=i=>document.getElementById(i),sh=a=>{a=[...a];for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a},strip=s=>s.replace(/<[^>]+>/g,"");
+const st={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+try{const w=Telegram.WebApp;w.ready();w.expand()}catch(e){}
+const CL="Temporal|Kausal|Modal|Lokal",CAP={S:"Subjekt",V1:"Verb 1",V2:"Verb 2",TE:"TE",KA:"KA",MO:"MO",LO:"LO",D:"Dativ",A:"Akkusativ",P:"Präp.-Obj.",N:"nicht",X:"інше"};
+const G=(s,a,o,ua,ex,m)=>({s,a,o:o.split("|"),ua,ex,m}),M=(s,a,o,ua,ex)=>G(s,a,o,ua,ex,1),O=(p,r,ua,alt)=>({p:p.split("|"),r:r.split(" "),ua,alt});
+const TABS=[
+{id:"c",label:"Тип",title:"ЯКИЙ ЦЕ ЧЛЕН РЕЧЕННЯ?",h:"Постав питання: wann? warum? wie? wo / wohin / woher?"},
+{id:"o",label:"TE-KA-MO-LO",title:"СКЛАДИ РЕЧЕННЯ",h:"Формула: TE → KA → MO → LO. Temporal майже завжди стоїть перед Lokal."},
+{id:"p1",label:"Позиція 1",title:"ОБСТАВИНА НА ПОЗИЦІЇ 1",h:"Verb 1 завжди на 2-му місці, тож підмет іде одразу за дієсловом."},
+{id:"da",label:"Dat · Akk",title:"ДОПОВНЕННЯ В РЕЧЕННІ",h:"Dativ (особа) → Akkusativ (річ). Нова інформація — праворуч."},
+{id:"pr",label:"Pronomen",title:"ЗАЙМЕННИКИ ЗАМІСТЬ ІМЕННИКІВ",h:"Займенник — перед іменником. Два займенники: Akkusativ → Dativ."},
+{id:"pp",label:"Präp.-Objekt",title:"ПРИЙМЕННИКОВЕ ДОПОВНЕННЯ",h:"Präp.-Objekt стоїть майже в кінці, перед Verb 2. Особа — перед річчю."},
+{id:"f",label:"Fehler",title:"ЗНАЙДИ ПРАВИЛЬНЕ РЕЧЕННЯ",h:"Pronomen вперед, Dativ перед Akkusativ, TE-KA-MO-LO."},
+{id:"x",label:"Мікс",title:"МІКС · УСІ ТЕМИ",h:"Усе разом: тип, порядок, займенники, Präp.-Objekt."}];
+const ITEMS={
+c:[M("Ich bin <u>gestern</u> mit dem Taxi zur Arbeit gefahren.","Temporal",CL,"Учора я поїхав на таксі на роботу.","gestern — wann? → Temporal."),
+M("Ich bin gestern <u>mit dem Taxi</u> zur Arbeit gefahren.","Modal",CL,"Учора я поїхав на таксі на роботу.","mit dem Taxi — wie? → Modal."),
+M("Ich bin gestern mit dem Taxi <u>zur Arbeit</u> gefahren.","Lokal",CL,"Учора я поїхав на таксі на роботу.","zur Arbeit — wohin? → Lokal."),
+M("Wir sind <u>wegen des Streiks</u> zu Fuß zur Arbeit gegangen.","Kausal",CL,"Через страйк ми пішли на роботу пішки.","wegen des Streiks — warum? → Kausal."),
+M("Sie wohnt <u>seit drei Jahren</u> in Karlsruhe.","Temporal",CL,"Вона живе в Карлсруе вже три роки.","seit drei Jahren — wie lange? → Temporal."),
+M("Er hat <u>aus Liebe</u> geheiratet.","Kausal",CL,"Він одружився з любові.","aus Liebe — warum? → Kausal."),
+M("Sie arbeitet <u>gern</u> im Homeoffice.","Modal",CL,"Вона із задоволенням працює вдома.","gern — wie? → Modal."),
+M("Wir fahren <u>jedes Jahr</u> nach Italien.","Temporal",CL,"Ми щороку їздимо до Італії.","jedes Jahr — wie oft? → Temporal."),
+M("<u>Trotz des Regens</u> sind wir spazieren gegangen.","Kausal",CL,"Попри дощ ми пішли гуляти.","trotz теж належить до Kausal."),
+M("Er kommt <u>aus Hamburg</u>.","Lokal",CL,"Він родом із Гамбурга.","aus Hamburg — woher? → Lokal."),
+M("Sie hat das Formular <u>sehr sorgfältig</u> ausgefüllt.","Modal",CL,"Вона дуже ретельно заповнила бланк.","sehr sorgfältig — wie? → Modal."),
+M("Ich habe <u>zwei Stunden lang</u> gewartet.","Temporal",CL,"Я чекав дві години.","zwei Stunden lang — wie lange? → Temporal.")],
+o:[O("Ich|bin|gestern|wegen des U-Bahn-Streiks|mit dem Taxi|zur Arbeit|gefahren.","S V1 TE KA MO LO V2","Учора через страйк метро я поїхав на таксі на роботу."),
+O("Meine Kollegin|ist|letzten Monat|wegen der neuen Stelle|ganz spontan|nach München|gezogen.","S V1 TE KA MO LO V2","Минулого місяця моя колега через нову роботу спонтанно переїхала до Мюнхена."),
+O("Wir|sind|heute|trotz des Regens|mit dem Fahrrad|zur Uni|gefahren.","S V1 TE KA MO LO V2","Сьогодні попри дощ ми поїхали до університету на велосипеді."),
+O("Jana|wollte|heute Morgen|trotz Regens|zu Fuß|zur Arbeit|gehen.","S V1 TE KA MO LO V2","Яна хотіла сьогодні вранці піти на роботу пішки, попри дощ."),
+O("Ich|bin|gestern|aus Unachtsamkeit|gegen die Tür|gelaufen.","S V1 TE KA LO V2","Учора через неуважність я наштовхнувся на двері."),
+O("Unsere Gäste|sind|heute Morgen|aus Hamburg|angereist.","S V1 TE LO V2","Сьогодні вранці наші гості приїхали з Гамбурга."),
+O("Sie|fährt|jeden Tag|aus Gewohnheit|mit der Bahn|nach Stuttgart.","S V1 TE KA MO LO","Вона щодня за звичкою їздить поїздом до Штутгарта."),
+O("Er|wohnt|seit 2020|gern|in Karlsruhe.","S V1 TE MO LO","Він із 2020 року із задоволенням живе в Карлсруе.")],
+p1:[O("Letztes Jahr|bin|ich|wegen eines Projekts|ziemlich spontan|nach Hamburg|gezogen.","TE V1 S KA MO LO V2","Минулого року через проєкт я досить спонтанно переїхав до Гамбурга."),
+O("Gestern|bin|ich|wegen des U-Bahn-Streiks|mit dem Taxi|zur Arbeit|gefahren.","TE V1 S KA MO LO V2","Учора через страйк метро я поїхав на таксі на роботу."),
+O("Heute Morgen|sind|unsere Gäste|aus Hamburg|angereist.","TE V1 S LO V2","Сьогодні вранці наші гості приїхали з Гамбурга."),
+O("Wegen des Streiks|sind|wir|heute|zu Fuß|zur Arbeit|gegangen.","KA V1 S TE MO LO V2","Через страйк ми сьогодні пішли на роботу пішки."),
+O("Am Dienstag|bin|ich|in die Stadt|gegangen.","TE V1 S LO V2","У вівторок я ходив у місто."),
+O("Nächste Woche|gebe|ich|dir|den USB-Stick|zurück.","TE V1 S D A V2","Наступного тижня я поверну тобі флешку."),
+O("In der Stadt|habe|ich|Schuhe|gekauft.","LO V1 S A V2","У місті я купив взуття.")],
+da:[O("Der Kellner|serviert|der Dame|den Kaffee.","S V1 D A","Офіціант подає даме каву."),
+O("Er|schreibt|seiner Mutter|einen Brief.","S V1 D A","Він пише матері листа."),
+O("Ich|gebe|meinem Vater|eine Schokolade.","S V1 D A","Я даю батькові шоколадку."),
+O("Die Mutter|erzählt|ihrem Kind|eine Geschichte.","S V1 D A","Мати розповідає дитині історію."),
+O("Sie|hat|dem Chef|gestern|gratuliert.","S V1 D TE V2","Вона вчора привітала шефа."),
+O("Paul|bringt|den Kindern|jedes Jahr|Geschenke|aus Italien|mit.","S V1 D TE A LO V2","Пауль щороку привозить дітям подарунки з Італії.","Paul bringt jedes Jahr den Kindern Geschenke aus Italien mit."),
+O("Die Lehrerin|hat|den Satz|an die Tafel|geschrieben.","S V1 A LO V2","Вчителька написала речення на дошці."),
+O("Ich|konnte|meinen Vater|gestern|wegen eines Termins|nicht|pünktlich|am Bahnhof|abholen.","S V1 A TE KA N MO LO V2","Учора через зустріч я не зміг вчасно забрати батька на вокзалі.")],
+pr:[G("Ich gebe meinem Vater eine Schokolade.<br>→ Ich gebe ___.","sie ihm","sie ihm|ihm sie|es ihm|ihn ihm","Я даю її йому.","Schokolade = sie (Akk), Vater = ihm (Dat). Akk-Pronomen йде першим."),
+G("Er schreibt seiner Mutter einen Brief.<br>→ Er schreibt ___.","ihn ihr","ihn ihr|ihr ihn|sie ihr|es ihr","Він пише їй його.","Brief = ihn (maskulin, Akk), Mutter = ihr (Dat)."),
+G("Die Mutter erzählt ihrem Kind eine Geschichte.<br>→ Die Mutter erzählt ___.","sie ihm","sie ihm|ihm sie|es ihm|ihr sie","Мати розповідає її йому.","Geschichte = sie, Kind = ihm (Neutrum)."),
+G("Der Kellner serviert der Dame den Kaffee.<br>→ Er serviert ___.","ihn ihr","ihn ihr|ihr ihn|es ihr|sie ihr","Він подає їй його.","Kaffee = ihn, Dame = ihr."),
+G("Wir zeigen unserer Tochter den Hund.<br>→ Wir zeigen ___.","ihn ihr","ihn ihr|ihr ihn|ihn ihm|sie ihr","Ми показуємо їй його.","Hund = ihn, Tochter = ihr."),
+G("Er hat seiner Tochter das Fahrrad geschenkt.<br>→ Er hat ___ geschenkt.","es ihr","es ihr|ihr es|sie ihr|es ihm","Він подарував його їй.","das Fahrrad = es, Tochter = ihr."),
+G("Sie schickt dem Kollegen die Rechnung.<br>→ Sie schickt ___.","sie ihm","sie ihm|ihm sie|es ihm|sie ihn","Вона надсилає її йому.","Rechnung = sie, Kollege = ihm."),
+G("Kannst du mir den Büroschlüssel geben?<br>→ Ich habe ___ doch schon gegeben.","ihn dir","ihn dir|dir ihn|es dir|sie dir","Я ж уже дав тобі його.","Schlüssel = ihn (Akk) перед dir (Dat)."),
+G("Der Vater hat das Buch gestern der Nachbarin gegeben.<br>→ Der Vater hat ___ gestern der Nachbarin gegeben.","es","es|ihr|sie|ihm","Батько вчора віддав її сусідці.","Pronomen стоїть перед усіма іменниками й обставинами."),
+G("Ich habe die Aufgabe dem Chef erklärt.<br>→ Ich habe ___ dem Chef erklärt.","sie","sie|ihn|es|ihm","Я пояснив її шефові.","die Aufgabe = sie.")],
+pp:[O("Ich|habe|gestern|vor dem Kino|auf Marie|gewartet.","S V1 TE LO P V2","Учора перед кінотеатром я чекав на Марі."),
+O("Eine Stunde|musste|ich|gestern|auf die Ankunft des Zuges|warten.","TE V1 S TE P V2","Годину мені довелося вчора чекати на прибуття поїзда."),
+O("Leider|haben|wir|nicht|mit dieser Entwicklung|gerechnet.","X V1 S N P V2","На жаль, ми не розраховували на такий розвиток подій."),
+O("Ich|habe|am Anfang|ständig|an meine Familie|gedacht.","S V1 TE TE P V2","На початку я постійно думав про свою родину."),
+M("Die Geschäftsführung beschäftigt sich ___.","seit Jahren mit diesem Problem","seit Jahren mit diesem Problem|mit diesem Problem seit Jahren","Керівництво вже багато років займається цією проблемою.","Обставина (seit Jahren) — перед Präp.-Objekt (mit diesem Problem)."),
+M("Unsere Führungskräfte nehmen ___ teil.","am Montag an einer Fortbildung zu diesem Thema","am Montag an einer Fortbildung zu diesem Thema|an einer Fortbildung zu diesem Thema am Montag","Наші керівники в понеділок беруть участь у підвищенні кваліфікації з цієї теми.","TE (am Montag) → Präp.-Objekt (an einer Fortbildung…)."),
+M("Die Firma leidet ___.","schon länger an Überalterung","schon länger an Überalterung|an Überalterung schon länger","Фірма вже давно страждає від старіння колективу.","schon länger (TE) → an Überalterung (Präp.-Objekt)."),
+M("Hat sich Max ___ entschuldigt?","bei Julia für sein Missgeschick","bei Julia für sein Missgeschick|für sein Missgeschick bei Julia","Чи перепросив Макс Юлію за свою оплошність?","Два Präp.-Objekte: спочатку особа (bei Julia), потім річ.")],
+f:[M("Welcher Satz ist richtig?","Der Vater hat seinem Kind ein Buch gekauft.","Der Vater hat seinem Kind ein Buch gekauft.|Der Vater hat ein Buch seinem Kind gekauft.|Der Vater hat gekauft seinem Kind ein Buch.","Батько купив своїй дитині книжку.","Dativ (особа) стоїть перед Akkusativ (річ)."),
+M("Welcher Satz ist richtig?","Ich möchte ihm heute Abend das Buch vorlesen.","Ich möchte ihm heute Abend das Buch vorlesen.|Ich möchte heute Abend ihm das Buch vorlesen.|Ich möchte heute Abend das Buch ihm vorlesen.","Я хочу сьогодні ввечері почитати йому книжку.","Pronomen ihm — перед temporal і перед іменником."),
+M("Welcher Satz ist richtig?","Oh, der Vater hat es gestern der Nachbarin gegeben.","Oh, der Vater hat es gestern der Nachbarin gegeben.|Oh, der Vater hat der Nachbarin gestern es gegeben.|Oh, der Vater hat gestern der Nachbarin es gegeben.","О, батько вчора віддав це сусідці.","Pronomen es йде вперед, перед усім іншим."),
+M("Welcher Satz ist richtig?","Sie will es uns morgen zurückbringen.","Sie will es uns morgen zurückbringen.|Sie will uns es morgen zurückbringen.|Sie will morgen es uns zurückbringen.","Вона хоче завтра повернути це нам.","Два займенники: Akk (es) → Dat (uns)."),
+M("Welcher Satz ist richtig?","Ich koche dem Kind einen Kakao.","Ich koche dem Kind einen Kakao.|Ich koche einen Kakao dem Kind.","Я варю дитині какао.","Два іменники: Dativ → Akkusativ."),
+M("Welcher Satz ist richtig?","Ich bringe ihn ihm ans Bett.","Ich bringe ihn ihm ans Bett.|Ich bringe ihm ihn ans Bett.","Я несу його йому до ліжка.","Два займенники: Akk (ihn) → Dat (ihm)."),
+M("Welcher Satz ist richtig?","Mein Arbeitgeber hat mir vor vier Wochen eine neue Stelle in Hamburg angeboten.","Mein Arbeitgeber hat mir vor vier Wochen eine neue Stelle in Hamburg angeboten.|Mein Arbeitgeber hat vor vier Wochen mir eine neue Stelle in Hamburg angeboten.|Mein Arbeitgeber hat vor vier Wochen eine neue Stelle in Hamburg mir angeboten.","Чотири тижні тому мій роботодавець запропонував мені нову посаду в Гамбурзі.","Pronomen mir — одразу після Verb 1."),
+M("Welcher Satz ist richtig?","Ich habe mich ihnen noch nicht vorgestellt.","Ich habe mich ihnen noch nicht vorgestellt.|Ich habe ihnen mich noch nicht vorgestellt.|Ich habe noch nicht mich ihnen vorgestellt.","Я ще не представився їм.","Reflexivpronomen — одразу після дієслова, перед іншими займенниками.")]};
+const ks=Object.keys(ITEMS);ITEMS.x=[];ks.forEach(k=>ITEMS[k].forEach((v,i)=>{if(i%3==1)ITEMS.x.push(v)}));
+const hl=(c,t)=>`<b class="hl ${c}">${t}</b>`,chp=(c,t,k)=>`<span class="ch r ${c}">${t}${k?`<i>${k}</i>`:""}</span>`;
+const rl=(n,t,d,e)=>`<div class="rl"><i>${n}</i><div><b>${t}</b><p>${d}</p><div class="e">${e}</div></div></div>`;
+const fc=(c,n,q,e)=>`<div class="fc ${c}"><b>${c}</b><span>${n}</span><small>${q}</small><em>${e}</em></div>`;
+const cm=(x,y,n)=>`<div class="x">❌ ${x}</div><div class="y">✅ ${y}<small>${n}</small></div>`;
+const FULL=[["S","Subjekt"],["V1","Verb 1"],["A","Pron. Akk"],["D","Pron. Dat"],["D","Nomen Dat"],["A","Nomen Akk"],["TE","Temporal"],["KA","Kausal"],["N","nicht"],["MO","Modal"],["LO","Lokal"],["P","Präp.-Obj."],["V2","Verb 2"]];
+const TH=`<div class="th-h"><h3>📖 Теорія · TEKAMOLO</h3><button class="sb" data-a="x">✕ Закрити</button></div><div class="th-b">
+<p>У німецькому реченні змінюване дієслово (<b>Verb 1</b>) стоїть на 2-му місці, а друга частина присудка (<b>Verb 2</b>) — у кінці. Вони утворюють «рамку», а все між ними — <b>середнє поле</b>. Обставини в ньому йдуть за формулою <b>TE → KA → MO → LO</b>.</p>
+<h4>1 · Формула</h4><div class="fg">${fc("TE","Temporal","wann? wie oft? wie lange?","gestern, jeden Tag, seit 2020")}${fc("KA","Kausal","warum?","wegen des Streiks, aus Liebe")}${fc("MO","Modal","wie?","mit dem Taxi, gern, zu Fuß")}${fc("LO","Lokal","wo? wohin? woher?","zur Arbeit, in Karlsruhe")}</div>
+<p style="margin-top:10px">Запам’ятай: <b>Час → Причина → Спосіб → Місце</b> (Wann – Warum – Wie – Wo).</p>
+<h4>2 · Схема речення</h4><div class="sx"><div class="zone fx">${chp("S","Ich","Subjekt")}${chp("V1","bin","Verb 1")}${chp("TE","gestern","TE")}${chp("KA","wegen des Streiks","KA")}${chp("MO","mit dem Taxi","MO")}${chp("LO","zur Arbeit","LO")}${chp("V2","gefahren","Verb 2")}</div></div>
+<h4>3 · Правила</h4>
+${rl(1,"Жорстких правил немає — є схема","Речення за формулою TE-KA-MO-LO завжди правильне. У реальному реченні рідко є всі чотири члени.",`Ich wohne ${hl("TE","seit 2020")} ${hl("LO","in Karlsruhe")}.`)}
+${rl(2,"Temporal стоїть перед Lokal","Майже без винятків.",`Unsere Gäste sind ${hl("TE","heute Morgen")} ${hl("LO","aus Hamburg")} angereist.`)}
+${rl(3,"На позицію 1 можна поставити будь-який член","Тоді підмет іде одразу після Verb 1, а порядок решти не змінюється. На позицію 1 не можна: nicht, Reflexivpronomen.",`${hl("TE","Letztes Jahr")} bin ich ${hl("KA","wegen eines Projekts")} ${hl("LO","nach Hamburg")} gezogen.`)}
+${rl(4,"Dativ перед Akkusativ","Особа (Dativ) стоїть перед річчю (Akkusativ). Нова, важлива інформація — праворуч.",`Er schreibt ${hl("D","seiner Mutter")} ${hl("A","einen Brief")}.`)}
+${rl(5,"Займенники — перед іменниками","Два займенники: спочатку Akkusativ, потім Dativ.",`Ich gebe ${hl("A","sie")} ${hl("D","ihm")}.<br>Er hat ${hl("A","es")} ${hl("D","ihr")} geschenkt.`)}
+${rl(6,"Präpositionalobjekt — майже в кінці","Стоїть перед Verb 2. Якщо їх два — спочатку особа.",`Ich habe ${hl("TE","gestern")} ${hl("LO","vor dem Kino")} ${hl("P","auf Marie")} gewartet.`)}
+${rl(7,"nicht — після TE і KA, перед MO і LO","Заперечує все речення.",`Ich konnte meinen Vater ${hl("TE","gestern")} ${hl("KA","wegen eines Termins")} ${hl("N","nicht")} ${hl("MO","pünktlich")} ${hl("LO","am Bahnhof")} abholen.`)}
+${rl(8,"Кілька однотипних обставин","Temporal — від великого до малого. Lokal — від малого до великого.",`Wir sind ${hl("TE","vor einem Jahr")} ${hl("TE","im Mai")} ${hl("LO","hier")} angekommen.<br>Wir fahren ${hl("LO","zu unseren Freunden")} ${hl("LO","in ein kleines Dorf")} ${hl("LO","im Süden")}.`)}
+<h4>4 · Повний порядок слів</h4><p>Нейтральна послідовність. У реченні ніколи не бувають усі члени одразу.</p><div class="zone fx">${FULL.map((f,i)=>chp(f[0],f[1],i+1)).join("")}</div>
+<h4>5 · Типові помилки</h4><div class="cmp">${cm("Ich bin nach Hamburg gestern gefahren.","Ich bin gestern nach Hamburg gefahren.","Temporal перед Lokal.")}${cm("Ich gebe ihm sie.","Ich gebe sie ihm.","Akkusativ-займенник перед Dativ.")}${cm("Er schreibt einen Brief seiner Mutter.","Er schreibt seiner Mutter einen Brief.","Dativ-іменник перед Akkusativ-іменником.")}${cm("Ich habe auf Marie gestern gewartet.","Ich habe gestern auf Marie gewartet.","Präp.-Objekt ближче до кінця.")}</div>
+<div class="ma"><button class="go" data-a="x" style="width:100%">Зрозуміло</button></div></div>`;
+const XM=200,KEY=i=>"tk1_"+i,blank=()=>({k:{},r:0,w:0,err:{},x:0});
+const RK=[[0,"🌱","Новачок"],[20,"🌿","Учень"],[50,"🧭","Дослідник"],[90,"⚡","Знавець"],[130,"🔥","Профі"],[170,"💎","Майстер"],[200,"🏆","Легенда"]];
+const S={};TABS.forEach(t=>{let v=null;try{v=JSON.parse(localStorage.getItem(KEY(t.id)))}catch(e){}S[t.id]=v&&v.k?Object.assign(blank(),v):blank()});
+let mode=st.get("tk-mode")=="c"?"c":"w",tab=TABS.some(t=>t.id==st.get("tk-tab"))?st.get("tk-tab"):"c",cur=0,ans=false,opts=[],pick=-1,tm,rv=false,tr=false,pool=[],pl=[],snd=st.get("tk-snd")!="off",ac;
+const IT=()=>ITEMS[tab],T=()=>S[tab],TB=()=>TABS.find(t=>t.id==tab),X=()=>IT()[cur],isO=x=>!!x.p,mcOn=x=>!isO(x)&&(x.m||mode=="c");
+const save=()=>st.set(KEY(tab),JSON.stringify(S[tab])),errs=()=>IT().map((_,i)=>i).filter(i=>T().err[i]),dn=t=>ITEMS[t].filter((_,i)=>S[t].k[i]).length;
+const norm=s=>String(s).toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:]/g," ").replace(/\s+/g," ").trim();
+const mdl=(h,c)=>{$("bx").className="bx "+(c||"");$("bx").innerHTML=h;$("md").hidden=false;$("bx").scrollTop=0},cls=()=>{$("md").hidden=true};
+function sound(ok){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();ac.resume();const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.connect(g);g.connect(ac.destination);o.type=ok?"sine":"triangle";o.frequency.setValueAtTime(ok?523:200,n);if(ok)o.frequency.setValueAtTime(659,n+.1);else o.frequency.exponentialRampToValueAtTime(100,n+.2);g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.3,n+.04);g.gain.exponentialRampToValueAtTime(.001,n+.4);o.start(n);o.stop(n+.5)}catch(e){}}
+function say(x){if(!window.speechSynthesis)return;const t=isO(x)?x.p.join(" "):/^Welcher/.test(x.s)?x.a:strip(x.s.split("→").pop().replace("___",x.a));try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function ordR(){const x=X();$("zone").innerHTML=`<span class="ch lk">${x.p[0]}</span>`+pl.map((j,n)=>`<button class="ch on" data-u="${n}">${x.p[j]}</button>`).join("");$("pool").innerHTML=pool.map(j=>`<button class="ch" data-p="${j}">${x.p[j]}</button>`).join("")}
+function setBtn(){$("chk").disabled=isO(X())&&pool.length>0}
+function xp(){const v=T().x||0;let r=0;RK.forEach((q,i)=>{if(v>=q[0])r=i});const N=RK[r+1];$("xr").textContent=RK[r][1]+" "+RK[r][2];$("xt").textContent=v;$("xn").textContent=v>=XM?"MAX":"/ "+XM;$("xnx").textContent=N?"ще "+(N[0]-v)+" до «"+N[2]+"»":"максимальний ранг";$("xf").style.width=v/XM*100+"%"}
+function render(){const x=X(),t=T(),o=isO(x),n=IT().length,d=dn(tab);
+$("title").textContent=TB().title;
+$("mode").hidden=o||!!x.m;$("mode").textContent=mode=="w"?"✏️ Впиши":"👆 Обери";
+$("q").innerHTML=o?"🇺🇦 "+x.ua:x.s.replace("___",'<span class="bl"></span>');
+$("lab").innerHTML=o?"":tr?`<div class="tr">${x.ua}</div>`:'<button class="sb" data-a="tr">🌐 Перекласти</button>';
+
+$("zone").hidden=$("pool").hidden=!o;$("opts").hidden=o||!mcOn(x);$("row").hidden=ans||(!o&&mcOn(x));$("inp").hidden=o;$("next").hidden=!ans;
+$("sd").textContent=d+" / "+n;$("sr").textContent=t.r;$("sw").textContent=t.w;$("pg").style.width=d/n*100+"%";
+
+$("tabs").innerHTML=TABS.map(b=>`<button class="tab ${b.id==tab?"on":""}" data-t="${b.id}">${b.label}<small>${dn(b.id)}/${ITEMS[b.id].length}</small></button>`).join("");xp()}
+function load(i){clearTimeout(tm);cur=i;ans=false;pick=-1;tr=false;const x=X();$("card").classList.remove("win");$("fb").className="fb";$("fb").innerHTML="";$("inp").value="";
+if(isO(x)){let a;const s=x.p.map((_,j)=>j).slice(1);do{a=sh(s)}while(a.length>2&&a.join()==s.join());pool=a;pl=[];ordR()}
+else{opts=sh(x.o);$("opts").className="opts"+(opts.some(o=>o.length>24)?" one":"");$("opts").innerHTML=opts.map((o,j)=>`<button class="opt" data-o="${j}">${o}</button>`).join("")}
+render();setBtn();if(!isO(x)&&!mcOn(x)&&matchMedia("(pointer:fine)").matches)$("inp").focus({preventScroll:true})}
+function nxt(){const L=IT().map((_,i)=>i).filter(i=>!T().k[i]);return L.length?(L.find(i=>i>cur)??L[0]):-1}
+function adv(){const n=nxt();if(n>=0)load(n);else done()}
+function done(){const t=T(),n=errs().length;mdl(`<h3>🎉 Вкладку пройдено!</h3><p>Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b></p><div class="ma"><button class="go" data-a="rd">По колу ↔</button><button class="sb" data-a="x">Закрити</button></div>`)}
+function fb(ok,x){const f=$("fb");f.className="fb "+(ok?"ok":"er");let b;
+if(isO(x))b=`<div class="zone fx">${x.p.map((p,i)=>`<span class="ch r ${x.r[i]}">${p}<i>${CAP[x.r[i]]}</i></span>`).join("")}</div>`+(x.alt?`<div>Також можливо: ${x.alt}</div>`:"");
+else b=`<div>${x.s.indexOf("___")<0?x.s+"<br>→ <b>"+x.a+"</b>":x.s.replace("___","<b>"+x.a+"</b>")}</div><div>${x.ex||""}</div>`;
+f.innerHTML=`<div class="k">${ok?"✓ ПРАВИЛЬНО · +1 EXP":"✗ НЕПРАВИЛЬНО · −1 EXP"}</div>`+b}
+function mark(){document.querySelectorAll(".opt").forEach((b,j)=>{b.disabled=true;if(opts[j]==X().a)b.classList.add("ok");else if(j==pick)b.classList.add("er")})}
+function finish(ok){const t=T(),x=X(),b=t.x||0;ans=true;sound(ok);
+if(ok){t.r++;t.x=Math.min(XM,b+1);t.k[cur]=1;if(rv)delete t.err[cur]}else{t.w++;t.x=Math.max(0,b-1);delete t.k[cur];t.err[cur]=true}
+save();fb(ok,x);render();setBtn();if(!isO(x)&&mcOn(x))mark();
+clearTimeout(tm);if(ok){$("card").classList.add("win");tm=setTimeout(()=>{if(ans)adv()},1500)}}
+function check(){if(ans){adv();return}const x=X();
+if(isO(x)){if(pool.length)return;const s=[x.p[0],...pl.map(j=>x.p[j])].join(" ");finish(s==x.p.join(" ")||s==x.alt);return}
+if(mcOn(x))return;const v=$("inp").value;if(!v.trim())return;finish(norm(v)==norm(x.a))}
+const theme=()=>document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"),icons=()=>{$("thb").textContent=theme()=="dark"?"🌙":"☀️";$("snb").textContent=snd?"🔔":"🔕"};
+const A={
+tr(){tr=true;render()},ck:check,x:cls,th:()=>mdl(TH,"th"),sp:()=>say(X()),
+sn(){snd=!snd;st.set("tk-snd",snd?"on":"off");icons();sound(true)},
+tm(){const n=theme()=="dark"?"light":"dark";document.documentElement.dataset.theme=n;st.set("tk-theme",n);icons()},
+md(){mode=mode=="w"?"c":"w";st.set("tk-mode",mode);load(cur)},
+
+
+rd(){const e=T().err,x=T().x;S[tab]=blank();S[tab].err=e;S[tab].x=x;save();cls();rv=false;load(0)},
+rs:()=>mdl(`<h3>Скинути прогрес?</h3><p>Прогрес цієї вкладки (EXP і помилки теж) буде скинуто. Інші вкладки не зміняться.</p><div class="ma"><button class="go" data-a="rsy">Так, скинути</button><button class="sb" data-a="x">Скасувати</button></div>`),
+rsy(){S[tab]=blank();save();cls();rv=false;load(0)}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a],[data-t],[data-u],[data-p],[data-o],.sent");if(!b)return;const d=b.dataset;
+if(b.id=="md"&&e.target!=b)return;
+if(d.t){tab=d.t;st.set("tk-tab",tab);rv=false;const n=nxt();load(n<0?0:n);return}
+if(d.u!=null){if(!ans){pool.push(pl.splice(+d.u,1)[0]);ordR();setBtn()}return}
+if(d.p!=null){if(!ans){pl.push(+d.p);pool=pool.filter(j=>j!=d.p);ordR();setBtn()}return}
+if(d.o!=null){if(!ans){pick=+d.o;finish(opts[pick]==X().a)}return}
+if(b.classList.contains("sent")){say(X());return}
+if(A[d.a])A[d.a]()});
+document.addEventListener("keydown",e=>{if(e.key=="Enter"&&(e.target==document.body||e.target.id=="inp"))check()});
+const sv=st.get("tk-theme");if(sv=="light"||sv=="dark")document.documentElement.dataset.theme=sv;icons();
+{const n=nxt();load(n<0?0:n)}
+
+/* === TELEGRAM: BackButton → index.html === */
+if (window.Telegram && window.Telegram.WebApp) {
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+  tg.BackButton.show();
+  tg.BackButton.onClick(() => { window.location.href = 'index.html'; });
+}
+</script></body></html>

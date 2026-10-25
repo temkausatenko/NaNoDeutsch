@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Futur I 25.10.2026</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="sync.js"></script>
+<style>
+:root{--bg:#0c0f16;--bg2:#1a2035;--card:#131a24;--tx:#e8eef5;--mu:#8892a7;--pr:#6366f1;--glow:rgba(99,102,241,.35);--pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.12);--no:#ef4444;--nob:rgba(239,68,68,.12);--go:#f59e0b;--bd:#1e293b;--sa:#818cf8;--pe:#a78bfa;color-scheme:dark}
+:root[data-theme=light]{--bg:#f8fafc;--bg2:#eef2ff;--card:#fff;--tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--glow:rgba(79,70,229,.2);--pl:#eef2ff;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);--go:#d97706;--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0)}
+body{margin:0;background:radial-gradient(circle at top,var(--bg2),var(--bg));background-color:var(--bg);color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.w{max-width:720px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right)) calc(60px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.hd{position:relative;text-align:center;margin-bottom:16px;padding-top:8px}
+h1{font-size:1.6rem;margin:0;line-height:1.2;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px}
+.ib{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:1.05rem;padding:0}
+.ib:hover,.ib:focus-visible{border-color:var(--pr);color:var(--tx);outline:none}
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
+.tab{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 14px;cursor:pointer;font-size:.85rem;font-weight:500;font-family:inherit;display:inline-flex;gap:6px;align-items:center}
+.tab small{font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--glow)}
+.tab.on small{background:rgba(255,255,255,.2);color:#fff}
+.pg{height:6px;background:var(--pl);border-radius:99px;overflow:hidden;margin:0 0 6px}.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));transition:width .6s}
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin:10px 0 18px}.stat-box{background:var(--card);padding:10px 4px;text-align:center}.stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:2px;font-weight:600}.stat-val{font-size:1.2rem;font-weight:800;line-height:1.1}.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}
+.card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px 18px;transition:border-color .3s,box-shadow .3s}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}.card.lose{border-color:var(--no);box-shadow:0 0 0 3px var(--nob)}
+.top{display:flex;align-items:center;gap:8px;margin-bottom:16px}.top h2{flex:1;min-width:0;margin:0;font-size:.66rem;font-weight:600;letter-spacing:.14em;color:var(--mu);text-transform:uppercase;line-height:1.3}
+.cb{flex:none;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1rem;padding:0;line-height:1}.cb:hover{color:var(--tx);border-color:var(--pr)}
+.mode{flex:none;height:32px;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:0 12px;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit;white-space:nowrap}.mode:hover{color:var(--tx);border-color:var(--pr)}
+.sent{font-size:1.25rem;font-weight:500;line-height:1.5;margin:0 0 8px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.g{display:inline-block;min-width:2.2ch;padding:0 4px;border-bottom:3px solid var(--pr);color:var(--sa);text-align:center}.g.ok{color:var(--ok);border-color:var(--ok)}.g.no{color:var(--no);border-color:var(--no)}
+.lab{margin:0 0 16px;min-height:26px;font-size:.8rem;color:var(--mu)}.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer}.tr-btn:hover{color:var(--tx);border-color:var(--pr)}.bh{color:var(--mu);font-size:.85rem;margin-left:4px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.opt{border:1px solid var(--bd);background:var(--pl);color:var(--tx);border-radius:12px;padding:10px 18px;font-size:1.05rem;font-weight:600;font-family:inherit;cursor:pointer;min-width:64px;flex:1 1 auto;min-height:44px}
+.opt:hover{border-color:var(--pr)}.opt.ok{background:var(--okb);border-color:var(--ok)}.opt.no{background:var(--nob);border-color:var(--no);animation:shake .4s}.opt:disabled:not(.ok):not(.no){opacity:.45}
+.row{display:flex;gap:8px;margin-top:10px}
+input{flex:1;min-width:0;background:var(--pl);border:1px solid var(--bd);color:var(--tx);border-radius:12px;padding:11px 14px;font-size:1.05rem;font-family:inherit}input:focus{outline:2px solid var(--pr)}
+.btn{border:1px solid var(--bd);background:var(--pl);color:var(--tx);border-radius:12px;padding:10px 16px;font-family:inherit;font-weight:600;cursor:pointer}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.fb{margin-top:14px;padding:12px 14px;border-radius:12px;font-size:.92rem;display:none}.fb.ok{display:block;background:var(--okb);border:1px solid var(--ok)}.fb.no{display:block;background:var(--nob);border:1px solid var(--no)}.fb .k{font-weight:700;margin-bottom:4px}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid var(--bd);border-radius:14px;background:var(--card)}
+.xh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.xl{font-size:.7rem;letter-spacing:.14em;color:var(--mu);font-weight:600}
+.xv{position:relative;font-variant-numeric:tabular-nums}.xv b{font-size:1.3rem}.xv small{color:var(--mu);font-weight:600;margin-left:4px}
+.rk{display:flex;justify-content:space-between;margin-bottom:8px;font-size:.78rem;color:var(--mu)}.rk b{font-size:.9rem;color:var(--xz)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden}.xb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--xa),var(--xz));transition:width .7s;box-shadow:0 0 12px var(--xz)}
+.xp{--xa:#475569;--xz:#94a3b8}.xp[data-r="1"]{--xa:#047857;--xz:#34d399}.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.pop{position:absolute;right:0;top:-6px;font-weight:800;opacity:0;pointer-events:none}.pop.go{animation:pp .9s ease-out forwards}.pop.up{color:var(--ok)}.pop.dn{color:var(--no)}
+@keyframes pp{0%{opacity:0;transform:translateY(4px)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.foot{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.foot .btn{flex:1}
+.th{margin-top:16px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px}
+.th h2{font-size:1.1rem;margin:18px 0 8px}.th h3{font-size:.95rem;margin:14px 0 6px}.th p{margin:6px 0}
+.box{background:var(--pl);border-left:4px solid var(--pr);border-radius:10px;padding:10px 14px;margin:10px 0}
+.tw{overflow-x:auto;margin:8px 0}table{border-collapse:collapse;width:100%;font-size:.88rem}th,td{border:1px solid var(--bd);padding:6px 8px;text-align:center;white-space:nowrap}th{background:var(--pl);color:var(--mu)}td b{color:var(--go)}
+.th ul{padding-left:20px;margin:6px 0}.th li{margin:4px 0}.bad{color:var(--no)}.good{color:var(--ok)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9}.modal>div{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;max-width:340px;text-align:center}
+@media(max-width:480px){.hd{padding-top:48px}h1{font-size:1.35rem}.card{padding:18px}.row{flex-direction:column}.sent{font-size:1.15rem}.th{padding:14px}.mode{padding:0 10px}.top{gap:6px}.opt{padding:10px 12px}.stat-val{font-size:1.05rem}.tabs{gap:6px}.tab{padding:6px 11px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.th:not([hidden]){animation:slideUp .5s cubic-bezier(.16,1,.3,1)}@keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.tl td,.tl th{white-space:normal;text-align:left}.tl td:first-child{font-weight:600}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="hd">
+    <button class="ib" id="thBtn" style="right:96px" title="Теорія">📖</button>
+    <button class="ib" id="sndBtn" style="right:48px" title="Звукові ефекти">🔔</button>
+    <button class="ib" id="themeBtn" style="right:0" title="Тема">🌙</button>
+    <h1>Das Futur I<small>Майбутній час · теорія + практика</small></h1>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="pg"><i id="pg"></i></div>
+  <div class="stats-panel"><div class="stat-box"><div class="stat-label">Речення</div><div class="stat-val" id="sdone">0 / 0</div></div><div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="scor">0</div></div><div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="swr">0</div></div></div>
+
+  <div class="card" id="card">
+    <div class="top"><h2 id="title"></h2><button class="mode" id="modeBtn" title="Змінити режим"></button><button class="cb" id="spBtn" title="Озвучити німецькою">🔊</button><button class="cb" id="rst" title="Скинути прогрес цієї вкладки">↻</button></div>
+    <p class="sent" id="sent"></p>
+    <div class="lab" id="lab"></div>
+    <div class="opts" id="opts"></div>
+    <div class="row" id="inrow"><input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"><button class="btn p" id="chk">Перевірити ✓</button></div>
+    <div class="fb" id="fb"></div>
+    <div class="row"><button class="btn p" id="next" style="flex:1" hidden>Далі →</button></div>
+  </div>
+
+  <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl">EXP ЦІЄЇ КАТЕГОРІЇ</span><span class="xv"><b id="xt">0</b><small id="xn">/ 200</small><em class="pop" id="pop"></em></span></div><div class="rk"><b id="xr"></b><span id="xnx"></span></div><div class="xb"><i id="xf"></i></div></div>
+
+  <div class="foot"><button class="btn p" id="thBtn2">📖 Теорія</button></div>
+
+  <div class="th" id="theory" hidden>
+    <h1 style="font-size:1.4rem;text-align:center">Теорія</h1>
+    <div class="box">🔮 <b>Формула:</b> <b>werden</b> (відмінюється, <b>2-га позиція</b>) + <b>Infinitiv</b> (<b>в кінці речення</b>).<br><i>Ich <b>werde</b> morgen eine Ausbildung <b>machen</b>.</i></div>
+    <h2>1. Відмінювання werden</h2>
+    <div class="tw"><table><tr><th>ich</th><th>du</th><th>er / sie / es</th><th>wir</th><th>ihr</th><th>sie / Sie</th></tr><tr><td><b>werde</b></td><td><b>wirst</b></td><td><b>wird</b></td><td><b>werden</b></td><td><b>werdet</b></td><td><b>werden</b></td></tr></table></div>
+    <h2>2. Порядок слів</h2>
+    <div class="tw"><table class="tl"><tr><th>Тип</th><th>Приклад</th></tr><tr><td>Розповідне</td><td>Ich werde morgen eine Ausbildung machen.</td></tr><tr><td>Ja/Nein-питання</td><td>Wirst du eine Ausbildung machen?</td></tr><tr><td>W-питання</td><td>Was wirst du nächstes Jahr machen?</td></tr></table></div>
+    <h2>3. П’ять функцій Futur I</h2>
+    <div class="tw"><table class="tl"><tr><th>Функція</th><th>Приклад</th></tr>
+    <tr><td>План, намір</td><td>Ich werde nächstes Jahr Informatik studieren.<br><i>Наступного року я вчитимуся на інформатика.</i></td></tr>
+    <tr><td>Припущення</td><td>Er wird wohl gerade zu Hause sein.<br><i>Він, мабуть, зараз удома.</i></td></tr>
+    <tr><td>Прогноз</td><td>Morgen wird es den ganzen Tag regnen.<br><i>Завтра цілий день іти­ме дощ.</i></td></tr>
+    <tr><td>Наказ</td><td>Du wirst jetzt sofort deine Hausaufgaben machen!<br><i>Ти зараз же будеш робити домашнє завдання!</i></td></tr>
+    <tr><td>Обіцянка</td><td>Ich werde dir bei dem Umzug helfen, das verspreche ich.<br><i>Я допоможу тобі з переїздом, обіцяю.</i></td></tr></table></div>
+    <h2>4. Припущення і слова-сигнали</h2>
+    <p>Для припущення Futur I майже завжди поєднують зі словами <b>wohl</b>, <b>wahrscheinlich</b>, <b>vielleicht</b>.</p>
+    <ul><li><i>Er wird krank sein.</i> — звучить як твердження або прогноз.</li><li><i>Er wird <b>wohl</b> krank sein.</i> — чітке припущення: «він, мабуть, хворий».</li></ul>
+    <h2>5. У розмові: Präsens + час</h2>
+    <p>Для простих планів у розмовній мові Futur I вживають рідко: беруть Präsens і слово, що вказує на час.</p>
+    <div class="tw"><table class="tl"><tr><th>Futur I (формально)</th><th>Präsens + час (розмовно)</th></tr><tr><td>Ich werde morgen nach Berlin fahren.</td><td>Ich fahre morgen nach Berlin.</td></tr><tr><td>Wirst du nächstes Jahr eine Ausbildung machen?</td><td>Machst du nächstes Jahr eine Ausbildung?</td></tr></table></div>
+    <h2>6. werden ≠ wollen</h2>
+    <div class="tw"><table class="tl"><tr><th>Дієслово</th><th>Значення</th><th>Приклад</th></tr><tr><td>werden + Infinitiv</td><td>майбутнє, план, прогноз</td><td>Ich werde Deutsch lernen. <i>(Я буду вчити німецьку.)</i></td></tr><tr><td>wollen + Infinitiv</td><td>бажання, воля</td><td>Ich will Deutsch lernen. <i>(Я хочу вчити німецьку.)</i></td></tr></table></div>
+    <h2>7. Який варіант вибрати?</h2>
+    <div class="tw"><table class="tl"><tr><th>Речення</th><th>Нюанс</th></tr><tr><td>Machst du eine Ausbildung?</td><td>Präsens: загальне запитання про теперішнє або близьке майбутнє.</td></tr><tr><td>Machst du nächstes Jahr eine Ausbildung?</td><td>Präsens + час: найчастіший варіант у побуті.</td></tr><tr><td>Wirst du eine Ausbildung machen?</td><td>Futur I: формальніше, підкреслює рішення і планування.</td></tr></table></div>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden><div><p id="mt"></p><div class="row" style="justify-content:center"><button class="btn" id="mn">Скасувати</button><button class="btn p" id="my">Так</button></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+/* [речення з ___, відповідь, переклад, пояснення, (Винятки: базове слово, хибні варіанти)] */
+const D={
+x:[],
+w:[["Ich ___ morgen eine Ausbildung machen.","werde","Завтра я розпочну професійне навчання.","ich → werde","","wirst|wird|werden"],
+["Du ___ bestimmt eine gute Lehrerin sein.","wirst","Ти напевно будеш гарною вчителькою.","du → wirst","","werde|wird|werdet"],
+["Er ___ morgen früh aufstehen.","wird","Завтра він встане рано.","er → wird","","werde|wirst|werden"],
+["Meine Schwester ___ im Sommer nach Spanien fliegen.","wird","Влітку моя сестра полетить до Іспанії.","вона (одна особа) → wird","","werde|werden|wirst"],
+["Wir ___ am Wochenende grillen.","werden","На вихідних ми будемо смажити на грилі.","wir → werden","","wird|werdet|werde"],
+["Ihr ___ nächste Woche Besuch bekommen.","werdet","Наступного тижня до вас прийдуть гості.","ihr → werdet","","werden|wirst|wird"],
+["Meine Eltern ___ uns am Sonntag besuchen.","werden","У неділю нас відвідають мої батьки.","вони (багато) → werden","","wird|werdet|werde"],
+["Das Kind ___ bald schlafen.","wird","Дитина скоро засне.","es → wird","","werden|werdet|wirst"],
+["___ du heute Abend kochen?","Wirst","Ти будеш готувати сьогодні ввечері?","питання без слова-запитання: Wirst на 1-й позиції","","Wird|Werde|Werdet"],
+["___ ihr mit dem Zug oder mit dem Auto fahren?","Werdet","Ви поїдете потягом чи машиною?","ihr → werdet","","Werden|Wirst|Wird"],
+["Was ___ ihr nächstes Jahr machen?","werdet","Що ви робитимете наступного року?","W-питання: werdet на 2-й позиції","","werden|wirst|wird"],
+["Wann ___ der Kurs beginnen?","wird","Коли почнеться курс?","der Kurs = er → wird","","werden|wirst|werdet"],
+["Du und ich, wir ___ das schaffen!","werden","Ми з тобою впораємося з цим!","wir → werden","","werdet|wird|wirst"],
+["Herr Müller ___ morgen nicht kommen.","wird","Пан Мюллер завтра не прийде.","er → wird","","werde|wirst|werden"],
+["Ich glaube, ich ___ das nie vergessen.","werde","Мені здається, я цього ніколи не забуду.","ich → werde","","wirst|wird|werden"],
+["Die Kinder ___ im Garten spielen.","werden","Діти гратимуть у саду.","вони (багато) → werden","","wird|werdet|wirst"]],
+i:[["Ich werde morgen nach Berlin ___.","fahren","Завтра я поїду до Берліна.","Infinitiv стоїть в кінці речення (не Partizip II)","їхати","gefahren|fährt|zu fahren"],
+["Wir werden nächstes Jahr ein Haus ___.","kaufen","Наступного року ми купимо будинок.","Infinitiv стоїть в кінці речення (не Partizip II)","купити","gekauft|kauft|zu kaufen"],
+["Wirst du eine Ausbildung ___?","machen","Ти будеш проходити професійне навчання?","Infinitiv стоїть в кінці речення (не Partizip II)","робити","gemacht|machst|zu machen"],
+["Was wirst du nächstes Jahr ___?","machen","Що ти робитимеш наступного року?","Infinitiv стоїть в кінці речення (не Partizip II)","робити","gemacht|machst|zu machen"],
+["Er wird die Prüfung bestimmt ___.","bestehen","Він напевно складе іспит.","Infinitiv стоїть в кінці речення (не Partizip II)","скласти","bestanden|besteht|zu bestehen"],
+["Ich werde dir beim Umzug ___.","helfen","Я допоможу тобі з переїздом.","Infinitiv стоїть в кінці речення (не Partizip II)","допомогти","geholfen|helfe|zu helfen"],
+["Morgen wird es den ganzen Tag ___.","regnen","Завтра цілий день йтиме дощ.","Infinitiv стоїть в кінці речення (не Partizip II)","іти (про дощ)","geregnet|regnet|zu regnen"],
+["Ihr werdet mit uns nach Wien ___.","reisen","Ви поїдете з нами до Відня.","Infinitiv стоїть в кінці речення (не Partizip II)","подорожувати","gereist|reist|zu reisen"],
+["Sie werden im Mai ___.","heiraten","Вони одружаться в травні.","Infinitiv стоїть в кінці речення (не Partizip II)","одружитися","geheiratet|heiratet|zu heiraten"],
+["Ich werde heute Abend früh ins Bett ___.","gehen","Сьогодні ввечері я рано ляжу спати.","Infinitiv стоїть в кінці речення (не Partizip II)","піти","gegangen|gehe|zu gehen"],
+["Du wirst jetzt sofort deine Hausaufgaben ___!","machen","Ти зараз же будеш робити домашнє завдання!","Infinitiv стоїть в кінці речення (не Partizip II)","робити","gemacht|machst|zu machen"],
+["Wann wirst du endlich Deutsch ___?","lernen","Коли ти нарешті вивчиш німецьку?","Infinitiv стоїть в кінці речення (не Partizip II)","вчити","gelernt|lernst|zu lernen"],
+["Werden Sie morgen zur Besprechung ___?","kommen","Ви прийдете завтра на нараду?","Infinitiv стоїть в кінці речення (не Partizip II)","прийти","gekommen|kommt|zu kommen"],
+["Wir werden dich am Bahnhof ___.","abholen","Ми заберемо тебе на вокзалі.","Infinitiv стоїть в кінці речення (не Partizip II)","забрати","abgeholt|holen ab|abzuholen"],
+["Er wird bald einen neuen Job ___.","finden","Він скоро знайде нову роботу.","Infinitiv стоїть в кінці речення (не Partizip II)","знайти","gefunden|findet|zu finden"],
+["Das Wetter wird am Wochenende schön ___.","sein","На вихідних погода буде гарною.","Infinitiv стоїть в кінці речення (не Partizip II)","бути","gewesen|ist|zu sein"]],
+f:[["Wir ___ nach dem Abitur ein Jahr im Ausland leben.","werden","Після школи ми проживемо рік за кордоном.","план: wir → werden","","werdet|wird|wirst"],
+["Meine Schwester ___ im Herbst Medizin studieren.","wird","Восени моя сестра піде вчитися на медицину.","план: вона → wird","","werden|wirst|werde"],
+["Er wird ___ gerade zu Hause sein.","wohl","Він, мабуть, зараз удома.","wohl робить речення припущенням","","sehr|viel|zu",["wahrscheinlich","vielleicht"]],
+["Sie wird ___ krank sein, sie antwortet nicht.","wohl","Вона, мабуть, хвора, вона не відповідає.","wohl / wahrscheinlich / vielleicht = припущення","","sehr|viel|zu",["wahrscheinlich","vielleicht"]],
+["Das wird ___ ein Missverständnis sein.","wohl","Це, мабуть, непорозуміння.","wohl = мабуть","","sehr|viel|zu",["wahrscheinlich","vielleicht"]],
+["Peter ist nicht da. Er ___ wohl noch im Büro sein.","wird","Петера немає. Він, мабуть, ще в офісі.","припущення: wird + wohl + Infinitiv","","wirst|werden|werde"],
+["Morgen ___ es den ganzen Tag regnen.","wird","Завтра цілий день йтиме дощ.","прогноз: es → wird","","werden|wirst|werde"],
+["In zehn Jahren ___ es viel mehr Elektroautos geben.","wird","Через десять років електромобілів буде набагато більше.","прогноз: es → wird","","werden|werde|werdet"],
+["Im Winter ___ es hier sehr kalt werden.","wird","Взимку тут стане дуже холодно.","прогноз: es → wird","","werden|wirst|werdet"],
+["Du ___ jetzt sofort dein Zimmer aufräumen!","wirst","Ти зараз же приберешся у своїй кімнаті!","наказ: du → wirst","","wird|werde|werdet"],
+["Ihr ___ heute pünktlich zu Hause sein!","werdet","Сьогодні ви будете вдома вчасно!","наказ: ihr → werdet","","werden|wirst|wird"],
+["Du ___ das Fenster sofort schließen!","wirst","Ти негайно закриєш вікно!","наказ: du → wirst","","wird|werde|werdet"],
+["Ich ___ dich nie vergessen, das verspreche ich dir.","werde","Я тебе ніколи не забуду, обіцяю тобі.","обіцянка: ich → werde","","wirst|wird|werden"],
+["Wir ___ pünktlich da sein, versprochen!","werden","Ми будемо там вчасно, обіцяємо!","обіцянка: wir → werden","","werdet|wird|werde"],
+["Ich ___ dir morgen das Geld zurückgeben, ich verspreche es.","werde","Завтра я поверну тобі гроші, обіцяю.","обіцянка: ich → werde","","wirst|wird|werden"]],
+v:[["Ich ___ Deutsch lernen, aber ich habe leider keine Zeit.","will","Я хочу вчити німецьку, але, на жаль, не маю часу.","wollen = бажання","","werde|wirst|wollen"],
+["Wenn du so weiterlernst, ___ du bald fließend Deutsch sprechen.","wirst","Якщо ти й далі так вчитимешся, скоро вільно говоритимеш німецькою.","werden = прогноз: du → wirst","","willst|wird|wollt"],
+["Er ___ nächstes Jahr heiraten, aber seine Freundin ist noch unsicher.","will","Він хоче одружитися наступного року, але його дівчина ще не певна.","wollen = бажання","","wird|wollen|wollt"],
+["Alle sagen: Er ___ nächstes Jahr bestimmt heiraten.","wird","Усі кажуть: він наступного року напевно одружиться.","werden = прогноз","","will|werden|wirst"],
+["Wir ___ im Urlaub viel schwimmen, aber das Meer ist zu kalt.","wollen","У відпустці ми хочемо багато плавати, але море надто холодне.","wir + бажання → wollen","","werden|wollt|wird"],
+["Ich ___ Pilot werden, aber meine Eltern sind dagegen.","will","Я хочу стати пілотом, але мої батьки проти.","wollen = бажання","","werde|wirst|wollen"],
+["Was ___ du später werden? Hast du schon einen Traumberuf?","willst","Ким ти хочеш стати пізніше? У тебе вже є професія мрії?","wollen: du → willst","","wirst|wollt|will"],
+["Meine Prognose: Du ___ ein guter Arzt werden.","wirst","Мій прогноз: ти станеш хорошим лікарем.","werden = прогноз: du → wirst","","willst|wird|wollt"],
+["Ich ___ morgen nach Berlin.","fahre","Завтра я їду до Берліна.","Präsens + час — розмовна заміна Futur I","","werde|fahren|gefahren"],
+["___ du nächstes Jahr eine Ausbildung?","Machst","Ти наступного року починаєш професійне навчання?","Präsens + час: Machst du nächstes Jahr …?","","Wirst|Mache|Machen"],
+["Wir ___ am Samstag ins Kino.","gehen","У суботу ми йдемо в кіно.","Präsens + час замість Futur I","","werden|gegangen|geht"],
+["Meine Schwester ___ morgen Abend unsere Oma.","besucht","Завтра ввечері моя сестра відвідує нашу бабусю.","Präsens + час замість Futur I","","besuchen|besuchte|wird"],
+["Ich ___ dich heute Abend an.","rufe","Сьогодні ввечері я тобі зателефоную.","Präsens + час: rufe … an","","werde|rufen|gerufen"],
+["Du ___ den Führerschein bestimmt bald machen.","wirst","Ти напевно скоро складеш на права.","Futur I: wirst … machen","","machst|wollt|werdet"]]};
+D.x=[...D.w,...D.i,...D.f,...D.v];
+const TABS=[["x","Мікс"],["w","Werden"],["i","Infinitiv"],["f","Функції"],["v","Werden / wollen"]];
+const TITLES={x:"Мікс: усе про Futur I",w:"Форми werden",i:"Infinitiv в кінці речення",f:"5 функцій Futur I",v:"werden · wollen · Präsens"};
+const XM=200,NEED=1,KEY="futur1_trainer_v1";
+const RANKS=[[0,"🌱","Новачок"],[20,"🌿","Учень"],[48,"🧭","Дослідник"],[88,"⚡","Знавець"],[136,"🔥","Профі"],[184,"💎","Майстер"],[200,"🏆","Легенда"]];
+let S={};try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+S.t=S.t||"x";S.mode=S.mode||"write";S.d=S.d||{};S.snd=S.snd!==false;S.th=S.th||"";
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const T=()=>S.d[S.t]||(S.d[S.t]={x:0,r:0,w:0,k:{}});
+let cur=0,answered=false,tm;
+const items=()=>D[S.t];
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const mastered=i=>(T().k[i]||0)>=NEED;
+const isFull=it=>!!it[5];
+let trShown=false;
+function renderLab(){const it=items()[cur];$("lab").innerHTML=trShown?`<div class="tr-text">${esc(it[2])}</div>`:'<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>'}
+
+let audioCtx;
+function playSound(type){
+  if(!S.snd)return;
+  try{
+    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx.state==="suspended")audioCtx.resume();
+    if("audioSession" in navigator)navigator.audioSession.type="playback";
+    const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+    osc.connect(gain);gain.connect(audioCtx.destination);
+    const now=audioCtx.currentTime;
+    if(type==="correct"){
+      osc.type="sine";osc.frequency.setValueAtTime(523.25,now);osc.frequency.setValueAtTime(659.25,now+0.1);
+      gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.4,now+0.05);gain.gain.exponentialRampToValueAtTime(0.001,now+0.5);
+      osc.start(now);osc.stop(now+0.6);
+    }else{
+      osc.type="triangle";osc.frequency.setValueAtTime(200,now);osc.frequency.exponentialRampToValueAtTime(100,now+0.2);
+      gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(0.4,now+0.05);gain.gain.exponentialRampToValueAtTime(0.001,now+0.3);
+      osc.start(now);osc.stop(now+0.4);
+    }
+  }catch(e){}
+}
+document.addEventListener("touchstart",function u(){if(!audioCtx)try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}document.removeEventListener("touchstart",u)},{once:true});
+function speak(){if(!window.speechSynthesis)return;const it=items()[cur];speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(it[0].replace("___",it[1]));u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}
+
+function pick(){const a=items().map((_,i)=>i).filter(i=>i!==cur);const open=a.filter(i=>!mastered(i));const p=open.length?open:a;return p[Math.random()*p.length|0]}
+function load(i){
+  cur=i;answered=false;clearTimeout(tm);const it=items()[i];
+  $("card").className="card";
+  const [a,b]=it[0].split("___");
+  $("sent").innerHTML=esc(a)+'<span class="g" id="gap">&nbsp;&nbsp;</span>'+(it[4]?`<span class="bh">(${esc(it[4])})</span>`:"")+esc(b);
+  trShown=false;renderLab();
+  $("fb").className="fb";$("next").hidden=true;
+  const o=$("opts"),r=$("inrow");
+  if(S.mode==="choose"){
+    r.hidden=true;o.hidden=false;
+    const list=isFull(it)?shuffle([it[1],...it[5].split("|")]):["e","en","er","es","em"];
+    o.innerHTML=list.map(v=>`<button class="opt" data-v="${esc(v)}">${isFull(it)?esc(v):"-"+v}</button>`).join("");
+  }else{
+    o.hidden=true;o.innerHTML="";r.hidden=false;$("chk").hidden=false;
+    $("inp").value="";$("inp").disabled=false;$("inp").placeholder=isFull(it)?"Повна форма слова":"Закінчення: e, en, er, es, em";
+    if(!matchMedia("(pointer:coarse)").matches)$("inp").focus();
+  }
+  render();
+}
+function check(v){
+  if(answered)return;const it=items()[cur];v=v.trim();if(!v)return;
+  const vl=v.toLowerCase().replace(/^-/,""),ok=[it[1],...(it[6]||[])].some(a=>a.toLowerCase()===vl);
+  answered=true;const t=T(),x0=t.x;playSound(ok?"correct":"wrong");
+  if(ok){t.r++;t.x=Math.min(XM,t.x+1);t.k[cur]=(t.k[cur]||0)+1}else{t.w++;t.x=Math.max(0,t.x-1);t.k[cur]=0}
+  save();
+  const g=$("gap");g.textContent=it[1];g.className="g "+(ok?"ok":"no");
+  $("card").className="card "+(ok?"win":"lose");
+  document.querySelectorAll(".opt").forEach(b=>{b.disabled=true;if(b.dataset.v.toLowerCase()===it[1].toLowerCase())b.classList.add("ok");else if(b.dataset.v===v)b.classList.add("no")});
+  $("inp").disabled=true;$("chk").hidden=true;
+  const done=items().every((_,i)=>mastered(i));
+  const f=$("fb");f.className="fb "+(ok?"ok":"no");
+  f.innerHTML=`<div class="k">${ok?"✓ ПРАВИЛЬНО · +1 EXP":"✗ НЕПРАВИЛЬНО · −1 EXP"}</div><div><b>${esc(it[0].replace("___",it[1]))}</b></div><div>${esc(it[2])}</div><div style="color:var(--mu);margin-top:4px">💡 ${esc(it[3])}</div>`+(ok&&done?'<div class="k" style="margin-top:6px">🏆 Усю вкладку засвоєно!</div>':"");
+  render();popXp(t.x-x0,rankOf(t.x)>rankOf(x0));
+  if(ok&&!done){tm=setTimeout(()=>{if(answered)load(pick())},1500)}else $("next").hidden=false;
+}
+const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
+function render(){
+  const t=T(),n=items().length,d=items().filter((_,i)=>mastered(i)).length,r=rankOf(t.x),R=RANKS[r],N=RANKS[r+1];
+  $("xp").dataset.r=r;$("xf").style.width=t.x/XM*100+"%";$("xt").textContent=t.x;$("xn").textContent=t.x>=XM?"MAX":"/ "+XM;
+  $("xr").textContent=R[1]+" "+R[2];$("xnx").textContent=N?`ще ${N[0]-t.x} до «${N[2]}»`:"максимальний ранг";
+  $("pg").style.width=d/n*100+"%";$("sdone").textContent=d+" / "+n;$("scor").textContent=t.r;$("swr").textContent=t.w;
+  $("title").textContent=TITLES[S.t];
+  $("modeBtn").textContent=S.mode==="write"?"✏️ Впиши":"👆 Обери";
+  document.querySelectorAll(".tab").forEach(b=>{const k=b.dataset.k,c=(S.d[k]?Object.values(S.d[k].k).filter(v=>v>=NEED).length:0);b.classList.toggle("on",k===S.t);b.querySelector("small").textContent=c+"/"+D[k].length});
+}
+function popXp(d,up){if(!d)return;const p=$("pop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="pop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go")}
+$("tabs").innerHTML=TABS.map(t=>`<button class="tab" data-k="${t[0]}">${t[1]} <small>0/${D[t[0]].length}</small></button>`).join("");
+$("tabs").onclick=e=>{const b=e.target.closest(".tab");if(!b)return;S.t=b.dataset.k;save();load(pick())};
+$("opts").onclick=e=>{const b=e.target.closest(".opt");if(b)check(b.dataset.v)};
+$("chk").onclick=()=>check($("inp").value);
+$("next").onclick=()=>load(pick());
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"||e.repeat||!$("modal").hidden)return;
+  if(e.target.closest&&e.target.closest("#theory"))return;
+  e.preventDefault();
+  if(answered)load(pick());
+  else if(S.mode==="write")check($("inp").value);
+});
+$("modeBtn").onclick=()=>{S.mode=S.mode==="write"?"choose":"write";save();load(cur)};
+$("lab").onclick=e=>{if(e.target.closest("[data-tr]")){trShown=true;renderLab()}};$("sent").onclick=speak;
+$("spBtn").onclick=speak;
+$("sndBtn").onclick=()=>{S.snd=!S.snd;$("sndBtn").textContent=S.snd?"🔔":"🔕";save();if(S.snd)playSound("correct")};
+$("themeBtn").onclick=()=>{S.th=S.th==="light"?"dark":"light";document.documentElement.dataset.theme=S.th;$("themeBtn").textContent=S.th==="light"?"☀️":"🌙";save()};
+function openTheory(){const t=$("theory");if(t.hidden){t.hidden=false;$("thBtn2").innerHTML="❌ Закрити теорію"}setTimeout(()=>t.scrollIntoView({behavior:"smooth",block:"start"}),100)}
+function toggleTheory(){const t=$("theory");if(!t.hidden){t.hidden=true;$("thBtn2").innerHTML="📖 Теорія";$("card").scrollIntoView({behavior:"smooth",block:"start"})}else openTheory()}
+$("thBtn").onclick=openTheory;$("thBtn2").onclick=toggleTheory;
+$("rst").onclick=()=>{$("mt").textContent="Скинути прогрес і EXP лише цієї вкладки?";$("modal").hidden=false};
+$("mn").onclick=()=>$("modal").hidden=true;
+$("my").onclick=()=>{S.d[S.t]={x:0,r:0,w:0,k:{}};save();$("modal").hidden=true;load(0)};
+$("sndBtn").textContent=S.snd?"🔔":"🔕";if(S.th)document.documentElement.dataset.theme=S.th;$("themeBtn").textContent=S.th==="light"?"☀️":"🌙";
+
+load(pick());
+
+if (window.Telegram && window.Telegram.WebApp) {
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+  tg.BackButton.show();
+  tg.BackButton.onClick(() => { window.location.href = 'index.html'; });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Perfekt & Präteritum 25.10.2026</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="sync.js"></script>
+<style>
+:root{
+  --bg:#0c0f16;--bg-grad:#1a2035;
+  --card:#131a24;--card-hover:#1c2532;
+  --tx:#e8eef5;--mu:#8892a7;
+  --pr:#6366f1;--pr-glow:rgba(99,102,241,.35);
+  --pl:#1e293b;
+  --ok:#10b981;--okb:rgba(16,185,129,.12);
+  --no:#ef4444;--nob:rgba(239,68,68,.12);
+  --go:#f59e0b;--gob:rgba(245,158,11,.12);
+  --bd:#1e293b;
+  --sa:#818cf8;--pe:#a78bfa;
+  --radius:16px;color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
+  color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;transition:background-color .3s,color .3s}
+.w{max-width:720px;margin:0 auto;padding-block:24px 60px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
+.header-wrap{position:relative;text-align:center;margin-bottom:16px;padding-top:8px}
+h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
+  background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
+.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+  color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
+.theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
+.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
+  padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
+  display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
+.tab.on small{color:#fff;background:rgba(255,255,255,.2)}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
+.xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
+@keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.stat-box{background:var(--card);padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:2px;font-weight:600}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--tx);line-height:1.1}
+.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}.stat-val.go{color:var(--go)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
+@keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:175px;text-transform:uppercase;line-height:32px;min-height:32px}
+.speak,.mode-toggle,.reset-btn{position:absolute;top:22px;height:32px;border-radius:50%;border:1px solid var(--bd);
+  background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
+.speak{right:22px;width:32px}.reset-btn{width:32px}
+.mode-toggle{right:62px;width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.speak:hover,.mode-toggle:hover,.reset-btn:hover{color:var(--tx);border-color:var(--pr)}
+
+.sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.sent:hover{opacity:.85}.sent:active{opacity:.7}
+.verb-badge{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:99px;background:var(--pl);color:var(--sa);font-size:.88rem;font-weight:700;vertical-align:baseline;border:1px solid var(--bd)}
+.lab{margin:0 0 12px;font-size:.8rem;line-height:1.4;font-weight:400;color:var(--mu)}
+.lab:empty{display:none}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:.84rem;line-height:1.4;color:var(--mu)}
+.rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
+.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
+.scheme{font-size:.9rem;color:var(--mu);margin:4px 0 6px;line-height:1.5}
+.scheme .np{color:var(--sa);font-weight:600}
+.blank{display:inline-block;min-width:64px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.opt{flex:1 1 44%;min-height:44px;padding:11px 16px;font-size:.98rem;text-align:center;
+  border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
+.opt.ok,.opt.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.opt.er,.opt.er:hover{border-color:var(--no);background:var(--nob);color:var(--no);animation:shake .4s}
+.opt:disabled{cursor:default}.opt:disabled:not(.ok):not(.er){opacity:.45}
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);
+  font:inherit;font-size:1rem;outline:none;transition:border-color .2s}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--pr-glow)}
+.chk,.next{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
+.chk{border:2px solid var(--pr);background:var(--pr);color:#fff}
+.chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.next{border:2px solid var(--bd);background:transparent;color:var(--tx)}.next:hover{border-color:var(--pr)}
+.card:not(.mc) .opts{display:none}
+.card.mc .row,.card.mc .um-row{display:none}
+.card.mc .fb{cursor:pointer}
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.um{width:36px;height:34px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-size:.95rem;cursor:pointer;transition:all .18s}
+.um:hover{color:var(--tx);border-color:var(--pr)}
+.tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
+.tool:hover{color:var(--tx)}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
+.fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
+.fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
+.fb.hint{display:block;background:var(--gob);border-color:var(--go)}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}.fb.hint .k{color:var(--go)}
+.fb .ans{font-size:1.1rem;font-weight:600;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
+.fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
+.fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
+.fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 1.2s linear forwards;width:100%}
+@keyframes shrink{to{width:0}}
+.foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
+.foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
+.btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
+.btn:hover{border-color:var(--pr);transform:translateY(-1px)}
+.btn.g{font-weight:500;font-size:.82rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
+.btn.g:hover{color:var(--tx);background:var(--pl);transform:none}
+.btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+.cheat{margin:24px 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.cheat-title{margin:0 0 2px;font-size:1.05rem;font-weight:700;color:var(--tx)}
+.cheat-sub{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
+.cheat-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.cheat-pill{font:inherit;font-size:.8rem;font-weight:500;color:var(--mu);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.cheat-pill:hover{color:var(--tx);border-color:var(--c,var(--sa))}
+.cheat-pill.on{color:var(--tx);border-color:var(--c,var(--sa));background:var(--pl);box-shadow:inset 0 -2px 0 var(--c,var(--sa))}
+.cheat-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px}
+.cheat-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--bd)}
+.cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
+.cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
+@media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
+.complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;
+  padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;
+  max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover{border-color:var(--pr)}
+#theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
+#theory-section.show{display:block}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.theory-card h2{font-size:1.2rem;color:var(--sa);border-bottom:1px solid var(--bd);padding-bottom:6px;margin-top:24px}
+.theory-card h2:first-child{margin-top:0}
+.theory-card h3{font-size:1rem;color:var(--tx);margin:16px 0 8px}
+.theory-card p,.theory-card li{color:var(--mu);font-size:.92rem;line-height:1.6}
+.theory-card ul{padding-left:20px;margin:10px 0}
+.theory-card .rule-box{background:var(--gob);border-left:4px solid var(--go);padding:11px 14px;margin:16px 0;
+  border-radius:6px;color:var(--go);font-size:.92rem}
+.theory-card .tip-box{background:var(--okb);border-left:4px solid var(--ok);padding:11px 14px;margin:16px 0;
+  border-radius:6px;color:var(--tx);font-size:.92rem}
+.theory-card .example{background:var(--pl);border-left:4px solid var(--sa);padding:11px 14px;margin:10px 0;
+  border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .example span.hl{color:var(--sa);font-weight:bold}
+.table-wrap{overflow-x:auto}
+.theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
+.theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left;vertical-align:top}
+.theory-card th{background:var(--pl);color:var(--tx);font-weight:700}
+@media(max-width:480px){
+  .stats-panel{grid-template-columns:repeat(3,1fr)}
+  .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
+  .tool{margin-left:0}.card{padding:18px}h1{font-size:1.35rem}.complete-card{padding:22px 18px}
+  .theory-card{padding:16px}.header-wrap{padding-top:48px}
+  .speak,.mode-toggle{top:18px;height:32px}
+  .speak{right:18px}
+  .mode-toggle{right:58px}
+  .card h2{padding-right:160px;height:auto;min-height:32px}
+  .opt{flex:1 1 100%}
+}
+@media(hover:hover) and (pointer:fine){
+  .tab:hover{border-color:var(--pr);color:var(--tx)}.tab.on:hover{background:#4338ca}
+  .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
+  .btn:hover{transform:translateY(-1px)}.btn.g:hover{transform:none}
+}
+.errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
+.errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
+.errs-list{overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:2px;min-height:0}
+.err-item{background:var(--nob);border:1px solid var(--bd);border-left:4px solid var(--no);border-radius:10px;padding:10px 12px}
+.err-item .e-de{color:var(--tx);font-size:.95rem;line-height:1.45}
+.err-item .e-de b{color:var(--ok)}
+.err-item .e-ua{color:var(--mu);font-size:.82rem;margin-top:3px}
+.err-item .e-ex{color:var(--mu);font-size:.8rem;margin-top:3px;font-style:italic}
+.errs-empty{text-align:center;color:var(--mu);padding:26px 8px;font-size:.95rem}
+.errs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.errs-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
+.errs-actions .go:hover{filter:brightness(1.1)}
+.errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.errs-actions .cancel:hover{border-color:var(--pr)}
+button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ранги EXP */
+.xv{position:relative}
+.xp{--xa:#475569;--xz:#94a3b8}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xb i{background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xb::after{display:none}
+.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
+.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+@keyframes xgold{to{background-position:200% 0}}
+.card-tools{position:absolute;top:22px;right:22px;display:flex;gap:8px;align-items:center;z-index:2}
+.card-tools>*{position:static}
+.card h2{padding-right:195px}
+@media(max-width:480px){.card-tools{top:18px;right:18px}.card h2{padding-right:185px}}
+</style>
+</head>
+<body>
+<div class="w">
+  <div class="header-wrap">
+    <h1>Perfekt & Präteritum<small>Минулі часи в німецькій мові · Теорія та практика</small></h1>
+    <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="pg"><i id="bar"></i></div>
+
+  <div class="stats-panel">
+    <div class="stat-box"><div class="stat-label">Завдання</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+    <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
+    <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
+  </div>
+
+  <div class="card" id="card">
+    <h2 id="title"></h2>
+    <div class="card-tools">
+      <!-- ✏️ Впиши / 👆 Обери -->
+      <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
+      <!-- 🔊 Озвучити -->
+      <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
+      <!-- ↻ Скинути -->
+      <button class="reset-btn" id="resetBtn" title="Скинути прогрес цієї вкладки" onclick="restartTab()">↻</button>
+    </div>
+
+    <p class="sent" id="sent"></p>
+    <div class="scheme" id="scheme"></div>
+    <div class="lab" id="lab"></div>
+    <div class="opts" id="opts"></div>
+
+    <div class="row">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи відповідь …" enterkeyhint="done">
+      <button class="chk" id="chk">Перевірити ✓</button>
+      <button class="next" id="next">Далі →</button>
+    </div>
+
+    <div class="um-row">
+      <button class="tool" type="button" id="showSolBtn">Показати відповідь</button>
+    </div>
+
+    <div class="fb" id="fb"></div>
+  </div>
+
+  <div class="xp" id="xp" data-r="0">
+    <div class="xh">
+      <span class="xl"><i class="xg"></i>EXP цієї категорії</span>
+      <span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span>
+    </div>
+    <div class="xrank">
+      <span class="xrn" id="xr">🌱 Новачок</span>
+      <span class="xnx" id="xnext"></span>
+    </div>
+    <div class="xb"><i id="xf"></i><s id="xticks"></s></div>
+  </div>
+
+  <div class="foot">
+    <div class="foot-row">
+      <button class="btn danger" id="reviewBtn" style="display:none" onclick="openErrors()"></button>
+    </div>
+    <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Конспект (Теорія)</button>
+  </div>
+
+  <div class="cheat" id="glossary"></div>
+
+  <!-- === ПОВНА ТЕОРІЯ === -->
+  <div id="theory-section">
+    <div class="theory-card">
+      <h1 style="margin-bottom:8px;font-size:1.4rem;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Три минулі часи в німецькій мові</h1>
+      <p style="text-align:center;margin:0 0 18px"><em>Perfekt · Präteritum · Plusquamperfekt — коли вживати, як утворювати та як не плутати</em></p>
+
+      <div class="rule-box">🧭 <strong>ГОЛОВНА РІЗНИЦЯ:</strong><br>
+      • <strong>Perfekt</strong> (<em>Ich habe gelernt</em>) — переважно жива розмова, приватні повідомлення, листування з друзями.<br>
+      • <strong>Präteritum</strong> (<em>Ich lernte / Ich war</em>) — письмові розповіді, книги, новини; але для <strong>sein, haben</strong> і <strong>модальних дієслів</strong> — також і в розмові!<br>
+      • <strong>Plusquamperfekt</strong> (<em>Ich hatte gelernt</em>) — подія, яка відбулася <strong>ще раніше</strong> за іншу минулу подію.</div>
+
+      <h2>1. 🔵 Perfekt — минулий час у розмові</h2>
+      <p><strong>Формула:</strong> <code>haben / sein</code> (на 2-му місці) + <code>Partizip II</code> (у кінці речення).</p>
+      <div class="example">
+        Ich <span class="hl">habe</span> eine Pizza <span class="hl">gemacht</span>. — Я приготував піцу.<br>
+        Wir <span class="hl">sind</span> nach Hause <span class="hl">gefahren</span>. — Ми поїхали додому.
+      </div>
+
+      <h3>Коли haben, а коли sein?</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Зазвичай haben</th><th>Обов'язково sein</th></tr>
+          <tr>
+            <td>
+              • Усі дієслова з прямим додатком в <strong>Akkusativ</strong> (<em>lesen, kaufen, essen</em>)<br>
+              • Усі зворотні дієслова з <strong>sich</strong> (<em>sich beeilen, sich freuen</em>)<br>
+              • Модальні та більшість інших дієслів (<em>arbeiten, schlafen</em>)
+            </td>
+            <td>
+              • <strong>Рух</strong> з точки А в точку Б (<em>gehen, fahren, fliegen, kommen, laufen</em>)<br>
+              • <strong>Зміна стану</strong> (<em>aufwachen, einschlafen, sterben, wachsen, werden</em>)<br>
+              • <strong>Дієслова-винятки:</strong> <em>sein, bleiben, passieren, geschehen, gelingen, misslingen, begegnen, folgen</em>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="rule-box">⚠️ <strong>Обережно з рухом + Akkusativ!</strong> Якщо в дієслова руху з'являється прямий додаток (кого? що?), вживаємо <strong>haben</strong>:<br>
+      • <em>Er <strong>ist</strong> in die Garage gefahren.</em> (сам поїхав — рух)<br>
+      • <em>Er <strong>hat</strong> das Auto in die Garage gefahren.</em> (завів машину — є додаток <em>das Auto</em>)</div>
+
+      <h3>Як утворити Partizip II?</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Тип дієслова</th><th>Правило</th><th>Приклади</th></tr>
+          <tr><td><strong>Правильні (слабкі)</strong></td><td><code>ge-</code> + основа + <code>-t</code></td><td>machen → <strong>gemacht</strong>, lernen → <strong>gelernt</strong></td></tr>
+          <tr><td><strong>Основа на -t / -d / -m / -n</strong></td><td><code>ge-</code> + основа + <code>-et</code></td><td>arbeiten → <strong>gearbeitet</strong>, antworten → <strong>geantwortet</strong></td></tr>
+          <tr><td><strong>Відокремлюваний префікс</strong></td><td>префікс + <code>ge</code> + основа + <code>-t/-en</code></td><td>aufmachen → <strong>aufgemacht</strong>, anrufen → <strong>angerufen</strong></td></tr>
+          <tr><td><strong>Невідокремлюваний префікс</strong><br>(be-, ge-, er-, ver-, zer-, ent-, emp-, miss-)</td><td><strong>БЕЗ ge-!</strong></td><td>bezahlen → <strong>bezahlt</strong>, verstehen → <strong>verstanden</strong></td></tr>
+          <tr><td><strong>Дієслова на -ieren</strong></td><td><strong>БЕЗ ge-!</strong> + <code>-t</code></td><td>studieren → <strong>studiert</strong>, telefonieren → <strong>telefoniert</strong></td></tr>
+          <tr><td><strong>Сильні (неправильні)</strong></td><td><code>ge-</code> + часто зміна голосної + <code>-en</code></td><td>fahren → <strong>gefahren</strong>, trinken → <strong>getrunken</strong></td></tr>
+        </table>
+      </div>
+
+      <h3>Perfekt із модальними дієсловами</h3>
+      <p>У розмові модальні дієслова найчастіше ставлять у Präteritum (<em>Ich musste arbeiten</em>), але в Perfekt використовується конструкція з <strong>двома інфінітивами</strong> (Ersatzinfinitiv):</p>
+      <div class="example">
+        <code>haben + Infinitiv основного дієслова + Infinitiv модального</code><br>
+        Ich <span class="hl">habe</span> gestern länger <span class="hl">arbeiten müssen</span>. — Я мусив учора довше працювати.<br>
+        <em>У підрядному реченні (Nebensatz) haben ставиться ПЕРЕД двома інфінітивами:</em><br>
+        ..., weil ich gestern länger <span class="hl">habe arbeiten müssen</span>.
+      </div>
+
+      <h2>2. 🟣 Präteritum (Imperfekt) — розповідь та база</h2>
+      <p>Використовується в книгах, історіях, новинах, а в живому мовленні — постійно для <strong>sein (war), haben (hatte), werden (wurde), wissen (wusste)</strong> та <strong>модальних дієслів</strong>.</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Особа</th><th>Слабкі (-te)</th><th>sein → war</th><th>haben → hatte</th><th>Сильні (gehen → ging)</th></tr>
+          <tr><td><strong>ich</strong></td><td>lernte / arbeitete</td><td>war</td><td>hatte</td><td>ging</td></tr>
+          <tr><td><strong>du</strong></td><td>lerntest / arbeitetest</td><td>warst</td><td>hattest</td><td>gingst</td></tr>
+          <tr><td><strong>er/sie/es</strong></td><td>lernte / arbeitete</td><td>war</td><td>hatte</td><td>ging</td></tr>
+          <tr><td><strong>wir</strong></td><td>lernten / arbeiteten</td><td>waren</td><td>hatten</td><td>gingen</td></tr>
+          <tr><td><strong>ihr</strong></td><td>lerntet / arbeitetet</td><td>wart</td><td>hattet</td><td>gingt</td></tr>
+          <tr><td><strong>sie/Sie</strong></td><td>lernten / arbeiteten</td><td>waren</td><td>hatten</td><td>gingen</td></tr>
+        </table>
+      </div>
+      <div class="tip-box">💡 <strong>Зверни увагу:</strong> у Präteritum форми для <strong>ich</strong> та <strong>er/sie/es</strong> ЗАВЖДИ однакові! А відокремлюваний префікс у Präteritum летить у кінець речення:<br>
+      <em>anrufen → Er <strong>rief</strong> mich gestern <strong>an</strong>.</em> · <em>aufmachen → Ich <strong>machte</strong> die Tür <strong>auf</strong>.</em></div>
+
+      <h3>Модальні дієслова в Präteritum (без умлаута!)</h3>
+      <ul>
+        <li><strong>können → konnte</strong> (<em>Ich konnte nicht schlafen.</em>)</li>
+        <li><strong>müssen → musste</strong> (<em>Wir mussten lange warten.</em>)</li>
+        <li><strong>wollen → wollte</strong> (<em>Sie wollte nur kurz fragen.</em>)</li>
+        <li><strong>sollen → sollte</strong> (<em>Du solltest doch anrufen.</em>)</li>
+        <li><strong>dürfen → durfte</strong> (<em>Ich durfte als Kind nicht lange fernsehen.</em>)</li>
+        <li><strong>mögen → mochte</strong> (<em>Er mochte keine Pilze.</em>)</li>
+      </ul>
+
+      <h2>3. 🟢 Plusquamperfekt — передминулий час</h2>
+      <p>Показує дію, яка вже завершилася <strong>ДО</strong> іншої дії в минулому (особливо зі сполучниками <strong>nachdem</strong>, <strong>als</strong>, <strong>bevor</strong>).</p>
+      <p><strong>Формула:</strong> <code>hatte / war</code> + <code>Partizip II</code>.</p>
+      <div class="example">
+        Als wir am Bahnhof ankamen, <span class="hl">war</span> der Zug schon <span class="hl">abgefahren</span>. (Спочатку поїзд поїхав, потім ми прийшли).<br>
+        Nachdem ich an der Kasse <span class="hl">bezahlt hatte</span>, packte ich meine Einkäufe ein. (У підрядному реченні <em>hatte/war</em> стоїть у самому кінці!).
+      </div>
+
+      <h3>Нюанс: geworden чи worden?</h3>
+      <div class="example">
+        • <span class="hl">geworden</span> — коли <em>werden</em> означає «ставати» (повнозначне дієслово): <em>Er ist Arzt <strong>geworden</strong>. / Sie war krank <strong>geworden</strong>.</em><br>
+        • <span class="hl">worden</span> — у пасиві (Passiv Perfekt / Plusquamperfekt): <em>Das Haus ist gebaut <strong>worden</strong>.</em>
+      </div>
+
+      <h2>4. ⚖️ Швидке порівняння трьох часів</h2>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Час</th><th>Формула</th><th>Слова-маркери</th><th>Приклад</th></tr>
+          <tr><td><strong>Perfekt</strong></td><td>haben/sein + Partizip II</td><td>gestern, gerade, eben, schon, noch nie, heute Morgen</td><td><em>Ich habe den Film gesehen.</em></td></tr>
+          <tr><td><strong>Präteritum</strong></td><td>Präteritum-форма</td><td>damals, früher, 1995, als Kind, eines Tages</td><td><em>Ich sah den Film. / Ich war müde.</em></td></tr>
+          <tr><td><strong>Plusquamperfekt</strong></td><td>hatte/war + Partizip II</td><td>nachdem, bevor, als (+ schon)</td><td><em>Ich hatte den Film schon gesehen, als du kamst.</em></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- === МОДАЛКА ПОМИЛОК === -->
+<div class="complete" id="errs" hidden>
+  <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
+    <h2 id="errs-title">🔁 Мої помилки</h2>
+    <p class="errs-sub" id="errs-sub"></p>
+    <div class="errs-list" id="errs-list"></div>
+    <div class="errs-actions" id="errs-actions"></div>
+  </div>
+</div>
+
+<!-- === МОДАЛКА ЗАВЕРШЕННЯ === -->
+<div class="complete" id="complete" hidden>
+  <div class="complete-card">
+    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
+    <p id="complete-text">Усі завдання цієї вкладки пройдено. Гарна робота!</p>
+    <div class="complete-actions" id="complete-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ============ HELPERS ============ */
+const $ = id => document.getElementById(id);
+const sh = a => { a = [...a]; for (let i = a.length; i > 1; ) { const j = Math.random() * i-- | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const stripHTML = s => String(s || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+const norm = s => String(s || "").toLowerCase().replace(/ß/g, "ss").replace(/[.,!?;:—–·/\\|()]/g, " ").replace(/\s+/g, " ").trim();
+
+/* ============ THEME ============ */
+const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+const mqLight = window.matchMedia('(prefers-color-scheme: light)');
+function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
+function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
+const savedTheme = store.get('pp-theme');
+if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+paintThemeIcon();
+if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
+function toggleTheme(){
+  const n = effTheme() === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', n);
+  store.set('pp-theme', n); paintThemeIcon();
+}
+
+/* ============ SOUND ============ */
+let soundEnabled = store.get('pp-sound') !== 'off';
+function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
+updateSoundIcon();
+function toggleSound(){ soundEnabled = !soundEnabled; store.set('pp-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
+
+let audioCtx;
+function playSound(type){
+  if(!soundEnabled) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    if('audioSession' in navigator){ try{ navigator.audioSession.type = 'playback'; }catch(e){} }
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    if(type === 'correct'){
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now); osc.stop(now + 0.6);
+    } else {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.4);
+    }
+  }catch(e){}
+}
+
+/* ============ DATA ============ */
+const RAW_AUX = [
+  ["Heute ___ ich mit der S-Bahn zur Arbeit gefahren.", ["bin","habe","war","hatte"], "bin", "Сьогодні я поїхав на роботу міською електричкою.", "fahren (рух з місця на місце без додатка) → sein: ich bin gefahren.", "fahren · рух"],
+  ["Ja, ich ___ deine Nachricht schon gelesen.", ["habe","bin","hatte","war"], "habe", "Так, я вже прочитав твоє повідомлення.", "lesen має прямий додаток в Akkusativ → haben: ich habe gelesen.", "lesen + Akk."],
+  ["Ich ___ mich sehr beeilt, aber der Bus war schon weg.", ["habe","bin","war","hatte"], "habe", "Я дуже поспішав, але автобус уже поїхав.", "Усі зворотні дієслова (sich beeilen) утворюють Perfekt із haben.", "sich beeilen · зворотне"],
+  ["Mein Wecker hat nicht geklingelt. Ich ___ erst um 9 Uhr aufgewacht.", ["bin","habe","war","hatte"], "bin", "Мій будильник не задзвонив. Я прокинувся лише о 9-й годині.", "aufwachen — зміна стану (сон → пробудження), тому вживаємо sein.", "aufwachen · зміна стану"],
+  ["Gestern ___ wir wegen des Regens den ganzen Tag zu Hause geblieben.", ["sind","haben","waren","hatten"], "sind", "Учора через дощ ми весь день залишилися вдома.", "bleiben — дієслово-виняток, яке ЗАВЖДИ вживається з sein.", "bleiben · виняток"],
+  ["Er ___ sein neues Auto vorsichtig in die Garage gefahren.", ["hat","ist","war","hatte"], "hat", "Він обережно завів своє нове авто в гараж.", "Увага! Тут є прямий додаток (sein Auto в Akkusativ), тому fahren іде з haben!", "fahren + Akkusativ!"],
+  ["Er ___ gestern Abend schnell nach Berlin gefahren.", ["ist","hat","war","hatte"], "ist", "Учора ввечері він швидко поїхав до Берліна.", "Тут немає прямого додатка — просто рух у напрямку, тому ist gefahren.", "fahren · напрямок"],
+  ["Was ___ denn hier passiert? Warum liegt alles auf dem Boden?", ["ist","hat","war","wurde"], "ist", "Що ж тут трапилося? Чому все лежить на підлозі?", "passieren (траплятися) та geschehen завжди утворюють Perfekt із sein.", "passieren · виняток"],
+  ["Das kleine Kind ___ im Auto sofort eingeschlafen.", ["ist","hat","war","hatte"], "ist", "Маленька дитина одразу заснула в машині.", "einschlafen (засинати) — зміна стану → sein.", "einschlafen · зміна стану"],
+  ["Gestern ___ ich fast acht Stunden geschlafen.", ["habe","bin","war","hatte"], "habe", "Учора я спав майже вісім годин.", "schlafen (спати — процес, без зміни стану) → haben! Порівняй: einschlafen → ist.", "schlafen vs einschlafen"],
+  ["Letztes Jahr ___ meine Schwester nach München umgezogen.", ["ist","hat","war","hatte"], "ist", "Минулого року моя сестра переїхала до Мюнхена.", "umziehen (переїжджати в інше житло) означає зміну місця → sein.", "umziehen · переїзд"],
+  ["Ich ___ mich schnell umgezogen und bin losgegangen.", ["habe","bin","war","hatte"], "habe", "Я швидко переодягнувся і пішов.", "sich umziehen (переодягатися) — зворотне дієслово з sich → haben!", "sich umziehen · зворотне"],
+  ["Auf dem Weg ins Büro ___ ich zufällig meinem alten Chef begegnet.", ["bin","habe","war","hatte"], "bin", "Дорогою в офіс я випадково зустрів свого старого шефа.", "begegnen (+ Dativ) та folgen (+ Dativ) утворюють Perfekt із sein.", "begegnen · виняток"],
+  ["___ ihr am Wochenende ins Gebirge gefahren?", ["Seid","Habt","Wart","Hattet"], "Seid", "Ви їздили на вихідних у гори?", "fahren (рух) для ihr → seid ihr gefahren.", "ihr + fahren"],
+  ["Der Kuchen ___ mir heute leider nicht gelungen.", ["ist","hat","war","wurde"], "ist", "Пиріг мені сьогодні, на жаль, не вдався.", "gelingen (вдаватися) — дієслово-виняток, утворює Perfekt із sein.", "gelingen · виняток"],
+  ["Wir ___ uns gestern Abend in einem gemütlichen Café getroffen.", ["haben","sind","waren","hatten"], "haben", "Ми зустрілися вчора ввечері в затишному кафе.", "sich treffen (зворотне) та когось treffen (+ Akk) — завжди з haben.", "sich treffen"],
+  ["Der Flug nach Wien ___ pünktlich um 10 Uhr gestartet.", ["ist","hat","war","hatte"], "ist", "Рейс до Відня стартував вчасно о 10-й годині.", "starten та landen (про літак / рух) вживаються із sein.", "starten · рух"],
+  ["Ich ___ gestern im Homeoffice acht Stunden gearbeitet.", ["habe","bin","hatte","war"], "habe", "Учора я працював вісім годин з дому.", "arbeiten — звичайне дієслово процесу → haben.", "arbeiten"],
+  ["Mein Sohn ___ in diesem Jahr sehr stark gewachsen.", ["ist","hat","war","hatte"], "ist", "Мій син цього року дуже сильно виріс.", "wachsen (рости) позначає зміну стану → sein.", "wachsen · зміна стану"],
+  ["___ du dir vor dem Essen die Hände gewaschen?", ["Hast","Bist","Hattest","Warst"], "Hast", "Ти помив собі руки перед їжею?", "waschen (+ Akkusativ: die Hände) → haben (du hast).", "waschen + Akk."],
+  ["Nach dem langen Spaziergang ___ es plötzlich kalt geworden.", ["ist","hat","war","hatte"], "ist", "Після довгої прогулянки раптом стало холодно.", "werden (ставати) — зміна стану → ist geworden.", "werden · зміна стану"],
+  ["Der Hund ___ der Katze bis in den Garten gefolgt.", ["ist","hat","war","hatte"], "ist", "Собака біг слідом за кішкою аж до саду.", "folgen (слідувати за кимось) означає напрямлений рух → sein.", "folgen · рух/виняток"],
+  ["Wir ___ den ganzen Abend über Politik diskutiert.", ["haben","sind","hatten","waren"], "haben", "Ми весь вечір дискутували про політику.", "diskutieren (процес спілкування) → haben.", "diskutieren"],
+  ["Der Schlüssel ___ mir aus der Tasche gefallen.", ["ist","hat","war","hatte"], "ist", "Ключ випав у мене з кишені.", "fallen (падати — переміщення вниз) → sein.", "fallen · рух"]
+];
+
+const RAW_PART = [
+  ["Ich habe gestern endlich mein Zimmer ___.", ["aufgeräumt","geaufräumt","aufräumen","aufgeräumen"], "aufgeräumt", "Я вчора нарешті прибрав свою кімнату.", "Відокремлюваний префікс auf-: префікс + ge + основа + t → aufgeräumt.", "aufräumen"],
+  ["Ich habe gestern Abend lange mit meiner Mutter ___.", ["telefoniert","getelefoniert","telefonieren","telefonierte"], "telefoniert", "Я вчора ввечері довго розмовляв по телефону з мамою.", "Дієслова на -ieren утворюють Partizip II БЕЗ префікса ge-: telefoniert.", "telefonieren (-ieren)"],
+  ["An der Kasse habe ich kontaktlos mit Karte ___.", ["bezahlt","gebezahlt","bezahlen","bezahlte"], "bezahlt", "На касі я заплатив безконтактно карткою.", "Невідокремлюваний префікс be- не приймає ge-: bezahlt.", "bezahlen (be-)"],
+  ["Hast du den neuen deutschen Film schon ___?", ["gesehen","geseht","sehen","sah"], "gesehen", "Ти вже бачив новий німецький фільм?", "sehen — сильне дієслово: ge + seh + en → gesehen.", "sehen (сильне)"],
+  ["Wir haben am Wochenende viel Wasser und Tee ___.", ["getrunken","getrinkt","getranken","trinken"], "getrunken", "Ми на вихідних пили багато води й чаю.", "trinken — сильне дієслово зі зміною голосної (i → u): getrunken.", "trinken (i → a → u)"],
+  ["Er hat mir bei dem Umzug sehr ___.", ["geholfen","gehelft","gehalfen","helfen"], "geholfen", "Він мені дуже допоміг з переїздом.", "helfen — сильне дієслово (e → o): geholfen.", "helfen (e → a → o)"],
+  ["Ich habe gestern im Supermarkt für die ganze Woche ___.", ["eingekauft","geeinkauft","einkaufen","eingekaufen"], "eingekauft", "Я вчора скупився в супермаркеті на весь тиждень.", "einkaufen має відокремлюваний префікс ein-: eingekauft.", "einkaufen (ein-)"],
+  ["Warum hast du mir auf meine E-Mail nicht ___?", ["geantwortet","geantworten","antwortet","beantwortet"], "geantwortet", "Чому ти не відповів мені на електронний лист?", "Основа закінчується на -t (antwort-), тому додається -et: geantwortet.", "antworten (-et)"],
+  ["Meine Oma hat zum Geburtstag einen Apfelkuchen ___.", ["gebacken","gebackt","backen","buk"], "gebacken", "Моя бабуся спекла до дня народження яблучний пиріг.", "backen у Partizip II зберігає сильну форму: gebacken.", "backen"],
+  ["Ich habe deinen Namen leider ___.", ["vergessen","gevergasst","gevergessen","vergaß"], "vergessen", "Я, на жаль, забув твоє ім'я.", "Невідокремлюваний префікс ver- (без ge-) + сильна форма → vergessen.", "vergessen (ver-)"],
+  ["Der Kellner hat uns einen sehr guten Wein ___.", ["empfohlen","geempfohlen","empfehlt","empfahl"], "empfohlen", "Офіціант порекомендував нам дуже хороше вино.", "Невідокремлюваний префікс emp- (без ge-) + зміна голосної → empfohlen.", "empfehlen (emp-)"],
+  ["Wann bist du gestern Abend nach Hause ___?", ["gekommen","gekommt","kommen","kam"], "gekommen", "Коли ти вчора ввечері прийшов додому?", "kommen — сильне дієслово: gekommen.", "kommen"],
+  ["Sie hat drei Jahre lang in Wien Informatik ___.", ["studiert","gestudiert","studieren","studierte"], "studiert", "Вона три роки вивчала інформатику у Відні.", "Дієслова на -ieren: БЕЗ ge- → studiert.", "studieren (-ieren)"],
+  ["Hast du schon mit dem neuen Kollegen ___?", ["gesprochen","gesprecht","gesprachen","sprechen"], "gesprochen", "Ти вже поговорив із новим колегою?", "sprechen — сильне дієслово (e → o): gesprochen.", "sprechen (e → a → o)"],
+  ["Ich habe meinen Hausschlüssel im Büro ___.", ["verloren","geverloren","verliert","verlor"], "verloren", "Я загубив свій ключ від дому в офісі.", "verlieren: префікс ver- (без ge-) + зміна голосної → verloren.", "verlieren (ver-)"],
+  ["Wir haben die Einladung zur Hochzeit gerne ___.", ["angenommen","geangenommen","annehmen","angenimmt"], "angenommen", "Ми охоче прийняли запрошення на весілля.", "annehmen = відокремлюваний префікс an- + ge + nommen (від nehmen) → angenommen.", "annehmen"],
+  ["Er hat mir zum Geburtstag ein tolles Buch ___.", ["mitgebracht","gemitgebracht","mitbringen","mitbrachte"], "mitgebracht", "Він приніс мені на день народження чудову книгу.", "mitbringen (мішане дієслово з відокремлюваним префіксом): mit + ge + bracht.", "mitbringen"],
+  ["Ich habe lange über dein Angebot ___.", ["nachgedacht","genachdacht","nachdenken","nachgedenkt"], "nachgedacht", "Я довго думав над твоєю пропозицією.", "nachdenken (мішане дієслово): nach + ge + dacht → nachgedacht.", "nachdenken"],
+  ["Am Bahnhof bin ich in die Linie U2 ___.", ["umgestiegen","geumstiegen","umsteigen","umgesteigt"], "umgestiegen", "На вокзалі я пересів на лінію U2.", "umsteigen (тут 'пересідати' — відокремлюваний префікс): um + ge + stiegen.", "umsteigen"],
+  ["Der Mechaniker hat mein Fahrrad schnell ___.", ["repariert","gerepariert","reparieren","reparierte"], "repariert", "Механік швидко відремонтував мій велосипед.", "reparieren (-ieren) → без ge-: repariert.", "reparieren (-ieren)"],
+  ["Sie hat die Prüfung beim ersten Mal ___.", ["bestanden","gebestanden","besteht","bestand"], "bestanden", "Вона склала іспит з першого разу.", "bestehen (префікс be- без ge-) → bestanden.", "bestehen (be-)"],
+  ["Wir haben uns im Urlaub wunderbar ___.", ["entspannt","geentspannt","entspannen","entspannte"], "entspannt", "Ми чудово розслабилися у відпустці.", "entspannen має невідокремлюваний префікс ent- → без ge-: entspannt.", "sich entspannen (ent-)"],
+  ["Mein Bruder ist gestern zum ersten Mal nach Spanien ___.", ["geflogen","gefliegt","fliegen","flog"], "geflogen", "Мій брат учора вперше полетів до Іспанії.", "fliegen — сильне дієслово (ie → o): geflogen.", "fliegen"],
+  ["Hast du das Formular schon komplett ___?", ["ausgefüllt","geausfüllt","ausfüllen","ausfüllt"], "ausgefüllt", "Ти вже повністю заповнив формуляр?", "ausfüllen (відокремлюваний префікс aus-): aus + ge + füllt.", "ausfüllen"],
+  ["Er ist leider schon vor fünf Jahren ___.", ["gestorben","gesterbt","sterben","starb"], "gestorben", "Він, на жаль, помер уже п'ять років тому.", "sterben — сильне дієслово (e → o): gestorben.", "sterben"]
+];
+
+const RAW_PRAT = [
+  ["Ich ___ gestern nach der Arbeit sehr müde.", ["war","bin","wurde","hatte"], "war", "Я був учора після роботи дуже втомлений.", "Дієслово sein у розмові та на письмі зазвичай іде в Präteritum: ich war.", "sein (ich)"],
+  ["Gestern ___ ich einen wichtigen Termin beim Zahnarzt.", ["hatte","habe","war","hätte"], "hatte", "Учора в мене був важливий прийом у стоматолога.", "Дієслово haben у минулому часі майже завжди вживають у Präteritum: ich hatte.", "haben (ich)"],
+  ["Ich ___ gestern nicht kommen, weil ich Fieber hatte.", ["konnte","kann","gekonnt","könnte"], "konnte", "Я не зміг учора прийти, бо мав температуру.", "Модальне дієслово können у Präteritum (без умлаута!): ich konnte.", "können (ich)"],
+  ["Am Samstag ___ wir die ganze Wohnung putzen.", ["mussten","müssen","musste","gemusst"], "mussten", "У суботу ми мусили прибирати всю квартиру.", "müssen у Präteritum для wir → wir mussten.", "müssen (wir)"],
+  ["Entschuldigung, ich ___ nur kurz nach meinem Termin fragen.", ["wollte","will","gewollt","wolltest"], "wollte", "Перепрошую, я хотів лише коротко запитати про свій запис.", "Ввічлива розмовна форма у минулому: Ich wollte nur kurz fragen (wollen → wollte).", "wollen (ich)"],
+  ["Früher ___ mein Vater in einer großen Fabrik.", ["arbeitete","arbeittete","arbeitet","gearbeitet"], "arbeitete", "Раніше мій батько працював на великій фабриці.", "Основа на -t (arbeit-) отримує додаткову -e- перед -te: er arbeitete.", "arbeiten (er)"],
+  ["Als Kind ___ ich jeden Sommer Urlaub bei meiner Oma.", ["machte","mache","gemacht","machten"], "machte", "У дитинстві я щоліта проводив канікули в бабусі.", "Слабке дієслово machen у Präteritum: ich machte.", "machen (ich)"],
+  ["Nach dem Abendessen ___ ich noch eine Runde im Park spazieren.", ["ging","gehe","gegangen","gingst"], "ging", "Після вечері я ще пішов прогулятися в парку.", "Сильне дієслово gehen → Präteritum: ich ging.", "gehen (ich)"],
+  ["Ich ___ leider nichts von deinen Plänen.", ["wusste","weiß","gewusst","wussten"], "wusste", "Я, на жаль, нічого не знав про твої плани.", "Дієслово wissen часто вживається у Präteritum: ich wusste.", "wissen (ich)"],
+  ["Draußen ___ es am Abend plötzlich dunkel und kalt.", ["wurde","wird","geworden","war"], "wurde", "Надворі ввечері раптом стало темно й холодно.", "werden (ставати) у Präteritum: es wurde.", "werden (es)"],
+  ["Als Kind ___ ich überhaupt keinen Spinat.", ["mochte","mag","gemocht","mochten"], "mochte", "У дитинстві я взагалі не любив шпинат.", "mögen у Präteritum (без умлаута, зміна g → ch): ich mochte.", "mögen (ich)"],
+  ["Wir ___ als Kinder nach 20 Uhr nicht mehr fernsehen.", ["durften","dürfen","durfte","gedurft"], "durften", "Нам у дитинстві не дозволяли дивитися телевізор після 20-ї години.", "dürfen у Präteritum для wir (без умлаута!): wir durften.", "dürfen (wir)"],
+  ["Er ___ mich gestern spät am Abend noch einmal an.", ["rief","ruft","angerufen","riefe"], "rief", "Він зателефонував мені вчора пізно ввечері ще раз.", "anrufen у Präteritum: префікс an стоїть у кінці, а основа в 2-й позиції → er rief ... an.", "anrufen (er)"],
+  ["Ich ___ ehrlich gesagt, dass heute Sonntag ist.", ["dachte","denke","gedacht","dachtest"], "dachte", "Чесно кажучи, я думав, що сьогодні неділя.", "denken — мішане дієслово: Präteritum ich dachte.", "denken (ich)"],
+  ["Die Kellnerin ___ uns sofort die Speisekarte.", ["brachte","bringt","gebracht","brachtet"], "brachte", "Офіціантка одразу принесла нам меню.", "bringen — мішане дієслово: sie brachte.", "bringen (sie)"],
+  ["Am Sonntag ___ ich bis elf Uhr vormittags.", ["schlief","schlafe","geschlafen","schlieft"], "schlief", "У неділю я спав до одинадцятої ранку.", "schlafen — сильне дієслово: ich schlief.", "schlafen (ich)"],
+  ["Er ___ mir seine Telefonnummer auf einen Zettel.", ["schrieb","schreibt","geschrieben","schreiben"], "schrieb", "Він написав мені свій номер телефону на папірці.", "schreiben — сильне дієслово (ei → ie): er schrieb.", "schreiben (er)"],
+  ["Vor zehn Jahren ___ es hier noch keinen Supermarkt.", ["gab","gibt","gegeben","gaben"], "gab", "Десять років тому тут ще не було супермаркету.", "es gibt у Präteritum → es gab (від geben).", "es gibt → es gab"],
+  ["Wo ___ ihr denn gestern Abend so lange?", ["wart","warst","waren","seid"], "wart", "Де ж ви були вчора ввечері так довго?", "sein у Präteritum для ihr → ihr wart.", "sein (ihr)"],
+  ["Sie ___ langsam die schwere Tür auf.", ["machte","aufmachte","gemacht","macht"], "machte", "Вона повільно відчинила важкі двері.", "aufmachen у Präteritum: префікс auf у кінці речення → sie machte ... auf.", "aufmachen (sie)"],
+  ["Er ___ seine Jacke und verließ wortlos das Zimmer.", ["nahm","nimmt","genommen","nahmt"], "nahm", "Він узяв свою куртку і мовчки вийшов із кімнати.", "nehmen — сильне дієслово: er nahm.", "nehmen (er)"],
+  ["Im Urlaub ___ wir jeden Morgen am Strand entlang.", ["liefen","laufen","lief","gelaufen"], "liefen", "У відпустці ми щоранку бігали вздовж пляжу.", "laufen — сильне дієслово, для wir → wir liefen.", "laufen (wir)"],
+  ["Du ___ mir doch gestern Bescheid sagen!", ["solltest","sollst","gesollt","sollte"], "solltest", "Ти ж мав мені вчора повідомити!", "sollen у Präteritum для du → du solltest.", "sollen (du)"],
+  ["Als er mich ___, winkte er mir sofort zu.", ["sah","sieht","gesehen","sahen"], "sah", "Коли він мене побачив, він одразу мені помахав.", "sehen — сильне дієслово: er sah.", "sehen (er)"],
+  ["Wir ___ damals schon sehr gut über das Problem Bescheid.", ["wussten","wissen","wusste","gewusst"], "wussten", "Ми тоді вже дуже добре знали про цю проблему.", "wissen у Präteritum для wir → wir wussten.", "wissen (wir)"]
+];
+
+const RAW_MIX = [
+  ["Als wir endlich am Bahnhof ankamen, ___ der Zug schon ___.", ["war ... abgefahren","ist ... abgefahren","hatte ... abgefahren","fuhr ... ab"], "war ... abgefahren", "Коли ми нарешті прибули на вокзал, поїзд уже поїхав.", "Поїзд поїхав РАНІШЕ за наш прихід → Plusquamperfekt з рухом: war abgefahren.", "Plusquamperfekt · раніша дія"],
+  ["Ich ___ schon das Abendessen gekocht, als meine Freunde klingelten.", ["hatte","habe","war","bin"], "hatte", "Я вже приготував вечерю, коли подзвонили у двері мої друзі.", "Приготування їжі завершилося ДО приходу друзів → Plusquamperfekt: hatte gekocht.", "Plusquamperfekt (kochen)"],
+  ["Nachdem ich an der Kasse ___, packte ich meine Einkäufe ein.", ["bezahlt hatte","bezahlt habe","bezahlte","hatte bezahlt"], "bezahlt hatte", "Після того як я заплатив на касі, я спакував свої покупки.", "Після nachdem (якщо головне в Präteritum) вживаємо Plusquamperfekt, допоміжне дієслово в кінці: bezahlt hatte.", "nachdem + Plusquamperfekt"],
+  ["Er konnte die Wohnungstür nicht öffnen, weil er seinen Schlüssel ___.", ["verloren hatte","verliert","hat verloren","verloren war"], "verloren hatte", "Він не міг відчинити двері квартири, бо загубив свій ключ.", "Втрата ключа сталася раніше за спробу відчинити двері (контекст у Präteritum) + Nebensatz → verloren hatte.", "Причина в передминулому"],
+  ["Sie blieb gestern zu Hause, weil sie in der Nacht krank ___.", ["geworden war","ist geworden","geworden ist","worden war"], "geworden war", "Вона залишилася вчора вдома, бо вночі захворіла.", "Спочатку захворіла вночі (werden → sein), потім залишилася вдома (blieb) → ...weil sie krank geworden war.", "Plusquamperfekt + Nebensatz"],
+  ["Oh nein, ich ___ mein Portemonnaie zu Hause vergessen!", ["habe","bin","hatte","war"], "habe", "О ні, я забув свій гаманець вдома!", "Жива ситуація в кафе прямо зараз (результат у теперішньому) → звичайний розмовний Perfekt: ich habe vergessen.", "Perfekt у живій розмові"],
+  ["Wo ___ du gestern Abend? Ich habe dich dreimal angerufen!", ["warst","bist","gewesen","hattest"], "warst", "Де ти був учора ввечері? Я тобі тричі телефонував!", "Дієслово sein у живій розмові найприродніше звучить у Präteritum: Wo warst du?", "sein у розмові"],
+  ["Ich ___ gestern im Büro leider zwei Stunden länger arbeiten müssen.", ["habe","bin","hatte","musste"], "habe", "Я мусив учора в офісі, на жаль, працювати на дві години довше.", "Модальна конструкція в Perfekt з двома інфінітивами (arbeiten müssen) завжди вимагає haben!", "Perfekt + модальний інфінітив"],
+  ["Mein Großvater ist mit 24 Jahren ein sehr guter Arzt ___.", ["geworden","worden","werden","wurde"], "geworden", "Мій дідусь у 24 роки став дуже хорошим лікарем.", "Коли werden — самостійне дієслово ('ставати'), Partizip II = geworden (worden — лише для пасиву!).", "geworden vs worden"],
+  ["Dieses alte Rathaus ist schon im 19. Jahrhundert gebaut ___.", ["worden","geworden","werden","wurde"], "worden", "Ця стара ратуша була збудована ще в ХІХ столітті.", "Це пасив у Perfekt (ist + Partizip II + worden). У пасиві префікс ge- відпадає: worden!", "Passiv Perfekt (worden)"],
+  ["Nachdem wir zwei Stunden im Stau ___, kamen wir endlich ans Meer.", ["gestanden hatten","gestanden haben","standen","hatten gestanden"], "gestanden hatten", "Після того як ми дві години простояли в заторі, ми нарешті дісталися моря.", "Головне речення у Präteritum (kamen), тому після nachdem іде Plusquamperfekt з дієсловом у кінці: gestanden hatten.", "nachdem + Plusquamperfekt"],
+  ["___ ich 2018 zum ersten Mal nach Berlin kam, kannte ich dort niemanden.", ["Als","Wenn","Nachdem","Bevor"], "Als", "Коли я у 2018 році вперше приїхав до Берліна, я там нікого не знав.", "Одноразова подія в минулому → сполучник Als.", "als vs wenn у минулому"],
+  ["Immer ___ ich früher meine Oma besuchte, backte sie mir Pfannkuchen.", ["wenn","als","nachdem","bevor"], "wenn", "Щоразу, коли я раніше відвідував бабусю, вона пекла мені млинці.", "Багаторазова, повторювана дія в минулому (immer wenn / jedes Mal wenn) → wenn!", "immer wenn (багаторазово)"],
+  ["Bevor er nach Deutschland zog, ___ er schon zwei Jahre Deutsch gelernt.", ["hatte","hat","ist","war"], "hatte", "Перед тим як він переїхав до Німеччини, він уже два роки вчив німецьку.", "Дія (вивчення мови) відбувалася до переїзду в минулому → Plusquamperfekt: hatte gelernt.", "bevor + Plusquamperfekt"],
+  ["Nachdem ich gegessen ___, gehe ich meistens eine Runde spazieren.", ["habe","hatte","bin","war"], "habe", "Після того як я поїм, я зазвичай іду трохи прогулятися.", "Увага! Головне речення в Präsens (gehe), тому в підрядному з nachdem достатньо Perfekt: gegessen habe.", "nachdem + Präsens"],
+  ["Er erzählte mir gestern, dass er schon mal in Tokio ___.", ["gewesen war","gewesen ist","war gewesen","ist"], "gewesen war", "Він розповів мені вчора, що раніше вже бував у Токіо.", "Поїздка в Токіо була ще раніше за вчорашню розповідь → Plusquamperfekt у Nebensatz: gewesen war.", "Plusquamperfekt у Nebensatz"]
+];
+
+const RAW_VERBS = [
+  ["gehen", "йти (пішки)", "ging · ist gegangen", ["ging · ist gegangen","ging · hat gegangen","gehte · ist gegangen","ging · ist gegangt"], "Сильне дієслово руху: gehen – ging – ist gegangen."],
+  ["kommen", "приходити, приїжджати", "kam · ist gekommen", ["kam · ist gekommen","kommte · ist gekommen","kam · hat gekommen","kamen · ist gekommt"], "Сильне дієслово руху: kommen – kam – ist gekommen."],
+  ["fahren", "їхати", "fuhr · ist gefahren", ["fuhr · ist gefahren","fahrte · ist gefahren","fuhr · hat gefahren","fuhren · ist gefahrt"], "Сильне дієслово руху: fahren – fuhr – ist gefahren (з додатком: hat gefahren).", ["fuhr · hat gefahren"]],
+  ["sehen", "бачити, дивитися", "sah · hat gesehen", ["sah · hat gesehen","sehte · hat gesehen","sah · ist gesehen","sahen · hat geseht"], "Сильне дієслово: sehen – sah – hat gesehen."],
+  ["essen", "їсти", "aß · hat gegessen", ["aß · hat gegessen","esste · hat gegessen","aß · hat geessen","aßen · ist gegessen"], "Сильне дієслово (у Partizip II додаткове -g-): essen – aß – hat gegessen."],
+  ["trinken", "пити", "trank · hat getrunken", ["trank · hat getrunken","trinkte · hat getrunken","trank · hat getrinkt","trank · ist getrunken"], "Сильне дієслово (i – a – u): trinken – trank – hat getrunken."],
+  ["sprechen", "говорити, розмовляти", "sprach · hat gesprochen", ["sprach · hat gesprochen","sprechte · hat gesprochen","sprach · hat gesprecht","sprach · ist gesprochen"], "Сильне дієслово (e – a – o): sprechen – sprach – hat gesprochen."],
+  ["nehmen", "брати", "nahm · hat genommen", ["nahm · hat genommen","nehmte · hat genommen","nahm · hat genehmt","nahm · ist genommen"], "Сильне дієслово: nehmen – nahm – hat genommen."],
+  ["geben", "давати", "gab · hat gegeben", ["gab · hat gegeben","gebte · hat gegeben","gab · hat gegebt","gab · ist gegeben"], "Сильне дієслово: geben – gab – hat gegeben."],
+  ["finden", "знаходити", "fand · hat gefunden", ["fand · hat gefunden","findete · hat gefunden","fand · ist gefunden","fand · hat gefindet"], "Сильне дієслово (i – a – u): finden – fand – hat gefunden."],
+  ["bleiben", "залишатися", "blieb · ist geblieben", ["blieb · ist geblieben","blieb · hat geblieben","bleibte · ist geblieben","blieb · ist gebleibt"], "Сильне дієслово-виняток (завжди з sein!): bleiben – blieb – ist geblieben."],
+  ["schreiben", "писати", "schrieb · hat geschrieben", ["schrieb · hat geschrieben","schreibte · hat geschrieben","schrieb · ist geschrieben","schrieb · hat geschreibt"], "Сильне дієслово (ei – ie – ie): schreiben – schrieb – hat geschrieben."],
+  ["lesen", "читати", "las · hat gelesen", ["las · hat gelesen","leste · hat gelesen","las · hat gelest","las · ist gelesen"], "Сильне дієслово: lesen – las – hat gelesen."],
+  ["schlafen", "спати", "schlief · hat geschlafen", ["schlief · hat geschlafen","schlief · ist geschlafen","schlafte · hat geschlafen","schlief · hat geschlaft"], "Сильне дієслово: schlafen – schlief – hat geschlafen."],
+  ["helfen", "допомагати", "half · hat geholfen", ["half · hat geholfen","helfte · hat geholfen","half · ist geholfen","half · hat gehelft"], "Сильне дієслово (e – a – o): helfen – half – hat geholfen."],
+  ["treffen", "зустрічати", "traf · hat getroffen", ["traf · hat getroffen","treffte · hat getroffen","traf · ist getroffen","traf · hat getrefft"], "Сильне дієслово: treffen – traf – hat getroffen."],
+  ["denken", "думати", "dachte · hat gedacht", ["dachte · hat gedacht","denkte · hat gedenkt","dachte · ist gedacht","dachte · hat gedenkt"], "Мішане дієслово: denken – dachte – hat gedacht."],
+  ["bringen", "приносити", "brachte · hat gebracht", ["brachte · hat gebracht","bringte · hat gebringt","brachte · ist gebracht","brang · hat gebrungen"], "Мішане дієслово: bringen – brachte – hat gebracht."],
+  ["wissen", "знати (факт)", "wusste · hat gewusst", ["wusste · hat gewusst","wisste · hat gewisst","wusste · ist gewusst","wusste · hat gewussen"], "Мішане дієслово: wissen – wusste – hat gewusst."],
+  ["kennen", "знати (когось, бути знайомим)", "kannte · hat gekannt", ["kannte · hat gekannt","kennte · hat gekennt","kannte · ist gekannt","kannte · hat gekonnen"], "Мішане дієслово: kennen – kannte – hat gekannt."],
+  ["laufen", "бігти, ходити пішки", "lief · ist gelaufen", ["lief · ist gelaufen","laufte · ist gelauft","lief · hat gelaufen","lief · ist geloffen"], "Сильне дієслово руху: laufen – lief – ist gelaufen."],
+  ["fliegen", "летіти", "flog · ist geflogen", ["flog · ist geflogen","fliegte · ist gefliegt","flog · hat geflogen","flog · ist gefliegt"], "Сильне дієслово руху: fliegen – flog – ist geflogen."],
+  ["schwimmen", "плавати", "schwamm · ist geschwommen", ["schwamm · ist geschwommen","schwimmte · hat geschwimmt","schwamm · hat geschwommen","schwomm · ist geschwammen"], "Сильне дієслово: schwimmen – schwamm – ist/hat geschwommen.", ["schwamm · hat geschwommen"]],
+  ["anrufen", "телефонувати", "rief an · hat angerufen", ["rief an · hat angerufen","rufte an · hat angerufen","rief an · ist angerufen","anrief · hat geanrufen"], "Відокремлюваний префікс: anrufen – rief an – hat angerufen."],
+  ["aufstehen", "вставати (з ліжка)", "stand auf · ist aufgestanden", ["stand auf · ist aufgestanden","stand auf · hat aufgestanden","stehte auf · ist aufgesteht","aufstand · ist geaufstanden"], "Зміна положення/стану з sein: aufstehen – stand auf – ist aufgestanden."],
+  ["ankommen", "прибувати", "kam an · ist angekommen", ["kam an · ist angekommen","kam an · hat angekommen","kommte an · ist angekommt","ankam · ist geankommen"], "Рух з sein: ankommen – kam an – ist angekommen."],
+  ["einsteigen", "сідати (в транспорт)", "stieg ein · ist eingestiegen", ["stieg ein · ist eingestiegen","stieg ein · hat eingestiegen","steigte ein · ist eingesteigt","einstieg · ist geeinstiegen"], "Рух з sein: einsteigen – stieg ein – ist eingestiegen."],
+  ["umziehen", "переїжджати", "zog um · ist umgezogen", ["zog um · ist umgezogen","ziehte um · ist umgezieht","zog um · hat umgezogen","umzog · ist geumzogen"], "Переїзд з sein: umziehen – zog um – ist umgezogen (але sich umziehen → hat)."],
+  ["verlieren", "губити, програвати", "verlor · hat verloren", ["verlor · hat verloren","verlierte · hat verliert","verlor · hat geverloren","verlor · ist verloren"], "Невідокремлюваний префікс ver- (без ge-): verlieren – verlor – hat verloren."],
+  ["gewinnen", "вигравати", "gewann · hat gewonnen", ["gewann · hat gewonnen","gewinnte · hat gewinnt","gewann · ist gewonnen","gewann · hat gegewonnen"], "Префікс ge- вже є в основі: gewinnen – gewann – hat gewonnen."],
+  ["beginnen", "починати(ся)", "begann · hat begonnen", ["begann · hat begonnen","beginnte · hat beginnt","begann · ist begonnen","begann · hat gebegonnen"], "Невідокремлюваний префікс be-: beginnen – begann – hat begonnen."],
+  ["vergessen", "забувати", "vergaß · hat vergessen", ["vergaß · hat vergessen","vergesste · hat vergesst","vergaß · hat gevergessen","vergaß · ist vergessen"], "Невідокремлюваний префікс ver-: vergessen – vergaß – hat vergessen."],
+  ["empfehlen", "рекомендувати", "empfahl · hat empfohlen", ["empfahl · hat empfohlen","empfehlte · hat empfehlt","empfahl · hat geempfohlen","empfahl · ist empfohlen"], "Невідокремлюваний префікс emp-: empfehlen – empfahl – hat empfohlen."],
+  ["entscheiden", "вирішувати", "entschied · hat entschieden", ["entschied · hat entschieden","entscheidete · hat entscheidet","entschied · hat geentschieden","entschied · ist entschieden"], "Невідокремлюваний префікс ent-: entscheiden – entschied – hat entschieden."],
+  ["passieren", "траплятися, відбуватися", "passierte · ist passiert", ["passierte · ist passiert","passierte · hat passiert","passierte · ist gepassiert","passierte · hat gepassiert"], "Дієслово на -ieren (без ge-) + виняток із sein: passieren – passierte – ist passiert."]
+];
+
+const TABS = [
+  { id: "aux",   label: "haben / sein", title: "ДОПОМІЖНЕ ДІЄСЛОВО (PERFEKT)", ph: "Введи: habe, bin, sind, ist …" },
+  { id: "part",  label: "Partizip II",  title: "УТВОРИ PARTIZIP II",          ph: "Введи форму Partizip II …" },
+  { id: "prat",  label: "Präteritum",   title: "ФОРМА PRÄTERITUM",             ph: "Введи дієслово в Präteritum …" },
+  { id: "mix",   label: "Контекст & Мікс", title: "PERFEKT · PRÄTERITUM · PLUSQUAMPERFEKT", ph: "Введи правильну форму …" },
+  { id: "verbs", label: "Дієслова (Бліц)", title: "3 ФОРМИ: PRÄTERITUM · PERFEKT", ph: "Напр.: ging, ist gegangen" }
+];
+
+const ITEMS = {};
+TABS.forEach(t => ITEMS[t.id] = []);
+
+function buildSentenceItems(rawArr, targetId){
+  rawArr.forEach(r => {
+    const sent = r[0], opts = r[1], corr = r[2], ua = r[3], ex = r[4], hint = (targetId === "aux" || targetId === "mix") ? "" : (r[5] || ""), alts = r[6] || [];
+    const parts = corr.split(/\s*\.\.\.\s*/);
+    let idx = 0;
+    const fullSent = sent.replace(/___/g, () => parts[idx++] || corr);
+    ITEMS[targetId].push({
+      s: sent.replace(/___/g, '<span class="blank">&nbsp;</span>') + (hint ? ` <span class="verb-badge">${hint}</span>` : ''),
+      options: opts.slice(),
+      a: corr,
+      ans: fullSent,
+      ex: ex,
+      lbl: ua,
+      full: fullSent,
+      alt: [corr.replace(/\s*\.\.\.\s*/g, " "), ...alts]
+    });
+  });
+}
+
+buildSentenceItems(RAW_AUX,  "aux");
+buildSentenceItems(RAW_PART, "part");
+buildSentenceItems(RAW_PRAT, "prat");
+buildSentenceItems(RAW_MIX,  "mix");
+
+RAW_VERBS.forEach(v => {
+  const inf = v[0], ua = v[1], corr = v[2], opts = v[3], ex = v[4], alts = v[5] || [];
+  const plainSpace = corr.replace(/\s*·\s*/g, " ");
+  ITEMS.verbs.push({
+    s: `<span style="font-size:1.45rem;font-weight:700;color:var(--tx)">${inf}</span> <span class="verb-badge">er/sie/es</span>`,
+    sch: `<span class="np">Значення:</span> ${ua} · <em>напиши Präteritum та Perfekt</em>`,
+    options: opts.slice(),
+    a: corr,
+    ans: `${inf} — ${corr}`,
+    ex: ex,
+    lbl: "",
+    full: `${inf}. ${corr.replace(/·/g, ",")}`,
+    alt: [plainSpace, ...(alts.map(x => x.replace(/\s*·\s*/g, " "))), ...alts]
+  });
+});
+
+const KEY = id => "pp_v1_" + id;
+const XP_MAX = 300;
+const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0 });
+const S = {};
+TABS.forEach(t => {
+  try {
+    const v = JSON.parse(localStorage.getItem(KEY(t.id)));
+    if(v && v.k){ if(!v.err) v.err = {}; S[t.id] = v; }
+  } catch(e){}
+  if(!S[t.id]) S[t.id] = blankState();
+  S[t.id].x = S[t.id].x || 0;
+});
+
+let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false;
+const TB = () => TABS.find(t => t.id === tab);
+let mode = store.get("pp-mode") === "type" ? "type" : "mc";
+const isMc = () => mode === "mc";
+const items = () => ITEMS[tab];
+const T = () => S[tab];
+const pool = () => items().map((_, i) => i);
+const streak = i => T().k[i] || 0;
+const maxStreak = () => 1;
+const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
+const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+
+function speak(text){
+  if(!window.speechSynthesis || !text) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.lang = "de-DE"; u.rate = 0.9; u.pitch = 1; u.volume = 1.0;
+    if('audioSession' in navigator){ try{ navigator.audioSession.type = 'playback'; }catch(e){} }
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+function getSpeechText(){
+  const it = items()[cur];
+  if(!it) return null;
+  return it.full;
+}
+function speakCurrent(){ speak(getSpeechText()); }
+
+function renderTabs(){
+  $("tabs").innerHTML = TABS.map(t => {
+    const s = S[t.id];
+    const done = Object.keys(s.k).filter(k => s.k[k] >= maxStreak()).length;
+    return `<button class="tab ${t.id === tab ? 'on' : ''}" data-t="${t.id}">${t.label}<small>${done}/${ITEMS[t.id].length}</small></button>`;
+  }).join("");
+  renderModes();
+}
+function renderModes(){
+  const b = $("modeBtn");
+  b.textContent = mode === "mc" ? "👆 Обери" : "✏️ Впиши";
+  b.title = mode === "mc" ? "Зараз вибір варіантів. Натисніть, щоб вводити вручну." : "Зараз ручний ввід. Натисніть, щоб обирати варіанти.";
+}
+let trShown = false;
+function renderLab(){
+  const it = items()[cur], lab = $("lab");
+  if(!it || !it.lbl){ lab.innerHTML = ""; return; }
+  lab.innerHTML = trShown ? `<div class="tr-text">${it.lbl}</div>` : '<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти речення</button>';
+}
+function renderCard(){
+  const it = items()[cur], t = T(), tb = TB();
+  if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
+  else $("title").textContent = tb.title;
+  $("sent").innerHTML = it.s;
+  $("sent").title = "Натисни, щоб почути німецькою";
+  $("scheme").innerHTML = it.sch || "";
+  renderLab();
+  $("inp").placeholder = tb.ph || "Введи відповідь …";
+  const total = items().length;
+  const done = Object.keys(t.k).filter(k => t.k[k] >= maxStreak()).length;
+  $("stat-done").textContent = `${done} / ${total}`;
+  $("stat-correct").textContent = t.r;
+  $("stat-wrong").textContent = t.w;
+  $("bar").style.width = `${Math.min(done, total) / total * 100}%`;
+  updateXp(t.x || 0);
+  renderTabs();
+}
+function renderOpts(){
+  const it = items()[cur];
+  curOpts = it.options ? sh(it.options) : [];
+  $("opts").innerHTML = curOpts.map((x, j) => `<button class="opt" data-o="${j}">${x}</button>`).join("");
+}
+function markOpts(){
+  const a = items()[cur].a;
+  document.querySelectorAll("#opts .opt").forEach((b, j) => {
+    b.disabled = true;
+    if(curOpts[j] === a) b.classList.add("ok");
+    else if(j === picked) b.classList.add("er");
+  });
+}
+function renderReviewBtn(){
+  const n = errCount();
+  const btn = $("reviewBtn");
+  if(!reviewMode){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
+  else btn.style.display = "none";
+}
+
+function showFb(ok, i){
+  const f = $("fb"), it = items()[i];
+  f.className = "fb " + (ok ? "ok" : "er");
+  f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО · +1 EXP" : "✗ НЕПРАВИЛЬНО · −1 EXP"}</div>
+    <div class="ans" title="Натисни, щоб прослухати">${stripHTML(it.ans || it.a)}</div>
+    <div class="ex">${it.ex}</div>${ok ? '<div class="bar"></div>' : ''}`;
+  const ansEl = f.querySelector(".ans");
+  if(ansEl) ansEl.onclick = (e) => { e.stopPropagation(); speak(it.full || stripHTML(it.ans || it.a)); };
+}
+
+function load(i){
+  clearTimeout(tm);
+  $("card").classList.remove("win");
+  cur = i; answered = false; picked = -1; trShown = false; T().pos = i; save();
+  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
+  $("card").classList.toggle("mc", isMc());
+  renderOpts(); renderCard(); renderReviewBtn();
+  if(!isMc()){ try { $("inp").focus({ preventScroll: true }); } catch(e){} }
+}
+const reviewDoneSets = {};
+const rd = () => reviewDoneSets[tab] || (reviewDoneSets[tab] = new Set());
+function reviewPool(){ return items().map((_, i) => i).filter(i => T().err[i]); }
+function reviewQueue(){ const d = rd(); return reviewPool().filter(i => !d.has(i)); }
+function nextIdx(){
+  if(reviewMode){
+    const rq = reviewQueue();
+    if(rq.length === 0) return -1;
+    if(!rq.includes(cur)) return rq.find(i => i > cur) ?? rq[0];
+    return rq[(rq.indexOf(cur) + 1) % rq.length];
+  }
+  const p = pool(), ms = maxStreak(), list = p.filter(i => streak(i) < ms);
+  if(list.length === 0) return -1;
+  if(list.length === 1) return list[0];
+  return list.find(i => i > cur) ?? list[0];
+}
+function allDone(){
+  if(reviewMode) return reviewQueue().length === 0;
+  return pool().every(i => streak(i) >= maxStreak());
+}
+
+const tabDone = () => pool().every(i => streak(i) >= maxStreak());
+function advance(){
+  const ni = nextIdx();
+  if(ni >= 0) load(ni);
+  else if(reviewMode) showReviewComplete();
+  else if(tabDone()) showComplete();
+}
+function showComplete(){
+  const t = T(), n = errCount();
+  $("complete-title").textContent = "🎉 Вкладку пройдено!";
+  $("complete-text").innerHTML = `Усі завдання цієї категорії пройдено.<br>Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b> · У списку помилок: <b>${n}</b>.<br>Обери, що робити далі:`;
+  $("complete-actions").innerHTML = (n > 0 ? `<button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button>` : "") + `<button class="${n > 0 ? "cancel" : "go"}" onclick="finalRestart()">↻ Почати заново</button>`;
+  $("complete").hidden = false;
+}
+function repeatReview(){ hideComplete(); startReview(); }
+function finalRestart(){
+  const e = T().err;
+  const xKeep = T().x || 0;
+  S[tab] = blankState(); S[tab].err = e; S[tab].x = xKeep; reviewDoneSets[tab] = new Set();
+  save(); hideComplete(); reviewMode = false;
+  load(pool()[0]);
+}
+function showReviewComplete(){
+  const done = tabDone();
+  $("complete-title").textContent = "✅ Помилки пройдено!";
+  $("complete-text").innerHTML = done
+    ? "Ти успішно повторив усі помилки зі списку! Можна повторити їх ще раз або почати категорію заново."
+    : "Ти повторив усі помилки зі списку. Можна повернутися до основного тренування.";
+  $("complete-actions").innerHTML = `<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button>` +
+    (done ? `<button class="cancel" onclick="finalRestart()">↻ Почати заново</button>` : `<button class="cancel" onclick="exitReview()">Продовжити тренування</button>`);
+  $("complete").hidden = false;
+}
+function hideComplete(){ $("complete").hidden = true; }
+
+const RANKS=[[0,'🌱','Новачок'],[30,'🌿','Учень'],[75,'🧭','Дослідник'],[135,'⚡','Знавець'],[205,'🔥','Профі'],[265,'💎','Майстер'],[300,'🏆','Легенда']];
+const rankOf = x => { let r = 0; RANKS.forEach((q, i) => { if(x >= q[0]) r = i; }); return r; };
+function updateXp(xv){
+  const r = rankOf(xv), R = RANKS[r], N = RANKS[r+1], box = $("xp");
+  box.dataset.r = r;
+  box.classList.toggle("max", xv >= XP_MAX);
+  $("xf").style.width = `${xv / XP_MAX * 100}%`;
+  $("xt").textContent = xv;
+  $("xn").textContent = xv >= XP_MAX ? "MAX" : `/ ${XP_MAX}`;
+  $("xr").textContent = `${R[1]} ${R[2]}`;
+  $("xnext").textContent = N ? `ще ${N[0] - xv} до «${N[2]}»` : "максимальний ранг";
+  const tk = $("xticks");
+  if(!tk.firstChild) tk.innerHTML = RANKS.slice(1, -1).map(q => `<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("");
+}
+function popXp(d, up){
+  const p = $("xpop"), b = $("xt"), box = $("xp");
+  p.textContent = (d > 0 ? "+" : "−") + Math.abs(d);
+  p.className = "xpop " + (d > 0 ? "up" : "dn"); void p.offsetWidth; p.classList.add("go");
+  b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+  if(up){ box.classList.remove("lvl"); void box.offsetWidth; box.classList.add("lvl"); }
+}
+
+function finish(ok){
+  const t = T(), xBefore = t.x || 0;
+  answered = true;
+  playSound(ok ? 'correct' : 'wrong');
+  if(ok){ t.r++; t.x = Math.min(XP_MAX, (t.x || 0) + 1); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
+  else  { t.w++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
+  save(); showFb(ok, cur); markOpts(); renderCard(); renderReviewBtn();
+  { const d = (t.x || 0) - xBefore; if(d) popXp(d, rankOf(t.x || 0) > rankOf(xBefore)); }
+  if(ok){
+    const c = $("card");
+    c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
+    clearTimeout(tm);
+    if(reviewMode){
+      if(reviewQueue().length === 0){
+        tm = setTimeout(() => { if(answered) showReviewComplete(); }, 1200);
+      } else {
+        tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); else showReviewComplete(); } }, 1100);
+      }
+    } else if(allDone()){
+      tm = setTimeout(() => { if(answered) showComplete(); }, 1200);
+    } else {
+      tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 1100);
+    }
+  } else {
+    if(isMc()){ clearTimeout(tm); tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 3600); }
+  }
+}
+
+function check(){
+  if(answered){ advance(); return; }
+  const it = items()[cur], v = $("inp").value;
+  if(!norm(v)) return;
+  const targets = [it.a, ...(it.alt || [])];
+  finish(targets.some(x => norm(v) === norm(x)));
+}
+function pick(j){
+  if(answered || !isMc()) return;
+  picked = j;
+  finish(curOpts[j] === items()[cur].a);
+}
+function showSol(){
+  if(answered) return;
+  answered = true;
+  const t = T();
+  t.l++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true;
+  save(); showFb(false, cur); markOpts(); renderCard(); renderReviewBtn();
+}
+
+function resetTab(){
+  S[tab] = blankState(); save(); hideComplete();
+  reviewMode = false; load(pool()[0]);
+}
+function askConfirm(msg, yes){
+  $("complete-title").textContent = "Скинути прогрес?";
+  $("complete-text").textContent = msg;
+  $("complete-actions").innerHTML = '<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
+  $("cf-yes").onclick = () => { hideComplete(); yes(); };
+  $("cf-no").onclick = hideComplete;
+  $("complete").hidden = false;
+}
+function restartTab(){ askConfirm("Прогрес цієї вкладки буде скинуто разом з EXP і списком помилок.", resetTab); }
+
+function openErrors(){
+  const rp = reviewPool(), tb = TB();
+  $("errs-sub").textContent = `Вкладка «${tb.label}» · помилок: ${rp.length}`;
+  if(rp.length === 0){
+    $("errs-list").innerHTML = '<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
+    $("errs-actions").innerHTML = '<button class="cancel" onclick="closeErrors()">Закрити</button>';
+  } else {
+    $("errs-list").innerHTML = rp.map(i => {
+      const it = items()[i];
+      return `<div class="err-item"><div class="e-de"><b>${it.ans}</b></div>${it.lbl ? `<div class="e-ua">${it.lbl}</div>` : ""}${it.ex ? `<div class="e-ex">${it.ex}</div>` : ""}</div>`;
+    }).join("");
+    $("errs-actions").innerHTML = '<button class="go" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="cancel" id="errs-clear" onclick="clearErrors()">🗑 Очистити список</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
+  }
+  $("errs").hidden = false;
+}
+function closeErrors(){ $("errs").hidden = true; }
+let clearArmed = false;
+function clearErrors(){
+  const b = $("errs-clear");
+  if(!clearArmed){ clearArmed = true; b.textContent = "Точно очистити?"; setTimeout(() => { clearArmed = false; const bb = $("errs-clear"); if(bb) bb.textContent = "🗑 Очистити список"; }, 3000); return; }
+  clearArmed = false; T().err = {}; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); openErrors();
+}
+function trainErrors(){ closeErrors(); startReview(); try{ $("card").scrollIntoView({ behavior: "smooth", block: "start" }); }catch(e){} }
+
+function startReview(){ if(errCount() === 0) return; reviewMode = true; reviewDoneSets[tab] = new Set(); const rq = reviewQueue(); if(rq.length > 0) load(rq[0]); }
+function exitReview(){ reviewMode = false; hideComplete(); load(startIdx()); if(tabDone()) showComplete(); }
+
+function startIdx(){
+  const p = pool(), ms = maxStreak(), pos = T().pos;
+  if(Number.isInteger(pos) && pos >= 0 && pos < p.length && streak(pos) < ms) return pos;
+  const from = Number.isInteger(pos) ? pos : -1;
+  return p.find(i => i > from && streak(i) < ms) ?? p.find(i => streak(i) < ms) ?? p[0];
+}
+function setTab(t){
+  hideComplete(); reviewMode = false; tab = t; store.set('pp-tab', t);
+  $("card").classList.toggle("mc", isMc());
+  renderTabs(); renderReviewBtn();
+  load(startIdx());
+  if(tabDone()) showComplete();
+}
+
+function openTheory(){
+  const sec = $("theory-section");
+  if(!sec.classList.contains("show")){ sec.classList.add("show"); $("theory-btn").innerHTML = "❌ Закрити теорію"; }
+  setTimeout(() => sec.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+}
+function toggleTheory(){
+  const sec = $("theory-section"), btn = $("theory-btn");
+  if(sec.classList.contains("show")){
+    sec.classList.remove("show"); btn.innerHTML = "📖 Конспект (Теорія)";
+    $("card").scrollIntoView({ behavior: "smooth", block: "start" });
+  } else openTheory();
+}
+
+const CHEAT = [
+  ["Завжди з sein","var(--sa)",[
+    ["gehen → ist gegangen","йти (рух)"],
+    ["fahren → ist gefahren","їхати (без додатка)"],
+    ["kommen → ist gekommen","приходити"],
+    ["fliegen → ist geflogen","летіти"],
+    ["aufwachen → ist aufgewacht","прокидатися (стан)"],
+    ["einschlafen → ist eingeschlafen","засинати (стан)"],
+    ["bleiben → ist geblieben","залишатися (виняток!)"],
+    ["passieren → ist passiert","траплятися (виняток!)"],
+    ["gelingen → ist gelungen","вдаватися (виняток!)"],
+    ["begegnen → ist begegnet","зустрічати (виняток!)"],
+    ["werden → ist geworden","ставати (стан)"],
+    ["sein → ist gewesen","бути"]
+  ]],
+  ["Präteritum-база","var(--pe)",[
+    ["sein → war / waren","був / були"],
+    ["haben → hatte / hatten","мав / мали"],
+    ["werden → wurde / wurden","став / стали"],
+    ["wissen → wusste","знав"],
+    ["denken → dachte","думав"],
+    ["bringen → brachte","приніс"],
+    ["können → konnte","міг"],
+    ["müssen → musste","мусив"],
+    ["wollen → wollte","хотів"],
+    ["dürfen → durfte","мав дозвіл"],
+    ["sollen → sollte","був повинен"],
+    ["es gibt → es gab","було (існувало)"]
+  ]],
+  ["Топ сильних дієслів","var(--ok)",[
+    ["sehen · sah · gesehen","бачити"],
+    ["essen · aß · gegessen","їсти"],
+    ["trinken · trank · getrunken","пити"],
+    ["sprechen · sprach · gesprochen","говорити"],
+    ["nehmen · nahm · genommen","брати"],
+    ["geben · gab · gegeben","давати"],
+    ["helfen · half · geholfen","допомагати"],
+    ["schreiben · schrieb · geschrieben","писати"],
+    ["lesen · las · gelesen","читати"],
+    ["schlafen · schlief · geschlafen","спати"],
+    ["finden · fand · gefunden","знаходити"],
+    ["verlieren · verlor · verloren","губити"]
+  ]],
+  ["Слова-маркери","var(--go)",[
+    ["gestern / heute Morgen","Perfekt (розмова)"],
+    ["schon / gerade / noch nie","Perfekt (результат)"],
+    ["damals / früher / als Kind","Präteritum (історія)"],
+    ["Als ich ... kam / war","одноразово в минулому"],
+    ["Immer wenn ich ...","багаторазово в минулому"],
+    ["Nachdem + hatte/war + Part.II","Plusquamperfekt (раніше)"],
+    ["ist Arzt geworden","став лікарем (werden)"],
+    ["ist gebaut worden","був збудований (Passiv)"]
+  ]]
+];
+let cheatG = 0;
+function renderCheat(){
+  const [, c, rows] = CHEAT[cheatG];
+  $("glossary").innerHTML = '<h2 class="cheat-title">Швидка шпаргалка</h2><p class="cheat-sub">Найважливіші форми й маркери для швидкого повторення</p>' +
+    '<div class="cheat-pills">' + CHEAT.map(([h, c2], i) => `<button type="button" class="cheat-pill${i === cheatG ? " on" : ""}" data-g="${i}" style="--c:${c2}">${h}</button>`).join("") + '</div>' +
+    `<div class="cheat-list" style="--c:${c}">` + rows.map(([d, u]) => `<div class="cheat-row"><b>${d}</b><span>${u}</span></div>`).join("") + '</div>';
+}
+renderCheat();
+$("glossary").onclick = e => { const b = e.target.closest("[data-g]"); if(b){ cheatG = +b.dataset.g; renderCheat(); } };
+
+$("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b) setTab(b.dataset.t); };
+$("modeBtn").onclick = () => {
+  mode = mode === "mc" ? "type" : "mc"; store.set("pp-mode", mode);
+  clearTimeout(tm);
+  $("card").classList.toggle("mc", isMc());
+  renderModes();
+  if(answered) advance(); else load(cur);
+};
+$("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
+$("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
+$("next").onclick = () => advance();
+$("chk").onclick = check;
+$("showSolBtn").onclick = showSol;
+$("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
+$("speakBtn").onclick = speakCurrent;
+$("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
+$("complete").addEventListener("click", e => { if(e.target.id === "complete") hideComplete(); });
+$("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
+
+$("inp").addEventListener("keydown", e => { if(e.key === "Enter" || e.keyCode === 13){ e.preventDefault(); check(); } });
+document.addEventListener("keydown", e => {
+  if(!isMc() || e.ctrlKey || e.metaKey || e.altKey) return;
+  if(e.target.closest && e.target.closest("button,input,textarea")) return;
+  if(answered){ if(e.key === "Enter"){ e.preventDefault(); advance(); } return; }
+  const j = +e.key - 1;
+  if(j >= 0 && j < curOpts.length) pick(j);
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("complete").hidden) hideComplete(); if(!$("errs").hidden) closeErrors(); } });
+
+{ const st = store.get('pp-tab'); setTab(TABS.some(t => t.id === st) ? st : TABS[0].id); }
+
+document.addEventListener('touchstart', function unlockAudio() {
+  try{
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }catch(e){}
+  document.removeEventListener('touchstart', unlockAudio);
+}, { once: true });
+
+if (window.Telegram && window.Telegram.WebApp) {
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
+  tg.BackButton.show();
+  tg.BackButton.onClick(() => {
+    window.location.href = 'index.html';
+  });
+}
+</script>
+</body>
+</html>
