@@ -758,14 +758,24 @@ TABS.forEach(t => {
 /* --- ЗАГАЛЬНИЙ EXP для всіх вкладок --- */
 const XP_KEY = "tk_v1_xp";
 let XP = 0;
-try {
-  const raw = localStorage.getItem(XP_KEY);
-  if(raw !== null) XP = Math.max(0, Math.min(XP_MAX, parseInt(raw, 10) || 0));
-  else XP = Math.min(XP_MAX, TABS.reduce((a, t) => a + (S[t.id].x || 0), 0)); // міграція зі старого EXP по вкладках
-} catch(e){}
+/* EXP зберігається як {v, t}: t — час останньої зміни, потрібен sync.js для злиття між пристроями */
+const readXp = () => {
+  try {
+    const raw = localStorage.getItem(XP_KEY);
+    if(raw === null) return null;
+    let v; try { v = JSON.parse(raw); } catch(e){ v = parseInt(raw, 10); }
+    if(v && typeof v === "object") v = v.v;
+    return Math.max(0, Math.min(XP_MAX, parseInt(v, 10) || 0));
+  } catch(e){ return null; }
+};
+const tkPush = () => { try { TKS.push(); } catch(e){} };
+const saveXp = (touch = true) => { try { localStorage.setItem(XP_KEY, JSON.stringify({ v: XP, t: touch ? Date.now() : 0 })); if(touch) tkPush(); } catch(e){} };
+{
+  const saved = readXp();
+  if(saved !== null) XP = saved;
+  else { XP = Math.min(XP_MAX, TABS.reduce((a, t) => a + (S[t.id].x || 0), 0)); saveXp(false); } // міграція зі старого EXP по вкладках (t=0, щоб не перебити хмару)
+}
 TABS.forEach(t => { delete S[t.id].x; });
-const saveXp = () => { try { localStorage.setItem(XP_KEY, String(XP)); } catch(e){} };
-saveXp();
 
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
 let mode = store.get("tk-mode") === "type" ? "type" : "mc";
@@ -779,7 +789,7 @@ const pool = () => items().map((_, i) => i);
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+const save = (touch = true) => { try { if(touch) S[tab].t = Date.now(); localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); if(touch) tkPush(); } catch(e){} };
 
 /* ============ SPEECH ============ */
 function speak(text){
@@ -922,7 +932,7 @@ function showFb(ok, i){
 function load(i){
   clearTimeout(tm);
   $("card").classList.remove("win");
-  cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
+  cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save(false);
   $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
   $("card").classList.toggle("mc", isMc());
   $("card").classList.toggle("bd", isBuild());
@@ -1227,6 +1237,79 @@ document.addEventListener('touchstart', function unlockAudio() {
   if (!audioCtx) { try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){} }
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
+
+/* === ВЛАСНА СИНХРОНІЗАЦІЯ TEKAMOLO через Telegram CloudStorage (sync.js не потрібен і не чіпається) === */
+function applyStorage(){
+  try {
+    TABS.forEach(t => {
+      if(answered && t.id === tab) return; // не ламаємо відповідь, що зараз на екрані
+      const v = JSON.parse(localStorage.getItem(KEY(t.id)));
+      if(v && v.k){ if(!v.err) v.err = {}; S[t.id] = v; }
+    });
+    const x = readXp(); if(x !== null) XP = x;
+    if(answered){ updateXp(XP); renderTabs(); }
+    else { renderCard(); renderReviewBtn(); }
+  } catch(e){}
+}
+const TKS = (() => {
+  const tg = window.Telegram && window.Telegram.WebApp, cs = tg && tg.CloudStorage;
+  const on = !!(cs && tg.initData && typeof tg.isVersionAtLeast === "function" && tg.isVersionAtLeast("6.9"));
+  if(!on) return { on:false, push(){}, sync(){} };
+  const CHUNK = 3500;
+  const names = ["xp"].concat(TABS.map(t => t.id));
+  const lsKey = n => n === "xp" ? XP_KEY : KEY(n);
+  const call = (m, ...a) => new Promise((res, rej) => {
+    try { cs[m](...a, (e, r) => e ? rej(new Error(String(e))) : res(r)); } catch(e){ rej(e); }
+  });
+  // «вік» значення: -2 немає, -1 старий формат без мітки, інакше мітка часу t
+  const stamp = s => {
+    if(!s) return -2;
+    try { const o = JSON.parse(s); return (o && typeof o === "object") ? (Number(o.t) || 0) : -1; } catch(e){ return -1; }
+  };
+  const split = s => { const c = []; for(let i = 0; i < s.length; i += CHUNK) c.push(s.slice(i, i + CHUNK)); return c.length ? c : [""]; };
+  async function readRemote(){
+    const cnt = await call("getItems", names.map(n => "tk_" + n + "__n"));
+    const plan = {}, keys = [];
+    names.forEach(n => { const c = parseInt(cnt["tk_" + n + "__n"], 10); if(c > 0){ plan[n] = c; for(let i = 0; i < c; i++) keys.push("tk_" + n + "__" + i); } });
+    const parts = keys.length ? await call("getItems", keys) : {};
+    const out = {};
+    names.forEach(n => { out[n] = plan[n] ? { str: Array.from({ length: plan[n] }, (_, i) => parts["tk_" + n + "__" + i] || "").join(""), n: plan[n] } : { str: "", n: 0 }; });
+    return out;
+  }
+  async function writeRemote(n, str, prevN){
+    const ch = split(str);
+    await Promise.all(ch.map((c, i) => call("setItem", "tk_" + n + "__" + i, c)));
+    await call("setItem", "tk_" + n + "__n", String(ch.length)); // лічильник — останнім
+    if(prevN > ch.length){ const old = []; for(let i = ch.length; i < prevN; i++) old.push("tk_" + n + "__" + i); await call("removeItems", old); }
+  }
+  let busy = false, again = false, timer = 0, first = true;
+  async function sync(){
+    if(busy){ again = true; return; }
+    busy = true;
+    try {
+      do {
+        again = false;
+        const remote = await readRemote();
+        let changed = false;
+        for(const n of names){
+          const r = remote[n].str, l = localStorage.getItem(lsKey(n)) || "";
+          const rt = stamp(r), lt = stamp(l);
+          if(rt > lt){ localStorage.setItem(lsKey(n), r); changed = true; }
+          else if(lt > rt && l !== r) await writeRemote(n, l, remote[n].n);
+        }
+        if(changed){ if(first && !answered) setTab(tab); else applyStorage(); }
+        first = false;
+      } while(again);
+    } catch(e){} finally { busy = false; }
+  }
+  const push = () => { clearTimeout(timer); timer = setTimeout(sync, 1500); };
+  sync();
+  setInterval(sync, 20000);
+  document.addEventListener("visibilitychange", () => { sync(); });
+  window.addEventListener("pagehide", () => { sync(); });
+  return { on:true, push, sync };
+})();
+window.addEventListener("tpsync:updated", applyStorage);
 
 /* === TELEGRAM: розгортання, кнопка «Назад» === */
 if (window.Telegram && window.Telegram.WebApp) {
