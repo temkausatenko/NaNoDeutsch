@@ -261,6 +261,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 @keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
 .xp.lvl .xrn{animation:xbump .6s ease-out}
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
+.xp.max .xnx{color:var(--go);font-weight:600}
+:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
 
 /* кнопка режиму з підписом */
@@ -741,7 +745,7 @@ const TIPS = {
 /* ============ STATE ============ */
 const KEY = id => "tk_v1_" + id;
 const XP_MAX = 400;
-const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0 });
+const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{} });
 const S = {};
 TABS.forEach(t => {
   S[t.id] = blankState();
@@ -749,8 +753,19 @@ TABS.forEach(t => {
     const v = JSON.parse(localStorage.getItem(KEY(t.id)));
     if(v && v.k){ if(!v.err) v.err = {}; S[t.id] = v; }
   } catch(e){}
-  S[t.id].x = S[t.id].x || 0;
 });
+
+/* --- ЗАГАЛЬНИЙ EXP для всіх вкладок --- */
+const XP_KEY = "tk_v1_xp";
+let XP = 0;
+try {
+  const raw = localStorage.getItem(XP_KEY);
+  if(raw !== null) XP = Math.max(0, Math.min(XP_MAX, parseInt(raw, 10) || 0));
+  else XP = Math.min(XP_MAX, TABS.reduce((a, t) => a + (S[t.id].x || 0), 0)); // міграція зі старого EXP по вкладках
+} catch(e){}
+TABS.forEach(t => { delete S[t.id].x; });
+const saveXp = () => { try { localStorage.setItem(XP_KEY, String(XP)); } catch(e){} };
+saveXp();
 
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
 let mode = store.get("tk-mode") === "type" ? "type" : "mc";
@@ -826,7 +841,7 @@ function renderCard(){
   $("stat-correct").textContent = t.r;
   $("stat-wrong").textContent = t.w;
   $("bar").style.width = `${Math.min(done, total) / total * 100}%`;
-  updateXp(t.x || 0);
+  updateXp(XP);
   renderTabs();
   $("chk").textContent = answered ? "Далі →" : "Перевірити ✓";
 }
@@ -895,7 +910,7 @@ function renderBuild(){
 function showFb(ok, i){
   const f = $("fb"), it = items()[i];
   f.className = "fb " + (ok ? "ok" : "er");
-  f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО · +1 EXP" : "✗ НЕПРАВИЛЬНО · −1 EXP"}</div>
+  f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
     <div class="ans" title="Натисни, щоб почути">${esc(it.ans)}</div>
     ${isBuild() ? `<div class="ex" style="margin-top:2px">${esc(stripHTML(it.s))}</div>` : (it.lbl && tab !== "classify" ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : (tab === "classify" ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""))}
     ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}`;
@@ -956,8 +971,8 @@ function showComplete(){
 }
 function repeatReview(){ hideComplete(); startReview(); }
 function finalRestart(){
-  const e = T().err, xKeep = T().x || 0;
-  S[tab] = blankState(); S[tab].err = e; S[tab].x = xKeep; reviewDoneSets[tab] = new Set();
+  const e = T().err;
+  S[tab] = blankState(); S[tab].err = e; reviewDoneSets[tab] = new Set();
   save(); hideComplete(); reviewMode = false;
   load(pool()[0]);
 }
@@ -979,12 +994,12 @@ const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 function updateXp(xv){
   const r=rankOf(xv),R=RANKS[r],N=RANKS[r+1],box=$("xp");
   box.dataset.r=r;
-  box.classList.toggle("max",xv>=XP_MAX);
+  box.classList.toggle("max",xv>=XP_MAX);document.documentElement.classList.toggle("legend",xv>=XP_MAX);
   $("xf").style.width=`${xv/XP_MAX*100}%`;
   $("xt").textContent=xv;
   $("xn").textContent=xv>=XP_MAX?"MAX":`/ ${XP_MAX}`;
   $("xr").textContent=`${R[1]} ${R[2]}`;
-  $("xnext").textContent=N?`ще ${N[0]-xv} до «${N[2]}»`:"максимальний ранг";
+  $("xnext").textContent=N?`ще ${N[0]-xv} до «${N[2]}»`:"EXP зафіксовано 🔒";
   const tk=$("xticks");
   if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("");
 }
@@ -998,17 +1013,18 @@ function popXp(d,up){
 
 /* ============ FINISH ============ */
 const completedShown = {};
+let xLocked = false;
 function finish(ok){
-  const t = T(), xBefore = t.x || 0;
+  const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
   answered = true; t._ok = ok;
   playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
-  if(ok){ t.r++; t.x = Math.min(XP_MAX, (t.x || 0) + 1); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
-  else  { t.w++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
-  save(); showFb(ok, cur); markOpts();
+  if(ok){ t.r++; if(!xLocked) XP = Math.min(XP_MAX, XP + 1); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
+  else  { t.w++; if(!xLocked) XP = Math.max(0, XP - 1); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
+  save(); saveXp(); showFb(ok, cur); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
   renderCard(); renderReviewBtn();
   if(isBuild()) renderBuild();
-  { const d = (t.x || 0) - xBefore; if(d) popXp(d, rankOf(t.x || 0) > rankOf(xBefore)); }
+  { const d = XP - xBefore; if(d) popXp(d, rankOf(XP) > rankOf(xBefore)); }
   if(ok){
     const c = $("card");
     c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
@@ -1057,9 +1073,9 @@ function showSol(){
   if(answered) return;
   answered = true;
   const t = T(); t._ok = false;
-  t.l++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true;
+  xLocked = XP >= XP_MAX; t.l++; if(!xLocked) XP = Math.max(0, XP - 1); t.k[cur] = 0; t.err[cur] = true;
   if(isBuild()){ bWrong = []; }
-  save(); showFb(false, cur); markOpts();
+  save(); saveXp(); showFb(false, cur); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
   renderCard(); renderReviewBtn();
   if(isBuild()) renderBuild();
@@ -1080,7 +1096,7 @@ function askConfirm(msg, yes){
   $("cf-no").onclick = hideComplete;
   $("complete").hidden = false;
 }
-function restartTab(){ askConfirm("Прогрес цієї вкладки буде скинуто разом з EXP і списком помилок.", resetTab); }
+function restartTab(){ askConfirm("Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP збережеться.", resetTab); }
 
 /* ============ ERRORS MODAL ============ */
 function openErrors(){
