@@ -893,7 +893,7 @@ const items = () => ITEMS[tab];
 const T = () => S[tab];
 const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] === stage);
 const streak = i => T().k[i] || 0;
-const maxStreak = () => 2;   // завдання «вивчене» після 2 вдалих відповідей поспіль (друга — пізніше, не відразу)
+const maxStreak = () => 1;   // завдання «вивчене» після 1 правильної відповіді — більше воно не повертається (помилкові повертаються)
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
 const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
 
@@ -1063,7 +1063,7 @@ const RULES = {
   classify:"💡 Постав питання до виділеного: <b>TE</b> wann? (коли) · <b>KA</b> warum? (чому) · <b>MO</b> wie? (як) · <b>LO</b> wo/wohin/woher? (де/куди/звідки).",
   ask:"💡 Питання до слова: wer/was? → Subjekt · wen/was? → Akk · wem? → Dat · wann/warum/wie/wo? → TE / KA / MO / LO.",
   insert:"💡 Обставини (TE KA MO LO) стоять перед Präpositionalobjekt; Verb 2 — в самому кінці.",
-  build:"💡 Формула: Підмет → Verb 1 → Dativ → Akkusativ → <b>TE → KA → MO → LO</b> → Verb 2. Ритм: <i>коли – чому – як – де</i>. Після першої вдалої спроби завдання повернеться, і складати доведеться без карток — самому!",
+  build:"💡 Формула: Підмет → Verb 1 → Dativ → Akkusativ → <b>TE → KA → MO → LO</b> → Verb 2. Ритм: <i>коли – чому – як – де</i>.",
   pron:"💡 Займенник раніше за іменник. Два займенники: спочатку Akkusativ, потім Dativ (<i>sie ihm</i>).",
   errors:"💡 Перевір по черзі: 1) Verb на 2-му місці · 2) Dativ перед Akkusativ · 3) TE → KA → MO → LO · 4) Verb 2 в кінці."
 };
