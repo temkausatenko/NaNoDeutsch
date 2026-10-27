@@ -827,7 +827,6 @@ const STAGES = [
 /* ============ ВПРАВИ ============ */
 const TABS = [
  { id:"md",   label:"Річ / людина",    kind:"mc",   title:"РІЧ ЧИ ЛЮДИНА?",          fixed:1, oc:"opts afit" },
- { id:"rr",   label:"Чи є -r-?",       kind:"mc",   title:"ПОТРІБНА ЛІТЕРА R?",       fixed:1, oc:"opts afit" },
  { id:"zs",   label:"Склади слово",    kind:"text", title:"СКЛАДИ СЛОВО",             ph:"Введи слово …",           oc:"opts grid4" },
  { id:"dw",   label:"da- чи wo-?",     kind:"mc",   title:"DA- ЧИ WO-?",              oc:"opts afit" },
  { id:"ei",   label:"Встав слово",     kind:"text", title:"ВСТАВ СЛОВО",              ph:"Введи слово …",           oc:"opts grid4" },
@@ -846,8 +845,6 @@ const TABS = [
 const OPT_META = {
   "Річ":     { r:"s",  t:"Річ",     s:"da(r)- / wo(r)-" },
   "Людина":  { r:"p",  t:"Людина",  s:"Präp + wen/wem" },
-  "З -r-":   { r:"r",  t:"З -r-",   s:"голосна" },
-  "Без -r-": { r:"pr", t:"Без -r-", s:"приголосна" },
   "wen":     { r:"wn", t:"wen",     s:"Akkusativ" },
   "wem":     { r:"wm", t:"wem",     s:"Dativ" }
 };
@@ -896,17 +893,29 @@ D.forEach((d, i) => {
     ex: S ? "Річ → da(r)- / wo(r)-" : "Людина → прийменник + wen/wem, ihn/ihm…", de:`<b>${esc(sent)}</b>` });
 });
 
+const NPH = {
+ "denken an":["meine Arbeit","meinen Bruder"],"warten auf":["den Bus","meine Schwester"],"sich freuen über":["das Geschenk",null],
+ "sich freuen auf":["das Wochenende","meine Schwester"],"sich interessieren für":["Musik","meinen neuen Kollegen"],"sich erinnern an":["den Urlaub","meine Oma"],
+ "Angst haben vor":["der Prüfung","meinem Chef"],"sprechen über":["das Problem","unsere Chefin"],"sich ärgern über":["den Lärm","meinen Nachbarn"],
+ "achten auf":["den Preis","meinen kleinen Bruder"],"träumen von":["einem Haus","meiner Freundin"],"abhängen von":["dem Wetter","meinem Chef"],
+ "sich beschäftigen mit":["dem Thema","meinem Sohn"],"sich verlassen auf":["mein Gefühl","meinen Bruder"],"suchen nach":["meinen Schlüsseln","meiner alten Freundin"],
+ "sich entscheiden für":["das blaue Auto","den ersten Bewerber"],"diskutieren über":["den neuen Plan","unseren Chef"],"leiden unter":["der Hitze","meinem Chef"],
+ "sich kümmern um":["den Haushalt","meine Mutter"],"bitten um":["Hilfe",null],"aufhören mit":["dem Rauchen",null],"anfangen mit":["dem Sprachkurs",null],
+ "helfen bei":["den Hausaufgaben",null],"teilnehmen an":["dem Kurs",null],"gehören zu":["dem Kurs",null],"sich konzentrieren auf":["die Arbeit",null]
+};
 /* --- з V: 24 дієслова --- */
 V.forEach(([v, p, ua, ds, us, wq]) => {
   const d = daF(p), w = woF(p), acc = AK.includes(p), mp = acc ? "ihn" : "ihm", fp = acc ? "sie" : "ihr", se = ds.replace("___", d);
   const ex = `${v} + ${p} → ${d} (відповідь) / ${w} (питання) — ${ua}`;
-  const r = RF[v + " " + p];
-  if(r){
-    const [th, pn, g] = r;
-    add("md", { s:bl(ds), sch:`Замість пропуску: <span class="np">${th}</span>`, o:["Річ","Людина"], a:"Річ", ans:`Річ → ${d}`, ex:`${th} — річ → da(r) + прийменник → ${d}`, lbl:"", ua:`${ds.replace("___","…")} (${th})`, sp:se, st:1 });
-    if(pn){
+  const r = RF[v + " " + p], np = NPH[v + " " + p];
+  if(r && np){
+    const [, pn, g] = r;
+    const full = x => ds.replace("___", `${p} ${x}`);
+    const mk = (x, ty) => ds.replace("___", `${p} <span class="u ${ty}">${x}</span>`);
+    add("md", { s:mk(np[0], "S"), sch:"Що стоїть після прийменника — річ чи людина?", o:["Річ","Людина"], a:"Річ", ans:`Річ → ${d}`, ex:`«${np[0]}» — річ → da(r) + прийменник → ${d}`, lbl:us, ua:us, sp:full(np[0]), st:1 });
+    if(pn && np[1]){
       const f = `${p} ${g === "m" ? mp : fp}`;
-      add("md", { s:bl(ds), sch:`Замість пропуску: <span class="np">${pn}</span>`, o:["Річ","Людина"], a:"Людина", ans:`Людина → ${f}`, ex:`${pn} — людина → прийменник + займенник → ${f}`, lbl:"", ua:`${ds.replace("___","…")} (${pn})`, sp:ds.replace("___", f), st:1 });
+      add("md", { s:mk(np[1], "P"), sch:"Що стоїть після прийменника — річ чи людина?", o:["Річ","Людина"], a:"Людина", ans:`Людина → ${f}`, ex:`«${np[1]}» — людина → прийменник + займенник → ${f}`, lbl:us, ua:us, sp:full(np[1]), st:1 });
     }
   }
   const o1 = oth(p, 1)[0];
@@ -922,8 +931,6 @@ UU.forEach(([q, a, w1, w2, p]) => add("ue", { s:q, sch:"Обери правил�
 /* --- утворення --- */
 SP.concat(["hinter", "zwischen"]).forEach(p => {
   const n = /hinter|zwischen/.test(p), r = VOW.test(p);
-  add("rr", { s:`<span class="big">${p}</span>`, sch:`Чи потрібна літера r у слові ${daF(p)} / ${woF(p)}?`, o:["З -r-","Без -r-"], a:r ? "З -r-" : "Без -r-", ans:`${r ? "З -r-" : "Без -r-"} → ${daF(p)}`,
-    ex: r ? `${p} починається з голосної → da + r + ${p} = ${daF(p)}` : `${p} починається з приголосної → без r: ${daF(p)}`, lbl:"", sp:daF(p), st:2, ua:p });
   [["da", daF, badDa], ["wo", woF, badWo]].forEach(([x, F, B]) => {
     if(x === "wo" && n) return;
     const opp = x === "da" ? "wo" : "da", oppB = x === "da" ? badWo : badDa;
@@ -1036,7 +1043,7 @@ function haptic(kind){
 
 /* ============ STATE ============ */
 const TIPS = {
-  md:"Подумай: після прийменника стоїть річ чи людина?", rr:"Дивись на першу літеру прийменника: голосна → r.", zs:"da / wo + (r) + прийменник — пиши разом.",
+  md:"Подумай: після прийменника стоїть річ чи людина?", zs:"da / wo + (r) + прийменник — пиши разом.",
   dw:"Відповідь → da-, питання → wo-.", ei:"Знайди прийменник дієслова й утвори da-слово.", vp:"Який прийменник вимагає це дієслово?",
   ks:"Akkusativ → wen, Dativ → wem.", fr:"Річ → wo(r)-, людина → прийменник + wen/wem.", pn:"Відмінок і рід визначають займенник.",
   aw:"Річ → da(r)-, людина → прийменник + займенник.", ue:"Спершу річ чи людина, потім прийменник.", br:"da-слово відсилає до цілого речення.",
@@ -1044,7 +1051,6 @@ const TIPS = {
 };
 const RULES = {
   md:"💡 <b>Річ</b> → da(r)- / wo(r)- · <b>людина</b> → прийменник + wen/wem та ihn/sie/ihm/ihr.",
-  rr:"💡 <b>Голосна</b> (a, e, i, o, u, ä, ö, ü) → <b>r</b>: darauf · <b>приголосна</b> → без r: damit.",
   zs:"💡 <b>da / wo</b> + (<b>r</b>) + прийменник: worauf, womit, darüber, dafür.",
   dw:"💡 <b>da-</b> — відповідь («про це») · <b>wo-</b> — питання («про що?»).",
   ei:"💡 Спершу знайди прийменник дієслова, потім додай da(r)-.",
