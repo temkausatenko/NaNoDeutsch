@@ -85,6 +85,21 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
+/* підсумок вкладки прямо в тренажері (без спливаючих вікон) */
+#finBox{display:none}
+.card.fin > :not(h2):not(.rst):not(#finBox){display:none!important}
+.card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
+#finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
+#finBox .ft.rv{color:var(--pr)}
+#finBox p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.55}
+#finBox p b{color:var(--tx)}
+.fin-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.fin-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.fin-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.fin-actions .go:hover{filter:brightness(1.1)}
+.fin-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.fin-actions .cancel:hover{border-color:var(--pr)}
+.tab.cl small::before{content:"✓ "}
 
 /* Выравнивание заголовка и кнопок */
 .card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
@@ -423,6 +438,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rstBtn" title="Скинути прогрес цієї вкладки" onclick="restartTab()">↺</button>
+    <div id="finBox"></div>
 
     <p class="sent" id="sent"></p>
     <div class="lab" id="lab"></div>
@@ -648,14 +664,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <p class="errs-sub" id="errs-sub"></p>
     <div class="errs-list" id="errs-list"></div>
     <div class="errs-actions" id="errs-actions"></div>
-  </div>
-</div>
-
-<div class="complete" id="complete" hidden>
-  <div class="complete-card">
-    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
-    <p id="complete-text">Усі завдання цієї вкладки пройдено. Гарна робота!</p>
-    <div class="complete-actions" id="complete-actions"></div>
   </div>
 </div>
 
@@ -919,7 +927,8 @@ function renderTabs(){
   $("tabs").innerHTML = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)).map(t => {
     const st = S[t.id], idx = ITEMS[t.id].map((_, i) => i).filter(i => !stage || STG[t.id][i] === stage);
     const done = idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
-    return `<button class="tab ${t.id === tab ? 'on' : ''}" data-t="${t.id}">${t.label}<small>${done}/${idx.length}</small></button>`;
+    const cl = st.cl && st.cl[String(stage || 0)];
+    return `<button class="tab ${t.id === tab ? 'on' : ''} ${cl ? 'cl' : ''}" data-t="${t.id}">${t.label}<small>${done}/${idx.length}</small></button>`;
   }).join("");
   renderModes(); renderStages();
 }
@@ -984,7 +993,7 @@ function markOpts(){
 }
 function renderReviewBtn(){
   const n = errCount(), btn = $("reviewBtn");
-  if(!reviewMode){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
+  if(!reviewMode && !isClosed()){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
   else btn.style.display = "none";
 }
 
@@ -1106,7 +1115,7 @@ $("blType").addEventListener("click", () => { if(answered) return; bType = !bTyp
 
 /* ============ NAVIGATION ============ */
 function load(i){
-  clearTimeout(tm);
+  clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
   cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
   $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
@@ -1142,39 +1151,53 @@ function allDone(){
   return pool().every(i => streak(i) >= maxStreak());
 }
 
-/* ============ COMPLETION ============ */
+/* ============ COMPLETION (усе всередині тренажера, без спливаючих вікон) ============ */
 const tabDone = () => pool().every(i => streak(i) >= maxStreak());
+const stg = () => String(stage || 0);
+const isClosed = () => !!(T().cl && T().cl[stg()]);
+function closeTab(){ const t = T(); t.cl = Object.assign({}, t.cl, { [stg()]: 1 }); t.x++; t.p++; save(); }  // x+1 і p+1: EXP не змінюється, але sync.js бачить новішу версію
+function hideFin(){ $("card").classList.remove("fin"); }
+function renderFin(kind){
+  clearTimeout(tm);
+  const t = T(), n = reviewPool().length;
+  const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
+  let h;
+  if(kind === "review") h = `<div class="ft rv">📋 Усі завдання пройдено</div><p>${st}<br>Помилок: <b>${n}</b>. Тепер можна лише повторити помилки.</p><div class="fin-actions"><button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button></div>`;
+  else if(kind === "confirm") h = `<div class="ft rv">Скинути прогрес?</div><p>Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP збережеться.</p><div class="fin-actions"><button class="go" onclick="resetTab()">Так, скинути</button><button class="cancel" onclick="cancelReset()">Скасувати</button></div>`;
+  else h = `<div class="ft">✅ Ця категорія вже пройдена</div><p>${st}<br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p><div class="fin-actions"><button class="go" onclick="finalRestart()">↻ Почати заново</button></div>`;
+  $("finBox").innerHTML = h;
+  $("card").classList.add("fin");
+  renderReviewBtn();
+}
+function syncFin(){
+  if(reviewMode){ hideFin(); return; }
+  if(isClosed()){ renderFin("closed"); return; }
+  if(tabDone()){
+    if(reviewPool().length === 0){ closeTab(); renderFin("closed"); }
+    else renderFin("review");
+    return;
+  }
+  hideFin(); renderReviewBtn();
+}
 function advance(){
   const ni = nextIdx();
   if(ni >= 0) load(ni);
   else if(reviewMode) showReviewComplete();
   else if(tabDone()) showComplete();
 }
-function showComplete(){
-  const t = T(), n = errCount();
-  $("complete-title").textContent = "🎉 Вкладку пройдено!";
-  $("complete-text").innerHTML = `Усі завдання цієї вкладки пройдено.<br>Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b> · У списку помилок: <b>${n}</b>.<br>Тренажер зупинено — обери, що робити далі.`;
-  $("complete-actions").innerHTML = (n > 0 ? `<button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button>` : "") + `<button class="${n > 0 ? "cancel" : "go"}" onclick="finalRestart()">↻ Почати заново</button>`;
-  $("complete").hidden = false;
-}
-function repeatReview(){ hideComplete(); startReview(); }
+function showComplete(){ syncFin(); }
+function repeatReview(){ startReview(); }
 function finalRestart(){
-  const e = T().err, bx = T().x + 1, bp = T().p + 1; // x+1 і p+1: EXP не змінюється, але sync.js бачить новішу версію
-  S[tab] = blankState(); S[tab].err = e; S[tab].x = bx; S[tab].p = bp; reviewDoneSets[tab] = new Set();
-  save(); hideComplete(); reviewMode = false;
+  const bx = T().x + 1, bp = T().p + 1; // x+1 і p+1: EXP не змінюється, але sync.js бачить новішу версію
+  S[tab] = blankState(); S[tab].x = bx; S[tab].p = bp; reviewDoneSets[tab] = new Set();
+  save(); reviewMode = false;
   load(pool()[0]);
 }
 function showReviewComplete(){
-  const done = tabDone();
-  $("complete-title").textContent = "✅ Помилки пройдено!";
-  $("complete-text").innerHTML = done
-    ? "Ти повторив усі помилки зі списку. Вони залишаються у списку «Помилки». Тренажер зупинено — обери, що робити далі."
-    : "Ти повторив усі помилки зі списку. Вони залишаються у списку «Помилки» — можна повторити ще раз.";
-  $("complete-actions").innerHTML = `<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button>` +
-    (done ? `<button class="cancel" onclick="finalRestart()">↻ Почати заново</button>` : `<button class="cancel" onclick="exitReview()">Продовжити тренування</button>`);
-  $("complete").hidden = false;
+  if(tabDone()){ reviewMode = false; closeTab(); renderFin("closed"); }
+  else exitReview();
 }
-function hideComplete(){ $("complete").hidden = true; }
+function hideComplete(){}
 
 /* ============ XP ============ */
 const RANKS=[[0,'🌱','Новачок'],[25,'🌿','Учень'],[60,'🧭','Дослідник'],[110,'⚡','Знавець'],[170,'🔥','Профі'],[230,'💎','Майстер'],[250,'🏆','Легенда']];
@@ -1283,19 +1306,12 @@ function showSol(){
 /* ============ RESET ============ */
 function resetTab(){
   { const bx = T().x + 1, bp = T().p + 1; S[tab] = blankState(); S[tab].x = bx; S[tab].p = bp; }
-  save(); hideComplete();
-  completedShown[tab] = false; reviewMode = false;
+  save();
+  completedShown[tab] = false; reviewMode = false; reviewDoneSets[tab] = new Set();
   load(pool()[0]);
 }
-function askConfirm(msg, yes){
-  $("complete-title").textContent = "Скинути прогрес?";
-  $("complete-text").textContent = msg;
-  $("complete-actions").innerHTML = '<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
-  $("cf-yes").onclick = () => { hideComplete(); yes(); };
-  $("cf-no").onclick = hideComplete;
-  $("complete").hidden = false;
-}
-function restartTab(){ askConfirm("Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP збережеться.", resetTab); }
+function restartTab(){ renderFin("confirm"); }
+function cancelReset(){ hideFin(); syncFin(); }
 
 /* ============ ERRORS MODAL ============ */
 function openErrors(){
@@ -1323,8 +1339,8 @@ function clearErrors(){
 function trainErrors(){ closeErrors(); startReview(); try{ $("card").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){} }
 
 /* ============ REVIEW ============ */
-function startReview(){ if(errCount() === 0) return; reviewMode = true; reviewDoneSets[tab] = new Set(); const rq = reviewQueue(); if(rq.length > 0) load(rq[0]); }
-function exitReview(){ reviewMode = false; hideComplete(); load(startIdx()); if(tabDone()) showComplete(); }
+function startReview(){ if(isClosed() || errCount() === 0) return; reviewMode = true; reviewDoneSets[tab] = new Set(); const rq = reviewQueue(); if(rq.length > 0) load(rq[0]); }
+function exitReview(){ reviewMode = false; load(startIdx()); syncFin(); }
 
 /* ============ TAB SWITCH ============ */
 function startIdx(){
@@ -1337,7 +1353,7 @@ function setTab(t){
   hideComplete(); reviewMode = false; tab = t; store.set('tk-tab', t);
   renderTabs(); renderReviewBtn();
   load(startIdx());
-  if(tabDone()) showComplete();
+  syncFin();
 }
 
 /* ============ THEORY ============ */
@@ -1393,7 +1409,6 @@ $("chk").onclick = check;
 $("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
 $("speakBtn").onclick = speakCurrent;
 $("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
-$("complete").addEventListener("click", e => { if(e.target.id === "complete") hideComplete(); });
 $("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
 $("inp").addEventListener("keydown", e => { if(e.key === "Enter" || e.keyCode === 13){ e.preventDefault(); check(); } });
 $("showBtn").onclick = showSol;
@@ -1416,7 +1431,7 @@ document.addEventListener("keydown", e => {
   const j = +e.key - 1;
   if(j >= 0 && j < curOpts.length) pick(j);
 });
-document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("complete").hidden) hideComplete(); if(!$("errs").hidden) closeErrors(); } });
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("errs").hidden) closeErrors(); } });
 
 /* ============ INIT ============ */
 { const st = store.get('tk-tab'); setTab(TABS.some(t => t.id === st) ? st : TABS[0].id); }
@@ -1437,7 +1452,7 @@ function applyStorage(){
     });
     XP = calcXp();
     if(answered){ updateXp(XP); renderTabs(); }
-    else { renderCard(); renderReviewBtn(); }
+    else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
