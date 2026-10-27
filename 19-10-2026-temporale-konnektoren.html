@@ -44,7 +44,6 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.5px;margin:0;background:lin
 .glossary b{display:block;color:var(--tx);font-weight:600;font-size:.8rem;margin-bottom:2px}
 .glossary span{line-height:1.2}
 
-/* Етапи: 25% менші, 2 ряди (flex-wrap) */
 .stages{display:flex;flex-wrap:wrap;gap:8px;padding:2px 2px 6px;margin:0 0 12px;justify-content:flex-start}
 .stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1.5px solid var(--bd);background:transparent;color:var(--mu);border-radius:11px;padding:8px 13px 11px;font:inherit;font-size:.8rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
 .stg small{margin-left:6px;font-size:.68rem;font-weight:500;opacity:.7}
@@ -99,7 +98,6 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.5px;margin:0;background:lin
 .advance-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pr),var(--ok));border-radius:99px;animation:fillBar 2s linear forwards}
 @keyframes fillBar{from{width:0%}to{width:100%}}
 
-/* Поле вводу — ~2× більше */
 .inp{font-family:inherit;font-size:15px;width:255px;padding:4px 10px;margin:0 3px;border:1.5px solid var(--bd);border-radius:7px;background:var(--bg);color:var(--tx);text-align:center;transition:all .2s;line-height:1.4;height:30px;vertical-align:middle}
 @supports(field-sizing:content){.inp{width:auto;field-sizing:content;min-width:94px;max-width:374px}}
 .inp:focus{outline:none;border-color:var(--pr);box-shadow:0 0 0 3px var(--pr-glow)}
@@ -221,7 +219,6 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.5px;margin:0;background:lin
 .errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
 html.in-tg,html.in-tg body{overscroll-behavior-y:none}
 
-/* === Финальное состояние категории (как в TEKAMOLO) === */
 #finBox{display:none}
 .card.fin > :not(.rst):not(#finBox){display:none!important}
 .card.fin #finBox{
@@ -725,7 +722,7 @@ const textItems = [
   C('___ das Baby schläft, müssen wir leise sein.','Solange','Тривалість «поки» → solange.',['Solange','Nachdem','Seit','Bevor'],'Поки дитина спить, ми маємо бути тихими.'),
   C('Ich darf nicht ins Kino gehen, ___ ich meine Hausaufgaben nicht gemacht habe.','solange','«Доти, поки не» → solange … nicht.',['solange','sobald','sooft','seit'],'Мені не можна йти в кіно, поки я не зроблю домашнє завдання.'),
   C('___ ich meine Oma anrufe, erzählt sie mir von ihrem Garten.','Sooft','Повторюваність → sooft.',['Sooft','Nachdem','Ehe','Seit'],'Щоразу, коли я телефоную бабусі, вона розповідає мені про свій сад.'),
-  C('___ er in die Stadt kommt, besucht er uns.','Sooft','Повторюваність → sooft.',['Sooft','Bevor','Nachdem','Seit'],'Щоразу, коли він приїжджає в місто, він нас відвідує.'),
+  C('___ er in die Stadt kommt, besucht er uns.','Sooft','Повторюваність → sooft.',['Sooft','Bevor','Nachdem','Seit'],'Щоразу, коли він приїздить в місто, він нас відвідує.'),
   C('Er ruft mich an, ___ er ein Problem mit dem Computer hat.','sooft','Повторюваність → sooft.',['sooft','bevor','nachdem','bis'],'Він телефонує мені щоразу, коли в нього проблема з комп’ютером.'),
   C('___ du die Reise buchst, solltest du die Preise vergleichen.','Ehe','Спочатку порівняти ціни → ehe / bevor.',['Ehe','Nachdem','Seit','Sobald'],'Перш ніж ти забронюєш подорож, тобі слід порівняти ціни.'),
   C('Wir müssen den Antrag abgeben, ___ die Frist abläuft.','ehe','Раніше, ніж мине термін → ehe / bevor.',['ehe','nachdem','seit','sobald'],'Ми повинні подати заяву, перш ніж мине термін.'),
@@ -752,7 +749,6 @@ const textItems = [
   O('Bevor ich aus dem Haus gehe, schließe ich die Fenster.','Перш ніж вийти з дому, я зачиняю вікна.','Nebensatz zuerst: після коми головне з дієслова «schließe».')
 ];
 
-/* Логічна послідовність з новими категоріями */
 const D = [
   { n:'Nachdem', t:'i', stage:1, tip:CATS[0].tip, it:CATS[0].items.map(P) },
   { n:'Bevor / Ehe', t:'i', stage:2, tip:CATS[1].tip, it:CATS[1].items.map(P) },
@@ -780,22 +776,27 @@ const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','�
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
 let XP = 0;
-const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),xp:0,errors:{},
-  cl:D.map(()=>0),      // 1 = категорія закрита (пройдена повністю)
-  corr:D.map(()=>0),    // накопичувальний лічильник правильних
-  wrng:D.map(()=>0)});  // накопичувальний лічильник неправильних
+// ⚠️ ВАЖЛИВО: поле XP тепер `x` (раніше було `xp`) — саме за ним sync.js вирішує, чия версія перемагає
+const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:0,errors:{},
+  cl:D.map(()=>0),
+  corr:D.map(()=>0),
+  wrng:D.map(()=>0)});
 let S=blank();
 let autoAdvanceTimer=null;
 let rvMode=false, rvCur=-1, trShown=false;
 const rvDoneSets={};
 
-try{
-  let s=JSON.parse(localStorage.getItem(K));
-  if(s){
+/* Завантаження стану з localStorage + міграція старого поля xp → x */
+function loadState(){
+  try{
+    let s=JSON.parse(localStorage.getItem(K));
+    if(!s || typeof s !== 'object') return null;
+    // Міграція: стара версія писала XP у полі `xp`
+    if(s.x===undefined && s.xp!==undefined){ s.x=s.xp; delete s.xp; }
+    if(s.x===undefined) s.x=0;
     if(!s.errors) s.errors={};
     if(!s.i) s.i=[];
     if(!s.r) s.r=[];
-    if(s.xp===undefined) s.xp=0;
     while(s.i.length<D.length) s.i.push(0);
     while(s.r.length<D.length) s.r.push([]);
     if(!s.cl) s.cl=[];
@@ -810,22 +811,26 @@ try{
     s.corr=s.corr.slice(0,D.length);
     s.wrng=s.wrng.slice(0,D.length);
     s.i=s.i.map((v,k)=>Math.min(Math.max(parseInt(v)||0,0),D[k].it.length));
-    s.xp=Math.min(XP_MAX,Math.max(0,parseInt(s.xp)||0));
+    s.x=Math.min(XP_MAX,Math.max(0,parseInt(s.x)||0));
     if(s.l===undefined||s.l>=D.length) s.l=0;
     delete s.reviewMode; delete s.reviewQueue; delete s.reviewIndex;
-    S=s;
+    return s;
+  }catch(e){
+    console.error("Error loading save",e);
+    return null;
   }
-}catch(e){console.error("Error loading save",e);}
-XP = S.xp || 0;
+}
+const _initialState = loadState();
+if (_initialState) S = _initialState;
+XP = S.x || 0;
 
-const save=()=>{S.xp=XP;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const save=()=>{S.x=XP;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
 const $=id=>document.getElementById(id);
 const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
 const okv=(v,a)=>a.split('|').map(norm).includes(norm(v||''));
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 let st={};
 
-/* === хелпери стану категорій === */
 const isClosed     = l => !!(S.cl && S.cl[l]);
 const isAllCorrect = l => S.r[l].length === D[l].it.length
                        && S.r[l].every(x => x === true);
@@ -927,7 +932,6 @@ function finalRestart(){
 function hideComplete(){$('complete').hidden=true;}
 function showComplete(){
   const l=S.l;
-  // Якщо все правильно (після повторення помилок або з першого разу) — одразу закриваємо категорію
   if(isAllCorrect(l)){
     closeCat(l);
     save();
@@ -949,7 +953,6 @@ function showComplete(){
 }
 function showReviewComplete(){
   const l=S.l;
-  // Усі помилки виправлено → закриваємо категорію і показуємо фінальну плашку
   if(isAllCorrect(l)){
     closeCat(l);
     save();
@@ -958,7 +961,6 @@ function showReviewComplete(){
     render();
     return;
   }
-  // Резервний випадок (не повинен траплятися)
   $('complete-title').textContent='✅ Помилки пройдено!';
   $('complete-text').innerHTML='Ти повторив усі помилки зі списку.';
   $('complete-actions').innerHTML='<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button><button class="cancel" onclick="exitReview()">Продовжити тренування</button>';
@@ -1217,7 +1219,6 @@ function render(){
   syncTheoryBtn();
   const m=$('main');
 
-  // Категорія вже закрита → показуємо фінальну плашку (як у TEKAMOLO)
   if(isClosed(ctx.l) && !rvMode){
     m.innerHTML = `<div class="card fin">
       <button class="rst" onclick="restartTab()" title="Скинути прогрес цієї категорії">↺</button>
@@ -1318,7 +1319,6 @@ document.addEventListener('keydown',e=>{
 $('complete').addEventListener('click',e=>{if(e.target.id==='complete')hideComplete();});
 $('errs').addEventListener('click',e=>{if(e.target.id==='errs')closeErrors();});
 
-/* Клік по етапах */
 $('stages').addEventListener('click',e=>{
   const b=e.target.closest('.stg[data-s]');
   if(!b||b.disabled) return;
@@ -1357,4 +1357,48 @@ document.addEventListener('touchstart',function unlockAudio(){
 },{once:true});
 
 fresh();render();
+
+/* === Синхронізація: підхоплюємо зміни, які sync.js приніс з хмари ===
+ * sync.js фаерить 'tpsync:updated' після pull() або push(), коли дані
+ * в localStorage реально оновилися з іншого пристрою. Перечитуємо стан
+ * і перемальовуємо, щоб користувач побачив синхронізований прогрес. */
+function stateEqual(a, b){
+  if (!a || !b) return a === b;
+  if (a.l !== b.l) return false;
+  if ((a.x||0) !== (b.x||0)) return false;
+  if (String(a.i) !== String(b.i)) return false;
+  if (String(a.cl) !== String(b.cl)) return false;
+  if (String(a.corr) !== String(b.corr)) return false;
+  if (String(a.wrng) !== String(b.wrng)) return false;
+  // r — масив масивів boolean|undefined; нормалізуємо до 1/0
+  const ar = a.r.map(arr => arr.map(v => v?1:0).join('')).join('|');
+  const br = b.r.map(arr => arr.map(v => v?1:0).join('')).join('|');
+  if (ar !== br) return false;
+  // errors — об'єкт виду "l_i": true; порівнюємо відсортовані ключі з true
+  const ae = Object.keys(a.errors||{}).filter(k=>a.errors[k]).sort();
+  const be = Object.keys(b.errors||{}).filter(k=>b.errors[k]).sort();
+  if (ae.length !== be.length) return false;
+  for (let k = 0; k < ae.length; k++) if (ae[k] !== be[k]) return false;
+  return true;
+}
+function reloadFromStorage(){
+  const loaded = loadState();
+  if (!loaded) return;
+  if (stateEqual(S, loaded)) return; // нічого важливого не змінилось
+  clearTimeout(autoAdvanceTimer);
+  rvMode = false;
+  hideComplete();
+  closeErrors();
+  S = loaded;
+  XP = S.x || 0;
+  fresh();
+  render();
+}
+window.addEventListener('tpsync:updated', reloadFromStorage);
+
+// Якщо sync.js ще не завершив pull на момент старту — підвантажимо стан
+// після того, як він стане ready (на випадок, якщо подія вже відбулася).
+if (window.TPSync && window.TPSync.ready) {
+  window.TPSync.ready.then(reloadFromStorage).catch(function(){});
+}
 </script></body></html>
