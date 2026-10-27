@@ -1,6 +1,5 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Partizip I · Trainer 24.10.2026</title>
-<!-- === ИНТЕГРАЦИЯ С TELEGRAM: ПОДКЛЮЧЕНИЕ SDK === -->
+<!doctype html><html lang="uk"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Partizip Master · I & II + Passiv</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -34,14 +33,15 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
-.card h2{margin:0 0 16px;font-size:.66rem;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;padding-right:56px}
-.sp,.rs{position:absolute;top:16px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;padding:0}
-.rs{right:16px}.sp{right:16px}.sp:hover,.rs:hover{border-color:var(--pr);color:var(--tx)}
+.card h2{margin:0 0 16px;font-size:.66rem;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;padding-right:90px;line-height:32px;min-height:32px}
+.sp,.rst,.mode-toggle{position:absolute;top:16px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;line-height:1;z-index:2}
+.sp{right:16px;width:32px;font-size:1rem}
+.rst{right:56px;width:32px;font-size:1.15rem}
+.mode-toggle{right:96px;width:auto;padding:0 10px;border-radius:99px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.sp:hover,.rst:hover,.mode-toggle:hover{border-color:var(--pr);color:var(--tx)}
 .q{font-size:1.25rem;font-weight:500;margin:0 0 8px;line-height:1.6;cursor:pointer}
 .bl{display:inline-block;min-width:80px;border-bottom:2px solid var(--sa);margin:0 4px;text-align:center;color:var(--sa)}
 .bl.ok{color:var(--ok);border-color:var(--ok)}.bl.no{color:var(--no);border-color:var(--no)}
-.t.er{border:1px solid var(--no);background:var(--nob);color:var(--no);border-radius:12px;padding:8px 16px;font-weight:600}
-.t.er:hover{color:var(--no);filter:brightness(1.15)}
 .trt{font-size:.85rem;font-weight:400;color:var(--mu);margin-top:8px}
 .opts,.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .opt{flex:1 1 auto;min-height:44px;padding:11px 18px;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer}
@@ -60,12 +60,14 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .fb .a{font-size:1.1rem;font-weight:600;margin:6px 0 4px;cursor:pointer;display:inline-block}.fb .a::after{content:" 🔊";font-size:.8em;opacity:.6}.fb .a:hover{text-decoration:underline;text-underline-offset:4px}.fb.sk{cursor:pointer}.fb .e{color:var(--mu);font-size:.9rem}
 .tools{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;align-items:center}
 .t{border:0;background:none;color:var(--mu);font:inherit;font-size:.85rem;text-decoration:none;cursor:pointer;padding:6px 8px}.t:hover{color:var(--tx)}
+.t.er{border:1px solid var(--no);background:var(--nob);color:var(--no);border-radius:12px;padding:8px 16px;font-weight:600}
+.t.er:hover{color:var(--no);filter:brightness(1.15)}
 .xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
 .xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
 .xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
 .xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
 .xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
-.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums;position:relative}
 .xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
 .xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
 .xp.max .xv b,.xp.max .xv small{color:var(--go)}
@@ -76,7 +78,9 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .fb .bar{height:3px;background:var(--ok);border-radius:3px;margin-top:12px;width:100%;animation:shr 2s linear forwards}@keyframes shr{to{width:0}}
 .fb.er .bar{background:var(--no);animation-duration:3.5s}
 .foot{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-.bt{font:inherit;font-weight:600;font-size:.85rem;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx)}.bt:hover{border-color:var(--pr)}
+.bt{font:inherit;font-weight:600;font-size:.95rem;border-radius:12px;padding:12px 24px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s}.bt:hover{border-color:var(--pr)}
+.bt.p{background:var(--pr);border-color:var(--pr);color:#fff;width:100%;max-width:400px}
+.bt.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--glow)}
 .th{margin:18px 0 0;padding:18px 20px;background:var(--card);border:1px solid var(--bd);border-radius:16px}
 .th h3{margin:18px 0 6px;font-size:1rem;color:var(--sa)}.th h3:first-child{margin-top:0}
 .th p{margin:6px 0}.th .x{padding:8px 12px;border-left:3px solid var(--sa);background:var(--pl);border-radius:8px;margin:8px 0;font-size:.95rem}
@@ -116,8 +120,9 @@ h1{font-size:1.45rem}
 .t{padding:10px 8px}.t.er{padding:10px 14px}
 .th{padding:14px}table{font-size:.8rem}th,td{padding:5px 3px}
 .stats b{font-size:1.05rem}
+.sp,.rst,.mode-toggle{top:18px}.sp{right:18px}.rst{right:58px}.mode-toggle{right:98px}
+.card h2{padding-right:100px}
 }
-/* ранги EXP */
 .xp{--xa:#475569;--xz:#94a3b8}
 .xp[data-r="1"]{--xa:#047857;--xz:#34d399}.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
 .xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
@@ -127,7 +132,6 @@ h1{font-size:1.45rem}
 .xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
 .xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}.xnx{font-size:.74rem;color:var(--mu)}
 .xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
-.xv{position:relative}
 .xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
 .xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}.xpop.go{animation:xpop .9s ease-out forwards}
 @keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
@@ -136,8 +140,26 @@ h1{font-size:1.45rem}
 .xp.lvl{animation:xlvl 1.2s ease-out}@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
 .xp.lvl .xrn{animation:xbump .6s ease-out}
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
+.xp.max .xnx{color:var(--go);font-weight:600}
+:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.legend .hd h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
-/* шпаргалка */
+.stages{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
+.stages::-webkit-scrollbar{display:none}
+.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.72rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
+.stg small{margin-left:6px;font-size:.62rem;font-weight:500;opacity:.65}
+.stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
+.stg:hover{color:var(--tx);border-color:var(--pr)}
+.stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
+.stg.lk{opacity:.5}
+.lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
+body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
+.lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
+.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
+.rule:empty{display:none}
+.rule b{font-weight:700}
 .cheat{margin:18px 0 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:16px}
 .cheat h2{margin:0 0 2px;font-size:1.05rem;color:var(--tx)}.cheat .cs{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
 .cp{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
@@ -149,186 +171,669 @@ h1{font-size:1.45rem}
 @media(max-width:520px){.cl{grid-template-columns:1fr}}
 </style>
 <div class="w">
-<div class="hd"><button class="ib" style="right:96px" id="bth" onclick="toggleTh()" title="Теорія">📖</button><button class="ib" style="right:48px" id="bs" onclick="toggleSnd()">🔊</button><button class="ib" style="right:0" id="bm" onclick="toggleTheme()">🌙</button>
-<h1>Partizip I<small>ТЕОРІЯ · ТРЕНАЖЕР · ДО АВТОМАТИЗМУ</small></h1></div>
+<div class="hd">
+<button class="ib" style="right:96px" id="bth" onclick="toggleTh()" title="Теорія">📖</button>
+<button class="ib" style="right:48px" id="bs" onclick="toggleSnd()">🔊</button>
+<button class="ib" style="right:0" id="bm" onclick="toggleTheme()">🌙</button>
+<h1>Partizip Master<small>PARTIZIP I & II · PASSIV · ДО АВТОМАТИЗМУ</small></h1>
+</div>
 
+<div class="stages" id="stages"></div>
+<div class="lesson" id="lesson"></div>
 <div class="tabs" id="tabs"></div>
 <div class="pg"><i id="pg"></i></div>
-<div class="stats"><div><span>Речення</span><b id="sm">0 / 0</b></div><div><span>Правильно</span><b class="ok" id="sr">0</b></div><div><span>Неправильно</span><b class="no" id="sw">0</b></div></div>
-<div class="card" id="card"></div>
-<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
-<div class="cheat" id="cheat"></div>
-<div class="foot"><button class="bt" onclick="toggleTh()">📖 Теорія</button></div>
-<div class="th" id="th">
-<h3>1. Що це таке?</h3>
-<p><b class="g">Partizip I</b> — це дієслово, яке стало «описом»: <i>той, що щось робить просто зараз</i>.</p>
-<div class="x">lachen → <b>lachend</b> = «той, що сміється»<br>der <b>lachende</b> Mann = чоловік, який сміється</div>
-<p>Дія відбувається <b>одночасно</b> з головною дією речення і завжди <b>активна</b> (хтось сам щось робить).</p>
-<h3>2. Як утворити — одне правило</h3>
-<p><code>Infinitiv + d</code></p>
-<div class="x">spielen → spiel<b>en</b>d · arbeiten → arbeitend · sammeln → sammelnd · wandern → wandernd<br>Неправильні теж: <b>sein → seiend</b>, <b>tun → tuend</b></div>
-<h3>3. Три ролі</h3>
-<p><b>Прислівник</b> (без закінчень): <i>Lachend kam sie herein.</i> — «Сміючись, вона зайшла».</p>
-<p><b>Прикметник</b> (із закінченнями): <i>das schlafende Kind</i>, <i>ein bellender Hund</i>.</p>
-<p><b>Іменник</b> (з великої літери): <i>der Reisende</i> (мандрівник), <i>die Studierende</i>, <i>ein Vorsitzender</i>.</p>
-<h3>4. Закінчення — як у звичайних прикметників</h3>
-<table><tr><th></th><th>m</th><th>f</th><th>n</th><th>Pl</th></tr>
-<tr><td>der / die / das</td><td><b>-e</b></td><td><b>-e</b></td><td><b>-e</b></td><td><b>-en</b></td></tr>
-<tr><td>ein / kein</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-en</b></td></tr>
-<tr><td>без артикля</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-e</b></td></tr></table>
-<p>Це <b>Nominativ</b>. Простий лайфхак: після der/die/das та ein <b>Dativ і Genitiv — завжди -en</b>; Akkusativ m — теж <b>-en</b> (<i>den lachenden Mann</i>). Без артикля Dativ f / Genitiv f — <b>-er</b> (<i>mit zitternder Stimme</i>).</p>
-<h3>5. Partizip I чи Partizip II?</h3>
-<div class="x"><b>I</b> = робить зараз, активно: das <b>kochende</b> Wasser (вода кипить)<br><b>II</b> = вже зроблено, пасивно: das <b>gekochte</b> Ei (яйце зварене)</div>
-<p>Питання-тест: «Хтось/щось <i>зараз це робить</i>?» Так → Partizip I.</p>
-<h3>6. zu + Partizip I («який треба/можна зробити»)</h3>
-<div class="x">die Aufgabe, die gelöst werden muss → die <b>zu lösende</b> Aufgabe<br>Відокремлюваний префікс: ausfüllen → das <b>auszufüllende</b> Formular</div>
-<p>Тільки від дієслів, що мають пасив (з Akkusativ).</p>
-<details><summary>🧠 Перевір себе: як сказати «дитина, що спить» (das Kind)?</summary><p class="x">das <b>schlafende</b> Kind — schlafen + d, плюс <b>-e</b> після das. Вийшло? Тоді переходь до вправ!</p></details>
+
+<div class="stats">
+  <div><span>Завдання</span><b id="sm">0 / 0</b></div>
+  <div><span>Правильно</span><b class="ok" id="sr">0</b></div>
+  <div><span>Помилки</span><b class="no" id="sw">0</b></div>
 </div>
 
+<div class="rule" id="rule"></div>
+<div class="card" id="card"></div>
+
+<div class="xp" id="xp" data-r="0">
+  <div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 150</small><em class="xpop" id="xpop"></em></span></div>
+  <div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div>
+  <div class="xb"><i id="xf"></i><s id="xticks"></s></div>
 </div>
+
+<div class="cheat" id="cheat"></div>
+
+<div class="foot">
+  <button class="bt p" id="theory-btn" onclick="toggleTheory()">📖 Відкрити теорію</button>
+</div>
+
+<div class="th" id="th">
+  <h3>1. Partizip I (Активний, одночасний)</h3>
+  <p><b class="g">Утворення:</b> <code>Infinitiv + d</code> (lachen → lachend, sein → seiend).</p>
+  <p><b>Значення:</b> Дія відбувається <b>одночасно</b> з головною дією і завжди <b>активна</b> (хтось сам щось робить).</p>
+  <div class="x">das <b>schlafende</b> Kind = дитина, <i>яка спить</i>.</div>
+  
+  <h3>2. Partizip II (Пасивний, завершений)</h3>
+  <p><b>Утворення:</b> <code>ge...t / ge...en</code> (kochen → gekocht, schreiben → geschrieben).</p>
+  <p><b>Значення:</b> Дія <b>завершена</b> і зазвичай <b>пасивна</b> (з об'єктом щось зробили).</p>
+  <div class="x">das <b>gekochte</b> Ei = яйце, <i>яке зварили</i>.</div>
+  <p><b>⚠️ Важливо:</b> Partizip II в ролі прикметника утворюється тільки від <b>перехідних дієслів</b> (transitive Verben). Виняток: дієслова руху/зміни стану (Perfekt з <i>sein</i>) мають <b>активне</b> значення в Partizip II: <i>der <b>angekommene</b> Zug</i> (поїзд, який прибув).</p>
+
+  <h3>3. Закінчення прикметників</h3>
+  <table><tr><th></th><th>m</th><th>f</th><th>n</th><th>Pl</th></tr>
+  <tr><td>der / die / das</td><td><b>-e</b></td><td><b>-e</b></td><td><b>-e</b></td><td><b>-en</b></td></tr>
+  <tr><td>ein / kein</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-en</b></td></tr>
+  <tr><td>без артикля</td><td><b>-er</b></td><td><b>-e</b></td><td><b>-es</b></td><td><b>-e</b></td></tr></table>
+  <p>Dativ і Genitiv — завжди <b>-en</b> (після артикля). Akkusativ m — <b>-en</b>.</p>
+
+  <h3>4. Поворотні дієслова (Reflexive Verben)</h3>
+  <p>При утворенні Partizip I зворотний займенник <b>зберігається</b> і ставиться перед дієприкметником:</p>
+  <div class="x">die Tür, die <b>sich</b> automatisch öffnet → die <b>sich</b> automatisch öffnende Tür.<br>ein Ofen, der <b>sich</b> von selbst reinigt → ein <b>sich</b> von selbst reinigender Ofen.</div>
+
+  <h3>5. Розширені обороти (Erweiterungen)</h3>
+  <p>Дієприкметник може мати при собі додаткові слова, які ставляться <b>перед</b> ним:</p>
+  <div class="x">die Tür, die sich automatisch öffnet → die <b>sich automatisch öffnende</b> Tür.<br>der Zug, der viel zu spät ankommt → der <b>viel zu spät ankommende</b> Zug.<br>ein Gast, der laut auf den lesenden Mann einredet → ein <b>laut auf den lesenden Mann einredender</b> Gast.</div>
+
+  <h3>6. zu + Partizip I (Gerundiv)</h3>
+  <p>Означає «який <b>треба/можна</b> зробити»:</p>
+  <div class="x">die Bücher, die verkauft werden müssen → die <b>zu verkaufenden</b> Bücher.</div>
+  <p><b>⚠️ Важливо:</b> Ця конструкція можлива тільки з дієсловами, від яких можна утворити <i>werden-Passiv</i> (перехідними). Виражає повинність або можливість (<i>muss, soll, kann</i>).</p>
+
+  <h3>7. Пасивні конструкції (Passivbedeutung)</h3>
+  <div class="x"><b>sich + Verb:</b> Das Buch <b>liest sich</b> gut. (Книга добре читається).<br><b>gehören + PII:</b> Das Buch <b>gehört</b> ins Fenster <b>gestellt</b>. (Книгу треба поставити).<br><b>bekommen/kriegen + PII:</b> Er <b>bekommt</b> das Buch <b>geschenkt</b>. (Йому дарують книгу).</div>
+  <p><b>Nomen-Verb:</b> Akzeptanz <b>erfahren</b>, Lob <b>erfahren</b>, Bewunderung <b>genießen</b>, zur Auswahl <b>stehen</b>, in Erfüllung <b>gehen</b>, zur Anwendung <b>kommen</b>.</p>
+
+  <details><summary>🧠 Перевір себе: як сказати «двері, що автоматично відчиняються»?</summary><p class="x">die <b>sich automatisch öffnende</b> Tür. (sich + Partizip I + закінчення).</p></details>
+</div>
+</div>
+
 <div class="ov" id="ovE" hidden onclick="if(event.target===this)closeMd()"><div class="md dg" role="dialog" aria-modal="true" aria-labelledby="eT"><h2 id="eT">🔁 Мої помилки</h2><p id="eSub"></p><div class="el" id="eList"></div><div class="row ma" id="eAct"></div></div></div>
 <div class="ov" id="ovC" hidden onclick="if(event.target===this)closeMd()"><div class="md" id="mdC" role="dialog" aria-modal="true" aria-labelledby="cT"><h2 id="cT"></h2><p id="cP"></p><div class="row ma" id="cAct"></div></div></div>
+
 <script>
+/* ============ УТИЛІТИ ============ */
 const $=id=>document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const st={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+/* ============ ТЕМА ============ */
 const mq=matchMedia("(prefers-color-scheme: light)");
 const eff=()=>document.documentElement.getAttribute("data-theme")||(mq.matches?"light":"dark");
 const icon=()=>$("bm").textContent=eff()==="light"?"☀️":"🌙";
 const sv=st.get("pi-theme");if(sv==="light"||sv==="dark")document.documentElement.setAttribute("data-theme",sv);icon();
 function toggleTheme(){const n=eff()==="light"?"dark":"light";document.documentElement.setAttribute("data-theme",n);st.set("pi-theme",n);icon()}
-let snd=st.get("pi-snd")!=="off";const si=()=>$("bs").textContent=snd?"🔊":"🔇";si();
-function toggleSnd(){snd=!snd;st.set("pi-snd",snd?"on":"off");si();if(snd)beep(1)}
-let ac;function beep(ok){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),n=ac.currentTime;o.connect(g);g.connect(ac.destination);o.type=ok?"sine":"triangle";o.frequency.setValueAtTime(ok?523:200,n);if(ok)o.frequency.setValueAtTime(659,n+.1);else o.frequency.exponentialRampToValueAtTime(100,n+.2);g.gain.setValueAtTime(.07,n);g.gain.exponentialRampToValueAtTime(.001,n+.45);o.start(n);o.stop(n+.5)}catch(e){}}
-function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
-function toggleTh(){const t=$("th");t.hidden=!t.hidden;st.set("pi-th",t.hidden?"0":"1");if(!t.hidden)t.scrollIntoView({behavior:"smooth"})}
-$("th").hidden=st.get("pi-th")==="0";
 
-const E=["e","en","er","es","em"];
+/* ============ ЗВУКИ ============ */
+let snd=st.get("pi-snd")!=="off";const si=()=>$("bs").textContent=snd?"🔊":"🔇";si();
+function toggleSnd(){snd=!snd;st.set("pi-snd",snd?"on":"off");si();if(snd)playSound('correct');}
+let ac;
+function playSound(type){
+  if(!snd)return;
+  try{
+    if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();
+    if(ac.state==='suspended')ac.resume();
+    const now=ac.currentTime;
+    if(type==='open'||type==='close'){
+      const notes=type==='open'?[392,523.25,659.25]:[659.25,523.25,392];
+      notes.forEach((f,k)=>{
+        const o=ac.createOscillator(),g=ac.createGain(),t0=now+k*0.07;
+        o.type='sine';o.frequency.setValueAtTime(f,t0);
+        g.gain.setValueAtTime(0,t0);
+        g.gain.linearRampToValueAtTime(0.07,t0+0.03);
+        g.gain.exponentialRampToValueAtTime(0.001,t0+0.28);
+        o.connect(g);g.connect(ac.destination);
+        o.start(t0);o.stop(t0+0.3);
+      });return;
+    }
+    const osc=ac.createOscillator(),gain=ac.createGain();
+    osc.connect(gain);gain.connect(ac.destination);
+    if(type==='correct'){
+      osc.type='sine';
+      osc.frequency.setValueAtTime(523.25,now);
+      osc.frequency.setValueAtTime(659.25,now+0.1);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.4,now+0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001,now+0.5);
+      osc.start(now);osc.stop(now+0.6);
+    }else{
+      osc.type='triangle';
+      osc.frequency.setValueAtTime(200,now);
+      osc.frequency.exponentialRampToValueAtTime(100,now+0.2);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(0.4,now+0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001,now+0.3);
+      osc.start(now);osc.stop(now+0.4);
+    }
+  }catch(e){}
+}
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+
+/* ============ ТЕОРІЯ ============ */
+function toggleTh(){
+  const t=$("th");
+  t.hidden=!t.hidden;
+  st.set("pi-th",t.hidden?"0":"1");
+  if(!t.hidden){t.scrollIntoView({behavior:"smooth"});playSound('open');}
+  else{playSound('close');$("card").scrollIntoView({behavior:"smooth",block:"start"});}
+}
+$("th").hidden=st.get("pi-th")==="0";
+function toggleTheory(){toggleTh();}
+
+/* ============ ЕТАПИ ============ */
+const STAGES = [
+ { n:1, t:"База та Закінчення", p:"Тут ми вчимося утворювати Partizip I та правильно додавати закінчення прикметників залежно від роду, відмінка та артикля.", ex:[["Der lachende Mann", "Чоловік, який сміється (der + Nom m → -e)."]], tip:"Пам'ятай: після der/die/das зазвичай -e, після ein — -er/-es, а Dativ/Genitiv — завжди -en." },
+ { n:2, t:"Прислівники та Іменники", p:"Partizip I може виступати як прислівник (без закінчень) або перетворитися на іменник (з великої літери).", ex:[["Lachend kam sie herein.", "Сміючись, вона зайшла (прислівник)."], ["der Reisende", "мандрівник (іменник)."]], tip:"Якщо слово описує дію (як?) — це прислівник. Якщо це назва особи — іменник." },
+ { n:3, t:"Поворотні дієслова", p:"Якщо дієслово зворотне (sich öffnen, sich erholen), займенник sich зберігається і стоїть перед Partizip I.", ex:[["die sich automatisch öffnende Tür", "двері, що автоматично відчиняються."]], tip:"Ніколи не забувай про sich, інакше зміниться зміст." },
+ { n:4, t:"Relativsatz → Partizip", p:"Вчимося перетворювати складні речення з 'який' на компактні конструкції з Partizip I.", ex:[["der Hund, der bellt → der bellende Hund", "собака, що гавкає."]], tip:"Прибираємо 'der/die/das' та особову форму дієслова, додаємо -d та закінчення." },
+ { n:5, t:"I чи II?", p:"Головний контраст: Partizip I — це активний процес зараз. Partizip II — це завершена дія або пасив.", ex:[["das kochende Wasser (I)", "вода, що кипить."], ["das gekochte Ei (II)", "зварене яйце."]], tip:"Запитай себе: дія відбувається зараз чи вже завершена?" },
+ { n:6, t:"Erweiterungen", p:"Додаємо слова перед Partizip I, щоб утворити складні означення.", ex:[["der viel zu spät ankommende Zug", "поїзд, що прибуває надто пізно."]], tip:"Всі додаткові слова ставляться між артиклем та дієприкметником." },
+ { n:7, t:"zu + Partizip I", p:"Конструкція, що означає 'який треба/можна зробити'.", ex:[["die zu lösende Aufgabe", "завдання, яке треба розв'язати."]], tip:"Утворюється тільки від перехідних дієслів. Префікс zu ставиться перед дієприкметником." },
+ { n:8, t:"Passivbedeutung", p:"Альтернативні пасивні конструкції: sich + Verb, gehören + PII, bekommen + PII, Nomen-Verb.", ex:[["Das Buch liest sich gut.", "Книга добре читається."]], tip:"Ці конструкції часто використовуються носіями замість звичайного пасиву." },
+ { n:9, t:"Тексти", p:"Фінальний етап: застосовуємо всі знання на реальних текстах.", ex:[["Nach vielen anstrengenden Wochen...", "Після багатьох виснажливих тижнів..."]], tip:"Читай уважно, звертай увагу на контекст." }
+];
+
+/* ============ ВКЛАДКИ ============ */
 const TABS=[
-{id:"f",n:"Утворення",h:"Infinitiv + d. Завжди! Навіть sein → seiend, tun → tuend.",it:[
-["lachen → ___","lachend",0,"lachen + d."],["spielen → ___","spielend",0,"spielen + d."],["schlafen → ___","schlafend",0,"schlafen + d. Ніяких змін кореня."],["arbeiten → ___","arbeitend",0,"arbeiten + d."],["sammeln → ___","sammelnd",0,"sammeln + d (не sammelend!)."],["wandern → ___","wandernd",0,"wandern + d."],["lächeln → ___","lächelnd",0,"lächeln + d."],["weinen → ___","weinend",0,"weinen + d."],["sein → ___","seiend",["gewesen","seind","seiende"],"Неправильне дієслово, але правило те саме: sein + d."],["tun → ___","tuend",["getan","tunend","tuende"],"tun + d = tuend."]]},
-{id:"e",n:"Закінчення",end:1,h:"Визнач рід, відмінок і тип артикля. der-група: -e (Nom/Akk f,n,m-Nom), -en в інших. ein: -er / -e / -es.",it:[
-["Der ___ Mann (lachen) ist mein Onkel.","lachend","e","der + Nom m → -e."],["Ich sehe das ___ Kind (weinen).","weinend","e","das + Akk n → -e."],["Sie hilft dem ___ Mann (warten).","wartend","en","Dativ після артикля → завжди -en."],["Ein ___ Hund (bellen) läuft vorbei.","bellend","er","ein + Nom m → -er."],["Die ___ Kinder (spielen) sind laut.","spielend","en","Plural після артикля → -en."],["Wir helfen den ___ Schülern (lernen).","lernend","en","Dativ Pl → -en."],["Ich höre ein ___ Baby (schreien).","schreiend","es","ein + Akk n → -es."],["Das Auto der ___ Frau (fahren) ist neu.","fahrend","en","Genitiv → -en."],["Sie trägt ___ Kinder (schlafen) ins Bett.","schlafend","e","Без артикля, Akk Pl → -e."],["Mit ___ Stimme (zittern) sprach er.","zitternd","er","Без артикля, Dativ f → -er."]]},
-{id:"r",n:"Relativsatz → Partizip",end:1,h:"Relativsatz («який …») стискаємо: дієслово → Partizip I перед іменником із закінченням.",it:[
-["die Frau, die telefoniert → die ___ Frau","telefonierend","e","telefonieren + d, die + Nom f → -e."],["der Hund, der bellt → der ___ Hund","bellend","e","der + Nom m → -e."],["das Kind, das schläft → das ___ Kind","schlafend","e","das + Nom n → -e."],["die Kinder, die spielen → die ___ Kinder","spielend","en","Plural → -en."],["ein Mann, der wartet → ein ___ Mann","wartend","er","ein + Nom m → -er."],["ein Kind, das lacht → ein ___ Kind","lachend","es","ein + Nom n → -es."],["Ich helfe dem Mann, der weint → dem ___ Mann","weinend","en","Dativ → -en."],["die Studenten, die lernen → die ___ Studenten","lernend","en","Plural → -en."]]},
-{id:"c",n:"I чи II?",h:"Зараз робить (активно) → Partizip I. Вже зроблено (пасивно) → Partizip II.",it:[
-["Das ___ Kind (weinen) braucht Trost.","weinende",["geweinte"],"Дитина плаче зараз → Partizip I."],["Der ___ Brief (schreiben) liegt auf dem Tisch.","geschriebene",["schreibende"],"Лист уже написаний → Partizip II."],["Der ___ Zug (ankommen) hat Verspätung.","ankommende",["angekommene"],"Поїзд прибуває зараз → Partizip I."],["Das ___ Fenster (zerbrechen) muss repariert werden.","zerbrochene",["zerbrechende"],"Вікно вже розбите → Partizip II."],["Vorsicht, das ___ Wasser (kochen)!","kochende",["gekochte"],"Вода кипить зараз → Partizip I."],["Das ___ Ei (kochen) schmeckt gut.","gekochte",["kochende"],"Яйце вже зварене → Partizip II."],["Ein ___ Vogel (singen) weckte mich.","singender",["gesungener"],"Птах співає → Partizip I."],["Die ___ Hausaufgaben (machen) sind richtig.","gemachten",["machenden"],"Вже зроблені → Partizip II."]]},
-{id:"z",n:"zu + Partizip I",h:"«який треба/можна зробити»: zu + Partizip I + закінчення. Відокремлюваний префікс: auszufüllende.",it:[
-["die Aufgabe, die gelöst werden muss → die ___ Aufgabe","zu lösende",["gelöste","lösende","zu gelöste"],"gelöst werden muss = zu lösend + e."],["der Text, der übersetzt werden muss → der ___ Text","zu übersetzende",["übersetzende","zu übersetzte","übersetzte"],"zu + übersetzen + d + e."],["die Regeln, die beachtet werden müssen → die ___ Regeln","zu beachtenden",["beachtenden","zu beachtende","beachteten"],"Plural → -en."],["das Formular, das ausgefüllt werden muss → das ___ Formular","auszufüllende",["zu ausfüllende","ausgefüllte","zuausfüllende"],"Префікс відокремлюваний: aus-zu-füllend, пишемо разом."],["der Brief, der geschrieben werden muss → der ___ Brief","zu schreibende",["schreibende","geschriebene","zu schreibenden"],"der + Nom m → -e."],["ein Fehler, der vermieden werden kann → ein ___ Fehler","zu vermeidender",["vermeidender","zu vermeidende","vermiedener"],"ein + Nom m → -er."]]},
-{id:"t",n:"Переклад",tr:1,h:"",it:[]}];
+{id:"f",n:"1. База та Закінчення",h:"Визнач рід, відмінок і тип артикля. der-група: -e (Nom/Akk f,n,m-Nom), -en в інших. ein: -er / -e / -es.",it:[
+["Der ___ Mann (lachen) ist mein Onkel.","lachende",["lachend","lachender","lachenden"],"der + Nom m → -e."],
+["Ich sehe das ___ Kind (weinen).","weinende",["weinend","weinender","weinenden"],"das + Akk n → -e."],
+["Sie hilft dem ___ Mann (warten).","wartenden",["wartend","wartende","wartender"],"Dativ після артикля → завжди -en."],
+["Ein ___ Hund (bellen) läuft vorbei.","bellender",["bellend","bellende","bellenden"],"ein + Nom m → -er."],
+["Die ___ Kinder (spielen) sind laut.","spielenden",["spielend","spielende","spielender"],"Plural після артикля → -en."],
+["Wir helfen den ___ Schülern (lernen).","lernenden",["lernend","lernende","lernender"],"Dativ Pl → -en."],
+["Ich höre ein ___ Baby (schreien).","schreiendes",["schreiend","schreiender","schreiende"],"ein + Akk n → -es."],
+["Das Auto der ___ Frau (fahren) ist neu.","fahrenden",["fahrend","fahrende","fahrender"],"Genitiv → -en."],
+["Sie trägt ___ Kinder (schlafen) ins Bett.","schlafende",["schlafend","schlafender","schlafenden"],"Без артикля, Akk Pl → -e."],
+["Mit ___ Stimme (zittern) sprach er.","zitternder",["zitternd","zitternde","zitternden"],"Без артикля, Dativ f → -er."],
+["Der Film ist ___ (spannen).","spannend",["gespannt","spannende","spannenden"],"Лексикалізований дієприкметник: spannend = захоплюючий."],
+["Die Arbeit ist ___ (anstrengen).","anstrengend",["angestrengt","anstrengende","anstrengenden"],"anstrengend = виснажливий."],
+["Der Termin ist ___ (dringen).","dringend",["gedrungen","dringende","dringenden"],"dringend = терміновий."]]},
+{id:"adv",n:"2. Прислівники та Іменники",h:"Partizip I без закінчень = прислівник. З великої літери = іменник.",it:[
+["___ (lachen) kam sie herein.","Lachend",["Lachende","Gelacht","Lachenden"],"Прислівник: без закінчень, з великої літери на початку речення."],
+["___ (weinen) verließ er den Raum.","Weinend",["Weinende","Geweint","Weinenden"],"Прислівник: weinend."],
+["Ein Mann, der reist, ist ein ___.","Reisender",["Reisende","Gereister","Reisenden"],"Іменник: der Reisende (мандрівник)."],
+["Eine Frau, die studiert, ist eine ___.","Studierende",["Studierender","Studiert","Studierenden"],"Іменник: die Studierende (студентка)."],
+["Der Mann, der den Vorsitz hat, ist der ___.","Vorsitzende",["Vorsitzender","Vorsitzenden","Vorgesitzte"],"Іменник: der Vorsitzende (голова)."]]},
+{id:"ref",n:"3. Поворотні дієслова",h:"Зворотний займенник sich зберігається і ставиться ПЕРЕД Partizip I.",it:[
+["die Tür, die sich automatisch öffnet → die ___ Tür","sich automatisch öffnende",["automatisch öffnende","sich automatisch geöffnete","sich automatisch öffnend"],"sich + автоматично + Partizip I + закінчення."],
+["ein Ofen, der sich von selbst reinigt → ein ___ Ofen","sich von selbst reinigender",["von selbst reinigender","sich von selbst gereinigter","sich von selbst reinigend"],"sich + von selbst + Partizip I + -er (ein + Nom m)."],
+["der Fleck, der sich ausbreitet → der ___ Fleck","sich ausbreitende",["ausbreitende","sich ausgebreitete","sich ausbreitend"],"sich + ausbreitend + -e (der + Nom m)."],
+["die Stadt, die sich schnell entwickelt → die ___ Stadt","sich schnell entwickelnde",["schnell entwickelnde","sich schnell entwickelte","sich schnell entwickelnd"],"sich + schnell + entwickelnd + -e."],
+["der Patient, der sich gut erholt → der ___ Patient","sich gut erholende",["gut erholende","sich gut erholte","sich gut erholend"],"sich + gut + erholend + -e."]]},
+{id:"r",n:"4. Relativsatz → Partizip",h:"Relativsatz («який …») стискаємо: дієслово → Partizip I перед іменником із закінченням.",it:[
+["die Frau, die telefoniert → die ___ Frau","telefonierende",["telefonierend","telefonierender","telefonierenden"],"telefonieren + d, die + Nom f → -e."],
+["der Hund, der bellt → der ___ Hund","bellende",["bellend","bellender","bellenden"],"der + Nom m → -e."],
+["das Kind, das schläft → das ___ Kind","schlafende",["schlafend","schlafender","schlafenden"],"das + Nom n → -e."],
+["die Kinder, die spielen → die ___ Kinder","spielenden",["spielend","spielende","spielender"],"Plural → -en."],
+["ein Mann, der wartet → ein ___ Mann","wartender",["wartend","wartende","wartenden"],"ein + Nom m → -er."],
+["ein Kind, das lacht → ein ___ Kind","lachendes",["lachend","lachende","lachenden"],"ein + Nom n → -es."],
+["Ich helfe dem Mann, der weint → dem ___ Mann","weinenden",["weinend","weinende","weinender"],"Dativ → -en."],
+["die Studenten, die lernen → die ___ Studenten","lernenden",["lernend","lernende","lernender"],"Plural → -en."]]},
+{id:"c",n:"5. I чи II?",h:"Зараз робить (активно) → Partizip I. Вже зроблено (пасивно) → Partizip II. Але обережно з дієсловами руху!",it:[
+["Das ___ Kind (weinen) braucht Trost.","weinende",["geweinte"],"Дитина плаче зараз → Partizip I."],
+["Der ___ Brief (schreiben) liegt auf dem Tisch.","geschriebene",["schreibende"],"Лист вже написаний → Partizip II."],
+["Der ___ Zug (ankommen) hat Verspätung.","ankommende",["angekommene"],"Поїзд прибуває зараз (в процесі) → Partizip I."],
+["Der ___ Zug (ankommen) steht auf Gleis 5.","angekommene",["ankommende"],"Поїзд вже прибув. Але це АКТИВ (Perfekt з sein) → Partizip II."],
+["Das ___ Fenster (zerbrechen) muss repariert werden.","zerbrochene",["zerbrechende"],"Вікно вже розбите (пасив) → Partizip II."],
+["Vorsicht, das ___ Wasser (kochen)!","kochende",["gekochte"],"Вода кипить зараз → Partizip I."],
+["Das ___ Ei (kochen) schmeckt gut.","gekochte",["kochende"],"Яйце вже зварене → Partizip II."],
+["Die ___ Tür (öffnen) lässt frische Luft herein.","geöffnete",["öffnende"],"Двері вже відчинені (Zustandspassiv) → Partizip II."],
+["Die ___ Tür (öffnen) quietscht laut.","sich öffnende",["geöffnete"],"Двері відчиняються зараз (процес) → Partizip I."]]},
+{id:"erw",n:"6. Erweiterungen",h:"Розширені обороти: додаткові слова стоять перед Partizip I і не відокремлюються комами.",it:[
+["der Zug, der viel zu spät ankommt → der ___ Zug","viel zu spät ankommende",["viel zu spät angekommene","viel zu spät ankommend","spät ankommende"],"viel zu spät + ankommend + e."],
+["eine Mutter, die ihr Kind alleine erzieht → eine ___ Mutter","alleinerziehende",["allein erziehende","alleinerzogene","alleinerziehend"],"allein + erziehend + e."],
+["ein Gerät, das Strom spart → ein ___ Gerät","stromsparendes",["stromgespartes","stromsparend","stromsparende"],"strom + sparend + es."],
+["die Bücher, die verkauft werden müssen → die ___ Bücher","zu verkaufenden",["verkaufenden","zu verkaufende","verkauften"],"zu + Partizip I + en (Plural)."],
+["ein Gast, der laut auf den lesenden Mann einredet → ein ___ Gast","laut auf den lesenden Mann einredender",["laut auf den lesenden Mann einredende","laut auf den gelesenen Mann einredender","laut auf den lesenden Mann einredend"],"laut auf den lesenden Mann + einredend + er (ein + Nom m)."]]},
+{id:"z",n:"7. zu + Partizip I",h:"«який треба/можна зробити»: zu + Partizip I + закінчення. Відокремлюваний префікс: auszufüllende. Тільки від перехідних дієслів!",it:[
+["die Aufgabe, die gelöst werden muss → die ___ Aufgabe","zu lösende",["gelöste","lösende","zu gelöste"],"gelöst werden muss = zu lösend + e."],
+["der Text, der übersetzt werden muss → der ___ Text","zu übersetzende",["übersetzende","zu übersetzte","übersetzte"],"zu + übersetzen + d + e."],
+["die Regeln, die beachtet werden müssen → die ___ Regeln","zu beachtenden",["beachtenden","zu beachtende","beachteten"],"Plural → -en."],
+["das Formular, das ausgefüllt werden muss → das ___ Formular","auszufüllende",["zu ausfüllende","ausgefüllte","zuausfüllende"],"Префікс відокремлюваний: aus-zu-füllend, пишемо разом."],
+["der Brief, der geschrieben werden muss → der ___ Brief","zu schreibende",["schreibende","geschriebene","zu schreibenden"],"der + Nom m → -e."],
+["ein Fehler, der vermieden werden kann → ein ___ Fehler","zu vermeidender",["vermeidender","zu vermeidende","vermiedener"],"ein + Nom m → -er."]]},
+{id:"p",n:"8. Passivbedeutung",h:"Пасивні конструкції: sich + Verb, gehören + PII, bekommen + PII, Nomen-Verb.",it:[
+["Das Buch ___ sich sehr gut. (lesen)","liest",["lest","gelesen","lesen"],"sich + Verb: Das Buch liest sich gut."],
+["Hier ___ es sich gut. (schlafen)","schläft",["schlaft","geschlafen","schlafen"],"sich + Verb: Hier schläft es sich gut."],
+["Das Buch ___ ins Fenster gestellt. (gehören)","gehört",["gehörte","gehören","gehörtet"],"gehören + PII: Das Buch gehört ins Fenster gestellt."],
+["Er ___ das neue Buch geschenkt. (bekommen)","bekommt",["bekam","bekommen","bekommte"],"bekommen + PII: Er bekommt das neue Buch geschenkt."],
+["Der Schauspieler ___ Bewunderung. (genießen)","genießt",["genoss","genossen","genießen"],"Nomen-Verb: Bewunderung genießen."],
+["Das Lehrbuch ___ an vielen Schulen Verwendung. (finden)","findet",["fand","gefunden","finden"],"Nomen-Verb: Verwendung finden."],
+["Die Politik ___ Akzeptanz. (erfahren)","erfährt",["erfuhr","erfahren","erfahrt"],"Nomen-Verb: Akzeptanz erfahren."],
+["Manche Wünsche ___ in Erfüllung. (gehen)","gehen",["gingen","gegangen","geht"],"Nomen-Verb: in Erfüllung gehen."],
+["Das neue Verfahren ___ zur Anwendung. (kommen)","kommt",["kam","gekommen","kommen"],"Nomen-Verb: zur Anwendung kommen."]]},
+{id:"txt",n:"9. Тексти",h:"",it:[
+["Nach vielen ___ (anstrengen) Wochen bei der Arbeit hatte ich endlich Urlaub.","anstrengenden",["anstrengende","anstrengender","anstrengend"],"Plural Dativ після 'vielen' → -en."],
+["Meine Reise begann bei ___ (strömen) Regen.","strömendem",["strömenden","strömender","strömende"],"Dativ m → -em (без артикля)."],
+["Am Bahnhof sah ich gleich viele ___ (warten) Menschen.","wartende",["wartenden","wartender","wartendes"],"Akkusativ Plural → -e (без артикля)."],
+["Als der Zug ankam, drückten sich sofort viele Leute durch die sich gerade ___ (öffnen) Tür.","öffnende",["geöffnete","öffnenden","öffnender"],"Akkusativ f → -e."],
+["Ich musste während der ganzen Fahrt zwischen ___ (streiten) Jugendlichen stehen.","streitenden",["streitende","streitender","streitendes"],"Dativ Plural → -en."],
+["Nachdem ich ausgestiegen war und dem ___ (abfahren) Zug nachsah, bemerkte ich, dass ich meinen Koffer vergessen hatte.","abfahrenden",["abfahrende","abfahrender","abfahrendes"],"Dativ m → -en."],
+["Es war dann noch ein sehr ___ (entspannen) Urlaub.","entspannender",["entspannte","entspannende","entspannenden"],"Nominativ m → -er."],
+["Das hier abgedruckte Bild zeigt eine ___ (merkwürdig) Tischgesellschaft.","merkwürdige",["merkwürdigen","merkwürdiger","merkwürdiges"],"Akkusativ f → -e."],
+["Ein alter Herr sitzt vorne rechts an dem schön ___ (decken) Tisch und liest in einem dicken Buch.","gedeckten",["gedeckte","gedeckter","gedecktes"],"Dativ m (Partizip II) → -en."],
+["Sie trägt ein weiß-blau ___ (streifen) Hemd und eine dunkelblaue Krawatte.","gestreiftes",["streifendes","gestreifte","gestreiften"],"Akkusativ n (Partizip II) → -es."],
+["Sie ist vielleicht die Gastgeberin dieser ___ (ungewöhnlich) Essenseinladung.","ungewöhnlichen",["ungewöhnliche","ungewöhnlicher","ungewöhnliches"],"Genitiv f → -en."]]}
+];
+TABS.forEach((t, i) => t.stg = i + 1);
+
+/* ============ ПЕРЕКЛАДИ ============ */
+const TR={
+"Der ___ Mann (lachen) ist mein Onkel.":"Чоловік, який сміється, — мій дядько.","Ich sehe das ___ Kind (weinen).":"Я бачу дитину, яка плаче.","Sie hilft dem ___ Mann (warten).":"Вона допомагає чоловікові, який чекає.","Ein ___ Hund (bellen) läuft vorbei.":"Повз біжить собака, яка гавкає.","Die ___ Kinder (spielen) sind laut.":"Діти, які граються, галасливі.","Wir helfen den ___ Schülern (lernen).":"Ми допомагаємо учням, які вчаться.","Ich höre ein ___ Baby (schreien).":"Я чую немовля, яке кричить.","Das Auto der ___ Frau (fahren) ist neu.":"Автомобіль жінки, яка за кермом, новий.","Sie trägt ___ Kinder (schlafen) ins Bett.":"Вона несе дітей, які сплять, у ліжко.","Mit ___ Stimme (zittern) sprach er.":"Тремтячим голосом він говорив.","Der Film ist ___ (spannen).":"Фільм захоплюючий.","Die Arbeit ist ___ (anstrengen).":"Робота виснажлива.","Der Termin ist ___ (dringen).":"Зустріч термінова.",
+"___ (lachen) kam sie herein.":"Сміючись, вона зайшла.","___ (weinen) verließ er den Raum.":"Плачучи, він вийшов з кімнати.","Ein Mann, der reist, ist ein ___.":"Чоловік, який подорожує, — це мандрівник.","Eine Frau, die studiert, ist eine ___.":"Жінка, яка навчається, — це студентка.","Der Mann, der den Vorsitz hat, ist der ___.":"Чоловік, який головує, — це голова.",
+"die Tür, die sich automatisch öffnet → die ___ Tür":"двері, що автоматично відчиняються","ein Ofen, der sich von selbst reinigt → ein ___ Ofen":"піч, що самоочищується","der Fleck, der sich ausbreitet → der ___ Fleck":"пляма, що поширюється","die Stadt, die sich schnell entwickelt → die ___ Stadt":"місто, що швидко розвивається","der Patient, der sich gut erholt → der ___ Patient":"пацієнт, що добре відновлюється",
+"die Frau, die telefoniert → die ___ Frau":"жінка, яка розмовляє телефоном","der Hund, der bellt → der ___ Hund":"собака, що гавкає","das Kind, das schläft → das ___ Kind":"дитина, що спить","die Kinder, die spielen → die ___ Kinder":"діти, що граються","ein Mann, der wartet → ein ___ Mann":"чоловік, що чекає","ein Kind, das lacht → ein ___ Kind":"дитина, що сміється","Ich helfe dem Mann, der weint → dem ___ Mann":"Я допомагаю чоловікові, що плаче","die Studenten, die lernen → die ___ Studenten":"студенти, що вчаться",
+"Das ___ Kind (weinen) braucht Trost.":"Дитина, що плаче, потребує розради.","Der ___ Brief (schreiben) liegt auf dem Tisch.":"Написаний лист лежить на столі.","Der ___ Zug (ankommen) hat Verspätung.":"Поїзд, що прибуває, запізнюється.","Der ___ Zug (ankommen) steht auf Gleis 5.":"Поїзд, що прибув, стоїть на 5 колії.","Das ___ Fenster (zerbrechen) muss repariert werden.":"Розбите вікно треба полагодити.","Vorsicht, das ___ Wasser (kochen)!":"Обережно, кипляча вода!","Das ___ Ei (kochen) schmeckt gut.":"Зварене яйце смачне.","Die ___ Tür (öffnen) lässt frische Luft herein.":"Відчинені двері впускають свіже повітря.","Die ___ Tür (öffnen) quietscht laut.":"Двері, що відчиняються, гучно скриплять.",
+"der Zug, der viel zu spät ankommt → der ___ Zug":"поїзд, що прибуває надто пізно","eine Mutter, die ihr Kind alleine erzieht → eine ___ Mutter":"мати, яка сама виховує дитину","ein Gerät, das Strom spart → ein ___ Gerät":"пристрій, що економить електроенергію","die Bücher, die verkauft werden müssen → die ___ Bücher":"книжки, які треба продати","ein Gast, der laut auf den lesenden Mann einredet → ein ___ Gast":"гість, який гучно говорить читаючому чоловікові",
+"die Aufgabe, die gelöst werden muss → die ___ Aufgabe":"завдання, яке треба розв’язати","der Text, der übersetzt werden muss → der ___ Text":"текст, який треба перекласти","die Regeln, die beachtet werden müssen → die ___ Regeln":"правила, яких треба дотримуватися","das Formular, das ausgefüllt werden muss → das ___ Formular":"бланк, який треба заповнити","der Brief, der geschrieben werden muss → der ___ Brief":"лист, який треба написати","ein Fehler, der vermieden werden kann → ein ___ Fehler":"помилка, якої можна уникнути",
+"Das Buch ___ sich sehr gut. (lesen)":"Книга добре читається.","Hier ___ es sich gut. (schlafen)":"Тут добре спиться.","Das Buch ___ ins Fenster gestellt. (gehören)":"Книгу треба поставити на вікно.","Er ___ das neue Buch geschenkt. (bekommen)":"Йому дарують нову книгу.","Der Schauspieler ___ Bewunderung. (genießen)":"Актор користується захопленням.","Das Lehrbuch ___ an vielen Schulen Verwendung. (finden)":"Підручник знаходить застосування в багатьох школах.","Die Politik ___ Akzeptanz. (erfahren)":"Політика отримує визнання.","Manche Wünsche ___ in Erfüllung. (gehen)":"Деякі бажання здійснюються.","Das neue Verfahren ___ zur Anwendung. (kommen)":"Новий метод застосовується.",
+"Nach vielen ___ (anstrengen) Wochen bei der Arbeit hatte ich endlich Urlaub.":"Після багатьох виснажливих тижнів на роботі я нарешті взяв відпустку.","Meine Reise begann bei ___ (strömen) Regen.":"Моя подорож почалася з проливного дощу.","Am Bahnhof sah ich gleich viele ___ (warten) Menschen.":"На вокзалі я одразу побачив багато людей, які чекали.","Als der Zug ankam, drückten sich sofort viele Leute durch die sich gerade ___ (öffnen) Tür.":"Коли прибув поїзд, багато людей одразу протиснулися через двері, що саме відчинялися.","Ich musste während der ganzen Fahrt zwischen ___ (streiten) Jugendlichen stehen.":"Мені довелося всю поїздку стояти між сварливими підлітками.","Nachdem ich ausgestiegen war und dem ___ (abfahren) Zug nachsah, bemerkte ich, dass ich meinen Koffer vergessen hatte.":"Після того як я вийшов і подивився вслід поїзду, що від'їжджав, я помітив, що забув свою валізу.","Es war dann noch ein sehr ___ (entspannen) Urlaub.":"Це була дуже розслаблююча відпустка.","Das hier abgedruckte Bild zeigt eine ___ (merkwürdig) Tischgesellschaft.":"Надруковане тут зображення показує дивне товариство за столом.","Ein alter Herr sitzt vorne rechts an dem schön ___ (decken) Tisch und liest in einem dicken Buch.":"Літній пан сидить попереду праворуч за гарно накритим столом і читає товсту книгу.","Sie trägt ein weiß-blau ___ (streifen) Hemd und eine dunkelblaue Krawatte.":"На ній сорочка в біло-синю смужку та темно-синій краватці.","Sie ist vielleicht die Gastgeberin dieser ___ (ungewöhnlich) Essenseinladung.":"Можливо, вона господиня цієї незвичайної вечері."};
+
+/* ============ СТАН ============ */
+const PREFIX = "tp_v2_partizip_";  // для синхронізації через sync.js
 const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const S={};
-TABS.forEach(t=>{let s;try{s=JSON.parse(st.get("pi1_"+t.id))}catch(e){}S[t.id]=s&&s.k?s:{k:{},r:0,w:0,err:{}};S[t.id].x=S[t.id].x||0;
-t.items=t.it.map(x=>{const q=x[0];let a,w,e;
-if(t.end){a=x[1]+x[2];w=E.map(z=>x[1]+z).filter(z=>z!==a);e=x[3]}
-else{a=x[1];w=x[2]||[];e=x[3];if(!w.length){const inf=q.split(" ")[0],s=inf.replace(/e?n$/,"");w=[inf,"ge"+s+"t",a+"e"]}}
-return{q,a,w,e}})});
-let trOn=false;const TR={"lachen → ___":"сміятися → той, що сміється","spielen → ___":"грати → той, що грає","schlafen → ___":"спати → той, що спить","arbeiten → ___":"працювати → той, що працює","sammeln → ___":"збирати → той, що збирає","wandern → ___":"мандрувати → той, що мандрує","lächeln → ___":"усміхатися → той, що усміхається","weinen → ___":"плакати → той, що плаче","sein → ___":"бути → той, що є","tun → ___":"робити → той, що робить",
-"Der ___ Mann (lachen) ist mein Onkel.":"Чоловік, що сміється, — мій дядько.","Ich sehe das ___ Kind (weinen).":"Я бачу дитину, що плаче.","Sie hilft dem ___ Mann (warten).":"Вона допомагає чоловікові, що чекає.","Ein ___ Hund (bellen) läuft vorbei.":"Повз біжить собака, що гавкає.","Die ___ Kinder (spielen) sind laut.":"Діти, що граються, галасливі.","Wir helfen den ___ Schülern (lernen).":"Ми допомагаємо учням, які вчаться.","Ich höre ein ___ Baby (schreien).":"Я чую немовля, що кричить.","Das Auto der ___ Frau (fahren) ist neu.":"Автомобіль жінки, яка за кермом, новий.","Sie trägt ___ Kinder (schlafen) ins Bett.":"Вона несе дітей, що сплять, у ліжко.","Mit ___ Stimme (zittern) sprach er.":"Тремтячим голосом він говорив.",
-"die Frau, die telefoniert → die ___ Frau":"жінка, яка розмовляє телефоном","der Hund, der bellt → der ___ Hund":"собака, що гавкає","das Kind, das schläft → das ___ Kind":"дитина, що спить","die Kinder, die spielen → die ___ Kinder":"діти, що граються","ein Mann, der wartet → ein ___ Mann":"чоловік, що чекає","ein Kind, das lacht → ein ___ Kind":"дитина, що сміється","Ich helfe dem Mann, der weint → dem ___ Mann":"Я допомагаю чоловікові, що плаче","die Studenten, die lernen → die ___ Studenten":"студенти, що вчаться",
-"Das ___ Kind (weinen) braucht Trost.":"Дитина, що плаче, потребує розради.","Der ___ Brief (schreiben) liegt auf dem Tisch.":"Написаний лист лежить на столі.","Der ___ Zug (ankommen) hat Verspätung.":"Поїзд, що прибуває, запізнюється.","Das ___ Fenster (zerbrechen) muss repariert werden.":"Розбите вікно треба полагодити.","Vorsicht, das ___ Wasser (kochen)!":"Обережно, кипляча вода!","Das ___ Ei (kochen) schmeckt gut.":"Зварене яйце смачне.","Ein ___ Vogel (singen) weckte mich.":"Птах, що співав, розбудив мене.","Die ___ Hausaufgaben (machen) sind richtig.":"Зроблені домашні завдання правильні.",
-"die Aufgabe, die gelöst werden muss → die ___ Aufgabe":"завдання, яке треба розв’язати","der Text, der übersetzt werden muss → der ___ Text":"текст, який треба перекласти","die Regeln, die beachtet werden müssen → die ___ Regeln":"правила, яких треба дотримуватися","das Formular, das ausgefüllt werden muss → das ___ Formular":"бланк, який треба заповнити","der Brief, der geschrieben werden muss → der ___ Brief":"лист, який треба написати","ein Fehler, der vermieden werden kann → ein ___ Fehler":"помилка, якої можна уникнути"};
-const fixTr=x=>x.replace(/\s*\([^)]*\)/g,"").replace(/\s+([!?.,])/g,"$1");
-TABS.find(x=>x.id==="t").items=TABS.filter(x=>x.id==="e"||x.id==="c").flatMap(x=>x.items).filter(it=>TR[it.q]).map(it=>({q:TR[it.q],a:fixTr(it.q.replace("___",it.a)),w:[],e:it.e,hn:it.q,vb:(it.q.match(/\(([^)]*)\)/)||[])[1]||""}));
-let tm;function trTog(){trOn=!trOn;$("trt").hidden=!trOn}
-let ti=Math.max(0,TABS.findIndex(x=>x.id===st.get("pi-tab"))),cur=-1,done=false,ok=false,pk="",opts=[],rev=false,hint=false,resume=true,rvTot=0,revDone=false,shortMsg=false,clrArm=false,mc=st.get("pi-mc")!=="0";
-const T=()=>TABS[ti],Sx=()=>S[T().id],isMc=()=>mc&&!T().tr;
-const save=()=>{st.set("pi1_"+T().id,JSON.stringify(Sx()));st.set("pi1_xp",G)};
+TABS.forEach(t=>{
+  let s;try{s=JSON.parse(st.get(PREFIX+t.id))}catch(e){}
+  // Міграція зі старого pi1_* (одноразово)
+  if(!s || !s.k){ try{const old=JSON.parse(st.get("pi1_"+t.id)); if(old&&old.k) s=old;}catch(e){} }
+  S[t.id]=s&&s.k?s:{k:{},r:0,w:0,err:{},x:0,p:0};
+  S[t.id].x=S[t.id].x||0;
+  S[t.id].p=S[t.id].p||0;
+  if(!S[t.id].err) S[t.id].err={};
+  t.items=t.it.map(x=>{
+    const q=x[0];let a,w,e;
+    if(x[2]&&x[2].length>0){a=x[1];w=x[2];e=x[3];}
+    else{a=x[1];w=[];e=x[3];}
+    return{q,a,w,e};
+  });
+});
+
+const XP_MAX=150;
+const computeXp=()=>Math.max(0,Math.min(XP_MAX,TABS.reduce((a,t)=>a+((S[t.id].x||0)-(S[t.id].p||0)),0)));
+let XP=computeXp();
+
+// Міграція зі старого pi1_xp (якщо весь прогрес в одному числі)
+(()=>{
+  if(XP===0){
+    const old=parseInt(st.get("pi1_xp"));
+    if(old>0){
+      // Розподіляємо на першу вкладку, щоб синхронізація його підхопила
+      S[TABS[0].id].x=Math.min(XP_MAX,old);
+      S[TABS[0].id].p=0;
+      st.set(PREFIX+TABS[0].id,JSON.stringify(S[TABS[0].id]));
+      XP=computeXp();
+    }
+  }
+  // видаляємо старий ключ, бо він не синхронізується
+  try{localStorage.removeItem("pi1_xp")}catch(e){}
+})();
+
+let ti=Math.max(0,TABS.findIndex(x=>x.id===st.get("pi-tab")));
+let cur=-1,done=false,ok=false,pk="",opts=[],rev=false,resume=true,rvTot=0,revDone=false,clrArm=false;
+let mc=st.get("pi-mc")!=="0";
+let stage = parseInt(st.get("pi-stage"));
+if(isNaN(stage)) stage = 1;
+
+const T=()=>TABS[ti],Sx=()=>S[T().id];
+const save=()=>{st.set(PREFIX+T().id,JSON.stringify(Sx()));};
 const mast=t=>t.items.filter((_,i)=>(S[t.id].k[i]||0)>=2).length;
 const errN=()=>Object.keys(Sx().err).length;
-function setTab(i){closeMd();ti=i;st.set("pi-tab",T().id);rev=false;cur=-1;resume=true;load()}
-function load(){clearTimeout(tm);const t=T(),s=Sx();let pool=t.items.map((_,i)=>i).filter(i=>rev?s.err[i]:(s.k[i]||0)<2);
-if(!pool.length&&rev){rev=false;revDone=true;return load()}
-if(pool.length){if(resume&&!rev&&Number.isInteger(s.pos)&&pool.includes(s.pos))cur=s.pos;else{const p=pool.filter(i=>i!==cur),L=p.length?p:pool;cur=L[Math.random()*L.length|0]}
-resume=false;const it=t.items[cur];opts=sh([it.a,...sh(it.w).slice(0,3)]);s.pos=cur;save()}else cur=-1;
-done=false;hint=false;trOn=false;shortMsg=false;pk="";render();
-if(cur<0){revDone=false;showComplete()}else if(revDone){revDone=false;showRevDone()}}
-function render(){const t=T(),s=Sx(),n=t.items.length,m=mast(t),c=$("card");
-$("tabs").innerHTML=TABS.map((x,i)=>`<button class="tab${i===ti?" on":""}" onclick="setTab(${i})">${x.n}<small>${mast(x)}/${x.items.length}</small></button>`).join("");
-$("pg").style.width=m/n*100+"%";updateXp(G);$("sr").textContent=s.r;$("sw").textContent=s.w;$("sm").textContent=m+" / "+n;
 
-c.className="card"+(done&&ok?" win":"");
-if(cur<0){c.innerHTML=`<h2>${t.n}</h2><div class="q" style="cursor:default">🎉 Вкладку засвоєно!</div><p class="e" style="color:var(--mu)">Кожне завдання виконано правильно двічі поспіль. Для автоматизму поверни до неї ще завтра.</p><div class="row"><button class="b p" onclick="finalRestart()">Почати знову</button>${ti<TABS.length-1?`<button class="b" onclick="setTab(${ti+1})">Наступна вкладка →</button>`:""}</div>`;return}
-const it=t.items[cur],mcOn=isMc(),bl=`<span class="bl${done?ok?" ok":" no":""}">${done?(ok?it.a:pk||"?"):""}</span>`;
-let h=`<h2>${t.n} · ${rev?`робота над помилками · залишилось <span class="rv">${errN()}<i>/</i>${rvTot}</span>`:"завдання"}</h2><button class="sp" onclick="speakIt()">🔊</button><div class="q" onclick="speakIt()">${it.q.replace("___",bl)}</div>`;
-h+=t.tr?`<div class="trt" style="margin-top:0">✍️ Напиши німецькою${it.vb?` · дієслово: <b>${it.vb}</b>`:""}</div>`:`<div class="tools" style="margin-top:0"><button class="t" onclick="trTog()">🌐 Перекласти</button></div><div class="trt" id="trt"${trOn?"":" hidden"}>${TR[it.q]||""}</div>`;
-if(mcOn)h+=`<div class="opts">${opts.map((o,i)=>`<button class="opt${done?o===it.a?" ok":o===pk?" er":"":""}" ${done?"disabled":""} onclick="pick(${i})">${o}</button>`).join("")}</div>`;
-else if(!done)h+=`<div class="row"><input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${t.tr?"Введи повне речення…":"Впиши форму…"}"><button class="b p" onclick="chk()">Перевірити</button></div>`;
-if(hint&&!done)h+=`<div class="fb hint"><div class="k">ПІДКАЗКА</div><div class="e">${t.tr?"Порядок слів: "+it.hn:t.h}</div></div>`;
-if(shortMsg&&!done)h+=`<div class="fb hint"><div class="k">ПОВНЕ РЕЧЕННЯ</div><div class="e">Спочатку напиши повне речення, а не лише слово.</div></div>`;
-if(done)h+=`<div class="fb ${ok?"ok":"er"}${mcOn?" sk":""}"${mcOn?' onclick="skipFb()"':""}><div class="k">${ok?"ВІРНО · +1 EXP":"ПОМИЛКА · −1 EXP"}</div><div class="a" title="Натисни, щоб почути" onclick="event.stopPropagation();speakIt()">${it.a}</div><div class="e">${it.e}</div>${ok||mcOn?'<div class="bar"></div>':""}</div><div class="row"><button class="b p" onclick="load()">Далі →</button></div>`;
-h+=`<div class="tools">${done?"":'<button class="t" onclick="hint=true;render()">💡 Підказка</button>'}${t.tr?"":`<button class="t" onclick="toggleMode()">${mc?"⌨️ Вводити самому":"🔘 Вибір варіантів"}</button>`}${rev?'<button class="t" onclick="exitRev()">← До тренування</button>':`<button class="t er" onclick="openErrors()">🔁 Помилки (${errN()})</button>`}<button class="t" onclick="askReset()">↻ Скинути прогрес</button></div>`;
-c.innerHTML=h;const i=$("in");if(i){i.focus();i.onkeydown=e=>{if(e.key==="Enter")chk()}}}
-function fin(good,val){if(done)return;done=true;ok=good;pk=val;shortMsg=false;const s=Sx(),xb=G;
-if(good){s.r++;G=Math.min(XP_MAX,G+1);s.k[cur]=(s.k[cur]||0)+1;if(rev)delete s.err[cur]}else{s.w++;G=Math.max(0,G-1);s.k[cur]=0;s.err[cur]=1}
-save();beep(good);render();{const d=G-xb;if(d)popXp(d,rankOf(G)>rankOf(xb))}clearTimeout(tm);
-if(good)tm=setTimeout(()=>{if(done&&ok)load()},2000);
-else if(isMc())tm=setTimeout(()=>{if(done&&!ok)load()},3500)}
+/* ============ ЕТАПИ ЛОГІКА ============ */
+const UL_KEY = "pi-unlocked";  // не синхронізується, це локальний override
+const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
+const stProg = n => {
+  let d = 0, t = 0;
+  TABS.forEach(x => {
+    if(x.stg === n) {
+      x.items.forEach((_, i) => {
+        t++;
+        if((S[x.id].k[i] || 0) >= 2) d++;
+      });
+    }
+  });
+  return { d, t };
+};
+const stOpen = n => {
+  if(n === 0) return true;
+  if(n === 1) return true;
+  if(ulSet().includes(n)) return true;
+  const q = stProg(n - 1);
+  return q.t === 0 || q.d >= 15 || q.d / q.t >= .6;
+};
+
+/* ============ РЕНДЕР ЕТАПІВ ============ */
+function renderStages(){
+  $("stages").innerHTML = STAGES.map(g => {
+    const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
+    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${esc(g.t)}<small>${pc}%</small><i style="width:${pc}%"></i></button>`;
+  }).join("") + `<button class="stg ${stage === 0 ? "on" : ""}" data-s="0">Вільна практика</button>`;
+}
+
+/* ============ УРОК ============ */
+function showLesson(n){
+  const g = STAGES.find(x => x.n === n), el = $("lesson");
+  if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
+  el.innerHTML = `<h3>Етап ${g.n}. ${esc(g.t)}</h3><p>${g.p}</p>` +
+    g.ex.map(([sp, ua]) => `<div class="lx"><div class="ex">${esc(sp)}</div><div class="ex" style="color:var(--mu);font-style:normal;margin-top:4px">${esc(ua)}</div></div>`).join("") +
+    `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  document.body.classList.add("lsn");
+  const lg = $("lgo");
+  if(lg) lg.onclick = () => document.body.classList.remove("lsn");
+}
+
+/* ============ ВІДКРИТТЯ ЕТАПУ ============ */
+function openStage(n, force_lesson){
+  if(n && !stOpen(n)){
+    if(!confirm("Цей етап відкриється, коли ти опануєш 60% (або 15 завдань) попереднього. Відкрити достроково?")){
+      const firstOpen = STAGES.find(g => stOpen(g.n));
+      stage = firstOpen ? firstOpen.n : 1;
+      localStorage.setItem("pi-stage", String(stage));
+      const vis = TABS.filter(t => t.stg === stage);
+      setTab(vis.length ? vis[0].id : TABS[0].id);
+      return;
+    }
+    const u = ulSet(); if(!u.includes(n)) u.push(n);
+    localStorage.setItem(UL_KEY, JSON.stringify(u));
+  }
+  stage = n;
+  localStorage.setItem("pi-stage", String(n));
+  const vis = TABS.filter(t => !stage || t.stg === stage);
+  setTab(vis.length ? vis[0].id : TABS[0].id);
+  if(n && (force_lesson || !localStorage.getItem("pi_seen_"+n))){
+    showLesson(n);
+    localStorage.setItem("pi_seen_"+n, "1");
+  }
+}
+
+/* ============ ПЕРЕМИКАННЯ ВКЛАДОК ============ */
+function setTab(id){
+  closeMd();
+  const idx = TABS.findIndex(x=>x.id===id);
+  if(idx >= 0) ti = idx;
+  st.set("pi-tab", T().id);
+  rev=false; cur=-1; resume=true; load();
+}
+
+/* ============ РЕНДЕР ВКЛАДОК ============ */
+function renderTabs(){
+  const vis = TABS.filter(t => !stage || t.stg === stage);
+  const curId = T().id;
+  $("tabs").innerHTML = vis.map(x=>{
+    const s = S[x.id];
+    const d = Object.keys(s.k).filter(k=>s.k[k]>=2).length;
+    return `<button class="tab ${x.id === curId ? 'on' : ''}" data-t="${x.id}">${esc(x.n)}<small>${d}/${x.items.length}</small></button>`;
+  }).join("");
+  renderStages();
+}
+
+/* ============ ЗАВАНТАЖЕННЯ ЗАВДАННЯ ============ */
+function load(){
+  clearTimeout(tm);
+  const t=T(), s=Sx();
+  let pool = t.items.map((_,i)=>i).filter(i => rev ? s.err[i] : (s.k[i]||0)<2);
+  if(!pool.length && rev){ rev=false; revDone=true; return load(); }
+  if(pool.length){
+    if(resume && !rev && Number.isInteger(s.pos) && pool.includes(s.pos)) cur=s.pos;
+    else {
+      const p=pool.filter(i=>i!==cur), L=p.length?p:pool;
+      cur=L[Math.random()*L.length|0];
+    }
+    resume=false;
+    const it=t.items[cur]; opts=sh([it.a,...sh(it.w).slice(0,3)]); s.pos=cur;
+  } else cur=-1;
+  done=false; pk=""; render();
+  if(cur<0){ revDone=false; showComplete(); }
+  else if(revDone){ revDone=false; showRevDone(); }
+}
+
+/* ============ РЕНДЕР КАРТКИ ============ */
+let tm;
+function render(){
+  const t=T(), s=Sx(), n=t.items.length, m=mast(t), c=$("card");
+  renderTabs();
+  $("pg").style.width = m/n*100+"%";
+  updateXp(XP);
+  $("sr").textContent = s.r;
+  $("sw").textContent = s.w;
+  $("sm").textContent = m+" / "+n;
+  if(t.h) $("rule").innerHTML = `<b>Порада:</b> ${t.h}`;
+  else $("rule").innerHTML = "";
+
+  c.className = "card" + (done && ok ? " win" : "");
+  if(cur < 0){
+    c.innerHTML = `<h2>${esc(t.n)}</h2><div class="q" style="cursor:default">🎉 Вкладку засвоєно!</div><p class="e" style="color:var(--mu)">Кожне завдання виконано правильно двічі поспіль. Для автоматизму поверни до неї ще завтра.</p><div class="row"><button class="b p" onclick="finalRestart()">Почати знову</button>${ti<TABS.length-1?`<button class="b" onclick="closeMd();setTab('${TABS[ti+1].id}')">Наступна вкладка →</button>`:""}</div>`;
+    return;
+  }
+  const it=t.items[cur], mcOn=isMc(), bl=`<span class="bl${done?ok?" ok":" no":""}">${done?(ok?esc(it.a):esc(pk||"?")):""}</span>`;
+  let h=`<h2>${esc(t.n)} · ${rev?`робота над помилками · залишилось <span class="rv">${errN()}<i>/</i>${rvTot}</span>`:"завдання"}</h2>
+<button class="rst" onclick="resetTab()" title="Скинути прогрес вкладки">↺</button>
+<button class="sp" onclick="speakIt()">🔊</button>
+<button class="mode-toggle" onclick="toggleMode()">${mc?"👆 Обери":"✏️ Впиши"}</button>
+<div class="q" onclick="speakIt()">${esc(it.q).replace("___", bl)}</div>`;
+  h+=`<div class="tools" style="margin-top:0"><button class="t" onclick="trTog()">🌐 Перекласти</button></div><div class="trt" id="trt" hidden>${TR[it.q]||""}</div>`;
+  if(mcOn) h+=`<div class="opts">${opts.map((o,i)=>`<button class="opt${done?o===it.a?" ok":o===pk?" er":"":""}" ${done?"disabled":""} onclick="pick(${i})">${esc(o)}</button>`).join("")}</div>`;
+  else if(!done) h+=`<div class="row"><input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Впиши слово або фразу…"><button class="b p" onclick="chk()">Перевірити</button></div>`;
+  if(done) h+=`<div class="fb ${ok?"ok":"er"}${mcOn?" sk":""}"${mcOn?' onclick="skipFb()"':""}><div class="k">${ok?"ВІРНО · +1 EXP":"ПОМИЛКА · −1 EXP"}</div><div class="a" title="Натисни, щоб почути" onclick="event.stopPropagation();speakIt()">${esc(it.a)}</div><div class="e">${esc(it.e)}</div>${ok||mcOn?'<div class="bar"></div>':""}</div><div class="row"><button class="b p" onclick="load()">Далі →</button></div>`;
+  c.innerHTML=h;
+  const i=$("in");
+  if(i){ i.focus(); i.onkeydown=e=>{if(e.key==="Enter")chk()}; }
+}
+
+/* ============ ПЕРЕВІРКА ============ */
 const norm=x=>x.trim().toLowerCase().replace(/\s+/g," ");
-const trNorm=x=>x.trim().toLowerCase().replace(/ß/g,"ss").replace(/[.,!?;:—–]/g," ").replace(/\s+/g," ").trim();
-function pick(i){fin(opts[i]===T().items[cur].a,opts[i])}
-function chk(){const t=T(),v=$("in").value,f=t.tr?trNorm:norm,n=f(v);if(!n)return;
-if(t.tr&&n.split(" ").length<3){shortMsg=true;render();$("in").value=v;return}
-fin(n===f(t.items[cur].a),v)}
-function giveUp(){fin(false,"")}
-function speakIt(){const t=T(),it=t.items[cur];if(it)say(t.tr?it.a:it.q.split("→").pop().replace("___",it.a).replace(/\(.*?\)/g,""))}
-function skipFb(){clearTimeout(tm);load()}
-function startRev(){if(!errN())return;rev=true;rvTot=errN();load();$("card").scrollIntoView({behavior:"smooth",block:"start"})}
-function exitRev(){rev=false;load()}
-function toggleMode(){mc=!mc;st.set("pi-mc",mc?"1":"0");render()}
-function resetTab(){S[T().id]={k:{},r:0,w:0,err:{},x:0};save();rev=false;cur=-1;resume=false;load()}
-function finalRestart(){const o=Sx();S[T().id]={k:{},r:0,w:0,err:o.err,x:o.x||0};save();closeMd();rev=false;cur=-1;resume=false;load()}
+function isMc(){ return mc; }
 
-/* ---- вікна ---- */
+/* Bump: оновлює per-tab x/p так, щоб XP = sum(x-p) відображав net зміну
+   net = +1 (правильно), 0 (правильно на MAX / помилка на 0), -1 (помилка) */
+function bumpTab(net){
+  const s=Sx();
+  s.x = (s.x||0) + 1;
+  s.p = (s.p||0) + (1 - net);
+}
+
+function fin(good,val){
+  if(done) return;
+  done=true; ok=good; pk=val;
+  const s=Sx(), xb=XP;
+  let net;
+  if(good){
+    s.r++;
+    s.k[cur]=(s.k[cur]||0)+1;
+    if(rev) delete s.err[cur];
+    net = (XP < XP_MAX) ? 1 : 0;
+  } else {
+    s.w++;
+    s.k[cur]=0;
+    s.err[cur]=1;
+    net = (XP > 0 && XP < XP_MAX) ? -1 : 0;
+  }
+  bumpTab(net);
+  XP = computeXp();
+  save(); playSound(good?'correct':'wrong');
+  render();
+  const d = XP - xb;
+  if(d) popXp(d, rankOf(XP) > rankOf(xb));
+  clearTimeout(tm);
+  if(good) tm=setTimeout(()=>{ if(done&&ok) load(); }, 2000);
+  else if(isMc()) tm=setTimeout(()=>{ if(done&&!ok) load(); }, 3500);
+}
+function pick(i){ fin(opts[i]===T().items[cur].a, opts[i]); }
+function chk(){
+  const t=T(), v=$("in").value;
+  const f=x=>x.trim().toLowerCase().replace(/\s+/g," ");
+  const n=f(v);
+  if(!n) return;
+  fin(n === f(t.items[cur].a), v);
+}
+function speakIt(){
+  const t=T(), it=t.items[cur];
+  if(it) say(it.q.split("→").pop().replace("___", it.a).replace(/\(.*?\)/g, ""));
+}
+function skipFb(){ clearTimeout(tm); load(); }
+function trTog(){ const el=$("trt"); if(el) el.hidden = !el.hidden; }
+function toggleMode(){ mc=!mc; st.set("pi-mc", mc?"1":"0"); render(); }
+function resetTab(){
+  // зберігаємо x/p, щоб не втратити EXP (він глобальний)
+  const oldX = Sx().x || 0, oldP = Sx().p || 0;
+  S[T().id] = {k:{},r:0,w:0,err:{},x:oldX,p:oldP};
+  save();
+  rev=false; cur=-1; resume=false; load();
+}
+function finalRestart(){
+  const oldX = Sx().x || 0, oldP = Sx().p || 0;
+  S[T().id] = {k:{},r:0,w:0,err:{},x:oldX,p:oldP};
+  save(); closeMd();
+  rev=false; cur=-1; resume=false; load();
+}
+
+/* ============ ВІКНА ============ */
 const modalOpen=()=>!$("ovE").hidden||!$("ovC").hidden;
 function closeMd(){$("ovE").hidden=true;$("ovC").hidden=true}
 function focusMd(id){setTimeout(()=>{const b=document.querySelector("#"+id+" .b");if(b)b.focus()},0)}
 function showC(t,p,a,dg){$("mdC").className="md"+(dg?" dg":"");$("cT").textContent=t;$("cP").innerHTML=p;$("cAct").innerHTML=a;$("ovC").hidden=false;focusMd("ovC")}
-function showComplete(){const s=Sx(),n=errN();
-showC("🎉 Вкладку засвоєно!",`Усі завдання цієї вкладки виконано.<br>Правильно: <b>${s.r}</b> · Неправильно: <b>${s.w}</b> · У списку помилок: <b>${n}</b>.<br>Тренажер зупинено — обери, що робити далі.`,
-(n?`<button class="b ok" onclick="closeMd();startRev()">🔁 Пройти помилки (${n})</button>`:"")+`<button class="b${n?"":" ok"}" onclick="finalRestart()">↻ Почати заново</button>`+(ti<TABS.length-1?`<button class="b" onclick="closeMd();setTab(${ti+1})">Наступна вкладка →</button>`:""))}
-function showRevDone(){showC("✅ Помилки пройдено!","Ти виправив усі помилки зі списку.<br>Можна продовжити тренування.",'<button class="b ok" onclick="closeMd()">Продовжити тренування</button>')}
-function askReset(){showC("Скинути прогрес?","Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP не зміниться.",'<button class="b no" onclick="closeMd();resetTab()">Так, скинути</button><button class="b" onclick="closeMd()">Скасувати</button>',1)}
-function openErrors(){const t=T(),e=Sx().err,ids=Object.keys(e).filter(i=>e[i]).map(Number);
-$("eSub").textContent=`Вкладка «${t.n}» · помилок: ${ids.length}`;
-if(!ids.length){$("eList").innerHTML='<div class="em">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';$("eAct").innerHTML='<button class="b" onclick="closeMd()">Закрити</button>'}
-else{$("eList").innerHTML=ids.map(i=>{const it=t.items[i],de=t.tr?it.a:it.q.replace("___",`<b>${it.a}</b>`),ua=t.tr?it.q:(TR[it.q]||"");
-return `<div class="ei"><div class="d">${de}</div>${ua?`<div class="u">${ua}</div>`:""}${it.e?`<div class="x">${it.e}</div>`:""}</div>`}).join("");
-$("eAct").innerHTML='<button class="b no" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="b" id="eClr" onclick="clearErrors()">🗑 Очистити список</button><button class="b" onclick="closeMd()">Закрити</button>'}
-$("ovE").hidden=false;focusMd("ovE")}
-function trainErrors(){closeMd();startRev()}
-function clearErrors(){const b=$("eClr");if(!clrArm){clrArm=true;b.textContent="Точно очистити?";setTimeout(()=>{clrArm=false;const x=$("eClr");if(x)x.textContent="🗑 Очистити список"},3000);return}
-clrArm=false;Sx().err={};save();render();openErrors()}
+function showComplete(){
+  const s=Sx(), n=errN();
+  showC("🎉 Вкладку засвоєно!", `Усі завдання цієї вкладки виконано.<br>Правильно: <b>${s.r}</b> · Неправильно: <b>${s.w}</b> · У списку помилок: <b>${n}</b>.<br>Тренажер зупинено — обери, що робити далі.`,
+  (n?`<button class="b ok" onclick="closeMd();startRev()">🔁 Пройти помилки (${n})</button>`:"")+`<button class="b${n?"":" ok"}" onclick="finalRestart()">↻ Почати заново</button>`+(ti<TABS.length-1?`<button class="b" onclick="closeMd();setTab('${TABS[ti+1].id}')">Наступна вкладка →</button>`:""));
+}
+function showRevDone(){ showC("✅ Помилки пройдено!","Ти виправив усі помилки зі списку.<br>Можна продовжити тренування.",'<button class="b ok" onclick="closeMd()">Продовжити тренування</button>') }
+function startRev(){
+  if(!errN()) return;
+  rev=true; rvTot=errN(); load();
+  $("card").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function openErrors(){
+  const t=T(), e=Sx().err, ids=Object.keys(e).filter(i=>e[i]).map(Number);
+  $("eSub").textContent=`Вкладка «${t.n}» · помилок: ${ids.length}`;
+  if(!ids.length){
+    $("eList").innerHTML='<div class="em">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
+    $("eAct").innerHTML='<button class="b" onclick="closeMd()">Закрити</button>';
+  } else {
+    $("eList").innerHTML=ids.map(i=>{
+      const it=t.items[i],de=esc(it.q).replace("___",`<b>${esc(it.a)}</b>`),ua=TR[it.q]||"";
+      return `<div class="ei"><div class="d">${de}</div>${ua?`<div class="u">${ua}</div>`:""}${it.e?`<div class="x">${esc(it.e)}</div>`:""}</div>`;
+    }).join("");
+    $("eAct").innerHTML='<button class="b no" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="b" id="eClr" onclick="clearErrors()">🗑 Очистити список</button><button class="b" onclick="closeMd()">Закрити</button>';
+  }
+  $("ovE").hidden=false;
+  focusMd("ovE");
+}
+function trainErrors(){ closeMd(); startRev(); }
+function clearErrors(){
+  const b=$("eClr");
+  if(!clrArm){ clrArm=true; b.textContent="Точно очистити?"; setTimeout(()=>{clrArm=false;const x=$("eClr");if(x)x.textContent="🗑 Очистити список"},3000); return; }
+  clrArm=false; Sx().err={}; save(); render(); openErrors();
+}
 
-/* ---- клавіатура ---- */
+/* ============ КЛАВІАТУРА ============ */
 document.addEventListener("keydown",e=>{
-if(e.key==="Escape"){closeMd();return}
-if(modalOpen()||e.ctrlKey||e.metaKey||e.altKey)return;
-if(e.key==="Enter"&&done&&e.target.tagName!=="BUTTON"){load();return}
-if(isMc()&&!done&&cur>=0&&!/INPUT|TEXTAREA/.test(e.target.tagName)&&e.key.length===1){const j=+e.key-1;if(j>=0&&j<opts.length)pick(j)}});
-/* ---- ранги EXP ---- */
-const XP_MAX=300,RANKS=[[0,"🌱","Новачок"],[30,"🌿","Учень"],[72,"🧭","Дослідник"],[132,"⚡","Знавець"],[204,"🔥","Профі"],[276,"💎","Майстер"],[300,"🏆","Легенда"]];
-let G=parseInt(st.get("pi1_xp"));if(isNaN(G))G=Math.min(XP_MAX,TABS.reduce((a,t)=>a+(S[t.id].x||0),0));
-const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
-function updateXp(x){const r=rankOf(x),R=RANKS[r],N=RANKS[r+1],b=$("xp");b.dataset.r=r;b.classList.toggle("max",x>=XP_MAX);
-$("xf").style.width=x/XP_MAX*100+"%";$("xt").textContent=x;$("xn").textContent=x>=XP_MAX?"MAX":"/ "+XP_MAX;
-$("xr").textContent=R[1]+" "+R[2];$("xnext").textContent=N?"ще "+(N[0]-x)+" до «"+N[2]+"»":"максимальний ранг";
-const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("")}
-function popXp(d,up){const p=$("xpop"),b=$("xt"),x=$("xp");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");
-b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");if(up){x.classList.remove("lvl");void x.offsetWidth;x.classList.add("lvl")}}
-/* ---- шпаргалка ---- */
-const CHEAT=[["Утворення","#818cf8",[["lachen → lachend","сміятися"],["spielen → spielend","грати"],["arbeiten → arbeitend","працювати"],["sammeln → sammelnd","збирати"],["sein → seiend","бути"],["tun → tuend","робити"]]],
-["Закінчення","#34d399",[["der lachende Mann","der + Nom m → -e"],["die weinende Frau","die + Nom f → -e"],["das schlafende Kind","das + Nom/Akk n → -e"],["dem wartenden Mann","Dativ → -en"],["ein lachender Mann","ein + m → -er"],["ein bellendes Tier","ein + n → -es"],["lachende Kinder","без артикля, Pl → -e"]]],
-["I чи II?","#fb7185",[["das kochende Wasser","вода кипить (I)"],["das gekochte Ei","яйце зварене (II)"],["der schreibende Autor","автор пише (I)"],["der geschriebene Brief","лист написаний (II)"],["der ankommende Zug","поїзд прибуває (I)"],["der angekommene Zug","поїзд прибув (II)"]]],
-["zu + Partizip I","#fcd34d",[["die zu lösende Aufgabe","завдання, яке треба розв’язати"],["der zu übersetzende Text","текст, який треба перекласти"],["die zu beachtenden Regeln","правила, які треба дотримуватись"],["das auszufüllende Formular","бланк, який треба заповнити"]]]];
-let cg=0;
-function renderCheat(){const[,c,rows]=CHEAT[cg];$("cheat").innerHTML='<h2>Шпаргалка</h2><p class="cs">Головне про Partizip I — для швидкого повторення</p><div class="cp">'+CHEAT.map((x,i)=>`<button type="button" class="${i===cg?"on":""}" data-g="${i}" style="--c:${x[1]}">${x[0]}</button>`).join("")+'</div><div class="cl">'+rows.map(r=>`<div class="cr"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")+'</div>'}
-$("cheat").onclick=e=>{const b=e.target.closest("[data-g]");if(b){cg=+b.dataset.g;renderCheat()}};
-renderCheat();
-/* === ИНТЕГРАЦИЯ С TELEGRAM: РАЗВОРОТ И КНОПКА "НАЗАД" === */
-if(window.Telegram&&window.Telegram.WebApp){const tg=window.Telegram.WebApp;tg.expand();tg.BackButton.show();tg.BackButton.onClick(()=>{window.location.href='index.html'})}
-load();
-</script>
+  if(e.key==="Escape"){ closeMd(); return; }
+  if(modalOpen()||e.ctrlKey||e.metaKey||e.altKey) return;
+  if(e.key==="Enter"&&done&&e.target.tagName!=="BUTTON"){ load(); return; }
+  if(isMc()&&!done&&cur>=0&&!/INPUT|TEXTAREA/.test(e.target.tagName)&&e.key.length===1){ const j=+e.key-1; if(j>=0&&j<opts.length)pick(j); }
+});
 
+/* ============ РАНГИ ============ */
+const RANKS=[[0,"🌱","Новачок"],[30,"🌿","Учень"],[60,"🧭","Дослідник"],[100,"⚡","Знавець"],[130,"🔥","Профі"],[150,"🏆","ЛЕГЕНДА"]];
+const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
+function updateXp(x){
+  const r=rankOf(x),R=RANKS[r],N=RANKS[r+1],b=$("xp");
+  b.dataset.r=r;
+  b.classList.toggle("max",x>=XP_MAX);
+  document.documentElement.classList.toggle("legend",x>=XP_MAX);
+  $("xf").style.width=Math.min(100,x/XP_MAX*100)+"%";
+  $("xt").textContent=x;
+  $("xn").textContent=x>=XP_MAX?"MAX":"/ "+XP_MAX;
+  $("xr").textContent=R[1]+" "+R[2];
+  $("xnext").textContent=N?"ще "+(N[0]-x)+" до «"+N[2]+"»":"EXP зафіксовано 🔒";
+  const tk=$("xticks");
+  if(tk && !tk.firstChild) tk.innerHTML=RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("");
+}
+function popXp(d,up){
+  const p=$("xpop"),b=$("xt"),x=$("xp");
+  p.textContent=(d>0?"+":"−")+Math.abs(d);
+  p.className="xpop "+(d>0?"up":"dn");
+  void p.offsetWidth;p.classList.add("go");
+  b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");
+  if(up){x.classList.remove("lvl");void x.offsetWidth;x.classList.add("lvl")}
+}
+
+/* ============ ШПАРГАЛКА ============ */
+const CHEAT=[
+["Утворення","#818cf8",[["lachen → lachend","сміятися"],["spielen → spielend","грати"],["arbeiten → arbeitend","працювати"],["sammeln → sammelnd","збирати"],["sein → seiend","бути"],["tun → tuend","робити"],["spannend / anstrengend","лексикалізовані"]]],
+["Закінчення","#34d399",[["der lachende Mann","der + Nom m → -e"],["die weinende Frau","die + Nom f → -e"],["das schlafende Kind","das + Nom/Akk n → -e"],["dem wartenden Mann","Dativ → -en"],["ein lachender Mann","ein + m → -er"],["ein bellendes Tier","ein + n → -es"],["lachende Kinder","без артикля, Pl → -e"],["mit zitternder Stimme","Dativ f без артикля → -er"]]],
+["Поворотні","#f472b6",[["die sich öffnende Tür","sich + P I"],["ein sich reinigender Ofen","sich + P I"],["der sich ausbreitende Fleck","sich + P I"]]],
+["I чи II?","#fb7185",[["das kochende Wasser","вода кипить (I)"],["das gekochte Ei","яйце зварене (II)"],["der ankommende Zug","поїзд прибуває (I)"],["der angekommene Zug","поїзд прибув (II, АКТИВ!)"],["die geöffnete Tür","двері відчинені (II, стан)"],["die sich öffnende Tür","двері відчиняються (I)"]]],
+["zu + Partizip I","#fcd34d",[["die zu lösende Aufgabe","завдання, яке треба розв’язати"],["der zu übersetzende Text","текст, який треба перекласти"],["die zu beachtenden Regeln","правила, яких треба дотримуватись"],["das auszufüllende Formular","бланк, який треба заповнити"]]],
+["Passivbedeutung","#a78bfa",[["Das Buch liest sich gut.","sich + Verb"],["Das Buch gehört ins Fenster gestellt.","gehören + PII"],["Er bekommt das Buch geschenkt.","bekommen + PII"],["Akzeptanz erfahren","Nomen-Verb"],["zur Anwendung kommen","Nomen-Verb"],["in Erfüllung gehen","Nomen-Verb"]]]
+];
+let cg=0;
+function renderCheat(){
+  const [,c,rows]=CHEAT[cg];
+  $("cheat").innerHTML='<h2>Шпаргалка</h2><p class="cs">Головне про Partizip I, II та Passiv</p><div class="cp">'+CHEAT.map((x,i)=>`<button type="button" class="${i===cg?"on":""}" data-g="${i}" style="--c:${x[1]}">${x[0]}</button>`).join("")+'</div><div class="cl">'+rows.map(r=>`<div class="cr"><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")+'</div>';
+}
+$("cheat").addEventListener("click",e=>{const b=e.target.closest("[data-g]");if(b){cg=+b.dataset.g;renderCheat()}});
+renderCheat();
+
+/* ============ ПОДІЇ ============ */
+$("stages").addEventListener("click", e => {
+  const b = e.target.closest(".stg");
+  if(b) openStage(+b.dataset.s, true);
+});
+$("tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-t]");
+  if(b) setTab(b.dataset.t);
+});
+
+/* ============ СИНХРОНІЗАЦІЯ ============ */
+function applyRemote(){
+  // Перечитуємо S з localStorage (sync.js вже туди записав)
+  TABS.forEach(t=>{
+    try{
+      const raw = st.get(PREFIX+t.id);
+      if(!raw) return;
+      const r = JSON.parse(raw);
+      if(!r || !r.k) return;
+      const lxp = (S[t.id].x||0) - (S[t.id].p||0);
+      const rxp = (r.x||0) - (r.p||0);
+      // Беремо версію з більшим net XP (більш просунуту)
+      if(rxp > lxp || (rxp === lxp && (r.r||0) > (S[t.id].r||0))){
+        S[t.id] = r;
+      }
+    }catch(e){}
+  });
+  const newXP = computeXp();
+  if(newXP !== XP){
+    XP = newXP;
+    updateXp(XP);
+  }
+}
+// Після першої синхронізації з хмарою — підтягуємо прогрес
+if(window.TPSync && window.TPSync.ready){
+  window.TPSync.ready.then(()=>{
+    applyRemote();
+    if(!done && (cur === -1 || !answered)){
+      // безпечно перезавантажити поточне завдання з оновленим станом
+      resume = false;
+      load();
+    }
+  });
+}
+// Подальші оновлення з хмари (інший пристрій щось надіслав)
+window.addEventListener("tpsync:updated", ()=>{
+  if(done) return; // не перебиваємо активну відповідь
+  applyRemote();
+  render();
+});
+
+/* ============ TELEGRAM ============ */
+if(window.Telegram&&window.Telegram.WebApp){
+  const tg=window.Telegram.WebApp;
+  try{tg.ready();}catch(e){}
+  try{tg.expand();}catch(e){}
+  try{tg.BackButton.show();tg.BackButton.onClick(()=>{window.location.href='index.html'})}catch(e){}
+}
+
+/* ============ СТАРТ ============ */
+openStage(stage, false);
+</script>
 </body></html>
