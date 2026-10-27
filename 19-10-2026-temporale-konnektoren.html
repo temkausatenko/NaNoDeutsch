@@ -776,7 +776,7 @@ const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','�
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
 let XP = 0;
-const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:0,errors:{},
+const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:0,xp:0,errors:{},
   cl:D.map(()=>0),
   corr:D.map(()=>0),
   wrng:D.map(()=>0)});
@@ -814,7 +814,12 @@ function loadState(){
         ? arr.map(v => v === true ? true : v === false ? false : undefined)
         : []);
     }
-    s.x=Math.min(XP_MAX,Math.max(0,parseInt(s.x)||0));
+        // x — счётчик действий (растёт всегда, для sync.js)
+    // xp — реальный EXP (может уменьшаться). Миграция со старой версии: xp = x
+    if (s.xp === undefined) s.xp = parseInt(s.x) || 0;
+    s.x  = Math.max(0, parseInt(s.x)  || 0);
+    s.xp = Math.min(XP_MAX, Math.max(0, parseInt(s.xp) || 0));
+    if (s.x < s.xp) s.x = s.xp;   // x никогда не меньше xp
     if(s.l===undefined||s.l>=D.length) s.l=0;
     delete s.reviewMode; delete s.reviewQueue; delete s.reviewIndex;
     return s;
@@ -825,9 +830,13 @@ function loadState(){
 }
 const _initialState = loadState();
 if (_initialState) S = _initialState;
-XP = S.x || 0;
+XP = S.xp || 0;
 
-const save=()=>{S.x=XP;try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const save=()=>{
+  if (S.x < S.xp) S.x = S.xp;                   // x всегда ≥ xp
+  S.xp = Math.min(XP_MAX, Math.max(0, S.xp));    // клампим xp
+  try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}
+};
 const $=id=>document.getElementById(id);
 const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
 const okv=(v,a)=>a.split('|').map(norm).includes(norm(v||''));
@@ -1135,14 +1144,18 @@ function done(ok){
   S.r[l][i]=ok;
   const key=`${l}_${i}`;
   if(ok){
-    if(!xLocked) XP=Math.min(XP_MAX,XP+1);
+    if(!xLocked) S.xp = Math.min(XP_MAX, S.xp + 1);
     delete S.errors[key];
     if(S.corr) S.corr[l] = (S.corr[l]||0) + 1;
   } else {
-    if(!xLocked) XP=Math.max(0,XP-1);
+    if(!xLocked) S.xp = Math.max(0, S.xp - 1);
     S.errors[key]=true;
     if(S.wrng) S.wrng[l] = (S.wrng[l]||0) + 1;
   }
+  // x — всегда растёт. Это защита от sync.js:
+  // если x уменьшится, sync решит что у нас старая версия и затрёт нашу.
+  S.x = Math.max(S.x + 1, S.xp);
+  XP = S.xp;
   const dx=XP-xBefore;
   st.done=true; st.ok=ok; st.dx=dx;
   save(); render();
@@ -1434,13 +1447,19 @@ function stateEqual(a, b){
 function reloadFromStorage(){
   const loaded = loadState();
   if (!loaded) return;
+  const sx = parseInt(S.x) || 0;
+  const lx = parseInt(loaded.x) || 0;
+  // Если наше состояние не старше серверного — не загружаем.
+  // Это защищает от гонки: только что записали ошибку, sync.js ещё не отправил наш x,
+  // и попытается затереть нашей же "старой" версией.
+  if (sx >= lx) return;
   if (stateEqual(S, loaded)) return;
   clearTimeout(autoAdvanceTimer);
   rvMode = false;
   hideComplete();
   closeErrors();
   S = loaded;
-  XP = S.x || 0;
+  XP = S.xp || 0;
   fresh();
   render();
 }
