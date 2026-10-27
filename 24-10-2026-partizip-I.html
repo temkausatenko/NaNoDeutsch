@@ -145,14 +145,78 @@ h1{font-size:1.45rem}
 :root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
 :root.legend .hd h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
-.stages{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
-.stages::-webkit-scrollbar{display:none}
-.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.72rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
-.stg small{margin-left:6px;font-size:.62rem;font-weight:500;opacity:.65}
-.stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
-.stg:hover{color:var(--tx);border-color:var(--pr)}
-.stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
-.stg.lk{opacity:.5}
+
+/* ===== ОНОВЛЕНИЙ БЛОК ДЛЯ ЕТАПІВ (ЯК НА СКРІНШОТІ) ===== */
+.stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 0 14px;
+}
+
+.stg {
+  position: relative;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  color: var(--mu);
+  border-radius: 99px;
+  padding: 7px 14px;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.stg small {
+  font-size: .7rem;
+  font-weight: 500;
+  opacity: .6;
+}
+
+.stg i {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--go);
+  border-radius: 0 3px 3px 0;
+  transition: width .3s;
+}
+
+.stg:hover {
+  color: var(--tx);
+  border-color: var(--pr);
+}
+
+.stg.on {
+  border-color: var(--pr);
+  background: var(--pr);
+  color: #fff;
+  box-shadow: 0 2px 8px var(--glow);
+}
+
+.stg.on small {
+  opacity: .85;
+  color: #fff;
+}
+
+.stg.on i {
+  background: #fff;
+}
+
+.stg.lk {
+  opacity: .5;
+}
+/* ======================================================== */
+
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
@@ -427,12 +491,11 @@ const TR={
 "Nach vielen ___ (anstrengen) Wochen bei der Arbeit hatte ich endlich Urlaub.":"Після багатьох виснажливих тижнів на роботі я нарешті взяв відпустку.","Meine Reise begann bei ___ (strömen) Regen.":"Моя подорож почалася з проливного дощу.","Am Bahnhof sah ich gleich viele ___ (warten) Menschen.":"На вокзалі я одразу побачив багато людей, які чекали.","Als der Zug ankam, drückten sich sofort viele Leute durch die sich gerade ___ (öffnen) Tür.":"Коли прибув поїзд, багато людей одразу протиснулися через двері, що саме відчинялися.","Ich musste während der ganzen Fahrt zwischen ___ (streiten) Jugendlichen stehen.":"Мені довелося всю поїздку стояти між сварливими підлітками.","Nachdem ich ausgestiegen war und dem ___ (abfahren) Zug nachsah, bemerkte ich, dass ich meinen Koffer vergessen hatte.":"Після того як я вийшов і подивився вслід поїзду, що від'їжджав, я помітив, що забув свою валізу.","Es war dann noch ein sehr ___ (entspannen) Urlaub.":"Це була дуже розслаблююча відпустка.","Das hier abgedruckte Bild zeigt eine ___ (merkwürdig) Tischgesellschaft.":"Надруковане тут зображення показує дивне товариство за столом.","Ein alter Herr sitzt vorne rechts an dem schön ___ (decken) Tisch und liest in einem dicken Buch.":"Літній пан сидить попереду праворуч за гарно накритим столом і читає товсту книгу.","Sie trägt ein weiß-blau ___ (streifen) Hemd und eine dunkelblaue Krawatte.":"На ній сорочка в біло-синю смужку та темно-синій краватці.","Sie ist vielleicht die Gastgeberin dieser ___ (ungewöhnlich) Essenseinladung.":"Можливо, вона господиня цієї незвичайної вечері."};
 
 /* ============ СТАН ============ */
-const PREFIX = "tp_v2_partizip_";  // для синхронізації через sync.js
+const PREFIX = "tp_v2_partizip_";
 const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const S={};
 TABS.forEach(t=>{
   let s;try{s=JSON.parse(st.get(PREFIX+t.id))}catch(e){}
-  // Міграція зі старого pi1_* (одноразово)
   if(!s || !s.k){ try{const old=JSON.parse(st.get("pi1_"+t.id)); if(old&&old.k) s=old;}catch(e){} }
   S[t.id]=s&&s.k?s:{k:{},r:0,w:0,err:{},x:0,p:0};
   S[t.id].x=S[t.id].x||0;
@@ -450,19 +513,16 @@ const XP_MAX=150;
 const computeXp=()=>Math.max(0,Math.min(XP_MAX,TABS.reduce((a,t)=>a+((S[t.id].x||0)-(S[t.id].p||0)),0)));
 let XP=computeXp();
 
-// Міграція зі старого pi1_xp (якщо весь прогрес в одному числі)
 (()=>{
   if(XP===0){
     const old=parseInt(st.get("pi1_xp"));
     if(old>0){
-      // Розподіляємо на першу вкладку, щоб синхронізація його підхопила
       S[TABS[0].id].x=Math.min(XP_MAX,old);
       S[TABS[0].id].p=0;
       st.set(PREFIX+TABS[0].id,JSON.stringify(S[TABS[0].id]));
       XP=computeXp();
     }
   }
-  // видаляємо старий ключ, бо він не синхронізується
   try{localStorage.removeItem("pi1_xp")}catch(e){}
 })();
 
@@ -478,7 +538,7 @@ const mast=t=>t.items.filter((_,i)=>(S[t.id].k[i]||0)>=2).length;
 const errN=()=>Object.keys(Sx().err).length;
 
 /* ============ ЕТАПИ ЛОГІКА ============ */
-const UL_KEY = "pi-unlocked";  // не синхронізується, це локальний override
+const UL_KEY = "pi-unlocked";
 const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
 const stProg = n => {
   let d = 0, t = 0;
@@ -622,8 +682,6 @@ function render(){
 const norm=x=>x.trim().toLowerCase().replace(/\s+/g," ");
 function isMc(){ return mc; }
 
-/* Bump: оновлює per-tab x/p так, щоб XP = sum(x-p) відображав net зміну
-   net = +1 (правильно), 0 (правильно на MAX / помилка на 0), -1 (помилка) */
 function bumpTab(net){
   const s=Sx();
   s.x = (s.x||0) + 1;
@@ -672,7 +730,6 @@ function skipFb(){ clearTimeout(tm); load(); }
 function trTog(){ const el=$("trt"); if(el) el.hidden = !el.hidden; }
 function toggleMode(){ mc=!mc; st.set("pi-mc", mc?"1":"0"); render(); }
 function resetTab(){
-  // зберігаємо x/p, щоб не втратити EXP (він глобальний)
   const oldX = Sx().x || 0, oldP = Sx().p || 0;
   S[T().id] = {k:{},r:0,w:0,err:{},x:oldX,p:oldP};
   save();
@@ -786,7 +843,6 @@ $("tabs").addEventListener("click", e => {
 
 /* ============ СИНХРОНІЗАЦІЯ ============ */
 function applyRemote(){
-  // Перечитуємо S з localStorage (sync.js вже туди записав)
   TABS.forEach(t=>{
     try{
       const raw = st.get(PREFIX+t.id);
@@ -795,7 +851,6 @@ function applyRemote(){
       if(!r || !r.k) return;
       const lxp = (S[t.id].x||0) - (S[t.id].p||0);
       const rxp = (r.x||0) - (r.p||0);
-      // Беремо версію з більшим net XP (більш просунуту)
       if(rxp > lxp || (rxp === lxp && (r.r||0) > (S[t.id].r||0))){
         S[t.id] = r;
       }
@@ -807,20 +862,17 @@ function applyRemote(){
     updateXp(XP);
   }
 }
-// Після першої синхронізації з хмарою — підтягуємо прогрес
 if(window.TPSync && window.TPSync.ready){
   window.TPSync.ready.then(()=>{
     applyRemote();
     if(!done && (cur === -1 || !answered)){
-      // безпечно перезавантажити поточне завдання з оновленим станом
       resume = false;
       load();
     }
   });
 }
-// Подальші оновлення з хмари (інший пристрій щось надіслав)
 window.addEventListener("tpsync:updated", ()=>{
-  if(done) return; // не перебиваємо активну відповідь
+  if(done) return; 
   applyRemote();
   render();
 });
