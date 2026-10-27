@@ -761,7 +761,7 @@ const D = [
   { n:'Mix', t:'m', stage:9,
     tip:'Усі коннектори впереміш: nachdem, bevor/ehe, während, solange, seit/seitdem, bis, sooft, sobald. Синоніми (bevor/ehe, seit/seitdem) приймаються обидва.',
     it: mixItems },
-    { n:'Finale', t:'m', stage:10,
+  { n:'Finale', t:'m', stage:10,
     tip:'Фінальний рівень: усі коннектори впереміш, wenn/als у контексті, Zeitenfolge у nachdem і Satzbau у двох порядках. Тут ти не вчиш правило — ти його застосовуєш.',
     it: textItems }
 ];
@@ -783,6 +783,8 @@ const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:0,errors:{},
 let S=blank();
 let autoAdvanceTimer=null;
 let rvMode=false, rvCur=-1, trShown=false, rvInitial=0;
+let _recent = [];
+const RECENT_WINDOW = 4;
 
 function loadState(){
   try{
@@ -807,6 +809,11 @@ function loadState(){
     s.corr=s.corr.slice(0,D.length);
     s.wrng=s.wrng.slice(0,D.length);
     s.i=s.i.map((v,k)=>Math.min(Math.max(parseInt(v)||0,0),D[k].it.length));
+    if (Array.isArray(s.r)) {
+      s.r = s.r.map(arr => Array.isArray(arr)
+        ? arr.map(v => v === true ? true : v === false ? false : undefined)
+        : []);
+    }
     s.x=Math.min(XP_MAX,Math.max(0,parseInt(s.x)||0));
     if(s.l===undefined||s.l>=D.length) s.l=0;
     delete s.reviewMode; delete s.reviewQueue; delete s.reviewIndex;
@@ -852,20 +859,37 @@ function rvNext(){
   return pool[(pool.indexOf(rvCur)+1)%pool.length];
 }
 
-/* === Вибір наступного питання: пропускає вже правильні,
-   виключає поточне (щоб не повторювалось одразу), віддає
-   перевагу ще не заданим (70%), інакше — помилковим === */
 function nextIdx(){
   const l = S.l;
-  const pool = D[l].it.map((_, i) => i).filter(i => S.r[l][i] !== true);
-  if (!pool.length) return -1;
+  const total = D[l].it.length;
   const cur = S.i[l];
-  const candidates = pool.filter(i => i !== cur);
-  if (!candidates.length) return pool[0];
-  const never = candidates.filter(i => S.r[l][i] === undefined);
-  const wrong = candidates.filter(i => S.r[l][i] === false);
+
+  const collect = (useRecent) => {
+    const out = [];
+    for (let i = 0; i < total; i++) {
+      if (S.r[l][i] === true) continue;
+      if (i === cur) continue;
+      if (useRecent && _recent.includes(i)) continue;
+      out.push(i);
+    }
+    return out;
+  };
+
+  let pool = collect(true);
+  if (pool.length === 0) pool = collect(false);
+  if (pool.length === 0) {
+    for (let i = 0; i < total; i++) if (S.r[l][i] !== true) return i;
+    return -1;
+  }
+
+  const never = pool.filter(i => S.r[l][i] == null);
+  const wrong = pool.filter(i => S.r[l][i] === false);
   const from = (never.length && (!wrong.length || Math.random() < 0.7)) ? never : wrong;
-  return from[Math.floor(Math.random() * from.length)];
+  const picked = from[Math.floor(Math.random() * from.length)];
+
+  _recent.push(picked);
+  if (_recent.length > RECENT_WINDOW) _recent.shift();
+  return picked;
 }
 
 function getContext(){
@@ -916,6 +940,7 @@ function go(k){
   if(!stOpen(k+1)) return;
   clearTimeout(autoAdvanceTimer);
   rvMode=false; hideComplete(); closeErrors();
+  _recent = [];
   S.l=k; save(); fresh(); render();
 }
 function nextQ(){
@@ -927,7 +952,7 @@ function nextQ(){
     return;
   }
   const ni = nextIdx();
-  if (ni < 0) { showComplete(); return; }
+  if (ni == null || ni < 0) { showComplete(); return; }
   S.i[S.l] = ni;
   save(); fresh(); render();
 }
@@ -947,6 +972,7 @@ function resetTab(){
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
   rvMode=false;
+  _recent = [];
   save(); hideComplete(); fresh(); render();
 }
 function finalRestart(){
@@ -956,6 +982,7 @@ function finalRestart(){
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
   rvMode=false;
+  _recent = [];
   save(); hideComplete(); fresh(); render();
 }
 function hideComplete(){$('complete').hidden=true;}
