@@ -220,6 +220,23 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.5px;margin:0;background:lin
 .errs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 .errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
 html.in-tg,html.in-tg body{overscroll-behavior-y:none}
+
+/* === Финальное состояние категории (как в TEKAMOLO) === */
+#finBox{display:none}
+.card.fin > :not(.rst):not(#finBox){display:none!important}
+.card.fin #finBox{
+  display:block!important;
+  text-align:center;
+  padding:14px 4px 6px;
+  animation:pop .35s ease-out
+}
+#finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
+#finBox p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.55}
+#finBox p b{color:var(--tx)}
+.fin-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.fin-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.fin-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.fin-actions .go:hover{filter:brightness(1.1)}
 </style></head><body><div class="w">
 
 <div class="header-wrap">
@@ -743,8 +760,8 @@ const D = [
   { n:'Solange', t:'i', stage:4, tip:CATS[3].tip, it:CATS[3].items.map(P) },
   { n:'Seit / Seitdem', t:'i', stage:5, tip:CATS[4].tip, it:CATS[4].items.map(P) },
   { n:'Bis', t:'i', stage:6, tip:CATS[5].tip, it:CATS[5].items.map(P) },
-  { n:'Sobald / Sowie', t:'i', stage:7, tip:CATS[7].tip, it:CATS[7].items.map(P) }, // <-- подняли
-  { n:'Sooft', t:'i', stage:8, tip:CATS[6].tip, it:CATS[6].items.map(P) },           // <-- опустили
+  { n:'Sobald / Sowie', t:'i', stage:7, tip:CATS[7].tip, it:CATS[7].items.map(P) },
+  { n:'Sooft', t:'i', stage:8, tip:CATS[6].tip, it:CATS[6].items.map(P) },
   { n:'Mix', t:'m', stage:9,
     tip:'Усі коннектори впереміш: nachdem, bevor/ehe, während, solange, seit/seitdem, bis, sooft, sobald/sowie. Синоніми (bevor/ehe, seit/seitdem, sobald/sowie) приймаються обидва.',
     it: mixItems },
@@ -763,7 +780,10 @@ const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','�
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
 let XP = 0;
-const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),xp:0,errors:{}});
+const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),xp:0,errors:{},
+  cl:D.map(()=>0),      // 1 = категорія закрита (пройдена повністю)
+  corr:D.map(()=>0),    // накопичувальний лічильник правильних
+  wrng:D.map(()=>0)});  // накопичувальний лічильник неправильних
 let S=blank();
 let autoAdvanceTimer=null;
 let rvMode=false, rvCur=-1, trShown=false;
@@ -778,8 +798,17 @@ try{
     if(s.xp===undefined) s.xp=0;
     while(s.i.length<D.length) s.i.push(0);
     while(s.r.length<D.length) s.r.push([]);
+    if(!s.cl) s.cl=[];
+    if(!s.corr) s.corr=[];
+    if(!s.wrng) s.wrng=[];
+    while(s.cl.length<D.length) s.cl.push(0);
+    while(s.corr.length<D.length) s.corr.push(0);
+    while(s.wrng.length<D.length) s.wrng.push(0);
     s.i=s.i.slice(0,D.length);
     s.r=s.r.slice(0,D.length);
+    s.cl=s.cl.slice(0,D.length);
+    s.corr=s.corr.slice(0,D.length);
+    s.wrng=s.wrng.slice(0,D.length);
     s.i=s.i.map((v,k)=>Math.min(Math.max(parseInt(v)||0,0),D[k].it.length));
     s.xp=Math.min(XP_MAX,Math.max(0,parseInt(s.xp)||0));
     if(s.l===undefined||s.l>=D.length) s.l=0;
@@ -795,6 +824,19 @@ const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
 const okv=(v,a)=>a.split('|').map(norm).includes(norm(v||''));
 const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 let st={};
+
+/* === хелпери стану категорій === */
+const isClosed     = l => !!(S.cl && S.cl[l]);
+const isAllCorrect = l => S.r[l].length === D[l].it.length
+                       && S.r[l].every(x => x === true);
+function closeCat(l){ if(!S.cl) S.cl = []; S.cl[l] = 1; }
+function finBoxHTML(l){
+  const c = (S.corr && S.corr[l]) || 0;
+  const w = (S.wrng && S.wrng[l]) || 0;
+  return `<div class="ft">✅ Ця категорія вже пройдена</div>
+    <p>Правильно: <b>${c}</b> · Неправильно: <b>${w}</b><br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p>
+    <div class="fin-actions"><button class="go" onclick="finalRestart()">↻ Почати заново</button></div>`;
+}
 
 const errIdx=l=>Object.keys(S.errors).filter(k=>S.errors[k]).map(k=>{const p=k.split('_');return {l:parseInt(p[0]),i:parseInt(p[1])}}).filter(q=>q.l===l&&D[q.l]&&D[q.l].it[q.i]).map(q=>q.i).sort((a,b)=>a-b);
 const rvSet=l=>rvDoneSets[l]||(rvDoneSets[l]=new Set());
@@ -868,6 +910,7 @@ function resetTab(){
   clearTimeout(autoAdvanceTimer);
   const l=S.l;
   S.i[l]=0; S.r[l]=[];
+  S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
   rvMode=false; rvDoneSets[l]=new Set();
   save(); hideComplete(); fresh(); render();
@@ -876,12 +919,23 @@ function finalRestart(){
   clearTimeout(autoAdvanceTimer);
   const l=S.l;
   S.i[l]=0; S.r[l]=[];
+  S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
+  Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
   rvMode=false; rvDoneSets[l]=new Set();
   save(); hideComplete(); fresh(); render();
 }
 function hideComplete(){$('complete').hidden=true;}
 function showComplete(){
-  const l=S.l, r=S.r[l];
+  const l=S.l;
+  // Якщо все правильно (після повторення помилок або з першого разу) — одразу закриваємо категорію
+  if(isAllCorrect(l)){
+    closeCat(l);
+    save();
+    $('complete').hidden = true;
+    render();
+    return;
+  }
+  const r=S.r[l];
   const c=r.filter(Boolean).length, w=r.filter(x=>x===false).length, n=errIdx(l).length;
   const hasNext=l<D.length-1;
   $('complete-title').textContent='🎉 Категорію пройдено!';
@@ -894,8 +948,19 @@ function showComplete(){
   $('complete').hidden=false;
 }
 function showReviewComplete(){
+  const l=S.l;
+  // Усі помилки виправлено → закриваємо категорію і показуємо фінальну плашку
+  if(isAllCorrect(l)){
+    closeCat(l);
+    save();
+    rvMode=false;
+    $('complete').hidden = true;
+    render();
+    return;
+  }
+  // Резервний випадок (не повинен траплятися)
   $('complete-title').textContent='✅ Помилки пройдено!';
-  $('complete-text').innerHTML='Ти повторив усі помилки зі списку. Вони залишаються у списку «Помилки» — можна повторити ще раз.';
+  $('complete-text').innerHTML='Ти повторив усі помилки зі списку.';
   $('complete-actions').innerHTML='<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button><button class="cancel" onclick="exitReview()">Продовжити тренування</button>';
   $('complete').hidden=false;
 }
@@ -1014,10 +1079,12 @@ function done(ok){
   if(ok){
     if(!xLocked) XP=Math.min(XP_MAX,XP+1);
     if(rvMode) rvSet(l).add(i);
+    if(S.corr) S.corr[l] = (S.corr[l]||0) + 1;
   } else {
     if(!xLocked) XP=Math.max(0,XP-1);
     S.errors[key]=true;
     if(rvMode) rvSet(l).delete(i);
+    if(S.wrng) S.wrng[l] = (S.wrng[l]||0) + 1;
   }
   const dx=XP-xBefore;
   st.done=true; st.ok=ok; st.dx=dx;
@@ -1136,6 +1203,8 @@ function render(){
         <button class="btn g" onclick="exitReview()">Повернутися до тренування</button>
       </div>
       ${theoryBtn}`;
+  } else if(isClosed(ctx.l)){
+    $('foot').innerHTML=theoryBtn;
   } else {
     const totalErrs=rvPool().length;
     $('foot').innerHTML=`
@@ -1147,6 +1216,15 @@ function render(){
 
   syncTheoryBtn();
   const m=$('main');
+
+  // Категорія вже закрита → показуємо фінальну плашку (як у TEKAMOLO)
+  if(isClosed(ctx.l) && !rvMode){
+    m.innerHTML = `<div class="card fin">
+      <button class="rst" onclick="restartTab()" title="Скинути прогрес цієї категорії">↺</button>
+      <div id="finBox">${finBoxHTML(ctx.l)}</div>
+    </div>`;
+    return;
+  }
 
   if(i>=n){
     const p=Math.round(correctCount/n*100);
