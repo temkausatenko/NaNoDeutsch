@@ -254,7 +254,7 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
 
 <div id="main"></div>
 
-<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>Загальний EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 350</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>Загальний EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 250</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
 
 <div class="foot" id="foot"></div>
 
@@ -284,7 +284,7 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
   <div><b>solange</b><span>доти, поки</span></div>
   <div><b>bis</b><span>поки не / до</span></div>
   <div><b>seit / seitdem</b><span>з тих пір як</span></div>
-  <div><b>sobald / sowie</b><span>як тільки</span></div>
+  <div><b>sobald</b><span>як тільки</span></div>
   <div><b>sooft</b><span>щоразу як</span></div>
   <div><b>immer wenn</b><span>щоразу, коли</span></div>
   <div><b>jedes Mal wenn</b><span>кожного разу</span></div>
@@ -316,7 +316,7 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
 
     <h2>2. Одночасність та тривалість</h2>
     <h3>🔹 während (в той час, як / поки)</h3>
-    <p>Дві паралельні дії відбуваються одночасно.</p>
+    <p>Дві паралельні дії відбуваються одночасно. Важливо: час в обох частинах має бути однаковий.</p>
     <div class="example"><span class="highlight">Während</span> ich <strong>koche</strong>, <strong>sieht</strong> mich meine Katze die ganze Zeit <strong>an</strong>.<br><em>(В той час як я готую, мій кіт весь час дивиться на мене).</em></div>
     <h3>🔹 solange (доти, поки / поки)</h3>
     <p>Дві дії тривають паралельно до моменту завершення однієї з них.</p>
@@ -329,13 +329,13 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
     <h3>🔹 bis (до того як / поки не)</h3>
     <p>Вказує на кінець дії (Signalisiert das Ende).</p>
     <div class="example"><span class="highlight">Bis</span> die Pause <strong>anfängt</strong>, sind es noch 25 Minuten.<br><em>(Поки не почнеться перерва, залишилося 25 хвилин).</em></div>
-    <h3>🔹 sobald / sowie (як тільки)</h3>
-    <p>Вказує на негайний початок дії (Anfang einer Aktion). Це повні синоніми; <strong>sowie</strong> звучить трохи офіційніше.</p>
+    <h3>🔹 sobald (як тільки)</h3>
+    <p>Вказує на негайний початок дії (Anfang einer Aktion).</p>
     <div class="example"><span class="highlight">Sobald</span> ich <strong>esse</strong>, will die Katze auch ihr Futter <strong>haben</strong>.<br><em>(Як тільки я їм, кіт теж хоче свою їжу).</em></div>
 
     <h2>4. Повторюваність (Частота)</h2>
     <h3>🔹 sooft / immer wenn / jedes Mal wenn (щоразу як / кожного разу, коли)</h3>
-    <p>Використовуються, коли дія повторюється (Wiederholung). Це синоніми; <strong>sooft</strong> — трохи офіційніше.</p>
+    <p>Використовуються, коли дія повторюється (Wiederholung). <strong>sooft</strong> — трохи офіційніше.</p>
     <div class="example"><span class="highlight">Sooft</span> wir ein Thema <strong>üben</strong>, <strong>wird</strong> es verständlicher.<br><em>(Щоразу як ми практикуємо тему, вона стає зрозумілішою).</em></div>
 
     <h2>5. БИТВА ТИТАНІВ: WENN vs. ALS</h2>
@@ -357,7 +357,7 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
       <tr><td><strong>wenn</strong></td><td>теперішнє/майбутнє або повторення</td><td>Wenn ich koche, kommt die Katze.</td></tr>
       <tr><td><strong>als</strong></td><td>одноразова дія в минулому</td><td>Als ich gestern Fisch gekocht habe, war die Katze aufgeregt.</td></tr>
       <tr><td><strong>solange</strong></td><td>паралельні дії до кінця</td><td>Solange ich koche, bleibt die Katze sitzen.</td></tr>
-      <tr><td><strong>sobald / sowie</strong></td><td>негайний початок</td><td>Sobald ich esse, will die Katze Futter.</td></tr>
+      <tr><td><strong>sobald</strong></td><td>негайний початок</td><td>Sobald ich esse, will die Katze Futter.</td></tr>
       <tr><td><strong>sooft / immer wenn / jedes Mal wenn</strong></td><td>повторювана дія</td><td>Sooft ich koche, steht sie neben mir.</td></tr>
     </table></div>
 
@@ -563,7 +563,7 @@ const CATS = [
   ]
 },
 { n:'Während', re:/\bwährend\b/i, acc:['während'],
-  tip:'während = «у той час як, під час»: дві дії відбуваються одночасно. Дієслово в підрядному — в кінці.',
+  tip:'während = «у той час як, під час»: дві дії відбуваються одночасно. Час в обох частинах має бути однаковий (Präsens + Präsens або Präteritum + Präteritum).',
   mixExpl:'Дві дії одночасно, «у той час як» → während.',
   items:[
     ['Während ich (kochen) ___, hört mein Mann Musik.',['koche'],'während = «у той час як». «koche» в кінці підрядного.','Поки я готую, мій чоловік слухає музику.'],
@@ -573,8 +573,8 @@ const CATS = [
     ['Während mein Sohn (lernen) ___, lese ich ein Buch.',['lernt'],'lernen → er lernt.','Поки мій син навчається, я читаю книгу.'],
     ['Während er auf den Bus (warten) ___, liest er ein Buch.',['wartet'],'er wartet; паралельно.','Поки він чекає на автобус, він читає книгу.'],
     ['Während ich (telefonieren) ___, sollst du leise sein.',['telefoniere'],'ich telefoniere.','Поки я розмовляю по телефону, ти маєш бути тихо.'],
-    ['Während sie (studieren) ___, hat sie im Café gearbeitet.',['studierte'],'Präteritum: sie studierte.','Поки вона навчалася, вона працювала в кафе.'],
-    ['Während die Sonne (scheinen) ___, sind wir spazieren gegangen.',['schien'],'Präteritum: die Sonne schien.','Поки світило сонце, ми гуляли.'],
+    ['Während sie (studieren) ___, arbeitete sie im Café.',['studierte'],'Präteritum: sie studierte / arbeitete.','Поки вона навчалася, вона працювала в кафе.'],
+    ['Während die Sonne (scheinen) ___, gingen wir spazieren.',['schien'],'Präteritum: die Sonne schien / gingen.','Поки світило сонце, ми гуляли.'],
     ['Während ich (kochen) ___ ___, hat er den Tisch gedeckt.',['gekocht','habe'],'Perfekt: gekocht habe.','Поки я готував, він накривав на стіл.'],
     ['Während ich (aufräumen) ___, hörst du Musik.',['aufräume'],'Роздільне дієслово разом: aufräume.','Поки я прибираю, ти слухаєш музику.'],
     ['Während die Kinder im Garten (spielen) ___, koche ich das Mittagessen.',['spielen'],'Підмет множини → «spielen» в кінці.','Поки діти граються в саду, я готую обід.']
@@ -643,13 +643,13 @@ const CATS = [
   tip:'sooft = «щоразу, коли» (синонім immer wenn / jedes Mal wenn). Дія повторюється; дієслово в підрядному — в кінці.',
   mixExpl:'Повторювана дія, «щоразу, коли» → sooft.',
   items:[
-    ['Sooft ich nach Berlin (kommen) ___, besuche ich immer das Brandenburger Tor.',['komme'],'Повторюваність → sooft; «komme» в кінці.','Щоразу, коли я приїжджаю до Берліна, я завжди відвідую Бранденбурзькі ворота.'],
-    ['Sooft er Zeit (haben) ___, geht er immer schwimmen.',['hat'],'er hat; дієслово в кінці.','Щоразу, коли в нього є час, він іде плавати.'],
-    ['Ich esse immer einen Apfel, sooft ich Hunger (haben) ___.',['habe'],'ich habe; підрядне після головного.','Я завжди їм яблуко, щоразу, коли голодний.'],
-    ['Sooft du mich (anrufen) ___, freue ich mich jedes Mal.',['anrufst'],'Роздільне дієслово в підрядному — разом: du anrufst.','Щоразу, коли ти мені телефонуєш, я дуже радію.'],
-    ['Sooft wir ein Thema (üben) ___, wird es jedes Mal verständlicher.',['üben'],'wir üben; дієслово в кінці.','Щоразу, коли ми відпрацьовуємо тему, вона стає зрозумілішою.'],
-    ['Sooft der Zug Verspätung (haben) ___, komme ich jedes Mal zu spät zur Arbeit.',['hat'],'der Zug hat; головне з «komme».','Щоразу, коли поїзд запізнюється, я спізнююся на роботу.'],
-    ['Sooft meine Oma uns (besuchen) ___, bringt sie immer selbstgebackenen Kuchen mit.',['besucht'],'sie besucht; дієслово в кінці.','Щоразу, коли до нас приходить бабуся, вона приносить домашній пиріг.'],
+    ['Sooft ich nach Berlin (kommen) ___, besuche ich das Brandenburger Tor.',['komme'],'Повторюваність → sooft; «komme» в кінці.','Щоразу, коли я приїжджаю до Берліна, я відвідую Бранденбурзькі ворота.'],
+    ['Sooft er Zeit (haben) ___, geht er schwimmen.',['hat'],'er hat; дієслово в кінці.','Щоразу, коли в нього є час, він іде плавати.'],
+    ['Ich esse einen Apfel, sooft ich Hunger (haben) ___.',['habe'],'ich habe; підрядне після головного.','Я їм яблуко, щоразу, коли голодний.'],
+    ['Sooft du mich (anrufen) ___, freue ich mich.',['anrufst'],'Роздільне дієслово в підрядному — разом: du anrufst.','Щоразу, коли ти мені телефонуєш, я радію.'],
+    ['Sooft wir ein Thema (üben) ___, wird es verständlicher.',['üben'],'wir üben; дієслово в кінці.','Щоразу, коли ми відпрацьовуємо тему, вона стає зрозумілішою.'],
+    ['Sooft der Zug Verspätung (haben) ___, komme ich zu spät zur Arbeit.',['hat'],'der Zug hat; головне з «komme».','Щоразу, коли поїзд запізнюється, я спізнююся на роботу.'],
+    ['Sooft meine Oma uns (besuchen) ___, bringt sie selbstgebackenen Kuchen mit.',['besucht'],'sie besucht; дієслово в кінці.','Щоразу, коли до нас приходить бабуся, вона приносить домашній пиріг.'],
     ['Sooft ich ihn (sehen) ___, trägt er dieselbe Jacke.',['sehe'],'ich sehe; дієслово в кінці.','Щоразу, коли я його бачу, на ньому та сама куртка.'],
     ['Sooft wir früher am Meer (sein) ___, haben wir Eis gegessen.',['waren'],'Минуле повторюване: Präteritum «waren».','Щоразу, коли ми раніше були на морі, ми їли морозиво.'],
     ['Sooft es im Winter (schneien) ___, bauen die Kinder einen Schneemann.',['schneit'],'es schneit; дієслово в кінці.','Щоразу, коли взимку йде сніг, діти ліплять сніговика.'],
@@ -660,9 +660,9 @@ const CATS = [
     ['Sooft die Sonne (scheinen) ___, gehen wir schwimmen.',['scheint'],'die Sonne scheint.','Щоразу, коли світить сонце, ми йдемо плавати.']
   ]
 },
-{ n:'Sobald', re:/\b(sobald|sowie)\b/i, acc:['sobald','sowie'],
-  tip:'sobald / sowie = «щойно, як тільки»: негайний початок дії. Це синоніми. Дієслово в підрядному — в кінці.',
-  mixExpl:'Негайна реакція, «щойно / як тільки» → sobald / sowie. Це повні синоніми.',
+{ n:'Sobald', re:/\bsobald\b/i, acc:['sobald'],
+  tip:'sobald = «щойно, як тільки»: негайний початок дії. Дієслово в підрядному — в кінці.',
+  mixExpl:'Негайна реакція, «щойно / як тільки» → sobald.',
   items:[
     ['Sobald ich Feierabend (haben) ___, gehe ich sofort ins Fitnessstudio.',['habe'],'Präsens: «habe» в кінці.','Щойно в мене закінчиться робочий день, я одразу йду у фітнес-зал.'],
     ['Ich rufe dich sofort an, sobald ich zu Hause (sein) ___.',['bin'],'ich bin; дієслово в кінці.','Я одразу тобі зателефоную, щойно буду вдома.'],
@@ -674,21 +674,21 @@ const CATS = [
     ['Sobald der Unterricht (anfangen) ___, schalten alle sofort ihre Handys aus.',['anfängt'],'anfangen → er/es fängt … an; в підрядному разом: anfängt.','Щойно починається урок, усі одразу вимикають телефони.'],
     ['Sobald du bereit (sein) ___, können wir direkt losgehen.',['bist'],'du bist; дієслово в кінці.','Щойно ти будеш готовий, ми можемо одразу вирушати.'],
     ['Sobald mein Mann (einschlafen) ___, fängt er sofort an zu schnarchen.',['einschläft'],'einschlafen → er schläft ein; в підрядному разом: einschläft.','Щойно мій чоловік засинає, він одразу починає хропіти.'],
-    ['Ich schreibe dir sofort, sowie ich in Frankfurt (ankommen) ___.',['ankomme'],'sowie = sobald; «ankomme» в кінці.','Я одразу напишу тобі, щойно приїду до Франкфурта.'],
-    ['Sowie der Film zu Ende (sein) ___, gehen wir gleich schlafen.',['ist'],'der Film ist zu Ende.','Щойно фільм закінчиться, ми одразу підемо спати.'],
-    ['Sowie ich die Prüfungsergebnisse (haben) ___, rufe ich dich sofort an.',['habe'],'ich habe; головне з «rufe … an».','Щойно я матиму результати іспитів, я одразу тобі зателефоную.'],
-    ['Sowie der Chef (kommen) ___, beginnt die Besprechung.',['kommt'],'der Chef kommt.','Щойно прийде шеф, почнеться нарада.'],
-    ['Sowie die Sonne (untergehen) ___, wird es kalt.',['untergeht'],'Роздільне дієслово разом: untergeht.','Щойно заходить сонце, стає холодно.'],
-    ['Sowie das Paket (ankommen) ___, informieren wir Sie sofort.',['ankommt'],'das Paket kommt an → в підрядному: ankommt.','Щойно прийде посилка, ми одразу повідомимо Вас.'],
-    ['Sowie ich einen freien Termin (finden) ___, melde ich mich gleich bei Ihnen.',['finde'],'ich finde; дієслово в кінці.','Щойно я знайду вільний термін, я одразу з Вами зв’яжуся.'],
-    ['Sowie es (klingeln) ___, öffne ich sofort die Tür.',['klingelt'],'es klingelt.','Щойно задзвонять у двері, я одразу відчиню.'],
-    ['Sowie der Kuchen fertig (sein) ___, nehme ich ihn gleich aus dem Ofen.',['ist'],'der Kuchen ist fertig.','Щойно пиріг буде готовий, я одразу дістану його з духовки.'],
-    ['Sowie du (aufstehen) ___, ruf mich bitte sofort an.',['aufstehst'],'du stehst auf → в підрядному: aufstehst.','Щойно ти встанеш, одразу зателефонуй мені.']
+    ['Ich schreibe dir sofort, sobald ich in Frankfurt (ankommen) ___.',['ankomme'],'«ankomme» в кінці.','Я одразу напишу тобі, щойно приїду до Франкфурта.'],
+    ['Sobald der Film zu Ende (sein) ___, gehen wir gleich schlafen.',['ist'],'der Film ist zu Ende.','Щойно фільм закінчиться, ми одразу підемо спати.'],
+    ['Sobald ich die Prüfungsergebnisse (haben) ___, rufe ich dich sofort an.',['habe'],'ich habe; головне з «rufe … an».','Щойно я матиму результати іспитів, я одразу тобі зателефоную.'],
+    ['Sobald der Chef (kommen) ___, beginnt die Besprechung.',['kommt'],'der Chef kommt.','Щойно прийде шеф, почнеться нарада.'],
+    ['Sobald die Sonne (untergehen) ___, wird es kalt.',['untergeht'],'Роздільне дієслово разом: untergeht.','Щойно заходить сонце, стає холодно.'],
+    ['Sobald das Paket (ankommen) ___, informieren wir Sie sofort.',['ankommt'],'das Paket kommt an → в підрядному: ankommt.','Щойно прийде посилка, ми одразу повідомимо Вас.'],
+    ['Sobald ich einen freien Termin (finden) ___, melde ich mich gleich bei Ihnen.',['finde'],'ich finde; дієслово в кінці.','Щойно я знайду вільний термін, я одразу з Вами зв’яжуся.'],
+    ['Sobald es (klingeln) ___, öffne ich sofort die Tür.',['klingelt'],'es klingelt.','Щойно задзвонять у двері, я одразу відчиню.'],
+    ['Sobald der Kuchen fertig (sein) ___, nehme ich ihn gleich aus dem Ofen.',['ist'],'der Kuchen ist fertig.','Щойно пиріг буде готовий, я одразу дістану його з духовки.'],
+    ['Sobald du (aufstehen) ___, ruf mich bitte sofort an.',['aufstehst'],'du stehst auf → в підрядному: aufstehst.','Щойно ти встанеш, одразу зателефонуй мені.']
   ]
 }
 ];
 
-const MIXOPTS = ['nachdem','bevor','ehe','während','solange','seit','seitdem','bis','sooft','sobald','sowie'];
+const MIXOPTS = ['nachdem','bevor','ehe','während','solange','seit','seitdem','bis','sooft','sobald'];
 const mixRaw = [];
 CATS.forEach(c => c.items.forEach(raw => {
   const p = P(raw);
@@ -729,15 +729,15 @@ const textItems = [
   C('___ sie den Vertrag unterschrieb, las sie ihn dreimal durch.','Ehe','Спочатку читала → ehe / bevor.',['Ehe','Nachdem','Seit','Sobald'],'Перш ніж підписати договір, вона тричі його перечитала.'),
   C('___ du in Berlin ankommst, schick mir bitte eine Nachricht.','Sobald','Одразу, як тільки → sobald.',['Sobald','Bevor','Solange','Seit'],'Щойно ти приїдеш до Берліна, надішли мені, будь ласка, повідомлення.'),
   C('Ich gehe sofort ins Bett, ___ ich nach Hause komme.','sobald','Одразу, як тільки → sobald.',['sobald','solange','ehe','seit'],'Я одразу лягаю спати, щойно приходжу додому.'),
-  C('___ die Tür aufgeht, strömen die Kunden in den Laden.','Sowie','Одразу, як тільки → sowie / sobald.',['Sowie','Solange','Bevor','Seit'],'Щойно відчиняються двері, покупці вливаються в магазин.'),
-  C('Ich melde mich bei Ihnen, ___ ich etwas Neues weiß.','sowie','Одразу, як тільки → sowie / sobald.',['sowie','ehe','solange','seit'],'Я зв’яжуся з Вами, щойно дізнаюся щось нове.'),
-  I('Sowie das Essen (fertig sein) ___, rufe ich euch.',['ist'],'sowie = щойно; «ist» в кінці.','Щойно їжа буде готова, я вас покличу.'),
+  C('___ die Tür aufgeht, strömen die Kunden in den Laden.','Sobald','Одразу, як тільки → sobald.',['Sobald','Solange','Bevor','Seit'],'Щойно відчиняються двері, покупці вливаються в магазин.'),
+  C('Ich melde mich bei Ihnen, ___ ich etwas Neues weiß.','sobald','Одразу, як тільки → sobald.',['sobald','ehe','solange','seit'],'Я зв’яжуся з Вами, щойно дізнаюся щось нове.'),
+  I('Sobald das Essen (fertig sein) ___, rufe ich euch.',['ist'],'sobald = щойно; «ist» в кінці.','Щойно їжа буде готова, я вас покличу.'),
   C('Ich höre Musik, ___ ich im Zug sitze.','während','Одночасно → während.',['während','nachdem','ehe','sobald'],'Я слухаю музику, поки їду в поїзді.'),
   I('Ich warte hier, ___ der Bus kommt. (доки, 3 Buchstaben)',['bis'],'bis = «доки не».','Я чекаю тут, доки не прийде автобус.'),
   I('Ich kann nicht gehen, ___ der Chef im Büro ist. (поки, 7 Buchstaben)',['solange'],'solange = «поки».','Я не можу піти, поки шеф в офісі.'),
   I('___ du mich anrufst, freue ich mich. (щоразу, 5 Buchstaben)',['sooft'],'sooft = «щоразу, коли».','Щоразу, коли ти мені телефонуєш, я радію.'),
   I('Ich dusche, ___ ich zur Arbeit gehe. (= bevor, 3 Buchstaben)',['ehe'],'ehe = bevor.','Я приймаю душ, перш ніж піти на роботу.'),
-  I('Ich schreibe dir, ___ ich in Frankfurt angekommen bin. (= sobald, 5 Buchstaben)',['sowie'],'sowie = sobald.','Я напишу тобі, щойно приїду до Франкфурта.'),
+  I('Ich schreibe dir, ___ ich in Frankfurt angekommen bin. (6 Buchstaben)',['sobald'],'sobald = «щойно, як тільки».','Я напишу тобі, щойно приїду до Франкфурта.'),
   I('Nachdem ich eine Eintrittskarte gekauft ___, ___ ich ins Kino. (Präsens)',['habe','gehe'],'Präsens: nachdem + Perfekt (habe gekauft), головне в Präsens (gehe).','Після того як я купив квиток, я йду в кіно.'),
   I('Nachdem ich eine Eintrittskarte gekauft ___, ___ ich ins Kino ___. (Vergangenheit)',['hatte','bin','gegangen'],'Vergangenheit: nachdem + Plusquamperfekt (hatte gekauft), головне в Perfekt (bin gegangen).','Після того як я купив квиток, я пішов у кіно.'),
   C('Er hat fünf Kilogramm abgenommen, ___ er keine Schokolade mehr isst.','seitdem','Відтоді → seitdem.',['seitdem','bevor','nachdem','bis'],'Він схуд на п’ять кілограмів відтоді, як більше не їсть шоколад.'),
@@ -756,13 +756,13 @@ const D = [
   { n:'Solange', t:'i', stage:4, tip:CATS[3].tip, it:CATS[3].items.map(P) },
   { n:'Seit / Seitdem', t:'i', stage:5, tip:CATS[4].tip, it:CATS[4].items.map(P) },
   { n:'Bis', t:'i', stage:6, tip:CATS[5].tip, it:CATS[5].items.map(P) },
-  { n:'Sobald / Sowie', t:'i', stage:7, tip:CATS[7].tip, it:CATS[7].items.map(P) },
+  { n:'Sobald', t:'i', stage:7, tip:CATS[7].tip, it:CATS[7].items.map(P) },
   { n:'Sooft', t:'i', stage:8, tip:CATS[6].tip, it:CATS[6].items.map(P) },
   { n:'Mix', t:'m', stage:9,
-    tip:'Усі коннектори впереміш: nachdem, bevor/ehe, während, solange, seit/seitdem, bis, sooft, sobald/sowie. Синоніми (bevor/ehe, seit/seitdem, sobald/sowie) приймаються обидва.',
+    tip:'Усі коннектори впереміш: nachdem, bevor/ehe, während, solange, seit/seitdem, bis, sooft, sobald. Синоніми (bevor/ehe, seit/seitdem) приймаються обидва.',
     it: mixItems },
-  { n:'Text & Kontrast', t:'m', stage:10,
-    tip:'Міні-тексти, мінімальні пари на контраст (wenn/als та інші коннектори), переклад під реченням і Satzbau у двох порядках.',
+    { n:'Finale', t:'m', stage:10,
+    tip:'Фінальний рівень: усі коннектори впереміш, wenn/als у контексті, Zeitenfolge у nachdem і Satzbau у двох порядках. Тут ти не вчиш правило — ти його застосовуєш.',
     it: textItems }
 ];
 
@@ -770,28 +770,24 @@ const K='tp_v2_temporale_konnektoren';
 const T=(L,it)=>L.t=='m'?it[3]:L.t;
 const UA=(L,it)=>L.t=='m'?it[5]:it[3];
 
-const XP_MAX=350;
+const XP_MAX=250;
 const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','Дослідник'],[.44,'⚡','Знавець'],[.68,'🔥','Профі'],[.92,'💎','Майстер'],[1,'🏆','Легенда']]
   .map(q=>[Math.round(q[0]*XP_MAX),q[1],q[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
 let XP = 0;
-// ⚠️ ВАЖЛИВО: поле XP тепер `x` (раніше було `xp`) — саме за ним sync.js вирішує, чия версія перемагає
 const blank=()=>({l:0,i:D.map(()=>0),r:D.map(()=>[]),x:0,errors:{},
   cl:D.map(()=>0),
   corr:D.map(()=>0),
   wrng:D.map(()=>0)});
 let S=blank();
 let autoAdvanceTimer=null;
-let rvMode=false, rvCur=-1, trShown=false;
-const rvDoneSets={};
+let rvMode=false, rvCur=-1, trShown=false, rvInitial=0;
 
-/* Завантаження стану з localStorage + міграція старого поля xp → x */
 function loadState(){
   try{
     let s=JSON.parse(localStorage.getItem(K));
     if(!s || typeof s !== 'object') return null;
-    // Міграція: стара версія писала XP у полі `xp`
     if(s.x===undefined && s.xp!==undefined){ s.x=s.xp; delete s.xp; }
     if(s.x===undefined) s.x=0;
     if(!s.errors) s.errors={};
@@ -832,8 +828,12 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 let st={};
 
 const isClosed     = l => !!(S.cl && S.cl[l]);
-const isAllCorrect = l => S.r[l].length === D[l].it.length
-                       && S.r[l].every(x => x === true);
+const isAllCorrect = l => {
+  for (let i = 0; i < D[l].it.length; i++) {
+    if (S.r[l][i] !== true) return false;
+  }
+  return true;
+};
 function closeCat(l){ if(!S.cl) S.cl = []; S.cl[l] = 1; }
 function finBoxHTML(l){
   const c = (S.corr && S.corr[l]) || 0;
@@ -844,25 +844,55 @@ function finBoxHTML(l){
 }
 
 const errIdx=l=>Object.keys(S.errors).filter(k=>S.errors[k]).map(k=>{const p=k.split('_');return {l:parseInt(p[0]),i:parseInt(p[1])}}).filter(q=>q.l===l&&D[q.l]&&D[q.l].it[q.i]).map(q=>q.i).sort((a,b)=>a-b);
-const rvSet=l=>rvDoneSets[l]||(rvDoneSets[l]=new Set());
 const rvPool=()=>errIdx(S.l);
-const rvQueue=()=>{const d=rvSet(S.l);return rvPool().filter(i=>!d.has(i))};
-function rvNext(){const q=rvQueue();if(!q.length)return -1;if(!q.includes(rvCur))return q.find(i=>i>rvCur)??q[0];return q[(q.indexOf(rvCur)+1)%q.length]}
+function rvNext(){
+  const pool=rvPool();
+  if(!pool.length) return -1;
+  if(!pool.includes(rvCur)) return pool[0];
+  return pool[(pool.indexOf(rvCur)+1)%pool.length];
+}
+
+/* === Вибір наступного питання: пропускає вже правильні,
+   виключає поточне (щоб не повторювалось одразу), віддає
+   перевагу ще не заданим (70%), інакше — помилковим === */
+function nextIdx(){
+  const l = S.l;
+  const pool = D[l].it.map((_, i) => i).filter(i => S.r[l][i] !== true);
+  if (!pool.length) return -1;
+  const cur = S.i[l];
+  const candidates = pool.filter(i => i !== cur);
+  if (!candidates.length) return pool[0];
+  const never = candidates.filter(i => S.r[l][i] === undefined);
+  const wrong = candidates.filter(i => S.r[l][i] === false);
+  const from = (never.length && (!wrong.length || Math.random() < 0.7)) ? never : wrong;
+  return from[Math.floor(Math.random() * from.length)];
+}
 
 function getContext(){
-  const l=S.l;
-  if(rvMode){
-    if(rvCur>=0 && D[l].it[rvCur]) return {L:D[l],it:D[l].it[rvCur],l:l,i:rvCur,n:D[l].it.length,idx:rvCur};
-    rvMode=false;
+  const l = S.l;
+  if (rvMode) {
+    if (rvCur >= 0 && D[l].it[rvCur]) return {L: D[l], it: D[l].it[rvCur], l, i: rvCur, n: D[l].it.length, idx: rvCur};
+    rvMode = false;
   }
-  const i=S.i[l];
-  return {L:D[l],it:D[l].it[i],l:l,i:i,n:D[l].it.length,idx:i};
+  let i = S.i[l];
+  if (i === undefined || i < 0 || i >= D[l].it.length) i = 0;
+  return {L: D[l], it: D[l].it[i], l, i, n: D[l].it.length, idx: i};
 }
 
 function fresh(){
   try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}
   st={done:false,ok:false,dx:0,pick:null,vals:[],pool:[],ans:[]};
   trShown=false;
+  if(!rvMode){
+    const l = S.l;
+    let i = S.i[l];
+    if (i === undefined || i < 0 || i >= D[l].it.length) i = 0;
+    S.i[l] = i;
+    if (S.r[l][i] === true) {
+      const ni = nextIdx();
+      if (ni >= 0) S.i[l] = ni;
+    }
+  }
   const ctx=getContext(), L=ctx.L, it=ctx.it;
   if(it && T(L,it)=='o'){
     const w=it[0].split(' ');
@@ -896,11 +926,10 @@ function nextQ(){
     else showReviewComplete();
     return;
   }
-  const ctx=getContext();
-  if(!ctx.it) return;
-  S.i[S.l]++;
+  const ni = nextIdx();
+  if (ni < 0) { showComplete(); return; }
+  S.i[S.l] = ni;
   save(); fresh(); render();
-  if(S.i[S.l]>=D[S.l].it.length) showComplete();
 }
 function askConfirm(msg,yes){
   $('complete-title').textContent='Скинути прогрес?';
@@ -917,7 +946,7 @@ function resetTab(){
   S.i[l]=0; S.r[l]=[];
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
-  rvMode=false; rvDoneSets[l]=new Set();
+  rvMode=false;
   save(); hideComplete(); fresh(); render();
 }
 function finalRestart(){
@@ -926,7 +955,7 @@ function finalRestart(){
   S.i[l]=0; S.r[l]=[];
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
-  rvMode=false; rvDoneSets[l]=new Set();
+  rvMode=false;
   save(); hideComplete(); fresh(); render();
 }
 function hideComplete(){$('complete').hidden=true;}
@@ -952,19 +981,20 @@ function showComplete(){
   $('complete').hidden=false;
 }
 function showReviewComplete(){
-  const l=S.l;
-  if(isAllCorrect(l)){
-    closeCat(l);
-    save();
-    rvMode=false;
+  const l = S.l;
+  if (isAllCorrect(l)) {
+    closeCat(l); save();
+    rvMode = false;
     $('complete').hidden = true;
     render();
     return;
   }
-  $('complete-title').textContent='✅ Помилки пройдено!';
-  $('complete-text').innerHTML='Ти повторив усі помилки зі списку.';
-  $('complete-actions').innerHTML='<button class="go" onclick="repeatReview()">🔁 Повторити помилки ще раз</button><button class="cancel" onclick="exitReview()">Продовжити тренування</button>';
-  $('complete').hidden=false;
+  rvMode = false;
+  $('complete').hidden = true;
+  const ni = nextIdx();
+  if (ni >= 0) S.i[l] = ni;
+  save();
+  fresh(); render();
 }
 function repeatReview(){hideComplete();startReview();}
 
@@ -1006,16 +1036,15 @@ function clearErrors(){
   }
   clearArmed=false;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(S.l+'_'))delete S.errors[k];});
-  rvDoneSets[S.l]=new Set();
   save(); render(); openErrors();
 }
 function trainErrors(){closeErrors();startReview();try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){}}
 
 function startReview(){
-  const pool=rvPool();
-  if(!pool.length) return;
+  const pool = rvPool();
+  if (!pool.length) return;
   clearTimeout(autoAdvanceTimer);
-  rvMode=true; rvDoneSets[S.l]=new Set(); rvCur=pool[0];
+  rvMode = true; rvCur = pool[0]; rvInitial = pool.length;
   fresh(); render();
 }
 function exitReview(){
@@ -1080,12 +1109,11 @@ function done(ok){
   const key=`${l}_${i}`;
   if(ok){
     if(!xLocked) XP=Math.min(XP_MAX,XP+1);
-    if(rvMode) rvSet(l).add(i);
+    delete S.errors[key];
     if(S.corr) S.corr[l] = (S.corr[l]||0) + 1;
   } else {
     if(!xLocked) XP=Math.max(0,XP-1);
     S.errors[key]=true;
-    if(rvMode) rvSet(l).delete(i);
     if(S.wrng) S.wrng[l] = (S.wrng[l]||0) + 1;
   }
   const dx=XP-xBefore;
@@ -1154,7 +1182,7 @@ function fb(L,it){
     ${it[2]}
   </div>
   <div class="row">
-    <button class="btn p" onclick="nextQ()">${nextLabel} →
+    <button class="btn p" onclick="nextQ()">${nextLabel} →</button>
   </div>
   ${st.ok?'<div class="advance-bar"><i></i></div>':''}`;
 }
@@ -1176,8 +1204,8 @@ function render(){
   const L=ctx.L, n=ctx.n, i=ctx.idx, r=S.r[ctx.l];
 
   if(rvMode){
-    const pool=rvPool().length, left=rvQueue().length;
-    $('stages').innerHTML=`<div class="rv-pill">🔁 Робота над помилками · залишилось <span class="rv-count">${left}<i>/</i>${pool}</span></div>`;
+    const left=rvPool().length;
+    $('stages').innerHTML=`<div class="rv-pill">🔁 Робота над помилками · залишилось <span class="rv-count">${left}<i>/</i>${rvInitial}</span></div>`;
   } else {
     renderStages();
   }
@@ -1191,8 +1219,8 @@ function render(){
   $('stat-wrong').textContent=wrongCount;
 
   if(rvMode){
-    const pool=rvPool().length, left=rvQueue().length;
-    $('bar').style.width=(pool?(pool-left)/pool*100:0)+'%';
+    const left = rvPool().length;
+    $('bar').style.width = (rvInitial ? (rvInitial - left) / rvInitial * 100 : 0) + '%';
   } else {
     $('bar').style.width=(Math.min(i+(st.done?1:0),n)/n*100)+'%';
   }
@@ -1358,10 +1386,7 @@ document.addEventListener('touchstart',function unlockAudio(){
 
 fresh();render();
 
-/* === Синхронізація: підхоплюємо зміни, які sync.js приніс з хмари ===
- * sync.js фаерить 'tpsync:updated' після pull() або push(), коли дані
- * в localStorage реально оновилися з іншого пристрою. Перечитуємо стан
- * і перемальовуємо, щоб користувач побачив синхронізований прогрес. */
+/* === Синхронізація === */
 function stateEqual(a, b){
   if (!a || !b) return a === b;
   if (a.l !== b.l) return false;
@@ -1370,11 +1395,9 @@ function stateEqual(a, b){
   if (String(a.cl) !== String(b.cl)) return false;
   if (String(a.corr) !== String(b.corr)) return false;
   if (String(a.wrng) !== String(b.wrng)) return false;
-  // r — масив масивів boolean|undefined; нормалізуємо до 1/0
   const ar = a.r.map(arr => arr.map(v => v?1:0).join('')).join('|');
   const br = b.r.map(arr => arr.map(v => v?1:0).join('')).join('|');
   if (ar !== br) return false;
-  // errors — об'єкт виду "l_i": true; порівнюємо відсортовані ключі з true
   const ae = Object.keys(a.errors||{}).filter(k=>a.errors[k]).sort();
   const be = Object.keys(b.errors||{}).filter(k=>b.errors[k]).sort();
   if (ae.length !== be.length) return false;
@@ -1384,7 +1407,7 @@ function stateEqual(a, b){
 function reloadFromStorage(){
   const loaded = loadState();
   if (!loaded) return;
-  if (stateEqual(S, loaded)) return; // нічого важливого не змінилось
+  if (stateEqual(S, loaded)) return;
   clearTimeout(autoAdvanceTimer);
   rvMode = false;
   hideComplete();
@@ -1395,9 +1418,6 @@ function reloadFromStorage(){
   render();
 }
 window.addEventListener('tpsync:updated', reloadFromStorage);
-
-// Якщо sync.js ще не завершив pull на момент старту — підвантажимо стан
-// після того, як він стане ready (на випадок, якщо подія вже відбулася).
 if (window.TPSync && window.TPSync.ready) {
   window.TPSync.ready.then(reloadFromStorage).catch(function(){});
 }
