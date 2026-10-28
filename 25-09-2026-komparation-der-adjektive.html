@@ -3,105 +3,199 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Komparation der Adjektive 25.10.2026</title>
+<title>Komparation der Adjektive - Trainer</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <style>
 :root{
-  --bg:#090b10;--bg-grad:#151b2b;--card:#12161f;--card-hover:#1a202c;
-  --tx:#f1f5f9;--mu:#94a3b8;--pr:#6366f1;--pr-glow:rgba(99,102,241,.4);
-  --pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.1);--no:#ef4444;
-  --nob:rgba(239,68,68,.1);--go:#f59e0b;--gob:rgba(245,158,11,.1);
-  --bd:#2a3441;--sa:#a78bfa;--pe:#f9a8d4;--radius:16px;color-scheme:dark;
+  --bg:#0c0f16;--bg-grad:#1a2035;
+  --card:#131a24;--card-hover:#1c2532;
+  --tx:#e8eef5;--mu:#8892a7;
+  --pr:#6366f1;--pr-glow:rgba(99,102,241,.35);
+  --pl:#1e293b;
+  --ok:#10b981;--okb:rgba(16,185,129,.12);
+  --no:#ef4444;--nob:rgba(239,68,68,.12);
+  --go:#f59e0b;--gob:rgba(245,158,11,.12);
+  --bd:#1e293b;
+  --sa:#818cf8;--pe:#a78bfa;
+  --radius:16px;color-scheme:dark;
 }
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
-  --bg:#f8fafc;--bg-grad:#e2e8f0;--card:#ffffff;--card-hover:#f1f5f9;
-  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);
-  --pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;
-  --nob:rgba(220,38,38,.1);--go:#d97706;--gob:rgba(217,119,6,.1);
-  --bd:#cbd5e1;--sa:#7c3aed;--pe:#db2777;color-scheme:light}}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}}
 :root[data-theme="light"]{
-  --bg:#f8fafc;--bg-grad:#e2e8f0;--card:#ffffff;--card-hover:#f1f5f9;
-  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);
-  --pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;
-  --nob:rgba(220,38,38,.1);--go:#d97706;--gob:rgba(217,119,6,.1);
-  --bd:#cbd5e1;--sa:#7c3aed;--pe:#db2777;color-scheme:light}
-*{box-sizing:border-box}
-[hidden]{display:none!important}
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
-body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;transition:background-color .3s,color .3s}
-.w{max-width:720px;margin:0 auto;padding-block:24px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
-.header-wrap{position:relative;text-align:center;margin-bottom:16px;padding-top:8px;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:10px}
-.header-wrap h1{order:5;flex:0 0 100%;margin-top:6px}
-h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
+  color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;transition:background-color .3s,color .3s}
+.w{max-width:720px;margin:0 auto;padding-block:24px 60px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
+.header-wrap{position:relative;text-align:center;margin-bottom:16px;padding-top:8px}
+h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
+  background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle{flex:none;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
-.theory-top-toggle{order:2}.sound-toggle{order:3}.theme-toggle{order:4}
+.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+  color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
+.theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
 .theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
-.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
+  padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
+  display:inline-flex;align-items:center;gap:6px;line-height:1.2}
 .tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
 .tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
 .tab.on small{color:#fff;background:rgba(255,255,255,.2)}
+.tab.cl small::before{content:"✓ "}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xrst{margin-left:10px;width:24px;height:24px;padding:0;border:1px solid var(--bd);border-radius:50%;background:transparent;color:var(--mu);font-size:.85rem;line-height:1;cursor:pointer;transition:all .18s}
+.xrst:hover{color:var(--tx);border-color:var(--pr)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums;position:relative}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
+.xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
+@keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz,#94a3b8);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xp{--xa:#475569;--xz:#94a3b8}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xb i{background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
+.xp.max .xnx{color:var(--go);font-weight:600}
+:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
+@keyframes xgold{to{background-position:200% 0}}
 .pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
 .pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
 .stat-box{background:var(--card);padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:2px;font-weight:600}
 .stat-val{font-size:1.2rem;font-weight:800;color:var(--tx);line-height:1.1}
-.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
+.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}.stat-val.go{color:var(--go)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
 @keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
-.top{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.top h2{flex:1;min-width:0;margin:0;font-size:.66rem;font-weight:600;letter-spacing:.14em;color:var(--mu);text-transform:uppercase;line-height:1.3;padding-right:0}
-.cb{flex:none;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:1rem;padding:0;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .18s}
-.cb:hover{color:var(--tx);border-color:var(--pr)}
-.mode{flex:none;height:32px;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;padding:0 12px;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit;white-space:nowrap;transition:all .18s}
-.mode:hover{color:var(--tx);border-color:var(--pr)}
-.rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle}
-.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
-.sent{font-size:1.15rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+#finBox{display:none}
+.card.fin > :not(h2):not(.rst):not(#finBox):not(.mode-toggle):not(.speak){display:none!important}
+.card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
+#finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
+#finBox .ft.rv{color:var(--pr)}
+#finBox p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.55}
+#finBox p b{color:var(--tx)}
+.fin-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.fin-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.fin-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.fin-actions .go:hover{filter:brightness(1.1)}
+.fin-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.fin-actions .cancel:hover{border-color:var(--pr)}
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:170px;text-transform:uppercase;line-height:32px;min-height:32px;}
+.speak,.mode-toggle,.rst{position:absolute;top:22px;height:32px;border-radius:50%;border:1px solid var(--bd);
+  background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
+.speak{right:62px;width:32px;}
+.rst{right:22px;width:32px;font-size:1.15rem}
+.mode-toggle{right:102px;width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.speak:hover,.mode-toggle:hover,.rst:hover{color:var(--tx);border-color:var(--pr)}
+.sent{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
-.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa)}
-.lab{margin:0 0 16px;font-size:.8rem;line-height:1.4;color:var(--mu)}
+.lab{margin:0 0 16px;font-size:.8rem;line-height:1.4;font-weight:400;color:var(--mu)}
 .lab:empty{display:none}
 .tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
 .tr-btn:hover{color:var(--tx);border-color:var(--pr)}
 .tr-text{font-size:.8rem;line-height:1.4;color:var(--mu)}
-.scheme{font-size:.95rem;color:var(--mu);margin:8px 0 0;line-height:1.5}
-.scheme .np{color:var(--tx);font-weight:500}
+.rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
+.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
+.cuechip{display:inline-block;margin:0 6px 4px 0;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;background:rgba(245,158,11,.14);color:var(--go);border:1px solid rgba(245,158,11,.35)}
+.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
+.blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
+.blank.fill{border-bottom-style:solid}
 .opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.opt{flex:1 1 45%;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s;line-height:1.4}
-.opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
+.opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.opts.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:640px){.opts.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.opt{flex:1 1 auto;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;
+  border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
 .opt.ok,.opt.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
 .opt.er,.opt.er:hover{border-color:var(--no);background:var(--nob);color:var(--no);animation:shake .4s}
-.opt:disabled{cursor:default}
-.opt:disabled:not(.ok):not(.er){opacity:.45}
+.opt:disabled{cursor:default}.opt:disabled:not(.ok):not(.er){opacity:.45}
 .row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit;font-size:1rem;outline:none;transition:border-color .2s}
-.row input:focus{border-color:var(--pr);box-shadow:0 0 0 2px var(--pr-glow)}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);
+  font:inherit;font-size:1rem;outline:none;transition:border-color .2s}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--pr-glow)}
 .chk,.next{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
 .chk{border:2px solid var(--pr);background:var(--pr);color:#fff}
 .chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
-.next{border:2px solid var(--bd);background:transparent;color:var(--tx)}
-.next:hover{border-color:var(--pr)}
+.next{border:2px solid var(--bd);background:transparent;color:var(--tx)}.next:hover{border-color:var(--pr)}
+.card:not(.mc) .opts{display:none}
+.card.mc .row{display:none}
+.card.mc .um-row{display:none}
+.card.mc .fb{cursor:pointer}
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
+.tool:hover{color:var(--tx)}
+.fb-adv{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--ok);background:var(--ok);color:#fff;transition:all .18s}
+.fb-adv:hover{filter:brightness(1.1)}
+.stages{display:grid;grid-auto-flow:column;grid-template-rows:repeat(1,auto);grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
+.stages::-webkit-scrollbar{display:none}
+.stages.drag{cursor:grabbing;user-select:none}
+.stages.drag .stg{pointer-events:none}
+.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.76rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
+.stg small{margin-left:6px;font-size:.62rem;font-weight:500;opacity:.65}
+.stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
+.stg:hover{color:var(--tx);border-color:var(--pr)}
+.stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
+.stg.lk{opacity:.5}
+.lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px;background:var(--card)}
+body.lsn #tabs,body.lsn #card{display:none}
+.lesson h3{margin:0 0 8px;font-size:1.05rem;color:var(--sa)}.lesson p{line-height:1.6;font-size:.92rem;color:var(--mu)}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px;color:var(--tx);font-size:.9rem;margin-top:10px}
+.lgo{margin-top:12px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer;width:100%;transition:all .2s}
+.lgo:hover{filter:brightness(1.1)}
 .fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
 .fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
 .fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
-.fb.hint{display:block;background:var(--gob);border-color:var(--go)}
 .fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
-.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}.fb.hint .k{color:var(--go)}
-.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}
+.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block;color:var(--tx)}
 .fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
 .fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
 .fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
-.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 1.2s linear forwards;width:100%}
-@keyframes shrink{to{width:0}}
+.fb .ex b{color:var(--tx)}
 .foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
 .foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
 .btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
@@ -110,28 +204,6 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
 .btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
 .theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
-.cheat{margin:24px 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.12)}
-.cheat-title{margin:0 0 2px;font-size:1.05rem;font-weight:700;color:var(--tx)}
-.cheat-sub{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
-.cheat-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
-.cheat-pill{font:inherit;font-size:.8rem;font-weight:500;color:var(--mu);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s}
-.cheat-pill:hover{color:var(--tx);border-color:var(--c,var(--sa))}
-.cheat-pill.on{color:var(--tx);border-color:var(--c,var(--sa));background:var(--pl);box-shadow:inset 0 -2px 0 var(--c,var(--sa))}
-.cheat-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px}
-.cheat-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--bd)}
-.cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
-.cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
-@media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
-.complete{position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;z-index:100;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:pop .35s ease}
-.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
-.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
-.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
-.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
-.complete-actions .go:hover{filter:brightness(1.1)}
-.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
-.complete-actions .cancel:hover{border-color:var(--pr)}
 .errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
 .errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
@@ -145,14 +217,18 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .errs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 .errs-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
 .errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
+.errs-actions .go:hover{filter:brightness(1.1)}
 .errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .errs-actions .cancel:hover{border-color:var(--pr)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;
+  padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  animation:pop .35s ease}
+button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
 #theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
 #theory-section.show{display:block}
-.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.1)}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
 .theory-card h2{font-size:1.2rem;color:var(--sa);border-bottom:1px solid var(--bd);padding-bottom:6px;margin-top:24px}
 .theory-card h2:first-child{margin-top:0}
-.theory-card h3{font-size:1rem;color:var(--tx);margin-top:18px}
 .theory-card p,.theory-card li{color:var(--mu);font-size:.92rem;line-height:1.6}
 .theory-card ul{padding-left:20px;margin:10px 0}
 .theory-card .rule-box{background:var(--gob);border-left:4px solid var(--go);padding:11px 14px;margin:16px 0;border-radius:6px;color:var(--go);font-size:.92rem}
@@ -162,92 +238,95 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
 .theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
 .theory-card th{background:var(--pl);color:var(--tx)}
-@media(max-width:480px){.row{flex-direction:column}.chk,.next{padding:12px}.card{padding:18px}h1{font-size:1.4rem}.complete-card{padding:22px 18px}.theory-card{padding:16px}.opt{flex:1 1 100%}}
+
+/* Візуальні плашки для уроку */
+:root{--c-subj:#60a5fa;--c-verb:#f472b6;--c-adj:#a3e635;--c-adv:#94a3b8;--c-obj:#cbd5e1;--c-pr:#fcd34d;--c-art:#2dd4bf;--c-n:#c4b5fd}
+.r-subj{--c:var(--c-subj)}.r-verb{--c:var(--c-verb)}.r-adj{--c:var(--c-adj)}.r-adv{--c:var(--c-adv)}.r-obj{--c:var(--c-obj)}.r-pr{--c:var(--c-pr)}.r-art{--c:var(--c-art)}.r-n{--c:var(--c-n)}
+.lx{margin:10px 0}
+.sch{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
+.un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
+.un .wc{cursor:default}
+.wc{display:inline-block;padding:9px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-size:.98rem;font-weight:500;line-height:1.25;transition:transform .12s,border-color .15s,background .15s}
+.wc.col{border-color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+
+@media(max-width:480px){
+  .stats-panel{grid-template-columns:repeat(3,1fr)}
+  .row{flex-direction:column}.chk,.next{padding:12px}
+  .card{padding:18px}h1{font-size:1.35rem}.header-wrap{padding-top:48px}
+  .speak,.mode-toggle,.rst{top:18px}
+  .rst{right:18px}.speak{right:58px}.mode-toggle{right:98px}
+  .card h2{padding-right:150px;min-height:32px;line-height:32px}
+  .theory-card{padding:16px}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
-.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s;--xa:#475569;--xz:#94a3b8}
-.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
-.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
-.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
-.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
-.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
-.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
-.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
-.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
-.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
-.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums;position:relative}
-.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
-.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
-.xp.max .xv b,.xp.max .xv small{color:var(--go)}
-.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
-.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent);transition:width .7s cubic-bezier(.4,0,.2,1)}
-.xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
-@keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
-.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
-.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
-.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
-.xnx{font-size:.74rem;color:var(--mu)}
-.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
-.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
-.xpop.go{animation:xpop .9s ease-out forwards}
-@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
-.xv b.bump{animation:xbump .35s ease-out}
-@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
-.xp.lvl{animation:xlvl 1.2s ease-out}
-@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
-.xp.lvl .xrn{animation:xbump .6s ease-out}
-.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
-@keyframes xgold{to{background-position:200% 0}}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
-    <h1>Komparation der Adjektive<small>Ступені порівняння прикметників · тренажер</small></h1>
+    <h1>Komparation<small>Ступені порівняння прикметників</small></h1>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
-    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звук">🔔</button>
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
   </div>
+
+  <div class="stages" id="stages"></div>
+  
+  <div style="text-align:center; margin-bottom:10px;">
+    <button class="tr-btn" onclick="showLesson(stage)" type="button">📖 Урок / Правила етапу</button>
+  </div>
+
+  <div class="lesson" id="lesson"></div>
 
   <div class="tabs" id="tabs"></div>
   <div class="pg"><i id="bar"></i></div>
 
   <div class="stats-panel">
-    <div class="stat-box"><div class="stat-label">Речення</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+    <div class="stat-box"><div class="stat-label">Завдань</div><div class="stat-val" id="stat-done">0 / 0</div></div>
     <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
     <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
   </div>
 
   <div class="card" id="card">
-    <div class="top">
-      <h2 id="title"></h2>
-      <button class="mode" id="modeBtn" title="Змінити режим"></button>
-      <button class="cb" id="speakBtn" title="Озвучити німецькою">🔊</button>
-      <button class="cb" id="rst" title="Скинути прогрес цієї вкладки">↻</button>
-    </div>
+    <h2 id="title"></h2>
+    <button class="mode-toggle" id="modeBtn" title="Змінити режим">✏️ Впиши</button>
+    <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
+    <button class="rst" id="rstBtn" title="Скинути прогрес цієї категорії" onclick="restartTab()">↺</button>
+
+    <div id="finBox"></div>
+
     <p class="sent" id="sent"></p>
+    <div class="cue-line" id="cueLine"></div>
     <div class="lab" id="lab"></div>
-    <div class="scheme" id="scheme"></div>
+
     <div class="opts" id="opts"></div>
-    <div class="row" id="row">
-      <input id="inp" type="text" aria-label="Відповідь" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи відповідь …" enterkeyhint="done">
+
+    <div class="um-row" id="umRow">
+      <button class="tool" id="showBtn" type="button">Показати відповідь</button>
+    </div>
+    <div class="row">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
-      <button class="next" id="next">Далі →</button>
     </div>
     <div class="fb" id="fb"></div>
   </div>
 
-  <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl">EXP цієї категорії</span><span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+  <div class="xp" id="xp" data-r="0">
+    <div class="xh">
+      <span class="xl"><i class="xg"></i>EXP</span>
+      <span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span>
+    </div>
+    <div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div>
+    <div class="xb"><i id="xf"></i></div>
+  </div>
 
   <div class="foot">
     <div class="foot-row">
       <button class="btn danger" id="reviewBtn" style="display:none" onclick="openErrors()"></button>
     </div>
-    <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Шпаргалка (Теорія)</button>
+    <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Відкрити теорію</button>
   </div>
-
-  <div class="cheat" id="glossary"></div>
 
   <div id="theory-section">
     <div class="theory-card">
@@ -317,69 +396,66 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   </div>
 </div>
 
-<div class="complete" id="errs" hidden>
-  <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
-    <h2 id="errs-title">🔁 Мої помилки</h2>
+<div class="modal" id="errs" hidden>
+  <div class="errs-card" role="dialog" aria-modal="true">
+    <h2>🔁 Мої помилки</h2>
     <p class="errs-sub" id="errs-sub"></p>
     <div class="errs-list" id="errs-list"></div>
     <div class="errs-actions" id="errs-actions"></div>
   </div>
 </div>
 
-<div class="complete" id="complete" hidden>
-  <div class="complete-card">
-    <h2 id="complete-title">🎉 Вкладку пройдено!</h2>
-    <p id="complete-text"></p>
-    <div class="complete-actions" id="complete-actions"></div>
-  </div>
-</div>
-
 <script>
-/* ============ HELPERS ============ */
-const $=id=>document.getElementById(id);
-const sh=a=>{a=[...a];for(let i=a.length;i>1;){const j=Math.random()*i--|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const stripHTML=s=>String(s||"").replace(/<br\s*\/?>/gi," ").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
-const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); return { t: t.replace(/_/g, " "), r }; });
+const ROLE = { subj:"Підмет", verb:"Дієслово", adj:"Прикметник", adv:"Обставина", obj:"Додаток", pr:"Прийменник", art:"Артикль", n:"Іменник", neg:"Заперечення" };
 
-/* ============ THEME & SOUND ============ */
-const mqLight=window.matchMedia('(prefers-color-scheme: light)');
-function effTheme(){return document.documentElement.getAttribute('data-theme')||(mqLight.matches?'light':'dark')}
-function paintThemeIcon(){$("theme-toggle").textContent=effTheme()==='light'?'☀️':'🌙'}
-const savedTheme=store.get('ka-theme');
-if(savedTheme==='light'||savedTheme==='dark')document.documentElement.setAttribute('data-theme',savedTheme);
-paintThemeIcon();
-if(mqLight.addEventListener)mqLight.addEventListener('change',paintThemeIcon);
-function toggleTheme(){const n=effTheme()==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',n);store.set('ka-theme',n);paintThemeIcon()}
+const STAGES = [
+  { 
+    n:1, t:"Positiv (Рівність)", 
+    p:"Використовується для опису або порівняння однакових якостей. Формула: <b>so + прикметник + wie</b> (такий самий ... як). Для заперечення: <b>nicht so + прикметник + wie</b>.", 
+    ex:[["Der|art Kaffee|subj ist|verb so|adv lecker|adj wie|pr Tee|obj","Кава така ж смачна, як чай."],["Mein|art Handy|subj ist|verb nicht|neg so|adv teuer|adj wie|pr deins|obj","Мій телефон не такий дорогий, як твій."],["Das|art Haus|subj ist|verb doppelt|adv so|adv groß|adj wie|pr meine|art Wohnung|obj","Будинок удвічі більший, ніж моя квартира."]], 
+    tip:"Після <i>so … wie</i> прикметник завжди стоїть у базовій формі (без -er)." 
+  },
+  { 
+    n:2, t:"Komparativ (Порівняння)", 
+    p:"Порівнює дві різні речі. Додаємо <b>-er</b> до прикметника. Односкладові прикметники з голосними a, o, u отримують умлаут (ä, ö, ü). Використовується зі словом <b>als</b> (ніж).", 
+    ex:[["Er|subj ist|verb älter|adj als|pr ich|obj","Він старший за мене."],["Berlin|subj ist|verb größer|adj als|pr Karlsruhe|obj","Берлін більший за Карлсруе."],["Das|art Hotel|subj ist|verb teurer|adj als|pr das|art Hostel|obj","Готель дорожчий за хостел."]], 
+    tip:"Ніколи не кажи <i>mehr groß</i> — тільки <i>größer</i>. Винятки: gut → besser, viel → mehr, gern → lieber." 
+  },
+  { 
+    n:3, t:"Superlativ (Найвищий ступінь)", 
+    p:"Вказує на найвищу якість. Має дві форми: <b>am + ... + -sten</b> (коли стоїть після дієслова) та <b>der/die/das + ... + -ste</b> (коли стоїть перед іменником).", 
+    ex:[["Im|pr Winter|obj ist|verb es|subj am|adv kältesten|adj","Взимку найхолодніше."],["Das|art ist|verb der|art höchste|adj Berg|obj","Це найвища гора."],["Sie|subj ist|verb die|art jüngste|adj Schülerin|obj","Вона наймолодша учениця."]], 
+    tip:"Після літер -t, -d, -s, -ß, -z, -sch додаємо -est (наприклад, am ältesten)." 
+  },
+  { 
+    n:4, t:"Особливі форми", 
+    p:"Деякі прикметники змінюються не за правилами. Їх треба просто запам'ятати. Також є прикметники, які втрачають літеру -e (teuer → teurer, dunkel → dunkler).", 
+    ex:[["gut|adj besser|adj am_besten|adj","хороший → кращий → найкращий"],["viel|adj mehr|adj am_meisten|adj","багато → більше → найбільше"],["hoch|adj höher|adj am_höchsten|adj","високий → вищий → найвищий"],["teuer|adj teurer|adj am_teuersten|adj","дорогий → дорожчий → найдорожчий"]], 
+    tip:"Запам'ятай трійцю: <b>gern – lieber – am liebsten</b> (охоче - охочіше - найохочіше)." 
+  },
+  { 
+    n:5, t:"Динаміка та підсилення", 
+    p:"Komparativ часто використовується для опису змін. <b>immer + Komparativ</b> = все більш... Конструкція <b>Je + Komparativ, desto/umso + Komparativ</b> = Чим..., тим...", 
+    ex:[["Es|subj wird|verb immer|adv kälter|adj","Стає все холодніше."],["Je|pr mehr|adj du|subj übst|verb desto|pr besser|adj sprichst|verb du|subj","Чим більше ти тренуєшся, тим краще говориш."],["Das|subj ist|verb viel|adv besser|adj","Це набагато краще."]], 
+    tip:"Для підсилення використовуй <i>viel, noch, deutlich</i>. НЕ використовуй <i>sehr</i> з Komparativ!" 
+  },
+  { 
+    n:6, t:"Закінчення (Deklination)", 
+    p:"Якщо прикметник у Komparativ або Superlativ стоїть перед іменником, він відмінюється як звичайний прикметник (отримує закінчення -e, -en, -er, -es залежно від роду та відмінка).", 
+    ex:[["Ich|subj möchte|verb ein|art schnelleres|adj Auto|obj kaufen|verb","Я хочу купити швидшу машину."],["Das|art ist|verb der|art beste|adj Kaffee|obj","Це найкраща кава."],["Wir|subj haben|verb einen|art netteren|adj Chef|obj","У нас приємніший начальник."]], 
+    tip:"Перед іменником завжди є артикль (der/die/das/ein/eine), а прикметник отримує відповідне закінчення." 
+  },
+  { 
+    n:7, t:"Мікс (Типові помилки)", 
+    p:"Тут зібрані найнебезпечніші випадки: плутанина між wie та als, забутий умлаут, неправильні форми винятків та закінчення.", 
+    ex:[["Er|subj ist|verb größer|adj als|pr ich|obj","Він вищий за мене (різниця - als)."],["Sie|subj ist|verb so|adv alt|adj wie|pr ich|obj","Вона така ж стара, як я (рівність - wie)."],["Das|art ist|verb das|art schnellste|adj Auto|obj","Це найшвидша машина (перед іменником без am)."]], 
+    tip:"Питання на мільйон: <b>als</b> чи <b>wie</b>? Якщо є різниця (Komparativ) — als. Якщо однаково (Positiv) — wie." 
+  }
+];
 
-let soundEnabled=store.get('ka-sound')!=='off';
-function updateSoundIcon(){$("sound-toggle").textContent=soundEnabled?'🔔':'🔕'}
-updateSoundIcon();
-function toggleSound(){soundEnabled=!soundEnabled;store.set('ka-sound',soundEnabled?'on':'off');updateSoundIcon();if(soundEnabled)playSound('correct')}
-let audioCtx;
-function playSound(type){
-  if(!soundEnabled)return;
-  try{
-    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==='suspended')audioCtx.resume();
-    if('audioSession' in navigator){try{navigator.audioSession.type='playback'}catch(e){}}
-    const osc=audioCtx.createOscillator(),g=audioCtx.createGain();
-    osc.connect(g);g.connect(audioCtx.destination);
-    const now=audioCtx.currentTime;
-    if(type==='correct'){
-      osc.type='sine';osc.frequency.setValueAtTime(523.25,now);osc.frequency.setValueAtTime(659.25,now+0.1);
-      g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.4,now+0.05);g.gain.exponentialRampToValueAtTime(0.001,now+0.5);
-      osc.start(now);osc.stop(now+0.6);
-    }else{
-      osc.type='triangle';osc.frequency.setValueAtTime(200,now);osc.frequency.exponentialRampToValueAtTime(100,now+0.2);
-      g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.4,now+0.05);g.gain.exponentialRampToValueAtTime(0.001,now+0.3);
-      osc.start(now);osc.stop(now+0.4);
-    }
-  }catch(e){}
-}
-
-/* ============ DATA ============ */
-const RAW={
-pos:[
+const RAW_SENT = {
+1: [
 ["Kaffee ist so lecker ___ Tee.","рівність: so … wie","wie",["wie","als","denn","so"],"Кава така ж смачна, як і чай.","so + Positiv + wie — рівність."],
 ["Mein neues Handy ist nicht so teuer ___ deins.","заперечення рівності","wie",["wie","als","denn","dass"],"Мій новий телефон не такий дорогий, як твій.","nicht so + Positiv + wie."],
 ["Das Haus ist doppelt so groß ___ meine Wohnung.","кратність","wie",["wie","als","denn","dass"],"Будинок удвічі більший, ніж моя квартира.","doppelt / dreimal so + Positiv + wie."],
@@ -389,16 +465,9 @@ pos:[
 ["Deutsch ist nicht so schwer ___ Chinesisch.","рівність","wie",["wie","als","dass","denn"],"Німецька не така складна, як китайська.","nicht so + Positiv + wie."],
 ["Der Zug ist doppelt so ___ wie der Bus.","schnell → Positiv","schnell",["schnell","schneller","schnellste","am schnellsten"],"Поїзд удвічі швидший за автобус.","doppelt so + Positiv + wie."],
 ["Im Sommer ist es hier so ___ wie in Spanien.","warm → Positiv","warm",["warm","wärmer","am wärmsten","mehr warm"],"Влітку тут так само тепло, як в Іспанії.","so + Positiv + wie."],
-["Das Zimmer ist genauso groß ___ das Wohnzimmer.","рівність","wie",["wie","als","dass","denn"],"Ця кімната така ж велика, як і вітальня.","genauso + Positiv + wie."],
-["Mein Bruder ist genauso ___ wie ich: Wir sind beide 25.","alt → Positiv","alt",["alt","älter","am ältesten","mehr alt"],"Мій брат такого ж віку, як я: нам обом по 25.","genauso + Positiv + wie."],
-["Der Kuchen ist so ___ wie Omas Kuchen.","lecker → Positiv","lecker",["lecker","leckerer","am leckersten","mehr lecker"],"Пиріг такий смачний, як бабусин.","so + Positiv + wie."],
-["Sie ist dreimal so ___ wie ich.","stark → Positiv","stark",["stark","stärker","am stärksten","mehr stark"],"Вона втричі сильніша за мене.","dreimal so + Positiv + wie."],
-["Das Buch ist so interessant ___ der Film.","рівність","wie",["wie","als","dass","denn"],"Книжка така ж цікава, як і фільм.","so + Positiv + wie."],
-["Ich bin nicht so ___ wie du.","müde → Positiv","müde",["müde","müder","am müdesten","mehr müde"],"Я не такий втомлений, як ти.","nicht so + Positiv + wie."],
-["Dieser Film ist nicht so ___ wie das Buch.","gut → Positiv","gut",["gut","besser","am besten","guter"],"Цей фільм не такий хороший, як книжка.","besser вживаємо лише з als; з so … wie — Positiv."],
-["Er spricht so ___ Deutsch wie ich.","gut → Positiv","gut",["gut","besser","am besten","gute"],"Він говорить німецькою так само добре, як я.","so + Positiv + wie."]
+["Das Zimmer ist genauso groß ___ das Wohnzimmer.","рівність","wie",["wie","als","dass","denn"],"Ця кімната така ж велика, як і вітальня.","genauso + Positiv + wie."]
 ],
-komp:[
+2: [
 ["Der Cappuccino ist ___ als der Filterkaffee.","Komparativ · gut","besser",["besser","guter","mehr gut","am besten"],"Капучино кращий за фільтр-каву.","gut → besser (виняток)."],
 ["Er ist ___ als ich.","Komparativ · alt","älter",["älter","alter","ältere","am ältesten"],"Він старший за мене.","alt → älter (умлаут)."],
 ["Mit dem Zug fährt man ___ als mit dem Bus.","Komparativ · bequem","bequemer",["bequemer","mehr bequem","am bequemsten","bequemere"],"Потягом їхати зручніше, ніж автобусом.","bequem + er."],
@@ -409,21 +478,10 @@ komp:[
 ["Tee ist ___ als Kaffee.","Komparativ · gesund","gesünder",["gesünder","gesunder","mehr gesund","am gesündesten"],"Чай здоровіший за каву.","gesund → gesünder (умлаут)."],
 ["Das Hotel ist ___ als das Hostel.","Komparativ · teuer","teurer",["teurer","teuerer","mehr teuer","am teuersten"],"Готель дорожчий за хостел.","teuer → teurer (випадає -e-)."],
 ["Mein Zimmer ist ___ als deins.","Komparativ · dunkel","dunkler",["dunkler","dunkeler","mehr dunkel","am dunkelsten"],"Моя кімната темніша за твою.","dunkel → dunkler (випадає -e-)."],
-["Der Bus ist ___ als das Auto.","Komparativ · langsam","langsamer",["langsamer","mehr langsam","am langsamsten","langsamere"],"Автобус повільніший за машину.","langsam + er."],
 ["Ich trinke Tee gern, aber Kaffee trinke ich ___.","Komparativ · gern","lieber",["lieber","gerner","mehr gern","am liebsten"],"Я люблю чай, але каву п'ю охочіше.","gern – lieber – am liebsten."],
-["Er isst ___ als ich.","Komparativ · viel","mehr",["mehr","vieler","mehr viel","am meisten"],"Він їсть більше за мене.","viel – mehr – am meisten."],
-["Das Handy kostet ___ als das Tablet.","Komparativ · wenig","weniger",["weniger","wenigere","mehr wenig","am wenigsten"],"Телефон коштує менше, ніж планшет.","wenig – weniger – am wenigsten."],
-["Die Prüfung war ___ als gedacht.","Komparativ · schwer","schwerer",["schwerer","mehr schwer","am schwersten","schwerere"],"Іспит був складнішим, ніж я думав.","schwer + er."],
-["Mein Weg zur Arbeit ist ___ als dein Weg.","Komparativ · nah","näher",["näher","naher","am nächsten","mehr nah"],"Моя дорога на роботу ближча, ніж твоя.","nah → näher (умлаут)."],
-["Der Berg ist ___ als das Haus.","Komparativ · hoch","höher",["höher","hocher","am höchsten","mehr hoch"],"Гора вища за будинок.","hoch → höher (c зникає)."],
-["Meine Katze ist ___ als mein Hund.","Komparativ · klug","klüger",["klüger","kluger","am klügsten","mehr klug"],"Моя кішка розумніша за мого собаку.","klug → klüger (умлаут)."],
-["Sie kommt ___ als ich.","Komparativ · früh","früher",["früher","mehr früh","am frühesten","fruher"],"Вона приходить раніше за мене.","früh + er."],
-["Er kommt immer ___ als ich.","Komparativ · spät","später",["später","spater","mehr spät","am spätesten"],"Він завжди приходить пізніше за мене.","spät → später (умлаут)."],
-["Diese Aufgabe ist ___ als die erste.","Komparativ · wichtig","wichtiger",["wichtiger","mehr wichtig","am wichtigsten","wichtigerer"],"Це завдання важливіше за перше.","wichtig + er."],
-["Mein Opa ist ___ als meine Oma.","Komparativ · alt","älter",["älter","alter","mehr alt","am ältesten"],"Мій дідусь старший за мою бабусю.","alt → älter (умлаут)."],
-["Der Sommer in Italien ist ___ als in Deutschland.","Komparativ · warm","wärmer",["wärmer","warmer","mehr warm","am wärmsten"],"Літо в Італії тепліше, ніж у Німеччині.","warm → wärmer (умлаут)."]
+["Er isst ___ als ich.","Komparativ · viel","mehr",["mehr","vieler","mehr viel","am meisten"],"Він їсть більше за мене.","viel – mehr – am meisten."]
 ],
-sup:[
+3: [
 ["Im Winter ist es ___.","Superlativ · kalt","am kältesten",["am kältesten","der kälteste","kältesten","am kälteste"],"Взимку найхолодніше.","Після дієслова: am + … + -sten.",["kältesten"]],
 ["Welches Auto fährt ___?","Superlativ · schnell","am schnellsten",["am schnellsten","das schnellste","schnellsten","am schnellste"],"Яка машина їде найшвидше?","Після дієслова: am + … + -sten."],
 ["Am Morgen trinke ich ___ Espresso.","Superlativ · gern","am liebsten",["am liebsten","am gernsten","am besten","liebsten"],"Вранці я найохочіше п'ю еспресо.","gern – lieber – am liebsten."],
@@ -432,46 +490,20 @@ sup:[
 ["Mein Bruder ist ___ in unserer Familie.","Superlativ · alt","am ältesten",["am ältesten","am altesten","der älteste","am ältsten"],"Мій брат найстарший у нашій родині.","alt → am ältesten (-est після -t)."],
 ["Diese Jacke ist ___.","Superlativ · günstig","am günstigsten",["am günstigsten","der günstigste","günstigsten","am günstiger"],"Ця куртка найвигідніша за ціною.","günstig → am günstigsten."],
 ["In unserer Gruppe lernt Anna ___.","Superlativ · viel","am meisten",["am meisten","am vielsten","die meiste","am mehrsten"],"У нашій групі Анна вчиться найбільше.","viel – mehr – am meisten."],
-["Im Sommer stehe ich ___ auf.","Superlativ · früh","am frühesten",["am frühesten","am frühsten","der früheste","am früher"],"Влітку я встаю найраніше.","früh → am frühesten (-est)."],
-["Das Zimmer ist ___.","Superlativ · dunkel","am dunkelsten",["am dunkelsten","am dunklesten","der dunkelste","am dunkler"],"Ця кімната найтемніша.","dunkel → am dunkelsten."],
-["Diese Aufgabe ist ___.","Superlativ · wichtig","am wichtigsten",["am wichtigsten","am wichtigesten","die wichtigste","am wichtiger"],"Це завдання найважливіше.","wichtig → am wichtigsten."],
-["Dieser Weg ist ___.","Superlativ · nah","am nächsten",["am nächsten","am nahsten","der nächste","am näher"],"Ця дорога найближча.","nah – näher – am nächsten."],
-["Welcher Berg ist ___?","Superlativ · hoch","am höchsten",["am höchsten","am höhsten","der höchste","am hochsten"],"Яка гора найвища?","hoch – höher – am höchsten."],
-["Er kommt immer ___.","Superlativ · spät","am spätesten",["am spätesten","am spätsten","der späteste","am später"],"Він завжди приходить найпізніше.","spät → am spätesten (-est)."],
 ["Berlin ist die ___ Stadt Deutschlands.","Superlativ · groß","größte",["größte","größten","größere","am größten"],"Берлін — найбільше місто Німеччини.","Перед іменником: der/die/das + … + -ste."],
-["Das ist der ___ Kaffee der Stadt!","Superlativ · gut","beste",["beste","besten","gute","am besten"],"Це найкраща кава в місті!","gut – besser – der beste."],
-["Heute ist der ___ Tag der Woche.","Superlativ · schön","schönste",["schönste","schönsten","am schönsten","schönere"],"Сьогодні найпрекрасніший день тижня.","Перед іменником: der + … + -ste."],
-["Das ist der ___ Berg in Deutschland.","Superlativ · hoch","höchste",["höchste","höhste","am höchsten","höchsten"],"Це найвища гора в Німеччині.","hoch → der höchste."],
-["Berlin ist eine der ___ Städte Europas.","Superlativ · interessant","interessantesten",["interessantesten","interessantsten","interessanteste","interessanter"],"Берлін — одне з найцікавіших міст Європи.","eine der + Superlativ (Genitiv Pl.) → -en.",["interessantesten"]],
-["Er ist einer der ___ Fußballer.","Superlativ · gut","besten",["besten","beste","guten","bestes"],"Він один із найкращих футболістів.","einer der + Superlativ (Genitiv Pl.) → -en."],
-["Das ist das ___ Geschenk!","aller- + gut","allerbeste",["allerbeste","am besten","allerbesten","aller beste"],"Це най-найкращий подарунок!","aller- + Superlativ — підсилення."],
-["Das ist das ___ Auto.","Superlativ · schnell","schnellste",["schnellste","am schnellsten","am schnellste","schnellsten"],"Це найшвидша машина.","Перед іменником am не вживаємо."],
-["Sie ist die ___ Schülerin.","Superlativ · jung","jüngste",["jüngste","jüngsten","am jüngsten","jüngere"],"Вона наймолодша учениця.","jung → die jüngste."],
-["Im Sommer ist es hier ___.","Superlativ · schön","am schönsten",["am schönsten","am schönesten","der schönste","am schöner"],"Влітку тут найгарніше.","schön → am schönsten."]
+["Das ist der ___ Kaffee der Stadt!","Superlativ · gut","beste",["beste","besten","gute","am besten"],"Це найкраща кава в місті!","gut – besser – der beste."]
 ],
-dyn:[
+5: [
 ["Es wird ___ kälter.","«все більш»","immer",["immer","noch","je","desto"],"Стає все холодніше.","immer + Komparativ = динаміка."],
 ["Mein Deutsch wird immer ___.","Komparativ · gut","besser",["besser","gut","am besten","guter"],"Моя німецька стає все кращою.","immer + Komparativ."],
 ["Je mehr du übst, ___ besser sprichst du.","чим…, тим…","desto",["desto","als","wie","am"],"Чим більше ти тренуєшся, тим краще говориш.","Je + Komparativ …, desto / umso + Komparativ …",["umso"]],
 ["Je früher wir losgehen, ___ schneller sind wir da.","чим…, тим…","umso",["umso","als","wie","am"],"Чим раніше ми вийдемо, тим швидше будемо там.","Je … umso = Je … desto.",["desto"]],
 ["Je ___ du übst, desto besser sprichst du.","Komparativ · viel","mehr",["mehr","viel","am meisten","vieler"],"Чим більше ти тренуєшся, тим краще говориш.","je + Komparativ: je mehr."],
-["Je länger ich warte, desto ___ werde ich.","Komparativ · nervös","nervöser",["nervöser","nervös","am nervösesten","mehr nervös"],"Чим довше я чекаю, тим нервовішим стаю.","desto + Komparativ."],
 ["Heute ist es ___ kälter als gestern.","підсилення","noch",["noch","sehr","am","mehr"],"Сьогодні ще холодніше, ніж учора.","viel / noch / deutlich + Komparativ (не sehr!).",["viel","deutlich"]],
 ["Das ist ___ besser.","підсилення","viel",["viel","sehr","mehr","am"],"Це набагато краще.","viel / noch / deutlich + Komparativ.",["deutlich","noch"]],
-["Der Test war ___ schwerer als gedacht.","підсилення","deutlich",["deutlich","sehr","am","mehr"],"Тест був помітно складнішим, ніж я думав.","viel / noch / deutlich + Komparativ.",["viel","noch"]],
-["Mit dem Rad ist es ___ schneller als mit dem Bus.","підсилення","viel",["viel","sehr","am","mehr"],"На велосипеді набагато швидше, ніж автобусом.","viel + Komparativ.",["deutlich","noch"]],
-["Ein ___ Herr sitzt im Bus.","alt (абсолютний Komparativ)","älterer",["älterer","älteren","alter","ältester"],"У автобусі сидить літній чоловік.","Абсолютний Komparativ: не «старший за когось», а «у віці»."],
-["Die Tage werden ___ länger.","«все більш»","immer",["immer","noch","je","viel"],"Дні стають все довшими.","immer + Komparativ."],
-["Je älter ich werde, ___ ruhiger werde ich.","чим…, тим…","desto",["desto","als","wie","am"],"Чим старшим я стаю, тим спокійнішим стаю.","Je … desto / umso.",["umso"]],
-["Je teurer ein Handy ist, ___ besser ist die Kamera.","чим…, тим…","desto",["desto","als","wie","am"],"Чим дорожчий телефон, тим краща камера.","Je … desto.",["umso"]],
-["Je ___ das Wetter, desto besser meine Laune.","Komparativ · schön","schöner",["schöner","schön","am schönsten","mehr schön"],"Чим гарніша погода, тим кращий мій настрій.","je + Komparativ."],
-["Je weniger man schläft, desto ___ ist man.","Komparativ · müde","müder",["müder","müde","am müdesten","mehr müde"],"Чим менше спиш, тим втомленішим є.","desto + Komparativ."],
-["Je schneller du sprichst, ___ weniger verstehe ich.","чим…, тим…","desto",["desto","als","wie","am"],"Чим швидше ти говориш, тим менше я розумію.","Je … desto / umso.",["umso"]],
-["Je ___ er arbeitet, desto mehr verdient er.","Komparativ · viel","mehr",["mehr","viel","am meisten","vieler"],"Чим більше він працює, тим більше заробляє.","je + Komparativ."],
-["Das Wetter wird ___ schlechter.","«все більш»","immer",["immer","noch","je","desto"],"Погода стає все гіршою.","immer + Komparativ."],
-["Meine Deutschkenntnisse werden ___ besser.","«все більш»","immer",["immer","noch","je","desto"],"Мої знання німецької стають все кращими.","immer + Komparativ."]
+["Mit dem Rad ist es ___ schneller als mit dem Bus.","підсилення","viel",["viel","sehr","am","mehr"],"На велосипеді набагато швидше, ніж автобусом.","viel + Komparativ.",["deutlich","noch"]]
 ],
-dekl:[
+6: [
 ["Ich möchte ein ___ Auto kaufen.","schnell · Komparativ","schnelleres",["schnelleres","schnellerem","schnellstes","schneller"],"Я хочу купити швидшу машину.","schnell + er + es (Neutrum Akk)."],
 ["Das war der ___ Tag meines Lebens.","schön · Superlativ","schönste",["schönste","schönsten","schöneste","am schönsten"],"Це був найпрекрасніший день мого життя.","schön + st + e (Maskulinum Nom.)."],
 ["Er hat einen ___ Bruder.","alt · Komparativ","älteren",["älteren","älterer","älteres","ältesten"],"У нього є старший брат.","einen + Maskulinum Akk → -en."],
@@ -479,22 +511,11 @@ dekl:[
 ["Sie hat eine ___ Schwester.","jung · Komparativ","jüngere",["jüngere","jüngeren","jüngerer","jünger"],"У неї є молодша сестра.","eine + Feminin Akk → -e."],
 ["Wir brauchen ein ___ Zimmer.","groß · Komparativ","größeres",["größeres","größerer","größeren","größer"],"Нам потрібна більша кімната.","ein + Neutrum Akk → -es."],
 ["Der ___ Weg führt durch den Wald.","kurz · Superlativ","kürzeste",["kürzeste","kürzesten","kürzester","am kürzesten"],"Найкоротша дорога веде через ліс.","der + -ste (Nom.)."],
-["Ich habe einen ___ Chef als du.","nett · Komparativ","netteren",["netteren","netterer","nettesten","netter"],"У мене приємніший начальник, ніж у тебе.","einen + Maskulinum Akk → -en."],
 ["Mit meiner ___ Schwester wohne ich in Berlin.","alt · Komparativ","älteren",["älteren","ältere","älterer","älteres"],"З моєю старшою сестрою я живу в Берліні.","mit + Dativ Feminin → -en."],
 ["Das ist das ___ Handy im Laden.","teuer · Superlativ","teuerste",["teuerste","teuersten","teurerste","am teuersten"],"Це найдорожчий телефон у магазині.","das + -ste (Neutrum Nom.)."],
-["Ich wohne im ___ Haus der Straße.","alt · Superlativ","ältesten",["ältesten","älteste","älteres","am ältesten"],"Я живу в найстарішому будинку на вулиці.","im = in dem (Dativ Neutrum) → -en."],
-["Das war der ___ Film des Jahres.","lustig · Superlativ","lustigste",["lustigste","lustigsten","am lustigsten","lustigere"],"Це був найсмішніший фільм року.","der + -ste (Nom.)."],
-["Wir suchen eine ___ Wohnung.","billig · Komparativ","billigere",["billigere","billigeren","billiger","billigste"],"Ми шукаємо дешевшу квартиру.","eine + Feminin Akk → -e."],
-["Er ist ein ___ Lehrer als sie.","streng · Komparativ","strengerer",["strengerer","strengere","strengeren","strengster"],"Він суворіший учитель, ніж вона.","ein + Maskulinum Nom → -er."],
-["Sie trägt ein ___ Kleid.","schön · Komparativ","schöneres",["schöneres","schönerer","schönere","schönstes"],"Вона носить гарнішу сукню.","ein + Neutrum Akk → -es."],
-["Das ist die ___ Antwort.","richtig · Superlativ","richtigste",["richtigste","richtigsten","richtigeste","am richtigsten"],"Це найправильніша відповідь.","die + -ste."],
-["Das ___ Hotel der Stadt ist teuer.","groß · Superlativ","größte",["größte","größten","größere","am größten"],"Найбільший готель міста дорогий.","das + -ste."],
-["Ich möchte einen ___ Kaffee.","stark · Komparativ","stärkeren",["stärkeren","stärkerer","stärkeres","stärksten"],"Я хочу міцнішу каву.","einen + Maskulinum Akk → -en."],
-["Das ist die ___ Katze der Welt.","süß · Superlativ","süßeste",["süßeste","süßste","süßere","süßeren"],"Це наймиліша кішка у світі.","після -ß: -est → süßeste."],
-["Er trägt die ___ Schuhe.","teuer · Superlativ (Pl.)","teuersten",["teuersten","teuerste","teurerer","teurersten"],"Він носить найдорожче взуття.","die + Plural Akk → -en."],
-["Heute ist ein ___ Tag als gestern.","kalt · Komparativ","kälterer",["kälterer","kältere","kälteren","kältester"],"Сьогодні холодніший день, ніж учора.","ein + Maskulinum Nom → -er."]
+["Ich wohne im ___ Haus der Straße.","alt · Superlativ","ältesten",["ältesten","älteste","älteres","am ältesten"],"Я живу в найстарішому будинку на вулиці.","im = in dem (Dativ Neutrum) → -en."]
 ],
-mix:[
+7: [
 ["Er ist größer ___ ich.","wie / als?","als",["als","wie","denn","so"],"Він вищий за мене.","Різниця = als."],
 ["Sie ist so alt ___ ich.","wie / als?","wie",["wie","als","denn","dass"],"Вона така ж стара, як я.","Рівність = so … wie."],
 ["Das Haus ist ___.","groß · Komparativ","größer",["größer","mehr groß","am größten","größere"],"Будинок більший.","Не «mehr groß», а größer."],
@@ -506,458 +527,511 @@ mix:[
 ["Er spricht Deutsch ___ als ich.","gut · Komparativ","besser",["besser","guter","mehr gut","am besten"],"Він говорить німецькою краще за мене.","gut → besser."],
 ["Der Zug ist so schnell ___ der Bus.","wie / als?","wie",["wie","als","denn","dass"],"Поїзд такий же швидкий, як автобус.","so … wie."],
 ["Er ist ___ als sein Bruder.","klug · Komparativ","klüger",["klüger","kluger","mehr klug","am klügsten"],"Він розумніший за свого брата.","klug → klüger."],
-["Die Aufgabe war schwieriger ___ ich dachte.","wie / als?","als",["als","wie","dass","denn"],"Завдання було складнішим, ніж я думав.","Komparativ + als."],
-["Das Wetter ist heute ___ als gestern.","schlecht · Komparativ","schlechter",["schlechter","mehr schlecht","am schlechtesten","schlechte"],"Погода сьогодні гірша, ніж учора.","schlecht + er."],
-["Er fährt ___ als ich.","schnell · Komparativ","schneller",["schneller","mehr schnell","am schnellsten","schnellere"],"Він їздить швидше за мене.","schnell + er."],
-["Er ist der ___ Schüler der Klasse.","fleißig · Superlativ","fleißigste",["fleißigste","fleißigsten","am fleißigsten","fleißiger"],"Він найпильніший учень класу.","der + -ste."],
-["Diese Jacke ist nicht ___ schön wie die rote.","so / mehr?","so",["so","als","sehr","mehr"],"Ця куртка не така гарна, як червона.","nicht so + Positiv + wie."],
-["Er ist doppelt ___ alt wie ich.","so / als?","so",["so","als","mehr","sehr"],"Він удвічі старший за мене.","doppelt so + Positiv + wie."],
-["Welches Land ist ___?","groß · Superlativ","am größten",["am größten","das größte","größten","am größte"],"Яка країна найбільша?","Після дієслова: am + … + -sten."],
-["Ich trinke Tee gern, aber Kaffee ___.","trinke ich lieber","lieber",["lieber","gerner","mehr gern","besser"],"Я люблю чай, але каву п'ю охочіше.","gern – lieber – am liebsten."],
-["Je mehr ich lerne, ___ besser verstehe ich.","чим…, тим…","desto",["desto","als","wie","am"],"Чим більше я вчуся, тим краще розумію.","Je … desto.",["umso"]]
+["Die Aufgabe war schwieriger ___ ich dachte.","wie / als?","als",["als","wie","dass","denn"],"Завдання було складнішим, ніж я думав.","Komparativ + als."]
 ]
 };
 
 const FK=[
-["gut","besser","guter","хороший → кращий","Виняток: gut – besser – am besten."],
-["viel","mehr","vieler","багато → більше","Виняток: viel – mehr – am meisten."],
-["gern","lieber","gerner","охоче → охочіше","Виняток: gern – lieber – am liebsten."],
-["hoch","höher","hocher","високий → вищий","hoch → höher (c зникає)."],
-["nah","näher","naher","близький → ближчий","nah – näher – am nächsten."],
-["groß","größer","großer","великий → більший","Умлаут: groß → größer."],
-["alt","älter","alter","старий → старший","Умлаут: a → ä."],
-["jung","jünger","junger","молодий → молодший","Умлаут: u → ü."],
-["kalt","kälter","kalter","холодний → холодніший","Умлаут: a → ä."],
-["warm","wärmer","warmer","теплий → тепліший","Умлаут: a → ä."],
-["lang","länger","langer","довгий → довший","Умлаут: a → ä."],
-["kurz","kürzer","kurzer","короткий → коротший","Умлаут: u → ü."],
-["stark","stärker","starker","сильний → сильніший","Умлаут: a → ä."],
-["schwach","schwächer","schwacher","слабкий → слабший","Умлаут: a → ä."],
-["klug","klüger","kluger","розумний → розумніший","Умлаут: u → ü."],
-["dumm","dümmer","dummer","дурний → дурніший","Умлаут: u → ü."],
-["arm","ärmer","armer","бідний → бідніший","Умлаут: a → ä."],
-["hart","härter","harter","твердий → твердіший","Умлаут: a → ä."],
-["krank","kränker","kranker","хворий → хворіший","Умлаут: a → ä."],
-["gesund","gesünder","gesunder","здоровий → здоровіший","Умлаут: u → ü."],
-["teuer","teurer","teuerer","дорогий → дорожчий","Випадає -e-: teuer → teurer."],
-["dunkel","dunkler","dunkeler","темний → темніший","Випадає -e-: dunkel → dunkler."],
-["klein","kleiner","mehr klein","маленький → менший","Без умлауту: klein → kleiner."],
-["schnell","schneller","mehr schnell","швидкий → швидший","Без умлауту: schnell → schneller."],
-["langsam","langsamer","mehr langsam","повільний → повільніший","Звичайне правило: + er."],
-["billig","billiger","mehr billig","дешевий → дешевший","Звичайне правило: + er."],
-["schön","schöner","mehr schön","гарний → гарніший","Звичайне правило: + er."],
-["früh","früher","mehr früh","ранній → раніший","Звичайне правило: + er."],
-["wichtig","wichtiger","mehr wichtig","важливий → важливіший","Звичайне правило: + er."],
-["interessant","interessanter","mehr interessant","цікавий → цікавіший","Звичайне правило: + er."],
-["heiß","heißer","mehr heiß","гарячий → гарячіший","Звичайне правило: + er."]
+["gut","besser","guter","хороший → кращий","Виняток: gut – besser – am besten."],["viel","mehr","vieler","багато → більше","Виняток: viel – mehr – am meisten."],["gern","lieber","gerner","охоче → охочіше","Виняток: gern – lieber – am liebsten."],["hoch","höher","hocher","високий → вищий","hoch → höher (c зникає)."],["nah","näher","naher","близький → ближчий","nah – näher – am nächsten."],["groß","größer","großer","великий → більший","Умлаут: groß → größer."],["alt","älter","alter","старий → старший","Умлаут: a → ä."],["jung","jünger","junger","молодий → молодший","Умлаут: u → ü."],["kalt","kälter","kalter","холодний → холодніший","Умлаут: a → ä."],["warm","wärmer","warmer","теплий → тепліший","Умлаут: a → ä."],["teuer","teurer","teuerer","дорогий → дорожчий","Випадає -e-: teuer → teurer."],["dunkel","dunkler","dunkeler","темний → темніший","Випадає -e-: dunkel → dunkler."]
 ];
 const FS=[
-["gut","besten","guten","хороший → найкращий","Виняток: am besten."],
-["viel","meisten","vielsten","багато → найбільше","Виняток: am meisten."],
-["gern","liebsten","gernsten","охоче → найохочіше","Виняток: am liebsten."],
-["hoch","höchsten","höhsten","високий → найвищий","hoch → am höchsten."],
-["nah","nächsten","nahsten","близький → найближчий","nah → am nächsten."],
-["groß","größten","großten","великий → найбільший","groß → am größten (умлаут)."],
-["alt","ältesten","altesten","старий → найстаріший","Після -t: -est + умлаут."],
-["jung","jüngsten","jungsten","молодий → наймолодший","Умлаут: u → ü."],
-["kalt","kältesten","kaltesten","холодний → найхолодніший","Після -t: -est + умлаут."],
-["warm","wärmsten","warmsten","теплий → найтепліший","Умлаут: a → ä."],
-["lang","längsten","langsten","довгий → найдовший","Умлаут: a → ä."],
-["kurz","kürzesten","kurzesten","короткий → найкоротший","Після -z: -est + умлаут."],
-["stark","stärksten","starksten","сильний → найсильніший","Умлаут: a → ä."],
-["schwach","schwächsten","schwachsten","слабкий → найслабший","Умлаут: a → ä."],
-["klug","klügsten","klugsten","розумний → наймудріший","Умлаут: u → ü."],
-["dumm","dümmsten","dummsten","дурний → найдурніший","Умлаут: u → ü."],
-["arm","ärmsten","armsten","бідний → найбідніший","Умлаут: a → ä."],
-["hart","härtesten","hartesten","твердий → найтвердіший","Після -t: -est + умлаут."],
-["krank","kränksten","kranksten","хворий → найхворіший","Умлаут: a → ä."],
-["gesund","gesündesten","gesündsten","здоровий → найздоровіший","Після -d: -est + умлаут."],
-["teuer","teuersten","teursten","дорогий → найдорожчий","У Superlativ -e- залишається: teuersten."],
-["dunkel","dunkelsten","dunklesten","темний → найтемніший","У Superlativ -e- залишається: dunkelsten."],
-["klein","kleinsten","kleinesten","маленький → найменший","Звичайне правило: + sten."],
-["schnell","schnellsten","schnellesten","швидкий → найшвидший","Звичайне правило: + sten."],
-["billig","billigsten","billigesten","дешевий → найдешевший","Звичайне правило: + sten."],
-["schön","schönsten","schönesten","гарний → найгарніший","Звичайне правило: + sten."],
-["früh","frühesten","frühsten","ранній → найраніший","Додається -e-: am frühesten."],
-["spät","spätesten","spätsten","пізній → найпізніший","Після -t: -est + умлаут."],
-["wichtig","wichtigsten","wichtigesten","важливий → найважливіший","Звичайне правило: + sten."],
-["interessant","interessantesten","interessantsten","цікавий → найцікавіший","Після -t: -est."],
-["heiß","heißesten","heißsten","гарячий → найгарячіший","Після -ß: -est."]
+["gut","besten","guten","хороший → найкращий","Виняток: am besten."],["viel","meisten","vielsten","багато → найбільше","Виняток: am meisten."],["gern","liebsten","gernsten","охоче → найохочіше","Виняток: am liebsten."],["hoch","höchsten","höhsten","високий → найвищий","hoch → am höchsten."],["nah","nächsten","nahsten","близький → найближчий","nah → am nächsten."],["groß","größten","großten","великий → найбільший","groß → am größten (умлаут)."],["alt","ältesten","altesten","старий → найстаріший","Після -t: -est + умлаут."],["jung","jüngsten","jungsten","молодий → наймолодший","Умлаут: u → ü."],["kalt","kältesten","kaltesten","холодний → найхолодніший","Після -t: -est + умлаут."],["warm","wärmsten","warmsten","теплий → найтепліший","Умлаут: a → ä."],["teuer","teuersten","teursten","дорогий → найдорожчий","У Superlativ -e- залишається: teuersten."],["dunkel","dunkelsten","dunklesten","темний → найтемніший","У Superlativ -e- залишається: dunkelsten."]
 ];
 
-const TABS=[
- {id:"pos",label:"Positiv",title:"POSITIV · SO … WIE"},
- {id:"komp",label:"Komparativ",title:"KOMPARATIV · … ALS"},
- {id:"sup",label:"Superlativ",title:"SUPERLATIV · AM … -STEN"},
- {id:"forms",label:"Форми",title:"УТВОРЕННЯ ФОРМ"},
- {id:"dyn",label:"Immer · Je…desto",title:"ДИНАМІКА ТА ПІДСИЛЕННЯ"},
- {id:"dekl",label:"Закінчення",title:"ПРИКМЕТНИК ПЕРЕД ІМЕННИКОМ"},
- {id:"mix",label:"Мікс",title:"МІКС · ТИПОВІ ПОМИЛКИ"}
-];
-const ITEMS={};
-["pos","komp","sup","dyn","dekl","mix"].forEach(k=>{
-  ITEMS[k]=RAW[k].map(r=>({s:r[0],hint:r[1],a:r[2],opts:r[3],ua:r[4],ex:r[5],alt:r[6]||[]}));
+const ITEMS = { sent: [] };
+Object.keys(RAW_SENT).forEach(st => {
+  RAW_SENT[st].forEach(r => {
+    ITEMS.sent.push({ s:r[0], hint:r[1], a:r[2], o:r[3], lbl:r[4], ex:r[5], alt:r[6]||[], st:parseInt(st) });
+  });
 });
-(function(){
-  const kA=FK.map(x=>x[1]),sA=FS.map(x=>x[1]);
-  const L=[];
-  for(let i=0;i<Math.max(FK.length,FS.length);i++){
-    if(FK[i])L.push({s:`${FK[i][0]} → Komparativ: ___`,hint:"Komparativ = основа + -er (± умлаут)",a:FK[i][1],w:FK[i][2],pool:kA,ua:FK[i][3],ex:`${FK[i][0]} → ${FK[i][1]}. ${FK[i][4]}`,alt:[],gen:1,say:FK[i][1]});
-    if(FS[i])L.push({s:`${FS[i][0]} → Superlativ: am ___`,hint:"Superlativ = am + основа + -sten / -esten",a:FS[i][1],w:FS[i][2],pool:sA,ua:FS[i][3],ex:`${FS[i][0]} → am ${FS[i][1]}. ${FS[i][4]}`,alt:[],gen:1,say:"am "+FS[i][1]});
-  }
-  ITEMS.forms=L;
-})();
+// Generate forms stage (4)
+const kA=FK.map(x=>x[1]), sA=FS.map(x=>x[1]);
+for(let i=0;i<Math.max(FK.length,FS.length);i++){
+  if(FK[i]) ITEMS.sent.push({s:`${FK[i][0]} → Komparativ: ___`, hint:"Komparativ = основа + -er (± умлаут)", a:FK[i][1], o:[FK[i][1], FK[i][2], "am "+FK[i][1], FK[i][0]], lbl:FK[i][3], ex:`${FK[i][0]} → ${FK[i][1]}. ${FK[i][4]}`, alt:[], st:4});
+  if(FS[i]) ITEMS.sent.push({s:`${FS[i][0]} → Superlativ: am ___`, hint:"Superlativ = am + основа + -sten / -esten", a:FS[i][1], o:[FS[i][1], FS[i][2], "am "+FS[i][1], FS[i][0]], lbl:FS[i][3], ex:`${FS[i][0]} → am ${FS[i][1]}. ${FS[i][4]}`, alt:[], st:4});
+}
 
-/* ============ ⚠️ ГОЛОВНИЙ ФІКС: MS = 1 (одна правильна відповідь = прогрес) ============ */
-const XP_MAX=300,MS=1;
-const KEY=id=>"ka_v1_"+id;
-const blankState=()=>({k:{},r:0,w:0,err:{},x:0,pos:0});
-const S={};
-TABS.forEach(t=>{
-  let v=null;try{v=JSON.parse(localStorage.getItem(KEY(t.id)))}catch(e){}
-  S[t.id]=(v&&v.k)?Object.assign(blankState(),v):blankState();
-});
-let mode=store.get('ka-mode')==='choose'?'choose':'write';
-let tab=TABS.some(t=>t.id===store.get('ka-tab'))?store.get('ka-tab'):TABS[0].id;
-let cur=0,answered=false,picked=-1,curOpts=[],tm,reviewMode=false,trShown=false;
-const isMc=()=>mode==='choose';
-const TB=()=>TABS.find(t=>t.id===tab);
-const items=()=>ITEMS[tab];
-const T=()=>S[tab];
-const pool=()=>items().map((_,i)=>i);
-const streak=i=>T().k[i]||0;
-const save=()=>{try{localStorage.setItem(KEY(tab),JSON.stringify(S[tab]))}catch(e){}};
-const errCount=()=>Object.keys(T().err).filter(k=>T().err[k]).length;
+const TABS = [{ id:"sent", label:"Тренажер", title:"ВПРАВИ", ph:"Введи відповідь …", oc:"opts grid4" }];
+const TOTAL_TASKS = ITEMS.sent.length;
+const XP_MAX = TOTAL_TASKS < 100 ? Math.ceil(TOTAL_TASKS / 10) * 10 : Math.ceil(TOTAL_TASKS / 50) * 50;
 
-function speak(text){
-  if(!window.speechSynthesis||!text)return;
+let stage = (() => { const v = localStorage.getItem("komp_stage"); const n = v === null ? 1 : parseInt(v, 10); return (Number.isFinite(n) && n >= 1 && n <= STAGES.length) ? n : 1; })();
+const UL_KEY = "komp_unlocked";
+const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
+
+const $ = id => document.getElementById(id);
+const sh = a => { a = [...a]; for (let i = a.length; i > 1; ) { const j = Math.random() * i-- | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+
+const mqLight = window.matchMedia('(prefers-color-scheme: light)');
+function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
+function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
+const savedTheme = store.get('komp-theme');
+if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+paintThemeIcon();
+if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
+function toggleTheme(){ const n = effTheme() === 'light' ? 'dark' : 'light'; document.documentElement.setAttribute('data-theme', n); store.set('komp-theme', n); paintThemeIcon(); }
+
+let soundEnabled = store.get('komp-sound') !== 'off';
+function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
+updateSoundIcon();
+function toggleSound(){ soundEnabled = !soundEnabled; store.set('komp-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
+let audioCtx;
+function playSound(type){
+  if(!soundEnabled) return;
   try{
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(String(text));
-    u.lang="de-DE";u.rate=0.9;u.pitch=1;u.volume=1;
-    if('audioSession' in navigator){try{navigator.audioSession.type='playback'}catch(e){}}
-    speechSynthesis.speak(u);
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    if ('audioSession' in navigator) navigator.audioSession.type = 'playback';
+    const now = audioCtx.currentTime;
+    if(type === 'open' || type === 'close'){
+      const notes = type === 'open' ? [392, 523.25, 659.25] : [659.25, 523.25, 392];
+      notes.forEach((f, k) => {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t0 = now + k * 0.07;
+        o.type = 'sine'; o.frequency.setValueAtTime(f, t0);
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime(0.07, t0 + 0.03);
+        g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(t0); o.stop(t0 + 0.3);
+      });
+      return;
+    }
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    if(type === 'correct'){
+      osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(0.4, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now); osc.stop(now + 0.6);
+    } else {
+      osc.type = 'triangle'; osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+      gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(0.4, now + 0.05); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.4);
+    }
   }catch(e){}
 }
-function fullText(it){
-  if(it.gen)return it.say;
-  return it.s.replace(/___/g,it.a);
-}
-function speakCurrent(){const it=items()[cur];if(it)speak(stripHTML(fullText(it)))}
-
-const norm=s=>String(s).toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[.,!?;:]/g,' ').replace(/\s+/g,' ').trim();
-
-/* ⚠️ ФІКС: тепер приймає і «am kältesten», і «kältesten» */
-function matches(it,v){
-  const n=norm(v);
-  const answers=[it.a,...it.alt].map(norm);
-  if(answers.includes(n))return true;
-  if(n.startsWith("am ")&&answers.includes(n.slice(3)))return true;
-  if(answers.includes("am "+n))return true;
-  return false;
+function haptic(kind){
+  try{
+    const h = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback;
+    if(!h) return;
+    if(kind === 'ok') h.notificationOccurred('success');
+    else if(kind === 'no') h.notificationOccurred('error');
+    else h.selectionChanged();
+  }catch(e){}
 }
 
-function getOpts(it){
-  if(!it.gen)return sh(it.opts);
-  const o=[it.a];if(it.w)o.push(it.w);
-  sh(it.pool.filter(x=>x!==it.a&&x!==it.w)).forEach(x=>{if(o.length<4)o.push(x)});
-  return sh(o);
+function speak(text){
+  if(!window.speechSynthesis || !text) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.lang = "de-DE"; u.rate = 0.9;
+    if ('audioSession' in navigator) navigator.audioSession.type = 'playback';
+    speechSynthesis.speak(u);
+  } catch(e){}
 }
-function renderOpts(){
-  const it=items()[cur];
-  curOpts=getOpts(it);
-  $("opts").innerHTML=curOpts.map((x,j)=>`<button class="opt" data-o="${j}">${x}</button>`).join("");
+function fullText(it){ return it.s.replace(/___/g, it.a); }
+function speakCurrent(){ const it = items()[cur]; if(it) speak(fullText(it)); }
+
+const KEY = id => "tp_v2_komp_" + id;
+const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0 });
+const S = { sent: blankState() };
+const readState = id => {
+  try { const v = JSON.parse(localStorage.getItem(KEY(id))); if(v && v.k){ if(!v.err) v.err = {}; v.x = Number(v.x) || 0; return v; } } catch(e){}
+  return null;
+};
+const savedState = readState("sent");
+if(savedState) S.sent = savedState;
+const calcXp = () => Math.min(XP_MAX, S.sent.x || 0);
+let XP = calcXp();
+
+let tab = "sent", cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
+let mode = store.get("komp-mode") === "mc" ? "mc" : "type";
+let xLocked = false;
+const TB = () => TABS[0];
+const isMc = () => mode === "mc";
+const items = () => ITEMS.sent;
+const T = () => S.sent;
+const pool = () => items().map((_, i) => i).filter(i => !stage || items()[i].st === stage);
+const streak = i => T().k[i] || 0;
+const maxStreak = () => 1;
+const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
+const save = () => { try { localStorage.setItem(KEY("sent"), JSON.stringify(S.sent)); } catch(e){} };
+const isClosed = () => !!(T().cl && T().cl[stage||0]);
+
+function finish(ok){
+  const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
+  answered = true; t._ok = ok;
+  if(ok) {
+    t.r++;
+    t.k[cur] = Math.min(maxStreak(), streak(cur) + 1);
+    if(reviewMode) rd().add(cur);
+    if(!xLocked) t.x = Math.min(items().length, (t.x || 0) + 1);
+  } else {
+    t.w++;
+    t.k[cur] = 0;
+    t.err[cur] = true;
+    if(reviewMode) rd().delete(cur);
+    if(!xLocked && XP > 0) t.x = Math.max(0, (t.x || 0) - 1);
+  }
+  XP = calcXp(); save();
+  playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
+  showFb(ok); markOpts();
+  $("sent").innerHTML = sentHTML(items()[cur]);
+  renderCard(); renderReviewBtn();
+
+  const d = XP - xBefore; if(d) popXp(d, rankOf(XP) > rankOf(xBefore));
+
+  if(ok){
+    const c = $("card"); c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
+    clearTimeout(tm);
+    if(reviewMode){
+      if(reviewQueue().length === 0) tm = setTimeout(() => { if(answered) advance(); }, 1200);
+      else tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); else advance(); } }, 1000);
+    } else if(allDone()){
+      tm = setTimeout(() => { if(answered) syncFin(); }, 1200);
+    } else {
+      tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 1000);
+    }
+  } else {
+    if(isMc()){ clearTimeout(tm); }
+    try{ $("fb").scrollIntoView({ behavior:"smooth", block:"nearest" }); }catch(e){}
+  }
 }
-function markOpts(){
-  const a=items()[cur].a;
-  document.querySelectorAll("#opts .opt").forEach((b,j)=>{
-    b.disabled=true;
-    if(curOpts[j]===a)b.classList.add("ok");
-    else if(j===picked)b.classList.add("er");
-  });
+
+function sentHTML(it){
+  const filled = answered ? esc(it.a) : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+  const cls = answered ? ("blank fill " + (T()._ok ? "ok" : "no")) : "blank";
+  return it.s.replace("___", `<span class="${cls}">${filled}</span>`);
 }
+function norm(s){ return String(s).toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[.,!?;:]/g,' ').replace(/\s+/g,' ').trim(); }
 
 function renderTabs(){
-  $("tabs").innerHTML=TABS.map(t=>{
-    const s=S[t.id];
-    const done=Object.keys(s.k).filter(k=>s.k[k]>=MS).length;
-    return `<button class="tab ${t.id===tab?'on':''}" data-t="${t.id}">${t.label}<small>${done}/${ITEMS[t.id].length}</small></button>`;
-  }).join("");
+  const st = S.sent, idx = pool();
+  const done = idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
+  const cl = st.cl && st.cl[String(stage || 0)];
+  $("tabs").innerHTML = `<button class="tab on ${cl ? 'cl' : ''}">${TB().label}<small>${done}/${idx.length}</small></button>`;
+  renderModes(); renderStages();
+}
+function renderModes(){
+  const b = $("modeBtn");
+  b.style.display = "flex";
+  b.textContent = mode === "mc" ? "👆 Обери" : "✏️ Впиши";
 }
 function renderLab(){
-  const it=items()[cur],lab=$("lab");
-  if(!it||!it.ua){lab.innerHTML="";return}
-  lab.innerHTML=trShown?`<div class="tr-text">${it.ua}</div>`:'<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
+  const it = items()[cur], lab = $("lab");
+  if(!it || !it.lbl){ lab.innerHTML = ""; return; }
+  lab.innerHTML = trShown ? `<div class="tr-text">${esc(it.lbl)}</div>` : '<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
 }
-function reviewPool(){return items().map((_,i)=>i).filter(i=>T().err[i])}
-const reviewDoneSets={};
-const rd=()=>reviewDoneSets[tab]||(reviewDoneSets[tab]=new Set());
-function reviewQueue(){const d=rd();return reviewPool().filter(i=>!d.has(i))}
-
 function renderCard(){
-  const it=items()[cur],t=T(),tb=TB();
-  if(reviewMode)$("title").innerHTML=`🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
-  else $("title").textContent=tb.title;
-  $("modeBtn").textContent = mode === "write" ? "✏️ Впиши" : "👆 Обери";
-  $("sent").innerHTML=it.s.replace(/___/g,'<span class="blank"></span>');
-  $("sent").title="Натисни, щоб почути німецькою";
+  const it = items()[cur], t = T(), tb = TB();
+  $("title").textContent = tb.title;
+  $("sent").innerHTML = sentHTML(it);
   renderLab();
-  $("scheme").innerHTML=`<span class="np">Підказка:</span> ${it.hint}`;
-  if(isMc()){
-    $("opts").style.display='flex';$("row").style.display='none';
-  }else{
-    $("opts").style.display='none';$("row").style.display='flex';
-  }
-  const total=items().length;
-  const done=Object.keys(t.k).filter(k=>t.k[k]>=MS).length;
-  $("stat-done").textContent=`${done} / ${total}`;
-  $("stat-correct").textContent=t.r;
-  $("stat-wrong").textContent=t.w;
-  $("bar").style.width=`${Math.min(done,total)/total*100}%`;
-  updateXp(t.x||0);
-  renderTabs();
+  $("inp").placeholder = tb.ph || "";
+
+  const total = pool().length;
+  const done = pool().filter(i => (t.k[i] || 0) >= maxStreak()).length;
+  $("stat-done").textContent = `${done} / ${total}`;
+  $("stat-correct").textContent = t.r;
+  $("stat-wrong").textContent = t.w;
+  $("bar").style.width = `${Math.min(done, total) / Math.max(1, total) * 100}%`;
+  updateXp(XP); renderTabs();
+  $("chk").textContent = answered ? "Далі →" : "Перевірити ✓";
+}
+function renderOpts(){
+  const it = items()[cur];
+  if(!isMc() || !it.o){ curOpts = []; $("opts").innerHTML = ""; $("opts").className = "opts"; return; }
+  curOpts = sh(it.o);
+  $("opts").className = TB().oc || "opts grid4";
+  $("opts").innerHTML = curOpts.map((x, j) => `<button class="chip opt" data-o="${j}">${esc(x)}</button>`).join("");
+}
+function markOpts(){
+  const a = items()[cur].a;
+  document.querySelectorAll("#opts .opt").forEach((b, j) => {
+    b.disabled = true;
+    if(curOpts[j] === a) b.classList.add("ok");
+    else if(j === picked) b.classList.add("er");
+  });
 }
 function renderReviewBtn(){
-  const n=errCount(),btn=$("reviewBtn");
-  if(!reviewMode){btn.style.display="inline-block";btn.textContent=`🔁 Помилки (${n})`}
-  else btn.style.display="none";
+  const n = errCount(), btn = $("reviewBtn");
+  if(!reviewMode && !isClosed()){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
+  else btn.style.display = "none";
 }
 
-function showFb(ok,i){
-  const f=$("fb"),it=items()[i];
-  const ansStr=it.s.replace(/___/g,`<b style="color:var(--sa)">${it.a}</b>`);
-  f.className="fb "+(ok?"ok":"er");
-  f.innerHTML=`<div class="k">${ok?"✓ ПРАВИЛЬНО · +1 EXP":"✗ НЕПРАВИЛЬНО · −1 EXP"}</div>
-    <div class="ans" title="Натисни, щоб почути">${ansStr}</div>
-    <div class="ex">${it.ex}</div>${ok?'<div class="bar"></div>':''}`;
-  const ansEl=f.querySelector(".ans");
-  if(ansEl)ansEl.onclick=()=>speak(stripHTML(fullText(it)));
+const stProg = n => { const idx = items().map((_, i) => i).filter(i => items()[i].st === n); const done = idx.filter(i => (T().k[i] || 0) >= maxStreak()).length; return { d: done, t: idx.length }; };
+const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t > 0 && q.d === q.t; })();
+function renderStages(){
+  $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
+    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("");
+}
+function showLesson(n){
+  const g = STAGES.find(x => x.n === n), el = $("lesson");
+  if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
+  const exHtml = g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex" style="margin-top:6px;font-size:.85rem;color:var(--mu);">${esc(ua)}</div></div>`).join("");
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>${exHtml}<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  document.body.classList.add("lsn"); localStorage.setItem("komp_seen_" + n, "1");
+  $("lgo").onclick = () => document.body.classList.remove("lsn");
+}
+function openStage(n){
+  if(n && !stOpen(n)){
+    if(!confirm("Цей етап відкриється, коли ти опануєш 100% завдань попереднього етапу. Відкрити достроково?")) return;
+    const u = ulSet(); u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u));
+  }
+  stage = n; localStorage.setItem("komp_stage", String(n));
+  setTab("sent");
+  if(!localStorage.getItem("komp_seen_" + n)) showLesson(n);
+  else { document.body.classList.remove("lsn"); $("lesson").innerHTML = ""; }
 }
 
 function load(i){
-  clearTimeout(tm);
+  clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
-  cur=i;answered=false;picked=-1;trShown=false;T().pos=i;save();
-  $("inp").value="";$("fb").className="fb";$("fb").innerHTML="";
-  renderOpts();renderCard();renderReviewBtn();
-  if(!isMc()){try{$("inp").focus({preventScroll:true})}catch(e){}}
+  cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; save();
+  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
+  $("card").classList.toggle("mc", isMc());
+  $("umRow").style.display = !isMc() ? "flex" : "none";
+  renderOpts(); renderCard(); renderReviewBtn();
+  if(!isMc()) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
 }
+
+const reviewDoneSets = {};
+const rd = () => reviewDoneSets[tab] || (reviewDoneSets[tab] = new Set());
+function reviewPool(){ return items().map((_, i) => i).filter(i => T().err[i] && (!stage || items()[i].st === stage)); }
+function reviewQueue(){ const d = rd(); return reviewPool().filter(i => !d.has(i)); }
 function nextIdx(){
   if(reviewMode){
-    const rq=reviewQueue();
-    if(!rq.length)return -1;
-    if(!rq.includes(cur))return rq.find(i=>i>cur)??rq[0];
-    return rq[(rq.indexOf(cur)+1)%rq.length];
+    const rq = reviewQueue();
+    if(rq.length === 0) return -1;
+    if(!rq.includes(cur)) return rq.find(i => i > cur) ?? rq[0];
+    return rq[(rq.indexOf(cur) + 1) % rq.length];
   }
-  const p=pool(),list=p.filter(i=>streak(i)<MS);
-  if(!list.length)return -1;
-  if(list.length===1)return list[0];
-  return list.find(i=>i>cur)??list[0];
+  const list = pool().filter(i => streak(i) < maxStreak());
+  if(list.length === 0) return -1;
+  if(list.length === 1) return list[0];
+  const c = list.filter(i => i !== cur), fresh = c.filter(i => streak(i) === 0), once = c.filter(i => streak(i) > 0);
+  const from = (fresh.length && (!once.length || Math.random() < .7)) ? fresh : once;
+  return from[Math.random() * from.length | 0];
 }
-const tabDone=()=>pool().every(i=>streak(i)>=MS);
-function advance(){
-  const ni=nextIdx();
-  if(ni>=0)load(ni);
-  else if(reviewMode)showReviewComplete();
-  else if(tabDone())showComplete();
-}
+function allDone(){ if(reviewMode) return reviewQueue().length === 0; return pool().every(i => streak(i) >= maxStreak()); }
+const tabDone = () => pool().every(i => streak(i) >= maxStreak());
+function closeTab(){ const t = T(); t.cl = Object.assign({}, t.cl, { [stage||0]: 1 }); save(); }
 
-function hideComplete(){$("complete").hidden=true}
-function showComplete(){
-  const t=T(),n=errCount();
-  $("complete-title").textContent="🎉 Вкладку пройдено!";
-  $("complete-text").innerHTML=`Усі речення цієї категорії пройдено.<br>Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b> · У списку помилок: <b>${n}</b>.`;
-  $("complete-actions").innerHTML=(n>0?`<button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button>`:"")+`<button class="${n>0?"cancel":"go"}" onclick="nextRound()">По колу ↔</button><button class="cancel" onclick="hideComplete()">Закрити</button>`;
-  $("complete").hidden=false;
-}
-function showReviewComplete(){
-  $("complete-title").textContent="✅ Помилки пройдено!";
-  $("complete-text").textContent="Ти повторив усі помилки зі списку. Вони залишаються у списку «Помилки» — можна повторити ще раз.";
-  $("complete-actions").innerHTML=`<button class="go" onclick="repeatReview()">🔁 Ще раз</button><button class="cancel" onclick="exitReview()">Продовжити тренування</button>`;
-  $("complete").hidden=false;
-}
-function nextRound(){const e=T().err,x=T().x;S[tab]=blankState();S[tab].err=e;S[tab].x=x;reviewDoneSets[tab]=new Set();reviewMode=false;save();hideComplete();load(0)}
-function repeatReview(){hideComplete();startReview()}
-function startReview(){if(errCount()===0)return;reviewMode=true;reviewDoneSets[tab]=new Set();const rq=reviewQueue();if(rq.length)load(rq[0])}
-function exitReview(){reviewMode=false;hideComplete();load(startIdx());if(tabDone())showComplete()}
-
-const RANKS=[[0,'🌱','Новачок'],[30,'🌿','Учень'],[72,'🧭','Дослідник'],[132,'⚡','Знавець'],[204,'🔥','Профі'],[276,'💎','Майстер'],[300,'🏆','Легенда']];
-const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
-function updateXp(xv){
-  const r=rankOf(xv),R=RANKS[r],N=RANKS[r+1],box=$("xp");
-  box.dataset.r=r;box.classList.toggle("max",xv>=XP_MAX);
-  $("xf").style.width=`${xv/XP_MAX*100}%`;
-  $("xt").textContent=xv;
-  $("xn").textContent=xv>=XP_MAX?"MAX":`/ ${XP_MAX}`;
-  $("xr").textContent=`${R[1]} ${R[2]}`;
-  $("xnext").textContent=N?`ще ${N[0]-xv} до «${N[2]}»`:"максимальний ранг";
-  const tk=$("xticks");
-  if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>`<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("");
-}
-function popXp(d,up){
-  const p=$("xpop"),b=$("xt"),box=$("xp");
-  p.textContent=(d>0?"+":"−")+Math.abs(d);
-  p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");
-  b.classList.remove("bump");void b.offsetWidth;b.classList.add("bump");
-  if(up){box.classList.remove("lvl");void box.offsetWidth;box.classList.add("lvl")}
-}
-
-function finish(ok){
-  const t=T(),xBefore=t.x||0;
-  answered=true;
-  playSound(ok?'correct':'wrong');
-  if(ok){t.r++;t.x=Math.min(XP_MAX,xBefore+1);t.k[cur]=Math.min(MS,streak(cur)+1);if(reviewMode)rd().add(cur)}
-  else{t.w++;t.x=Math.max(0,xBefore-1);t.k[cur]=0;t.err[cur]=true;if(reviewMode)rd().delete(cur)}
-  save();showFb(ok,cur);markOpts();renderCard();renderReviewBtn();
-  {const d=(t.x||0)-xBefore;if(d)popXp(d,rankOf(t.x||0)>rankOf(xBefore))}
+function hideFin(){ $("card").classList.remove("fin"); }
+function renderFin(kind){
   clearTimeout(tm);
-  if(ok){
-    const c=$("card");c.classList.remove("win");void c.offsetWidth;c.classList.add("win");
-    if(reviewMode){
-      if(reviewQueue().length===0)tm=setTimeout(()=>{if(answered)showReviewComplete()},1200);
-      else tm=setTimeout(()=>{if(answered)advance()},1300);
-    }else if(tabDone()){
-      tm=setTimeout(()=>{if(answered)showComplete()},1200);
-    }else{
-      tm=setTimeout(()=>{if(answered)advance()},1300);
-    }
-  }else if(isMc()){
-    tm=setTimeout(()=>{if(answered)advance()},4500);
+  const t = T(), n = reviewPool().length;
+  const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
+  let h;
+  if(kind === "review") h = `<div class="ft rv">📋 Усі завдання пройдено</div><p>${st}<br>Помилок: <b>${n}</b>. Тепер можна лише повторити помилки.</p><div class="fin-actions"><button class="go" onclick="startReview()">🔁 Пройти помилки (${n})</button></div>`;
+  else if(kind === "confirm") h = `<div class="ft rv">Скинути прогрес?</div><p>Прогрес завдань цієї категорії буде скинуто разом зі списком помилок. <b>Загальний EXP збережеться.</b></p><div class="fin-actions"><button class="go" onclick="resetTab()">Так, скинути</button><button class="cancel" onclick="cancelReset()">Скасувати</button></div>`;
+  else h = `<div class="ft">✅ Ця категорія вже пройдена</div><p>${st}<br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p><div class="fin-actions"><button class="go" onclick="finalRestart()">↻ Почати заново</button></div>`;
+  $("finBox").innerHTML = h;
+  $("card").classList.add("fin"); renderReviewBtn();
+}
+function syncFin(){
+  if(reviewMode){ hideFin(); return; }
+  if(tabDone()){
+    if(reviewPool().length === 0){ closeTab(); renderFin("closed"); }
+    else renderFin("review");
+    return;
   }
+  if(isClosed()){ renderFin("closed"); return; }
+  hideFin(); renderReviewBtn();
+}
+function advance(){
+  const ni = nextIdx();
+  if(ni >= 0) load(ni);
+  else if(reviewMode) { if(tabDone()){ reviewMode = false; closeTab(); renderFin("closed"); } else { reviewMode = false; load(startIdx()); syncFin(); } }
+  else if(tabDone()) { syncFin(); }
 }
 
+const RANKS=[
+  [0,'🌱','Новачок'],
+  [Math.round(XP_MAX*0.10),'🌿','Учень'],
+  [Math.round(XP_MAX*0.24),'🧭','Дослідник'],
+  [Math.round(XP_MAX*0.44),'⚡','Знавець'],
+  [Math.round(XP_MAX*0.68),'🔥','Профі'],
+  [Math.round(XP_MAX*0.92),'💎','Майстер'],
+  [XP_MAX,'🏆','ЛЕГЕНДА']
+];
+const rankOf = x => { let r=0; RANKS.forEach((q,i) => { if(x>=q[0]) r=i; }); return r; };
+function updateXp(xv){
+  const r = rankOf(xv), R = RANKS[r], N = RANKS[r+1], box = $("xp");
+  box.dataset.r = Math.min(6, r);
+  box.classList.toggle("max", xv >= XP_MAX);
+  document.documentElement.classList.toggle("legend", xv >= XP_MAX);
+  $("xf").style.width = `${Math.min(100, xv/XP_MAX*100)}%`;
+  $("xt").textContent = xv;
+  $("xn").textContent = xv >= XP_MAX ? "MAX" : `/ ${XP_MAX}`;
+  $("xr").textContent = xv >= XP_MAX ? "🏆 ЛЕГЕНДА" : `${R[1]} ${R[2]}`;
+  $("xnext").textContent = xv >= XP_MAX ? "EXP зафіксовано 🔒" : (N ? `ще ${N[0]-xv} до «${N[2]}»` : "EXP зафіксовано 🔒");
+}
+function popXp(d, up){
+  const p = $("xpop"), b = $("xt"), box = $("xp");
+  p.textContent = (d>0?"+":"−") + Math.abs(d);
+  p.className = "xpop " + (d>0?"up":"dn"); void p.offsetWidth; p.classList.add("go");
+  b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+  if(up){ box.classList.remove("lvl"); void box.offsetWidth; box.classList.add("lvl"); }
+}
+
+function showFb(ok){
+  const f = $("fb"), it = items()[cur];
+  f.className = "fb " + (ok ? "ok" : "er");
+  let html = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
+    <div class="ans" title="Натисни, щоб почути">${esc(fullText(it))}</div>
+    ${it.lbl ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""}
+    ${it.ex ? `<div class="ex" style="margin-top:8px">💡 <b>${esc(it.ex)}</b></div>` : ""}`;
+  if(!ok && isMc()){ html += `<button type="button" class="fb-adv" onclick="event.stopPropagation();advance()">Далі →</button>`; }
+  f.innerHTML = html;
+  const ansEl = f.querySelector(".ans"); if(ansEl) ansEl.onclick = () => speak(fullText(it));
+}
+
+function matches(it, v){
+  const n = norm(v);
+  const answers = [it.a, ...(it.alt||[])].map(norm);
+  if(answers.includes(n)) return true;
+  if(n.startsWith("am ") && answers.includes(n.slice(3))) return true;
+  if(answers.includes("am " + n)) return true;
+  return false;
+}
 function check(){
-  if(answered){advance();return}
-  if(isMc())return;
-  const it=items()[cur],v=$("inp").value;
-  if(!v.trim())return;
-  finish(matches(it,v));
+  if(answered){ advance(); return; }
+  const it = items()[cur], v = $("inp").value;
+  if(!v.trim()) return;
+  finish(matches(it, v));
 }
-function pick(j){
-  if(answered||!isMc())return;
-  picked=j;
-  finish(curOpts[j]===items()[cur].a);
+function pick(j){ if(answered || !isMc()) return; picked = j; finish(curOpts[j] === items()[cur].a); }
+function showSol(){
+  if(answered) return; answered = true; T()._ok = false; xLocked = XP >= XP_MAX;
+  if(!xLocked && XP > 0) T().x = Math.max(0, (T().x||0) - 1);
+  XP = calcXp(); T().k[cur] = 0; T().err[cur] = true; save();
+  showFb(false); markOpts(); $("sent").innerHTML = sentHTML(items()[cur]); renderCard(); renderReviewBtn();
 }
 
-function resetTab(){S[tab]=blankState();save();hideComplete();reviewMode=false;reviewDoneSets[tab]=new Set();load(0)}
-function askConfirm(msg,yes){
-  $("complete-title").textContent="Скинути прогрес?";
-  $("complete-text").textContent=msg;
-  $("complete-actions").innerHTML='<button class="go" id="cf-yes">Так, скинути</button><button class="cancel" id="cf-no">Скасувати</button>';
-  $("cf-yes").onclick=()=>{hideComplete();yes()};
-  $("cf-no").onclick=hideComplete;
-  $("complete").hidden=false;
+function resetTab(){
+  const bx = T().x || 0;
+  S.sent = blankState();
+  S.sent.x = bx;
+  save();
+  reviewMode = false; reviewDoneSets[tab] = new Set();
+  load(pool()[0]);
+  syncFin();
 }
-function restartTab(){askConfirm("Прогрес цієї категорії (EXP і список помилок теж) буде скинуто. Інші категорії не зміняться.",resetTab)}
+function restartTab(){ renderFin("confirm"); }
+function cancelReset(){ hideFin(); syncFin(); }
+function finalRestart(){ resetTab(); }
 
 function openErrors(){
-  const rp=reviewPool(),tb=TB();
-  $("errs-sub").textContent=`Вкладка «${tb.label}» · помилок: ${rp.length}`;
-  if(!rp.length){
-    $("errs-list").innerHTML='<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
-    $("errs-actions").innerHTML='<button class="cancel" onclick="closeErrors()">Закрити</button>';
-  }else{
-    $("errs-list").innerHTML=rp.map(i=>{
-      const it=items()[i];
-      const de=it.s.replace(/___/g,`<b>${it.a}</b>`);
-      return `<div class="err-item"><div class="e-de">${de}</div>${it.ua?`<div class="e-ua">${it.ua}</div>`:""}${it.ex?`<div class="e-ex">${it.ex}</div>`:""}</div>`;
+  const rp = reviewPool(), tb = TB();
+  $("errs-sub").textContent = `Помилок: ${rp.length}`;
+  if(rp.length === 0){
+    $("errs-list").innerHTML = '<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
+    $("errs-actions").innerHTML = '<button class="cancel" onclick="closeErrors()">Закрити</button>';
+  } else {
+    $("errs-list").innerHTML = rp.map(i => {
+      const it = items()[i];
+      return `<div class="err-item"><div class="e-de">${sentHTML(it)}</div><div class="e-ua">${it.lbl}</div>${it.ex ? `<div class="e-ex">${esc(it.ex)}</div>` : ""}</div>`;
     }).join("");
-    $("errs-actions").innerHTML='<button class="go" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="cancel" id="errs-clear" onclick="clearErrors()">🗑 Очистити список</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
+    $("errs-actions").innerHTML = '<button class="go" onclick="startReviewAndClose()">🔁 Тренувати помилки</button><button class="cancel" onclick="clearErrors()">🗑 Очистити</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
   }
-  $("errs").hidden=false;
+  $("errs").hidden = false;
 }
-function closeErrors(){$("errs").hidden=true}
-let clearArmed=false;
-function clearErrors(){
-  const b=$("errs-clear");
-  if(!clearArmed){clearArmed=true;b.textContent="Точно очистити?";setTimeout(()=>{clearArmed=false;const bb=$("errs-clear");if(bb)bb.textContent="🗑 Очистити список"},3000);return}
-  clearArmed=false;T().err={};reviewDoneSets[tab]=new Set();save();renderReviewBtn();openErrors();
-}
-function trainErrors(){closeErrors();startReview();try{$("card").scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}}
-
-function startIdx(){
-  const p=pool(),pos=T().pos;
-  if(Number.isInteger(pos)&&pos>=0&&pos<p.length&&streak(pos)<MS)return pos;
-  const from=Number.isInteger(pos)?pos:-1;
-  return p.find(i=>i>from&&streak(i)<MS)??p.find(i=>streak(i)<MS)??p[0];
-}
-function setTab(t){
-  hideComplete();reviewMode=false;tab=t;store.set('ka-tab',t);
-  renderTabs();load(startIdx());
-}
-function setMode(m){
-  if(m===mode)return;
-  mode=m;store.set('ka-mode',m);clearTimeout(tm);
-  if(answered)advance();else load(cur);
-}
+function closeErrors(){ $("errs").hidden = true; }
+function clearErrors(){ if(confirm("Точно очистити список помилок?")){ T().err = {}; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); closeErrors(); } }
+function startReviewAndClose(){ closeErrors(); reviewMode = true; reviewDoneSets[tab] = new Set(); const q = reviewQueue(); if(q.length) load(q[0]); }
+function startReview(){ reviewMode = true; reviewDoneSets[tab] = new Set(); const q = reviewQueue(); if(q.length) load(q[0]); }
 
 function openTheory(){
-  const sec=$("theory-section");
-  if(!sec.classList.contains("show")){sec.classList.add("show");$("theory-btn").innerHTML="❌ Закрити теорію"}
-  setTimeout(()=>sec.scrollIntoView({behavior:"smooth",block:"start"}),100);
+  const sec = $("theory-section");
+  if(!sec.classList.contains("show")){ sec.classList.add("show"); $("theory-btn").innerHTML = "❌ Закрити теорію"; playSound('open'); }
+  setTimeout(() => sec.scrollIntoView({ behavior:"smooth", block:"start" }), 100);
 }
 function toggleTheory(){
-  const sec=$("theory-section"),btn=$("theory-btn");
+  const sec = $("theory-section"), btn = $("theory-btn");
   if(sec.classList.contains("show")){
-    sec.classList.remove("show");btn.innerHTML="📖 Шпаргалка (Теорія)";
-    $("card").scrollIntoView({behavior:"smooth",block:"start"});
-  }else openTheory();
+    sec.classList.remove("show"); btn.innerHTML = "📖 Відкрити теорію"; playSound('close');
+    $("card").scrollIntoView({ behavior:"smooth", block:"start" });
+  } else openTheory();
 }
 
-const CHEAT=[
- ["Конструкції","var(--sa)",[["so schnell wie","такий швидкий, як"],["nicht so teuer wie","не такий дорогий, як"],["doppelt so groß wie","удвічі більший, ніж"],["älter als","старший, ніж"],["immer kälter","все холодніше"],["je … desto / umso …","чим…, тим…"],["viel / noch / deutlich besser","набагато / ще / помітно краще"],["am schnellsten","найшвидше"],["der schnellste","найшвидший"],["einer der besten","один із найкращих"],["allerbeste","най-найкращий"],["ein älterer Herr","літній чоловік"]]],
- ["Винятки","var(--pe)",[["gut – besser – am besten","добре"],["viel – mehr – am meisten","багато"],["gern – lieber – am liebsten","охоче"],["hoch – höher – am höchsten","високий"],["nah – näher – am nächsten","близький"],["groß – größer – am größten","великий"]]],
- ["Правила форм","var(--ok)",[["a, o, u → ä, ö, ü","alt → älter"],["-el / -er / -eu → без e","dunkel → dunkler"],["teuer → teurer","дорожчий"],["-t, -d, -s, -ß, -z, -x → -est","am ältesten"],["früh → am frühesten","додається -e-"],["без умлауту: klar, laut, voll","klarer, lauter"]]],
- ["Не плутай","var(--go)",[["wie","рівність (so … wie)"],["als","різниця (Komparativ + als)"],["mehr groß ❌","größer ✅"],["das am schnellsten Auto ❌","das schnellste Auto ✅"],["sehr besser ❌","viel besser ✅"],["alter ❌","älter ✅"]]]
-];
-let cheatG=0;
-function renderCheat(){
-  const rows=CHEAT[cheatG][2],c=CHEAT[cheatG][1];
-  $("glossary").innerHTML='<h2 class="cheat-title">Шпаргалка</h2><p class="cheat-sub">Найчастіші конструкції — для швидкого повторення</p>'+
-   '<div class="cheat-pills">'+CHEAT.map(([h,c2],i)=>`<button type="button" class="cheat-pill${i===cheatG?" on":""}" data-g="${i}" style="--c:${c2}">${h}</button>`).join("")+'</div>'+
-   `<div class="cheat-list" style="--c:${c}">`+rows.map(([d,u])=>`<div class="cheat-row"><b>${d}</b><span>${u}</span></div>`).join("")+'</div>';
+function startIdx(){
+  const p = pool(), ms = maxStreak();
+  return p.find(i => streak(i) < ms) ?? p[0];
 }
-renderCheat();
-$("glossary").onclick=e=>{const b=e.target.closest("[data-g]");if(b){cheatG=+b.dataset.g;renderCheat()}};
+function setTab(t){
+  hideFin(); reviewMode = false; tab = t; store.set('komp-tab', t);
+  renderTabs(); renderReviewBtn(); load(startIdx()); syncFin();
+}
 
-$("tabs").onclick=e=>{const b=e.target.closest("[data-t]");if(b)setTab(b.dataset.t)};
-$("modeBtn").onclick=()=>setMode(mode==='write'?'choose':'write');
-$("rst").onclick=restartTab;
-$("opts").onclick=e=>{const b=e.target.closest("[data-o]");if(b&&!b.disabled)pick(+b.dataset.o)};
-$("next").onclick=()=>advance();
-$("chk").onclick=check;
-$("lab").onclick=e=>{if(e.target.closest("[data-tr]")){trShown=true;renderLab()}};
-$("speakBtn").onclick=speakCurrent;
-$("sent").addEventListener("click",()=>{if(window.getSelection().toString().trim().length===0)speakCurrent()});
-$("fb").addEventListener("click",e=>{if(isMc()&&answered&&!e.target.closest('.ans')){clearTimeout(tm);advance()}});
-$("complete").addEventListener("click",e=>{if(e.target.id==="complete")hideComplete()});
-$("errs").addEventListener("click",e=>{if(e.target.id==="errs")closeErrors()});
-$("inp").addEventListener("keydown",e=>{if(e.key==="Enter"||e.keyCode===13){e.preventDefault();check()}});
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){if(!$("complete").hidden)hideComplete();if(!$("errs").hidden)closeErrors()}
-  if(!isMc()||e.ctrlKey||e.metaKey||e.altKey)return;
-  if(e.target.closest&&e.target.closest("button,input,textarea"))return;
-  if(answered){if(e.key==="Enter"){e.preventDefault();clearTimeout(tm);advance()}return}
-  const j=+e.key-1;
-  if(j>=0&&j<curOpts.length)pick(j);
+$("xrst").addEventListener("click", () => {
+  if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
+  T().x = 0; save(); XP = 0; updateXp(XP); renderTabs();
 });
 
-setTab(tab);
+$("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b) setTab(b.dataset.t); };
+$("modeBtn").onclick = () => { mode = mode === "mc" ? "type" : "mc"; store.set("komp-mode", mode); clearTimeout(tm); if(answered) advance(); else load(cur); };
+$("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
+$("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
+$("chk").onclick = check;
+$("fb").addEventListener("click", e => { if(answered && isMc() && !e.target.closest(".ans") && !e.target.closest(".fb-adv")){ clearTimeout(tm); advance(); } });
+$("speakBtn").onclick = speakCurrent;
+$("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
+$("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
+$("inp").addEventListener("keydown", e => { if(e.key === "Enter" || e.keyCode === 13){ e.preventDefault(); check(); } });
+$("showBtn").onclick = showSol;
+$("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
 
-document.addEventListener('touchstart',function unlockAudio(){
-  try{
-    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==='suspended')audioCtx.resume();
-  }catch(e){}
-},{once:true});
+document.addEventListener("keydown", e => {
+  if(e.ctrlKey || e.metaKey || e.altKey) return;
+  if(answered && (e.key === "Enter" || e.keyCode === 13)){
+    if(e.target.closest && e.target.closest("input,textarea")) return;
+    e.preventDefault(); advance(); return;
+  }
+  if(!isMc() || answered) return;
+  if(e.target.closest && e.target.closest("button,input,textarea")) return;
+  const j = +e.key - 1;
+  if(j >= 0 && j < curOpts.length) pick(j);
+});
 
-if(window.Telegram&&window.Telegram.WebApp){
-  const tg=window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
-  tg.BackButton.show();
-  tg.BackButton.onClick=()=>{window.location.href='index.html';};
+{ const st = store.get('komp-tab'); setTab("sent"); }
+
+if(stage && !localStorage.getItem("komp_seen_" + stage)){ showLesson(stage); }
+
+function applyStorage(){
+  try {
+    const v = readState("sent");
+    if(v && !(answered && tab === "sent")) S.sent = v;
+    XP = calcXp();
+    if(answered){ updateXp(XP); renderTabs(); } else { renderCard(); renderReviewBtn(); syncFin(); }
+  } catch(e){}
 }
+window.addEventListener("tpsync:updated", applyStorage);
+const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
+document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
+setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
+
+if (window.Telegram && window.Telegram.WebApp) {
+  const tg = window.Telegram.WebApp;
+  try { tg.ready(); tg.expand(); tg.BackButton.show(); tg.BackButton.onClick(() => { window.location.href = 'index.html'; }); } catch(e){}
+}
+
+(function(){
+  const el = $("stages"); let d = false, moved = false, x0 = 0, s0 = 0;
+  el.addEventListener("pointerdown", e => { if(e.pointerType !== "mouse" || e.button !== 0) return; d = true; moved = false; x0 = e.clientX; s0 = el.scrollLeft; });
+  window.addEventListener("pointermove", e => { if(!d) return; const dx = e.clientX - x0; if(Math.abs(dx) > 4){ moved = true; el.classList.add("drag"); } if(moved) el.scrollLeft = s0 - dx; });
+  window.addEventListener("pointerup", () => { d = false; el.classList.remove("drag"); });
+  document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
+  el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
+})();
+
+document.addEventListener('touchstart', function unlockAudio() {
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if (!audioCtx) { try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){} }
+  document.removeEventListener('touchstart', unlockAudio);
+}, { once: true });
 </script>
 </body>
 </html>
