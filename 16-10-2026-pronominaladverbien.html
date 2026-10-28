@@ -820,14 +820,13 @@ const STAGES = [
  { n:6, t:"Переклад UA → DE", p:"Тепер усе разом: визначи, річ чи людина, обери питальну або відповідну форму, поклади прийменник і відмінок. Українське речення — німецька відповідь з правильним займенниковим прислівником чи займенником.", ex:[["Я_чекаю|v на_автобус|s","→ Ich warte darauf."],["Я_чекаю|v на_друга|p","→ Ich warte auf ihn."]], tip:"Алгоритм: 1) річ/людина 2) дієслово + прийменник 3) da-/wo- або wen/wem + займенник." },
  { n:7, t:"da- як зв’язка речень", p:"Слова з <b>da(r)-</b> можуть відсилати до <b>цілого попереднього речення</b>: <i>Ich habe morgen eine Prüfung. <b>Davor</b> habe ich Angst.</i> Прийменник підказує дієслово з другого речення: <i>Angst haben <b>vor</b> → davor</i>.", ex:[["Ich_habe_eine_Prüfung.|s Davor|da habe_ich_Angst.|v","→ Angst haben vor"],["Er_hat_viel_geübt.|s Dadurch|da ist_er_besser.|v","→ завдяки цьому"]], tip:"Знайди в другому реченні дієслово чи прилагательне з прийменником — це і є da-слово." },
  { n:8, t:"damit і darum", p:"<b>damit</b> і <b>darum</b> мають два значення. Як вказівка: <i>Damit kannst du schreiben</i> — «цим». Як сполучник: <i>…, damit ich es verstehe</i> — «щоб» (підрядне, дієслово в кінці). <b>Darum</b>: «про це» (<i>Es geht darum…</i>) або «тому» (<i>Darum bleiben wir hier</i>).", ex:[["Damit|da kannst_du_schreiben.|v","з цим"],["…,_damit|da ich_es_verstehe.|v","щоб (мета)"],["Darum|da bleiben_wir_hier.|v","тому (причина)"]], tip:"Підрядне з дієсловом в кінці → damit = щоб. Окреме речення → «цим / тому»." },
- { n:9, t:"Розмовне → літературне", p:"У розмові часто чути «<b>was + прийменник</b>»: <i>Auf was wartest du?</i> На письмі й на іспиті потрібна стандартна форма: <b>Worauf wartest du?</b> Прийменник «переїжджає» всередину слова з wo(r)-.", ex:[["Auf|pr was|s wartest_du?|v","розмовне"],["Wo|wo r|r auf|pr wartest_du?|v","стандартне"]], tip:"was + прийменник → wo(r) + прийменник." },
- { n:10, t:"Підсумок і тексти", p:"Фінал: усе разом у завданнях на помилки й у коротких текстах. Для кожного слова питай себе: <b>1)</b> річ чи людина? <b>2)</b> який прийменник і відмінок? <b>3)</b> з -r- чи без? <b>4)</b> це питання, відповідь чи зв’язка?", ex:[["Davor|da habe_ich_Angst.|v","річ + Angst haben vor"],["Mit|pr wem|wm sprichst_du?|v","людина + Dativ"]], tip:"Алгоритм: 1) річ/людина 2) прийменник і відмінок 3) r? 4) питання чи відповідь?" }
+ { n:9, t:"Підсумок і тексти", p:"Фінал: усе разом у завданнях на помилки й у коротких текстах. Для кожного слова питай себе: <b>1)</b> річ чи людина? <b>2)</b> який прийменник і відмінок? <b>3)</b> з -r- чи без? <b>4)</b> це питання, відповідь чи зв’язка?", ex:[["Davor|da habe_ich_Angst.|v","річ + Angst haben vor"],["Mit|pr wem|wm sprichst_du?|v","людина + Dativ"]], tip:"Алгоритм: 1) річ/людина 2) прийменник і відмінок 3) r? 4) питання чи відповідь?" }
 ];
 
 /* ============ ВПРАВИ ============ */
 const TABS = [
  { id:"md",   label:"Річ / людина",    kind:"mc",   title:"РІЧ ЧИ ЛЮДИНА?",          fixed:1, oc:"opts afit" },
- { id:"zs",   label:"Склади слово",    kind:"text", title:"СКЛАДИ СЛОВО",             ph:"Введи слово …",           oc:"opts grid4" },
+ { id:"zs",   label:"Склади слово",    kind:"text", title:"СКЛАДИ СЛОВО",             ph:"Введи слово …",           oc:"opts grid4", typeOnly:1 },
  { id:"dw",   label:"da- чи wo-?",     kind:"mc",   title:"DA- ЧИ WO-?",              oc:"opts afit" },
  { id:"ei",   label:"Встав слово",     kind:"text", title:"ВСТАВ СЛОВО",              ph:"Введи слово …",           oc:"opts grid4" },
  { id:"vp",   label:"Дієслово + прийменник", kind:"text", title:"ЯКИЙ ПРИЙМЕННИК?",   ph:"Введи прийменник …",      oc:"opts grid4" },
@@ -838,7 +837,6 @@ const TABS = [
  { id:"ue",   label:"Переклад",        kind:"text", title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ",      ph:"Введи речення німецькою …", oc:"opts col" },
  { id:"br",   label:"da-зв’язка",      kind:"text", title:"DA- ЯК ЗВ’ЯЗКА",           ph:"Введи слово …",           oc:"opts grid4" },
  { id:"dd",   label:"damit / darum",   kind:"mc",   title:"ЩО ОЗНАЧАЄ СЛОВО?",        oc:"opts col" },
- { id:"ug",   label:"Розмовне",        kind:"text", title:"РОЗМОВНЕ → ЛІТЕРАТУРНЕ",   ph:"Введи питання …",         oc:"opts col" },
  { id:"er",   label:"Знайди помилку",  kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",     oc:"opts col" },
  { id:"tx",   label:"Тексти",          kind:"text", title:"ВСТАВ У ТЕКСТ",            ph:"Введи слово …",           oc:"opts grid4" }
 ];
@@ -950,21 +948,27 @@ MM.forEach(([s, n], k) => {
   add("dd", { s:s.replace(/(damit|darum)/i, '<span class="u">$1</span>'), sch:"Значення видно з контексту речення.", o:MN[w], a:MN[w][+n], ex:`${cap(w)} = ${MN[w][+n]}`, lbl:MMT[k], sp:s, st:8,
     de:`${esc(s)} → <b>${esc(MN[w][+n])}</b>`, ua:MMT[k] });
 });
-KK.forEach(([p, r], k) => {
-  const a = `${cap(woF(p))} ${r}?`;
-  add("ug", { s:`${cap(p)} was ${r}?`, sch:"Перепиши літературною мовою: wo(r) + прийменник.", o:uniq4(a, [`${cap(badWo(p))} ${r}?`, `${cap(p)} wen ${r}?`, `${cap(daF(p))} ${r}?`]), a,
-    ex:`${p} was — розмовна форма; ${woF(p)} — літературна`, lbl:KKT[k], sp:a, st:9 });
-});
 
 /* --- підсумок --- */
-ERR.forEach(([ua, a, w1, w2, w3, ex]) => add("er", { s:ua, sch:"Обери правильний варіант німецькою.", o:[a, w1, w2, w3], a, ex, lbl:"", ua, sp:a, st:10, de:`<b>${esc(a)}</b>` }));
-TXT.forEach(([s, a, o, ex, ua]) => add("tx", { s, sch:"Читай речення цілком: річ чи людина, прийменник, відмінок.", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+ERR.forEach(([ua, a, w1, w2, w3, ex]) => add("er", { s:ua, sch:"Обери правильний варіант німецькою.", o:[a, w1, w2, w3], a, ex, lbl:"", ua, sp:a, st:9, de:`<b>${esc(a)}</b>` }));
+TXT.forEach(([s, a, o, ex, ua]) => add("tx", { s, sch:"Читай речення цілком: річ чи людина, прийменник, відмінок.", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:9, ua }));
+
+/* --- «Річ чи людина?»: прибираємо дублікати (однакове підкреслене слово) --- */
+{
+  const seen = new Set();
+  ITEMS.md = ITEMS.md.filter(it => {
+    const m = it.s.match(/<span class="u [SP]">([^<]+)<\/span>/);
+    const key = m ? m[1].trim().split(" ").pop().toLowerCase() : stripHTML(it.s).toLowerCase();
+    if(seen.has(key)) return false;
+    seen.add(key); return true;
+  });
+}
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
 const XP_MAX = Math.ceil(TOTAL / 10) * 10;         // EXP = кількість усіх завдань, округлена вгору до 10
 
-let stage = (() => { const v = localStorage.getItem("pa_stage"); return v === null ? 1 : (parseInt(v, 10) || 0); })();
+let stage = (() => { const v = parseInt(localStorage.getItem("pa_stage"), 10); return (v >= 1 && v <= 9) ? v : 1; })();
 const UL_KEY = "pa_unlocked";
 const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
 
@@ -1083,7 +1087,8 @@ let XP = calcXp();
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
 let mode = store.get("pa-mode") === "type" ? "type" : "mc";
 const TB = () => TABS.find(t => t.id === tab);
-const isMc = () => TB().kind === "mc" || (TB().kind === "text" && mode === "mc");
+const eMode = () => TB().typeOnly ? "type" : mode;
+const isMc = () => TB().kind === "mc" || (TB().kind === "text" && eMode() === "mc");
 const items = () => ITEMS[tab];
 const T = () => S[tab];
 const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] === stage);
@@ -1117,7 +1122,7 @@ function renderTabs(){
 }
 function renderModes(){
   const b = $("modeBtn");
-  b.style.display = TB().kind === "text" ? "flex" : "none";
+  b.style.display = (TB().kind === "text" && !TB().typeOnly) ? "flex" : "none";
   b.textContent = mode === "mc" ? "👆 Обери" : "✏️ Впиши";
   b.title = mode === "mc" ? "Зараз: вибір варіантів. Натисніть, щоб вписувати самому." : "Зараз: ввід. Натисніть, щоб обирати варіанти.";
 }
@@ -1199,7 +1204,7 @@ const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
-   + `<button class="stg ${stage === 0 ? "on" : ""}" data-s="0">Вільна практика</button>`;
+;
 }
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
@@ -1234,7 +1239,7 @@ function load(i){
   $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
   $("card").classList.toggle("mc", isMc());
   $("card").classList.toggle("tx", TB().kind === "text");
-  $("umRow").style.display = (TB().kind === "text" && mode === "type") ? "flex" : "none";
+  $("umRow").style.display = (TB().kind === "text" && eMode() === "type") ? "flex" : "none";
   renderOpts(); renderRule(); renderCard(); renderReviewBtn();
   if(!isMc()) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
 }
@@ -1463,7 +1468,6 @@ const CHEAT = [
   ["+ Akkusativ","var(--c-s)",[["warten auf","чекати на"],["denken an","думати про"],["sich erinnern an","пам’ятати"],["sich freuen auf","радіти наперед"],["sich freuen über","радіти з"],["sprechen über · diskutieren über","говорити · обговорювати"],["sich ärgern über","злитися на"],["sich interessieren für","цікавитися"],["sich entscheiden für","обирати"],["bitten um · sich kümmern um","просити · піклуватися"],["achten auf · sich konzentrieren auf","звертати увагу · зосереджуватися"],["sich verlassen auf","покладатися"]]],
   ["+ Dativ","var(--c-da)",[["sich beschäftigen mit","займатися"],["aufhören mit · anfangen mit","припиняти · починати"],["träumen von · abhängen von","мріяти про · залежати від"],["Angst haben vor","боятися"],["suchen nach","шукати"],["helfen bei","допомагати з"],["gehören zu","належати до"],["leiden unter","страждати від"],["teilnehmen an","брати участь (an + Dativ!)"]]],
   ["damit · darum","var(--c-pn)",[["Damit kannst du schreiben.","з цим (вказівка)"],["…, damit ich es verstehe.","щоб (мета)"],["Es geht darum, …","про це (вказівка)"],["Darum bleiben wir hier.","тому (причина)"]]],
-  ["Розмовне","var(--c-r)",[["Auf was → Worauf","на що?"],["Mit was → Womit","чим?"],["Über was → Worüber","про що?"],["Von was → Wovon","про що / від чого?"],["Für was → Wofür","для чого?"],["Um was → Worum","про що / за що?"]]]
 ];
 let cheatG = 0;
 function renderCheat(){
