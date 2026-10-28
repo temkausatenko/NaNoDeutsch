@@ -54,7 +54,6 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
 .tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
 .tab.on small{color:#fff;background:rgba(255,255,255,.2)}
-.tab.cl small::before{content:"✓ "}
 .xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
 .xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
 .xrst{margin-left:10px;width:24px;height:24px;padding:0;border:1px solid var(--bd);border-radius:50%;background:transparent;color:var(--mu);font-size:.85rem;line-height:1;cursor:pointer;transition:all .18s}
@@ -62,41 +61,15 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
 .xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
 .xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
-.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums;position:relative}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
 .xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
 .xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
 .xp.max .xv b,.xp.max .xv small{color:var(--go)}
 .xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 2px),var(--card) calc(20% - 2px),var(--card) 20%)}
 .xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
 .xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
 @keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
-.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
-.xrn{font-size:.9rem;font-weight:700;color:var(--xz,#94a3b8);letter-spacing:.02em}
-.xnx{font-size:.74rem;color:var(--mu)}
-.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
-.xp{--xa:#475569;--xz:#94a3b8}
-.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
-.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
-.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
-.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
-.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
-.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
-.xb i{background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
-.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
-.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
-.xpop.go{animation:xpop .9s ease-out forwards}
-@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
-.xv b.bump{animation:xbump .35s ease-out}
-@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
-.xp.lvl{animation:xlvl 1.2s ease-out}
-@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
-.xp.lvl .xrn{animation:xbump .6s ease-out}
-.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
-.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
-.xp.max .xnx{color:var(--go);font-weight:600}
-:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
-:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
-@keyframes xgold{to{background-position:200% 0}}
 .pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
 .pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
@@ -112,7 +85,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
 #finBox{display:none}
-.card.fin > :not(h2):not(.rst):not(#finBox):not(.mode-toggle):not(.speak){display:none!important}
+.card.fin > :not(h2):not(.rst):not(#finBox){display:none!important}
 .card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
 #finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
 #finBox .ft.rv{color:var(--pr)}
@@ -124,6 +97,8 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .fin-actions .go:hover{filter:brightness(1.1)}
 .fin-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .fin-actions .cancel:hover{border-color:var(--pr)}
+.tab.cl small::before{content:"✓ "}
+
 .card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:170px;text-transform:uppercase;line-height:32px;min-height:32px;}
 .speak,.mode-toggle,.rst{position:absolute;top:22px;height:32px;border-radius:50%;border:1px solid var(--bd);
   background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
@@ -131,7 +106,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .rst{right:22px;width:32px;font-size:1.15rem}
 .mode-toggle{right:102px;width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
 .speak:hover,.mode-toggle:hover,.rst:hover{color:var(--tx);border-color:var(--pr)}
-.sent{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
 .lab{margin:0 0 16px;font-size:.8rem;line-height:1.4;font-weight:400;color:var(--mu)}
 .lab:empty{display:none}
@@ -140,14 +115,13 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .tr-text{font-size:.8rem;line-height:1.4;color:var(--mu)}
 .rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
 .rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
+.cue-line{margin:-4px 0 10px}
+.cue-line:empty{display:none}
 .cuechip{display:inline-block;margin:0 6px 4px 0;padding:3px 10px;border-radius:999px;font-size:.78rem;font-weight:700;background:rgba(245,158,11,.14);color:var(--go);border:1px solid rgba(245,158,11,.35)}
 .blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
 .blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
 .blank.fill{border-bottom-style:solid}
 .opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
-.opts.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(min-width:640px){.opts.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .opt{flex:1 1 auto;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;
   border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
 .opt.ok,.opt.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
@@ -169,23 +143,43 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;
   text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
 .tool:hover{color:var(--tx)}
-.fb-adv{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--ok);background:var(--ok);color:#fff;transition:all .18s}
-.fb-adv:hover{filter:brightness(1.1)}
-.stages{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
+.stages{display:flex;gap:6px;overflow-x:auto;cursor:grab;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
 .stages::-webkit-scrollbar{display:none}
 .stages.drag{cursor:grabbing;user-select:none}
 .stages.drag .stg{pointer-events:none}
-.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.76rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
+.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.72rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
 .stg small{margin-left:6px;font-size:.62rem;font-weight:500;opacity:.65}
 .stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
 .stg:hover{color:var(--tx);border-color:var(--pr)}
 .stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
 .stg.lk{opacity:.5}
+
+/* Lesson Overlay */
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px;background:var(--card)}
 body.lsn #tabs,body.lsn #card{display:none}
 .lesson h3{margin:0 0 8px;font-size:1.05rem;color:var(--sa)}.lesson p{line-height:1.6;font-size:.92rem;color:var(--mu)}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px;color:var(--tx);font-size:.9rem;margin-top:10px}
 .lgo{margin-top:12px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer;width:100%;transition:all .2s}
 .lgo:hover{filter:brightness(1.1)}
+.lesson .lp{line-height:1.6;font-size:.93rem;color:var(--mu)}
+.lesson .lp p{margin:0 0 10px}
+.lesson .lp b{color:var(--tx)}
+.lesson .lp ul,.lesson .lp ol{margin:6px 0 12px;padding-left:20px}
+.lesson .lp li{margin:5px 0;color:var(--mu);font-size:.92rem;line-height:1.55}
+.lesson .lp i{color:var(--tx)}
+.lesson .lp table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.82rem}
+.lesson .lp th,.lesson .lp td{border:1px solid var(--bd);padding:6px 8px;text-align:left;color:var(--tx)}
+.lesson .lp th{background:var(--pl)}
+.lesson h4{margin:16px 0 4px;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.e{color:var(--go);font-weight:800}
+.lx{margin:10px 0}
+.sch{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
+.un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
+.wc{display:inline-block;padding:9px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-size:.98rem;font-weight:500;line-height:1.25;cursor:default}
+.wc.col{border-color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+:root{--c-art:#60a5fa;--c-adj:#a3e635;--c-n:#c4b5fd;--c-verb:#f472b6;--c-adv:#94a3b8;--c-pr:#fcd34d;--c-num:#fb7185}
+.r-art{--c:var(--c-art)}.r-adj{--c:var(--c-adj)}.r-n{--c:var(--c-n)}.r-verb{--c:var(--c-verb)}.r-adv{--c:var(--c-adv)}.r-pr{--c:var(--c-pr)}.r-num{--c:var(--c-num)}
+
 .fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
 .fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
 .fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
@@ -196,6 +190,9 @@ body.lsn #tabs,body.lsn #card{display:none}
 .fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
 .fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
 .fb .ex b{color:var(--tx)}
+.fb-adv{display:inline-block;margin-top:12px;padding:10px 22px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .18s;width:100%}
+.fb-adv:hover{border-color:var(--pr);color:var(--pr)}
+
 .foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
 .foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
 .btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
@@ -204,6 +201,7 @@ body.lsn #tabs,body.lsn #card{display:none}
 .btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
 .btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
 .theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+
 .errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
 .errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
@@ -224,6 +222,7 @@ body.lsn #tabs,body.lsn #card{display:none}
   padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
   animation:pop .35s ease}
 button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+
 #theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
 #theory-section.show{display:block}
 .theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
@@ -239,16 +238,34 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
 .theory-card th{background:var(--pl);color:var(--tx)}
 
-/* Візуальні плашки для уроку */
-:root{--c-art:#60a5fa;--c-adj:#a3e635;--c-n:#c4b5fd;--c-verb:#f472b6;--c-adv:#94a3b8;--c-pr:#fcd34d;--c-num:#fb7185}
-.r-art{--c:var(--c-art)}.r-adj{--c:var(--c-adj)}.r-n{--c:var(--c-n)}.r-verb{--c:var(--c-verb)}.r-adv{--c:var(--c-adv)}.r-pr{--c:var(--c-pr)}.r-num{--c:var(--c-num)}
-.lx{margin:10px 0}
-.sch{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
-.un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
-.un .wc{cursor:default}
-.wc{display:inline-block;padding:9px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-size:.98rem;font-weight:500;line-height:1.25;transition:transform .12s,border-color .15s,background .15s}
-.wc.col{border-color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+/* XP Colors & Legends */
+.xp{--xa:#475569;--xz:#94a3b8}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xb i{background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
+.xp.max .xnx{color:var(--go);font-weight:600}
+:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
+@keyframes xgold{to{background-position:200% 0}}
 
 @media(max-width:480px){
   .stats-panel{grid-template-columns:repeat(3,1fr)}
@@ -289,7 +306,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   </div>
 
   <div class="card" id="card">
-    <h2 id="title"></h2>
+    <h2 id="title">ВПРАВИ</h2>
     <button class="mode-toggle" id="modeBtn" title="Змінити режим">✏️ Впиши</button>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rstBtn" title="Скинути прогрес цієї категорії" onclick="restartTab()">↺</button>
@@ -306,7 +323,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
       <button class="tool" id="showBtn" type="button">Показати відповідь</button>
     </div>
     <div class="row">
-      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи закінчення …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
     </div>
     <div class="fb" id="fb"></div>
@@ -354,6 +371,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
           <tr><td>Nom</td><td>ein gut<b>er</b></td><td>eine gut<b>e</b></td><td>ein gut<b>es</b></td><td>keine gut<b>en</b></td></tr>
           <tr><td>Akk</td><td>einen gut<b>en</b></td><td>eine gut<b>e</b></td><td>ein gut<b>es</b></td><td>keine gut<b>en</b></td></tr>
           <tr><td>Dat</td><td>einem gut<b>en</b></td><td>einer gut<b>en</b></td><td>einem gut<b>en</b></td><td>keinen gut<b>en</b></td></tr>
+          <tr><td>Gen</td><td>eines gut<b>en</b></td><td>einer gut<b>en</b></td><td>eines gut<b>en</b></td><td>keiner gut<b>en</b></td></tr>
         </table>
       </div>
 
@@ -398,166 +416,260 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 <script>
 const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); return { t: t.replace(/_/g, " "), r }; });
-const ROLE = { art:"Артикль", adj:"Прикметник", n:"Іменник", verb:"Дієслово", adv:"Обставина", pr:"Прийменник", num:"Числівник" };
+const hl = t => esc(t).replace(/\{(.*?)\}/g, '<span class="e">$1</span>');
+const ROLE = { art:"Артикль", adj:"Прикметник", n:"Іменник", verb:"Дієслово", adv:"Обставина", pr:"Прийменник", num:"Числівник", pron:"Займенник" };
 
 const STAGES = [
-  { 
-    n:1, t:"Слабке (der/die/das)", 
-    p:"Використовується після означених артиклів (<b>der, die, das</b>) та вказівних займенників (<b>dieser, jeder, welcher</b>). Оскільки артикль вже показує рід і відмінок, прикметник отримує «слабкі» закінчення: <b>-e</b> або <b>-en</b>.", 
-    ex:[["Der|art alt|adj Mann|n wohnt|verb hier|adv","Старий чоловік живе тут. (der + Nom M → -e)"],["Ich|n sehe|verb den|art alt|adj Mann|n","Я бачу старого чоловіка. (den + Akk M → -en)"],["Er|n hilft|verb dem|art klug|adj Kind|n","Він допомагає розумній дитині. (dem + Dat → -en)"]], 
-    tip:"Правило: Dat, Gen і Plural — завжди -en. Nom (M, F, N) і Akk (F, N) — -e. Akk M — -en." 
+  {
+    n:1, t:"Слабке (der/die/das)",
+    p:`<p>Це найпростіший тип. Він використовується, коли перед прикметником стоїть <b>означений артикль</b> (<b>der, die, das</b>) або слова, що відмінюються так само: <b>dieser, jeder, welcher, derselbe</b>.</p>
+<p>Артикль уже показує рід і відмінок, тому прикметник «відпочиває» і має лише <b>два закінчення: -e або -en</b>.</p>
+<div class="table-wrap"><table>
+<tr><th></th><th>M (der)</th><th>F (die)</th><th>N (das)</th><th>Pl (die)</th></tr>
+<tr><td>Nom</td><td>der gut<span class="e">e</span></td><td>die gut<span class="e">e</span></td><td>das gut<span class="e">e</span></td><td>die gut<span class="e">en</span></td></tr>
+<tr><td>Akk</td><td>den gut<span class="e">en</span></td><td>die gut<span class="e">e</span></td><td>das gut<span class="e">e</span></td><td>die gut<span class="e">en</span></td></tr>
+<tr><td>Dat</td><td>dem gut<span class="e">en</span></td><td>der gut<span class="e">en</span></td><td>dem gut<span class="e">en</span></td><td>den gut<span class="e">en</span></td></tr>
+<tr><td>Gen</td><td>des gut<span class="e">en</span></td><td>der gut<span class="e">en</span></td><td>des gut<span class="e">en</span></td><td>der gut<span class="e">en</span></td></tr>
+</table></div>
+<p><b>Як запам'ятати:</b> закінчення <span class="e">-e</span> є лише у <b>п'яти клітинках</b>: Nom (M, F, N) та Akk (F, N). Скрізь в іншому місці — <span class="e">-en</span>.</p>`,
+    ex:[["Der|art alt{e}|adj Mann|n wohnt|verb hier|adv","Старий чоловік живе тут. (der + Nom M → -e)"],["Ich|pron sehe|verb den|art alt{en}|adj Mann|n","Я бачу старого чоловіка. (den + Akk M → -en)"],["Er|pron hilft|verb dem|art klug{en}|adj Kind|n","Він допомагає розумній дитині. (dem + Dat → -en)"],["Die|art klein{en}|adj Kinder|n spielen|verb","Маленькі діти граються. (die + Plural → -en)"]],
+    tip:"Dat, Gen і Plural — завжди -en. Nom (M, F, N) і Akk (F, N) — -e. Akk M — -en."
   },
-  { 
-    n:2, t:"Змішане (ein/kein/mein)", 
-    p:"Використовується після присвійних займенників та <b>ein/kein</b>. У цих артиклів немає закінчення в називному відмінку чоловічого та середнього роду (ein Mann, ein Kind), тому прикметник бере на себе сильне закінчення <b>-er</b> або <b>-es</b>. В інших випадках закінчення слабкі.", 
-    ex:[["Ein|art groß|adj Hund|n bellt|verb","Великий пес гавкає. (ein + Nom M → -er)"],["Ich|n habe|verb ein|art neu|adj Auto|n","У мене нова машина. (ein + Akk N → -es)"],["Sie|n wohnt|verb mit|pr ihrem|art nett|adj Mann|n","Вона живе зі своїм милим чоловіком. (ihrem + Dat → -en)"]], 
-    tip:"Якщо артикль показує рід (eine, einen, einem) — прикметник бере -e або -en. Якщо не показує (ein) — прикметник бере -er або -es." 
+  {
+    n:2, t:"Змішане (ein/kein/mein)",
+    p:`<p>Використовується після <b>ein, kein</b> та присвійних займенників: <b>mein, dein, sein, ihr, unser, euer</b>.</p>
+<p>Проблема: у трьох випадках ці слова <b>не мають закінчення</b>: <i>ein Mann</i> (Nom M), <i>ein Kind</i> (Nom N), <i>ein Kind</i> (Akk N). Артикль «мовчить», тому рід має показати сам прикметник: <span class="e">-er</span> (M) або <span class="e">-es</span> (N).</p>
+<div class="table-wrap"><table>
+<tr><th></th><th>M</th><th>F</th><th>N</th><th>Pl (kein)</th></tr>
+<tr><td>Nom</td><td>ein gut<span class="e">er</span></td><td>eine gut<span class="e">e</span></td><td>ein gut<span class="e">es</span></td><td>keine gut<span class="e">en</span></td></tr>
+<tr><td>Akk</td><td>einen gut<span class="e">en</span></td><td>eine gut<span class="e">e</span></td><td>ein gut<span class="e">es</span></td><td>keine gut<span class="e">en</span></td></tr>
+<tr><td>Dat</td><td>einem gut<span class="e">en</span></td><td>einer gut<span class="e">en</span></td><td>einem gut<span class="e">en</span></td><td>keinen gut<span class="e">en</span></td></tr>
+<tr><td>Gen</td><td>eines gut<span class="e">en</span></td><td>einer gut<span class="e">en</span></td><td>eines gut<span class="e">en</span></td><td>keiner gut<span class="e">en</span></td></tr>
+</table></div>
+<p>В усіх інших клітинках — як у слабкому типі (-e / -en).</p>`,
+    ex:[["Ein|art groß{er}|adj Hund|n bellt|verb","Великий пес гавкає. (ein + Nom M → -er)"],["Ich|pron habe|verb ein|art neu{es}|adj Auto|n","У мене нова машина. (ein + Akk N → -es)"],["Das|pron ist|verb eine|art gut{e}|adj Idee|n","Це хороша ідея. (eine + Nom F → -e)"],["Sie|pron wohnt|verb mit|pr ihrem|art nett{en}|adj Mann|n","Вона живе зі своїм милим чоловіком. (ihrem + Dat → -en)"]],
+    tip:"Артикль має закінчення (eine, einen, einem, einer…) → прикметник бере -e / -en. Артикль без закінчення (ein, mein, kein у Nom M, Nom N, Akk N) → прикметник бере -er / -es."
   },
-  { 
-    n:3, t:"Сильне (без артикля)", 
-    p:"Якщо перед прикметником немає артикля (або стоять слова <b>viele, wenige, einige</b>), він бере на себе роль артикля і копіює його закінчення. Виняток: у родовому відмінку чоловічого та середнього роду — <b>-en</b>.", 
-    ex:[["Frisch|adj Brot|n riecht|verb gut|adv","Свіжий хліб гарно пахне. (без артикля, Nom N → -es)"],["Ich|n trinke|verb kalt|adj Kaffee|n","Я п'ю холодну каву. (без артикля, Akk M → -en)"],["Mit|pr warm|adj Wasser|n wäscht|verb man|n besser|adv","Теплою водою миють краще. (без артикля, Dat N → -em)"]], 
-    tip:"Прикметник без артикля виглядає як означений артикль: guter Wein (der), gute Milch (die), gutes Bier (das)." 
+  {
+    n:3, t:"Сильне (без артикля)",
+    p:`<p>Використовується, коли <b>артикля немає</b>, а також після <b>числівників</b> (<i>zwei, drei</i>) та слів <b>viele, wenige, einige, mehrere</b>.</p>
+<p>Тут прикметник сам виконує роль артикля, тому бере <b>ті самі закінчення, що й der / die / das</b>.</p>
+<div class="table-wrap"><table>
+<tr><th></th><th>M</th><th>F</th><th>N</th><th>Pl</th></tr>
+<tr><td>Nom</td><td>gut<span class="e">er</span> Wein</td><td>gut<span class="e">e</span> Milch</td><td>gut<span class="e">es</span> Bier</td><td>gut<span class="e">e</span> Autos</td></tr>
+<tr><td>Akk</td><td>gut<span class="e">en</span> Wein</td><td>gut<span class="e">e</span> Milch</td><td>gut<span class="e">es</span> Bier</td><td>gut<span class="e">e</span> Autos</td></tr>
+<tr><td>Dat</td><td>gut<span class="e">em</span> Wein</td><td>gut<span class="e">er</span> Milch</td><td>gut<span class="e">em</span> Bier</td><td>gut<span class="e">en</span> Autos</td></tr>
+<tr><td>Gen</td><td>gut<span class="e">en</span> Weines</td><td>gut<span class="e">er</span> Milch</td><td>gut<span class="e">en</span> Bieres</td><td>gut<span class="e">er</span> Autos</td></tr>
+</table></div>
+<p><b>Єдиний виняток:</b> Gen M і N — <span class="e">-en</span>, а не -es, бо закінчення -(e)s уже є в іменнику: <i>guten Weines</i>.</p>`,
+    ex:[["Frisch{es}|adj Brot|n riecht|verb gut|adv","Свіжий хліб гарно пахне. (без артикля, Nom N → -es)"],["Ich|pron trinke|verb kalt{en}|adj Kaffee|n","Я п'ю холодну каву. (без артикля, Akk M → -en)"],["Mit|pr warm{em}|adj Wasser|n wäscht|verb man|pron besser|adv","Теплою водою миють краще. (без артикля, Dat N → -em)"],["Zwei|num groß{e}|adj Koffer|n stehen|verb im|pr Flur|n","Дві великі валізи стоять у коридорі. (після числівника, Nom Pl → -e)"]],
+    tip:"Прикметник без артикля виглядає як відповідний артикль: guter Wein (der), gute Milch (die), gutes Bier (das)."
   },
-  { 
-    n:4, t:"Винятки та ступені", 
-    p:"Деякі прикметники поводяться особливо: втрачають голосну, змінюють корінь або взагалі не відмінюються. Також сюди входять ступені порівняння перед іменником.", 
-    ex:[["Das|art ist|verb ein|art dunkl|adj Raum|n","Це темна кімната. (dunkel → dunkler)"],["Sie|n trägt|verb ein|art rosa|adj Hemd|n","Вона носить рожеву сорочку. (rosa не змінюється)"],["Er|n ist|verb der|art schnellst|adj Läufer|n","Він найшвидший бігун. (Superlativ перед іменником)"]], 
-    tip:"Запам'ятай: dunkel → dunkler, teuer → teurer, hoch → hoher. А rosa, lila, prima взагалі не отримують закінчень." 
+  {
+    n:4, t:"Винятки та ступені",
+    p:`<p>Деякі прикметники поводяться особливо. Також тут — ступені порівняння перед іменником.</p>
+<p><b>Особливі прикметники:</b></p>
+<ul>
+<li><b>-el / -er → випадає -e-</b>: <i>dunkel → ein dunkl<span class="e">er</span> Raum</i>, <i>teuer → eine teur<span class="e">e</span> Uhr</i>, <i>flexibel → eine flexibl<span class="e">e</span> Lösung</i>.</li>
+<li><b>hoch → hoh-</b> перед закінченням: <i>der hohe Berg</i>.</li>
+<li><b>Не відмінюються</b>: <i>rosa, lila, prima, super</i>. Наприклад: <i>ein rosa Hemd, eine prima Idee</i>.</li>
+<li><b>Міста на -er</b> не відмінюються і пишуться з великої літери: <i>die Berliner Luft, der Frankfurter Flughafen</i>.</li>
+</ul>
+<p><b>Ступені порівняння:</b></p>
+<ul>
+<li><b>Komparativ</b> = корінь + <b>-er</b>. Перед іменником додається ще й закінчення: <i>ein schnell<b>er</b><span class="e">er</span> Zug</i>. У присудку закінчення немає: <i>Er ist schneller als ich.</i></li>
+<li><b>Superlativ</b> = корінь + <b>-st</b> (+ закінчення): <i>der schnell<b>st</b><span class="e">e</span> Läufer</i>.</li>
+<li><b>am …sten</b> — коли немає іменника: <i>Er läuft am schnellsten.</i></li>
+<li><b>Неправильні форми</b>: gut → besser → best-; groß → größer → größt-; hoch → höher → höchst-; alt → älter → ältest-.</li>
+</ul>`,
+    ex:[["Das|pron ist|verb ein|art dunkl{er}|adj Raum|n","Це темна кімната. (dunkel → dunkler)"],["Sie|pron trägt|verb ein|art rosa|adj Hemd|n","Вона носить рожеву сорочку. (rosa не змінюється)"],["Er|pron ist|verb der|art schnellst{e}|adj Läufer|n","Він найшвидший бігун. (Superlativ перед іменником)"],["Er|pron läuft|verb am|pr schnellst{en}|adv","Він бігає найшвидше. (am …sten — без іменника)"]],
+    tip:"Запам'ятай: dunkel → dunkler, teuer → teure, hoch → hohe. А rosa, lila, prima, super не отримують закінчень."
   },
-  { 
-    n:5, t:"Мікс", 
-    p:"Тут зібрані всі типи відмінювання впереміш. Уважно дивись на артикль перед прикметником, щоб зрозуміти, яке закінчення використовувати.", 
-    ex:[["Ich|n kaufe|verb einen|art neu|adj Tisch|n","Я купую новий стіл. (einen + Akk M → -en)"],["Gut|adj Ideen|n sind|verb selten|adv","Хороші ідеї — рідкість. (без артикля, Nom Pl → -e)"],["Wir|n sprechen|verb mit|pr den|art neu|adj Kollegen|n","Ми розмовляємо з новими колегами. (den + Dat Pl → -en)"]], 
-    tip:"Головне питання: Який артикль? Якщо der/die/das — слабке. Якщо ein/kein — змішане. Якщо нічого — сильне." 
+  {
+    n:5, t:"Мікс",
+    p:`<p>Тут усі три типи впереміш. Щоразу став собі три питання по порядку:</p>
+<ol>
+<li><b>Перед прикметником є der / die / das / dieser / jeder / welcher?</b> → слабке: <span class="e">-e</span> або <span class="e">-en</span>.</li>
+<li><b>Є ein / kein / mein / dein / ihr…?</b> → змішане. Якщо це Nom M, Nom N або Akk N (артикль без закінчення) → <span class="e">-er / -es</span>. Інакше → <span class="e">-e / -en</span>.</li>
+<li><b>Нічого немає (або числівник, viele, einige)?</b> → сильне: закінчення як у der / die / das (<span class="e">-er, -e, -es, -en, -em</span>).</li>
+</ol>
+<p>Окремо перевір, чи не стоїть прикметник у <b>Dat</b> або <b>Gen</b>: там майже завжди <b>-en</b> (виняток: сильне Dat M/N → -em, Dat F → -er).</p>`,
+    ex:[["Ich|pron kaufe|verb einen|art neu{en}|adj Tisch|n","Я купую новий стіл. (einen + Akk M → -en)"],["Gut{e}|adj Ideen|n sind|verb selten|adv","Хороші ідеї — рідкість. (без артикля, Nom Pl → -e)"],["Wir|pron sprechen|verb mit|pr den|art neu{en}|adj Kollegen|n","Ми розмовляємо з новими колегами. (den + Dat Pl → -en)"],["Das|pron ist|verb mein|art best{er}|adj Freund|n","Це мій найкращий друг. (mein + Nom M → -er)"]],
+    tip:"Головне питання: який артикль? der/die/das → слабке. ein/kein/mein → змішане. Нічого → сильне."
   }
 ];
 
-const RAW = {
-1: [
-["Der alt___ Mann wohnt hier.","e",["e","en","er","es","em"],"Старий чоловік живе тут.","der + Nom M → -e"],
-["Ich sehe den alt___ Mann.","en",["e","en","er","es","em"],"Я бачу старого чоловіка.","den + Akk M → -en"],
-["Die klein___ Katze schläft.","e",["e","en","er","es","em"],"Маленька кішка спить.","die + Nom F → -e"],
-["Er hilft dem klug___ Kind.","en",["e","en","er","es","em"],"Він допомагає розумній дитині.","dem + Dat → завжди -en"],
-["Das ist das Auto der nett___ Frau.","en",["e","en","er","es","em"],"Це машина милої жінки.","der + Gen F → -en"],
-["Wir kaufen das neu___ Buch.","e",["e","en","er","es","em"],"Ми купуємо нову книгу.","das + Akk N → -e"],
-["Die gut___ Freunde kommen heute.","en",["e","en","er","es","em"],"Хороші друзі приходять сьогодні.","die + Plural → -en"],
-["Mit dem schnell___ Zug fahre ich nach Berlin.","en",["e","en","er","es","em"],"Швидким потягом я їду до Берліна.","dem + Dat → -en"],
-["Dieser rot___ Apfel schmeckt gut.","e",["e","en","er","es","em"],"Це червоне яблуко смачне.","dieser працює як der: Nom M → -e"],
-["Jede klein___ Stadt hat einen Bahnhof.","e",["e","en","er","es","em"],"Кожне маленьке місто має вокзал.","jede + Nom F → -e"],
-["Welchen groß___ Koffer nimmst du?","en",["e","en","er","es","em"],"Яку велику валізу ти береш?","welchen + Akk M → -en"],
-["Ich gebe der jung___ Lehrerin das Buch.","en",["e","en","er","es","em"],"Я даю молодій вчительці книгу.","der + Dat F → -en"],
-["Er wohnt in dem alt___ Haus.","en",["e","en","er","es","em"],"Він живе в старому будинку.","dem + Dat N → -en"],
-["Das Handy des neu___ Kollegen ist kaputt.","en",["e","en","er","es","em"],"Телефон нового колеги зламаний.","des + Gen M → -en"],
-["Kannst du bitte das groß___ Fenster öffnen?","e",["e","en","er","es","em"],"Можеш, будь ласка, відчинити велике вікно?","das + Akk N → -e"],
-["Ich warte seit einer Stunde auf den nächst___ Bus.","en",["e","en","er","es","em"],"Я вже годину чекаю наступний автобус.","den + Akk M → -en (warten auf + Akk)"],
-["Die neu___ Kollegin hat gestern angefangen.","e",["e","en","er","es","em"],"Нова колега почала працювати вчора.","die + Nom F → -e"],
-["Im groß___ Supermarkt ist alles billiger.","en",["e","en","er","es","em"],"У великому супермаркеті все дешевше.","im = in dem → Dat → -en"],
-["Der Preis des teur___ Handys hat mich geschockt.","en",["e","en","er","es","em"],"Ціна дорогого телефону мене шокувала.","des + Gen N → -en"],
-["Welche warm___ Jacke passt besser zu mir?","e",["e","en","er","es","em"],"Яка тепла куртка мені більше пасує?","welche + Nom F → -e"],
-["Ich bedanke mich bei dem freundlich___ Verkäufer.","en",["e","en","er","es","em"],"Я дякую привітному продавцеві.","dem + Dat M → -en"],
-["Dieses neu___ Restaurant hat sehr gute Kritiken.","e",["e","en","er","es","em"],"У цього нового ресторану дуже хороші відгуки.","dieses + Nom N → -e"]
-],
-2: [
-["Ein groß___ Hund bellt.","er",["e","en","er","es","em"],"Великий пес гавкає.","ein + Nom M: артикль без закінчення → -er"],
-["Ich habe ein neu___ Auto.","es",["e","en","er","es","em"],"У мене нова машина.","ein + Akk N: артикль без закінчення → -es"],
-["Das ist eine gut___ Idee.","e",["e","en","er","es","em"],"Це хороша ідея.","eine + Nom F → -e"],
-["Er hat einen alt___ Computer.","en",["e","en","er","es","em"],"У нього старий комп’ютер.","einen + Akk M → -en"],
-["Mein klein___ Bruder spielt Fußball.","er",["e","en","er","es","em"],"Мій молодший брат грає у футбол.","mein + Nom M → -er"],
-["Das ist kein einfach___ Problem.","es",["e","en","er","es","em"],"Це не проста проблема.","kein + Nom N → -es"],
-["Sie wohnt mit ihrem nett___ Mann in Wien.","en",["e","en","er","es","em"],"Вона живе зі своїм милим чоловіком у Відні.","ihrem + Dat → -en"],
-["Wir haben keine frei___ Zimmer.","en",["e","en","er","es","em"],"У нас немає вільних кімнат.","keine + Plural → -en"],
-["Ich suche meine rot___ Jacke.","e",["e","en","er","es","em"],"Я шукаю свою червону куртку.","meine + Akk F → -e"],
-["Das ist ein schön___ Tag.","er",["e","en","er","es","em"],"Це гарний день.","ein + Nom M → -er"],
-["Sie schenkt ihrem klein___ Sohn ein Buch.","en",["e","en","er","es","em"],"Вона дарує своєму маленькому сину книгу.","ihrem + Dat M → -en"],
-["Unser neu___ Chef kommt aus Köln.","er",["e","en","er","es","em"],"Наш новий шеф родом з Кельна.","unser + Nom M → -er"],
-["Das ist die Tasche meiner alt___ Tante.","en",["e","en","er","es","em"],"Це сумка моєї старої тітки.","meiner + Gen F → -en"],
-["Hast du kein warm___ Wasser?","es",["e","en","er","es","em"],"У тебе немає теплої води?","kein + Akk N → -es"],
-["Ich habe einen stressig___ Tag hinter mir.","en",["e","en","er","es","em"],"У мене за плечима напружений день.","einen + Akk M → -en"],
-["Sie ist eine sehr nett___ Nachbarin.","e",["e","en","er","es","em"],"Вона дуже мила сусідка.","eine + Nom F → -e"],
-["Wir haben ein klein___ Problem mit der Heizung.","es",["e","en","er","es","em"],"У нас невелика проблема з опаленням.","ein + Akk N → -es"],
-["Mein neu___ Handy hat eine super Kamera.","es",["e","en","er","es","em"],"У мого нового телефону супер камера.","mein + Nom N → -es"],
-["Ich fahre mit meinem alt___ Auto zur Arbeit.","en",["e","en","er","es","em"],"Я їжджу на роботу на своїй старій машині.","meinem + Dat N → -en"],
-["Hast du einen gut___ Zahnarzt?","en",["e","en","er","es","em"],"У тебе є хороший стоматолог?","einen + Akk M → -en"],
-["Das ist ein lecker___ Kuchen!","er",["e","en","er","es","em"],"Це смачний пиріг!","ein + Nom M → -er"],
-["Unsere neu___ Wohnung hat einen Balkon.","e",["e","en","er","es","em"],"У нашій новій квартирі є балкон.","unsere + Nom F → -e"]
-],
-3: [
-["Frisch___ Brot riecht gut.","es",["e","en","er","es","em"],"Свіжий хліб гарно пахне.","без артикля, Nom N → -es"],
-["Ich trinke kalt___ Kaffee.","en",["e","en","er","es","em"],"Я п’ю холодну каву.","без артикля, Akk M → -en"],
-["Heiß___ Milch schmeckt mir nicht.","e",["e","en","er","es","em"],"Гаряче молоко мені не смакує.","без артикля, Nom F → -e"],
-["Mit warm___ Wasser wäscht man besser.","em",["e","en","er","es","em"],"Теплою водою миють краще.","без артикля, Dat N → -em (як dem)"],
-["Wir suchen neu___ Mitarbeiter.","e",["e","en","er","es","em"],"Ми шукаємо нових співробітників.","без артикля, Akk Pl → -e"],
-["Bei schön___ Wetter gehen wir spazieren.","em",["e","en","er","es","em"],"За гарної погоди ми йдемо гуляти.","без артикля, Dat N → -em"],
-["Trotz schlecht___ Wetters bleiben wir draußen.","en",["e","en","er","es","em"],"Попри погану погоду ми залишаємось надворі.","Gen N без артикля → -en (є -s в іменнику)"],
-["Er kauft frisch___ Obst.","es",["e","en","er","es","em"],"Він купує свіжі фрукти.","без артикля, Akk N → -es"],
-["Ich esse gern italienisch___ Pizza.","e",["e","en","er","es","em"],"Я люблю їсти італійську піцу.","без артикля, Akk F → -e"],
-["Mit freundlich___ Grüßen","en",["e","en","er","es","em"],"З дружніми вітаннями","без артикля, Dat Pl → -en"],
-["Alt___ Freunde helfen immer.","e",["e","en","er","es","em"],"Старі друзі завжди допомагають.","без артикля, Nom Pl → -e"],
-["Man braucht kalt___ Butter.","e",["e","en","er","es","em"],"Потрібне холодне масло.","без артикля, Akk F → -e"],
-["Der Geschmack gut___ Weines ist wunderbar.","en",["e","en","er","es","em"],"Смак доброго вина чудовий.","Gen M без артикля → -en (є -es в іменнику)"],
-["Mit groß___ Freude sage ich Ja.","er",["e","en","er","es","em"],"З великою радістю кажу «так».","без артикля, Dat F → -er (як der)"],
-["Ich mag frisch___ Brötchen zum Frühstück.","e",["e","en","er","es","em"],"Я люблю свіжі булочки на сніданок.","без артикля, Akk Pl → -e"],
-["Zum Frühstück gibt es heiß___ Kaffee.","en",["e","en","er","es","em"],"На сніданок є гаряча кава.","без артикля, Akk M → -en (es gibt + Akk)"],
-["Bei stark___ Regen bleiben wir zu Hause.","em",["e","en","er","es","em"],"Під час сильного дощу ми залишаємось вдома.","без артикля, Dat M → -em"],
-["Gebraucht___ Autos sind oft günstiger.","e",["e","en","er","es","em"],"Вживані машини часто дешевші.","без артикля, Nom Pl → -e"],
-["Hier gibt es selbstgemacht___ Eis.","es",["e","en","er","es","em"],"Тут є домашнє морозиво.","без артикля, Akk N → -es"],
-["Die Tasche ist aus echt___ Leder.","em",["e","en","er","es","em"],"Сумка зі справжньої шкіри.","без артикля, Dat N → -em"],
-["Ich trinke gern still___ Wasser.","es",["e","en","er","es","em"],"Я люблю пити негазовану воду.","без артикля, Akk N → -es"],
-["Nach lang___ Suche habe ich endlich einen Job gefunden.","er",["e","en","er","es","em"],"Після довгих пошуків я нарешті знайшов роботу.","без артикля, Dat F → -er"]
-],
-4: [
-["Das ist ein ___ Raum.","dunkler",["dunkler","dunkeler","dunkelr","dunkel"],"Це темна кімната.","dunkel + -er → випадає -e-: dunkler (ein + Nom M)"],
-["Sie trägt eine ___ Uhr.","teure",["teure","teuere","teuer","teurer"],"Вона носить дорогий годинник.","teuer + -e → випадає -e-: teure"],
-["Der ___ Berg ist schön.","hohe",["hohe","hoche","hocher","hoch"],"Висока гора гарна.","hoch → hoh- перед закінченням"],
-["Sie trägt ein ___ Hemd.","rosa",["rosa","rosanes","rosas","rose"],"Вона носить рожеву сорочку.","rosa не відмінюється"],
-["Wir besuchen den ___ Flughafen.","Frankfurter",["Frankfurter","Frankfurtern","Frankfurtere","Frankfurt"],"Ми відвідуємо франкфуртський аеропорт.","місто + -er: не відмінюється, з великої літери"],
-["Er ist der ___ Läufer.","schnellste",["schnellste","am schnellsten","schnellere","schnellsten"],"Він найшвидший бігун.","der + ...ste перед іменником"],
-["Er läuft am ___.","schnellsten",["schnellsten","schnellste","schnellere","schnell"],"Він бігає найшвидше.","am ...sten — тільки з дієсловом"],
-["Ich suche eine ___ Wohnung als diese.","billigere",["billigere","billigste","billige","billiger"],"Я шукаю дешевшу квартиру, ніж ця.","корінь + er + e (eine + Akk F)"],
-["Das ist die ___ Idee.","beste",["beste","gutste","bester","besten"],"Це найкраща ідея.","gut → best + e: die beste"],
-["Das ist eine ___ Idee!","prima",["prima","primae","primea","primer"],"Це чудова ідея!","prima не відмінюється"],
-["Er hat ein ___ Haus als ich.","größeres",["größeres","größerer","großes","größten"],"У нього більший будинок, ніж у мене.","groß → größer + es (ein + Akk N)"],
-["Wir haben ein ___ Angebot.","flexibles",["flexibles","flexibeles","flexibelles","flexibler"],"У нас гнучка пропозиція.","flexibel + -es → flexibles (випадає -e-)"],
-["Wir wohnen in einem ___ Haus.","hohen",["hohen","hochen","hohem","hoch"],"Ми живемо у високому будинку.","hoch → hoh- + en (einem + Dat N)"],
-["Ich möchte keinen ___ Pullover kaufen.","teuren",["teuren","teueren","teuerem","teurer"],"Я не хочу купувати дорогий светр.","teuer + en → teuren (keinen + Akk M)"],
-["Sie hat ein ___ Zimmer.","dunkles",["dunkles","dunkeles","dunkelles","dunkler"],"У неї темна кімната.","dunkel + es → dunkles (ein + Akk N)"],
-["Das ist das ___ Restaurant der Stadt.","beste",["beste","gutste","bestes","besten"],"Це найкращий ресторан міста.","gut → best + e (das + Nom N)"],
-["Ich liebe die ___ Currywurst.","Berliner",["Berliner","Berlinere","berliner","Berlinern"],"Я обожнюю берлінську карі-вурст.","місто + -er: не відмінюється, з великої літери"],
-["Ich suche ein ___ Auto.","billigeres",["billigeres","billigers","billiges","billigeren"],"Я шукаю дешевшу машину.","billig → billiger + es (ein + Akk N)"]
-],
-5: [
-["Ich kaufe einen neu___ Tisch.","en",["e","en","er","es","em"],"Я купую новий стіл.","змішане: einen + Akk M → -en"],
-["Das Kind trägt eine blau___ Mütze.","e",["e","en","er","es","em"],"Дитина носить синю шапку.","змішане: eine + Akk F → -e"],
-["Hast du die neu___ Schuhe gesehen?","en",["e","en","er","es","em"],"Ти бачив нове взуття?","слабке: die + Plural → -en"],
-["Gut___ Ideen sind selten.","e",["e","en","er","es","em"],"Хороші ідеї — рідкість.","сильне: без артикля, Nom Pl → -e"],
-["Sie liest ein spannend___ Buch.","es",["e","en","er","es","em"],"Вона читає захопливу книгу.","змішане: ein + Akk N → -es"],
-["Ich fahre mit dem alt___ Fahrrad.","en",["e","en","er","es","em"],"Я їду на старому велосипеді.","слабке: dem + Dat → -en"],
-["Das ist mein best___ Freund.","er",["e","en","er","es","em"],"Це мій найкращий друг.","змішане: mein + Nom M → -er"],
-["Die Farbe des neu___ Autos gefällt mir.","en",["e","en","er","es","em"],"Колір нової машини мені подобається.","слабке: des + Gen → -en"],
-["Ich brauche dringend frisch___ Luft.","e",["e","en","er","es","em"],"Мені терміново потрібне свіже повітря.","сильне: без артикля, Akk F → -e"],
-["Wir sprechen mit den neu___ Kollegen.","en",["e","en","er","es","em"],"Ми розмовляємо з новими колегами.","слабке: den + Dat Pl → -en"],
-["Er trinkt gern kalt___ Bier.","es",["e","en","er","es","em"],"Він любить пити холодне пиво.","сильне: без артикля, Akk N → -es"],
-["Das ist ein klein___ Mädchen.","es",["e","en","er","es","em"],"Це маленька дівчинка.","змішане: ein + Nom N → -es"],
-["Wegen des schlecht___ Wetters bleiben wir zu Hause.","en",["e","en","er","es","em"],"Через погану погоду ми залишаємось вдома.","слабке: des + Gen → -en"],
-["Ich rufe meine alt___ Oma an.","e",["e","en","er","es","em"],"Я телефоную своїй старенькій бабусі.","змішане: meine + Akk F → -e"],
-["Ich suche ein ruhig___ Hotel in der Nähe vom Strand.","es",["e","en","er","es","em"],"Я шукаю тихий готель біля пляжу.","змішане: ein + Akk N → -es"],
-["Wir haben einen toll___ Urlaub in Italien gemacht.","en",["e","en","er","es","em"],"Ми чудово відпочили в Італії.","змішане: einen + Akk M → -en"],
-["Die nächst___ Haltestelle ist in fünf Minuten.","e",["e","en","er","es","em"],"Наступна зупинка через п’ять хвилин.","слабке: die + Nom F → -e"],
-["Darf ich dir meinen neu___ Freund vorstellen?","en",["e","en","er","es","em"],"Можна познайомити тебе з моїм новим хлопцем?","змішане: meinen + Akk M → -en"],
-["Sie trägt gern bequem___ Schuhe.","e",["e","en","er","es","em"],"Вона любить носити зручне взуття.","сильне: без артикля, Akk Pl → -e"],
-["Haben Sie noch ein frei___ Zimmer?","es",["e","en","er","es","em"],"У вас ще є вільна кімната?","змішане: ein + Akk N → -es"],
-["Im Winter trinke ich gern heiß___ Schokolade.","e",["e","en","er","es","em"],"Взимку я люблю пити гарячий шоколад.","сильне: без артикля, Akk F → -e"],
-["Ich telefoniere jeden Sonntag mit meiner best___ Freundin.","en",["e","en","er","es","em"],"Щонеділі я розмовляю по телефону з моєю найкращою подругою.","змішане: meiner + Dat F → -en"]
-]
-};
+const ITEMS = { sent: [
+  // Stage 1
+  { s: "Der alt{{B}} Mann wohnt hier.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Старий чоловік живе тут.", ex: "der + Nom M → -e", st: 1 },
+  { s: "Ich sehe den alt{{B}} Mann.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я бачу старого чоловіка.", ex: "den + Akk M → -en", st: 1 },
+  { s: "Die klein{{B}} Katze schläft.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Маленька кішка спить.", ex: "die + Nom F → -e", st: 1 },
+  { s: "Er hilft dem klug{{B}} Kind.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Він допомагає розумній дитині.", ex: "dem + Dat → завжди -en", st: 1 },
+  { s: "Das ist das Auto der nett{{B}} Frau.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Це машина милої жінки.", ex: "der + Gen F → -en", st: 1 },
+  { s: "Wir kaufen das neu{{B}} Buch.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Ми купуємо нову книгу.", ex: "das + Akk N → -e", st: 1 },
+  { s: "Die gut{{B}} Freunde kommen heute.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Хороші друзі приходять сьогодні.", ex: "die + Plural → -en", st: 1 },
+  { s: "Mit dem schnell{{B}} Zug fahre ich nach Berlin.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Швидким потягом я їду до Берліна.", ex: "dem + Dat → -en", st: 1 },
+  { s: "Dieser rot{{B}} Apfel schmeckt gut.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Це червоне яблуко смачне.", ex: "dieser працює як der: Nom M → -e", st: 1 },
+  { s: "Jede klein{{B}} Stadt hat einen Bahnhof.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Кожне маленьке місто має вокзал.", ex: "jede + Nom F → -e", st: 1 },
+  { s: "Welchen groß{{B}} Koffer nimmst du?", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Яку велику валізу ти береш?", ex: "welchen + Akk M → -en", st: 1 },
+  { s: "Ich gebe der jung{{B}} Lehrerin das Buch.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я даю молодій вчительці книгу.", ex: "der + Dat F → -en", st: 1 },
+  { s: "Er wohnt in dem alt{{B}} Haus.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Він живе в старому будинку.", ex: "dem + Dat N → -en", st: 1 },
+  { s: "Das Handy des neu{{B}} Kollegen ist kaputt.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Телефон нового колеги зламаний.", ex: "des + Gen M → -en", st: 1 },
+  { s: "Kannst du bitte das groß{{B}} Fenster öffnen?", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Можеш, будь ласка, відчинити велике вікно?", ex: "das + Akk N → -e", st: 1 },
+  { s: "Ich warte seit einer Stunde auf den nächst{{B}} Bus.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я вже годину чекаю наступний автобус.", ex: "den + Akk M → -en", st: 1 },
+  { s: "Die neu{{B}} Kollegin hat gestern angefangen.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Нова колега почала працювати вчора.", ex: "die + Nom F → -e", st: 1 },
+  { s: "Im groß{{B}} Supermarkt ist alles billiger.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "У великому супермаркеті все дешевше.", ex: "im = in dem → Dat → -en", st: 1 },
+  { s: "Der Preis des teur{{B}} Handys hat mich geschockt.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ціна дорогого телефону мене шокувала.", ex: "des + Gen N → -en", st: 1 },
+  { s: "Welche warm{{B}} Jacke passt besser zu mir?", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Яка тепла куртка мені більше пасує?", ex: "welche + Nom F → -e", st: 1 },
+  
+  // Stage 2
+  { s: "Ein groß{{B}} Hund bellt.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Великий пес гавкає.", ex: "ein + Nom M: артикль без закінчення → -er", st: 2 },
+  { s: "Ich habe ein neu{{B}} Auto.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "У мене нова машина.", ex: "ein + Akk N: артикль без закінчення → -es", st: 2 },
+  { s: "Das ist eine gut{{B}} Idee.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Це хороша ідея.", ex: "eine + Nom F → -e", st: 2 },
+  { s: "Er hat einen alt{{B}} Computer.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "У нього старий комп’ютер.", ex: "einen + Akk M → -en", st: 2 },
+  { s: "Mein klein{{B}} Bruder spielt Fußball.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Мій молодший брат грає у футбол.", ex: "mein + Nom M → -er", st: 2 },
+  { s: "Das ist kein einfach{{B}} Problem.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Це не проста проблема.", ex: "kein + Nom N → -es", st: 2 },
+  { s: "Sie wohnt mit ihrem nett{{B}} Mann in Wien.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Вона живе зі своїм милим чоловіком у Відні.", ex: "ihrem + Dat → -en", st: 2 },
+  { s: "Wir haben keine frei{{B}} Zimmer.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "У нас немає вільних кімнат.", ex: "keine + Plural → -en", st: 2 },
+  { s: "Ich suche meine rot{{B}} Jacke.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Я шукаю свою червону куртку.", ex: "meine + Akk F → -e", st: 2 },
+  { s: "Das ist ein schön{{B}} Tag.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Це гарний день.", ex: "ein + Nom M → -er", st: 2 },
+  { s: "Sie schenkt ihrem klein{{B}} Sohn ein Buch.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Вона дарує своєму маленькому сину книгу.", ex: "ihrem + Dat M → -en", st: 2 },
+  { s: "Unser neu{{B}} Chef kommt aus Köln.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Наш новий шеф родом з Кельна.", ex: "unser + Nom M → -er", st: 2 },
+  { s: "Das ist die Tasche meiner alt{{B}} Tante.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Це сумка моєї старої тітки.", ex: "meiner + Gen F → -en", st: 2 },
+  { s: "Hast du kein warm{{B}} Wasser?", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "У тебе немає теплої води?", ex: "kein + Akk N → -es", st: 2 },
+  { s: "Ich habe einen stressig{{B}} Tag hinter mir.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "У мене за плечима напружений день.", ex: "einen + Akk M → -en", st: 2 },
+  { s: "Sie ist eine sehr nett{{B}} Nachbarin.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Вона дуже мила сусідка.", ex: "eine + Nom F → -e", st: 2 },
+  { s: "Wir haben ein klein{{B}} Problem mit der Heizung.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "У нас невелика проблема з опаленням.", ex: "ein + Akk N → -es", st: 2 },
+  { s: "Mein neu{{B}} Handy hat eine super Kamera.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "У мого нового телефону супер камера.", ex: "mein + Nom N → -es", st: 2 },
+  { s: "Ich fahre mit meinem alt{{B}} Auto zur Arbeit.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я їжджу на роботу на своїй старій машині.", ex: "meinem + Dat N → -en", st: 2 },
+  
+  // Stage 3
+  { s: "Frisch{{B}} Brot riecht gut.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Свіжий хліб гарно пахне.", ex: "без артикля, Nom N → -es", st: 3 },
+  { s: "Ich trinke kalt{{B}} Kaffee.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я п’ю холодну каву.", ex: "без артикля, Akk M → -en", st: 3 },
+  { s: "Heiß{{B}} Milch schmeckt mir nicht.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Гаряче молоко мені не смакує.", ex: "без артикля, Nom F → -e", st: 3 },
+  { s: "Mit warm{{B}} Wasser wäscht man besser.", a: "em", o: ["e", "en", "er", "es", "em"], lbl: "Теплою водою миють краще.", ex: "без артикля, Dat N → -em (як dem)", st: 3 },
+  { s: "Wir suchen neu{{B}} Mitarbeiter.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Ми шукаємо нових співробітників.", ex: "без артикля, Akk Pl → -e", st: 3 },
+  { s: "Bei schön{{B}} Wetter gehen wir spazieren.", a: "em", o: ["e", "en", "er", "es", "em"], lbl: "За гарної погоди ми йдемо гуляти.", ex: "без артикля, Dat N → -em", st: 3 },
+  { s: "Trotz schlecht{{B}} Wetters bleiben wir draußen.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Попри погану погоду ми залишаємось надворі.", ex: "Gen N без артикля → -en (є -s в іменнику)", st: 3 },
+  { s: "Er kauft frisch{{B}} Obst.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Він купує свіжі фрукти.", ex: "без артикля, Akk N → -es", st: 3 },
+  { s: "Ich esse gern italienisch{{B}} Pizza.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Я люблю їсти італійську піцу.", ex: "без артикля, Akk F → -e", st: 3 },
+  { s: "Mit freundlich{{B}} Grüßen", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "З дружніми вітаннями", ex: "без артикля, Dat Pl → -en", st: 3 },
+  { s: "Alt{{B}} Freunde helfen immer.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Старі друзі завжди допомагають.", ex: "без артикля, Nom Pl → -e", st: 3 },
+  { s: "Man braucht kalt{{B}} Butter.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Потрібне холодне масло.", ex: "без артикля, Akk F → -e", st: 3 },
+  { s: "Der Geschmack gut{{B}} Weines ist wunderbar.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Смак доброго вина чудовий.", ex: "Gen M без артикля → -en (є -es в іменнику)", st: 3 },
+  { s: "Mit groß{{B}} Freude sage ich Ja.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "З великою радістю кажу «так».", ex: "без артикля, Dat F → -er (як der)", st: 3 },
+  { s: "Ich mag frisch{{B}} Brötchen zum Frühstück.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Я люблю свіжі булочки на сніданок.", ex: "без артикля, Akk Pl → -e", st: 3 },
+  { s: "Zum Frühstück gibt es heiß{{B}} Kaffee.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "На сніданок є гаряча кава.", ex: "без артикля, Akk M → -en (es gibt + Akk)", st: 3 },
+  { s: "Bei stark{{B}} Regen bleiben wir zu Hause.", a: "em", o: ["e", "en", "er", "es", "em"], lbl: "Під час сильного дощу ми залишаємось вдома.", ex: "без артикля, Dat M → -em", st: 3 },
+  { s: "Gebraucht{{B}} Autos sind oft günstiger.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Вживані машини часто дешевші.", ex: "без артикля, Nom Pl → -e", st: 3 },
+  { s: "Hier gibt es selbstgemacht{{B}} Eis.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Тут є домашнє морозиво.", ex: "без артикля, Akk N → -es", st: 3 },
 
-const ITEMS = { sent: [] };
-Object.keys(RAW).forEach(st => {
-  RAW[st].forEach(r => {
-    ITEMS.sent.push({ s:r[0].replace("___", "{{B}}"), a:r[1], o:r[2], lbl:r[3], ex:r[4], st:parseInt(st) });
-  });
-});
+  // Stage 4
+  { s: "Das ist ein {{B}} Raum.", a: "dunkler", o: ["dunkler", "dunkeler", "dunkles", "dunkel"], lbl: "Це темна кімната.", ex: "dunkel + -er → випадає -e-: dunkler (ein + Nom M)", st: 4 },
+  { s: "Sie trägt eine {{B}} Uhr.", a: "teure", o: ["teure", "teuere", "teuer", "teurer"], lbl: "Вона носить дорогий годинник.", ex: "teuer + -e → випадає -e-: teure", st: 4 },
+  { s: "Der {{B}} Berg ist schön.", a: "hohe", o: ["hohe", "hoche", "hocher", "hoch"], lbl: "Висока гора гарна.", ex: "hoch → hoh- перед закінченням", st: 4 },
+  { s: "Sie trägt ein {{B}} Hemd.", a: "rosa", o: ["rosa", "rosanes", "rosas", "rose"], lbl: "Вона носить рожеву сорочку.", ex: "rosa не відмінюється", st: 4 },
+  { s: "Wir besuchen den {{B}} Flughafen.", a: "Frankfurter", o: ["Frankfurter", "Frankfurtern", "Frankfurtere", "Frankfurt"], lbl: "Ми відвідуємо франкфуртський аеропорт.", ex: "місто + -er: не відмінюється, з великої літери", st: 4 },
+  { s: "Er ist der {{B}} Läufer.", a: "schnellste", o: ["schnellste", "am schnellsten", "schnellere", "schnellsten"], lbl: "Він найшвидший бігун.", ex: "der + ...ste перед іменником", st: 4 },
+  { s: "Er läuft am {{B}}.", a: "schnellsten", o: ["schnellsten", "schnellste", "schnellere", "schnell"], lbl: "Він бігає найшвидше.", ex: "am ...sten — тільки з дієсловом", st: 4 },
+  { s: "Ich suche eine {{B}} Wohnung als diese.", a: "billigere", o: ["billigere", "billigste", "billige", "billiger"], lbl: "Я шукаю дешевшу квартиру, ніж ця.", ex: "корінь + er + e (eine + Akk F)", st: 4 },
+  { s: "Das ist die {{B}} Idee.", a: "beste", o: ["beste", "gutste", "bester", "besten"], lbl: "Це найкраща ідея.", ex: "gut → best + e: die beste", st: 4 },
+  { s: "Das ist eine {{B}} Idee!", a: "prima", o: ["prima", "primae", "primea", "primer"], lbl: "Це чудова ідея!", ex: "prima не відмінюється", st: 4 },
+  { s: "Er hat ein {{B}} Haus als ich.", a: "größeres", o: ["größeres", "größerer", "großes", "größten"], lbl: "У нього більший будинок, ніж у мене.", ex: "groß → größer + es (ein + Akk N)", st: 4 },
+  { s: "Wir haben ein {{B}} Angebot.", a: "flexibles", o: ["flexibles", "flexibeles", "flexibelles", "flexibler"], lbl: "У нас гнучка пропозиція.", ex: "flexibel + -es → flexibles (випадає -e-)", st: 4 },
+  { s: "Wir wohnen in einem {{B}} Haus.", a: "hohen", o: ["hohen", "hochen", "hohem", "hoch"], lbl: "Ми живемо у високому будинку.", ex: "hoch → hoh- + en (einem + Dat N)", st: 4 },
+  { s: "Ich möchte keinen {{B}} Pullover kaufen.", a: "teuren", o: ["teuren", "teueren", "teuerem", "teurer"], lbl: "Я не хочу купувати дорогий светр.", ex: "teuer + en → teuren (keinen + Akk M)", st: 4 },
+  { s: "Sie hat ein {{B}} Zimmer.", a: "dunkles", o: ["dunkles", "dunkeles", "dunkelles", "dunkler"], lbl: "У неї темна кімната.", ex: "dunkel + es → dunkles (ein + Akk N)", st: 4 },
+  { s: "Das ist das {{B}} Restaurant der Stadt.", a: "beste", o: ["beste", "gutste", "bestes", "besten"], lbl: "Це найкращий ресторан міста.", ex: "gut → best + e (das + Nom N)", st: 4 },
+  { s: "Ich liebe die {{B}} Currywurst.", a: "Berliner", o: ["Berliner", "Berlinere", "berliner", "Berlinern"], lbl: "Я обожнюю берлінську карі-вурст.", ex: "місто + -er: не відмінюється, з великої літери", st: 4 },
+  { s: "Ich suche ein {{B}} Auto.", a: "billigeres", o: ["billigeres", "billigers", "billiges", "billigeren"], lbl: "Я шукаю дешевшу машину.", ex: "billig → billiger + es (ein + Akk N)", st: 4 },
+  
+  // Stage 5
+  { s: "Ich kaufe einen neu{{B}} Tisch.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я купую новий стіл.", ex: "змішане: einen + Akk M → -en", st: 5 },
+  { s: "Das Kind trägt eine blau{{B}} Mütze.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Дитина носить синю шапку.", ex: "змішане: eine + Akk F → -e", st: 5 },
+  { s: "Hast du die neu{{B}} Schuhe gesehen?", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ти бачив нове взуття?", ex: "слабке: die + Plural → -en", st: 5 },
+  { s: "Gut{{B}} Ideen sind selten.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Хороші ідеї — рідкість.", ex: "сильне: без артикля, Nom Pl → -e", st: 5 },
+  { s: "Sie liest ein spannend{{B}} Buch.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Вона читає захопливу книгу.", ex: "змішане: ein + Akk N → -es", st: 5 },
+  { s: "Ich fahre mit dem alt{{B}} Fahrrad.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я їду на старому велосипеді.", ex: "слабке: dem + Dat → -en", st: 5 },
+  { s: "Das ist mein best{{B}} Freund.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Це мій найкращий друг.", ex: "змішане: mein + Nom M → -er", st: 5 },
+  { s: "Die Farbe des neu{{B}} Autos gefällt mir.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Колір нової машини мені подобається.", ex: "слабке: des + Gen → -en", st: 5 },
+  { s: "Ich brauche dringend frisch{{B}} Luft.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Мені терміново потрібне свіже повітря.", ex: "сильне: без артикля, Akk F → -e", st: 5 },
+  { s: "Wir sprechen mit den neu{{B}} Kollegen.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ми розмовляємо з новими колегами.", ex: "слабке: den + Dat Pl → -en", st: 5 },
+  { s: "Er trinkt gern kalt{{B}} Bier.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Він любить пити холодне пиво.", ex: "сильне: без артикля, Akk N → -es", st: 5 },
+  { s: "Das ist ein klein{{B}} Mädchen.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Це маленька дівчинка.", ex: "змішане: ein + Nom N → -es", st: 5 },
+  { s: "Wegen des schlecht{{B}} Wetters bleiben wir zu Hause.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Через погану погоду ми залишаємось вдома.", ex: "слабке: des + Gen → -en", st: 5 },
+  { s: "Ich rufe meine alt{{B}} Oma an.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Я телефоную своїй старенькій бабусі.", ex: "змішане: meine + Akk F → -e", st: 5 },
+  { s: "Ich suche ein ruhig{{B}} Hotel in der Nähe vom Strand.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Я шукаю тихий готель біля пляжу.", ex: "змішане: ein + Akk N → -es", st: 5 },
+  { s: "Wir haben einen toll{{B}} Urlaub in Italien gemacht.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ми чудово відпочили в Італії.", ex: "змішане: einen + Akk M → -en", st: 5 },
+  { s: "Die nächst{{B}} Haltestelle ist in fünf Minuten.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Наступна зупинка через п’ять хвилин.", ex: "слабке: die + Nom F → -e", st: 5 },
+  { s: "Darf ich dir meinen neu{{B}} Freund vorstellen?", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Можна познайомити тебе з моїм новим хлопцем?", ex: "змішане: meinen + Akk M → -en", st: 5 },
+  { s: "Sie trägt gern bequem{{B}} Schuhe.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Вона любить носити зручне взуття.", ex: "сильне: без артикля, Akk Pl → -e", st: 5 },
+
+  // Нові завдання (додано в кінець, щоб не зсунути збережений прогрес)
+  { s: "Die klein{{B}} Kinder spielen im Garten.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Маленькі діти граються в саду.", ex: "die + Nom Plural → -en", st: 1 },
+  { s: "Die Eltern der neu{{B}} Schüler sind da.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Батьки нових учнів тут.", ex: "der + Gen Plural → -en", st: 1 },
+  { s: "Das klein{{B}} Mädchen lacht.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Маленька дівчинка сміється.", ex: "das + Nom N → -e", st: 1 },
+  { s: "Ich liebe die schön{{B}} Stadt.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Я люблю це гарне місто.", ex: "die + Akk F → -e", st: 1 },
+  { s: "Er schreibt dem neu{{B}} Chef eine E-Mail.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Він пише новому шефу електронного листа.", ex: "dem + Dat M → -en", st: 1 },
+  { s: "Dieses alt{{B}} Haus gehört meiner Oma.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Цей старий будинок належить моїй бабусі.", ex: "dieses працює як das: Nom N → -e", st: 1 },
+  { s: "Diese groß{{B}} Tasche ist zu schwer.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Ця велика сумка занадто важка.", ex: "diese + Nom F → -e", st: 1 },
+  { s: "Ich kenne den jung{{B}} Mann nicht.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я не знаю цього молодого чоловіка.", ex: "den + Akk M → -en", st: 1 },
+  { s: "Er trägt denselben blau{{B}} Pullover wie gestern.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Він носить той самий синій светр, що й учора.", ex: "denselben + Akk M → -en (derselbe = слабке)", st: 1 },
+  { s: "Der Chef der groß{{B}} Firma ruft an.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Шеф великої фірми телефонує.", ex: "der + Gen F → -en", st: 1 },
+  { s: "Welches klein{{B}} Zimmer ist frei?", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Яка маленька кімната вільна?", ex: "welches працює як das: Nom N → -e", st: 1 },
+  { s: "Mit dieser nett{{B}} Dame spreche ich oft.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "З цією милою дамою я часто розмовляю.", ex: "dieser + Dat F → -en", st: 1 },
+  { s: "Das ist eine klein{{B}} Stadt.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Це маленьке місто.", ex: "eine + Nom F → -e", st: 2 },
+  { s: "Er schenkt einer nett{{B}} Frau Blumen.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Він дарує милій жінці квіти.", ex: "einer + Dat F → -en", st: 2 },
+  { s: "Das Haus eines alt{{B}} Mannes steht dort.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Будинок старого чоловіка стоїть там.", ex: "eines + Gen M → -en", st: 2 },
+  { s: "Wir wohnen in einem klein{{B}} Dorf.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ми живемо в маленькому селі.", ex: "einem + Dat N → -en", st: 2 },
+  { s: "Das ist keine schlecht{{B}} Idee.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Це непогана ідея.", ex: "keine + Nom F → -e", st: 2 },
+  { s: "Ihr neu{{B}} Freund ist sehr sympathisch.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Її новий друг дуже симпатичний.", ex: "ihr + Nom M: немає закінчення → -er", st: 2 },
+  { s: "Haben Sie ein frei{{B}} Zimmer?", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "У вас є вільна кімната?", ex: "ein + Akk N: немає закінчення → -es", st: 2 },
+  { s: "Dein neu{{B}} Fahrrad sieht toll aus.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Твій новий велосипед виглядає чудово.", ex: "dein + Nom N: немає закінчення → -es", st: 2 },
+  { s: "Ich sehe seinen alt{{B}} Wagen.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я бачу його старий автомобіль.", ex: "seinen + Akk M → -en", st: 2 },
+  { s: "Das sind meine best{{B}} Freunde.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Це мої найкращі друзі.", ex: "meine + Nom Plural → -en", st: 2 },
+  { s: "Wegen eines kaputt{{B}} Zuges kam ich zu spät.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Через зламаний потяг я запізнився.", ex: "eines + Gen M → -en", st: 2 },
+  { s: "Sie hat keine teur{{B}} Schuhe gekauft.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Вона не купила дорогого взуття.", ex: "keine + Akk Plural → -en (teuer → teur-)", st: 2 },
+  { s: "Zwei groß{{B}} Koffer stehen im Flur.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Дві великі валізи стоять у коридорі.", ex: "числівник = без артикля, Nom Pl → -e", st: 3 },
+  { s: "Viele jung{{B}} Menschen lernen Deutsch.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Багато молодих людей вчать німецьку.", ex: "viele + Nom Pl → -e (як без артикля)", st: 3 },
+  { s: "Einige neu{{B}} Kollegen sind sehr nett.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Деякі нові колеги дуже милі.", ex: "einige + Nom Pl → -e", st: 3 },
+  { s: "Wir haben mehrere klein{{B}} Zimmer gebucht.", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Ми забронювали кілька маленьких кімнат.", ex: "mehrere + Akk Pl → -e", st: 3 },
+  { s: "Das ist die Meinung jung{{B}} Leute.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Це думка молодих людей.", ex: "без артикля, Gen Pl → -er", st: 3 },
+  { s: "Mit klein{{B}} Kindern ist Reisen anstrengend.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "З маленькими дітьми подорожувати втомливо.", ex: "без артикля, Dat Pl → -en", st: 3 },
+  { s: "Nach lang{{B}} Suche fand er die Schlüssel.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Після довгого пошуку він знайшов ключі.", ex: "без артикля, Dat F → -er (як der)", st: 3 },
+  { s: "Deutsch{{B}} Bier ist weltberühmt.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Німецьке пиво відоме на весь світ.", ex: "без артикля, Nom N → -es", st: 3 },
+  { s: "Sie trinkt gern grün{{B}} Tee.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Вона любить пити зелений чай.", ex: "без артикля, Akk M → -en", st: 3 },
+  { s: "Wir brauchen dringend sauber{{B}} Wasser.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Нам терміново потрібна чиста вода.", ex: "без артикля, Akk N → -es", st: 3 },
+  { s: "Aus frisch{{B}} Milch macht man Käse.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Зі свіжого молока роблять сир.", ex: "без артикля, Dat F → -er", st: 3 },
+  { s: "Dank gut{{B}} Freunden hat er es geschafft.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Завдяки добрим друзям він упорався.", ex: "без артикля, Dat Pl → -en", st: 3 },
+  { s: "Mit dem neu{{B}} Chef sind alle zufrieden.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Усі задоволені новим шефом.", ex: "слабке: dem + Dat M → -en", st: 5 },
+  { s: "Das ist die Idee eines klug{{B}} Mannes.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Це ідея розумного чоловіка.", ex: "змішане: eines + Gen M → -en", st: 5 },
+  { s: "Ich hätte gern ein groß{{B}} Glas Wasser.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Я б хотів велику склянку води.", ex: "змішане: ein + Akk N → -es", st: 5 },
+  { s: "Frisch{{B}} Gemüse ist gesund.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Свіжі овочі корисні.", ex: "сильне: без артикля, Nom N → -es", st: 5 },
+  { s: "Die Wohnung liegt in einer ruhig{{B}} Straße.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Квартира розташована на тихій вулиці.", ex: "змішане: einer + Dat F → -en", st: 5 },
+  { s: "Welches neu{{B}} Handy empfiehlst du?", a: "e", o: ["e", "en", "er", "es", "em"], lbl: "Який новий телефон ти порадиш?", ex: "слабке: welches + Akk N → -e", st: 5 },
+  { s: "Heiß{{B}} Tee tut gut bei Husten.", a: "er", o: ["e", "en", "er", "es", "em"], lbl: "Гарячий чай допомагає при кашлі.", ex: "сильне: без артикля, Nom M → -er", st: 5 },
+  { s: "Der Name ihres neu{{B}} Freundes ist Paul.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ім’я її нового хлопця — Пауль.", ex: "змішане: ihres + Gen M → -en", st: 5 },
+  { s: "Kennst du den berühmt{{B}} Sänger?", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Ти знаєш цього відомого співака?", ex: "слабке: den + Akk M → -en", st: 5 },
+  { s: "Wir haben ein gemütlich{{B}} Café gefunden.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Ми знайшли затишне кафе.", ex: "змішане: ein + Akk N → -es", st: 5 },
+  { s: "Das Leben in einer groß{{B}} Stadt ist teuer.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Життя у великому місті дороге.", ex: "змішане: einer + Dat F → -en", st: 5 },
+  { s: "Ich habe rot{{B}} Wein bestellt.", a: "en", o: ["e", "en", "er", "es", "em"], lbl: "Я замовив червоне вино.", ex: "сильне: без артикля, Akk M → -en", st: 5 },
+  { s: "Das ist ein sehr wichtig{{B}} Thema.", a: "es", o: ["e", "en", "er", "es", "em"], lbl: "Це дуже важлива тема.", ex: "змішане: ein + Nom N → -es", st: 5 },
+  { s: "Das ist eine {{B}} Farbe.", a: "lila", o: ["lila", "lilae", "lilane", "lilaer"], lbl: "Це фіолетовий колір.", ex: "lila не відмінюється", st: 4 },
+  { s: "Das ist ein {{B}} Film.", a: "super", o: ["super", "supere", "supers", "superer"], lbl: "Це чудовий фільм.", ex: "super не відмінюється", st: 4 },
+  { s: "Er hat einen {{B}} Anzug.", a: "dunklen", o: ["dunklen", "dunkelen", "dunkeln", "dunkler"], lbl: "У нього темний костюм.", ex: "dunkel + en → dunklen (einen + Akk M)", st: 4 },
+  { s: "Sie hat eine {{B}} Idee.", a: "bessere", o: ["bessere", "gutere", "bessre", "beste"], lbl: "У неї краща ідея.", ex: "gut → besser + e (eine + Akk F)", st: 4 },
+  { s: "Ich kaufe das {{B}} Handy.", a: "billigste", o: ["billigste", "am billigsten", "billigere", "billigstes"], lbl: "Я купую найдешевший телефон.", ex: "das + Superlativ: billig + st + e", st: 4 },
+  { s: "Mein Bruder ist {{B}} als ich.", a: "älter", o: ["älter", "alter", "ältere", "am ältesten"], lbl: "Мій брат старший за мене.", ex: "Komparativ у присудку без закінчення; alt → älter", st: 4 },
+  { s: "Sie ist die {{B}} Schülerin der Klasse.", a: "klügste", o: ["klügste", "klügeste", "klugste", "klügsten"], lbl: "Вона найрозумніша учениця класу.", ex: "klug → klüg- + ste (die + Nom F)", st: 4 },
+  { s: "Im Winter ist es hier am {{B}}.", a: "kältesten", o: ["kältesten", "kälteste", "kälter", "kaltesten"], lbl: "Взимку тут найхолодніше.", ex: "am ...sten; kalt → kält-", st: 4 },
+  { s: "Wir fahren mit dem {{B}} Zug.", a: "schnellsten", o: ["schnellsten", "schnellste", "schnellstem", "am schnellsten"], lbl: "Ми їдемо найшвидшим потягом.", ex: "dem + Dat → -en: schnell + st + en", st: 4 },
+  { s: "Das ist ein {{B}} Hotel.", a: "teures", o: ["teures", "teueres", "teuers", "teurer"], lbl: "Це дорогий готель.", ex: "teuer + es → teures (випадає -e-; ein + Nom N)", st: 4 },
+  { s: "Wir suchen eine {{B}} Lösung.", a: "flexible", o: ["flexible", "flexibele", "flexibel", "flexibler"], lbl: "Ми шукаємо гнучке рішення.", ex: "flexibel + e → flexible (випадає -e-)", st: 4 },
+  { s: "Der {{B}} Dom ist sehr alt.", a: "Kölner", o: ["Kölner", "Kölnere", "Kölnern", "kölner"], lbl: "Кельнський собор дуже старий.", ex: "місто + -er: не відмінюється, з великої літери", st: 4 },
+  { s: "Er ist {{B}} als sein Vater.", a: "größer", o: ["größer", "großer", "größere", "am größten"], lbl: "Він вищий за свого батька.", ex: "groß → größer; у присудку без закінчення", st: 4 },
+  { s: "Das ist der {{B}} Berg Deutschlands.", a: "höchste", o: ["höchste", "hochste", "hohe", "höheste"], lbl: "Це найвища гора Німеччини.", ex: "hoch → höchst- + e (der + Nom M)", st: 4 }
+]};
 
 const TABS = [{ id:"sent", label:"Тренажер", title:"ВПРАВИ", ph:"Введи закінчення або слово …", oc:"opts grid4" }];
 const TOTAL_TASKS = ITEMS.sent.length;
@@ -671,6 +783,7 @@ const isClosed = () => !!(T().cl && T().cl[stage||0]);
 function finish(ok){
   const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
   answered = true; t._ok = ok;
+  
   if(ok) {
     t.r++;
     t.k[cur] = Math.min(maxStreak(), streak(cur) + 1);
@@ -683,6 +796,7 @@ function finish(ok){
     if(reviewMode) rd().delete(cur);
     if(!xLocked && XP > 0) t.x = Math.max(0, (t.x || 0) - 1);
   }
+  
   XP = calcXp(); save();
   playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
   showFb(ok); markOpts();
@@ -778,8 +892,8 @@ function renderStages(){
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  const exHtml = g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex" style="margin-top:6px;font-size:.85rem;color:var(--mu);">${esc(ua)}</div></div>`).join("");
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>${exHtml}<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  const exHtml = g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${hl(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex" style="margin-top:6px;font-size:.85rem;color:var(--mu);">${esc(ua)}</div></div>`).join("");
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><div class="lp">${g.p}</div><h4>Приклади</h4>${exHtml}<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("adj_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
@@ -892,7 +1006,7 @@ function showFb(ok){
     <div class="ans" title="Натисни, щоб почути">${esc(fullText(it))}</div>
     ${it.lbl ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""}
     ${it.ex ? `<div class="ex" style="margin-top:8px">💡 <b>${esc(it.ex)}</b></div>` : ""}`;
-  if(!ok && isMc()){ html += `<button type="button" class="fb-adv" onclick="event.stopPropagation();advance()">Далі →</button>`; }
+  if(!ok){ html += `<button type="button" class="fb-adv" onclick="event.stopPropagation();advance()">Далі →</button>`; }
   f.innerHTML = html;
   const ansEl = f.querySelector(".ans"); if(ansEl) ansEl.onclick = () => speak(fullText(it));
 }
@@ -925,7 +1039,7 @@ function cancelReset(){ hideFin(); syncFin(); }
 function finalRestart(){ resetTab(); }
 
 function openErrors(){
-  const rp = reviewPool(), tb = TB();
+  const rp = reviewPool();
   $("errs-sub").textContent = `Помилок: ${rp.length}`;
   if(rp.length === 0){
     $("errs-list").innerHTML = '<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
@@ -940,7 +1054,14 @@ function openErrors(){
   $("errs").hidden = false;
 }
 function closeErrors(){ $("errs").hidden = true; }
-function clearErrors(){ if(confirm("Точно очистити список помилок?")){ T().err = {}; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); closeErrors(); } }
+function clearErrors(){ 
+  if(confirm("Точно очистити список помилок?")){ 
+    const rp = reviewPool();
+    rp.forEach(i => { delete T().err[i]; }); 
+    reviewDoneSets[tab] = new Set(); 
+    save(); renderReviewBtn(); closeErrors(); 
+  } 
+}
 function startReviewAndClose(){ closeErrors(); reviewMode = true; reviewDoneSets[tab] = new Set(); const q = reviewQueue(); if(q.length) load(q[0]); }
 function startReview(){ reviewMode = true; reviewDoneSets[tab] = new Set(); const q = reviewQueue(); if(q.length) load(q[0]); }
 
