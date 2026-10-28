@@ -928,8 +928,8 @@ function showLesson(n){
 }
 function openStage(n){
   if(n && !stOpen(n)){
-    if(!confirm("Цей етап відкриється, коли ти опануєш 100% завдань попереднього етапу. Відкрити достроково?")) return;
-    const u = ulSet(); u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u));
+    alert("🔒 Цей етап наразі заблоковано!\n\nЩоб відкрити його, пройди всі завдання попереднього етапу на 100% у кожній із вкладок.");
+    return; // Строго прерываем функцию, замок не снимается
   }
   stage = n; localStorage.setItem("pn_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
