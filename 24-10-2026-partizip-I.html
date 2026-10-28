@@ -926,7 +926,7 @@ function renderRule(){
   $("rule").innerHTML = r ? r + (stage ? `<br><span class="lsl" data-l="1">Урок етапу ${stage} ›</span>` : "") : "";
 }
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= 15 || q.d / q.t >= .6; })();
+const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
@@ -941,7 +941,7 @@ function showLesson(n){
 }
 function openStage(n){
   if(n && !stOpen(n)){
-    if(!confirm("Цей етап відкриється, коли ти опануєш 60% (або 15 завдань) попереднього. Відкрити достроково?")) return;
+    if(!confirm("Цей етап відкриється, коли ти опануєш 100% завдань попереднього етапу. Відкрити достроково?")) return;
     const u = ulSet(); u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u));
   }
   stage = n; localStorage.setItem("pi_stage", String(n));
