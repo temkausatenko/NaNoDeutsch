@@ -429,8 +429,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 :root[data-theme="light"]{--c-da:#0d9488;--c-wo:#d97706;--c-r:#e11d48;--c-pr:#64748b;--c-s:#2563eb;--c-p:#be185d;--c-v:#4d7c0f;--c-wn:#7c3aed;--c-wm:#0d9488;--c-pn:#b45309}
 .r-da{--c:var(--c-da)}.r-wo{--c:var(--c-wo)}.r-r{--c:var(--c-r)}.r-pr{--c:var(--c-pr)}.r-s{--c:var(--c-s)}.r-p{--c:var(--c-p)}.r-v{--c:var(--c-v)}.r-wn{--c:var(--c-wn)}.r-wm{--c:var(--c-wm)}.r-pn{--c:var(--c-pn)}
 .c-da{color:var(--c-da);font-weight:700}.c-wo{color:var(--c-wo);font-weight:700}.c-r{color:var(--c-r);font-weight:700}.c-s{color:var(--c-s);font-weight:700}.c-p{color:var(--c-p);font-weight:700}
-.sent .u.P{text-decoration-color:var(--c-p)}.sent .u.S{text-decoration-color:var(--c-s)}
-.sent .u{text-decoration-color:var(--c-wo)}
+.sent .u,.sent .u.P,.sent .u.S{text-decoration-color:var(--mu)}
 .opts.afit{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 .scheme .np{color:var(--tx);font-weight:600}
 </style>
@@ -891,6 +890,32 @@ D.forEach((d, i) => {
     ex: S ? "Річ → da(r)- / wo(r)-" : "Людина → прийменник + wen/wem, ihn/ihm…", de:`<b>${esc(sent)}</b>` });
 });
 
+const QU = Object.fromEntries(rows(`denken an|Про що ти думаєш?
+warten auf|На що ти чекаєш?
+sich freuen über|Чому ти радієш?
+sich freuen auf|Чому ти радієш наперед?
+sich interessieren für|Чим ти цікавишся?
+sich erinnern an|Що ти пам'ятаєш?
+bitten um|Про що ти його просиш?
+Angst haben vor|Чого ти боїшся?
+sprechen über|Про що ви говорите?
+sich ärgern über|На що ти злишся?
+achten auf|На що ти звертаєш увагу?
+träumen von|Про що ти мрієш?
+abhängen von|Від чого це залежить?
+gehören zu|До чого це належить?
+sich beschäftigen mit|Чим ти займаєшся?
+aufhören mit|Що ти припиняєш робити?
+anfangen mit|З чого ти починаєш?
+helfen bei|З чим ти мені допомагаєш?
+teilnehmen an|У чому ти береш участь?
+sich verlassen auf|На що ти покладаєшся?
+suchen nach|Що ти шукаєш?
+sich entscheiden für|Що ти обираєш?
+diskutieren über|Що ви обговорюєте?
+sich konzentrieren auf|На чому ти зосереджуєшся?
+sich kümmern um|Про що ти піклуєшся?
+leiden unter|Від чого ти страждаєш?`));
 const NPH = {
  "denken an":["meine Arbeit","meinen Bruder"],"warten auf":["den Bus","meine Schwester"],"sich freuen über":["das Geschenk",null],
  "sich freuen auf":["das Wochenende","meine Schwester"],"sich interessieren für":["Musik","meinen neuen Kollegen"],"sich erinnern an":["den Urlaub","meine Oma"],
@@ -917,11 +942,90 @@ V.forEach(([v, p, ua, ds, us, wq]) => {
     }
   }
   const o1 = oth(p, 1)[0];
-  add("dw", { s:ds.replace("___", "{{B}}"), sch:`Підказка: ${ua} · відповідь → da-`, o:[d, w], a:d, ex, lbl:us, sp:se, st:3, ua:us });
-  add("dw", { s:wq.replace("___", "{{B}}"), sch:`Підказка: ${ua} · питання → wo-`, o:[C(wq, w), C(wq, d)], a:C(wq, w), ex, lbl:"", sp:wq.replace("___", C(wq, w)), st:3, ua:`${v} ${p} — ${ua}` });
-  add("ei", { s:ds.replace("___", "{{B}}"), sch:`Підказка: ${ua}`, o:uniq4(d, [w, badDa(p), daF(o1)]), a:d, ex, lbl:us, sp:se, st:3 });
+  add("dw", { s:ds.replace("___", "{{B}}"), sch:us, o:[d, w], a:d, ex, lbl:"", sp:se, st:3, ua:us });
+  add("dw", { s:wq.replace("___", "{{B}}"), sch:QU[v + " " + p] || ua, o:[C(wq, w), C(wq, d)], a:C(wq, w), ex, lbl:"", sp:wq.replace("___", C(wq, w)), st:3, ua:`${v} ${p} — ${ua}` });
+  add("ei", { s:ds.replace("___", "{{B}}"), sch:`Підказка: ${ua}`, o:[d, Math.random() < .5 ? badDa(p) : daF(o1)], a:d, ex, lbl:us, sp:se, st:3 });
   add("vp", { s:`${v} → {{B}}`, sch:`Підказка: ${ua}`, o:uniq4(p, oth(p, 3)), a:p, alt:[d], ans:`${p} → ${d}`, ex, lbl:"", sp:`${v} ${p}`, st:3, ua:ua });
   add("ue", { s:us, sch:"Обери правильне німецьке речення.", o:uniq4(se, [se.replace(d, w), se.replace(d, `${p} es`), se.replace(d, daF(o1))]), a:se, ex, lbl:"", ua:us, sp:se, st:6, de:`<b>${esc(se)}</b>` });
+});
+/* --- додаткові дієслова лише для вкладки «Дієслово + прийменник» --- */
+rows(`sich bedanken|für|дякувати за
+sich bewerben|um|подавати заявку на
+sorgen|für|дбати про
+sich treffen|mit|зустрічатися з
+telefonieren|mit|говорити по телефону з
+sich unterhalten|über|розмовляти про
+erzählen|von|розповідати про
+berichten|über|повідомляти про
+schreiben|an|писати до
+sich beschweren|über|скаржитися на
+lachen|über|сміятися з
+sich streiten|mit|сваритися з
+sich verlieben|in|закохуватися в
+sich gewöhnen|an|звикати до
+sich beteiligen|an|брати участь у
+glauben|an|вірити в
+zweifeln|an|сумніватися в
+fragen|nach|питати про
+sich erkundigen|nach|довідуватися про
+sich handeln|um|ідеться про (es handelt sich um)
+gehen|um|ідеться про (es geht um)
+halten|von|мати думку про
+bestehen|aus|складатися з
+hoffen|auf|сподіватися на
+vertrauen|auf|довіряти
+reagieren|auf|реагувати на
+antworten|auf|відповідати на
+verzichten|auf|відмовлятися від
+aufpassen|auf|наглядати за
+sich vorbereiten|auf|готуватися до
+sich beziehen|auf|посилатися на
+sich einigen|auf|домовлятися про
+stolz sein|auf|пишатися
+warnen|vor|застерігати від
+sich fürchten|vor|боятися
+schützen|vor|захищати від
+sich verabschieden|von|прощатися з
+sich trennen|von|розлучатися з
+sich unterscheiden|von|відрізнятися від
+begeistert sein|von|бути в захваті від
+einladen|zu|запрошувати на
+gratulieren|zu|вітати з
+führen|zu|призводити до
+beitragen|zu|сприяти
+passen|zu|пасувати до
+sich entschuldigen|für|вибачатися за
+sich schämen|für|соромитися за
+halten|für|вважати
+kämpfen|für|боротися за
+protestieren|gegen|протестувати проти
+sich wehren|gegen|захищатися від
+erkranken|an|захворіти на
+rechnen|mit|розраховувати на
+umgehen|mit|поводитися з
+zurechtkommen|mit|давати собі раду з
+zufrieden sein|mit|бути задоволеним
+verheiratet sein|mit|бути одруженим з
+sich orientieren|an|орієнтуватися на
+arbeiten|an|працювати над
+liegen|an|бути причиною (es liegt an)
+sich verwandeln|in|перетворюватися на
+sich aufregen|über|нервувати через
+nachdenken|über|розмірковувати над
+sich informieren|über|дізнаватися про
+entscheiden|über|вирішувати щодо
+sich wundern|über|дивуватися з
+sterben|an|помирати від
+überzeugen|von|переконувати в
+sich begeistern|für|захоплюватися
+spielen|mit|грати з
+ankommen|auf|залежати від (es kommt darauf an)
+sich erholen|von|відновлюватися після
+sich einmischen|in|втручатися в
+übersetzen|in|перекладати на`).forEach(([v, p, ua]) => {
+  const d = daF(p);
+  add("vp", { s:`${v} → {{B}}`, sch:`Підказка: ${ua}`, o:uniq4(p, oth(p, 3)), a:p, alt:[d], ans:`${p} → ${d}`,
+    ex:`${v} + ${p} → ${d} (відповідь) / ${woF(p)} (питання) — ${ua}`, lbl:"", sp:`${v} ${p}`, st:3, ua });
 });
 UU.forEach(([q, a, w1, w2, p]) => add("ue", { s:q, sch:"Обери правильне німецьке питання.", o:[a, w1, w2], a, lbl:"", ua:q, sp:a, st:6,
   ex:"Людина → прийменник + wen/wem; річ → wo(r) + прийменник", de:`<b>${esc(a)}</b>` }));
@@ -966,7 +1070,7 @@ TXT.forEach(([s, a, o, ex, ua]) => add("tx", { s, sch:"Читай речення
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
-const XP_MAX = Math.ceil(TOTAL / 10) * 10;         // EXP = кількість усіх завдань, округлена вгору до 10
+const XP_MAX = TOTAL + 20;         // EXP = кількість усіх завдань, округлена вгору до 10
 
 let stage = (() => { const v = parseInt(localStorage.getItem("pa_stage"), 10); return (v >= 1 && v <= 9) ? v : 1; })();
 const UL_KEY = "pa_unlocked";
@@ -1200,7 +1304,7 @@ function renderRule(){
   $("rule").innerHTML = r ? r + (stage ? `<br><span class="lsl" data-l="1">Урок етапу ${stage} ›</span>` : "") : "";
 }
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= 15 || q.d / q.t >= .6; })();
+const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
@@ -1214,10 +1318,7 @@ function showLesson(n){
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
 function openStage(n){
-  if(n && !stOpen(n)){
-    if(!confirm("Цей етап відкриється, коли ти опануєш 60% (або 15 завдань) попереднього. Відкрити достроково?")) return;
-    const u = ulSet(); u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u));
-  }
+  if(!stOpen(n)) return;
   stage = n; localStorage.setItem("pa_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis.some(t => t.id === tab) ? tab : vis[0].id);
@@ -1505,6 +1606,7 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("errs").hidden) closeErrors(); } });
 
 /* ============ INIT ============ */
+if(!stOpen(stage)){ let s = 1; while(s < STAGES.length && stOpen(s + 1)) s++; stage = s; localStorage.setItem("pa_stage", String(s)); }
 { const st = store.get('pa-tab'), vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)); setTab(vis.some(t => t.id === st) ? st : vis[0].id); }
 
 document.addEventListener('touchstart', function unlockAudio() {
