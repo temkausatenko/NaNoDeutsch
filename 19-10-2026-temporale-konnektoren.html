@@ -496,7 +496,7 @@ function merge(s, a){
   outA.push(cur); outParts.push(parts[a.length]);
   return [outParts.join('___'), outA];
 }
-const P = raw => { const m = merge(raw[0], raw[1]); return [m[0], m[1], raw[2], raw[3]]; };
+const P = raw => { const m = merge(raw[0], raw[1]); return [m[0], m[1], raw[2], raw[3], raw[4]]; };
 const C = (s,a,e,opts,ua,acc) => [s,a,e,'c',opts,ua,acc];
 const I = (s,a,e,ua) => { const m = merge(s,a); return [m[0],m[1],e,'i',null,ua]; };
 const O = (s,ua,e) => [s,ua,e,'o'];
@@ -535,10 +535,18 @@ const CATS = [
     ['Nachdem es lange (regnen) ___ ___, ist die Sonne herausgekommen.',['geregnet','hatte'],'Головне в Perfekt → Plusquamperfekt: geregnet hatte.','Після того як довго йшов дощ, визирнуло сонце.'],
     ['Nachdem sie das Paket (abholen) ___ ___, ist sie zur Arbeit gefahren.',['abgeholt','hatte'],'Головне в Perfekt → Plusquamperfekt: abgeholt hatte.','Після того як вона забрала посилку, вона поїхала на роботу.'],
     ['Nachdem ich mich (anmelden) ___ ___, konnte ich die Prüfung machen.',['angemeldet','hatte'],'Головне в Präteritum → у nachdem-частині Plusquamperfekt.','Після того як я зареєструвався, я зміг скласти іспит.'],
-    ['Nachdem sie das Abitur (machen) ___ ___, hat sie an der Uni studiert.',['gemacht','hatte'],'Головне в Perfekt → Plusquamperfekt.','Після того як вона склала абітуру, вона навчалася в університеті.'],
+    ['Nachdem sie das Abitur (machen) ___ ___, hat sie an der Uni studiert.',['gemacht','hatte'],'Головне в Perfekt → Plusquamperfekt.','Після того як вона склала випускні іспити (Abitur), вона навчалася в університеті.'],
     ['Nachdem wir uns die Wohnung (ansehen) ___ ___, haben wir sie gemietet.',['angesehen','hatten'],'Головне в Perfekt → Plusquamperfekt.','Після того як ми подивилися квартиру, ми її орендували.'],
     ['Nachdem ich lange (überlegen) ___ ___, habe ich zugesagt.',['überlegt','hatte'],'Головне в Perfekt → Plusquamperfekt.','Після того як я довго думав, я погодився.'],
-    ['Nachdem die Kinder (schlafen) ___ ___, konnten wir endlich reden.',['geschlafen','hatten'],'Головне в Präteritum → Plusquamperfekt.','Після того як діти заснули, ми нарешті змогли поговорити.']
+    ['Nachdem die Kinder (schlafen) ___ ___, konnten wir endlich reden.',['geschlafen','hatten'],'Головне в Präteritum → Plusquamperfekt.','Після того як діти заснули, ми нарешті змогли поговорити.'],
+    ['Nachdem wir in Hamburg (ankommen) ___ ___, sind wir sofort ins Hotel gefahren.',['angekommen','waren'],'Головне в Perfekt → Plusquamperfekt. «ankommen» → sein: angekommen waren (не «hatten»).','Після того як ми приїхали до Гамбурга, ми одразу поїхали в готель.'],
+    ['Nachdem er zwei Stunden (laufen) ___ ___, war er völlig erschöpft.',['gelaufen','war'],'Головне в Präteritum → Plusquamperfekt; laufen → sein: gelaufen war.','Після того як він дві години йшов пішки, він був геть виснажений.'],
+    ['Ich ruhe mich aus, nachdem ich zwei Stunden (arbeiten) ___ ___.',['gearbeitet','habe'],'Головне в Präsens → Perfekt: gearbeitet habe.','Я відпочиваю після того, як попрацював дві години.'],
+    ['Nachdem die Gäste (gehen) ___ ___, haben wir die Küche aufgeräumt.',['gegangen','waren'],'Головне в Perfekt → Plusquamperfekt; gehen → sein: gegangen waren.','Після того як гості пішли, ми прибрали кухню.'],
+    ['Nachdem sie sich (duschen) ___ ___, zog sie sich an.',['geduscht','hatte'],'Головне в Präteritum → Plusquamperfekt; рефлексивне дієслово з haben: geduscht hatte.','Після того як вона прийняла душ, вона одяглася.'],
+    ['Nachdem ich den Brief (schreiben) ___ ___, bringe ich ihn zur Post.',['geschrieben','habe'],'Головне в Präsens → Perfekt: geschrieben habe.','Після того як я напишу листа, я віднесу його на пошту.'],
+    ['Nachdem das Kind (einschlafen) ___ ___, haben die Eltern einen Film angesehen.',['eingeschlafen','war'],'Головне в Perfekt → Plusquamperfekt; einschlafen → sein: eingeschlafen war.','Після того як дитина заснула, батьки подивилися фільм.'],
+    ['Nachdem der Zug (abfahren) ___ ___, standen wir noch lange auf dem Bahnsteig.',['abgefahren','war'],'Головне в Präteritum → Plusquamperfekt; abfahren → sein: abgefahren war.','Після того як поїзд відійшов, ми ще довго стояли на пероні.']
   ]
 },
 { n:'Bevor', re:/\b(bevor|ehe)\b/i, acc:['bevor','ehe'],
@@ -559,12 +567,17 @@ const CATS = [
     ['Bevor der Gast (ankommen) ___, müssen wir alles vorbereiten.',['ankommt'],'der Gast kommt an → в підрядному: ankommt.','Перш ніж прийде гість, ми повинні все підготувати.'],
     ['Wir haben lange gewartet, bevor wir ins Kino (gehen) ___ ___.',['gegangen','sind'],'Perfekt: gegangen sind.','Ми довго чекали, перш ніж піти в кіно.'],
     ['Bevor er den Job (annehmen) ___, überlegte er lange.',['annahm'],'Präteritum: annahm (книжний стиль).','Перш ніж прийняти роботу, він довго думав.'],
-    ['Ehe man eine Entscheidung (treffen) ___, sollte man alle Fakten kennen.',['trifft'],'man trifft; дієслово в кінці.','Перш ніж ухвалити рішення, слід знати всі факти.']
+    ['Ehe man eine Entscheidung (treffen) ___, sollte man alle Fakten kennen.',['trifft'],'man trifft; дієслово в кінці.','Перш ніж ухвалити рішення, слід знати всі факти.'],
+    ['Ehe ich ins Bett (gehen) ___, lese ich noch zehn Minuten.',['gehe'],'ehe = bevor: «gehe» в кінці підрядного.','Перш ніж лягти спати, я ще десять хвилин читаю.'],
+    ['Wir müssen sprechen, ehe es zu spät (sein) ___.',['ist'],'ehe = bevor: «ist» в кінці.','Нам треба поговорити, перш ніж стане запізно.'],
+    ['Ehe er das Zimmer (verlassen) ___, schaltete er das Licht aus.',['verließ'],'Präteritum: verließ (ehe — книжніший стиль).','Перш ніж вийти з кімнати, він вимкнув світло.'],
+    ['Bevor ich eine Wohnung (mieten) ___ ___, habe ich bei einer Freundin gewohnt.',['gemietet','habe'],'Perfekt: gemietet habe.','Перш ніж орендувати квартиру, я жив у подруги.'],
+    ['Bevor der Film (anfangen) ___, kaufen wir noch Popcorn.',['anfängt'],'Роздільне дієслово разом: anfängt.','Перш ніж почнеться фільм, ми ще купимо попкорн.']
   ]
 },
-{ n:'Während', re:/\bwährend\b/i, acc:['während'],
+{ n:'Während', re:/\bwährend\b/i, acc:['während'], mixAlso:['solange'],
   tip:'während = «у той час як, під час»: дві дії відбуваються одночасно. Час в обох частинах має бути однаковий (Präsens + Präsens або Präteritum + Präteritum).',
-  mixExpl:'Дві дії одночасно, «у той час як» → während.',
+  mixExpl:'Дві дії одночасно, «у той час як» → während (тут можливе й solange: «поки триває»).',
   items:[
     ['Während ich (kochen) ___, hört mein Mann Musik.',['koche'],'während = «у той час як». «koche» в кінці підрядного.','Поки я готую, мій чоловік слухає музику.'],
     ['Während sie (schlafen) ___, räume ich die Küche auf.',['schläft'],'schlafen → sie schläft.','Поки вона спить, я прибираю кухню.'],
@@ -577,7 +590,12 @@ const CATS = [
     ['Während die Sonne (scheinen) ___, gingen wir spazieren.',['schien'],'Präteritum: die Sonne schien / gingen.','Поки світило сонце, ми гуляли.'],
     ['Während ich (kochen) ___ ___, hat er den Tisch gedeckt.',['gekocht','habe'],'Perfekt: gekocht habe.','Поки я готував, він накривав на стіл.'],
     ['Während ich (aufräumen) ___, hörst du Musik.',['aufräume'],'Роздільне дієслово разом: aufräume.','Поки я прибираю, ти слухаєш музику.'],
-    ['Während die Kinder im Garten (spielen) ___, koche ich das Mittagessen.',['spielen'],'Підмет множини → «spielen» в кінці.','Поки діти граються в саду, я готую обід.']
+    ['Während die Kinder im Garten (spielen) ___, koche ich das Mittagessen.',['spielen'],'Підмет множини → «spielen» в кінці.','Поки діти граються в саду, я готую обід.'],
+    ['Während wir (frühstücken) ___, liest mein Vater die Zeitung.',['frühstücken'],'wir frühstücken; дієслово в кінці.','Поки ми снідаємо, мій батько читає газету.'],
+    ['Während der Lehrer (erklären) ___, schreiben die Schüler mit.',['erklärt'],'der Lehrer erklärt.','Поки вчитель пояснює, учні конспектують.'],
+    ['Während ich im Supermarkt (einkaufen) ___, wartet mein Hund im Auto.',['einkaufe'],'Роздільне дієслово разом: einkaufe.','Поки я роблю покупки в супермаркеті, мій пес чекає в машині.'],
+    ['Während wir in Italien (sein) ___ ___, hat es zu Hause geregnet.',['gewesen','sind'],'Perfekt в обох частинах: gewesen sind / hat geregnet.','Поки ми були в Італії, вдома йшов дощ.'],
+    ['Während er (telefonieren) ___, kochte sie das Abendessen.',['telefonierte'],'Präteritum в обох частинах: telefonierte / kochte.','Поки він розмовляв по телефону, вона готувала вечерю.']
   ]
 },
 { n:'Solange', re:/\bsolange\b/i, acc:['solange'],
@@ -585,20 +603,22 @@ const CATS = [
   mixExpl:'Дії тривають паралельно, «доти, поки» → solange.',
   items:[
     ['Ich bleibe hier, solange du mich (brauchen) ___.',['brauchst'],'solange = «поки»; «brauchst» в кінці підрядного.','Я залишаюся тут, поки я тобі потрібен.'],
-    ['Solange das Wetter schön (sein) ___, gehen wir im Park spazieren.',['ist'],'Präsens: «ist» в кінці; головне з «gehen».','Поки погода гарна, ми гуляємо в парку.'],
+    ['Solange das Wetter schön (sein) ___, gehen wir im Park spazieren.',['ist'],'Präsens: «ist» в кінці; головне з «gehen».','Поки погода гарна, ми гуляємо в парку.',['während']],
     ['Solange ich in Deutschland (wohnen) ___, möchte ich jeden Tag Deutsch sprechen.',['wohne'],'«wohne» в кінці; головне з «möchte».','Поки я живу в Німеччині, я хочу щодня говорити німецькою.'],
     ['Du kannst bei uns wohnen, solange du eine Wohnung (suchen) ___.',['suchst'],'du suchst; дієслово в кінці.','Ти можеш жити в нас, поки шукаєш квартиру.'],
-    ['Solange das Kind (schlafen) ___, müssen wir leise sein.',['schläft'],'schlafen → es schläft.','Поки дитина спить, ми маємо бути тихими.'],
+    ['Solange das Kind (schlafen) ___, müssen wir leise sein.',['schläft'],'schlafen → es schläft.','Поки дитина спить, ми маємо бути тихими.',['während']],
     ['Ich kann nicht gehen, solange der Chef im Büro (sein) ___.',['ist'],'«ist» в кінці підрядного.','Я не можу піти, поки шеф в офісі.'],
     ['Du darfst nicht fernsehen, solange deine Hausaufgaben nicht fertig (sein) ___.',['sind'],'Підмет у множині → «sind» в кінці.','Тобі не можна дивитися телевізор, поки уроки не зроблені.'],
-    ['Wir bleiben im Café, solange es (regnen) ___.',['regnet'],'es regnet; дієслово в кінці.','Ми залишаємося в кафе, поки йде дощ.'],
+    ['Wir bleiben im Café, solange es (regnen) ___.',['regnet'],'es regnet; дієслово в кінці.','Ми залишаємося в кафе, поки йде дощ.',['während']],
     ['Ich bleibe im Bett, solange ich Fieber (haben) ___.',['habe'],'ich habe; дієслово в кінці.','Я лежу в ліжку, поки в мене температура.'],
     ['Solange die Straße gesperrt (sein) ___, müssen wir einen Umweg fahren.',['ist'],'«ist» в кінці; головне з «müssen».','Поки вулиця перекрита, нам доводиться їхати в об’їзд.'],
     ['Solange du noch (lernen) ___, kannst du nicht ausgehen.',['lernst'],'du lernst; дієслово в кінці.','Поки ти ще навчаєшся, ти не можеш виходити гуляти.'],
-    ['Solange das Geschäft geöffnet (sein) ___, können wir dort hingehen.',['ist'],'«ist» в кінці.','Поки магазин відчинений, ми можемо туди піти.'],
+    ['Solange das Geschäft geöffnet (sein) ___, können wir dort hingehen.',['ist'],'«ist» в кінці.','Поки магазин відчинений, ми можемо туди піти.',['während']],
     ['Ich helfe dir, solange ich (können) ___.',['kann'],'ich kann; модальне дієслово в кінці.','Я допомагаю тобі, поки можу.'],
     ['Solange die Kinder im Kindergarten (sein) ___, kann ich arbeiten.',['sind'],'Підмет у множині → «sind».','Поки діти в дитсадку, я можу працювати.'],
-    ['Solange wir jung (sein) ___, sollten wir reisen.',['sind'],'wir sind; дієслово в кінці.','Поки ми молоді, нам варто подорожувати.']
+    ['Solange wir jung (sein) ___, sollten wir reisen.',['sind'],'wir sind; дієслово в кінці.','Поки ми молоді, нам варто подорожувати.'],
+    ['Du darfst mein Auto benutzen, solange du vorsichtig (fahren) ___.',['fährst'],'du fährst (a → ä); дієслово в кінці.','Ти можеш користуватися моєю машиною, поки їздиш обережно.'],
+    ['Solange ich keine Arbeit (haben) ___, muss ich sparen.',['habe'],'ich habe; головне з «muss».','Поки в мене немає роботи, я мушу економити.']
   ]
 },
 { n:'Seit', re:/\b(seit|seitdem)\b/i, acc:['seit','seitdem'],
@@ -618,7 +638,10 @@ const CATS = [
     ['Seit sie das Auto (verkaufen) ___ ___, fährt sie mit dem Rad.',['verkauft','hat'],'Perfekt: verkauft hat.','Відтоді як вона продала авто, вона їздить велосипедом.'],
     ['Seit ich täglich (lesen) ___, ist mein Deutsch viel besser geworden.',['lese'],'Präsens, дія триває.','Відтоді як я щодня читаю, моя німецька стала набагато кращою.'],
     ['Seitdem wir ein Haus (kaufen) ___ ___, haben wir viel zu tun.',['gekauft','haben'],'Perfekt: gekauft haben.','Відтоді як ми купили будинок, у нас багато роботи.'],
-    ['Seit ich hier (arbeiten) ___, habe ich viele nette Kollegen kennengelernt.',['arbeite'],'Präsens, дія триває.','Відтоді як я тут працюю, я познайомився з багатьма приємними колегами.']
+    ['Seit ich hier (arbeiten) ___, habe ich viele nette Kollegen kennengelernt.',['arbeite'],'Präsens, дія триває.','Відтоді як я тут працюю, я познайомився з багатьма приємними колегами.'],
+    ['Seit wir ein Kind (haben) ___, gehen wir selten ins Kino.',['haben'],'wir haben; Präsens: дія триває досі.','Відтоді як у нас є дитина, ми рідко ходимо в кіно.'],
+    ['Seit er die Stelle (wechseln) ___ ___, verdient er mehr.',['gewechselt','hat'],'Perfekt: gewechselt hat.','Відтоді як він змінив роботу, він заробляє більше.'],
+    ['Seitdem ich den Führerschein (haben) ___, fahre ich oft mit dem Auto.',['habe'],'ich habe; дієслово в кінці.','Відтоді як у мене є водійські права, я часто їжджу на машині.']
   ]
 },
 { n:'Bis', re:/\bbis\b/i, acc:['bis'],
@@ -636,7 +659,11 @@ const CATS = [
     ['Bis die Kinder im Bett (sein) ___, lese ich ihnen vor.',['sind'],'Підмет у множині → «sind».','Поки діти не в ліжку, я читаю їм.'],
     ['Bis der Regen (aufhören) ___, bleiben wir drinnen.',['aufhört'],'Роздільне дієслово разом: aufhört.','Поки дощ не вщухне, ми залишаємося вдома.'],
     ['Sie hat gewartet, bis der Arzt (kommen) ___.',['kam'],'Präteritum: kam.','Вона чекала, поки не прийшов лікар.'],
-    ['Bis ich das neue Auto (bekommen) ___, fahre ich mit dem alten.',['bekomme'],'ich bekomme; дієслово в кінці.','Поки я не отримаю нову машину, я їжджу старою.']
+    ['Bis ich das neue Auto (bekommen) ___, fahre ich mit dem alten.',['bekomme'],'ich bekomme; дієслово в кінці.','Поки я не отримаю нову машину, я їжджу старою.'],
+    ['Wir warten, bis der Arzt (kommen) ___.',['kommt'],'У німецькій після bis НЕ ставиться «nicht» (як в українській «поки не»). Дієслово в кінці.','Ми чекаємо, поки не прийде лікар.'],
+    ['Ich bleibe hier, bis du ___ ___.',['fertig','bist'],'fertig bist: 2 слова; після bis немає «nicht».','Я залишаюся тут, поки ти не будеш готовий.'],
+    ['Bis ich das Buch (lesen) ___ ___, gebe ich es nicht zurück.',['gelesen','habe'],'Perfekt у підрядному: gelesen habe (дія має завершитися).','Поки я не прочитаю цю книгу, я її не поверну.'],
+    ['Mach die Augen zu, bis ich „Jetzt“ (sagen) ___.',['sage'],'ich sage; дієслово в кінці, без «nicht».','Заплющ очі, поки я не скажу «Зараз».']
   ]
 },
 { n:'Sooft', re:/\bsooft\b/i, acc:['sooft'],
@@ -688,17 +715,19 @@ const CATS = [
 }
 ];
 
+const MIXBASE=[16,15,12,15,14,12,15,20]; CATS.forEach((c,k)=>{c.base=MIXBASE[k];});
 const MIXOPTS = ['nachdem','bevor','ehe','während','solange','seit','seitdem','bis','sooft','sobald'];
-const mixRaw = [];
-CATS.forEach(c => c.items.forEach(raw => {
+const mixOld = [], mixNew = [];
+CATS.forEach(c => c.items.forEach((raw, idx) => {
   const p = P(raw);
   const s = p[0], a = p[1];
   let k = 0;
   const full = s.replace(/\([^)]*\)\s*/g, '').replace(/___/g, () => a[k++].split('|')[0]);
   const blank = full.replace(c.re, '___');
-  mixRaw.push([blank, c.acc[0], c.mixExpl, 'c', MIXOPTS, p[3], c.acc]);
+  const acc = c.acc.concat(c.mixAlso || [], p[4] || []);
+  (idx < c.base ? mixOld : mixNew).push([blank, c.acc[0], c.mixExpl, 'c', MIXOPTS, p[3], acc]);
 }));
-const mixItems = seededShuffle(mixRaw, 20261021);
+const mixItems = seededShuffle(mixOld, 20261021).concat(seededShuffle(mixNew, 20261022));
 
 const WA = ['wenn','als'];
 const N4 = ['Nachdem','Bevor','Während','Sobald'];
@@ -716,7 +745,7 @@ const textItems = [
   C('___ die Badewanne voll ist, setze ich mich ins Wasser.','Sobald','Одразу, як тільки → sobald.',N4,'Щойно ванна наповниться, я сідаю у воду.'),
   C('___ ich Kinder habe, stehe ich morgens immer früher auf.','Seit','Відтоді й досі → seit.',['Seit','Als','Bis','Ehe'],'З тих пір, як у мене є діти, я вранці завжди встаю раніше.'),
   C('___ ich noch kinderlos war, konnte ich lange fernsehen.','Als','Одноразовий період у минулому → als.',['Seit','Als','Bis','Ehe'],'Коли в мене ще не було дітей, я міг довго дивитися телевізор.'),
-  C('Warte hier, ___ ich zurückkomme.','bis','До моменту → bis.',['bis','bevor','seit','als'],'Чекай тут, поки я не повернуся.'),
+  C('Ich übe Klavier, ___ ich das Stück kann.','bis','До моменту → bis (без «nicht»).',['bis','bevor','seit','als'],'Я граю на піаніно, поки не навчуся цього твору.'),
   C('Ich muss noch duschen, ___ ich zur Arbeit gehe.','bevor','Спочатку душ → bevor.',['während','bevor','seit','als'],'Мені ще треба прийняти душ, перш ніж піду на роботу.'),
   C('Du darfst gern bei uns wohnen, ___ du eine eigene Wohnung suchst.','solange','Тривалість «поки» → solange.',['solange','bevor','nachdem','sobald'],'Ти можеш жити в нас, поки шукаєш власну квартиру.'),
   C('___ das Baby schläft, müssen wir leise sein.','Solange','Тривалість «поки» → solange.',['Solange','Nachdem','Seit','Bevor'],'Поки дитина спить, ми маємо бути тихими.'),
@@ -746,7 +775,23 @@ const textItems = [
   O('Ich putze mir die Zähne, bevor ich ins Bett gehe.','Я чищу зуби, перш ніж лягти спати.','Hauptsatz zuerst: «putze» на 2-му місці, «gehe» в кінці підрядного.'),
   O('Bevor ich ins Bett gehe, putze ich mir die Zähne.','Перш ніж лягти спати, я чищу зуби.','Nebensatz zuerst: після коми головне з дієслова «putze».'),
   O('Ich schließe die Fenster, bevor ich aus dem Haus gehe.','Я зачиняю вікна, перш ніж вийти з дому.','Hauptsatz zuerst: «schließe» на 2-му місці, «gehe» в кінці.'),
-  O('Bevor ich aus dem Haus gehe, schließe ich die Fenster.','Перш ніж вийти з дому, я зачиняю вікна.','Nebensatz zuerst: після коми головне з дієслова «schließe».')
+  O('Bevor ich aus dem Haus gehe, schließe ich die Fenster.','Перш ніж вийти з дому, я зачиняю вікна.','Nebensatz zuerst: після коми головне з дієслова «schließe».'),
+C('___ ich gestern nach Hause kam, war die Wohnung leer.','als','Одноразова подія в минулому → als.',WA,'Коли я вчора прийшов додому, квартира була порожня.'),
+C('___ du morgen Zeit hast, können wir ins Kino gehen.','wenn','Майбутнє → wenn.',WA,'Коли в тебе завтра буде час, ми можемо піти в кіно.'),
+C('Jedes Mal, ___ ich Schokolade aß, bekam ich Bauchschmerzen.','wenn','Повторювана дія в минулому (jedes Mal) → wenn.',WA,'Щоразу, коли я їв шоколад, у мене боліло в животі.'),
+C('___ wir letzten Sommer in Spanien waren, haben wir jeden Tag gebadet.','als','Один конкретний період у минулому → als, навіть якщо всередині дія повторювалась.',WA,'Коли ми минулого літа були в Іспанії, ми купалися щодня.'),
+C('___ es im Winter schneit, fahren wir oft in die Berge.','wenn','Повторювана дія в теперішньому → wenn.',WA,'Коли взимку йде сніг, ми часто їздимо в гори.'),
+C('Als Kind habe ich immer geweint, ___ ich eine Spinne gesehen habe.','wenn','Повторювана дія в минулому (immer) → wenn, а не als.',WA,'У дитинстві я щоразу плакав, коли бачив павука.'),
+I('Nachdem wir gegessen ___, ___ wir einen Spaziergang. (Präsens)',['haben','machen'],'Präsens: nachdem + Perfekt (haben gegessen), головне в Präsens (machen).','Після того як ми поїли, ми йдемо на прогулянку.'),
+I('Nachdem er die Prüfung bestanden ___, ___ er eine Party ___. (Vergangenheit)',['hatte','hat','gegeben'],'Vergangenheit: nachdem + Plusquamperfekt (hatte bestanden), головне в Perfekt (hat … gegeben).','Після того як він склав іспит, він влаштував вечірку.'),
+O('Nachdem ich gegessen habe, gehe ich spazieren.','Після того як я поїв, я йду гуляти.','Nebensatz zuerst: «habe» в кінці, після коми головне з «gehe».'),
+O('Ich gehe spazieren, nachdem ich gegessen habe.','Я йду гуляти після того, як поїв.','Hauptsatz zuerst: «gehe» на 2-му місці, «habe» в кінці підрядного.'),
+O('Während ich koche, hört mein Mann Musik.','Поки я готую, мій чоловік слухає музику.','Nebensatz zuerst: «koche» в кінці; головне починається з «hört».'),
+O('Mein Mann hört Musik, während ich koche.','Мій чоловік слухає музику, поки я готую.','Hauptsatz zuerst: «hört» на 2-му місці, «koche» в кінці.'),
+O('Sobald der Bus kommt, steigen wir ein.','Щойно прийде автобус, ми сядемо.','Nebensatz zuerst: «kommt» в кінці; головне з «steigen» перед підметом.'),
+O('Seit ich in Berlin wohne, lerne ich Deutsch.','З тих пір як я живу в Берліні, я вчу німецьку.','Nebensatz zuerst: «wohne» в кінці; головне з «lerne».'),
+O('Ich bleibe hier, bis du fertig bist.','Я залишаюся тут, поки ти не будеш готовий.','Hauptsatz zuerst; у підрядному з bis дієслово «bist» в кінці.'),
+O('Nachdem er gegessen hatte, ist er ins Bett gegangen.','Після того як він поїв, він пішов спати.','Nachdem + Plusquamperfekt («hatte» в кінці); головне в Perfekt: «ist … gegangen».')
 ];
 
 const D = [
@@ -814,6 +859,9 @@ function loadState(){
         ? arr.map(v => v === true ? true : v === false ? false : undefined)
         : []);
     }
+    s.corr=s.corr.map((v,k)=>Math.max(parseInt(v)||0,(s.r[k]||[]).filter(x=>x===true).length));
+    s.wrng=s.wrng.map((v,k)=>Math.max(parseInt(v)||0,(s.r[k]||[]).filter(x=>x===false).length));
+    s.cl=s.cl.map((v,k)=>(v&&D[k]&&!D[k].it.every((_,j)=>s.r[k][j]===true))?0:v);
         // x — счётчик действий (растёт всегда, для sync.js)
     // xp — реальный EXP (может уменьшаться). Миграция со старой версии: xp = x
     if (s.xp === undefined) s.xp = parseInt(s.x) || 0;
@@ -855,7 +903,7 @@ function finBoxHTML(l){
   const c = (S.corr && S.corr[l]) || 0;
   const w = (S.wrng && S.wrng[l]) || 0;
   return `<div class="ft">✅ Ця категорія вже пройдена</div>
-    <p>Правильно: <b>${c}</b> · Неправильно: <b>${w}</b><br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p>
+    <p>Усього відповідей: правильних <b>${c}</b> · неправильних <b>${w}</b><br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p>
     <div class="fin-actions"><button class="go" onclick="finalRestart()">↻ Почати заново</button></div>`;
 }
 
@@ -1214,8 +1262,8 @@ function fb(L,it){
     right=it[0];
   }
   const xpTag=st.ok?(st.dx>0?' · +1 EXP':' · EXP MAX'):(st.dx<0?' · −1 EXP':'');
-  const left=rvMode?rvQueue().length:0;
-  const nextLabel=rvMode?(left===0?'Помилки виправлено':'Weiter'):(S.i[S.l]+1>=L.it.length?'Ergebnis anzeigen':'Weiter');
+  const left=rvMode?rvPool().length:0;
+  const nextLabel=rvMode?(left===0?'Помилки виправлено':'Weiter'):(S.r[S.l].filter(Boolean).length>=L.it.length?'Ergebnis anzeigen':'Weiter');
   return `<div class="fb ${st.ok?'ok':'no'}">
     <b>${st.ok?'✓ Richtig!':'✗ Leider falsch.'}${xpTag}</b>
     ${st.ok?'':'Правильно: <b style="display:inline">'+right+'</b><br>'}
@@ -1254,15 +1302,15 @@ function render(){
   const wrongCount=r.filter(x=>x===false).length;
   const doneCount=correctCount+wrongCount;
 
-  $('stat-done').textContent=`${doneCount} / ${n}`;
-  $('stat-correct').textContent=correctCount;
-  $('stat-wrong').textContent=wrongCount;
+  $('stat-done').textContent=`${correctCount} / ${n}`;
+  $('stat-correct').textContent=(S.corr&&S.corr[ctx.l])||0;
+  $('stat-wrong').textContent=(S.wrng&&S.wrng[ctx.l])||0;
 
   if(rvMode){
     const left = rvPool().length;
     $('bar').style.width = (rvInitial ? (rvInitial - left) / rvInitial * 100 : 0) + '%';
   } else {
-    $('bar').style.width=(Math.min(i+(st.done?1:0),n)/n*100)+'%';
+    $('bar').style.width=(correctCount/n*100)+'%';
   }
   updateXp(XP);
 
