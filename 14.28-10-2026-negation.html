@@ -1233,11 +1233,7 @@ const TABS = [
 const ROLE = { nom:"Підмет", v:"Дієслово", neg:"Заперечення", n:"Іменник", art:"Артикль", adj:"Прикметник", adv:"Обставина", akk:"Додаток (Akk.)", p2:"Partizip II", v2:"Інфінітив", präfix:"Префікс", fv:"Стала сполука", ns:"Підрядне", inf:"Інфінітив", mod:"Модальне" };
 const NM = {};
 const OPT_META = {};
-const TIPS = {
-  tab:"kein — для іменника; nicht — для дії / обставини / означеного іменника.",
-  sent:"",
-  ch:"Одна форма — kein, інша — nicht. Яка підходить?"
-};
+const TIPS = { tab:"", sent:"", ch:"" };
 
 const KEY = id => "tp_v2_negation_" + id;
 const XP_MAX = Math.ceil((Object.values(ITEMS).reduce((s, a) => s + a.length, 0) + 20) / 10) * 10;
@@ -1325,6 +1321,14 @@ function sentHTML0(it){
   const cls = answered ? ("blank fill " + (T()._ok ? "ok" : "no")) : "blank";
   return it.s.replace("{{B}}", `<span class="${cls}" id="bk">${filled}</span>`);
 }
+/* Статистика поточної вкладки в поточному етапі: відповідено / правильно / зараз з помилкою */
+function tabStats(){
+  const t = T(), pl = pool();
+  const done = pl.filter(i => (t.k[i] || 0) >= maxStreak()).length;
+  const wrong = pl.filter(i => t.err[i] && (t.k[i] || 0) < maxStreak()).length;
+  const tried = pl.filter(i => t.k[i] !== undefined).length;
+  return { total: pl.length, tried, done, wrong };
+}
 function renderCard(){
   const it = items()[cur], t = T(), tb = TB();
   if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
@@ -1336,11 +1340,10 @@ function renderCard(){
   $("cueLine").innerHTML = it.cue ? `<span class="cuechip">${esc(it.cue)}</span>` : "";
   $("scheme").innerHTML = (!answered && TIPS[tab]) ? TIPS[tab] : "";
   $("inp").placeholder = tb.ph || "";
-  const total = pool().length;
-  const done = pool().filter(i => (t.k[i] || 0) >= maxStreak()).length;
-  $("stat-done").textContent = `${done} / ${total}`;
-  $("stat-correct").textContent = t.r;
-  $("stat-wrong").textContent = t.w;
+  const { total, tried, done, wrong } = tabStats();
+  $("stat-done").textContent = `${tried} / ${total}`;
+  $("stat-correct").textContent = done;
+  $("stat-wrong").textContent = wrong;
   $("bar").style.width = `${Math.min(done, total) / total * 100}%`;
   updateXp(XP);
   renderTabs();
@@ -1462,7 +1465,7 @@ function hideFin(){ $("card").classList.remove("fin"); }
 function renderFin(kind){
   clearTimeout(tm);
   const t = T(), n = reviewPool().length;
-  const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
+  const ts = tabStats(), st = `Завдань: <b>${ts.tried} / ${ts.total}</b> · Правильно: <b>${ts.done}</b> · Неправильно: <b>${ts.wrong}</b>`;
   let h;
   if(kind === "review") h = `<div class="ft rv">📋 Усі завдання пройдено</div><p>${st}<br>Помилок: <b>${n}</b>. Тепер можна лише повторити помилки.</p><div class="fin-actions"><button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button></div>`;
   else if(kind === "confirm") h = `<div class="ft rv">Скинути прогрес?</div><p>Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP збережеться.</p><div class="fin-actions"><button class="go" onclick="resetTab()">Так, скинути</button><button class="cancel" onclick="cancelReset()">Скасувати</button></div>`;
