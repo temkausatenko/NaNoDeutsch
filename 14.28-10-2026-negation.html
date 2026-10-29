@@ -293,6 +293,68 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   .card:not(.tx) h2{padding-right:96px}
   .card.tx h2{padding-right:196px}
 }
+
+/* ===== ТЕОРІЯ (внизу сторінки) ===== */
+#theory-section{display:none;margin-top:20px}
+#theory-section.show{display:block;animation:slideUp .4s cubic-bezier(.16,1,.3,1)}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:24px 20px 20px;box-shadow:0 8px 30px rgba(0,0,0,.18);line-height:1.65}
+.theory-card h1{text-align:center}
+.theory-card h2{margin:30px 0 12px;padding:2px 0 2px 12px;border-left:4px solid var(--pr);font-size:1.12rem;font-weight:700;line-height:1.35;color:var(--tx);letter-spacing:0;text-transform:none}
+.theory-card p,.theory-card li{font-size:.93rem}
+.theory-card ul{margin:8px 0;padding-left:22px}
+.theory-card li{margin:4px 0}
+.theory-card strong,.theory-card b{color:var(--tx)}
+.theory-card s{color:var(--no);text-decoration-thickness:1.5px}
+.theory-card .rule-box{margin:14px 0;padding:12px 16px;border-radius:12px;border:1px solid color-mix(in srgb,var(--pr) 28%,transparent);border-left:4px solid var(--pr);background:var(--pl);font-size:.9rem}
+.theory-card .tip{margin:12px 0;padding:10px 14px;border-radius:10px;border-left:4px solid var(--go);background:var(--gob);font-size:.88rem}
+.theory-card .example{margin:12px 0;padding:12px 16px;border-radius:12px;background:var(--bg);border:1px solid var(--bd);font-size:.93rem;line-height:1.85}
+.theory-card .hl{color:var(--sa);font-weight:700;background:rgba(129,140,248,.14);padding:0 5px;border-radius:5px}
+.theory-card .bad{margin:8px 0;padding:9px 14px;border-radius:10px;background:var(--nob);border-left:4px solid var(--no);font-size:.9rem;line-height:1.6}
+.theory-card .table-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--bd);border-radius:12px}
+.theory-card table.tk{width:100%;border-collapse:collapse;font-size:.88rem}
+.theory-card .tk th{padding:9px 12px;background:var(--pl);color:var(--mu);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:left}
+.theory-card .tk td{padding:9px 12px;border-top:1px solid var(--bd);vertical-align:top}
+
+/* ===== УРОК ЕТАПУ ===== */
+body.lsn .lesson{padding:20px 18px 18px;background:var(--card);box-shadow:0 8px 30px rgba(0,0,0,.2);animation:slideUp .4s cubic-bezier(.16,1,.3,1)}
+.ls-head{display:flex;align-items:center;gap:12px;margin:0 0 14px;flex-wrap:wrap}
+.ls-num{flex:none;padding:5px 12px;border-radius:99px;background:var(--pr);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 2px 8px var(--pr-glow)}
+.lesson h3.ls-title{margin:0;font-size:1.2rem;line-height:1.3}
+.ls-lead{margin:0 0 6px;padding:12px 14px;border-radius:12px;background:var(--pl);border-left:4px solid var(--pr);font-size:.93rem;line-height:1.6}
+.ls-h{margin:20px 0 8px;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+.ls-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:8px 0}
+.ls-card{padding:12px 14px;border-radius:12px;border:1px solid var(--bd);border-top:3px solid var(--c,var(--pr));background:var(--bg)}
+.ls-card .t{display:block;font-size:1.05rem;font-weight:700;color:var(--c,var(--pr));margin-bottom:2px}
+.ls-card .s{display:block;color:var(--mu);font-size:.8rem;line-height:1.4;margin-bottom:8px}
+.ls-card ul{margin:0;padding-left:18px;font-size:.88rem;line-height:1.6}
+.ls-card li{margin:3px 0}
+.ls-scroll{overflow-x:auto;margin:6px 0;border:1px solid var(--bd);border-radius:12px}
+.ls-tbl{width:100%;border-collapse:collapse;font-size:.86rem}
+.ls-tbl th{padding:8px 12px;background:var(--pl);color:var(--mu);font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:left;white-space:nowrap}
+.ls-tbl td{padding:8px 12px;border-top:1px solid var(--bd);vertical-align:top;line-height:1.5}
+.ls-tbl td:first-child{white-space:nowrap}
+.ls-ex{padding:9px 12px;margin:6px 0;border-radius:10px;background:var(--bg);border:1px solid var(--bd)}
+.ls-ex .de{font-size:.98rem;font-weight:500;line-height:1.55}
+.ls-ex .ua{font-size:.8rem;color:var(--mu);margin-top:2px}
+.lesson mark{padding:0 5px;border-radius:5px;font-weight:700;color:inherit;background:transparent}
+.lesson mark.k{background:rgba(239,68,68,.16);color:var(--no)}
+.lesson mark.n{background:rgba(96,165,250,.18);color:var(--c-nom)}
+.lesson mark.v{background:rgba(245,158,11,.16);color:var(--go)}
+.lesson mark.z{background:rgba(45,212,191,.16);color:var(--c-dat)}
+.ls-note{margin:10px 0;padding:10px 14px;border-radius:10px;font-size:.88rem;line-height:1.6;border-left:4px solid var(--go);background:var(--gob)}
+.ls-note.bad{border-color:var(--no);background:var(--nob)}
+.ls-note.ok{border-color:var(--ok);background:var(--okb)}
+.ls-note s{color:var(--no)}
+.ls-note b.ttl{display:block;margin-bottom:3px;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase}
+.ls-note.bad b.ttl{color:var(--no)}.ls-note.ok b.ttl{color:var(--ok)}.ls-note:not(.bad):not(.ok) b.ttl{color:var(--go)}
+.ls-flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0;font-size:.82rem}
+.ls-flow span{padding:5px 10px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--mu)}
+.ls-flow span.hot{background:rgba(239,68,68,.16);border-color:var(--no);color:var(--no);font-weight:700}
+.ls-flow i{font-style:normal;color:var(--mu)}
+.ls-steps{margin:8px 0;padding:0;list-style:none;counter-reset:st}
+.ls-steps li{counter-increment:st;position:relative;margin:6px 0;padding:9px 12px 9px 46px;border-radius:10px;background:var(--bg);border:1px solid var(--bd);font-size:.9rem;line-height:1.55}
+.ls-steps li::before{content:counter(st);position:absolute;left:12px;top:9px;width:24px;height:24px;border-radius:50%;background:var(--pr);color:#fff;font-weight:700;font-size:.8rem;display:flex;align-items:center;justify-content:center}
+@media(max-width:480px){.ls-cards{grid-template-columns:1fr}.ls-tbl td:first-child{white-space:normal}}
 </style>
 </head>
 <body>
@@ -406,7 +468,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <h2>5. Funktionsverbgefüge (сталі дієслівно-іменникові сполуки)</h2>
 <p><strong>Typ 1 (буквальний)</strong> — іменник має те саме значення, що й базове дієслово, стоїть у Akkusativ без артикля → заперечення <strong>kein</strong>:</p>
 <div class="example">eine Entscheidung treffen → <span class="hl">keine</span> Entscheidung treffen · einen Beitrag leisten → <span class="hl">keinen</span> Beitrag leisten · eine Frage stellen → <span class="hl">keine</span> Frage stellen</div>
-<div class="rule-box">⚠️ <b>Виняток:</b> якщо іменник без артикля в однині (як <em>Kritik üben</em>), допустимі обидва варіанти — <em>nicht Kritik üben</em> (рекомендовано) і <em>keine Kritik üben</em>.</div>
+<div class="rule-box">⚠️ <b>Виняток:</b> якщо іменник без артикля в однині (як <em>Kritik üben</em>), частіше вживають kein-: <em>keine Kritik üben</em>; <em>nicht</em> з'являється при контрасті з <em>sondern</em>.</div>
 <p><strong>Typ 2 (ідіоматичний)</strong> — значення переосмислене, у складі є прийменник → заперечення <strong>nicht</strong> перед прийменником:</p>
 <div class="example">in Kauf nehmen → <span class="hl">nicht</span> in Kauf nehmen · unter Druck stehen → <span class="hl">nicht</span> unter Druck stehen · zur Verfügung stehen → <span class="hl">nicht</span> zur Verfügung stehen</div>
 <div class="tip">💡 Не можна сказати <s>in keinen Kauf nehmen</s>. У сталих сполуках з прийменником — тільки <strong>nicht</strong> перед прийменником.</div>
@@ -438,10 +500,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 </ul>
 <p><strong>anstatt … zu / anstatt dass</strong> — «замість дії»:</p>
 <div class="example">Er spielt, <span class="hl">anstatt</span> zu lernen. (грає замість того, щоб навчатися)<br>Sie arbeitet, <span class="hl">ohne</span> dass sie bezahlt wird. (працює без оплати)</div>
-<div class="rule-box">⚠️ Модальні дієслова <strong>wollen</strong> і <strong>sollen</strong> ніколи не вживаються в цих конструкціях. Значення наміру передається іншими дієсловами.</div>
+<div class="rule-box">💡 У реченні з <strong>ohne dass</strong> модальні дієслова цілком можливі: <em>Ohne dass er es wollte, wurde er Chef.</em></div>
 
 <h2>9. Типові помилки</h2>
-<div class="bad">❌ <s>Ich habe nicht Zeit.</s> → ✅ <span class="hl">Ich habe keine Zeit.</span> <em>(іменник з nicht артиклем)</em></div>
+<div class="bad">❌ <s>Ich habe nicht Zeit.</s> → ✅ <span class="hl">Ich habe keine Zeit.</span> <em>(іменник без артикля → kein)</em></div>
 <div class="bad">❌ <s>Ich kann nicht heute kommen.</s> → ✅ <span class="hl">Ich kann heute nicht kommen.</span> <em>(nicht перед інфінітивом)</em></div>
 <div class="bad">❌ <s>Ich habe gesehen nicht den Film.</s> → ✅ <span class="hl">Ich habe den Film nicht gesehen.</span> <em>(nicht перед Partizip II)</em></div>
 <div class="bad">❌ <s>Er nimmt das in keinen Kauf.</s> → ✅ <span class="hl">Er nimmt das nicht in Kauf.</span> <em>(стала сполука з прийменником → nicht)</em></div>
@@ -485,7 +547,7 @@ tab: [
   {s:"Ich finde den Film {{B}} gut.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich finde den Film nicht gut.",ex:"nicht перед прикметником gut.",lbl:"Я не вважаю фільм хорошим.",sp:"Ich finde den Film nicht gut.",de:"Ich finde den Film <b>nicht</b> gut.",ua:"Я не вважаю фільм хорошим.",st:2},
   {s:"Wir gehen {{B}} ins Kino.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Wir gehen nicht ins Kino.",ex:"nicht перед обставиною напрямку ins Kino.",lbl:"Ми не йдемо в кіно.",sp:"Wir gehen nicht ins Kino.",de:"Wir gehen <b>nicht</b> ins Kino.",ua:"Ми не йдемо в кіно.",st:2},
   {s:"Ich habe {{B}} Zeit, ins Kino zu gehen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Zeit, ins Kino zu gehen.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"У мене немає часу йти в кіно.",sp:"Ich habe keine Zeit, ins Kino zu gehen.",de:"Ich habe <b>keine</b> Zeit, ins Kino zu gehen.",ua:"У мене немає часу йти в кіно.",st:1},
-  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern (прислівник способу дії).",lbl:"Я неохоче ходжу до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я неохоче ходжу до школи.",st:2},
+  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern (прислівник способу дії).",lbl:"Я не люблю ходити до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я не люблю ходити до школи.",st:2},
 
   {s:"Ich esse {{B}} Fleisch.",o:["nie","nicht","kein","nichts"],a:"nie",alt:[],ans:"Ich esse nie Fleisch.",ex:"nie = ніколи.",lbl:"Я ніколи не їм м'яса.",sp:"Ich esse nie Fleisch.",de:"Ich esse <b>nie</b> Fleisch.",ua:"Я ніколи не їм м'яса.",st:3},
   {s:"Ich habe {{B}} gesagt.",o:["nichts","nicht","kein","nie"],a:"nichts",alt:[],ans:"Ich habe nichts gesagt.",ex:"nichts = нічого.",lbl:"Я нічого не сказав.",sp:"Ich habe nichts gesagt.",de:"Ich habe <b>nichts</b> gesagt.",ua:"Я нічого не сказав.",st:3},
@@ -512,17 +574,17 @@ tab: [
 
   {s:"Ich habe {{B}} Zeit noch Lust.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Ich habe weder Zeit noch Lust.",ex:"weder… noch = ні… ні. Без коми.",lbl:"У мене немає ні часу, ні бажання.",sp:"Ich habe weder Zeit noch Lust.",de:"Ich habe <b>weder</b> Zeit noch Lust.",ua:"У мене немає ні часу, ні бажання.",st:5},
   {s:"Er trinkt {{B}} Kaffee noch Tee.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er trinkt weder Kaffee noch Tee.",ex:"weder… noch — заперечне перерахування.",lbl:"Він не п'є ні кави, ні чаю.",sp:"Er trinkt weder Kaffee noch Tee.",de:"Er trinkt <b>weder</b> Kaffee noch Tee.",ua:"Він не п'є ні кави, ні чаю.",st:5},
-  {s:"{{B}} er noch sie kommt zur Party.",o:["Weder","Nicht","Kein","Nie"],a:"weder",alt:[],ans:"Weder er noch sie kommt zur Party.",ex:"weder… noch — на початку речення.",lbl:"Ні він, ні вона не прийдуть на вечірку.",sp:"Weder er noch sie kommt zur Party.",de:"<b>Weder</b> er noch sie kommt zur Party.",ua:"Ні він, ні вона не прийдуть на вечірку.",cap:true,st:5},
+  {s:"{{B}} er noch sie kommt zur Party.",o:["Weder","Nicht","Kein","Nie"],a:"Weder",alt:[],ans:"Weder er noch sie kommt zur Party.",ex:"weder… noch — на початку речення.",lbl:"Ні він, ні вона не прийдуть на вечірку.",sp:"Weder er noch sie kommt zur Party.",de:"<b>Weder</b> er noch sie kommt zur Party.",ua:"Ні він, ні вона не прийдуть на вечірку.",cap:true,st:5},
   {s:"Ich habe {{B}} Zeit noch Geld.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Ich habe weder Zeit noch Geld.",ex:"weder… noch — жодного з двох.",lbl:"У мене немає ні часу, ні грошей.",sp:"Ich habe weder Zeit noch Geld.",de:"Ich habe <b>weder</b> Zeit noch Geld.",ua:"У мене немає ні часу, ні грошей.",st:5},
   {s:"Sie kann {{B}} lesen noch schreiben.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Sie kann weder lesen noch schreiben.",ex:"weder… noch — ні… ні.",lbl:"Вона не вміє ні читати, ні писати.",sp:"Sie kann weder lesen noch schreiben.",de:"Sie kann <b>weder</b> lesen noch schreiben.",ua:"Вона не вміє ні читати, ні писати.",st:5},
   {s:"Er hat {{B}} Geld noch Zeit.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er hat weder Geld noch Zeit.",ex:"weder… noch.",lbl:"У нього немає ні грошей, ні часу.",sp:"Er hat weder Geld noch Zeit.",de:"Er hat <b>weder</b> Geld noch Zeit.",ua:"У нього немає ні грошей, ні часу.",st:5},
 
   {s:"Er nimmt das {{B}} in Kauf.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er nimmt das nicht in Kauf.",ex:"Funktionsverbgefüge Typ 2 (з прийменником) → nicht перед прийменником.",lbl:"Він не мириться з цим.",sp:"Er nimmt das nicht in Kauf.",de:"Er nimmt das <b>nicht</b> in Kauf.",ua:"Він не мириться з цим.",st:6},
   {s:"Wir leisten {{B}} Beitrag.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Wir leisten keinen Beitrag.",ex:"Funktionsverbgefüge Typ 1 (іменник у Akkusativ) → kein. der Beitrag → keinen.",lbl:"Ми не робимо внеску.",sp:"Wir leisten keinen Beitrag.",de:"Wir leisten <b>keinen</b> Beitrag.",ua:"Ми не робимо внеску.",st:6},
-  {s:"Das kommt {{B}} Frage.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das kommt nicht in Frage.",ex:"nicht in Frage kommen — стала сполука з прийменником.",lbl:"Це не підходить.",sp:"Das kommt nicht in Frage.",de:"Das kommt <b>nicht</b> in Frage.",ua:"Це не підходить.",st:6},
+  {s:"Das kommt {{B}} Frage.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das kommt nicht in Frage.",ex:"nicht in Frage kommen — стала сполука з прийменником.",lbl:"Про це не може бути й мови.",sp:"Das kommt nicht in Frage.",de:"Das kommt <b>nicht</b> in Frage.",ua:"Про це не може бути й мови.",st:6},
   {s:"Wir müssen {{B}} Entscheidung treffen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir müssen keine Entscheidung treffen.",ex:"Typ 1: eine Entscheidung treffen → keine.",lbl:"Нам не потрібно приймати рішення.",sp:"Wir müssen keine Entscheidung treffen.",de:"Wir müssen <b>keine</b> Entscheidung treffen.",ua:"Нам не потрібно приймати рішення.",st:6},
   {s:"Sie stellt {{B}} Frage.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie stellt keine Frage.",ex:"Typ 1: eine Frage stellen → keine Frage stellen.",lbl:"Вона не ставить питання.",sp:"Sie stellt keine Frage.",de:"Sie stellt <b>keine</b> Frage.",ua:"Вона не ставить питання.",st:6},
-  {s:"Das steht {{B}} zur Verfügung.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das steht nicht zur Verfügung.",ex:"Typ 2: nicht перед прийменником.",lbl:"Це не доступне.",sp:"Das steht nicht zur Verfügung.",de:"Das steht <b>nicht</b> zur Verfügung.",ua:"Це не доступне.",st:6},
+  {s:"Das steht {{B}} zur Verfügung.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das steht nicht zur Verfügung.",ex:"Typ 2: nicht перед прийменником.",lbl:"Це недоступне.",sp:"Das steht nicht zur Verfügung.",de:"Das steht <b>nicht</b> zur Verfügung.",ua:"Це недоступне.",st:6},
 
   {s:"Das ist {{B}}legal.",o:["il","un","non","a"],a:"il",alt:[],ans:"Das ist illegal.",ex:"illegal = nicht legal (нелегальний).",lbl:"Це незаконно.",sp:"Das ist illegal.",de:"Das ist <b>il</b>legal.",ua:"Це незаконно.",st:7},
   {s:"Er ist {{B}}höflich.",o:["un","in","il","a"],a:"un",alt:[],ans:"Er ist unhöflich.",ex:"unhöflich = nicht höflich (невежливий).",lbl:"Він неввічливий.",sp:"Er ist unhöflich.",de:"Er ist <b>un</b>höflich.",ua:"Він неввічливий.",st:7},
@@ -532,11 +594,75 @@ tab: [
   {s:"Das ist {{B}}real.",o:["ir","il","un","a"],a:"ir",alt:[],ans:"Das ist irreal.",ex:"irreal = nicht real (нереальний).",lbl:"Це нереально.",sp:"Das ist irreal.",de:"Das ist <b>ir</b>real.",ua:"Це нереально.",st:7},
 
   {s:"Er ging, {{B}} sich zu verabschieden.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er ging, ohne sich zu verabschieden.",ex:"ohne… zu — один підмет, дія не відбувається.",lbl:"Він пішов, не попрощавшись.",sp:"Er ging, ohne sich zu verabschieden.",de:"Er ging, <b>ohne</b> sich zu verabschieden.",ua:"Він пішов, не попрощавшись.",st:8},
-  {s:"{{B}} zu warten, ging sie direkt rein.",o:["Ohne","Anstatt","Nicht","Kein"],a:"ohne",alt:[],ans:"Ohne zu warten, ging sie direkt rein.",ex:"ohne… zu на початку речення.",lbl:"Не чекаючи, вона зайшла всередину.",sp:"Ohne zu warten, ging sie direkt rein.",de:"<b>Ohne</b> zu warten, ging sie direkt rein.",ua:"Не чекаючи, вона зайшла всередину.",cap:true,st:8},
+  {s:"{{B}} zu warten, ging sie direkt rein.",o:["Ohne","Anstatt","Nicht","Kein"],a:"Ohne",alt:[],ans:"Ohne zu warten, ging sie direkt rein.",ex:"ohne… zu на початку речення.",lbl:"Не чекаючи, вона зайшла всередину.",sp:"Ohne zu warten, ging sie direkt rein.",de:"<b>Ohne</b> zu warten, ging sie direkt rein.",ua:"Не чекаючи, вона зайшла всередину.",cap:true,st:8},
   {s:"Er spielt, {{B}} zu lernen.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:[],ans:"Er spielt, anstatt zu lernen.",ex:"anstatt… zu = замість того, щоб.",lbl:"Він грає замість того, щоб навчатися.",sp:"Er spielt, anstatt zu lernen.",de:"Er spielt, <b>anstatt</b> zu lernen.",ua:"Він грає замість того, щоб навчатися.",st:8},
   {s:"Sie arbeitet, {{B}} dass sie bezahlt wird.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie arbeitet, ohne dass sie bezahlt wird.",ex:"ohne dass — підрядне речення з ohne.",lbl:"Вона працює без оплати.",sp:"Sie arbeitet, ohne dass sie bezahlt wird.",de:"Sie arbeitet, <b>ohne</b> dass sie bezahlt wird.",ua:"Вона працює без оплати.",st:8},
   {s:"Er kam herein, {{B}} dass wir es merkten.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er kam herein, ohne dass wir es merkten.",ex:"ohne dass — різні підмети (er / wir).",lbl:"Він увійшов так, що ми не помітили.",sp:"Er kam herein, ohne dass wir es merkten.",de:"Er kam herein, <b>ohne</b> dass wir es merkten.",ua:"Він увійшов так, що ми не помітили.",st:8},
-  {s:"Sie ging, {{B}} ein Wort zu sagen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ging, ohne ein Wort zu sagen.",ex:"ohne… zu — один підмет, дія не відбувається.",lbl:"Вона пішла, не сказавши ні слова.",sp:"Sie ging, ohne ein Wort zu sagen.",de:"Sie ging, <b>ohne</b> ein Wort zu sagen.",ua:"Вона пішла, не сказавши ні слова.",st:8}
+  {s:"Sie ging, {{B}} ein Wort zu sagen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ging, ohne ein Wort zu sagen.",ex:"ohne… zu — один підмет, дія не відбувається.",lbl:"Вона пішла, не сказавши ні слова.",sp:"Sie ging, ohne ein Wort zu sagen.",de:"Sie ging, <b>ohne</b> ein Wort zu sagen.",ua:"Вона пішла, не сказавши ні слова.",st:8},
+  {s:"Heute gibt es {{B}} Hausaufgaben.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Heute gibt es keine Hausaufgaben.",ex:"множина без артикля → keine.",lbl:"Сьогодні немає домашнього завдання.",sp:"Heute gibt es keine Hausaufgaben.",de:"Heute gibt es <b>keine</b> Hausaufgaben.",ua:"Сьогодні немає домашнього завдання.",st:1},
+  {s:"Ich habe {{B}} Bruder.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Ich habe keinen Bruder.",ex:"der Bruder — чоловічий рід, Akkusativ → keinen.",lbl:"У мене немає брата.",sp:"Ich habe keinen Bruder.",de:"Ich habe <b>keinen</b> Bruder.",ua:"У мене немає брата.",st:1},
+  {s:"Das ist {{B}} meine Tasche.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht meine Tasche.",ex:"присвійний займенник meine → nicht.",lbl:"Це не моя сумка.",sp:"Das ist nicht meine Tasche.",de:"Das ist <b>nicht</b> meine Tasche.",ua:"Це не моя сумка.",st:1},
+  {s:"Wir essen {{B}} Fisch.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Wir essen keinen Fisch.",ex:"der Fisch — чоловічий рід, Akkusativ → keinen.",lbl:"Ми не їмо рибу.",sp:"Wir essen keinen Fisch.",de:"Wir essen <b>keinen</b> Fisch.",ua:"Ми не їмо рибу.",st:1},
+  {s:"Ich kenne {{B}} die Lehrerin.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne nicht die Lehrerin.",ex:"означений артикль die → nicht.",lbl:"Я не знаю цю вчительку.",sp:"Ich kenne nicht die Lehrerin.",de:"Ich kenne <b>nicht</b> die Lehrerin.",ua:"Я не знаю цю вчительку.",st:1},
+  {s:"Ich habe heute {{B}} gearbeitet.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich habe heute nicht gearbeitet.",ex:"nicht перед Partizip II gearbeitet.",lbl:"Сьогодні я не працював.",sp:"Ich habe heute nicht gearbeitet.",de:"Ich habe heute <b>nicht</b> gearbeitet.",ua:"Сьогодні я не працював.",st:2},
+  {s:"Er steht morgen {{B}} auf.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er steht morgen nicht auf.",ex:"nicht перед відокремлюваною префіксою auf.",lbl:"Завтра він не встане.",sp:"Er steht morgen nicht auf.",de:"Er steht morgen <b>nicht</b> auf.",ua:"Завтра він не встане.",st:2},
+  {s:"Wir spielen {{B}} gern Karten.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Wir spielen nicht gern Karten.",ex:"nicht перед gern (прислівник способу дії).",lbl:"Ми не любимо грати в карти.",sp:"Wir spielen nicht gern Karten.",de:"Wir spielen <b>nicht</b> gern Karten.",ua:"Ми не любимо грати в карти.",st:2},
+  {s:"Sie fährt {{B}} nach Hamburg.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Sie fährt nicht nach Hamburg.",ex:"nicht перед обставиною напрямку nach Hamburg.",lbl:"Вона не їде в Гамбург.",sp:"Sie fährt nicht nach Hamburg.",de:"Sie fährt <b>nicht</b> nach Hamburg.",ua:"Вона не їде в Гамбург.",st:2},
+  {s:"Das Wetter ist heute {{B}} schön.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das Wetter ist heute nicht schön.",ex:"nicht перед прикметником schön.",lbl:"Погода сьогодні не гарна.",sp:"Das Wetter ist heute nicht schön.",de:"Das Wetter ist heute <b>nicht</b> schön.",ua:"Погода сьогодні не гарна.",st:2},
+  {s:"Ich kann dir {{B}} helfen.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kann dir nicht helfen.",ex:"nicht перед інфінітивом helfen.",lbl:"Я не можу тобі допомогти.",sp:"Ich kann dir nicht helfen.",de:"Ich kann dir <b>nicht</b> helfen.",ua:"Я не можу тобі допомогти.",st:2},
+  {s:"Er kommt {{B}} pünktlich.",o:["nie","nichts","niemand","nirgends"],a:"nie",alt:["niemals","nicht"],ans:"Er kommt nie pünktlich.",ex:"nie = ніколи.",lbl:"Він ніколи не приходить вчасно.",sp:"Er kommt nie pünktlich.",de:"Er kommt <b>nie</b> pünktlich.",ua:"Він ніколи не приходить вчасно.",st:3},
+  {s:"{{B}} versteht mich.",o:["Niemand","Nichts","Nie","Nirgends"],a:"Niemand",alt:[],ans:"Niemand versteht mich.",ex:"niemand = ніхто (підмет).",lbl:"Мене ніхто не розуміє.",sp:"Niemand versteht mich.",de:"<b>Niemand</b> versteht mich.",ua:"Мене ніхто не розуміє.",st:3},
+  {s:"Ich habe meinen Schlüssel {{B}} gefunden.",o:["nirgends","niemand","nichts","nie"],a:"nirgends",alt:["nirgendwo"],ans:"Ich habe meinen Schlüssel nirgends gefunden.",ex:"nirgends = ніде.",lbl:"Я ніде не знайшов свого ключа.",sp:"Ich habe meinen Schlüssel nirgends gefunden.",de:"Ich habe meinen Schlüssel <b>nirgends</b> gefunden.",ua:"Я ніде не знайшов свого ключа.",st:3},
+  {s:"Ich habe {{B}} Neues gehört.",o:["nichts","niemand","nie","nirgends"],a:"nichts",alt:["nie","niemals"],ans:"Ich habe nichts Neues gehört.",ex:"nichts = нічого.",lbl:"Я не чув нічого нового.",sp:"Ich habe nichts Neues gehört.",de:"Ich habe <b>nichts</b> Neues gehört.",ua:"Я не чув нічого нового.",st:3},
+  {s:"Sie ist umgezogen und wohnt {{B}} hier.",o:["nicht mehr","noch nicht","nie","niemand"],a:"nicht mehr",alt:[],ans:"Sie ist umgezogen und wohnt nicht mehr hier.",ex:"nicht mehr = більше не.",lbl:"Вона переїхала й більше тут не живе.",sp:"Sie ist umgezogen und wohnt nicht mehr hier.",de:"Sie ist umgezogen und wohnt <b>nicht mehr</b> hier.",ua:"Вона переїхала й більше тут не живе.",st:3},
+  {s:"Das Baby ist erst ein Jahr alt und kann {{B}} laufen.",o:["noch nicht","nicht mehr","nie","nirgends"],a:"noch nicht",alt:[],ans:"Das Baby ist erst ein Jahr alt und kann noch nicht laufen.",ex:"noch nicht = ще не.",lbl:"Дитині лише рік, і вона ще не вміє ходити.",sp:"Das Baby ist erst ein Jahr alt und kann noch nicht laufen.",de:"Das Baby ist erst ein Jahr alt und kann <b>noch nicht</b> laufen.",ua:"Дитині лише рік, і вона ще не вміє ходити.",st:3},
+  {s:"Ich kenne hier {{B}}.",o:["niemanden","niemandem","niemand","nichts"],a:"niemanden",alt:[],ans:"Ich kenne hier niemanden.",ex:"niemand в Akkusativ → niemanden.",lbl:"Я тут нікого не знаю.",sp:"Ich kenne hier niemanden.",de:"Ich kenne hier <b>niemanden</b>.",ua:"Я тут нікого не знаю.",st:3},
+  {s:"Du {{B}} nicht kommen, es ist freiwillig.",o:["musst","darfst","willst","sollst"],a:"musst",alt:[],ans:"Du musst nicht kommen, es ist freiwillig.",ex:"nicht müssen = не обов'язково.",lbl:"Ти не мусиш приходити, це добровільно.",sp:"Du musst nicht kommen, es ist freiwillig.",de:"Du <b>musst</b> nicht kommen, es ist freiwillig.",ua:"Ти не мусиш приходити, це добровільно.",st:4},
+  {s:"Du {{B}} hier nicht parken. Das ist verboten.",o:["darfst","musst","brauchst","kannst"],a:"darfst",alt:["kannst"],ans:"Du darfst hier nicht parken. Das ist verboten.",ex:"nicht dürfen = заборонено.",lbl:"Тут не можна паркуватися. Це заборонено.",sp:"Du darfst hier nicht parken. Das ist verboten.",de:"Du <b>darfst</b> hier nicht parken. Das ist verboten.",ua:"Тут не можна паркуватися. Це заборонено.",st:4},
+  {s:"Du brauchst nicht {{B}} kommen.",o:["zu","um","ohne","dass"],a:"zu",alt:[],ans:"Du brauchst nicht zu kommen.",ex:"nicht brauchen + zu + інфінітив.",lbl:"Тобі не треба приходити.",sp:"Du brauchst nicht zu kommen.",de:"Du brauchst nicht <b>zu</b> kommen.",ua:"Тобі не треба приходити.",st:4},
+  {s:"Ich bleibe zu Hause, weil ich {{B}} fit bin.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich bleibe zu Hause, weil ich nicht fit bin.",ex:"підрядне речення: nicht перед прикметником fit.",lbl:"Я лишаюся вдома, бо я не в формі.",sp:"Ich bleibe zu Hause, weil ich nicht fit bin.",de:"Ich bleibe zu Hause, weil ich <b>nicht</b> fit bin.",ua:"Я лишаюся вдома, бо я не в формі.",st:4},
+  {s:"Ich bleibe zu Hause, weil ich {{B}} Zeit habe.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich bleibe zu Hause, weil ich keine Zeit habe.",ex:"die Zeit → keine.",lbl:"Я лишаюся вдома, бо в мене немає часу.",sp:"Ich bleibe zu Hause, weil ich keine Zeit habe.",de:"Ich bleibe zu Hause, weil ich <b>keine</b> Zeit habe.",ua:"Я лишаюся вдома, бо в мене немає часу.",st:4},
+  {s:"Das schaffe ich leider zeitlich {{B}}.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das schaffe ich leider zeitlich nicht.",ex:"ділова формула відмови: nicht у кінці.",lbl:"На жаль, за часом я цього не встигну.",sp:"Das schaffe ich leider zeitlich nicht.",de:"Das schaffe ich leider zeitlich <b>nicht</b>.",ua:"На жаль, за часом я цього не встигну.",st:4},
+  {s:"Entschuldigung, ich habe das {{B}} ganz verstanden.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Entschuldigung, ich habe das nicht ganz verstanden.",ex:"nicht перед ganz.",lbl:"Вибачте, я не зовсім це зрозумів.",sp:"Entschuldigung, ich habe das nicht ganz verstanden.",de:"Entschuldigung, ich habe das <b>nicht</b> ganz verstanden.",ua:"Вибачте, я не зовсім це зрозумів.",st:4},
+  {s:"Er hat {{B}} Ahnung davon.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er hat keine Ahnung davon.",ex:"die Ahnung → keine.",lbl:"Він не має про це уявлення.",sp:"Er hat keine Ahnung davon.",de:"Er hat <b>keine</b> Ahnung davon.",ua:"Він не має про це уявлення.",st:4},
+  {s:"Er ist {{B}} reich noch glücklich.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er ist weder reich noch glücklich.",ex:"weder… noch — ні… ні (без коми).",lbl:"Він ні багатий, ні щасливий.",sp:"Er ist weder reich noch glücklich.",de:"Er ist <b>weder</b> reich noch glücklich.",ua:"Він ні багатий, ні щасливий.",st:5},
+  {s:"{{B}} Anna noch Tom war da.",o:["Weder","Nicht","Kein","Nie"],a:"Weder",alt:[],ans:"Weder Anna noch Tom war da.",ex:"weder… noch на початку речення.",lbl:"Ні Анни, ні Тома там не було.",sp:"Weder Anna noch Tom war da.",de:"<b>Weder</b> Anna noch Tom war da.",ua:"Ні Анни, ні Тома там не було.",cap:true,st:5},
+  {s:"Ich mag {{B}} Fisch noch Fleisch.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Ich mag weder Fisch noch Fleisch.",ex:"weder… noch.",lbl:"Я не люблю ні рибу, ні м'ясо.",sp:"Ich mag weder Fisch noch Fleisch.",de:"Ich mag <b>weder</b> Fisch noch Fleisch.",ua:"Я не люблю ні рибу, ні м'ясо.",st:5},
+  {s:"Er kommt {{B}} heute noch morgen.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er kommt weder heute noch morgen.",ex:"weder… noch.",lbl:"Він не прийде ні сьогодні, ні завтра.",sp:"Er kommt weder heute noch morgen.",de:"Er kommt <b>weder</b> heute noch morgen.",ua:"Він не прийде ні сьогодні, ні завтра.",st:5},
+  {s:"Sie hat {{B}} angerufen noch geschrieben.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Sie hat weder angerufen noch geschrieben.",ex:"weder… noch з дієсловами (Partizip II).",lbl:"Вона ні подзвонила, ні написала.",sp:"Sie hat weder angerufen noch geschrieben.",de:"Sie hat <b>weder</b> angerufen noch geschrieben.",ua:"Вона ні подзвонила, ні написала.",st:5},
+  {s:"Wir haben weder Zeit {{B}} Geld.",o:["noch","oder","und","sondern"],a:"noch",alt:[],ans:"Wir haben weder Zeit noch Geld.",ex:"друга частина пари — noch.",lbl:"У нас немає ні часу, ні грошей.",sp:"Wir haben weder Zeit noch Geld.",de:"Wir haben weder Zeit <b>noch</b> Geld.",ua:"У нас немає ні часу, ні грошей.",st:5},
+  {s:"Das ist {{B}} nur teuer, sondern auch schlecht.",o:["nicht","kein","weder","nie"],a:"nicht",alt:[],ans:"Das ist nicht nur teuer, sondern auch schlecht.",ex:"nicht nur…, sondern auch.",lbl:"Це не лише дорого, а й погано.",sp:"Das ist nicht nur teuer, sondern auch schlecht.",de:"Das ist <b>nicht</b> nur teuer, sondern auch schlecht.",ua:"Це не лише дорого, а й погано.",st:5},
+  {s:"Er ist nicht dumm, {{B}} faul.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Er ist nicht dumm, sondern faul.",ex:"після заперечення — sondern (виправлення).",lbl:"Він не дурний, а лінивий.",sp:"Er ist nicht dumm, sondern faul.",de:"Er ist nicht dumm, <b>sondern</b> faul.",ua:"Він не дурний, а лінивий.",st:5},
+  {s:"Wir haben weder Auto {{B}} Fahrrad.",o:["noch","oder","und","sondern"],a:"noch",alt:[],ans:"Wir haben weder Auto noch Fahrrad.",ex:"weder… noch.",lbl:"У нас немає ні машини, ні велосипеда.",sp:"Wir haben weder Auto noch Fahrrad.",de:"Wir haben weder Auto <b>noch</b> Fahrrad.",ua:"У нас немає ні машини, ні велосипеда.",st:5},
+  {s:"Sie leistet {{B}} Hilfe.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie leistet keine Hilfe.",ex:"Typ 1: Hilfe leisten → keine Hilfe leisten.",lbl:"Вона не надає допомоги.",sp:"Sie leistet keine Hilfe.",de:"Sie leistet <b>keine</b> Hilfe.",ua:"Вона не надає допомоги.",st:6},
+  {s:"Wir stellen {{B}} Forderungen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir stellen keine Forderungen.",ex:"Typ 1: Forderungen stellen → keine.",lbl:"Ми не висуваємо вимог.",sp:"Wir stellen keine Forderungen.",de:"Wir stellen <b>keine</b> Forderungen.",ua:"Ми не висуваємо вимог.",st:6},
+  {s:"Er nimmt {{B}} Rücksicht auf andere.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er nimmt keine Rücksicht auf andere.",ex:"Typ 1: Rücksicht nehmen → keine Rücksicht nehmen.",lbl:"Він не зважає на інших.",sp:"Er nimmt keine Rücksicht auf andere.",de:"Er nimmt <b>keine</b> Rücksicht auf andere.",ua:"Він не зважає на інших.",st:6},
+  {s:"Sie gibt {{B}} Antwort.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie gibt keine Antwort.",ex:"Typ 1: eine Antwort geben → keine Antwort geben.",lbl:"Вона не дає відповіді.",sp:"Sie gibt keine Antwort.",de:"Sie gibt <b>keine</b> Antwort.",ua:"Вона не дає відповіді.",st:6},
+  {s:"Wir führen {{B}} Gespräch.",o:["kein","nicht","keine","keinen"],a:"kein",alt:[],ans:"Wir führen kein Gespräch.",ex:"Typ 1: das Gespräch → kein.",lbl:"Ми не ведемо розмови.",sp:"Wir führen kein Gespräch.",de:"Wir führen <b>kein</b> Gespräch.",ua:"Ми не ведемо розмови.",st:6},
+  {s:"Das steht {{B}} zur Diskussion.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das steht nicht zur Diskussion.",ex:"Typ 2: nicht перед прийменником zur.",lbl:"Це не обговорюється.",sp:"Das steht nicht zur Diskussion.",de:"Das steht <b>nicht</b> zur Diskussion.",ua:"Це не обговорюється.",st:6},
+  {s:"Er steht {{B}} unter Druck.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er steht nicht unter Druck.",ex:"Typ 2: nicht перед прийменником unter.",lbl:"Він не перебуває під тиском.",sp:"Er steht nicht unter Druck.",de:"Er steht <b>nicht</b> unter Druck.",ua:"Він не перебуває під тиском.",st:6},
+  {s:"Ich nehme das Angebot {{B}} in Anspruch.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich nehme das Angebot nicht in Anspruch.",ex:"Typ 2: nicht in Anspruch nehmen.",lbl:"Я не користуюся цією пропозицією.",sp:"Ich nehme das Angebot nicht in Anspruch.",de:"Ich nehme das Angebot <b>nicht</b> in Anspruch.",ua:"Я не користуюся цією пропозицією.",st:6},
+  {s:"Das Problem kommt {{B}} zur Sprache.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das Problem kommt nicht zur Sprache.",ex:"Typ 2: nicht zur Sprache kommen.",lbl:"Ця проблема не обговорюється.",sp:"Das Problem kommt nicht zur Sprache.",de:"Das Problem kommt <b>nicht</b> zur Sprache.",ua:"Ця проблема не обговорюється.",st:6},
+  {s:"Das ist {{B}}möglich.",o:["un","in","il","ir"],a:"un",alt:[],ans:"Das ist unmöglich.",ex:"unmöglich = nicht möglich.",lbl:"Це неможливо.",sp:"Das ist unmöglich.",de:"Das ist <b>un</b>möglich.",ua:"Це неможливо.",st:7},
+  {s:"Sie ist {{B}}glücklich.",o:["un","in","il","a"],a:"un",alt:[],ans:"Sie ist unglücklich.",ex:"unglücklich = nicht glücklich.",lbl:"Вона нещасна.",sp:"Sie ist unglücklich.",de:"Sie ist <b>un</b>glücklich.",ua:"Вона нещасна.",st:7},
+  {s:"Das ist {{B}}logisch.",o:["il","un","in","ir"],a:"il",alt:[],ans:"Das ist illogisch.",ex:"illogisch — in- перед l стає il-.",lbl:"Це нелогічно.",sp:"Das ist illogisch.",de:"Das ist <b>il</b>logisch.",ua:"Це нелогічно.",st:7},
+  {s:"Sein Verhalten ist {{B}}rational.",o:["ir","il","un","in"],a:"ir",alt:[],ans:"Sein Verhalten ist irrational.",ex:"irrational — in- перед r стає ir-.",lbl:"Його поведінка ірраціональна.",sp:"Sein Verhalten ist irrational.",de:"Sein Verhalten ist <b>ir</b>rational.",ua:"Його поведінка ірраціональна.",st:7},
+  {s:"Die Entscheidung ist {{B}}diskutabel.",o:["in","un","il","ir"],a:"in",alt:[],ans:"Die Entscheidung ist indiskutabel.",ex:"indiskutabel = nicht diskutabel.",lbl:"Це рішення не підлягає обговоренню.",sp:"Die Entscheidung ist indiskutabel.",de:"Die Entscheidung ist <b>in</b>diskutabel.",ua:"Це рішення не підлягає обговоренню.",st:7},
+  {s:"Das ist {{B}}typisch.",o:["a","un","in","il"],a:"a",alt:[],ans:"Das ist atypisch.",ex:"atypisch = nicht typisch.",lbl:"Це нетипово.",sp:"Das ist atypisch.",de:"Das ist <b>a</b>typisch.",ua:"Це нетипово.",st:7},
+  {s:"Er hat mich {{B}}verstanden.",o:["miss","un","des","dis"],a:"miss",alt:[],ans:"Er hat mich missverstanden.",ex:"missverstehen = неправильно зрозуміти.",lbl:"Він мене неправильно зрозумів.",sp:"Er hat mich missverstanden.",de:"Er hat mich <b>miss</b>verstanden.",ua:"Він мене неправильно зрозумів.",st:7},
+  {s:"Das Kind ist hilf{{B}}.",o:["los","frei","leer","un"],a:"los",alt:[],ans:"Das Kind ist hilflos.",ex:"-los = без чогось (hilflos = ohne Hilfe).",lbl:"Дитина безпорадна.",sp:"Das Kind ist hilflos.",de:"Das Kind ist hilf<b>los</b>.",ua:"Дитина безпорадна.",st:7},
+  {s:"Das Getränk ist zucker{{B}}.",o:["frei","los","leer","un"],a:"frei",alt:[],ans:"Das Getränk ist zuckerfrei.",ex:"-frei = вільний від чогось (zuckerfrei).",lbl:"Напій без цукру.",sp:"Das Getränk ist zuckerfrei.",de:"Das Getränk ist zucker<b>frei</b>.",ua:"Напій без цукру.",st:7},
+  {s:"Sie hat die Regeln {{B}}achtet.",o:["miss","un","des","dis"],a:"miss",alt:[],ans:"Sie hat die Regeln missachtet.",ex:"missachten = не дотримуватися, нехтувати.",lbl:"Вона знехтувала правилами.",sp:"Sie hat die Regeln missachtet.",de:"Sie hat die Regeln <b>miss</b>achtet.",ua:"Вона знехтувала правилами.",st:7},
+  {s:"Das Medikament ist {{B}}wirksam.",o:["un","in","il","ir"],a:"un",alt:[],ans:"Das Medikament ist unwirksam.",ex:"unwirksam = nicht wirksam.",lbl:"Ліки неефективні.",sp:"Das Medikament ist unwirksam.",de:"Das Medikament ist <b>un</b>wirksam.",ua:"Ліки неефективні.",st:7},
+  {s:"Er arbeitet, {{B}} eine Pause zu machen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er arbeitet, ohne eine Pause zu machen.",ex:"ohne… zu — один підмет, дії немає.",lbl:"Він працює, не роблячи перерви.",sp:"Er arbeitet, ohne eine Pause zu machen.",de:"Er arbeitet, <b>ohne</b> eine Pause zu machen.",ua:"Він працює, не роблячи перерви.",st:8},
+  {s:"Sie fährt nach Hause, {{B}} mit uns zu essen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie fährt nach Hause, ohne mit uns zu essen.",ex:"ohne… zu — один підмет.",lbl:"Вона їде додому, не поївши з нами.",sp:"Sie fährt nach Hause, ohne mit uns zu essen.",de:"Sie fährt nach Hause, <b>ohne</b> mit uns zu essen.",ua:"Вона їде додому, не поївши з нами.",st:8},
+  {s:"Er ruht sich aus, {{B}} zu arbeiten.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:["statt"],ans:"Er ruht sich aus, anstatt zu arbeiten.",ex:"anstatt… zu = замість того, щоб.",lbl:"Він відпочиває замість того, щоб працювати.",sp:"Er ruht sich aus, anstatt zu arbeiten.",de:"Er ruht sich aus, <b>anstatt</b> zu arbeiten.",ua:"Він відпочиває замість того, щоб працювати.",st:8},
+  {s:"Sie fährt mit dem Auto, {{B}} zu Fuß zu gehen.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:["statt"],ans:"Sie fährt mit dem Auto, anstatt zu Fuß zu gehen.",ex:"anstatt… zu — замість дії.",lbl:"Вона їде на машині замість того, щоб іти пішки.",sp:"Sie fährt mit dem Auto, anstatt zu Fuß zu gehen.",de:"Sie fährt mit dem Auto, <b>anstatt</b> zu Fuß zu gehen.",ua:"Вона їде на машині замість того, щоб іти пішки.",st:8},
+  {s:"Ich verlasse das Haus nie, {{B}} die Tür abzuschließen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Ich verlasse das Haus nie, ohne die Tür abzuschließen.",ex:"ohne… zu; zu стоїть між префіксом і коренем: abzuschließen.",lbl:"Я ніколи не виходжу з дому, не замкнувши двері.",sp:"Ich verlasse das Haus nie, ohne die Tür abzuschließen.",de:"Ich verlasse das Haus nie, <b>ohne</b> die Tür abzuschließen.",ua:"Я ніколи не виходжу з дому, не замкнувши двері.",st:8},
+  {s:"Er hat das Auto gekauft, {{B}} mich zu fragen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er hat das Auto gekauft, ohne mich zu fragen.",ex:"ohne… zu — один підмет.",lbl:"Він купив машину, не спитавши мене.",sp:"Er hat das Auto gekauft, ohne mich zu fragen.",de:"Er hat das Auto gekauft, <b>ohne</b> mich zu fragen.",ua:"Він купив машину, не спитавши мене.",st:8},
+  {s:"Sie ist gegangen, {{B}} dass jemand es bemerkt hat.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ist gegangen, ohne dass jemand es bemerkt hat.",ex:"ohne dass — різні підмети (sie / jemand).",lbl:"Вона пішла так, що ніхто цього не помітив.",sp:"Sie ist gegangen, ohne dass jemand es bemerkt hat.",de:"Sie ist gegangen, <b>ohne</b> dass jemand es bemerkt hat.",ua:"Вона пішла так, що ніхто цього не помітив.",st:8},
+  {s:"{{B}} dass er lernt, spielt er den ganzen Tag.",o:["Anstatt","Ohne","Nicht","Kein"],a:"Anstatt",alt:["Statt"],ans:"Anstatt dass er lernt, spielt er den ganzen Tag.",ex:"anstatt dass + підрядне речення.",lbl:"Замість того, щоб навчатися, він цілий день грає.",sp:"Anstatt dass er lernt, spielt er den ganzen Tag.",de:"<b>Anstatt</b> dass er lernt, spielt er den ganzen Tag.",ua:"Замість того, щоб навчатися, він цілий день грає.",cap:true,st:8},
+  {s:"{{B}} zu fragen, hat er das Buch genommen.",o:["Ohne","Anstatt","Nicht","Kein"],a:"Ohne",alt:[],ans:"Ohne zu fragen, hat er das Buch genommen.",ex:"ohne… zu на початку речення.",lbl:"Не питаючи, він узяв книжку.",sp:"Ohne zu fragen, hat er das Buch genommen.",de:"<b>Ohne</b> zu fragen, hat er das Buch genommen.",ua:"Не питаючи, він узяв книжку.",cap:true,st:8}
 ],
 sent: [
   {s:"Ich habe {{B}} Zeit, ins Kino zu gehen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Zeit, ins Kino zu gehen.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"У мене немає часу йти в кіно.",sp:"Ich habe keine Zeit, ins Kino zu gehen.",de:"Ich habe <b>keine</b> Zeit, ins Kino zu gehen.",ua:"У мене немає часу йти в кіно.",st:1},
@@ -560,7 +686,7 @@ sent: [
   {s:"Ich finde den Film {{B}} gut.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich finde den Film nicht gut.",ex:"nicht перед прикметником.",lbl:"Я не вважаю фільм хорошим.",sp:"Ich finde den Film nicht gut.",de:"Ich finde den Film <b>nicht</b> gut.",ua:"Я не вважаю фільм хорошим.",st:2},
   {s:"Wir gehen {{B}} ins Kino.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Wir gehen nicht ins Kino.",ex:"nicht перед обставиною напрямку.",lbl:"Ми не йдемо в кіно.",sp:"Wir gehen nicht ins Kino.",de:"Wir gehen <b>nicht</b> ins Kino.",ua:"Ми не йдемо в кіно.",st:2},
   {s:"Ich komme {{B}} aus Sri Lanka.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich komme nicht aus Sri Lanka.",ex:"обставина походження → nicht.",lbl:"Я не з Шрі-Ланки.",sp:"Ich komme nicht aus Sri Lanka.",de:"Ich komme <b>nicht</b> aus Sri Lanka.",ua:"Я не з Шрі-Ланки.",st:2},
-  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern (прислівник способу дії).",lbl:"Я неохоче ходжу до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я неохоче ходжу до школи.",st:2},
+  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern (прислівник способу дії).",lbl:"Я не люблю ходити до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я не люблю ходити до школи.",st:2},
 
   {s:"Ich esse {{B}} Fleisch.",o:["nie","nicht","kein","nichts"],a:"nie",alt:[],ans:"Ich esse nie Fleisch.",ex:"nie = ніколи.",lbl:"Я ніколи не їм м'яса.",sp:"Ich esse nie Fleisch.",de:"Ich esse <b>nie</b> Fleisch.",ua:"Я ніколи не їм м'яса.",st:3},
   {s:"Ich habe {{B}} gesagt.",o:["nichts","nicht","kein","nie"],a:"nichts",alt:[],ans:"Ich habe nichts gesagt.",ex:"nichts = нічого.",lbl:"Я нічого не сказав.",sp:"Ich habe nichts gesagt.",de:"Ich habe <b>nichts</b> gesagt.",ua:"Я нічого не сказав.",st:3},
@@ -594,10 +720,10 @@ sent: [
 
   {s:"Er nimmt das {{B}} in Kauf.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er nimmt das nicht in Kauf.",ex:"Typ 2: nicht перед прийменником.",lbl:"Він не мириться з цим.",sp:"Er nimmt das nicht in Kauf.",de:"Er nimmt das <b>nicht</b> in Kauf.",ua:"Він не мириться з цим.",st:6},
   {s:"Wir leisten {{B}} Beitrag.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Wir leisten keinen Beitrag.",ex:"Typ 1: der Beitrag → keinen.",lbl:"Ми не робимо внеску.",sp:"Wir leisten keinen Beitrag.",de:"Wir leisten <b>keinen</b> Beitrag.",ua:"Ми не робимо внеску.",st:6},
-  {s:"Das steht {{B}} zur Verfügung.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das steht nicht zur Verfügung.",ex:"Typ 2: nicht перед прийменником.",lbl:"Це не доступне.",sp:"Das steht nicht zur Verfügung.",de:"Das steht <b>nicht</b> zur Verfügung.",ua:"Це не доступне.",st:6},
+  {s:"Das steht {{B}} zur Verfügung.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das steht nicht zur Verfügung.",ex:"Typ 2: nicht перед прийменником.",lbl:"Це недоступне.",sp:"Das steht nicht zur Verfügung.",de:"Das steht <b>nicht</b> zur Verfügung.",ua:"Це недоступне.",st:6},
   {s:"Wir müssen {{B}} Entscheidung treffen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir müssen keine Entscheidung treffen.",ex:"Typ 1: eine Entscheidung treffen → keine.",lbl:"Нам не потрібно приймати рішення.",sp:"Wir müssen keine Entscheidung treffen.",de:"Wir müssen <b>keine</b> Entscheidung treffen.",ua:"Нам не потрібно приймати рішення.",st:6},
   {s:"Sie stellt {{B}} Frage.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie stellt keine Frage.",ex:"Typ 1: eine Frage stellen → keine.",lbl:"Вона не ставить питання.",sp:"Sie stellt keine Frage.",de:"Sie stellt <b>keine</b> Frage.",ua:"Вона не ставить питання.",st:6},
-  {s:"Das kommt {{B}} Frage.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das kommt nicht in Frage.",ex:"Typ 2: nicht in Frage kommen.",lbl:"Це не підходить.",sp:"Das kommt nicht in Frage.",de:"Das kommt <b>nicht</b> in Frage.",ua:"Це не підходить.",st:6},
+  {s:"Das kommt {{B}} Frage.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das kommt nicht in Frage.",ex:"Typ 2: nicht in Frage kommen.",lbl:"Про це не може бути й мови.",sp:"Das kommt nicht in Frage.",de:"Das kommt <b>nicht</b> in Frage.",ua:"Про це не може бути й мови.",st:6},
 
   {s:"Sein Verhalten war {{B}}.",o:["unhöflich","höflich","freundlich","nett"],a:"unhöflich",alt:[],ans:"Sein Verhalten war unhöflich.",ex:"unhöflich = nicht höflich (невежливий).",lbl:"Його поведінка була неввічливою.",sp:"Sein Verhalten war unhöflich.",de:"Sein Verhalten war <b>unhöflich</b>.",ua:"Його поведінка була неввічливою.",st:7},
   {s:"Der Vortrag war {{B}}.",o:["inhaltsleer","inhaltsvoll","langweilig","kurz"],a:"inhaltsleer",alt:[],ans:"Der Vortrag war inhaltsleer.",ex:"inhaltsleer = ohne Inhalt (без змісту).",lbl:"Доповідь була без змісту.",sp:"Der Vortrag war inhaltsleer.",de:"Der Vortrag war <b>inhaltsleer</b>.",ua:"Доповідь була без змісту.",st:7},
@@ -607,14 +733,77 @@ sent: [
   {s:"Er ist {{B}} (nicht pünktlich).",o:["unpünktlich","pünktlich","inpünktlich","dispünktlich"],a:"unpünktlich",alt:[],ans:"Er ist unpünktlich.",ex:"unpünktlich = nicht pünktlich (непунктуальний).",lbl:"Він непунктуальний.",sp:"Er ist unpünktlich.",de:"Er ist <b>unpünktlich</b>.",ua:"Він непунктуальний.",st:7},
 
   {s:"Er ging, {{B}} sich zu verabschieden.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er ging, ohne sich zu verabschieden.",ex:"ohne… zu — один підмет.",lbl:"Він пішов, не попрощавшись.",sp:"Er ging, ohne sich zu verabschieden.",de:"Er ging, <b>ohne</b> sich zu verabschieden.",ua:"Він пішов, не попрощавшись.",st:8},
-  {s:"{{B}} zu lernen, wird er die Prüfung nicht bestehen.",o:["Ohne","Anstatt","Nicht","Kein"],a:"ohne",alt:[],ans:"Ohne zu lernen, wird er die Prüfung nicht bestehen.",ex:"ohne… zu на початку.",lbl:"Не навчаючись, він не складе іспит.",sp:"Ohne zu lernen, wird er die Prüfung nicht bestehen.",de:"<b>Ohne</b> zu lernen, wird er die Prüfung nicht bestehen.",ua:"Не навчаючись, він не складе іспит.",cap:true,st:8},
+  {s:"{{B}} zu lernen, wird er die Prüfung nicht bestehen.",o:["Ohne","Anstatt","Nicht","Kein"],a:"Ohne",alt:[],ans:"Ohne zu lernen, wird er die Prüfung nicht bestehen.",ex:"ohne… zu на початку.",lbl:"Не навчаючись, він не складе іспит.",sp:"Ohne zu lernen, wird er die Prüfung nicht bestehen.",de:"<b>Ohne</b> zu lernen, wird er die Prüfung nicht bestehen.",ua:"Не навчаючись, він не складе іспит.",cap:true,st:8},
   {s:"Sie arbeitet, {{B}} dass sie bezahlt wird.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie arbeitet, ohne dass sie bezahlt wird.",ex:"ohne dass + Nebensatz.",lbl:"Вона працює без оплати.",sp:"Sie arbeitet, ohne dass sie bezahlt wird.",de:"Sie arbeitet, <b>ohne</b> dass sie bezahlt wird.",ua:"Вона працює без оплати.",st:8},
   {s:"Er spielt Computer, {{B}} zu lernen.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:[],ans:"Er spielt Computer, anstatt zu lernen.",ex:"anstatt… zu = замість того, щоб.",lbl:"Він грає в комп'ютер замість того, щоб навчатися.",sp:"Er spielt Computer, anstatt zu lernen.",de:"Er spielt Computer, <b>anstatt</b> zu lernen.",ua:"Він грає в комп'ютер замість того, щоб навчатися.",st:8},
   {s:"Er kam herein, {{B}} dass wir es merkten.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er kam herein, ohne dass wir es merkten.",ex:"ohne dass — різні підмети (er / wir).",lbl:"Він увійшов так, що ми не помітили.",sp:"Er kam herein, ohne dass wir es merkten.",de:"Er kam herein, <b>ohne</b> dass wir es merkten.",ua:"Він увійшов так, що ми не помітили.",st:8},
-  {s:"Sie ging, {{B}} ein Wort zu sagen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ging, ohne ein Wort zu sagen.",ex:"ohne… zu — один підмет.",lbl:"Вона пішла, не сказавши ні слова.",sp:"Sie ging, ohne ein Wort zu sagen.",de:"Sie ging, <b>ohne</b> ein Wort zu sagen.",ua:"Вона пішла, не сказавши ні слова.",st:8}
+  {s:"Sie ging, {{B}} ein Wort zu sagen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ging, ohne ein Wort zu sagen.",ex:"ohne… zu — один підмет.",lbl:"Вона пішла, не сказавши ні слова.",sp:"Sie ging, ohne ein Wort zu sagen.",de:"Sie ging, <b>ohne</b> ein Wort zu sagen.",ua:"Вона пішла, не сказавши ні слова.",st:8},
+  {s:"Sie trinkt {{B}} Milch.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie trinkt keine Milch.",ex:"die Milch — жіночий рід → keine.",lbl:"Вона не п'є молока.",sp:"Sie trinkt keine Milch.",de:"Sie trinkt <b>keine</b> Milch.",ua:"Вона не п'є молока.",st:1},
+  {s:"Das ist {{B}} mein Handy.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht mein Handy.",ex:"присвійний mein → nicht.",lbl:"Це не мій телефон.",sp:"Das ist nicht mein Handy.",de:"Das ist <b>nicht</b> mein Handy.",ua:"Це не мій телефон.",st:1},
+  {s:"Ich habe {{B}} Fragen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Fragen.",ex:"множина → keine.",lbl:"У мене немає запитань.",sp:"Ich habe keine Fragen.",de:"Ich habe <b>keine</b> Fragen.",ua:"У мене немає запитань.",st:1},
+  {s:"Er hat {{B}} Computer.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Er hat keinen Computer.",ex:"der Computer — чоловічий рід, Akkusativ → keinen.",lbl:"У нього немає комп'ютера.",sp:"Er hat keinen Computer.",de:"Er hat <b>keinen</b> Computer.",ua:"У нього немає комп'ютера.",st:1},
+  {s:"Wir sind {{B}} Touristen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir sind keine Touristen.",ex:"множина без артикля → keine.",lbl:"Ми не туристи.",sp:"Wir sind keine Touristen.",de:"Wir sind <b>keine</b> Touristen.",ua:"Ми не туристи.",st:1},
+  {s:"Sie ist {{B}} Ärztin.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie ist keine Ärztin.",ex:"eine Ärztin → keine Ärztin.",lbl:"Вона не лікарка.",sp:"Sie ist keine Ärztin.",de:"Sie ist <b>keine</b> Ärztin.",ua:"Вона не лікарка.",st:1},
+  {s:"Ich verstehe das {{B}}.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich verstehe das nicht.",ex:"після nicht немає другої частини присудка → nicht у кінці.",lbl:"Я цього не розумію.",sp:"Ich verstehe das nicht.",de:"Ich verstehe das <b>nicht</b>.",ua:"Я цього не розумію.",st:2},
+  {s:"Ich kenne ihn {{B}}.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne ihn nicht.",ex:"nicht у кінці речення.",lbl:"Я його не знаю.",sp:"Ich kenne ihn nicht.",de:"Ich kenne ihn <b>nicht</b>.",ua:"Я його не знаю.",st:2},
+  {s:"Sie hat das Fenster {{B}} geöffnet.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Sie hat das Fenster nicht geöffnet.",ex:"nicht перед Partizip II geöffnet.",lbl:"Вона не відкрила вікно.",sp:"Sie hat das Fenster nicht geöffnet.",de:"Sie hat das Fenster <b>nicht</b> geöffnet.",ua:"Вона не відкрила вікно.",st:2},
+  {s:"Er ruft mich {{B}} zurück.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er ruft mich nicht zurück.",ex:"nicht перед відокремлюваною префіксою zurück.",lbl:"Він мені не передзвонює.",sp:"Er ruft mich nicht zurück.",de:"Er ruft mich <b>nicht</b> zurück.",ua:"Він мені не передзвонює.",st:2},
+  {s:"Wir wollen {{B}} warten.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Wir wollen nicht warten.",ex:"nicht перед інфінітивом warten.",lbl:"Ми не хочемо чекати.",sp:"Wir wollen nicht warten.",de:"Wir wollen <b>nicht</b> warten.",ua:"Ми не хочемо чекати.",st:2},
+  {s:"Ich schlafe {{B}} gut.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich schlafe nicht gut.",ex:"nicht перед gut (прислівник способу дії).",lbl:"Я сплю погано.",sp:"Ich schlafe nicht gut.",de:"Ich schlafe <b>nicht</b> gut.",ua:"Я сплю погано.",st:2},
+  {s:"Er hat {{B}} Freunde mehr.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er hat keine Freunde mehr.",ex:"kein … mehr (множина) → keine.",lbl:"У нього більше немає друзів.",sp:"Er hat keine Freunde mehr.",de:"Er hat <b>keine</b> Freunde mehr.",ua:"У нього більше немає друзів.",st:3},
+  {s:"Ich habe {{B}} vergessen.",o:["nichts","nicht","niemand","nie"],a:"nichts",alt:["nie","niemals"],ans:"Ich habe nichts vergessen.",ex:"nichts = нічого.",lbl:"Я нічого не забув.",sp:"Ich habe nichts vergessen.",de:"Ich habe <b>nichts</b> vergessen.",ua:"Я нічого не забув.",st:3},
+  {s:"Sie ist 30, aber sie war {{B}} in Italien.",o:["noch nie","nie mehr","nicht","nichts"],a:"noch nie",alt:["nie","niemals"],ans:"Sie ist 30, aber sie war noch nie in Italien.",ex:"noch nie = ще ніколи.",lbl:"Їй 30, але вона ще ніколи не була в Італії.",sp:"Sie ist 30, aber sie war noch nie in Italien.",de:"Sie ist 30, aber sie war <b>noch nie</b> in Italien.",ua:"Їй 30, але вона ще ніколи не була в Італії.",st:3},
+  {s:"{{B}} hat angerufen.",o:["Niemand","Nichts","Nie","Nicht"],a:"Niemand",alt:[],ans:"Niemand hat angerufen.",ex:"niemand = ніхто (підмет).",lbl:"Ніхто не дзвонив.",sp:"Niemand hat angerufen.",de:"<b>Niemand</b> hat angerufen.",ua:"Ніхто не дзвонив.",cap:true,st:3},
+  {s:"Wir fahren {{B}} in den Urlaub.",o:["nie","nichts","niemand","nirgends"],a:"nie",alt:["niemals","nicht"],ans:"Wir fahren nie in den Urlaub.",ex:"nie = ніколи.",lbl:"Ми ніколи не їздимо у відпустку.",sp:"Wir fahren nie in den Urlaub.",de:"Wir fahren <b>nie</b> in den Urlaub.",ua:"Ми ніколи не їздимо у відпустку.",st:3},
+  {s:"Ich habe mit {{B}} gesprochen.",o:["niemandem","niemanden","niemand","nichts"],a:"niemandem",alt:[],ans:"Ich habe mit niemandem gesprochen.",ex:"mit + Dativ → niemandem.",lbl:"Я ні з ким не розмовляв.",sp:"Ich habe mit niemandem gesprochen.",de:"Ich habe mit <b>niemandem</b> gesprochen.",ua:"Я ні з ким не розмовляв.",st:3},
+  {s:"Das Konzert hat {{B}} begonnen.",o:["noch nicht","nicht mehr","nie","nirgends"],a:"noch nicht",alt:["nicht"],ans:"Das Konzert hat noch nicht begonnen.",ex:"noch nicht = ще не.",lbl:"Концерт ще не почався.",sp:"Das Konzert hat noch nicht begonnen.",de:"Das Konzert hat <b>noch nicht</b> begonnen.",ua:"Концерт ще не почався.",st:3},
+  {s:"Ich muss morgen {{B}} arbeiten.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich muss morgen nicht arbeiten.",ex:"nicht müssen = не обов'язково.",lbl:"Мені завтра не треба працювати.",sp:"Ich muss morgen nicht arbeiten.",de:"Ich muss morgen <b>nicht</b> arbeiten.",ua:"Мені завтра не треба працювати.",st:4},
+  {s:"Er sagt, dass er {{B}} Geld hat.",o:["kein","nicht","keine","keinen"],a:"kein",alt:[],ans:"Er sagt, dass er kein Geld hat.",ex:"підрядне речення: das Geld → kein.",lbl:"Він каже, що в нього немає грошей.",sp:"Er sagt, dass er kein Geld hat.",de:"Er sagt, dass er <b>kein</b> Geld hat.",ua:"Він каже, що в нього немає грошей.",st:4},
+  {s:"Ich weiß, dass sie {{B}} kommen kann.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich weiß, dass sie nicht kommen kann.",ex:"підрядне речення: nicht перед інфінітивом kommen.",lbl:"Я знаю, що вона не може прийти.",sp:"Ich weiß, dass sie nicht kommen kann.",de:"Ich weiß, dass sie <b>nicht</b> kommen kann.",ua:"Я знаю, що вона не може прийти.",st:4},
+  {s:"Wir können {{B}} Entscheidung treffen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir können keine Entscheidung treffen.",ex:"Typ 1: eine Entscheidung treffen → keine.",lbl:"Ми не можемо прийняти рішення.",sp:"Wir können keine Entscheidung treffen.",de:"Wir können <b>keine</b> Entscheidung treffen.",ua:"Ми не можемо прийняти рішення.",st:4},
+  {s:"Ich möchte {{B}} Kaffee, sondern Tee.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Ich möchte keinen Kaffee, sondern Tee.",ex:"der Kaffee, Akkusativ → keinen (…, sondern Tee).",lbl:"Я хочу не каву, а чай.",sp:"Ich möchte keinen Kaffee, sondern Tee.",de:"Ich möchte <b>keinen</b> Kaffee, sondern Tee.",ua:"Я хочу не каву, а чай.",st:4},
+  {s:"Du {{B}} nicht zu warten. Ich komme gleich.",o:["brauchst","musst","darfst","kannst"],a:"brauchst",alt:[],ans:"Du brauchst nicht zu warten. Ich komme gleich.",ex:"nicht brauchen zu = nicht müssen.",lbl:"Тобі не треба чекати. Я зараз прийду.",sp:"Du brauchst nicht zu warten. Ich komme gleich.",de:"Du <b>brauchst</b> nicht zu warten. Ich komme gleich.",ua:"Тобі не треба чекати. Я зараз прийду.",st:4},
+  {s:"Sie darf {{B}} rauchen.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Sie darf nicht rauchen.",ex:"nicht dürfen = заборонено.",lbl:"Їй не можна палити.",sp:"Sie darf nicht rauchen.",de:"Sie darf <b>nicht</b> rauchen.",ua:"Їй не можна палити.",st:4},
+  {s:"Ich habe {{B}} Lust, heute auszugehen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Lust, heute auszugehen.",ex:"die Lust → keine.",lbl:"Мені не хочеться сьогодні виходити.",sp:"Ich habe keine Lust, heute auszugehen.",de:"Ich habe <b>keine</b> Lust, heute auszugehen.",ua:"Мені не хочеться сьогодні виходити.",st:4},
+  {s:"Er hat {{B}} Brüder noch Schwestern.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er hat weder Brüder noch Schwestern.",ex:"weder… noch.",lbl:"У нього немає ні братів, ні сестер.",sp:"Er hat weder Brüder noch Schwestern.",de:"Er hat <b>weder</b> Brüder noch Schwestern.",ua:"У нього немає ні братів, ні сестер.",st:5},
+  {s:"Sie möchte {{B}} Tee noch Kaffee.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Sie möchte weder Tee noch Kaffee.",ex:"weder… noch.",lbl:"Вона не хоче ні чаю, ні кави.",sp:"Sie möchte weder Tee noch Kaffee.",de:"Sie möchte <b>weder</b> Tee noch Kaffee.",ua:"Вона не хоче ні чаю, ні кави.",st:5},
+  {s:"Ich habe {{B}} gefrühstückt noch zu Mittag gegessen.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Ich habe weder gefrühstückt noch zu Mittag gegessen.",ex:"weder… noch з Partizip II.",lbl:"Я не снідав і не обідав.",sp:"Ich habe weder gefrühstückt noch zu Mittag gegessen.",de:"Ich habe <b>weder</b> gefrühstückt noch zu Mittag gegessen.",ua:"Я не снідав і не обідав.",st:5},
+  {s:"Ich habe weder Hunger {{B}} Durst.",o:["noch","oder","und","sondern"],a:"noch",alt:[],ans:"Ich habe weder Hunger noch Durst.",ex:"друга частина пари — noch.",lbl:"Я не голодний і не відчуваю спраги.",sp:"Ich habe weder Hunger noch Durst.",de:"Ich habe weder Hunger <b>noch</b> Durst.",ua:"Я не голодний і не відчуваю спраги.",st:5},
+  {s:"Er ist nicht faul, {{B}} müde.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Er ist nicht faul, sondern müde.",ex:"після заперечення — sondern.",lbl:"Він не лінивий, а втомлений.",sp:"Er ist nicht faul, sondern müde.",de:"Er ist nicht faul, <b>sondern</b> müde.",ua:"Він не лінивий, а втомлений.",st:5},
+  {s:"{{B}} ich noch mein Bruder kennen ihn.",o:["Weder","Nicht","Kein","Nie"],a:"Weder",alt:[],ans:"Weder ich noch mein Bruder kennen ihn.",ex:"weder… noch на початку речення.",lbl:"Ні я, ні мій брат його не знаємо.",sp:"Weder ich noch mein Bruder kennen ihn.",de:"<b>Weder</b> ich noch mein Bruder kennen ihn.",ua:"Ні я, ні мій брат його не знаємо.",cap:true,st:5},
+  {s:"Das Hotel ist {{B}} nur schön, sondern auch günstig.",o:["nicht","kein","weder","nie"],a:"nicht",alt:[],ans:"Das Hotel ist nicht nur schön, sondern auch günstig.",ex:"nicht nur…, sondern auch.",lbl:"Готель не лише гарний, а й недорогий.",sp:"Das Hotel ist nicht nur schön, sondern auch günstig.",de:"Das Hotel ist <b>nicht</b> nur schön, sondern auch günstig.",ua:"Готель не лише гарний, а й недорогий.",st:5},
+  {s:"Er will {{B}} bleiben noch gehen.",o:["weder","nicht","kein","nie"],a:"weder",alt:[],ans:"Er will weder bleiben noch gehen.",ex:"weder… noch з інфінітивами.",lbl:"Він не хоче ні залишатися, ні йти.",sp:"Er will weder bleiben noch gehen.",de:"Er will <b>weder</b> bleiben noch gehen.",ua:"Він не хоче ні залишатися, ні йти.",st:5},
+  {s:"Ich fahre nicht nach Berlin, {{B}} nach München.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Ich fahre nicht nach Berlin, sondern nach München.",ex:"nicht…, sondern.",lbl:"Я їду не в Берлін, а в Мюнхен.",sp:"Ich fahre nicht nach Berlin, sondern nach München.",de:"Ich fahre nicht nach Berlin, <b>sondern</b> nach München.",ua:"Я їду не в Берлін, а в Мюнхен.",st:5},
+  {s:"Er leistet {{B}} Widerstand.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Er leistet keinen Widerstand.",ex:"Typ 1: der Widerstand → keinen.",lbl:"Він не чинить опору.",sp:"Er leistet keinen Widerstand.",de:"Er leistet <b>keinen</b> Widerstand.",ua:"Він не чинить опору.",st:6},
+  {s:"Ich treffe {{B}} Vorbereitungen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich treffe keine Vorbereitungen.",ex:"Typ 1: Vorbereitungen treffen → keine.",lbl:"Я не роблю жодних приготувань.",sp:"Ich treffe keine Vorbereitungen.",de:"Ich treffe <b>keine</b> Vorbereitungen.",ua:"Я не роблю жодних приготувань.",st:6},
+  {s:"Wir ziehen {{B}} Konsequenzen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir ziehen keine Konsequenzen.",ex:"Typ 1: Konsequenzen ziehen → keine.",lbl:"Ми не робимо жодних висновків.",sp:"Wir ziehen keine Konsequenzen.",de:"Wir ziehen <b>keine</b> Konsequenzen.",ua:"Ми не робимо жодних висновків.",st:6},
+  {s:"Das kommt {{B}} in Betracht.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das kommt nicht in Betracht.",ex:"Typ 2: nicht in Betracht kommen.",lbl:"Це не розглядається.",sp:"Das kommt nicht in Betracht.",de:"Das kommt <b>nicht</b> in Betracht.",ua:"Це не розглядається.",st:6},
+  {s:"Das Thema steht {{B}} auf der Tagesordnung.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das Thema steht nicht auf der Tagesordnung.",ex:"Typ 2: nicht перед прийменником auf.",lbl:"Цієї теми немає в порядку денному.",sp:"Das Thema steht nicht auf der Tagesordnung.",de:"Das Thema steht <b>nicht</b> auf der Tagesordnung.",ua:"Цієї теми немає в порядку денному.",st:6},
+  {s:"Sie stellt {{B}} Antrag.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Sie stellt keinen Antrag.",ex:"Typ 1: der Antrag → keinen Antrag stellen.",lbl:"Вона не подає заяви.",sp:"Sie stellt keinen Antrag.",de:"Sie stellt <b>keinen</b> Antrag.",ua:"Вона не подає заяви.",st:6},
+  {s:"Wir führen {{B}} Verhandlungen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Wir führen keine Verhandlungen.",ex:"Typ 1: Verhandlungen führen → keine.",lbl:"Ми не ведемо переговорів.",sp:"Wir führen keine Verhandlungen.",de:"Wir führen <b>keine</b> Verhandlungen.",ua:"Ми не ведемо переговорів.",st:6},
+  {s:"Ich bringe das {{B}} zur Sprache.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich bringe das nicht zur Sprache.",ex:"Typ 2: nicht zur Sprache bringen.",lbl:"Я не порушую цього питання.",sp:"Ich bringe das nicht zur Sprache.",de:"Ich bringe das <b>nicht</b> zur Sprache.",ua:"Я не порушую цього питання.",st:6},
+  {s:"Er setzt sich {{B}} unter Druck.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Er setzt sich nicht unter Druck.",ex:"Typ 2: nicht перед прийменником unter.",lbl:"Він не тисне на себе.",sp:"Er setzt sich nicht unter Druck.",de:"Er setzt sich <b>nicht</b> unter Druck.",ua:"Він не тисне на себе.",st:6},
+  {s:"Er ist {{B}} (nicht ehrlich).",o:["unehrlich","inehrlich","ilehrlich","disehrlich"],a:"unehrlich",alt:[],ans:"Er ist unehrlich.",ex:"unehrlich = nicht ehrlich.",lbl:"Він нечесний.",sp:"Er ist unehrlich.",de:"Er ist <b>unehrlich</b>.",ua:"Він нечесний.",st:7},
+  {s:"Das ist {{B}} (nicht möglich).",o:["unmöglich","inmöglich","ilmöglich","dismöglich"],a:"unmöglich",alt:[],ans:"Das ist unmöglich.",ex:"unmöglich = nicht möglich.",lbl:"Це неможливо.",sp:"Das ist unmöglich.",de:"Das ist <b>unmöglich</b>.",ua:"Це неможливо.",st:7},
+  {s:"Der Plan ist {{B}} (nicht realistisch).",o:["unrealistisch","irrealistisch","inrealistisch","disrealistisch"],a:"unrealistisch",alt:[],ans:"Der Plan ist unrealistisch.",ex:"unrealistisch = nicht realistisch.",lbl:"План нереалістичний.",sp:"Der Plan ist unrealistisch.",de:"Der Plan ist <b>unrealistisch</b>.",ua:"План нереалістичний.",st:7},
+  {s:"Das Kind ist {{B}} (ohne Hilfe).",o:["hilflos","hilfreich","hilffrei","hilfleer"],a:"hilflos",alt:[],ans:"Das Kind ist hilflos.",ex:"hilflos = ohne Hilfe.",lbl:"Дитина безпорадна.",sp:"Das Kind ist hilflos.",de:"Das Kind ist <b>hilflos</b>.",ua:"Дитина безпорадна.",st:7},
+  {s:"Das Getränk ist {{B}} (ohne Alkohol).",o:["alkoholfrei","alkoholleer","alkohollos","alkoholun"],a:"alkoholfrei",alt:[],ans:"Das Getränk ist alkoholfrei.",ex:"alkoholfrei = frei von Alkohol.",lbl:"Напій безалкогольний.",sp:"Das Getränk ist alkoholfrei.",de:"Das Getränk ist <b>alkoholfrei</b>.",ua:"Напій безалкогольний.",st:7},
+  {s:"Man bezahlt hier {{B}} (ohne Bargeld).",o:["bargeldlos","bargeldfrei","bargeldleer","bargeldun"],a:"bargeldlos",alt:[],ans:"Man bezahlt hier bargeldlos.",ex:"bargeldlos = ohne Bargeld.",lbl:"Тут розраховуються безготівково.",sp:"Man bezahlt hier bargeldlos.",de:"Man bezahlt hier <b>bargeldlos</b>.",ua:"Тут розраховуються безготівково.",st:7},
+  {s:"Der Raum ist {{B}} (ohne Luft).",o:["luftleer","luftlos","luftfrei","unluftig"],a:"luftleer",alt:[],ans:"Der Raum ist luftleer.",ex:"luftleer = leer von Luft.",lbl:"Простір безповітряний.",sp:"Der Raum ist luftleer.",de:"Der Raum ist <b>luftleer</b>.",ua:"Простір безповітряний.",st:7},
+  {s:"Mein Opa raucht nicht. Er ist {{B}}.",o:["Nichtraucher","Unraucher","Nonraucher","Keinraucher"],a:"Nichtraucher",alt:[],ans:"Mein Opa raucht nicht. Er ist Nichtraucher.",ex:"Nicht- + іменник: der Nichtraucher.",lbl:"Мій дід не палить. Він некурець.",sp:"Mein Opa raucht nicht. Er ist Nichtraucher.",de:"Mein Opa raucht nicht. Er ist <b>Nichtraucher</b>.",ua:"Мій дід не палить. Він некурець.",st:7},
+  {s:"Die Lage ist {{B}} (ohne Hoffnung).",o:["hoffnungslos","hoffnungsfrei","hoffnungsleer","unhoffnungs"],a:"hoffnungslos",alt:[],ans:"Die Lage ist hoffnungslos.",ex:"hoffnungslos = ohne Hoffnung.",lbl:"Ситуація безнадійна.",sp:"Die Lage ist hoffnungslos.",de:"Die Lage ist <b>hoffnungslos</b>.",ua:"Ситуація безнадійна.",st:7},
+  {s:"Sie las das Buch, {{B}} es zu verstehen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie las das Buch, ohne es zu verstehen.",ex:"ohne… zu — один підмет.",lbl:"Вона читала книжку, не розуміючи її.",sp:"Sie las das Buch, ohne es zu verstehen.",de:"Sie las das Buch, <b>ohne</b> es zu verstehen.",ua:"Вона читала книжку, не розуміючи її.",st:8},
+  {s:"Er schläft, {{B}} Hausaufgaben zu machen.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:["statt"],ans:"Er schläft, anstatt Hausaufgaben zu machen.",ex:"anstatt… zu — замість дії.",lbl:"Він спить замість того, щоб робити домашнє завдання.",sp:"Er schläft, anstatt Hausaufgaben zu machen.",de:"Er schläft, <b>anstatt</b> Hausaufgaben zu machen.",ua:"Він спить замість того, щоб робити домашнє завдання.",st:8},
+  {s:"Er verließ den Raum, {{B}} dass jemand etwas sagte.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er verließ den Raum, ohne dass jemand etwas sagte.",ex:"ohne dass — різні підмети.",lbl:"Він вийшов із кімнати, і ніхто нічого не сказав.",sp:"Er verließ den Raum, ohne dass jemand etwas sagte.",de:"Er verließ den Raum, <b>ohne</b> dass jemand etwas sagte.",ua:"Він вийшов із кімнати, і ніхто нічого не сказав.",st:8},
+  {s:"Ich kann nicht leben, {{B}} Musik zu hören.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Ich kann nicht leben, ohne Musik zu hören.",ex:"ohne… zu — один підмет.",lbl:"Я не можу жити, не слухаючи музики.",sp:"Ich kann nicht leben, ohne Musik zu hören.",de:"Ich kann nicht leben, <b>ohne</b> Musik zu hören.",ua:"Я не можу жити, не слухаючи музики.",st:8},
+  {s:"Er hat den Test bestanden, {{B}} viel zu lernen.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Er hat den Test bestanden, ohne viel zu lernen.",ex:"ohne… zu — один підмет.",lbl:"Він склав тест, не навчаючись багато.",sp:"Er hat den Test bestanden, ohne viel zu lernen.",de:"Er hat den Test bestanden, <b>ohne</b> viel zu lernen.",ua:"Він склав тест, не навчаючись багато.",st:8},
+  {s:"{{B}} dass er es wollte, wurde er Chef.",o:["Ohne","Anstatt","Nicht","Kein"],a:"Ohne",alt:[],ans:"Ohne dass er es wollte, wurde er Chef.",ex:"ohne dass; у підрядному можливе модальне дієслово (wollte).",lbl:"Хоча він цього не хотів, він став начальником.",sp:"Ohne dass er es wollte, wurde er Chef.",de:"<b>Ohne</b> dass er es wollte, wurde er Chef.",ua:"Хоча він цього не хотів, він став начальником.",cap:true,st:8},
+  {s:"Sie ging zur Arbeit, {{B}} zu frühstücken.",o:["ohne","anstatt","nicht","kein"],a:"ohne",alt:[],ans:"Sie ging zur Arbeit, ohne zu frühstücken.",ex:"ohne… zu — один підмет.",lbl:"Вона пішла на роботу, не поснідавши.",sp:"Sie ging zur Arbeit, ohne zu frühstücken.",de:"Sie ging zur Arbeit, <b>ohne</b> zu frühstücken.",ua:"Вона пішла на роботу, не поснідавши.",st:8},
+  {s:"{{B}} sich zu entschuldigen, legte er auf.",o:["Ohne","Anstatt","Nicht","Kein"],a:"Ohne",alt:[],ans:"Ohne sich zu entschuldigen, legte er auf.",ex:"ohne… zu зі зворотним дієсловом: ohne sich zu entschuldigen.",lbl:"Не вибачившись, він поклав слухавку.",sp:"Ohne sich zu entschuldigen, legte er auf.",de:"<b>Ohne</b> sich zu entschuldigen, legte er auf.",ua:"Не вибачившись, він поклав слухавку.",cap:true,st:8},
+  {s:"Wir gehen spazieren, {{B}} zu Hause zu bleiben.",o:["anstatt","ohne","nicht","kein"],a:"anstatt",alt:["statt"],ans:"Wir gehen spazieren, anstatt zu Hause zu bleiben.",ex:"anstatt… zu — замість дії.",lbl:"Ми йдемо гуляти замість того, щоб сидіти вдома.",sp:"Wir gehen spazieren, anstatt zu Hause zu bleiben.",de:"Wir gehen spazieren, <b>anstatt</b> zu Hause zu bleiben.",ua:"Ми йдемо гуляти замість того, щоб сидіти вдома.",st:8}
 ],
 ch: [
-  {s:"Ich habe {{B}} Zeit.",o:["keine","nicht"],a:"keine",alt:[],ans:"Ich habe keine Zeit.",ex:"іменник з nicht артиклем → kein.",lbl:"У мене немає часу.",sp:"Ich habe keine Zeit.",de:"Ich habe <b>keine</b> Zeit.",ua:"У мене немає часу.",st:1},
+  {s:"Ich habe {{B}} Zeit.",o:["keine","nicht"],a:"keine",alt:[],ans:"Ich habe keine Zeit.",ex:"іменник з ein / без артикля → kein.",lbl:"У мене немає часу.",sp:"Ich habe keine Zeit.",de:"Ich habe <b>keine</b> Zeit.",ua:"У мене немає часу.",st:1},
   {s:"Ich bin {{B}} verheiratet.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich bin nicht verheiratet.",ex:"стан → nicht.",lbl:"Я не одружений.",sp:"Ich bin nicht verheiratet.",de:"Ich bin <b>nicht</b> verheiratet.",ua:"Я не одружений.",st:1},
   {s:"Er hat {{B}} Auto.",o:["kein","nicht"],a:"kein",alt:[],ans:"Er hat kein Auto.",ex:"das Auto → kein.",lbl:"У нього немає машини.",sp:"Er hat kein Auto.",de:"Er hat <b>kein</b> Auto.",ua:"У нього немає машини.",st:1},
   {s:"Ich wohne {{B}} in Berlin.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich wohne nicht in Berlin.",ex:"обставина місця → nicht.",lbl:"Я не живу в Берліні.",sp:"Ich wohne nicht in Berlin.",de:"Ich wohne <b>nicht</b> in Berlin.",ua:"Я не живу в Берліні.",st:1},
@@ -625,7 +814,7 @@ ch: [
   {s:"Ich rufe dich {{B}} an.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich rufe dich nicht an.",ex:"nicht перед відокремлюваною префіксою.",lbl:"Я тобі не телефоную.",sp:"Ich rufe dich nicht an.",de:"Ich rufe dich <b>nicht</b> an.",ua:"Я тобі не телефоную.",st:2},
   {s:"Ich finde den Film {{B}} gut.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich finde den Film nicht gut.",ex:"nicht перед прикметником.",lbl:"Я не вважаю фільм хорошим.",sp:"Ich finde den Film nicht gut.",de:"Ich finde den Film <b>nicht</b> gut.",ua:"Я не вважаю фільм хорошим.",st:2},
   {s:"Wir gehen {{B}} ins Kino.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Wir gehen nicht ins Kino.",ex:"nicht перед обставиною напрямку.",lbl:"Ми не йдемо в кіно.",sp:"Wir gehen nicht ins Kino.",de:"Wir gehen <b>nicht</b> ins Kino.",ua:"Ми не йдемо в кіно.",st:2},
-  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern.",lbl:"Я неохоче ходжу до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я неохоче ходжу до школи.",st:2},
+  {s:"Ich gehe {{B}} gern zur Schule.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich gehe nicht gern zur Schule.",ex:"nicht перед gern.",lbl:"Я не люблю ходити до школи.",sp:"Ich gehe nicht gern zur Schule.",de:"Ich gehe <b>nicht</b> gern zur Schule.",ua:"Я не люблю ходити до школи.",st:2},
 
   {s:"Ich esse {{B}} Fleisch.",o:["nie","nicht"],a:"nie",alt:[],ans:"Ich esse nie Fleisch.",ex:"nie = ніколи.",lbl:"Я ніколи не їм м'яса.",sp:"Ich esse nie Fleisch.",de:"Ich esse <b>nie</b> Fleisch.",ua:"Я ніколи не їм м'яса.",st:3},
   {s:"Ich habe {{B}} gesagt.",o:["nichts","nicht"],a:"nichts",alt:[],ans:"Ich habe nichts gesagt.",ex:"nichts = нічого.",lbl:"Я нічого не сказав.",sp:"Ich habe nichts gesagt.",de:"Ich habe <b>nichts</b> gesagt.",ua:"Я нічого не сказав.",st:3},
@@ -672,22 +861,235 @@ ch: [
   {s:"Er spielt Fußball. Er studiert nicht. = Er spielt Fußball, {{B}} zu studieren.",o:["anstatt","ohne"],a:"anstatt",alt:[],ans:"Er spielt Fußball, anstatt zu studieren.",ex:"anstatt… zu — замість дії.",lbl:"Він грає у футбол замість того, щоб навчатися.",sp:"Er spielt Fußball, anstatt zu studieren.",de:"Er spielt Fußball, <b>anstatt</b> zu studieren.",ua:"Він грає у футбол замість того, щоб навчатися.",st:8},
   {s:"Sie kam herein, ohne anzuklopfen. = Sie kam herein, {{B}} anzuklopfen.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Sie kam herein, ohne anzuklopfen.",ex:"ohne… zu — дія не відбувається.",lbl:"Вона увійшла, не постукавши.",sp:"Sie kam herein, ohne anzuklopfen.",de:"Sie kam herein, <b>ohne</b> anzuklopfen.",ua:"Вона увійшла, не постукавши.",st:8},
   {s:"Sie schaut fern. Sie lernt nicht. = Sie schaut fern, {{B}} zu lernen.",o:["anstatt","ohne"],a:"anstatt",alt:[],ans:"Sie schaut fern, anstatt zu lernen.",ex:"anstatt… zu — замість дії.",lbl:"Вона дивиться телевізор замість того, щоб навчатися.",sp:"Sie schaut fern, anstatt zu lernen.",de:"Sie schaut fern, <b>anstatt</b> zu lernen.",ua:"Вона дивиться телевізор замість того, щоб навчатися.",st:8},
-  {s:"Er kam herein, {{B}} dass wir es merkten.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Er kam herein, ohne dass wir es merkten.",ex:"ohne dass — різні підмети.",lbl:"Він увійшов так, що ми не помітили.",sp:"Er kam herein, ohne dass wir es merkten.",de:"Er kam herein, <b>ohne</b> dass wir es merkten.",ua:"Він увійшов так, що ми не помітили.",st:8}
+  {s:"Er kam herein, {{B}} dass wir es merkten.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Er kam herein, ohne dass wir es merkten.",ex:"ohne dass — різні підмети.",lbl:"Він увійшов так, що ми не помітили.",sp:"Er kam herein, ohne dass wir es merkten.",de:"Er kam herein, <b>ohne</b> dass wir es merkten.",ua:"Він увійшов так, що ми не помітили.",st:8},
+  {s:"Wir haben {{B}} Kinder.",o:["keine","nicht"],a:"keine",alt:[],ans:"Wir haben keine Kinder.",ex:"множина → keine.",lbl:"У нас немає дітей.",sp:"Wir haben keine Kinder.",de:"Wir haben <b>keine</b> Kinder.",ua:"У нас немає дітей.",st:1},
+  {s:"Das ist {{B}} mein Auto.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das ist nicht mein Auto.",ex:"присвійний mein → nicht.",lbl:"Це не моя машина.",sp:"Das ist nicht mein Auto.",de:"Das ist <b>nicht</b> mein Auto.",ua:"Це не моя машина.",st:1},
+  {s:"Ich brauche {{B}} Regenschirm.",o:["keinen","nicht"],a:"keinen",alt:[],ans:"Ich brauche keinen Regenschirm.",ex:"der Regenschirm → keinen.",lbl:"Мені не потрібна парасолька.",sp:"Ich brauche keinen Regenschirm.",de:"Ich brauche <b>keinen</b> Regenschirm.",ua:"Мені не потрібна парасолька.",st:1},
+  {s:"Sie ist {{B}} Lehrerin.",o:["keine","nicht"],a:"keine",alt:[],ans:"Sie ist keine Lehrerin.",ex:"eine Lehrerin → keine.",lbl:"Вона не вчителька.",sp:"Sie ist keine Lehrerin.",de:"Sie ist <b>keine</b> Lehrerin.",ua:"Вона не вчителька.",st:1},
+  {s:"Ich mag den Kaffee {{B}}.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich mag den Kaffee nicht.",ex:"означений артикль → nicht.",lbl:"Я не люблю цю каву.",sp:"Ich mag den Kaffee nicht.",de:"Ich mag den Kaffee <b>nicht</b>.",ua:"Я не люблю цю каву.",st:1},
+  {s:"Ich verstehe das {{B}}.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich verstehe das nicht.",ex:"nicht у кінці речення.",lbl:"Я цього не розумію.",sp:"Ich verstehe das nicht.",de:"Ich verstehe das <b>nicht</b>.",ua:"Я цього не розумію.",st:2},
+  {s:"Er hat das Auto {{B}} gekauft.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Er hat das Auto nicht gekauft.",ex:"nicht перед Partizip II.",lbl:"Він не купив машину.",sp:"Er hat das Auto nicht gekauft.",de:"Er hat das Auto <b>nicht</b> gekauft.",ua:"Він не купив машину.",st:2},
+  {s:"Ich lade dich {{B}} ein.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich lade dich nicht ein.",ex:"nicht перед відокремлюваною префіксою ein.",lbl:"Я тебе не запрошую.",sp:"Ich lade dich nicht ein.",de:"Ich lade dich <b>nicht</b> ein.",ua:"Я тебе не запрошую.",st:2},
+  {s:"Das Essen schmeckt mir {{B}}.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das Essen schmeckt mir nicht.",ex:"nicht у кінці речення.",lbl:"Їжа мені не смакує.",sp:"Das Essen schmeckt mir nicht.",de:"Das Essen schmeckt mir <b>nicht</b>.",ua:"Їжа мені не смакує.",st:2},
+  {s:"Er kommt {{B}} pünktlich.",o:["nie","nichts"],a:"nie",alt:[],ans:"Er kommt nie pünktlich.",ex:"nie = ніколи.",lbl:"Він ніколи не приходить вчасно.",sp:"Er kommt nie pünktlich.",de:"Er kommt <b>nie</b> pünktlich.",ua:"Він ніколи не приходить вчасно.",st:3},
+  {s:"Ich habe {{B}} Neues gehört.",o:["nichts","niemand"],a:"nichts",alt:[],ans:"Ich habe nichts Neues gehört.",ex:"nichts = нічого.",lbl:"Я не чув нічого нового.",sp:"Ich habe nichts Neues gehört.",de:"Ich habe <b>nichts</b> Neues gehört.",ua:"Я не чув нічого нового.",st:3},
+  {s:"Ich weiß, dass er {{B}} Zeit hat.",o:["keine","nicht"],a:"keine",alt:[],ans:"Ich weiß, dass er keine Zeit hat.",ex:"підрядне: die Zeit → keine.",lbl:"Я знаю, що в нього немає часу.",sp:"Ich weiß, dass er keine Zeit hat.",de:"Ich weiß, dass er <b>keine</b> Zeit hat.",ua:"Я знаю, що в нього немає часу.",st:4},
+  {s:"Du {{B}} hier nicht rauchen. Es ist verboten.",o:["darfst","musst"],a:"darfst",alt:[],ans:"Du darfst hier nicht rauchen. Es ist verboten.",ex:"nicht dürfen = заборонено.",lbl:"Тут не можна палити. Це заборонено.",sp:"Du darfst hier nicht rauchen. Es ist verboten.",de:"Du <b>darfst</b> hier nicht rauchen. Es ist verboten.",ua:"Тут не можна палити. Це заборонено.",st:4},
+  {s:"Er hat weder Zeit {{B}} Geld.",o:["noch","und"],a:"noch",alt:[],ans:"Er hat weder Zeit noch Geld.",ex:"weder… noch.",lbl:"У нього немає ні часу, ні грошей.",sp:"Er hat weder Zeit noch Geld.",de:"Er hat weder Zeit <b>noch</b> Geld.",ua:"У нього немає ні часу, ні грошей.",st:5},
+  {s:"Sie ist nicht müde, {{B}} traurig.",o:["sondern","aber"],a:"sondern",alt:[],ans:"Sie ist nicht müde, sondern traurig.",ex:"nicht…, sondern.",lbl:"Вона не втомлена, а сумна.",sp:"Sie ist nicht müde, sondern traurig.",de:"Sie ist nicht müde, <b>sondern</b> traurig.",ua:"Вона не втомлена, а сумна.",st:5},
+  {s:"Ich trinke {{B}} Bier noch Wein.",o:["weder","kein"],a:"weder",alt:[],ans:"Ich trinke weder Bier noch Wein.",ex:"weder… noch.",lbl:"Я не п'ю ні пива, ні вина.",sp:"Ich trinke weder Bier noch Wein.",de:"Ich trinke <b>weder</b> Bier noch Wein.",ua:"Я не п'ю ні пива, ні вина.",st:5},
+  {s:"Das war {{B}} nur teuer, sondern auch schlecht.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das war nicht nur teuer, sondern auch schlecht.",ex:"nicht nur…, sondern auch.",lbl:"Це було не лише дорого, а й погано.",sp:"Das war nicht nur teuer, sondern auch schlecht.",de:"Das war <b>nicht</b> nur teuer, sondern auch schlecht.",ua:"Це було не лише дорого, а й погано.",st:5},
+  {s:"Weder er {{B}} sie hat angerufen.",o:["noch","und"],a:"noch",alt:[],ans:"Weder er noch sie hat angerufen.",ex:"weder… noch.",lbl:"Ні він, ні вона не дзвонили.",sp:"Weder er noch sie hat angerufen.",de:"Weder er <b>noch</b> sie hat angerufen.",ua:"Ні він, ні вона не дзвонили.",st:5},
+  {s:"Er trifft {{B}} Entscheidung.",o:["keine","nicht"],a:"keine",alt:[],ans:"Er trifft keine Entscheidung.",ex:"Typ 1: eine Entscheidung treffen → keine.",lbl:"Він не приймає рішення.",sp:"Er trifft keine Entscheidung.",de:"Er trifft <b>keine</b> Entscheidung.",ua:"Він не приймає рішення.",st:6},
+  {s:"Das kommt {{B}} in Betracht.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das kommt nicht in Betracht.",ex:"Typ 2: nicht in Betracht kommen.",lbl:"Це не розглядається.",sp:"Das kommt nicht in Betracht.",de:"Das kommt <b>nicht</b> in Betracht.",ua:"Це не розглядається.",st:6},
+  {s:"Wir leisten {{B}} Hilfe.",o:["keine","nicht"],a:"keine",alt:[],ans:"Wir leisten keine Hilfe.",ex:"Typ 1: Hilfe leisten → keine.",lbl:"Ми не надаємо допомоги.",sp:"Wir leisten keine Hilfe.",de:"Wir leisten <b>keine</b> Hilfe.",ua:"Ми не надаємо допомоги.",st:6},
+  {s:"Er steht {{B}} unter Druck.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Er steht nicht unter Druck.",ex:"Typ 2: nicht перед прийменником.",lbl:"Він не перебуває під тиском.",sp:"Er steht nicht unter Druck.",de:"Er steht <b>nicht</b> unter Druck.",ua:"Він не перебуває під тиском.",st:6},
+  {s:"Sie stellt {{B}} Antrag.",o:["keinen","nicht"],a:"keinen",alt:[],ans:"Sie stellt keinen Antrag.",ex:"Typ 1: der Antrag → keinen.",lbl:"Вона не подає заяви.",sp:"Sie stellt keinen Antrag.",de:"Sie stellt <b>keinen</b> Antrag.",ua:"Вона не подає заяви.",st:6},
+  {s:"nicht logisch = {{B}}",o:["illogisch","unlogisch"],a:"illogisch",alt:[],ans:"illogisch",ex:"illogisch — in- перед l стає il-.",lbl:"нелогічний",sp:"illogisch",de:"<b>illogisch</b>",ua:"нелогічний",st:7},
+  {s:"nicht real = {{B}}",o:["irreal","inreal"],a:"irreal",alt:[],ans:"irreal",ex:"irreal — in- перед r стає ir-.",lbl:"нереальний",sp:"irreal",de:"<b>irreal</b>",ua:"нереальний",st:7},
+  {s:"ohne Hilfe = {{B}}",o:["hilflos","hilffrei"],a:"hilflos",alt:[],ans:"hilflos",ex:"hilflos = ohne Hilfe.",lbl:"безпорадний",sp:"hilflos",de:"<b>hilflos</b>",ua:"безпорадний",st:7},
+  {s:"ohne Alkohol = {{B}}",o:["alkoholfrei","alkohollos"],a:"alkoholfrei",alt:[],ans:"alkoholfrei",ex:"alkoholfrei = frei von Alkohol.",lbl:"безалкогольний",sp:"alkoholfrei",de:"<b>alkoholfrei</b>",ua:"безалкогольний",st:7},
+  {s:"nicht ehrlich = {{B}}",o:["unehrlich","inehrlich"],a:"unehrlich",alt:[],ans:"unehrlich",ex:"unehrlich = nicht ehrlich.",lbl:"нечесний",sp:"unehrlich",de:"<b>unehrlich</b>",ua:"нечесний",st:7},
+  {s:"Sie kam, {{B}} dass wir sie eingeladen hatten.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Sie kam, ohne dass wir sie eingeladen hatten.",ex:"ohne dass — різні підмети.",lbl:"Вона прийшла, хоча ми її не запрошували.",sp:"Sie kam, ohne dass wir sie eingeladen hatten.",de:"Sie kam, <b>ohne</b> dass wir sie eingeladen hatten.",ua:"Вона прийшла, хоча ми її не запрошували.",st:8},
+  {s:"Er surft im Internet, {{B}} zu arbeiten.",o:["anstatt","ohne"],a:"anstatt",alt:["statt"],ans:"Er surft im Internet, anstatt zu arbeiten.",ex:"anstatt… zu — замість дії.",lbl:"Він сидить в інтернеті замість того, щоб працювати.",sp:"Er surft im Internet, anstatt zu arbeiten.",de:"Er surft im Internet, <b>anstatt</b> zu arbeiten.",ua:"Він сидить в інтернеті замість того, щоб працювати.",st:8},
+  {s:"Sie fuhr los, {{B}} sich anzuschnallen.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Sie fuhr los, ohne sich anzuschnallen.",ex:"ohne… zu — один підмет.",lbl:"Вона поїхала, не пристебнувшись.",sp:"Sie fuhr los, ohne sich anzuschnallen.",de:"Sie fuhr los, <b>ohne</b> sich anzuschnallen.",ua:"Вона поїхала, не пристебнувшись.",st:8},
+  {s:"Er zahlt, {{B}} die Rechnung zu prüfen.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Er zahlt, ohne die Rechnung zu prüfen.",ex:"ohne… zu — один підмет.",lbl:"Він платить, не перевіривши рахунок.",sp:"Er zahlt, ohne die Rechnung zu prüfen.",de:"Er zahlt, <b>ohne</b> die Rechnung zu prüfen.",ua:"Він платить, не перевіривши рахунок.",st:8},
+  {s:"Sie liest, {{B}} zu schlafen.",o:["anstatt","ohne"],a:"anstatt",alt:["statt"],ans:"Sie liest, anstatt zu schlafen.",ex:"anstatt… zu — замість дії.",lbl:"Вона читає замість того, щоб спати.",sp:"Sie liest, anstatt zu schlafen.",de:"Sie liest, <b>anstatt</b> zu schlafen.",ua:"Вона читає замість того, щоб спати.",st:8}
 ]
 };
 
 const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); return { t: t.replace(/_/g, " "), r }; });
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
-const STAGES = [
- {n:1, t:"kein чи nicht? Основи", p:"<b>kein</b> заперечує іменник з неозначеним артиклем або без артикля. Він відмінюється: <b>kein</b> (чол./сер. Nom./Akk.), <b>keine</b> (жін. / мн.), <b>keinen</b> (чол. Akk.), <b>keinem</b> (чол./сер. Dat.), <b>keiner</b> (жін. Dat.), <b>keinen</b> (мн. Dat.). <b>nicht</b> заперечує все інше: дію, обставину, прикметник, іменник з означеним артиклем або присвійним.", ex:[["Ich|nom habe|v keine|neg Zeit|n","У мене немає часу. (die Zeit → keine)"],["Ich|nom bin|v nicht|neg verheiratet|adj","Я не одружений. (стан → nicht)"],["Ich|nom lese|v nicht|neg das|art Buch|n","Я читаю не книжку. (означений артикль → nicht)"]], tip:"Якщо іменник має ein / eine або не має артикля — майже завжди kein. Якщо der / die / das або присвійний — nicht." },
- {n:2, t:"Позиція nicht у реченні", p:"При запереченні всього речення <b>nicht</b> стоїть якомога далі вправо, але <b>перед</b> другою частиною присудка (Infinitiv, Partizip II, trennbare Präfix, Modalverb im Nebensatz), а також перед прислівниками способу дії (gern, pünktlich, gut), прийменниковим додатком і обставиною місця. Порядок: <em>Subjekt – Verb 1 – (Dativ) – (Akkusativ) – temporal – kausal – <b>nicht</b> – modal – lokal – Verb 2</em>.", ex:[["Ich|nom kann|v heute|adv nicht|neg kommen|v2","Я не можу сьогодні прийти."],["Ich|nom habe|v das|art Buch|n nicht|neg gelesen|p2","Я не читав книжку."],["Ich|nom gehe|v nicht|neg gern|adv zur Schule|adv","Я неохоче ходжу до школи."]], tip:"nicht — правіше за все, але перед інфінітивом / Partizip II / gern / обставиною місця." },
- {n:3, t:"Заперечні слова", p:"<b>nie / niemals</b> = ніколи; <b>nichts</b> = нічого; <b>niemand / keiner</b> = ніхто (в Akk. — <em>niemanden</em>, в Dat. — <em>niemandem</em>); <b>nirgends / nirgendwo</b> = ніде. Часові відтінки: <b>noch kein …</b> / <b>noch nicht</b> = ще не; <b>nicht mehr</b> / <b>kein … mehr</b> = більше не. <b>Подвійного заперечення немає</b> (окрім weder…noch): <s>Ich habe nichts nicht gesehen</s> → <b>Ich habe nichts gesehen</b>.", ex:[["Ich|nom esse|v nie|neg Fleisch|n","Я ніколи не їм м'яса."],["Ich|nom habe|v nichts|neg gesagt|p2","Я нічого не сказав."],["Ich|nom habe|v noch keine|neg Karte|n","У мене ще немає квитка."]], tip:"nie, nichts, niemand, nirgends — окремі слова; noch kein / nicht mehr — часові відтінки. Подвійного заперечення немає." },
- {n:4, t:"Мікс: складні випадки", p:"У Perfekt <b>nicht</b> стоїть перед Partizip II. З модальними дієсловами — перед інфінітивом. У підрядному реченні дієслово йде в кінець, і <b>nicht</b> стоїть перед ним. <b>nicht müssen</b> (не мусити) ≠ <b>nicht dürfen</b> (не можна). <b>nicht brauchen zu</b> = nicht müssen. У діловому мовленні: <em>Das können wir im Moment nicht machen.</em>", ex:[["Ich|nom kann|v heute|adv nicht|neg kommen|v2","nicht перед інфінітивом"],["Ich|nom habe|v das|art nicht|neg gesagt|p2","nicht перед Partizip II"],["Das|nom können|v wir nicht|neg machen|v2","не можемо цього зробити"]], tip:"nicht — перед інфінітивом / Partizip II / модальним у кінці. nicht müssen ≠ nicht dürfen." },
- {n:5, t:"weder… noch і парні союзи", p:"<b>weder … noch</b> = «ні …, ні …» — заперечне перерахування. Пишеться <b>без коми</b> між частинами, як і <em>sowohl … als auch</em>. Сполука виключає потребу в <b>nicht</b> або <b>kein</b>. Натомість <b>nicht nur …, sondern auch</b> вимагає <b>коми</b> перед <em>sondern</em>.", ex:[["Ich|nom habe|v weder|neg Zeit|n noch|neg Lust|n","У мене немає ні часу, ні бажання."],["Nicht|neg nur er|nom, sondern|neg auch sie|nom kommt|v","Не лише він, а й вона прийде. (кома перед sondern)"],["Weder|neg er|nom noch sie|nom kommt|v","Ні він, ні вона не прийде."]], tip:"weder… noch = ні… ні. Без коми. Не треба додаткового nicht/kein." },
- {n:6, t:"Funktionsverbgefüge: kein чи nicht?", p:"<b>Funktionsverbgefüge</b> — сталі дієслівно-іменникові сполуки (<em>eine Entscheidung treffen, in Kauf nehmen, unter Druck stehen</em>). <b>Typ 1</b> (буквальний): іменник у Akkusativ без артикля → заперечення <b>kein</b>: <em>eine Entscheidung treffen → <b>keine</b> Entscheidung treffen</em>. <b>Виняток:</b> якщо іменник без артикля в однині (як <em>Kritik üben</em>), допустимі обидва варіанти — <em>nicht Kritik üben</em> (рекомендовано) і <em>keine Kritik üben</em>. <b>Typ 2</b> (ідіоматичний, з прийменником): заперечення <b>nicht</b> перед прийменником: <em>unter Druck stehen → <b>nicht</b> unter Druck stehen</em>.", ex:[["eine Entscheidung treffen|fv → keine Entscheidung treffen|neg","Typ 1: kein (іменник у Akk.)"],["in Kauf nehmen|fv → nicht in Kauf nehmen|neg","Typ 2: nicht перед прийменником"],["einen Beitrag leisten|fv → keinen Beitrag leisten|neg","Typ 1: keinen (der Beitrag, Akk.)"]], tip:"Typ 1 (без прийменника) → kein. Typ 2 (з прийменником) → nicht перед прийменником. Виняток: Kritik üben (без артикля) — обидва варіанти." },
- {n:7, t:"Словотвір: префікси та суфікси", p:"Заперечення можна виразити <b>словотвором</b>. Префікси: <b>un-</b> (unhöflich, unpünktlich, unvollständig), <b>in-/il-/ir-/a-/non-</b> (intolerant, illegal, irreal, atypisch, nonverbal, der Nonsens), <b>des-/dis-/miss-</b> (Desinteresse, disqualifiziert, Missverständnis). Суфікси: <b>-los</b> (arbeitslos = без роботи), <b>-frei</b> (steuerfrei = без податків), <b>-leer</b> (inhaltsleer = без змісту). Окремо — префікс <b>Nicht-</b> для іменників: <em>die Nichtbeachtung</em>. <b>Суфікс -los</b> часто має негативну конотацію; нейтральна альтернатива — <em>ohne + Nomen</em> або <em>kein + Nomen</em> (<em>Ich bin fantasielos = Ich habe keine Fantasie</em>).", ex:[["un-|neg + höflich|adj = unhöflich|adj","невежливий"],["il-|neg + legal|adj = illegal|adj","нелегальний"],["Arbeit|n + -los|neg = arbeitslos|adj","безробітний"],["Nicht-|neg + Beachtung|n = Nichtbeachtung|n","недотримання"]], tip:"un-, in-/il-/ir-/a-/non-, des-/dis-/miss- — префікси. -los, -frei, -leer — суфікси. Nicht- — для іменників. -los часто негативно." },
- {n:8, t:"ohne… zu / ohne dass / anstatt… zu", p:"Конструкції з <b>ohne</b> виражають <b>відсутність</b> дії. <b>ohne … zu + Infinitiv</b> — коли <b>один і той самий підмет</b>: <em>Er ging, <b>ohne</b> sich zu verabschieden.</em> <b>ohne dass + Nebensatz</b> — <b>обов'язково</b>, коли <b>підмети різні</b> (але також допустимий при однакових): <em>Er ging, <b>ohne dass</b> ich es wusste.</em> <b>anstatt … zu / anstatt dass</b> — «замість дії»: <em>Er spielt, <b>anstatt</b> zu lernen.</em> Модальні дієслова <b>wollen</b> і <b>sollen</b> ніколи не вживаються в цих конструкціях!", ex:[["Er|nom ging|v, ohne|neg sich zu verabschieden|inf","Він пішов, не попрощавшись. (один підмет)"],["Er|nom kam|v herein, ohne dass|neg wir es merkten|ns","Він увійшов так, що ми не помітили. (різні підмети)"],["Er|nom spielt|v, anstatt|neg zu lernen|inf","Він грає замість того, щоб навчатися."]], tip:"ohne + zu — один підмет. ohne dass — обов'язково при різних підметах. anstatt + zu — замість дії." }
+const STAGES = (() => {
+const LS = (() => {
+  const K = t => `<mark class="k">${t}</mark>`, N = t => `<mark class="n">${t}</mark>`, V = t => `<mark class="v">${t}</mark>`, Z = t => `<mark class="z">${t}</mark>`;
+  const H = t => `<div class="ls-h">${t}</div>`;
+  const LEAD = t => `<div class="ls-lead">${t}</div>`;
+  const EX = (de, ua) => `<div class="ls-ex"><div class="de">${de}</div><div class="ua">${ua}</div></div>`;
+  const TBL = (head, rows) => `<div class="ls-scroll"><table class="ls-tbl"><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  const CARD = (c, t, s, li) => `<div class="ls-card" style="--c:${c}"><span class="t">${t}</span><span class="s">${s}</span><ul>${li.map(x => `<li>${x}</li>`).join("")}</ul></div>`;
+  const CARDS = a => `<div class="ls-cards">${a.join("")}</div>`;
+  const NOTE = (t, b, k) => `<div class="ls-note ${k || ""}"><b class="ttl">${t}</b>${b}</div>`;
+  const FLOW = a => `<div class="ls-flow">${a.map((x, i) => (i ? "<i>→</i>" : "") + `<span${/^!/.test(x) ? ' class="hot"' : ""}>${x.replace(/^!/, "")}</span>`).join("")}</div>`;
+  const STEPS = a => `<ol class="ls-steps">${a.map(x => `<li>${x}</li>`).join("")}</ol>`;
+  return {K, N, V, Z, H, LEAD, EX, TBL, CARD, CARDS, NOTE, FLOW, STEPS};
+})();
+const {K, N, V, Z, H, LEAD, EX, TBL, CARD, CARDS, NOTE, FLOW, STEPS} = LS;
+
+return [
+ {n:1, t:"kein чи nicht? Основи", html:
+  LEAD(`<b>Одне питання вирішує все:</b> що саме ти заперечуєш? Якщо це <b>іменник з ein-/eine- або без артикля</b> → ${K("kein")}. Усе інше (дія, стан, прикметник, обставина, іменник з der/die/das чи mein) → ${K("nicht")}.`) +
+  H("Два інструменти") +
+  CARDS([
+    CARD("var(--c-dat)", "kein", "замінює ein / eine або «нульовий» артикль", [
+      `Ich habe ein Auto → Ich habe ${K("kein")} Auto.`,
+      `Ich habe Zeit → Ich habe ${K("keine")} Zeit.`,
+      `Er hat Geschwister → Er hat ${K("keine")} Geschwister.`,
+      `Sie ist eine Ärztin → Sie ist ${K("keine")} Ärztin.`]),
+    CARD("var(--c-nom)", "nicht", "заперечує все, що не є «ein-іменником»", [
+      `дія: Ich schlafe ${K("nicht")}.`,
+      `стан / прикметник: Ich bin ${K("nicht")} müde.`,
+      `обставина: Ich wohne ${K("nicht")} in Berlin.`,
+      `der / die / das: Ich lese ${K("nicht")} das Buch.`,
+      `mein / dein…: Das ist ${K("nicht")} mein Handy.`])
+  ]) +
+  H("Як відмінюється kein (так само, як ein, тільки з k-)") +
+  TBL(["Рід", "Nominativ", "Akkusativ", "Dativ", "Приклад"], [
+    ["чол. <small>der</small>", "kein", `${K("keinen")}`, "keinem", "Ich habe <b>keinen</b> Hunger."],
+    ["жін. <small>die</small>", "keine", "keine", "keiner", "Ich habe <b>keine</b> Zeit."],
+    ["сер. <small>das</small>", "kein", "kein", "keinem", "Ich habe <b>kein</b> Auto."],
+    ["множина", "keine", "keine", "keinen", "Er hat <b>keine</b> Geschwister."]]) +
+  STEPS([
+    "Визнач <b>рід</b> іменника (der / die / das / множина).",
+    "Визнач <b>відмінок</b>: після haben, brauchen, kennen, sehen — це Akkusativ.",
+    "Візьми форму ein і додай k: ein → kein, eine → keine, <b>einen → keinen</b>."]) +
+  NOTE("Лайфхак", `Підстав <b>ein</b>: «Ich habe <i>ein</i> Auto» звучить природно → <b>kein</b>. «Ich habe <i>das</i> Auto» → <b>nicht</b>.`) +
+  NOTE("Типова помилка", `<s>Ich habe nicht Zeit.</s> → Ich habe <b>keine</b> Zeit.<br><s>Ich lese kein das Buch.</s> → Ich lese <b>nicht</b> das Buch.`, "bad") +
+  NOTE("Виняток: Teilnegation", `Коли акцент на кількості чи виборі, nicht стоїть перед ein-словом: Ich lese ${K("nicht")} ein Buch, <b>sondern</b> zwei.`)
+ },
+ {n:2, t:"Позиція nicht у реченні", html:
+  LEAD(`<b>Правило:</b> ${K("nicht")} стоїть <b>якомога правіше</b>, але <b>перед</b> другою частиною присудка та перед словами, які «закривають» речення. Якщо заперечуєш <b>одне слово</b> (Teilnegation), nicht ставимо прямо перед ним — і часто далі йде <i>sondern</i>.`) +
+  H("nicht стоїть ПЕРЕД…") +
+  TBL(["…чим", "Приклад"], [
+    ["інфінітивом", `Ich kann heute ${K("nicht")} kommen.`],
+    ["Partizip II", `Ich habe das Buch ${K("nicht")} gelesen.`],
+    ["відокремлюваним префіксом", `Ich rufe dich ${K("nicht")} an.`],
+    ["прислівником способу дії (gern, gut)", `Ich gehe ${K("nicht")} gern zur Schule.`],
+    ["прикметником після sein", `Ich bin ${K("nicht")} müde.`],
+    ["обставиною місця / напрямку", `Wir gehen ${K("nicht")} ins Kino.`]]) +
+  NOTE("А якщо після nicht нічого немає?", `Тоді nicht стоїть <b>в самому кінці</b>: Ich verstehe das ${K("nicht")}. · Ich kenne ihn ${K("nicht")}.`, "ok") +
+  H("Загальний порядок слів") +
+  FLOW(["Subjekt", "Verb 1", "Dativ", "Akkusativ", "wann", "warum", "!NICHT", "wie", "wo / wohin", "Verb 2"]) +
+  `<div class="ls-note"><b class="ttl">Як читати</b>Усе, що ліворуч від nicht — «нейтральна» інформація; усе, що праворуч — те, що тісно пов'язане з дією.</div>` +
+  H("Teilnegation — заперечуємо одне слово") +
+  EX(`Sie kommt ${K("nicht")} heute, <b>sondern</b> morgen.`, "Вона прийде не сьогодні, а завтра.") +
+  EX(`Ich wohne ${K("nicht")} in Berlin, <b>sondern</b> in Potsdam.`, "Я живу не в Берліні, а в Потсдамі.") +
+  NOTE("Типова помилка", `<s>Ich kann nicht heute kommen.</s> → Ich kann heute ${K("nicht")} kommen.<br><s>Ich habe gesehen nicht den Film.</s> → Ich habe den Film ${K("nicht")} gesehen.`, "bad")
+ },
+ {n:3, t:"Заперечні слова", html:
+  LEAD(`Слова <b>nie, nichts, niemand, nirgends</b> заперечують <b>самі</b>. Додавати до них nicht чи kein <b>не можна</b> — у німецькій немає подвійного заперечення.`) +
+  H("Чотири основні слова") +
+  TBL(["Слово", "Значення", "Приклад"], [
+    ["nie / niemals", "ніколи", `Ich esse ${K("nie")} Fleisch.`],
+    ["nichts", "нічого", `Ich habe ${K("nichts")} gesagt.`],
+    ["niemand", "ніхто", `${K("Niemand")} ist gekommen.`],
+    ["nirgends / nirgendwo", "ніде", `Ich finde es ${K("nirgends")}.`]]) +
+  H("niemand — відмінюється") +
+  TBL(["Відмінок", "Форма", "Приклад"], [
+    ["Nominativ", "niemand", "Niemand ist gekommen."],
+    ["Akkusativ", `${K("niemanden")}`, "Ich habe <b>niemanden</b> gesehen."],
+    ["Dativ", `${K("niemandem")}`, "Ich habe mit <b>niemandem</b> gesprochen."]]) +
+  H("Часові відтінки: «ще не» та «більше не»") +
+  TBL(["Конструкція", "Значення", "Приклад"], [
+    ["noch nicht", "ще не (дія, стан)", `Er ist ${K("noch nicht")} da.`],
+    ["noch kein-", "ще немає (іменник)", `Ich habe ${K("noch keine")} Karte.`],
+    ["noch nie", "ще ніколи", `Ich war ${K("noch nie")} in Paris.`],
+    ["nicht mehr", "більше не (дія, стан)", `Ich rauche ${K("nicht mehr")}.`],
+    ["kein- … mehr", "більше немає (іменник)", `Ich habe ${K("kein")} Geld ${K("mehr")}.`]]) +
+  NOTE("Подвійного заперечення немає", `<s>Ich habe nichts nicht gesehen.</s> → Ich habe <b>nichts</b> gesehen.<br><s>Ich habe nie nichts gesagt.</s> → Ich habe <b>nie etwas</b> gesagt.`, "bad") +
+  NOTE("Пастка для українців", `В українській «Я ніколи нічого не бачив» має три заперечення. У німецькій — лише одне: <b>nichts</b> або <b>nie … etwas</b>.`)
+ },
+ {n:4, t:"Мікс: складні випадки", html:
+  LEAD(`На цьому етапі змішуються всі правила. Щоб не губитися, проходь <b>три запитання по черзі</b>.`) +
+  STEPS([
+    `Чи заперечується <b>іменник з ein-/без артикля</b>? → ${K("kein-")}`,
+    `Чи є окреме слово: <b>nie, nichts, niemand, nirgends</b>? → використай його`,
+    `Інакше → ${K("nicht")}. Знайди праворуч другу частину присудка і став nicht <b>перед нею</b>.`]) +
+  H("Складні часи, модальні, підрядні") +
+  TBL(["Ситуація", "Приклад"], [
+    ["Perfekt", `Ich habe ihn ${K("nicht")} gesehen.`],
+    ["модальне дієслово", `Ich kann ${K("nicht")} kommen.`],
+    ["підрядне (дієслово в кінці)", `…, weil ich ${K("nicht")} kommen kann.`],
+    ["підрядне + kein", `…, weil ich ${K("keine")} Zeit habe.`],
+    ["підрядне + відокремлюване", `…, weil ich dich ${K("nicht")} anrufe.`]]) +
+  H("nicht müssen ≠ nicht dürfen") +
+  TBL(["Конструкція", "Значення", "Приклад"], [
+    ["nicht müssen", "не обов'язково", `Du ${V("musst")} ${K("nicht")} kommen.`],
+    ["nicht brauchen zu", "те саме, що nicht müssen", `Du ${V("brauchst")} ${K("nicht")} zu kommen.`],
+    ["nicht dürfen", "заборонено", `Du ${V("darfst")} ${K("nicht")} kommen.`],
+    ["nicht können", "не можу / не вмію", `Ich ${V("kann")} ${K("nicht")} kommen.`]]) +
+  H("Ділові формули відмови (B2–C1)") +
+  EX("Das können wir im Moment <b>nicht</b> machen.", "Зараз ми цього зробити не можемо.") +
+  EX("Das schaffe ich leider zeitlich <b>nicht</b>.", "На жаль, за часом я цього не встигну.") +
+  EX("Entschuldigung, ich habe das <b>nicht</b> ganz verstanden.", "Вибачте, я не зовсім це зрозумів.") +
+  NOTE("Увага", `«Du musst nicht rauchen» — «ти не мусиш палити». Якщо мається на увазі «заборонено», потрібно <b>Du darfst nicht rauchen</b>.`, "bad")
+ },
+ {n:5, t:"weder… noch і парні союзи", html:
+  LEAD(`<b>weder … noch</b> = «ні … ні». Це вже повноцінне заперечення, тому додаткові <b>nicht / kein</b> не потрібні. Між частинами <b>коми немає</b>.`) +
+  H("Три пари — три різні значення") +
+  TBL(["Пара", "Значення", "Кома?", "Приклад"], [
+    [`${K("weder")} … ${K("noch")}`, "ні … ні", "немає", `Ich habe ${K("weder")} Zeit ${K("noch")} Lust.`],
+    [`nicht nur …, ${K("sondern auch")}`, "не лише … а й", "є, перед sondern", `Nicht nur er, ${K("sondern auch")} sie kommt.`],
+    [`nicht …, ${K("sondern")}`, "не … а", "є, перед sondern", `Er ist nicht dumm, ${K("sondern")} faul.`]]) +
+  H("weder … noch сполучає будь-які частини мови") +
+  EX(`Er trinkt ${K("weder")} Kaffee ${K("noch")} Tee.`, "іменники") +
+  EX(`Sie kann ${K("weder")} lesen ${K("noch")} schreiben.`, "дієслова") +
+  EX(`Das ist ${K("weder")} richtig ${K("noch")} falsch.`, "прикметники") +
+  EX(`${K("Weder")} er ${K("noch")} sie kommt zur Party.`, "підмети — weder на початку речення") +
+  NOTE("sondern чи aber?", `<b>sondern</b> — після заперечення, виправляє його: Er ist nicht dumm, <b>sondern</b> faul.<br><b>aber</b> — просте протиставлення: Er ist klug, <b>aber</b> faul.`) +
+  NOTE("Типова помилка", `<s>Ich habe weder Zeit, noch Lust.</s> → Ich habe weder Zeit ${K("noch")} Lust. (без коми)<br><s>Ich habe weder keine Zeit noch Lust.</s> → зайве заперечення`, "bad")
+ },
+ {n:6, t:"Funktionsverbgefüge: kein чи nicht?", html:
+  LEAD(`<b>Funktionsverbgefüge</b> — сталі сполуки «іменник + дієслово» (<i>eine Entscheidung treffen, in Kauf nehmen</i>). Яке заперечення брати — залежить від того, <b>чи є в сполуці прийменник</b>.`) +
+  CARDS([
+    CARD("var(--c-dat)", "Тип 1 → kein-", "буквальний зміст, іменник в Akkusativ, без прийменника", [
+      `eine Entscheidung treffen → ${K("keine")} Entscheidung treffen`,
+      `einen Beitrag leisten → ${K("keinen")} Beitrag leisten`,
+      `eine Frage stellen → ${K("keine")} Frage stellen`,
+      `Hilfe leisten → ${K("keine")} Hilfe leisten`]),
+    CARD("var(--c-nom)", "Тип 2 → nicht", "ідіома, є прийменник; nicht стоїть перед ним", [
+      `in Kauf nehmen → ${K("nicht")} in Kauf nehmen`,
+      `unter Druck stehen → ${K("nicht")} unter Druck stehen`,
+      `zur Verfügung stehen → ${K("nicht")} zur Verfügung stehen`,
+      `in Frage kommen → ${K("nicht")} in Frage kommen`,
+      `in Anspruch nehmen → ${K("nicht")} in Anspruch nehmen`])
+  ]) +
+  NOTE("Швидкий тест", `Є прийменник (in, unter, zu, auf…)? → <b>nicht</b> перед прийменником.<br>Немає прийменника, є іменник у Akkusativ? → <b>kein-</b>.`, "ok") +
+  NOTE("Типова помилка", `<s>Er nimmt das in keinen Kauf.</s> → Er nimmt das ${K("nicht")} in Kauf.`, "bad") +
+  NOTE("Іменник без артикля в однині", `У сполуках типу <i>Kritik üben, Rücksicht nehmen</i> зазвичай вживають <b>kein-</b> (keine Rücksicht nehmen). <b>nicht</b> з'являється тоді, коли є контраст із sondern.`)
+ },
+ {n:7, t:"Словотвір: префікси та суфікси", html:
+  LEAD(`Заперечення можна «вбудувати» в саме слово. Це економить слова й робить мову багатшою — але <b>слова доводиться запам'ятовувати цілком</b>: кожен префікс сполучається не з усім.`) +
+  H("Префікси") +
+  TBL(["Префікс", "Для яких слів", "Приклади"], [
+    [K("un-"), "найуніверсальніший, германські слова", "unhöflich, unpünktlich, unmöglich, unglücklich"],
+    [K("in-"), "слова латинського походження", "intolerant, indiskutabel, inaktiv"],
+    [K("il-"), "in- перед <b>l</b>", "illegal, illogisch"],
+    [K("ir-"), "in- перед <b>r</b>", "irreal, irrational"],
+    [K("a-"), "грецькі слова", "atypisch, asozial"],
+    [K("non-"), "міжнародні слова", "nonverbal, der Nonsens"],
+    [K("des- / dis-"), "іменники, прикметники, дієслова", "das Desinteresse, desinteressiert, disqualifiziert"],
+    [K("miss-"), "дієслова та іменники: «неправильно»", "missverstehen, das Missverständnis, missachten"],
+    [K("Nicht-"), "іменники", "der Nichtraucher, die Nichtbeachtung"]]) +
+  H("Суфікси") +
+  TBL(["Суфікс", "Значення", "Приклади"], [
+    [K("-los"), "без чогось (часто негативно)", "arbeitslos, hilflos, sinnlos"],
+    [K("-frei"), "вільний від (часто позитивно)", "steuerfrei, alkoholfrei, fehlerfrei"],
+    [K("-leer"), "порожній від", "inhaltsleer, luftleer"]]) +
+  NOTE("Порівняй", `<b>hilflos</b> (безпорадний — мінус) vs. <b>alkoholfrei</b> (без алкоголю — плюс). Нейтральна альтернатива: ${K("ohne")} + іменник або ${K("kein-")} + іменник: <i>Ich bin fantasielos = Ich habe keine Fantasie.</i>`) +
+  NOTE("Не вигадуй слів", `<b>unhöflich</b>, але не <s>inhöflich</s>; <b>illegal</b>, але не <s>unlegal</s>. Префікс треба вчити разом зі словом.`, "bad")
+ },
+ {n:8, t:"ohne… zu / ohne dass / anstatt… zu", html:
+  LEAD(`Ці конструкції виражають <b>відсутність дії</b> (${K("ohne")} — «не роблячи») або <b>заміну</b> однієї дії іншою (${K("anstatt")} — «замість того, щоб»).`) +
+  H("Чотири конструкції") +
+  TBL(["Конструкція", "Підмети", "Приклад"], [
+    [`${K("ohne")} … ${Z("zu")} + Infinitiv`, "однакові", `Er ging, ${K("ohne")} sich ${Z("zu")} verabschieden.`],
+    [`${K("ohne dass")} + підрядне`, "різні <small>(можна й однакові)</small>", `Er ging, ${K("ohne dass")} ich es wusste.`],
+    [`${K("anstatt")} … ${Z("zu")} + Infinitiv`, "однакові", `Er spielt, ${K("anstatt")} ${Z("zu")} lernen.`],
+    [`${K("anstatt dass")} + підрядне`, "різні", `${K("Anstatt dass")} er lernt, spielt er.`]]) +
+  H("Деталі, на яких помиляються") +
+  TBL(["Правило", "Приклад"], [
+    ["завжди <b>кома</b> перед ohne / anstatt", `Sie ging, ohne ein Wort zu sagen.`],
+    ["zu стоїть <b>між префіксом і коренем</b>", `ohne anzuklopfen · ohne die Tür abzuschließen`],
+    ["зворотні дієслова: sich перед zu", `ohne sich zu verabschieden`],
+    ["Perfekt-інфінітив", `ohne es gesagt zu haben`],
+    ["на початку речення — з великої літери", `Ohne zu fragen, nahm er das Buch.`]]) +
+  NOTE("Різниця за змістом", `<b>ohne</b> — дії <i>не було</i> (Er ging, ohne zu grüßen). <b>anstatt</b> — замість неї було <i>щось інше</i> (Er spielt, anstatt zu lernen).`) +
+  NOTE("Модальні дієслова", `У реченні з <b>ohne dass</b> модальні дієслова можливі: <i>Ohne dass er es wollte, wurde er Chef.</i>`, "ok") +
+  NOTE("Типова помилка", `<s>Er ging, ohne zu verabschieden.</s> → Er ging, ohne ${K("sich")} zu verabschieden.<br><s>Er ging, ohne dass zu grüßen.</s> → ohne zu grüßen / ohne dass er grüßte.`, "bad")
+ }
 ];
+})();
 
 let stage = (() => { const v = localStorage.getItem("pn_stage"); const n = v === null ? 1 : parseInt(v, 10); return (Number.isFinite(n) && n >= 1 && n <= STAGES.length) ? n : 1; })();
 const UL_KEY = "pn_unlocked";
@@ -784,7 +1186,7 @@ const TIPS = {
 };
 
 const KEY = id => "tp_v2_negation_" + id;
-const XP_MAX = Math.ceil(Object.values(ITEMS).reduce((s, a) => s + a.length, 0) / 10) * 10;
+const XP_MAX = Math.ceil((Object.values(ITEMS).reduce((s, a) => s + a.length, 0) + 20) / 10) * 10;
 const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0, p:0 });
 const S = {};
 const readState = id => {
@@ -922,9 +1324,10 @@ function renderStages(){
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  el.innerHTML = `<div class="ls-head"><span class="ls-num">Етап ${g.n}</span><h3 class="ls-title">${g.t}</h3></div>` + g.html + `<button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("pn_seen_" + n, "1");
-  $("lgo").onclick = () => document.body.classList.remove("lsn");
+  $("lgo").onclick = () => { document.body.classList.remove("lsn"); try{ $("card").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){} };
+  try{ el.scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){}
 }
 function openStage(n){
   if(n && !stOpen(n)){
@@ -1170,7 +1573,7 @@ const CHEAT = [
   ["Funktionsverbgefüge","var(--c-pos)",[["in Kauf nehmen → nicht in Kauf nehmen","Typ 2"],["Kritik üben → nicht Kritik üben","Typ 1 (без артикля)"],["einen Beitrag leisten → keinen Beitrag leisten","Typ 1"]]],
   ["weder… noch","var(--c-wq)",[["weder… noch","ні… ні"],["без коми","weder A noch B"],["nicht nur…, sondern auch","з комою"]]],
   ["Wortbildung","var(--c-man)",[["un-, in-/il-/ir-/a-/non-","прикметники"],["des-/dis-/miss-","ім./дієсл."],["Nicht-","іменники"],["-los, -frei, -leer","прикметники (-los часто негативно)"]]],
-  ["ohne / anstatt","var(--c-v)",[["ohne… zu + Inf.","один підмет"],["ohne dass + Nebensatz","обов'язково при різних підметах"],["anstatt… zu","замість дії"],["wollen/sollen — ніколи","в цих конструкціях"]]],
+  ["ohne / anstatt","var(--c-v)",[["ohne… zu + Inf.","один підмет"],["ohne dass + Nebensatz","обов'язково при різних підметах"],["anstatt… zu","замість дії"],["ohne dass + модальне","Ohne dass er es wollte…"]]],
   ["Модальні","var(--c-nom)",[["nicht müssen","не мусити"],["nicht dürfen","не можна"],["nicht brauchen zu","= nicht müssen"],["weder… noch","не подвійне заперечення"]]]
 ];
 let cheatG = 0;
