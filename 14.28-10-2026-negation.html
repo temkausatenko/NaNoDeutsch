@@ -139,6 +139,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .card.mc .row input,.card.mc .chk,.card.mc .um-row .um{display:none}
 .card.mc .row{display:none}
 .card.mc .fb{cursor:pointer}
+.fb .nbtn{display:inline-block;margin-top:14px;padding:12px 26px;border:0;border-radius:12px;background:var(--ok);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}.fb .nbtn:hover{filter:brightness(1.1)}
 .um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .um{width:36px;height:34px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-size:.95rem;cursor:pointer;transition:all .18s}
 .um:hover{color:var(--tx);border-color:var(--pr)}
@@ -1398,6 +1399,7 @@ function renderCard(){
   updateXp(XP);
   renderTabs();
   $("chk").textContent = answered ? "Далі →" : "Перевірити ✓";
+  $("card").classList.toggle("ans", !!answered);
 }
 function renderOpts(){
   const it = items()[cur], tb = TB();
@@ -1430,7 +1432,7 @@ function showFb(ok, i){
   f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
     <div class="ans" title="Натисни, щоб почути">${esc(it.ans)}</div>
     ${it.lbl ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""}
-    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}`;
+    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}${isMc() ? '<button class="nbtn" type="button">Далі →</button>' : ''}`;
   const ansEl = f.querySelector(".ans");
   if(ansEl) ansEl.onclick = () => speak(it.sp);
 }
@@ -1604,7 +1606,7 @@ function finish(ok){
       tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, wait);
     }
   } else {
-    if(isMc()){ clearTimeout(tm); tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 3800); }
+    clearTimeout(tm); /* після помилки автопереходу немає — тільки кнопка «Далі» */
   }
   if(!ok){ try{ $("fb").scrollIntoView({ behavior:"smooth", block:"nearest" }); }catch(e){} }
 }
@@ -1723,7 +1725,7 @@ $("modeBtn").onclick = () => { mode = mode === "mc" ? "type" : "mc"; store.set("
 $("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
 $("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
 $("chk").onclick = check;
-$("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
+$("fb").addEventListener("click", e => { if(answered && isMc() && e.target.closest(".nbtn")){ clearTimeout(tm); advance(); } });
 $("speakBtn").onclick = speakCurrent;
 $("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
 $("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
