@@ -542,6 +542,8 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <ul>
 <li><strong>Akkusativ → wen</strong>: warten <strong>auf</strong>, denken <strong>an</strong>, sprechen <strong>über</strong>, sich ärgern <strong>über</strong>, sich interessieren <strong>für</strong>, sich kümmern <strong>um</strong>, sich verlieben <strong>in</strong>.</li>
 <li><strong>Dativ → wem</strong>: sprechen <strong>mit</strong>, erzählen <strong>von</strong>, sich bedanken <strong>bei</strong>, fragen <strong>nach</strong>, Angst haben <strong>vor</strong>, leiden <strong>unter</strong>.</li></ul>
+<div class="tip">⚠️ <strong>an, auf, in, über, unter, vor</strong> можуть вимагати і Akkusativ, і Dativ — відмінок задає <strong>дієслово</strong>: <em>an wen</em> — denken an, glauben an, schreiben an · <em>an wem</em> — zweifeln an, arbeiten an, teilnehmen an, liegen an · <em>unter wem</em> — leiden unter · <em>vor wem</em> — Angst haben vor, warnen vor. Прийменники <strong>mit, von, bei, nach, aus, zu</strong> — завжди Dativ; <strong>für, um, gegen, durch</strong> — завжди Akkusativ.</div>
+<div class="tip">⛔ <strong>Не всі прийменники</strong> утворюють da-/wo- форми: <strong>ohne, seit, bis, während, wegen, trotz, statt, außer</strong> — немає «dohne», «darseit». Кажемо: <em>Ohne sie kann ich nicht lesen.</em> (повторюємо займенник або іменник).</div>
 <div class="example"><strong>Akkusativ:</strong> Ich interessiere mich für <span class="hl">meinen Nachbarn</span>. → Für <span class="hl">wen</span>? → Ich interessiere mich für <span class="hl">ihn</span>.</div>
 <div class="example"><strong>Dativ:</strong> Ich spreche mit <span class="hl">meiner Chefin</span>. → Mit <span class="hl">wem</span>? → Ich spreche mit <span class="hl">ihr</span>.</div>
 <div class="tip">💡 У питаннях про <strong>речі</strong> відмінок не впливає на форму: wo(r) + прийменник завжди однакове.</div>
@@ -658,7 +660,7 @@ const D=[
 ["Ich lache über den Witz.","über den Witz","S","Worüber lachst du?","Ich lache auch darüber."]
 ];
 const SP='an auf aus bei durch für gegen in mit nach neben um unter über von zu vor'.split(' '),
-near={über:'von an auf',von:'über an',an:'über von unter bei',auf:'über',bei:'mit an',mit:'bei',unter:'an',für:'gegen',gegen:'für',aus:'in'},
+near={über:'von an auf für gegen zu mit bei',von:'über an zu mit aus',an:'über von unter bei auf in zu mit',auf:'über an für in',bei:'mit an zu',mit:'bei zu über um',unter:'an über',für:'gegen um',gegen:'für',aus:'in von',nach:'zu auf',zu:'nach mit bei an',um:'für über',vor:'für an',in:'aus an auf'},
 oth=(p,n)=>sh(SP.filter(x=>x!=p&&!(near[p]||'').split(' ').includes(x))).slice(0,n),
 AK=['an','auf','über','für','um','gegen'],
 rows=s=>s.trim().split('\n').map(l=>l.split('|')),
@@ -715,7 +717,7 @@ teilnehmen an|der Kurs||
 gehören zu|der Kurs||
 sich konzentrieren auf|die Arbeit||`).map(r=>[r[0],r.slice(1)])),
 LK=rows(`Ich habe morgen eine Prüfung.|___ habe ich Angst.|vor
-Mein Bruder kommt heute zu Besuch.|___ freue ich mich sehr.|über
+Mein Bruder hat mir ein Paket geschickt.|___ freue ich mich sehr.|über
 Wir fahren im Sommer nach Italien.|___ freue ich mich schon.|auf
 Er kommt schon wieder zu spät.|___ ärgere ich mich jeden Tag.|über
 Heute Abend gibt es ein Konzert.|___ interessiere ich mich nicht.|für
@@ -727,13 +729,13 @@ Er hat viel geübt.|___ ist er besser geworden.|durch
 Ich habe Kopfschmerzen.|___ nehme ich eine Tablette.|gegen
 Ich habe einen neuen Rucksack.|___ ist mein Laptop.|in
 Ich habe ein neues Hobby.|___ beschäftige ich mich jeden Abend.|mit
-Ich habe meinen Schlüssel verloren.|___ suche ich schon eine Stunde.|nach
+Ich habe die Prüfung bestanden.|___ bin ich sehr stolz.|auf
 Ich brauche Hilfe.|___ möchte ich dich bitten.|um
 Im Sommer ist es sehr heiß.|___ leide ich.|unter
 Ich war im Urlaub in Spanien.|___ erzähle ich dir später.|von
 Das ist ein neuer Kurs.|___ gehören auch Hausaufgaben.|zu
 Mein Chef hat eine Idee.|___ sprechen wir morgen.|über
-Der Hund ist riesig.|___ habe ich Angst.|vor`),
+Nachts im Wald ist es sehr dunkel.|___ habe ich Angst.|vor`),
 MM=rows(`Ich lerne Deutsch, damit ich in Berlin arbeiten kann.|1
 Ich lerne Deutsch. Damit habe ich gute Chancen.|0
 Er spart Geld, damit er ein Auto kaufen kann.|1
@@ -761,17 +763,17 @@ UU=rows(`Про кого ти думаєш?|An wen denkst du?|Woran denkst du?|W
 Чим ти займаєшся?|Womit beschäftigst du dich?|Mit wem beschäftigst du dich?|Wobei beschäftigst du dich?|mit
 З ким ти розмовляєш?|Mit wem sprichst du?|Womit sprichst du?|Wozu sprichst du?|mit`),
 MN={damit:['з цим (вказівка)','щоб (мета)'],darum:['про це / за це (вказівка)','тому (причина)']};
-const DTR=['Я розмовляю зі своєю начальницею.', 'Я питаю дорогу.', 'Я чекаю на автобус.', 'Я розмовляю про начальницю.', 'Я розповідаю про свого брата.', 'Я прошу про допомогу.', 'Я піклуюся про дітей.', 'Я розмовляю з лікарем.', 'Я починаю роботу.', 'Я чекаю на свого друга.', 'Я думаю про відпустку.', 'Я думаю про свою маму.', 'Я радію вихідним, що попереду.', 'Я злюся через шум.', 'Я злюся на свого сусіда.', 'Я цікавлюся музикою.', 'Я цікавлюся новим колегою.', 'Я мрію про будинок.', 'Я беру участь у курсі.', 'Я дякую за подарунок.', 'Я дякую вчительці.', 'Я боюся іспиту.', 'Я питаю про вчительку.', 'Я задоволений(-а) результатом.', 'Я вірю в майбутнє.', 'Я займаюся хімією.', 'Я злюся на колегу.', 'Я розмовляю телефоном зі своїми батьками.', 'Я звертаю увагу на вимову.', 'Я закохуюся в сусіда.', 'Я чекаю на відповідь.', 'Я часто думаю про свого діда.', 'Я радію подарунку.', 'Я шукаю свій ключ.', 'Я пишу своїй бабусі.', "Я турбуюся про свою сім'ю.", 'Я граю зі своєю сестрою.', 'Я розраховую на дощ.', 'Я обговорюю політику.', 'Я сварюся зі своїм братом.', 'Я покладаюся на свого начальника.', 'Я сміюся з жарту.'],LKT=['У мене завтра іспит. Я цього боюся.', 'Мій брат сьогодні приїздить у гості. Я дуже цьому радію.', 'Ми влітку їдемо до Італії. Я вже цьому радію.', 'Він знову спізнюється. Я щодня на це злюся.', 'Сьогодні ввечері буде концерт. Я цим не цікавлюся.', 'Начальник пообіцяв рішення. Я вже кілька днів цього чекаю.', 'У нас була чудова відпустка. Я охоче це згадую.', 'У мене є борошно, цукор і яйця. З цього я печу торт.', 'Мені треба переїжджати. З цим мені допомагають друзі.', 'Він багато тренувався. Завдяки цьому він став кращим.', "У мене болить голова. Від цього я п'ю таблетку.", 'У мене новий рюкзак. У ньому мій ноутбук.', 'У мене нове хобі. Цим я займаюся щовечора.', 'Я загубив(-ла) ключ. Його я шукаю вже годину.', 'Мені потрібна допомога. Про неї я хочу тебе попросити.', 'Влітку дуже жарко. Від цього я страждаю.', 'Я була у відпустці в Іспанії. Про це я розповім тобі пізніше.', 'Це новий курс. До нього теж належать домашні завдання.', 'У мого начальника є ідея. Про неї ми поговоримо завтра.', 'Собака величезний. Його я боюся.'],MMT=['Я вчу німецьку, щоб працювати в Берліні.', 'Я вчу німецьку. З цим у мене гарні шанси.', 'Він заощаджує гроші, щоб купити авто.', 'Ось ключ. Ним ти можеш відчинити двері.', 'Я пояснюю повільно, щоб ти зрозумів.', 'Мені потрібна допомога. Я прошу тебе про це.', 'Іде сильний дощ. Тому ми залишаємося вдома.', 'Погода погана, тому свято скасовується.', 'Про що йдеться? Йдеться про те, щоб бути пунктуальним.', 'Дитина була втомлена. Тому вона рано лягла спати.'],KKT=['На що ти чекаєш?', 'Чим ти займаєшся?', 'Про що ти думаєш?', 'На що ти злишся?', 'Чим ти цікавишся?', 'Про що ти мрієш?', 'Чого ти боїшся?', 'Для чого тобі це?', 'Про що ти його просиш?', 'З чим ти мені допомагаєш?'];
+const DTR=['Я розмовляю зі своєю начальницею.', 'Я питаю дорогу.', 'Я чекаю на автобус.', 'Я розмовляю про начальницю.', 'Я розповідаю про свого брата.', 'Я прошу про допомогу.', 'Я піклуюся про дітей.', 'Я розмовляю з лікарем.', 'Я починаю роботу.', 'Я чекаю на свого друга.', 'Я думаю про відпустку.', 'Я думаю про свою маму.', 'Я радію вихідним, що попереду.', 'Я злюся через шум.', 'Я злюся на свого сусіда.', 'Я цікавлюся музикою.', 'Я цікавлюся новим колегою.', 'Я мрію про будинок.', 'Я беру участь у курсі.', 'Я дякую за подарунок.', 'Я дякую вчительці.', 'Я боюся іспиту.', 'Я питаю про вчительку.', 'Я задоволений(-а) результатом.', 'Я вірю в майбутнє.', 'Я займаюся хімією.', 'Я злюся на колегу.', 'Я розмовляю телефоном зі своїми батьками.', 'Я звертаю увагу на вимову.', 'Я закохуюся в сусіда.', 'Я чекаю на відповідь.', 'Я часто думаю про свого діда.', 'Я радію подарунку.', 'Я шукаю свій ключ.', 'Я пишу своїй бабусі.', "Я турбуюся про свою сім'ю.", 'Я граю зі своєю сестрою.', 'Я розраховую на дощ.', 'Я обговорюю політику.', 'Я сварюся зі своїм братом.', 'Я покладаюся на свого начальника.', 'Я сміюся з жарту.'],LKT=['У мене завтра іспит. Я цього боюся.', 'Мій брат надіслав мені посилку. Я дуже цьому радію.', 'Ми влітку їдемо до Італії. Я вже цьому радію.', 'Він знову спізнюється. Я щодня на це злюся.', 'Сьогодні ввечері буде концерт. Я цим не цікавлюся.', 'Начальник пообіцяв рішення. Я вже кілька днів цього чекаю.', 'У нас була чудова відпустка. Я охоче це згадую.', 'У мене є борошно, цукор і яйця. З цього я печу торт.', 'Мені треба переїжджати. З цим мені допомагають друзі.', 'Він багато тренувався. Завдяки цьому він став кращим.', "У мене болить голова. Від цього я п'ю таблетку.", 'У мене новий рюкзак. У ньому мій ноутбук.', 'У мене нове хобі. Цим я займаюся щовечора.', 'Я склав(-ла) іспит. Цим я дуже пишаюся.', 'Мені потрібна допомога. Про неї я хочу тебе попросити.', 'Влітку дуже жарко. Від цього я страждаю.', 'Я був(-ла) у відпустці в Іспанії. Про це я розповім тобі пізніше.', 'Це новий курс. До нього теж належать домашні завдання.', 'У мого начальника є ідея. Про неї ми поговоримо завтра.', 'Уночі в лісі дуже темно. Цього я боюся.'],MMT=['Я вчу німецьку, щоб працювати в Берліні.', 'Я вчу німецьку. З цим у мене гарні шанси.', 'Він заощаджує гроші, щоб купити авто.', 'Ось ключ. Ним ти можеш відчинити двері.', 'Я пояснюю повільно, щоб ти зрозумів.', 'Мені потрібна допомога. Я прошу тебе про це.', 'Іде сильний дощ. Тому ми залишаємося вдома.', 'Погода погана, тому свято скасовується.', 'Про що йдеться? Йдеться про те, щоб бути пунктуальним.', 'Дитина була втомлена. Тому вона рано лягла спати.'],KKT=['На що ти чекаєш?', 'Чим ти займаєшся?', 'Про що ти думаєш?', 'На що ти злишся?', 'Чим ти цікавишся?', 'Про що ти мрієш?', 'Чого ти боїшся?', 'Для чого тобі це?', 'Про що ти його просиш?', 'З чим ти мені допомагаєш?'];
 
 /* --- додаткові приклади --- */
 MM.push(
  ["Er arbeitet viel, damit seine Familie gut leben kann.","1"],
- ["Ich habe viel gelernt. Damit habe ich die Prüfung bestanden.","0"],
+ ["Ich habe eine neue Bohrmaschine. Damit kann ich Löcher in die Wand bohren.","0"],
  ["Sie hat Kopfschmerzen. Darum geht sie früh nach Hause.","1"],
  ["Es geht darum, die Regeln zu verstehen.","0"],
  ["Ich schreibe es auf, damit ich es nicht vergesse.","1"],
  ["Dort liegt ein Messer. Damit kannst du das Brot schneiden.","0"]);
-MMT.push("Він багато працює, щоб його сім’я добре жила.","Я багато вчився. Завдяки цьому склав іспит.","У неї болить голова. Тому вона йде додому раніше.","Йдеться про те, щоб розуміти правила.","Я записую це, щоб не забути.","Там лежить ніж. Ним можна нарізати хліб.");
+MMT.push("Він багато працює, щоб його сім’я добре жила.","У мене нова дриль. Нею я можу свердлити отвори в стіні.","У неї болить голова. Тому вона йде додому раніше.","Йдеться про те, щоб розуміти правила.","Я записую це, щоб не забути.","Там лежить ніж. Ним можна нарізати хліб.");
 KK.push(["an","glaubst du"],["über","lachst du"],["von","erzählst du"],["nach","fragst du"],["um","geht es"],["auf","freust du dich"],["zu","gehört das"]);
 KKT.push("У що ти віриш?","Над чим ти смієшся?","Про що ти розповідаєш?","Про що ти питаєш?","Про що йдеться?","Чому ти радієш наперед?","До чого це належить?");
 const DT = Object.fromEntries(D.map((d, i) => [d[0], DTR[i]]));
@@ -795,7 +797,7 @@ const ERR = [
 const TXT = [
  ["Morgen habe ich eine Prüfung. {{B}} habe ich große Angst.","Davor",["Davor","Wovor","Vor ihr","Dafür"],"Angst haben vor + річ → davor.","Завтра в мене іспит. Його я дуже боюся."],
  ["{{B}} bereitest du dich vor? — Auf die Mathe-Prüfung.","Worauf",["Worauf","Auf wen","Darauf","Wofür"],"Це питання про річ: wo + r + auf.","На що ти готуєшся? — До іспиту з математики."],
- ["Mein Freund hilft mir. {{B}} bin ich ihm sehr dankbar.","Dafür",["Dafür","Wofür","Für ihn","Davor"],"sich bedanken für → dafür (відсилання до речення).","Мій друг мені допомагає. Я дуже вдячний йому за це."],
+ ["Mein Freund hilft mir. {{B}} bin ich ihm sehr dankbar.","Dafür",["Dafür","Wofür","Für ihn","Davor"],"sich bedanken für → dafür (відсилання до речення).","Мій друг мені допомагає. Я йому дуже вдячний(-а) за це."],
  ["Ich warte auf meine Schwester. Ich warte schon lange {{B}}.","auf sie",["auf sie","darauf","auf ihr","worauf"],"Людина, warten auf + Akkusativ → auf sie.","Я чекаю на сестру. Я вже давно на неї чекаю."],
  ["{{B}} sprichst du? — Mit meinem Chef.","Mit wem",["Mit wem","Womit","Mit wen","Wormit"],"Людина, mit + Dativ → mit wem.","З ким ти розмовляєш? — З моїм начальником."],
  ["{{B}} träumst du? — Von einem großen Haus.","Wovon",["Wovon","Von wem","Worvon","Davon"],"Річ → wo + von = wovon (v — приголосна).","Про що ти мрієш? — Про великий будинок."],
@@ -814,10 +816,10 @@ const STAGES = [
  { n:1, t:"Річ чи людина?", p:"Усе починається з одного питання: <b>про що чи про кого</b> йдеться? Якщо це <b>річ, подія або ситуація</b> — прийменник «ховається» всередині слова: <b>wo(r)-</b> у питанні й <b>da(r)-</b> у відповіді. Якщо це <b>людина</b> — прийменник залишається окремо: <b>auf wen? — auf ihn</b>.", ex:[["warte|v auf|pr den_Bus|s","річ → worauf? — darauf"],["warte|v auf|pr meinen_Freund|p","людина → auf wen? — auf ihn"]], tip:"Прийменник + es не буває. Річ → da-/wo-, людина → wen/wem + ihn/sie/ihm/ihr." },
  { n:2, t:"Утворення: da(r)- і wo(r)-", p:"Слово утворюється так: <b>da / wo + прийменник</b>. Якщо прийменник починається з <b>голосної</b> (a, e, i, o, u, ä, ö, ü), додається <b>r</b>: <i>auf → darauf, worauf</i>. Якщо з приголосної — без r: <i>mit → damit, womit</i>. Пишемо одним словом.", ex:[["wo|wo r|r auf|pr","worauf — голосна, тому r"],["da|da r|r über|pr","darüber — ü теж голосна"],["da|da mit|pr","damit — приголосна, без r"]], tip:"Дивись лише на першу літеру прийменника: голосна → r, приголосна → без r." },
  { n:3, t:"Дієслово + прийменник", p:"Кожне дієслово має «свій» прийменник. Його треба вчити разом з дієсловом. Деякі дієслова мають <b>два</b> прийменники з різним змістом: <i>sich freuen <b>auf</b></i> — радіти наперед, <i>sich freuen <b>über</b></i> — радіти з того, що є. Коли прийменник відомий, нескладно утворити <i>darauf / darüber</i>.", ex:[["warten|v auf|pr darauf|da","чекати на → darauf"],["sich_freuen|v auf|pr","радіти наперед"],["sich_freuen|v über|pr","радіти з (того, що є)"]], tip:"Вчи сполуку цілком: «warten auf», «denken an», «Angst haben vor»." },
- { n:4, t:"Питання: wo(r)- · wen · wem", p:"Питання про <b>річ</b>: <b>wo(r) + прийменник</b> (<i>Worauf wartest du?</i>). Питання про <b>людину</b>: <b>прийменник + wen / wem</b>. Відмінок задає дієслово з прийменником: <b>Akkusativ → wen</b> (<i>auf wen, an wen, über wen, für wen, um wen</i>), <b>Dativ → wem</b> (<i>mit wem, von wem, bei wem, nach wem, vor wem</i>).", ex:[["wo|wo r|r auf|pr wartest_du?|v","про річ"],["auf|pr wen|wn wartest_du?|v","людина, Akkusativ"],["mit|pr wem|wm sprichst_du?|v","людина, Dativ"]], tip:"Спочатку річ чи людина, потім — відмінок дієслівного прийменника." },
+ { n:4, t:"Питання: wo(r)- · wen · wem", p:"Питання про <b>річ</b>: <b>wo(r) + прийменник</b> (<i>Worauf wartest du?</i>). Питання про <b>людину</b>: <b>прийменник + wen / wem</b>. Відмінок задає дієслово з прийменником: <b>Akkusativ → wen</b> (<i>auf wen, an wen, über wen, für wen, um wen</i>), <b>Dativ → wem</b> (<i>mit wem, von wem, bei wem, nach wem, vor wem</i>). <b>Увага:</b> <b>an, auf, in, über, unter, vor</b> можуть мати обидва відмінки — вирішує дієслово: <i>an wen denkst du</i>, але <i>an wem zweifelst du</i>, <i>unter wem leidest du</i>.", ex:[["wo|wo r|r auf|pr wartest_du?|v","про річ"],["auf|pr wen|wn wartest_du?|v","людина, Akkusativ"],["mit|pr wem|wm sprichst_du?|v","людина, Dativ"]], tip:"Спочатку річ чи людина, потім — відмінок дієслівного прийменника." },
  { n:5, t:"Відповідь: da(r)- · ihn · ihm", p:"У відповіді <b>річ</b> заміняємо на <b>da(r) + прийменник</b> (<i>Ich warte darauf</i>). <b>Людину</b> — на <b>прийменник + займенник</b>: Akkusativ <b>ihn / sie / sie</b>, Dativ <b>ihm / ihr / ihnen</b> (чоловічий / жіночий / множина; ihm також для середнього).", ex:[["Ich_warte|v dar|da auf|pr","річ"],["Ich_warte|v auf|pr ihn|pn","людина, Akkusativ"],["Ich_spreche|v mit|pr ihr|pn","людина, Dativ, жін."]], tip:"Відповідь про людину: прийменник той самий + займенник у тому ж відмінку." },
  { n:6, t:"Переклад UA → DE", p:"Тепер усе разом: визначи, річ чи людина, обери питальну або відповідну форму, поклади прийменник і відмінок. Українське речення — німецька відповідь з правильним займенниковим прислівником чи займенником.", ex:[["Я_чекаю|v на_автобус|s","→ Ich warte darauf."],["Я_чекаю|v на_друга|p","→ Ich warte auf ihn."]], tip:"Алгоритм: 1) річ/людина 2) дієслово + прийменник 3) da-/wo- або wen/wem + займенник." },
- { n:7, t:"da- як зв’язка речень", p:"Слова з <b>da(r)-</b> можуть відсилати до <b>цілого попереднього речення</b>: <i>Ich habe morgen eine Prüfung. <b>Davor</b> habe ich Angst.</i> Прийменник підказує дієслово з другого речення: <i>Angst haben <b>vor</b> → davor</i>.", ex:[["Ich_habe_eine_Prüfung.|s Davor|da habe_ich_Angst.|v","→ Angst haben vor"],["Er_hat_viel_geübt.|s Dadurch|da ist_er_besser.|v","→ завдяки цьому"]], tip:"Знайди в другому реченні дієслово чи прилагательне з прийменником — це і є da-слово." },
+ { n:7, t:"da- як зв’язка речень", p:"Слова з <b>da(r)-</b> можуть відсилати до <b>цілого попереднього речення</b>: <i>Ich habe morgen eine Prüfung. <b>Davor</b> habe ich Angst.</i> Прийменник підказує дієслово з другого речення: <i>Angst haben <b>vor</b> → davor</i>. Так само da-слово може заступати <b>dass-речення</b> або <b>інфінітив з zu</b>: <i>Ich freue mich <b>darauf</b>, dass du kommst.</i> / <i>Ich habe Angst <b>davor</b>, den Zug zu verpassen.</i>", ex:[["Ich_habe_eine_Prüfung.|s Davor|da habe_ich_Angst.|v","→ Angst haben vor"],["Er_hat_viel_geübt.|s Dadurch|da ist_er_besser.|v","→ завдяки цьому"]], tip:"Знайди в другому реченні дієслово чи прилагательне з прийменником — це і є da-слово." },
  { n:8, t:"damit і darum", p:"<b>damit</b> і <b>darum</b> мають два значення. Як вказівка: <i>Damit kannst du schreiben</i> — «цим». Як сполучник: <i>…, damit ich es verstehe</i> — «щоб» (підрядне, дієслово в кінці). <b>Darum</b>: «про це» (<i>Es geht darum…</i>) або «тому» (<i>Darum bleiben wir hier</i>).", ex:[["Damit|da kannst_du_schreiben.|v","з цим"],["…,_damit|da ich_es_verstehe.|v","щоб (мета)"],["Darum|da bleiben_wir_hier.|v","тому (причина)"]], tip:"Підрядне з дієсловом в кінці → damit = щоб. Окреме речення → «цим / тому»." },
  { n:9, t:"Підсумок і тексти", p:"Фінал: усе разом у завданнях на помилки й у коротких текстах. Для кожного слова питай себе: <b>1)</b> річ чи людина? <b>2)</b> який прийменник і відмінок? <b>3)</b> з -r- чи без? <b>4)</b> це питання, відповідь чи зв’язка?", ex:[["Davor|da habe_ich_Angst.|v","річ + Angst haben vor"],["Mit|pr wem|wm sprichst_du?|v","людина + Dativ"]], tip:"Алгоритм: 1) річ/людина 2) прийменник і відмінок 3) r? 4) питання чи відповідь?" }
 ];
@@ -857,8 +859,13 @@ function add(t, o){
 const PRON_SWAP = { ihn:"ihm", ihm:"ihn", sie:"ihr", ihr:"sie", ihnen:"ihn" };
 
 /* --- з D: 42 речення --- */
-D.forEach((d, i) => {
-  const [sent, np, ty, q, a] = d, p = np.split(" ")[0], S = ty === "S", ua = DTR[i];
+const DATONLY = ["aus","bei","mit","nach","von","zu"], AKKONLY = ["durch","für","gegen","um"];
+const OLDCASE = ["D","D","A","A","D","X","A","D","D","A","A","A","A","A","A","X","A","D","D","A","D","D","D","D","A","X","A","D","A","A","A","A","A","D","A","A","D","X","X","D","A","A"];
+const XWRONG = {5:["vor","unter","neben"],15:["vor","nach","aus"],25:["über","für","vor"],37:["vor","nach","über"],38:["mit","nach","vor"]};
+/* хибні прийменники, які гарантовано дають неправильне речення: після Akk-форми — прийменники лише з Dativ, і навпаки */
+function wrongPreps(d){ const i = D.indexOf(d), c = d[5] || OLDCASE[i]; if(c === "X") return XWRONG[i]; return sh(c === "A" ? DATONLY : AKKONLY).slice(0, 3); }
+function genD(d, ua){
+  const [sent, np, ty, q, a] = d, p = np.split(" ")[0], S = ty === "S";
   const cw = q.split(" ")[1];                         // wen / wem (для людини)
   const acc = S ? (AK.includes(p) || p === "in") : cw === "wen";
   const rest = q.split(" ").slice(S ? 1 : 2).join(" ");
@@ -886,9 +893,10 @@ D.forEach((d, i) => {
       ex: `${p} + ${acc ? "Akkusativ" : "Dativ"}: «${np}» → ${p} ${pron}.`, ans:`${p} ${pron}` });
   }
 
-  add("ue", { s:ua, sch:"Обери правильне німецьке речення.", o:uniq4(sent, oth(p, 3).map(x => swapPrep(sent, p, x))), a:sent, lbl:"", ua:ua, sp:sent, st:6,
+  add("ue", { s:ua, sch:"Обери правильне німецьке речення.", o:uniq4(sent, wrongPreps(d).map(x => swapPrep(sent, p, x))), a:sent, lbl:"", ua:ua, sp:sent, st:6,
     ex: S ? "Річ → da(r)- / wo(r)-" : "Людина → прийменник + wen/wem, ihn/ihm…", de:`<b>${esc(sent)}</b>` });
-});
+}
+D.forEach((d, i) => genD(d, DTR[i]));
 
 const QU = Object.fromEntries(rows(`denken an|Про що ти думаєш?
 warten auf|На що ти чекаєш?
@@ -1057,6 +1065,124 @@ MM.forEach(([s, n], k) => {
 ERR.forEach(([ua, a, w1, w2, w3, ex]) => add("er", { s:ua, sch:"Обери правильний варіант німецькою.", o:[a, w1, w2, w3], a, ex, lbl:"", ua, sp:a, st:9, de:`<b>${esc(a)}</b>` }));
 TXT.forEach(([s, a, o, ex, ua]) => add("tx", { s, sch:"Читай речення цілком: річ чи людина, прийменник, відмінок.", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:9, ua }));
 
+
+/* ============ ДОДАТКОВІ ЗАВДАННЯ (v2: розширення бази) ============ */
+/* Нові речення додаються ЛИШЕ В КІНЕЦЬ кожної вкладки, щоб не збити збережений прогрес (індекси). */
+
+/* --- нові речення для D-генератора: md · fr · aw · ue · (ks · pn для людей) --- */
+/* формат: [речення, підкреслене, S|P, питання, відповідь, відмінок A|D, переклад] */
+const D2 = [
+["Ich zweifle an meinem Vorgesetzten.","an meinem Vorgesetzten","P","An wem zweifelst du?","Ich zweifle auch an ihm.","D","Я сумніваюся у своєму керівникові."],
+["Ich leide unter meinem Trainer.","unter meinem Trainer","P","Unter wem leidest du?","Ich leide auch unter ihm.","D","Я страждаю від свого тренера."],
+["Ich bin stolz auf meine Tochter.","auf meine Tochter","P","Auf wen bist du stolz?","Ich bin auch stolz auf sie.","A","Я пишаюся своєю донькою."],
+["Ich zähle auf meine Großeltern.","auf meine Großeltern","P","Auf wen zählst du?","Ich zähle auch auf sie.","A","Я розраховую на своїх бабусю й дідуся."],
+["Ich bin begeistert von meiner Trainerin.","von meiner Trainerin","P","Von wem bist du begeistert?","Ich bin auch begeistert von ihr.","D","Я в захваті від своєї тренерки."],
+["Ich verabschiede mich von meinen Gästen.","von meinen Gästen","P","Von wem verabschiedest du dich?","Ich verabschiede mich auch von ihnen.","D","Я прощаюся зі своїми гостями."],
+["Ich entschuldige mich bei meiner Nachbarin.","bei meiner Nachbarin","P","Bei wem entschuldigst du dich?","Ich entschuldige mich auch bei ihr.","D","Я вибачаюся перед своєю сусідкою."],
+["Ich beschwere mich über meinen Vermieter.","über meinen Vermieter","P","Über wen beschwerst du dich?","Ich beschwere mich auch über ihn.","A","Я скаржуся на свого орендодавця."],
+["Ich fahre mit meinen Kollegen zur Arbeit.","mit meinen Kollegen","P","Mit wem fährst du zur Arbeit?","Ich fahre auch mit ihnen zur Arbeit.","D","Я їду на роботу з колегами."],
+["Ich warte auf meine Gäste.","auf meine Gäste","P","Auf wen wartest du?","Ich warte auch auf sie.","A","Я чекаю на своїх гостей."],
+["Ich gehe zu meiner Ärztin.","zu meiner Ärztin","P","Zu wem gehst du?","Ich gehe auch zu ihr.","D","Я йду до своєї лікарки."],
+["Ich glaube an meinen Mann.","an meinen Mann","P","An wen glaubst du?","Ich glaube auch an ihn.","A","Я вірю у свого чоловіка."],
+["Ich freue mich auf meine Freunde.","auf meine Freunde","P","Auf wen freust du dich?","Ich freue mich auch auf sie.","A","Я радію наперед зустрічі зі своїми друзями."],
+["Ich zweifle an dieser Entscheidung.","an dieser Entscheidung","S","Woran zweifelst du?","Ich zweifle auch daran.","D","Я сумніваюся в цьому рішенні."],
+["Ich arbeite an einem neuen Projekt.","an einem neuen Projekt","S","Woran arbeitest du?","Ich arbeite auch daran.","D","Я працюю над новим проєктом."],
+["Ich bin stolz auf meine Leistung.","auf meine Leistung","S","Worauf bist du stolz?","Ich bin auch stolz darauf.","A","Я пишаюся своїми досягненнями."],
+["Ich leide unter dem Zeitdruck.","unter dem Zeitdruck","S","Worunter leidest du?","Ich leide auch darunter.","D","Я страждаю від цейтноту."],
+["Ich verzichte auf den Nachtisch.","auf den Nachtisch","S","Worauf verzichtest du?","Ich verzichte auch darauf.","A","Я відмовляюся від десерту."],
+["Ich antworte auf die E-Mail.","auf die E-Mail","S","Worauf antwortest du?","Ich antworte auch darauf.","A","Я відповідаю на електронний лист."],
+["Ich bereite mich auf das Gespräch vor.","auf das Gespräch","S","Worauf bereitest du dich vor?","Ich bereite mich auch darauf vor.","A","Я готуюся до розмови."],
+["Ich gewöhne mich an die Kälte.","an die Kälte","S","Woran gewöhnst du dich?","Ich gewöhne mich auch daran.","A","Я звикаю до холоду."],
+["Ich nehme an einer Schulung teil.","an einer Schulung","S","Woran nimmst du teil?","Ich nehme auch daran teil.","D","Я беру участь у тренінгу."],
+["Ich erkundige mich nach den Öffnungszeiten.","nach den Öffnungszeiten","S","Wonach erkundigst du dich?","Ich erkundige mich auch danach.","D","Я цікавлюся годинами роботи."],
+["Ich bewerbe mich um eine Stelle.","um eine Stelle","S","Worum bewirbst du dich?","Ich bewerbe mich auch darum.","A","Я подаю заявку на вакансію."],
+["Ich freue mich über die Einladung.","über die Einladung","S","Worüber freust du dich?","Ich freue mich auch darüber.","A","Я радію запрошенню."],
+["Ich passe auf die Tasche auf.","auf die Tasche","S","Worauf passt du auf?","Ich passe auch darauf auf.","A","Я стежу за сумкою."]
+];
+D2.forEach(row => genD(row, row[6]));
+
+/* --- wen / wem: додаткові сполуки (Dativ після an/unter/vor/aus, Akkusativ після um/für/über) --- */
+[
+["Aus {{B}} besteht das Team?","wem","Aus wem besteht das Team?","З ким складається команда?","bestehen aus → завжди Dativ → wem."],
+["An {{B}} liegt das?","wem","An wem liegt das?","Через кого так (у кому причина)?","liegen an + Dativ → wem (an тут з Dativ!)."],
+["Um {{B}} geht es?","wen","Um wen geht es?","Про кого йдеться?","es geht um + Akkusativ → wen."],
+["Vor {{B}} warnst du ihn?","wem","Vor wem warnst du ihn?","Перед ким (від кого) ти його застерігаєш?","warnen vor → Dativ → wem."],
+["Für {{B}} entscheidest du dich?","wen","Für wen entscheidest du dich?","Кого ти обираєш?","sich entscheiden für + Akkusativ → wen."],
+["Bei {{B}} beschwerst du dich?","wem","Bei wem beschwerst du dich?","Кому ти скаржишся?","sich beschweren bei → Dativ → wem."]
+].forEach(([s, a, sp, ua, ex]) => add("ks", { s, sch:"Дієслово з цим прийменником вимагає Akkusativ чи Dativ?", o:["wen","wem"], a, lbl:ua, sp, st:4, ex }));
+
+/* --- da-слово перед dass-реченням / інфінітивом з zu (Verweiswort) --- */
+[
+["Ich freue mich {{B}}, dich bald zu sehen.","darauf",["darauf","darüber","dafür","davon"],"Я радію тому, що скоро тебе побачу.","sich freuen auf → darauf; da-слово заступає інфінітивну групу «dich bald zu sehen»."],
+["Ich warte {{B}}, dass der Bus kommt.","darauf",["darauf","davor","dafür","damit"],"Я чекаю, поки приїде автобус.","warten auf → darauf; після коми — dass-речення."],
+["Ich achte {{B}}, dass alle pünktlich sind.","darauf",["darauf","daran","dafür","danach"],"Я стежу за тим, щоб усі були пунктуальні.","achten auf → darauf + dass."],
+["Sie ärgert sich {{B}}, dass er immer zu spät kommt.","darüber",["darüber","darauf","davor","dafür"],"Вона злиться, що він завжди запізнюється.","sich ärgern über → darüber + dass."],
+["Ich habe Angst {{B}}, den Zug zu verpassen.","davor",["davor","dafür","darauf","darüber"],"Я боюся спізнитися на потяг.","Angst haben vor → davor + zu-Infinitiv."],
+["Er bittet mich {{B}}, ihm zu helfen.","darum",["darum","dafür","damit","dazu"],"Він просить мене допомогти йому.","bitten um → darum + zu-Infinitiv."],
+["Ich verlasse mich {{B}}, dass du pünktlich bist.","darauf",["darauf","davon","darüber","dafür"],"Я покладаюся на те, що ти будеш пунктуальним.","sich verlassen auf → darauf + dass."],
+["Es hängt {{B}} ab, ob es morgen regnet.","davon",["davon","darauf","darum","dazu"],"Це залежить від того, чи буде завтра дощ.","abhängen von → davon + ob-речення."],
+["Ich träume {{B}}, ein eigenes Café zu eröffnen.","davon",["davon","darüber","daran","dafür"],"Я мрію відкрити власне кафе.","träumen von → davon + zu-Infinitiv."],
+["Wir sprechen {{B}}, wie wir das Problem lösen können.","darüber",["darüber","darauf","dafür","damit"],"Ми говоримо про те, як вирішити проблему.","sprechen über → darüber + питальне підрядне.","davon"],
+["Ich bedanke mich {{B}}, dass du mir geholfen hast.","dafür",["dafür","davor","darauf","darum"],"Я дякую тобі за те, що ти мені допоміг.","sich bedanken für → dafür + dass."],
+["Er kümmert sich {{B}}, dass alle Gäste etwas zu trinken haben.","darum",["darum","daran","davon","dazu"],"Він дбає про те, щоб у всіх гостей був напій.","sich kümmern um → darum + dass."]
+].forEach(([s, a, o, ua, ex, alt]) => add("br", { s, sch:"da-слово заступає dass-речення або інфінітив з zu.", o, a, alt: alt ? [alt] : undefined, lbl:ua, sp:s.replace("{{B}}", a), st:7, ex, ua }));
+
+/* --- damit / darum: додаткові приклади --- */
+[
+["Ich habe einen Termin beim Arzt. Darum kann ich morgen nicht kommen.","1","У мене прийом у лікаря. Тому я не можу прийти завтра."],
+["Ich spare Geld, damit ich im Sommer verreisen kann.","1","Я заощаджую гроші, щоб улітку поїхати у відпустку."],
+["Ich brauche einen Stift. Damit kann ich unterschreiben.","0","Мені потрібна ручка. Нею я можу підписати."],
+["Wir sprechen leise, damit das Baby nicht aufwacht.","1","Ми говоримо тихо, щоб дитина не прокинулась."],
+["Sie bat ihn darum, das Fenster zu schließen.","0","Вона попросила його зачинити вікно."],
+["Der Zug hatte Verspätung. Darum kam ich zu spät.","1","Потяг запізнювався. Тому я спізнився(-лась)."],
+["Ich rufe dich an, damit wir alles besprechen können.","1","Я тобі зателефоную, щоб ми все обговорили."],
+["Ich habe ein neues Handy. Damit mache ich jetzt viele Fotos.","0","У мене новий телефон. Ним я тепер роблю багато фото."]
+].forEach(([s, n, ua]) => {
+  const w = s.match(/damit|darum/i)[0].toLowerCase();
+  add("dd", { s:s.replace(/(damit|darum)/i, '<span class="u">$1</span>'), sch:"Значення видно з контексту речення.", o:MN[w], a:MN[w][+n], ex:`${cap(w)} = ${MN[w][+n]}`, lbl:ua, sp:s, st:8,
+    de:`${esc(s)} → <b>${esc(MN[w][+n])}</b>`, ua });
+});
+
+/* --- «Знайди помилку»: винятки та типові пастки --- */
+[
+["Окуляри зламалися. Без них я не можу читати.","Ohne sie kann ich nicht lesen.","Dohne kann ich nicht lesen.","Ohne es kann ich nicht lesen.","Darohne kann ich nicht lesen.","Виняток: ohne не утворює da-форми (немає «dohne»). Після нього — займенник: ohne sie / ohne ihn."],
+["Ти мені допоміг. Я дякую тобі за це.","Ich bedanke mich bei dir dafür.","Ich bedanke mich dir dafür.","Ich bedanke mich bei dich dafür.","Ich bedanke mich bei dir darauf.","Людина — bei + Dativ (dir); за що — da-слово dafür (sich bedanken für)."],
+["Мені потрібна допомога. Я прошу її про це.","Ich bitte sie darum.","Ich bitte sie um es.","Ich bitte sie um sie.","Ich bitte ihr darum.","bitten + Akkusativ (sie) + um → darum. «um es» не буває."],
+["Я вибачаюся перед тобою за це.","Ich entschuldige mich bei dir dafür.","Ich entschuldige mich dir dafür.","Ich entschuldige mich bei dir davor.","Ich entschuldige mich bei dich dafür.","sich entschuldigen bei + Dativ (dir) за що → dafür (für)."],
+["У чому ти береш участь? (у тренінгу)","Woran nimmst du teil?","Worauf nimmst du teil?","Woan nimmst du teil?","An wen nimmst du teil?","teilnehmen an → Dativ; річ → wo + r + an = woran."],
+["Я сумніваюся в ньому (у керівникові).","Ich zweifle an ihm.","Ich zweifle an ihn.","Ich zweifle daran.","Ich zweifle auf ihn.","Пастка: zweifeln an + Dativ (не Akkusativ!) → an ihm."],
+["Над чим ти працюєш? (над проєктом)","Woran arbeitest du?","Worauf arbeitest du?","Woüber arbeitest du?","An wen arbeitest du?","arbeiten an → woran (річ)."],
+["Я радію подарунку, який уже отримав(-ла).","Ich freue mich darüber.","Ich freue mich darauf.","Ich freue mich darum.","Ich freue mich über es.","sich freuen über — те, що вже є; sich freuen auf — те, що ще попереду."],
+["Я вчу німецьку, щоб працювати в Німеччині.","Ich lerne Deutsch, damit ich in Deutschland arbeiten kann.","Ich lerne Deutsch, damit in Deutschland arbeiten kann.","Ich lerne Deutsch, damit ich in Deutschland zu arbeiten.","Ich lerne Deutsch, darum ich in Deutschland arbeiten kann.","damit відкриває підрядне: потрібен підмет, дієслово — в кінці."],
+["Про кого ти розповідаєш? (про брата)","Von wem erzählst du?","Von wen erzählst du?","Wovon erzählst du?","Davon erzählst du?","erzählen von + Dativ; людина → von wem."],
+["Це залежить від погоди.","Das hängt davon ab.","Das hängt darauf ab.","Das hängt von es ab.","Das hängt wovon ab.","abhängen von → davon; «von es» не буває."]
+].forEach(([ua, a, w1, w2, w3, ex]) => add("er", { s:ua, sch:"Обери правильний варіант німецькою.", o:[a, w1, w2, w3], a, ex, lbl:"", ua, sp:a, st:9, de:`<b>${esc(a)}</b>` }));
+
+/* --- Тексти: нові короткі контексти --- */
+[
+["Ich habe eine neue Stelle gefunden. {{B}} freue ich mich sehr.","Darüber",["Darüber","Darauf","Dafür","Davor"],"sich freuen über — те, що вже сталося → darüber.","Я знайшов(-ла) нову роботу. Я дуже з цього радію."],
+["{{B}} zweifelst du? — An seiner Ehrlichkeit.","Woran",["Woran","Worauf","An wen","Wovon"],"zweifeln an + Dativ; річ → woran.","У чому ти сумніваєшся? — У його чесності."],
+["{{B}} arbeitet Anna zusammen? — Mit Paul.","Mit wem",["Mit wem","Mit wen","Womit","Wormit"],"Людина, mit + Dativ → mit wem.","З ким працює Анна? — З Паулем."],
+["Mein Kollege hat mir geholfen. Ich bedanke mich bei ihm {{B}}.","dafür",["dafür","davor","für ihn","darauf"],"Людина — bei ihm; за що — dafür (sich bedanken für).","Мій колега мені допоміг. Я дякую йому за це."],
+["Ich habe Angst vor dem Test. Meine Schwester hat auch Angst {{B}}.","davor",["davor","vor ihm","wovor","dafür"],"Test — річ → davor.","Я боюся тесту. Моя сестра теж цього боїться."],
+["Der Chef achtet {{B}}, dass alle pünktlich sind.","darauf",["darauf","auf ihn","dafür","worauf"],"achten auf → darauf; da-слово заступає dass-речення.","Начальник стежить за тим, щоб усі були пунктуальні."],
+["{{B}} unterhaltet ihr euch? — Über den Urlaub.","Worüber",["Worüber","Über wen","Darüber","Wovon"],"sich unterhalten über; річ → worüber.","Про що ви розмовляєте? — Про відпустку."]
+].forEach(([s, a, o, ex, ua]) => add("tx", { s, sch:"Читай речення цілком: річ чи людина, прийменник, відмінок.", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:9, ua }));
+
+/* --- Приймаємо коректні альтернативні відповіді (дієслова з кількома прийменниками) --- */
+{
+  const VPALT = {"sprechen über":["von","mit"],"erzählen von":["über"],"berichten über":["von"],"sich unterhalten über":["mit"],"sich beschweren über":["bei"],
+    "sich streiten mit":["über","um"],"arbeiten an":["mit","für","bei"],"diskutieren über":["mit"],"leiden unter":["an"],"spielen mit":["gegen"],"sich bewerben um":["auf"],"denken an":["über"]};
+  ITEMS.vp.forEach(it => {
+    const al = VPALT[it.sp]; if(!al) return;
+    it.alt = (it.alt || []).concat(al);
+    it.o = it.o.filter(x => x === it.a || !al.includes(x));
+    SP.filter(x => x !== it.a && !al.includes(x) && !(near[it.a] || "").split(" ").includes(x) && !it.o.includes(x)).slice(0, 4 - it.o.length).forEach(x => it.o.push(x));
+  });
+  const EIALT = {"Wir sprechen morgen darüber.":["davon"],"Ich leide sehr darunter.":["daran"]};
+  ITEMS.ei.forEach(it => { if(EIALT[it.sp]) it.alt = (it.alt || []).concat(EIALT[it.sp]); });
+}
+
 /* --- «Річ чи людина?»: прибираємо дублікати (однакове підкреслене слово) --- */
 {
   const seen = new Set();
@@ -1163,7 +1289,7 @@ const RULES = {
   dw:"💡 <b>da-</b> — відповідь («про це») · <b>wo-</b> — питання («про що?»).",
   ei:"💡 Спершу знайди прийменник дієслова, потім додай da(r)-.",
   vp:"💡 Дієслово + прийменник вчимо разом: warten <b>auf</b>, denken <b>an</b>, Angst haben <b>vor</b>.",
-  ks:"💡 <b>Akkusativ → wen</b> (auf, an, über, für, um) · <b>Dativ → wem</b> (mit, von, bei, nach, vor).",
+  ks:"💡 <b>Akkusativ → wen</b> (auf, an, über, für, um) · <b>Dativ → wem</b> (mit, von, bei, nach, vor). ⚠️ an/unter: відмінок задає дієслово (<b>an wem</b> zweifeln, arbeiten, teilnehmen; <b>unter wem</b> leiden).",
   fr:"💡 Річ → <b>wo(r) + Präp</b> · людина → <b>Präp + wen/wem</b>.",
   pn:"💡 Akk: <b>ihn / sie / sie</b> · Dativ: <b>ihm / ihr / ihnen</b>.",
   aw:"💡 Річ → <b>da(r) + Präp</b> · людина → <b>Präp + займенник</b>. Ніколи «auf es».",
