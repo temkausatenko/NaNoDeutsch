@@ -1,9 +1,14 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nein! Nicht! Kein!</title>
+<!-- === ІНТЕГРАЦІЯ З TELEGRAM + СИНХРОНІЗАЦІЯ === -->
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
-<title>Слова-заперечення</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <style>
+
 :root{
   --bg:#0c0f16;--bg-grad:#1a2035;
   --card:#131a24;--card-hover:#1c2532;
@@ -27,7 +32,6 @@
   --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
   --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
   --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
-
 *{box-sizing:border-box}[hidden]{display:none!important}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
@@ -82,6 +86,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
+/* підсумок вкладки прямо в тренажері (без спливаючих вікон) */
 #finBox{display:none}
 .card.fin > :not(h2):not(.rst):not(#finBox){display:none!important}
 .card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
@@ -96,23 +101,33 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .fin-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .fin-actions .cancel:hover{border-color:var(--pr)}
 .tab.cl small::before{content:"✓ "}
+
+/* Выравнивание заголовка и кнопок */
 .card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
-.speak,.mode-toggle,.rst{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
+
+/* Кнопки внутри карточки */
+.speak,.mode-toggle{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
   background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
-.rst{right:22px;font-size:1.15rem;}
-.speak{right:62px;}
-.mode-toggle{right:102px;font-size:.8rem;width:auto;padding:0 12px;gap:6px;border-radius:99px;font-weight:600;white-space:nowrap;}
-.speak:hover,.mode-toggle:hover,.rst:hover{color:var(--tx);border-color:var(--pr)}
+  
+.speak{right:22px;}
+.mode-toggle{right:62px;font-size:1.1rem;}
+
+.speak:hover,.mode-toggle:hover{color:var(--tx);border-color:var(--pr)}
+
 .sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
 .u{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--sa)}
 .lab{margin:0 0 16px;font-size:.8rem;line-height:1.4;font-weight:400;color:var(--mu)}
 .lab:empty{display:none}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:.8rem;line-height:1.4;color:var(--mu)}
+.rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
+.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
 .scheme{font-size:.95rem;color:var(--mu);margin:8px 0 0;line-height:1.5}
 .scheme .np{color:var(--tx);font-weight:500}
 .blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
 .blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
-.blank.fill{border-bottom-style:solid}
 .opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .opt{flex:1 1 auto;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;
   border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
@@ -132,58 +147,79 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .card.mc .row .next{padding:12px 20px}
 .card.mc .row{display:none}
 .card.mc .fb{cursor:pointer}
-.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.um{width:36px;height:34px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-size:.95rem;cursor:pointer;transition:all .18s}
+.um:hover{color:var(--tx);border-color:var(--pr)}
 .tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;
   text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
 .tool:hover{color:var(--tx)}
-.translate-btn{margin-right:auto;padding:8px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--pl);color:var(--tx);font:inherit;font-size:.84rem;font-weight:600;cursor:pointer}
-.tr-text{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;background:var(--pl);color:var(--mu);font-size:.88rem}.tr-text.show{display:block}
-.next-correct{display:block;margin-top:14px;width:100%;padding:13px 18px;border:0;border-radius:12px;background:var(--ok);color:#fff;font:inherit;font-weight:700;font-size:1rem;cursor:pointer}
-.builder{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.builder .word{padding:9px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--pl);color:var(--tx);font:inherit;font-weight:600;cursor:pointer}.builder .word:disabled{opacity:.35}
-.build-answer{min-height:48px;padding:10px;border:1px dashed var(--sa);border-radius:10px;margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--mu)}
-.build-answer .word{background:var(--okb);border-color:var(--ok);color:var(--tx)}.build-actions{display:flex;gap:8px;margin-top:10px}.build-actions button{flex:1;padding:11px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-weight:600}
-.stages{display:grid;grid-auto-flow:column;grid-template-rows:repeat(1,auto);grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding-bottom:8px;scrollbar-width:none}
+.stages{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
 .stages::-webkit-scrollbar{display:none}
-.stages.drag{cursor:grabbing;user-select:none}
-.stages.drag .stg{pointer-events:none}
-.stg{position:relative;flex:none;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.72rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
+.stg{position:relative;flex:0 0 auto;white-space:nowrap;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:10px;padding:6px 10px 8px;font:inherit;font-size:.72rem;font-weight:600;line-height:1.2;cursor:pointer;overflow:hidden;transition:all .18s}
 .stg small{margin-left:6px;font-size:.62rem;font-weight:500;opacity:.65}
 .stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
 .stg:hover{color:var(--tx);border-color:var(--pr)}
 .stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
 .stg.lk{opacity:.5}
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
-body.lsn #tabs,body.lsn #rule,body.lsn #card,body.lsn .stats-panel,body.lsn .pg{display:none}
-.lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px;margin-top:12px}
-.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer;width:100%}
+body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
+.lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
+.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
 .lsl:hover{color:var(--tx)}
 .rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
 .rule:empty{display:none}
 .rule b{font-weight:700}
 .sch{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fb .why{margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--nob);font-size:.86rem;line-height:1.5}
 .fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
 .fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
 .fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
+.fb.hint{display:block;background:var(--gob);border-color:var(--go)}
 .fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
-.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}.fb.hint .k{color:var(--go)}
 .fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
 .fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
 .fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
 .fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
-.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2s linear forwards;width:100%}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 1s linear forwards;width:100%}
 @keyframes shrink{to{width:0}}
 .foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
 .foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
 .btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
 .btn:hover{border-color:var(--pr);transform:translateY(-1px)}
+.btn.g{font-weight:500;font-size:.82rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
+.btn.g:hover{color:var(--tx);background:var(--pl);transform:none}
 .btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
 .btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
 .btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
 .theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+.cheat{margin:24px 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.cheat-title{margin:0 0 2px;font-size:1.05rem;font-weight:700;color:var(--tx)}
+.cheat-sub{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
+.cheat-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.cheat-pill{font:inherit;font-size:.8rem;font-weight:500;color:var(--mu);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.cheat-pill:hover{color:var(--tx);border-color:var(--c,var(--sa))}
+.cheat-pill.on{color:var(--tx);border-color:var(--c,var(--sa));background:var(--pl);box-shadow:inset 0 -2px 0 var(--c,var(--sa))}
+.cheat-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px}
+.cheat-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--bd)}
+.cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
+.cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
+@media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
 .complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;
   padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
   animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;
+  max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-card .cmax{color:var(--tx);font-weight:600}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover{border-color:var(--pr)}
 #theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
 #theory-section.show{display:block}
 .theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
@@ -200,7 +236,22 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card,body.lsn .stats-panel,body.lsn .pg{
 .theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
 .theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
 .theory-card th{background:var(--pl);color:var(--tx)}
-
+@media(max-width:480px){
+  .stats-panel{grid-template-columns:repeat(3,1fr)}
+  .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
+  .tool{margin-left:0}.card{padding:18px}h1{font-size:1.35rem}.complete-card{padding:22px 18px}
+  .theory-card{padding:16px}.header-wrap{padding-top:48px}
+  /* Адаптация кнопок на мобильных */
+  .speak,.mode-toggle{top:18px;height:32px;width:32px;}
+  .speak{right:18px;}
+  .mode-toggle{right:58px;}
+  .card h2{padding-right:82px;line-height:32px;height:32px;}
+}
+@media(hover:hover) and (pointer:fine){
+  .tab:hover{border-color:var(--pr);color:var(--tx)}.tab.on:hover{background:#4338ca}
+  .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
+  .btn:hover{transform:translateY(-1px)}.btn.g:hover{transform:none}
+}
 .errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
 .errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
 .errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
@@ -217,11 +268,10 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card,body.lsn .stats-panel,body.lsn .pg{
 .errs-actions .go:hover{filter:brightness(1.1)}
 .errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
 .errs-actions .cancel:hover{border-color:var(--pr)}
-
 button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-/* EXP Ranks */
+/* ранги EXP */
 .xv{position:relative}
 .xp{--xa:#475569;--xz:#94a3b8}
 .xp[data-r="1"]{--xa:#047857;--xz:#34d399}
@@ -246,6 +296,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 @keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
 .xp.lvl{animation:xlvl 1.2s ease-out}
 @keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
 .xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
 .xp.max .xnx{color:var(--go);font-weight:600}
@@ -253,38 +304,141 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 :root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
 
-/* Colors for visual parsing */
-:root{--c-k:#f59e0b;--c-n:#fb7185;--c-p:#60a5fa;--c-t:#2dd4bf;--c-i:#a78bfa}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--c-k:#d97706;--c-n:#e11d48;--c-p:#2563eb;--c-t:#0d9488;--c-i:#7c3aed}}
-:root[data-theme="light"]{--c-k:#d97706;--c-n:#e11d48;--c-p:#2563eb;--c-t:#0d9488;--c-i:#7c3aed}
+/* кнопка режиму з підписом */
+.mode-toggle{width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.card h2{padding-right:175px;height:auto;min-height:32px}
+@media(max-width:480px){
+  .speak,.mode-toggle{top:18px}
+  .mode-toggle{width:auto;right:58px}
+  .card h2{padding-right:160px;height:auto;min-height:32px}
+}
 
-.r-k{--c:var(--c-k)}.r-n{--c:var(--c-n)}.r-p{--c:var(--c-p)}.r-t{--c:var(--c-t)}.r-i{--c:var(--c-i)}
-.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px;margin-right:6px;margin-bottom:6px}
-.un .cap{font-size:.65rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}
-.un .wc{cursor:default;display:inline-block;padding:7px 11px;border-radius:10px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card));color:var(--tx);font-weight:600;}
-.opts.col{flex-direction:column}
-.opts.col .opt{flex:none;text-align:left;font-weight:500;line-height:1.4}
+/* ===== TEKAMOLO: кольори ролей ===== */
+:root{--te:#f59e0b;--ka:#fb7185;--mo:#a78bfa;--lo:#2dd4bf;--dt:#60a5fa;--ak:#a3e635;--pp:#94a3b8;--ne:#cbd5e1}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
+:root[data-theme="light"]{--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}
+.r-te{--c:var(--te)}.r-ka{--c:var(--ka)}.r-mo{--c:var(--mo)}.r-lo{--c:var(--lo)}
+.r-dat,.r-pd{--c:var(--dt)}.r-akk,.r-pa{--c:var(--ak)}.r-prep{--c:var(--pp)}
+.r-s,.r-v1,.r-v2,.r-p1,.r-refl{--c:var(--ne)}.r-neg{--c:var(--no)}
+.c-te{color:var(--te)}.c-ka{color:var(--ka)}.c-mo{color:var(--mo)}.c-lo{color:var(--lo)}.c-dt{color:var(--dt)}.c-ak{color:var(--ak)}.c-pp{color:var(--pp)}
+.big{font-size:1.7rem;font-weight:700;line-height:1.25;letter-spacing:-.2px;padding:6px 0}
+.sent .blank{min-width:56px}
+.blank.fill{border-bottom-style:solid}
+.u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:var(--sa)}
+
+/* варіанти відповіді з кольором ролі */
+.opt.rl:not(.ok):not(.er){border-color:color-mix(in srgb,var(--c) 50%,var(--bd))}
+.opt.rl b{color:var(--c);font-weight:800;letter-spacing:.02em}
+.opt.rl small{display:block;font-weight:500;font-size:.72rem;color:var(--mu);margin-top:1px}
 .opts.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
 .opts.grid4 .opt{padding:12px 10px}
+@media(min-width:640px){.opts.grid4.c4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.opts.col{flex-direction:column}
+.opts.col .opt{flex:none;text-align:left;font-weight:500;line-height:1.4}
 
+/* конструктор речень */
+.card:not(.bd) .bld{display:none}
+.card.bd .row input,.card.bd .um-row .um{display:none}
+.card.bd .row{display:flex}
+.card.bd.bt .row input{display:block;flex:1;min-width:0}
+.card.mc .um-row,.card.bd .um-row{display:none}
+.bld{margin-top:6px}
+.frame{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;padding:12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg);min-height:62px}
+.zone{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;min-width:0;min-height:40px;padding:2px;border-radius:10px;border:1.5px dashed var(--bd)}
+.zone.done{display:contents}
+.zone .ph{color:var(--mu);font-size:.8rem;padding:8px 6px;line-height:1.3}
+.pool{display:flex;flex-wrap:wrap;gap:10px 8px;margin-top:14px;min-height:46px}
+.wc{display:inline-block;padding:9px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-size:.98rem;font-weight:500;line-height:1.25;cursor:pointer;transition:transform .12s,border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.wc:hover{border-color:var(--pr)}
+.wc:active{transform:scale(.96)}
+.wc.lk{cursor:default;background:var(--pl);border-color:transparent;color:var(--mu)}
+.wc.lk:hover{border-color:transparent}
+.wc.hint,.wc.col{border-color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+.wc.bad{border-color:var(--no);background:var(--nob);animation:shake .4s}
+.wc.ok{border-color:var(--ok);background:var(--okb)}
+.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
+.un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
+.un .wc{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:.72rem;color:var(--mu)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--c);margin-right:5px;vertical-align:-1px}
+.bl-tools{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.bl-tools .tool{margin:0}
+.um-row .tool{margin-left:auto}
+
+/* теорія */
+.mf{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0 4px}
+.mf span{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);font-weight:800;font-size:1.25rem;color:var(--c);line-height:1}
+.mf small{font-size:.62rem;font-weight:600;color:var(--mu);margin-top:5px;letter-spacing:.03em}
+.mf em{align-self:center;color:var(--mu);font-style:normal;font-weight:700}
+.theory-card h3{font-size:1rem;color:var(--tx);margin:18px 0 4px}
+.theory-card .tk td,.theory-card .tk th{white-space:nowrap;font-size:.82rem;padding:7px 9px}
+.theory-card .tk th.h-te,.theory-card .tk td.h-te{color:var(--te)}
+.theory-card .tk th.h-ka,.theory-card .tk td.h-ka{color:var(--ka)}
+.theory-card .tk th.h-mo,.theory-card .tk td.h-mo{color:var(--mo)}
+.theory-card .tk th.h-lo,.theory-card .tk td.h-lo{color:var(--lo)}
+.theory-card .tk th.h-dt,.theory-card .tk td.h-dt{color:var(--dt)}
+.theory-card .tk th.h-ak,.theory-card .tk td.h-ak{color:var(--ak)}
+.theory-card .tk th.h-pp,.theory-card .tk td.h-pp{color:var(--pp)}
+.theory-card .tk th.h-no,.theory-card .tk td.h-no{color:var(--no)}
+.theory-card .tk th.h-v,.theory-card .tk td.h-v{background:var(--pl);color:var(--tx)}
+.theory-card .tk td.n{color:var(--mu);text-align:center}
+.theory-card .bad{background:var(--nob);border-left:4px solid var(--no);padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .bad .hl{color:var(--ok);font-weight:700}
+.theory-card .bad s{color:var(--no);text-decoration-thickness:2px}
+.theory-card .bad em{color:var(--mu)}
+.theory-card .tip{background:var(--pl);border-left:4px solid var(--pr);padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .tip b{color:var(--sa)}
+.theory-card p b,.theory-card li b{color:var(--tx)}
+.xlg{display:inline-flex;gap:6px;align-items:center}
+.tg-note{display:none}
+
+.card:not(.tx) h2{padding-right:50px}
+.card.tx h2{padding-right:150px}
+@media(max-width:480px){.card:not(.tx) h2{padding-right:50px}.card.tx h2{padding-right:140px}}
+
+/* кнопки в шапці картки: режим · 🔊 · ↺ */
+.speak,.rst,.mode-toggle{top:22px}
+.rst{position:absolute;right:22px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1.15rem}
+.rst:hover{color:var(--tx);border-color:var(--pr)}
+.speak{right:62px}
+.mode-toggle{right:102px;font-size:.8rem}
+.card:not(.tx) h2{padding-right:100px}
+.card.tx h2{padding-right:200px}
+.um-row{justify-content:flex-end}
 @media(max-width:480px){
-  .speak,.rst,.mode-toggle{top:18px;height:32px;width:32px;}
-  .rst{right:18px}.speak{right:58px}.mode-toggle{right:98px;width:auto}
-  .card h2{padding-right:160px;height:auto;min-height:32px}
-  .stats-panel{grid-template-columns:repeat(3,1fr)}
-  .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
-  .tool{margin-left:0}.card{padding:18px}h1{font-size:1.35rem}
-  .theory-card{padding:16px}.header-wrap{padding-top:48px}
+  .speak,.rst,.mode-toggle{top:18px}
+  .rst{right:18px}.speak{right:58px}.mode-toggle{right:98px}
+  .card:not(.tx) h2{padding-right:96px}
+  .card.tx h2{padding-right:196px}
 }
-@media(hover:hover) and (pointer:fine){
-  .tab:hover{border-color:var(--pr);color:var(--tx)}.tab.on:hover{background:#4338ca}
-  .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
-  .btn:hover{transform:translateY(-1px)}
-}
+
+
+.opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.stages{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding-bottom:8px}
+.stages.drag{cursor:grabbing;user-select:none}
+.stages.drag .stg{pointer-events:none}
+.stg{flex:none}
+.theory-card .tk th.h-pi,.theory-card .tk td.h-pi{color:var(--sa);font-weight:700}
+.theory-card .tk td.h-ref{color:var(--pe);font-weight:700}
+.r-d{--c:var(--go)}
+
+
+/* ===== PRONOMINALADVERBIEN: кольори ролей ===== */
+:root{--c-da:#2dd4bf;--c-wo:#f59e0b;--c-r:#fb7185;--c-pr:#94a3b8;--c-s:#60a5fa;--c-p:#f472b6;--c-v:#a3e635;--c-wn:#a78bfa;--c-wm:#2dd4bf;--c-pn:#fcd34d}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--c-da:#0d9488;--c-wo:#d97706;--c-r:#e11d48;--c-pr:#64748b;--c-s:#2563eb;--c-p:#be185d;--c-v:#4d7c0f;--c-wn:#7c3aed;--c-wm:#0d9488;--c-pn:#b45309}}
+:root[data-theme="light"]{--c-da:#0d9488;--c-wo:#d97706;--c-r:#e11d48;--c-pr:#64748b;--c-s:#2563eb;--c-p:#be185d;--c-v:#4d7c0f;--c-wn:#7c3aed;--c-wm:#0d9488;--c-pn:#b45309}
+.r-da{--c:var(--c-da)}.r-wo{--c:var(--c-wo)}.r-r{--c:var(--c-r)}.r-pr{--c:var(--c-pr)}.r-s{--c:var(--c-s)}.r-p{--c:var(--c-p)}.r-v{--c:var(--c-v)}.r-wn{--c:var(--c-wn)}.r-wm{--c:var(--c-wm)}.r-pn{--c:var(--c-pn)}
+.c-da{color:var(--c-da);font-weight:700}.c-wo{color:var(--c-wo);font-weight:700}.c-r{color:var(--c-r);font-weight:700}.c-s{color:var(--c-s);font-weight:700}.c-p{color:var(--c-p);font-weight:700}
+.sent .u,.sent .u.P,.sent .u.S{text-decoration-color:var(--mu)}
+.opts.afit{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
+.scheme .np{color:var(--tx);font-weight:600}
+.r-nt{--c:var(--c-wo)}.r-kn{--c:var(--c-r)}.r-ng{--c:var(--c-da)}.r-ps{--c:var(--c-s)}.r-nn{--c:var(--c-p)}.r-vb{--c:var(--c-v)}
 </style>
+</head>
+<body>
 <div class="w">
   <div class="header-wrap">
-    <h1>Nein, danke!<small>Слова-заперечення · nicht, kein, niemand, nichts + сполучники</small></h1>
+    <h1>Nein! Nicht! Kein!<small>Слова-заперечення · nicht · kein · nie · niemand · тренажер</small></h1>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -312,10 +466,11 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <p class="sent" id="sent"></p>
     <div class="lab" id="lab"></div>
     <div class="scheme" id="scheme"></div>
-    <div class="opts" id="opts"></div><div id="builderArea"></div>
+
+    <div class="opts" id="opts"></div>
 
     <div class="um-row" id="umRow">
-      <button class="translate-btn" id="showBtn" type="button">🌐 Перекласти</button>
+      <button class="tool" id="showBtn" type="button">Показати відповідь</button>
     </div>
     <div class="row">
       <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
@@ -332,387 +487,502 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     </div>
     <button class="btn p theory-btn" id="theory-btn" onclick="toggleTheory()">📖 Відкрити теорію</button>
   </div>
+
+  <div class="cheat" id="glossary"></div>
+
   <div id="theory-section">
-    <div class="theory-card">
-      <h1 style="margin-bottom:14px;font-size:1.4rem;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent">СЛОВА-ЗАПЕРЕЧЕННЯ В НІМЕЦЬКІЙ</h1>
-      
-      <h2>1. nicht vs. kein</h2>
-      <p>Це базові слова для заперечення. Різниця залежить від того, ЩО саме ми заперечуємо.</p>
-      <ul>
-        <li><b>kein</b> — жоден, ніякий. Заперечує ТІЛЬКИ іменники, перед якими стоїть неозначений артикль (ein/eine) або взагалі немає артикля (нульовий артикль). Відмінюється як ein.</li>
-        <li><b>nicht</b> — не. Заперечує дієслова, прикметники, прислівники, імена та іменники з ОЗНАЧЕНИМ артиклем (der/die/das) або присвійним займенником (mein/dein).</li>
-      </ul>
-      <div class="example">Ich habe ein Auto. → Ich habe <span class="hl">kein</span> Auto. (іменник з неозначеним артиклем)</div>
-      <div class="example">Ich sehe das Auto <span class="hl">nicht</span>. (іменник з означеним артиклем)</div>
-      <div class="example">Ich schlafe <span class="hl">nicht</span>. (дієслово)</div>
+<div class="theory-card">
+<h1 style="margin-bottom:14px;font-size:1.4rem;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent">NICHT · KEIN · NIE · NIEMAND · повний розбір</h1>
+<p style="text-align:center;margin-bottom:6px"><em>слова-заперечення · nicht чи kein · пари слів · schon / noch · місце nicht</em></p>
+<div class="mf"><span class="r-nt">nicht<small>не</small></span><em>/</em><span class="r-kn">kein<small>жодний</small></span><em>=</em><span class="r-ng">nein<small>заперечення</small></span></div>
+<div class="rule-box">🎯 <strong>Золоте правило:</strong> <strong>kein</strong> заперечує <strong>іменник з ein / без артикля</strong>. <strong>nicht</strong> заперечує <strong>все інше</strong>: дієслово, прикметник, прислівник, іменник з der / mein / dieser, імена.<br>Слова <strong>nichts, niemand, nie, nirgends</strong> уже містять заперечення — <strong>подвійного заперечення в німецькій немає</strong>.</div>
 
-      <h2>2. Людина чи річ (niemand / nichts)</h2>
-      <ul>
-        <li><b>niemand</b> — ніхто (для людей). Це антонім до <i>jemand</i> (хтось) або <i>alle</i> (всі).</li>
-        <li><b>nichts</b> — нічого (для речей/понять). Це антонім до <i>etwas</i> (щось) або <i>alles</i> (все).</li>
-      </ul>
-      <div class="example">Ich sehe da <span class="hl">niemanden</span>. (Я нікого там не бачу).</div>
-      <div class="example">Ich habe <span class="hl">nichts</span> verstanden. (Я нічого не зрозумів).</div>
+<h2>1. Слова-заперечення</h2>
+<p>Ось основні слова теми. Вчи їх разом із прикладами.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th>Слово</th><th>Значення</th><th>Приклад</th></tr>
+<tr><td class="h-pi">nicht</td><td>не (загальне заперечення)</td><td>Ich verstehe das <strong>nicht</strong>.<br><em>Я цього не розумію.</em></td></tr>
+<tr><td class="h-pi">nichts</td><td>ніщо, нічого</td><td>Ich weiß <strong>nichts</strong>.<br><em>Я нічого не знаю.</em></td></tr>
+<tr><td class="h-pi">nie / niemals</td><td>ніколи</td><td>Er kommt <strong>nie</strong> zu spät.<br><em>Він ніколи не спізнюється.</em></td></tr>
+<tr><td class="h-pi">niemand</td><td>ніхто</td><td><strong>Niemand</strong> ist da.<br><em>Нікого немає.</em></td></tr>
+<tr><td class="h-pi">kein</td><td>жодний, ніякий (для іменників)</td><td>Ich habe <strong>keine</strong> Zeit.<br><em>У мене немає часу.</em></td></tr>
+<tr><td class="h-pi">nicht mehr</td><td>більше не, вже не</td><td>Ich rauche <strong>nicht mehr</strong>.<br><em>Я більше не курю.</em></td></tr>
+<tr><td class="h-pi">auf keinen Fall</td><td>ні в якому разі</td><td><strong>Auf keinen Fall</strong>!<br><em>Ні в якому разі!</em></td></tr>
+<tr><td class="h-pi">kaum</td><td>ледве, майже не</td><td>Ich habe <strong>kaum</strong> Zeit.<br><em>У мене майже немає часу.</em></td></tr>
+<tr><td class="h-pi">gar nicht / überhaupt nicht</td><td>зовсім не / взагалі не</td><td>Das ist <strong>gar nicht</strong> schwer.<br><em>Це зовсім не важко.</em></td></tr>
+<tr><td class="h-pi">nirgendwo / nirgends</td><td>ніде</td><td>Ich finde ihn <strong>nirgends</strong>.<br><em>Я ніде його не знаходжу.</em></td></tr></table></div>
+<div class="tip">💡 <strong>nie</strong> і <strong>niemals</strong> означають одне й те саме, але <strong>niemals</strong> звучить категоричніше («ніколи в житті»).</div>
 
-      <h2>3. Час і простір (nie / nirgendwo)</h2>
-      <ul>
-        <li><b>nie / niemals</b> — ніколи. Антонім до <i>immer</i> (завжди) або <i>schon mal</i> (колись).</li>
-        <li><b>nirgendwo / nirgends</b> — ніде. Антонім до <i>überall</i> (скрізь) або <i>irgendwo</i> (десь).</li>
-        <li><b>nicht mehr</b> — більше не. Антонім до <i>noch</i> (ще).</li>
-        <li><b>noch nicht</b> — ще ні. Антонім до <i>schon</i> (вже).</li>
-      </ul>
-      <div class="example">Ich war noch <span class="hl">nie</span> in Paris. (Я ще ніколи не був у Парижі).</div>
-      <div class="example">Ich wohne <span class="hl">nicht mehr</span> in Berlin. (Я більше не живу в Берліні).</div>
+<h2>2. nicht чи kein?</h2>
+<p>Це найважливіше питання теми. Дивимося на те, що саме заперечуємо.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th>Що заперечуємо</th><th>Слово</th><th>Приклад</th></tr>
+<tr><td>ein / eine + іменник</td><td class="h-ref">kein</td><td>Ich habe ein Auto. → Ich habe <strong>kein</strong> Auto.</td></tr>
+<tr><td>іменник без артикля (Geld, Zeit, Hunger, множина)</td><td class="h-ref">kein</td><td>Ich habe Zeit. → Ich habe <strong>keine</strong> Zeit.</td></tr>
+<tr><td>професія без артикля</td><td class="h-ref">kein</td><td>Er ist Arzt. → Er ist <strong>kein</strong> Arzt.</td></tr>
+<tr><td>der / die / das + іменник</td><td class="h-pi">nicht</td><td>Ich kenne den Mann <strong>nicht</strong>.</td></tr>
+<tr><td>mein / dein / dieser …</td><td class="h-pi">nicht</td><td>Das ist <strong>nicht</strong> mein Buch.</td></tr>
+<tr><td>власне ім’я</td><td class="h-pi">nicht</td><td>Ich besuche Anna <strong>nicht</strong>.</td></tr>
+<tr><td>дієслово</td><td class="h-pi">nicht</td><td>Er arbeitet <strong>nicht</strong>.</td></tr>
+<tr><td>прикметник, прислівник</td><td class="h-pi">nicht</td><td>Das ist <strong>nicht</strong> gut.</td></tr>
+<tr><td>прийменникова група</td><td class="h-pi">nicht</td><td>Wir fahren <strong>nicht</strong> nach Berlin.</td></tr></table></div>
+<div class="tip">💡 <strong>kein = nicht + ein</strong>: <em>nicht ein Auto</em> → <em>kein Auto</em>. Тому з означеним артиклем і з mein / dieser слово kein не вживається.</div>
+<div class="bad">❌ Ich habe <s>nicht</s> Zeit. → ✅ Ich habe <span class="hl">keine</span> Zeit. <em>(без артикля → kein)</em></div>
+<div class="bad">❌ Das ist <s>kein</s> mein Buch. → ✅ Das ist <span class="hl">nicht</span> mein Buch. <em>(mein → nicht)</em></div>
 
-      <h2>4. Посилення заперечення</h2>
-      <p>Щоб зробити заперечення більш емоційним чи категоричним, використовують спеціальні конструкції:</p>
-      <ul>
-        <li><b>gar nicht / überhaupt nicht</b> — зовсім не, взагалі не.</li>
-        <li><b>auf keinen Fall</b> — у жодному разі (дослівно: ні в якому випадку).</li>
-        <li><b>kaum</b> — ледве, майже не (слабке заперечення).</li>
-      </ul>
-      <div class="example">Das schmeckt mir <span class="hl">gar nicht</span>! (Це мені взагалі не смакує!)</div>
-      <div class="example">Das mache ich <span class="hl">auf keinen Fall</span>. (Я не зроблю цього в жодному разі).</div>
+<h2>3. Відмінювання kein</h2>
+<p><strong>kein</strong> змінюється так само, як <strong>ein</strong>. Закінчення залежать від роду й відмінка.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th></th><th>чол. (der)</th><th>жін. (die)</th><th>сер. (das)</th><th>множина</th></tr>
+<tr><td><strong>Nominativ</strong></td><td class="h-ref">kein</td><td class="h-ref">keine</td><td class="h-ref">kein</td><td class="h-ref">keine</td></tr>
+<tr><td><strong>Akkusativ</strong></td><td class="h-ref">keinen</td><td class="h-ref">keine</td><td class="h-ref">kein</td><td class="h-ref">keine</td></tr>
+<tr><td><strong>Dativ</strong></td><td class="h-ref">keinem</td><td class="h-ref">keiner</td><td class="h-ref">keinem</td><td class="h-ref">keinen</td></tr></table></div>
+<div class="example">Ich habe <span class="hl">keinen</span> Hund. <em>(Akk, чол.)</em><br>Das ist <span class="hl">keine</span> Katze. <em>(Nom, жін.)</em><br>Ich wohne in <span class="hl">keinem</span> Haus. <em>(Dat, сер.)</em></div>
+<div class="tip">💡 Змінюється лише <strong>чоловічий рід в Akkusativ</strong> (<em>keinen</em>). Жіночий, середній і множина в Akkusativ збігаються з Nominativ.</div>
 
-      <h2>5. Слова-заперечення та антоніми (Negationswörter)</h2>
-      <p>У німецькій мові багато слів-заперечень утворюють пари з антонімами. Запам'ятай ці відповідності:</p>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Ствердження (+ / Positiv)</th><th>Заперечення (- / Negativ)</th><th>Приклад</th></tr></thead>
-          <tbody>
-            <tr><td>etwas / alles</td><td>nichts</td><td>Man bezahlt viel/alles → Man bezahlt <b>nichts</b>.</td></tr>
-            <tr><td>jemand / alle / einer</td><td>niemand / keiner</td><td>Jeder kann die Karte kaufen → <b>Niemand/keiner</b> kann die Karte kaufen.</td></tr>
-            <tr><td>überall / irgendwo / irgendwohin</td><td>nirgends / nirgendwo / nirgendwohin</td><td>Ich kann überallhin fahren → Ich kann <b>nirgendwohin</b> fahren.</td></tr>
-            <tr><td>immer / (ein)mal / schon mal</td><td>nie / niemals</td><td>Ich kaufe immer eine Karte → Ich kaufe <b>nie</b> eine Karte.</td></tr>
-            <tr><td>schon (ein)mal / schon / bereits</td><td>noch nie / noch nicht</td><td>Ich war schon im Ausland → Ich war <b>noch nie</b> im Ausland.</td></tr>
-            <tr><td>immer noch / noch</td><td>nicht mehr / kein... mehr</td><td>Fährst du noch los? → Ich fahre <b>nicht mehr</b> los.</td></tr>
-            <tr><td>mit + Dativ/Akkusativ</td><td>ohne + Akkusativ</td><td>mit einer Fahrkarte → <b>ohne</b> Fahrkarte.</td></tr>
-          </tbody>
-        </table>
-      </div>
+<h2>4. Пари-антоніми</h2>
+<p>Заперечні слова мають позитивні «пари». У відповіді на питання з позитивним словом використовуй заперечну пару.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th>Позитивне</th><th>Заперечне</th><th>Значення</th></tr>
+<tr><td class="h-pi">etwas</td><td class="h-ref">nichts</td><td>щось ↔ ніщо</td></tr>
+<tr><td class="h-pi">jemand / alle</td><td class="h-ref">niemand</td><td>хтось / усі ↔ ніхто</td></tr>
+<tr><td class="h-pi">irgendwo / überall</td><td class="h-ref">nirgendwo / nirgends</td><td>десь / скрізь ↔ ніде</td></tr>
+<tr><td class="h-pi">immer</td><td class="h-ref">nie / niemals</td><td>завжди ↔ ніколи</td></tr>
+<tr><td class="h-pi">schon / bereits</td><td class="h-ref">noch nicht</td><td>вже ↔ ще не</td></tr>
+<tr><td class="h-pi">schon (ein)mal</td><td class="h-ref">noch nie</td><td>вже (колись) ↔ ще ніколи</td></tr>
+<tr><td class="h-pi">(immer) noch</td><td class="h-ref">nicht mehr / nie mehr</td><td>ще, досі ↔ більше не / ніколи більше</td></tr>
+<tr><td class="h-pi">ein / eine</td><td class="h-ref">kein / keine</td><td>є ↔ немає</td></tr></table></div>
+<div class="example">Hast du <span class="hl">etwas</span> gesehen? — Nein, ich habe <span class="hl">nichts</span> gesehen.<br><em>Ти щось бачив? — Ні, я нічого не бачив.</em></div>
+<div class="example">Ist <span class="hl">jemand</span> zu Hause? — Nein, <span class="hl">niemand</span> ist zu Hause.<br><em>Хтось удома? — Ні, нікого немає вдома.</em></div>
 
-      <h2>6. Повне та часткове заперечення (Satznegation / Teilnegation)</h2>
-      <p><b>Satznegation (Повне заперечення)</b> — частка <b>nicht</b> розташовується ближче до кінця речення:</p>
-      <ul>
-        <li>В кінці простого речення: <i>Ich kenne den neuen Kollegen <b>nicht</b>.</i></li>
-        <li>Перед другою частиною дієслівної рамки (Partizip II, Infinitiv): <i>Ich habe das <b>nicht</b> verstanden.</i></li>
-        <li>Перед прикметниками: <i>Sie findet Persönlichkeitstests <b>nicht</b> angenehm.</i></li>
-        <li>Перед прийменниковими додатками: <i>Wir sprechen im Team <b>nicht</b> über Probleme.</i></li>
-      </ul>
-      <p>Порядок: <i>nicht</i> стоїть після підмета, дієслова, займенників, додатків у Dativ, обставин часу та причини.</p>
-      <p><b>Teilnegation (Часткове заперечення)</b> — <b>nicht</b> стоїть безпосередньо перед тим елементом, який заперечується (часто з <b>sondern</b>):</p>
-      <div class="example"><b>Nicht</b> ich schenke ihr heute den Ring (sondern er).</div>
-      <div class="example">Ich schenke ihr <b>nicht</b> heute den Ring (sondern morgen).</div>
-      <div class="example">Ich schenke ihr den Ring <b>nicht</b> zur Verlobung (sondern zum Geburtstag).</div>
+<h2>5. schon · noch nicht · noch nie · nicht mehr</h2>
+<p>Ці пари найчастіше плутають. Запам’ятай логіку: чи подія <strong>ще може статися</strong>, чи <strong>вже закінчилася</strong>.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th>Питання</th><th>Заперечна відповідь</th><th>Зміст</th></tr>
+<tr><td>Hast du <strong>schon</strong> gegessen?<br><em>Ти вже поїв?</em></td><td class="h-ref">Nein, ich habe <strong>noch nicht</strong> gegessen.<br><em>Ні, ще не їв.</em></td><td>ще ні, але може бути</td></tr>
+<tr><td>Warst du <strong>schon einmal</strong> in Wien?<br><em>Ти вже бував у Відні?</em></td><td class="h-ref">Nein, ich war <strong>noch nie</strong> in Wien.<br><em>Ні, ще ніколи не був.</em></td><td>жодного разу</td></tr>
+<tr><td>Wohnst du <strong>noch</strong> in Hamburg?<br><em>Ти ще живеш у Гамбурзі?</em></td><td class="h-ref">Nein, ich wohne <strong>nicht mehr</strong> dort.<br><em>Ні, я там більше не живу.</em></td><td>було, але вже ні</td></tr>
+<tr><td>Hast du <strong>noch</strong> Geld?<br><em>У тебе ще є гроші?</em></td><td class="h-ref">Nein, ich habe <strong>kein</strong> Geld <strong>mehr</strong>.<br><em>Ні, грошей більше немає.</em></td><td>з іменником: kein … mehr</td></tr></table></div>
+<div class="tip">💡 <strong>noch nicht</strong> = «поки що ні» (очікуємо, що буде). <strong>nicht mehr</strong> = «було, але вже ні». <strong>nie mehr / nie wieder</strong> = «ніколи більше».</div>
 
-      <h2>7. Заперечні сполучники</h2>
-      <p>Для вираження заперечення на рівні речення або його частин використовуються спеціальні сполучники та конструкції:</p>
-      <ul>
-        <li><b>nicht ... sondern</b> / <b>kein ... sondern</b> — не ..., а ...<br><i>Ich trinke <b>keinen</b> Kaffee, <b>sondern</b> Tee.</i></li>
-        <li><b>ohne ... zu + Infinitiv</b> / <b>ohne dass</b> — без того, щоб ...<br><i>Er geht, <b>ohne</b> ein Wort zu sagen.</i><br><i>Sie ging, <b>ohne dass</b> sie sich verabschiedete.</i></li>
-        <li><b>anstatt dass / statt dass</b> — замість того, щоб ...<br><i><b>Anstatt dass</b> wir uns beeilen, gehen wir langsam.</i></li>
-        <li><b>als dass</b> — занадто ..., щоб ... (після слів типу "zu" + прикметник)<br><i>Das Wetter ist zu schlecht, <b>als dass</b> wir spazieren gehen könnten.</i></li>
-        <li><b>geschweige denn</b> — не кажучи вже про ...<br><i>Er hat kein Geld für ein Auto, <b>geschweige denn</b> für ein Fahrrad.</i></li>
-      </ul>
+<h2>6. Місце nicht у реченні</h2>
+<ul>
+<li><strong>Заперечуємо усе речення</strong> (дієслово) → <strong>nicht в кінці</strong>: <em>Ich kenne ihn nicht.</em></li>
+<li><strong>Перед прикметником або прислівником</strong>: <em>Das ist nicht gut.</em></li>
+<li><strong>Перед прийменниковою групою</strong> (місце, напрямок): <em>Er wohnt nicht in Berlin. Ich fahre nicht nach Hause.</em></li>
+<li><strong>Перед другою частиною дієслівної рамки</strong> — Partizip II, інфінітив, відокремлюваний префікс: <em>Ich habe ihn nicht gesehen. Ich kann nicht kommen. Ich rufe dich nicht an.</em></li>
+<li><strong>Заперечуємо одне слово</strong> → nicht перед ним + <strong>sondern</strong> («а»): <em>Ich fahre nicht heute, sondern morgen.</em></li>
+<li><strong>nie, niemals</strong> стоять як звичайні прислівники: <em>Ich esse nie Fleisch.</em> <strong>nichts, niemand</strong> — як звичайний додаток або підмет: <em>Niemand kommt. Ich sehe nichts.</em></li></ul>
+<div class="table-wrap"><table class="tk">
+<tr><th>Структура</th><th>Приклад</th></tr>
+<tr><td>Все речення</td><td>Er kommt <strong>nicht</strong>.</td></tr>
+<tr><td>Перед прикметником</td><td>Sie ist <strong>nicht</strong> müde.</td></tr>
+<tr><td>Перед прийм. групою</td><td>Ich gehe heute <strong>nicht</strong> ins Kino.</td></tr>
+<tr><td>Перед Partizip II</td><td>Ich habe das <strong>nicht</strong> gesehen.</td></tr>
+<tr><td>nicht … sondern</td><td><strong>Nicht</strong> heute, <strong>sondern</strong> morgen.</td></tr></table></div>
+<div class="bad">❌ Ich <s>nicht</s> kenne ihn. → ✅ Ich kenne ihn <span class="hl">nicht</span>. <em>(nicht не стоїть перед дієсловом)</em></div>
+<div class="bad">❌ Ich habe das gesehen <s>nicht</s>. → ✅ Ich habe das <span class="hl">nicht</span> gesehen. <em>(перед Partizip II)</em></div>
 
-      <div class="rule-box">🎯 <b>Пам'ятай:</b> В німецькій мові зазвичай є лише <b>одне</b> заперечення в реченні (на відміну від української). Ми кажемо "Ich sehe nichts" (Я <i>нічого</i> бачу), а не "Ich sehe nicht nichts".</div>
-    </div>
+<h2>7. Підсилення і відтінки</h2>
+<div class="table-wrap"><table class="tk">
+<tr><th>Вираз</th><th>Значення</th><th>Приклад</th></tr>
+<tr><td class="h-pi">gar nicht<br>überhaupt nicht</td><td>зовсім не<br>взагалі не</td><td>Das ist <strong>gar nicht</strong> schwer.<br>Ich verstehe es <strong>überhaupt nicht</strong>.</td></tr>
+<tr><td class="h-pi">gar kein<br>überhaupt kein</td><td>жодного, зовсім ніякого</td><td>Ich habe <strong>gar kein</strong> Geld.</td></tr>
+<tr><td class="h-pi">kaum</td><td>ледве, майже не (дуже мало)</td><td>Ich habe <strong>kaum</strong> Zeit.</td></tr>
+<tr><td class="h-pi">auf keinen Fall</td><td>ні в якому разі</td><td><strong>Auf keinen Fall</strong>! Das ist gefährlich.</td></tr>
+<tr><td class="h-pi">niemals</td><td>ніколи (категорично)</td><td>Ich werde das <strong>niemals</strong> vergessen.</td></tr></table></div>
+<div class="tip">💡 <strong>kaum</strong> — це <strong>не</strong> повне заперечення. Шкала частоти: <strong>immer → oft → manchmal → selten → kaum → nie</strong>.</div>
+
+<h2>8. Немає подвійного заперечення!</h2>
+<p>В українській мові заперечень у реченні може бути кілька («Я <em>ніколи нічого</em> не знаю»). У німецькій — <strong>лише одне</strong>: або nicht, або kein, або nichts / niemand / nie / nirgends.</p>
+<div class="table-wrap"><table class="tk">
+<tr><th>Українською</th><th>Німецькою</th></tr>
+<tr><td>Я <strong>нічого не</strong> знаю.</td><td class="h-ref">Ich weiß <strong>nichts</strong>.</td></tr>
+<tr><td><strong>Ніхто не</strong> прийшов.</td><td class="h-ref"><strong>Niemand</strong> ist gekommen.</td></tr>
+<tr><td>Він <strong>ніколи не</strong> спізнюється.</td><td class="h-ref">Er kommt <strong>nie</strong> zu spät.</td></tr>
+<tr><td>Я <strong>ніде</strong> його <strong>не</strong> бачу.</td><td class="h-ref">Ich sehe ihn <strong>nirgends</strong>.</td></tr></table></div>
+<div class="bad">❌ Ich weiß <s>nicht nichts</s>. → ✅ Ich weiß <span class="hl">nichts</span>.</div>
+<div class="bad">❌ Niemand ist <s>nicht</s> gekommen. → ✅ <span class="hl">Niemand</span> ist gekommen.</div>
+
+<h2>9. Типові помилки</h2>
+<div class="bad">❌ Ich habe <s>nicht</s> Hunger. → ✅ Ich habe <span class="hl">keinen</span> Hunger. <em>(іменник без артикля → kein)</em></div>
+<div class="bad">❌ Ich habe <s>kein</s> Zeit. → ✅ Ich habe <span class="hl">keine</span> Zeit. <em>(Zeit — жін. р.)</em></div>
+<div class="bad">❌ Er ist <s>nicht</s> Lehrer. → ✅ Er ist <span class="hl">kein</span> Lehrer. <em>(професія без артикля → kein)</em></div>
+<div class="bad">❌ Ich habe ihn <s>noch nicht mehr</s> gesehen. → ✅ Ich habe ihn <span class="hl">nicht mehr</span> gesehen. <em>(не змішуй пари)</em></div>
+<div class="bad">❌ Ich war <s>schon nie</s> in Paris. → ✅ Ich war <span class="hl">noch nie</span> in Paris. <em>(schon einmal ↔ noch nie)</em></div>
+<div class="bad">❌ <s>Dohne</s> Brille kann ich nicht lesen. → ✅ <span class="hl">Ohne</span> Brille kann ich nicht lesen. <em>(ohne — самостійний прийменник)</em></div>
+
+<div class="rule-box">✅ <strong>Підсумок:</strong> 1) Що заперечуємо? 2) Іменник з <strong>ein / без артикля</strong> → <strong>kein</strong> (з правильним закінченням), решта → <strong>nicht</strong>; 3) Є слово-пара → <strong>nichts, niemand, nie, nirgends, noch nicht, noch nie, nicht mehr</strong>; 4) <strong>nicht</strong> — в кінці або перед тим, що заперечуємо; 5) <strong>Жодного подвійного заперечення!</strong></div>
+</div>
+</div>
+
+</div>
+
+<div class="complete" id="errs" hidden>
+  <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
+    <h2 id="errs-title">🔁 Мої помилки</h2>
+    <p class="errs-sub" id="errs-sub"></p>
+    <div class="errs-list" id="errs-list"></div>
+    <div class="errs-actions" id="errs-actions"></div>
   </div>
-
-  <div class="complete" id="cfm" hidden>
-    <div class="errs-card" role="dialog" aria-modal="true">
-      <p id="cfm-msg" style="margin:0 0 4px;color:var(--tx);font-size:1rem;line-height:1.5"></p>
-      <div class="errs-actions"><button class="go" id="cfm-yes">Так</button><button class="cancel" id="cfm-no">Скасувати</button></div>
-    </div>
-  </div>
-
-  <div class="complete" id="errs" hidden>
-    <div class="errs-card" role="dialog" aria-modal="true" aria-labelledby="errs-title">
-      <h2 id="errs-title">🔁 Мої помилки</h2>
-      <p class="errs-sub" id="errs-sub"></p>
-      <div class="errs-list" id="errs-list"></div>
-      <div class="errs-actions" id="errs-actions"></div>
-    </div>
-  </div>
+</div>
 
 <script>
-try{localStorage.getItem("x")}catch(e){const m={};Object.defineProperty(window,"localStorage",{value:{getItem:k=>k in m?m[k]:null,setItem:(k,v)=>{m[k]=String(v)},removeItem:k=>{delete m[k]}}})}
 /* ============ HELPERS ============ */
 const $ = id => document.getElementById(id);
 const sh = a => { a = [...a]; for (let i = a.length; i > 1; ) { const j = Math.random() * i-- | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const stripHTML = s => String(s || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+const cap = s => s[0].toUpperCase() + s.slice(1);
 const norm = s => String(s).toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:—–„“"«»]/g," ").replace(/\s+/g," ").trim();
+const VOW = /^[aeiouäöü]/;
+const daF = p => "da" + (VOW.test(p) ? "r" : "") + p;
+const woF = p => "wo" + (VOW.test(p) ? "r" : "") + p;
+const badDa = p => "da" + (VOW.test(p) ? "" : "r") + p;     // хибна форма (r не там)
+const badWo = p => "wo" + (VOW.test(p) ? "" : "r") + p;
+const C = (q, x) => q.startsWith("___") ? cap(x) : x;
+const uniq4 = (a, arr) => { const o = [a]; arr.forEach(x => { if(x && o.indexOf(x) < 0) o.push(x); }); return o.slice(0, 4); };
+const bl = s => s.replace(/___/g, '<span class="blank"></span>');
+const uSent = d => d[0].replace(d[1], `<span class="u ${d[2]}">${d[1]}</span>`);
+const swapPrep = (s, p, x) => { let done = false; return s.split(" ").map(w => { if(!done && w === p){ done = true; return x; } return w; }).join(" "); };
 
-/* ============ STAGES & DATA ============ */
-const STAGES = [
- { n:1, t:"nicht чи kein?", p:"<b>kein</b> заперечує іменники (якщо перед ними був ein/eine або нічого). <b>nicht</b> заперечує все інше: дієслова, прикметники, імена та іменники з артиклем der/die/das.", 
-   ex:[
-     ["Das_ist|n kein|k Auto|n", "Це не (якесь) авто."], 
-     ["Ich_sehe_das_Auto|n nicht|n", "Я не бачу (саме це) авто."],
-     ["Er_arbeitet|n nicht|n", "Він не працює."]
-   ], tip:"Бачиш der/die/das, mein/dein, або дієслово — використовуй nicht. Бачиш іменник без артикля або з ein — kein." },
- 
- { n:2, t:"Людина чи річ", p:"<b>niemand</b> (ніхто) використовується для людей. <b>nichts</b> (нічого) — для речей та понять.", 
-   ex:[
-     ["Da_ist|n niemand|p", "Там нікого немає."], 
-     ["Ich_habe|n nichts|t gesagt|n", "Я нічого не казав."]
-   ], tip:"В німецькій мові діє правило ОДНОГО заперечення. Не кажи «nicht nichts», достатньо просто «nichts»." },
-
- { n:3, t:"Час і місце", p:"<b>nie / niemals</b> (ніколи), <b>nirgendwo / nirgends</b> (ніде), <b>nicht mehr</b> (більше не) — замінюють звичайне nicht для конкретизації.", 
-   ex:[
-     ["Ich_war_noch|n nie|t dort|n", "Я там ще ніколи не був."],
-     ["Ich_rauche|n nicht_mehr|t", "Я більше не курю (раніше курив)."],
-     ["Er_ist|n nirgendwo|p zu_finden|n", "Його ніде не знайти."]
-   ], tip:"«nicht mehr» — для того, що припинилося. «noch nicht» — для того, що ще не почалося." },
-
- { n:4, t:"Антоніми та Мікс", p:"Посилюємо заперечення: <b>gar nicht</b> (зовсім не), <b>auf keinen Fall</b> (у жодному разі). Відпрацьовуємо всі слова-заперечення разом та шукаємо антоніми.", 
-   ex:[
-     ["Das_stimmt|n gar_nicht|i", "Це зовсім не так."],
-     ["Auf|n keinen_Fall|i mache_ich_das|n", "В жодному разі я це не зроблю."]
-   ], tip:"Запам'ятай пари: etwas ↔ nichts, jemand ↔ niemand, immer ↔ nie." },
-
- { n:5, t:"Слова-заперечення", p:"<b>Negationswörter</b> — це слова-заперечення, які утворюють пари з антонімами. Наприклад: etwas ↔ nichts, jemand ↔ niemand, immer ↔ nie. Запам'ятай ці пари, щоб швидко орієнтуватися в мовленні.", 
-   ex:[
-     ["etwas|p _↔_ nichts|n", "щось ↔ нічого"], 
-     ["jemand|p _↔_ niemand|n", "хтось ↔ ніхто"],
-     ["überall|p _↔_ nirgends|n", "скрізь ↔ ніде"]
-   ], tip:"Зверни увагу на прийменники: mit + Dativ ↔ ohne + Akkusativ." },
-
- { n:6, t:"Satznegation / Teilnegation", p:"<b>Satznegation</b> (повне заперечення) — <b>nicht</b> стоїть ближче до кінця речення (перед другою частиною дієслівної рамки, прикметником, прийменниковим додатком).<br><b>Teilnegation</b> (часткове заперечення) — <b>nicht</b> стоїть безпосередньо перед тим елементом, який заперечується, часто з <b>sondern</b> (а не).", 
-   ex:[
-     ["Ich_kenne_den_Kollegen|n nicht|n", "Я не знаю колегу (повне)."], 
-     ["Nicht|n ich|p schenke_das|n, sondern_er|p", "Не я дарую це, а він (часткове)."],
-     ["Ich_schenke_das|n nicht|n heute|p, sondern_morgen|p", "Я дарую це не сьогодні, а завтра (часткове)."]
-   ], tip:"Порівняй: Ich komme nicht mit (Satznegation) vs. Nicht ich komme mit, sondern er (Teilnegation)." },
-
- { n:7, t:"Заперечні сполучники", p:"<b>nicht ... sondern</b> / <b>kein ... sondern</b> (не ..., а ...).<br><b>ohne ... zu + Infinitiv</b> / <b>ohne dass</b> (без того, щоб ...).<br><b>anstatt dass / statt dass</b> (замість того, щоб ...).<br><b>als dass</b> (занадто ..., щоб ...).<br><b>geschweige denn</b> (не кажучи вже про ...).", 
-   ex:[
-     ["Ich_trinke|n keinen|n Kaffee, sondern_Tee|p", "Я п'ю не каву, а чай."], 
-     ["Er_geht|n, ohne|p zu_sagen|n etwas|p", "Він йде, не сказавши нічого."],
-     ["Sie_ist_zu_müde|n, als_dass|p sie_arbeiten_könnte|n", "Вона занадто втомлена, щоб працювати."]
-   ], tip:"Після 'ohne', 'anstatt', 'statt' використовується 'zu + Infinitiv', якщо підмети однакові, і 'dass', якщо різні." }
-];
-
-const TABS = [
- { id:"mk", label:"nicht / kein", kind:"mc", title:"NICHT ЧИ KEIN?", ph:"Введи nicht або kein(e/en)...", oc:"opts grid4" },
- { id:"pn", label:"nichts / niemand", kind:"mc", title:"NICHTS ЧИ NIEMAND?", oc:"opts grid4" },
- { id:"tz", label:"Час і місце", kind:"mc", title:"ОБЕРИ ЗАПЕРЕЧЕННЯ", oc:"opts grid4" },
- { id:"op", label:"Антоніми", kind:"text", title:"НАПИШИ ПРОТИЛЕЖНІСТЬ", ph:"Введи антонім..." },
- { id:"mx", label:"Мікс (Усі)", kind:"mc", title:"ВСТАВ ПРАВИЛЬНЕ СЛОВО", oc:"opts grid4" },
- { id:"nw", label:"Negationswörter", kind:"text", title:"ЗАПОВНИ ПАРИ АНТОНІМІВ", ph:"Введи антонім..." },
- { id:"sn", label:"Satz/Teilnegation", kind:"text", title:"ВСТАВ НЕОБХІДНЕ ЗАПЕРЕЧЕННЯ", ph:"Введи слово..." },
- { id:"nc", label:"Союзи", kind:"mc", title:"ОБЕРИ ПРАВИЛЬНИЙ СОЮЗ", oc:"opts col" }
-];
-
-const ITEMS = { mk:[], pn:[], tz:[], op:[], mx:[], nw:[], sn:[], nc:[] };
-
-function add(tab, obj) {
-  obj.a = obj.a.trim();
-  if(obj.alt && obj.alt.length && obj.o) obj.o = [...obj.o.filter(x => !obj.alt.includes(x)), ...obj.alt];
-  obj.de = obj.s.replace("{{B}}", `<b>${obj.a}</b>`);
-  obj.ans = obj.a;
-  obj.sp = obj.full || obj.s.replace("{{B}}", obj.a);
-  if(obj.full) obj.construct = true;
-  ITEMS[tab].push(obj);
-}
-
+/* ============ ДАНІ: СЛОВА-ЗАПЕРЕЧЕННЯ ============ */
 const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); return { t: t.replace(/_/g, " "), r }; });
+const ROLE = { nt:"nicht", kn:"kein", ng:"заперечення", ps:"позитив", nn:"іменник", vb:"дієслово" };
 
-/* --- Stage 1: nicht vs kein (15 завдань) --- */
+/* ============ ЕТАПИ ============ */
+const STAGES = [
+ { n:1, t:"Слова-заперечення", p:"Німецькі заперечення можна поділити на групи: <b>загальні</b> — <b>nicht</b> («не») і <b>kein</b> («жодний»); <b>заперечні займенники та прислівники</b> — <b>nichts</b> (ніщо), <b>niemand</b> (ніхто), <b>nie / niemals</b> (ніколи), <b>nirgendwo / nirgends</b> (ніде); <b>вирази</b> — <b>nicht mehr</b> (більше не), <b>auf keinen Fall</b> (ні в якому разі); <b>відтінки</b> — <b>kaum</b> (ледве), <b>gar nicht / überhaupt nicht</b> (зовсім не / взагалі не). Спершу запам’ятай значення, потім навчимося їх уживати.",
+   ex:[["nicht|nt kein|kn","не · жодний"],["nichts|ng niemand|ng nie|ng nirgends|ng","ніщо · ніхто · ніколи · ніде"],["nicht_mehr|ng auf_keinen_Fall|ng kaum|ng","більше не · ні в якому разі · ледве"]],
+   tip:"Вчи слова парами з протилежним: <b>etwas ↔ nichts</b>, <b>jemand ↔ niemand</b>, <b>immer ↔ nie</b>." },
+ { n:2, t:"nicht чи kein?", p:"Це головне питання теми. <b>kein</b> заперечує <b>іменник</b> з <b>неозначеним артиклем</b> (ein / eine) або <b>без артикля</b> (Geld, Zeit, Hunger, множина). <b>nicht</b> — у всіх інших випадках: дієслово, прикметник, прислівник, іменник із <b>означеним артиклем</b> (der / die / das), <b>присвійним займенником</b> (mein…), <b>dieser</b> або <b>власне ім’я</b>. Професія без артикля теж → <b>kein</b>: <i>Er ist kein Arzt.</i>",
+   ex:[["Ich_habe|vb ein|ps Auto.|nn","є ein → заперечуємо kein"],["Ich_habe|vb kein|kn Auto.|nn","У мене немає машини"],["Ich_kenne|vb den_Mann|nn nicht|nt","означений артикль → nicht"]],
+   tip:"Формула: <b>ein / без артикля → kein</b>; <b>der / mein / дієслово / прикметник → nicht</b>." },
+ { n:3, t:"Пари-антоніми", p:"Заперечні слова мають позитивні «пари»: <b>etwas ↔ nichts</b>, <b>jemand / alle ↔ niemand</b>, <b>irgendwo / überall ↔ nirgendwo / nirgends</b>, <b>immer ↔ nie / niemals</b>. Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
+   ex:[["Hast_du|vb etwas|ps gesehen?|vb","питання"],["Ich_habe|vb nichts|ng gesehen.|vb","Я нічого не бачив"],["Niemand|ng ist_da.|vb","Нікого немає"]],
+   tip:"Українською «Я нічого не бачив» — два заперечення. Німецькою: <b>Ich habe nichts gesehen</b> — лише одне." },
+ { n:4, t:"schon · noch · nicht mehr", p:"<b>schon</b> («вже») → заперечення <b>noch nicht</b> («ще не»). <b>schon einmal</b> («вже колись») → <b>noch nie</b> («ще ніколи»). <b>(immer) noch</b> («ще, досі») → <b>nicht mehr</b> («вже не, більше не») або <b>nie mehr</b> («ніколи більше»). З іменниками: <b>noch + іменник</b> → <b>kein … mehr</b>: <i>Ich habe kein Geld mehr.</i>",
+   ex:[["Hast_du|vb schon|ps gegessen?|vb","вже"],["Nein,_ich_habe|vb noch_nicht|ng gegessen.|vb","ще не"],["Ich_wohne|vb nicht_mehr|ng hier.|vb","вже не живу тут"]],
+   tip:"<b>noch nicht</b> — «поки що ні» (ще може бути). <b>nicht mehr</b> — «було, але вже ні»." },
+ { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>: закінчення залежать від роду й відмінка. Nominativ: <b>kein / keine / kein / keine</b> (ч. / ж. / с. / мн.). Akkusativ змінюється лише в чоловічому роді: <b>keinen</b>. Dativ: <b>keinem / keiner / keinem / keinen</b>. У множині Nom і Akk — <b>keine</b>.",
+   ex:[["Ich_habe|vb keinen|kn Hund.|nn","Akkusativ, чол. р."],["Das_ist|vb keine|kn Katze.|nn","Nominativ, жін. р."],["mit|vb keinem|kn Kind|nn","Dativ, сер. р."]],
+   tip:"Закінчення такі самі, як у <b>ein</b>: ein → kein, einen → keinen, einem → keinem; у множині — keine." },
+ { n:6, t:"Місце nicht", p:"Якщо заперечуємо <b>усе речення</b> (дієслово), <b>nicht</b> стоїть <b>в кінці</b>: <i>Ich kenne ihn nicht.</i> Але <b>перед</b> прикметником чи прислівником (<i>nicht gut</i>), перед <b>прийменниковою групою</b> (<i>nicht in Berlin</i>, <i>nicht nach Hause</i>) і перед <b>другою частиною дієслівної рамки</b> — Partizip, інфінітив, відокремлюваний префікс (<i>nicht gesehen, nicht kommen, nicht an</i>). Якщо заперечуємо <b>одне слово</b> — nicht ставимо перед ним, далі йде <b>sondern</b>.",
+   ex:[["Ich_kenne_ihn|vb nicht|nt","в кінці речення"],["Das_ist|vb nicht|nt gut|nn","перед прикметником"],["Ich_habe_ihn|vb nicht|nt gesehen|vb","перед Partizip"],["Ich_fahre|vb nicht|nt heute,_sondern_morgen.|nn","nicht … sondern"]],
+   tip:"<b>kein</b> стоїть перед іменником, а <b>nicht</b> — «навколо» того, що заперечуємо (часто в кінці)." },
+ { n:7, t:"Підсилення і відтінки", p:"<b>gar nicht</b> і <b>überhaupt nicht</b> — «зовсім не / взагалі не» (підсилюють nicht). <b>gar kein / überhaupt kein</b> — «жодного взагалі». <b>kaum</b> — «ледве, майже не» (це не повне заперечення, а «дуже мало»). <b>auf keinen Fall</b> — «ні в якому разі» (категорична відмова). <b>niemals</b> — те саме, що <b>nie</b>, але категоричніше.",
+   ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
+   tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
+ { n:8, t:"Заперечи та перекладай", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Алгоритм: <b>1)</b> що саме заперечуємо; <b>2)</b> іменник з ein / без артикля → <b>kein</b>, інакше → <b>nicht</b>; <b>3)</b> є слово-пара (etwas, jemand, immer, schon, noch)? → заміни на <b>nichts, niemand, nie, noch nicht, nicht mehr</b>; <b>4)</b> без подвійного заперечення!",
+   ex:[["Ich_habe|vb einen|ps Bruder.|nn","→ Ich habe keinen Bruder."],["Er_ist|vb noch|ps hier.|nn","→ Er ist nicht mehr hier."]],
+   tip:"Українське «Ніхто не прийшов» = німецьке <b>Niemand ist gekommen</b> (без nicht)." },
+ { n:9, t:"Підсумок і тексти", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе: <b>1)</b> що заперечуємо — іменник, дієслово, прикметник? <b>2)</b> nicht чи kein (і яка форма)? <b>3)</b> чи є слово-пара (nichts, niemand, nie…)? <b>4)</b> де стоїть nicht? <b>5)</b> чи немає подвійного заперечення?",
+   ex:[["Ich_habe|vb keine|kn Zeit.|nn","kein — іменник без артикля"],["Niemand|ng hilft_mir.|vb","niemand — без nicht"]],
+   tip:"Алгоритм: 1) що заперечуємо 2) nicht / kein 3) слово-пара 4) місце 5) без подвійного заперечення." }
+];
+
+/* ============ ВПРАВИ ============ */
+const TABS = [
+ { id:"md", label:"Слово — значення", kind:"mc",   title:"ЩО ОЗНАЧАЄ СЛОВО?",       oc:"opts col" },
+ { id:"zs", label:"Переклад слова",   kind:"text", title:"ЯКЕ ЦЕ НІМЕЦЬКЕ СЛОВО?",  ph:"Введи слово …", oc:"opts grid4" },
+ { id:"kn", label:"nicht чи kein?",   kind:"mc",   title:"NICHT ЧИ KEIN?",          fixed:1, oc:"opts afit" },
+ { id:"ei", label:"Встав слово",      kind:"text", title:"ВСТАВ ЗАПЕРЕЧЕННЯ",       ph:"Введи слово …", oc:"opts grid4" },
+ { id:"an", label:"Пари-антоніми",   kind:"text", title:"ЯКЕ СЛОВО — ПАРА?",       ph:"Введи слово …", oc:"opts grid4" },
+ { id:"sn", label:"schon / noch",     kind:"text", title:"SCHON · NOCH · NICHT MEHR", ph:"Введи вираз …", oc:"opts grid4" },
+ { id:"kf", label:"Форми kein",       kind:"text", title:"ЯКА ФОРМА KEIN?",         ph:"Введи форму …", oc:"opts grid4" },
+ { id:"po", label:"Місце nicht",      kind:"mc",   title:"ДЕ СТОЇТЬ NICHT?",        oc:"opts col" },
+ { id:"pd", label:"Підсилення",       kind:"text", title:"ВСТАВ ПІДСИЛЕННЯ",        ph:"Введи вираз …", oc:"opts grid4" },
+ { id:"ne", label:"Заперечи речення", kind:"text", title:"ЗАПЕРЕЧИ РЕЧЕННЯ",        ph:"Введи повне речення …", oc:"opts col" },
+ { id:"ue", label:"Переклад",         kind:"text", title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ",     ph:"Введи речення німецькою …", oc:"opts col" },
+ { id:"er", label:"Знайди помилку",   kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",    oc:"opts col" },
+ { id:"tx", label:"Тексти",           kind:"text", title:"ВСТАВ У ТЕКСТ",           ph:"Введи слово …", oc:"opts grid4" }
+];
+const OPT_META = {
+  "nicht": { r:"nt", t:"nicht", s:"дієслово · прикметник · der/mein" },
+  "kein":  { r:"kn", t:"kein",  s:"ein / без артикля" }
+};
+
+const ITEMS = {};
+TABS.forEach(t => ITEMS[t.id] = []);
+function add(t, o){
+  o.ans = o.ans || o.a;
+  o.de = o.de || (o.s.indexOf("{{B}}") >= 0 ? o.s.replace("{{B}}", `<b>${esc(o.a)}</b>`).replace(/<br\s*\/?>/g, " ") : `<b>${esc(o.ans)}</b>`);
+  o.ua = o.ua != null ? o.ua : (o.lbl || "");
+  ITEMS[t].push(o);
+}
+const mcAdd = (tab, ua, a, ws, ex, st, sch) => add(tab, { s:ua, sch:sch || "Обери правильний варіант німецькою.", o:[a, ...ws], a, ex, lbl:"", ua, sp:a, st, de:`<b>${esc(a)}</b>` });
+
+/* ---------- 1. Слово — значення / Переклад слова ---------- */
+/* [слово, коротко, повністю, група, пояснення] */
+const WD = [
+ ["nicht","не","не (загальне заперечення)","A","nicht заперечує дієслово, прикметник, прислівник та іменник з означеним артиклем."],
+ ["nichts","ніщо, нічого","ніщо, нічого","B","nichts — ніщо, нічого; протилежне до etwas."],
+ ["nie","ніколи","ніколи","C","nie — ніколи; протилежне до immer."],
+ ["niemals","ніколи (категорично)","ніколи (категорично, сильніше за nie)","C","niemals — те саме, що nie, але категоричніше."],
+ ["niemand","ніхто","ніхто","D","niemand — ніхто; протилежне до jemand / alle."],
+ ["kein","жодний, ніякий","жодний, ніякий (заперечення іменників)","E","kein заперечує іменники з неозначеним артиклем або без артикля."],
+ ["nicht mehr","більше не","більше не, вже не","F","nicht mehr — раніше було, а тепер уже ні; протилежне до (immer) noch."],
+ ["auf keinen Fall","ні в якому разі","ні в якому разі","G","auf keinen Fall — категорична відмова."],
+ ["kaum","ледве, майже не","ледве, ледь (майже не)","H","kaum — не повне заперечення, а «дуже мало»."],
+ ["gar nicht","зовсім не","зовсім не","I","gar nicht — підсилене заперечення."],
+ ["überhaupt nicht","взагалі не","взагалі не","I","überhaupt nicht — підсилене заперечення (як gar nicht)."],
+ ["nirgendwo","ніде","ніде","J","nirgendwo / nirgends — ніде; протилежне до irgendwo / überall."],
+ ["nirgends","ніде","ніде","J","nirgendwo / nirgends — ніде; протилежне до irgendwo / überall."],
+ ["noch nicht","ще не","ще не","K","noch nicht — «поки що ні»; протилежне до schon."],
+ ["noch nie","ще ніколи","ще ніколи","L","noch nie — «ще жодного разу»; протилежне до schon einmal."]
+];
+const simG = (a, b) => a === b || (a === "C" && b === "L") || (a === "L" && b === "C");
+const usedUs = new Set();
+WD.forEach(([de, us, uf, g, nt]) => {
+  const others = sh(WD.filter(w => !simG(w[3], g)));
+  const opts = [uf]; others.forEach(w => { if(opts.length < 4 && !opts.includes(w[2])) opts.push(w[2]); });
+  add("md", { s:`<span class="u">${esc(de)}</span>`, sch:"Що означає це слово?", o:opts, a:uf, ans:`${de} = ${uf}`, ex:nt, lbl:"", sp:de, st:1, ua:uf });
+  if(usedUs.has(us)) return; usedUs.add(us);
+  const wo = [de]; others.forEach(w => { if(wo.length < 4 && !wo.includes(w[0])) wo.push(w[0]); });
+  const syn = WD.filter(w => w[3] === g && w[0] !== de).map(w => w[0]);
+  add("zs", { s:`<span class="u">${esc(us)}</span> = {{B}}`, sch:"Напиши німецьке слово.", o:wo, a:de, alt:syn, ans:`${us} = ${de}`, ex:nt, lbl:"", sp:de, st:1, ua:us });
+});
+
+/* ---------- 2. nicht чи kein? ---------- */
+/* [речення, підкреслене, nicht|kein, заперечене речення, переклад, пояснення] */
 [
-  ["Das ist {{B}} Hund, das ist eine Katze.", "kein", ["kein", "nicht", "keine", "nichts"], "Іменник (Hund) чоловічого роду в Nominativ -> kein.", "Це не собака, це кішка."],
-  ["Ich habe heute {{B}} Zeit.", "keine", ["keine", "nicht", "kein", "niemand"], "Іменник (Zeit) жіночого роду в Akkusativ -> keine.", "Я сьогодні не маю часу."],
-  ["Wir gehen heute {{B}} ins Kino.", "nicht", ["nicht", "kein", "keine", "nichts"], "Заперечується дія (gehen ins Kino) -> nicht.", "Ми сьогодні не йдемо в кіно."],
-  ["Er trinkt {{B}} Kaffee.", "keinen", ["keinen", "nicht", "kein", "keine"], "Іменник (Kaffee) чоловічого роду в Akkusativ -> keinen.", "Він не п'є кави."],
-  ["Das ist {{B}} mein Buch.", "nicht", ["nicht", "kein", "nichts", "keins"], "Є присвійний займенник (mein) -> nicht.", "Це не моя книга."],
-  ["Sie heißt {{B}} Maria, sie heißt Anna.", "nicht", ["nicht", "keine", "kein", "niemand"], "Власні імена заперечуються через nicht.", "Її звати не Марія, її звати Анна."],
-  ["Ich brauche {{B}} Hilfe.", "keine", ["keine", "nicht", "keinen", "nichts"], "Іменник (Hilfe) жіночого роду -> keine.", "Мені не потрібна допомога."],
-  ["Das Auto ist {{B}} neu.", "nicht", ["nicht", "kein", "nichts", "nie"], "Прикметник (neu) заперечується через nicht.", "Авто не нове."],
-  ["Wir haben {{B}} Geld dabei.", "kein", ["kein", "nicht", "keinen", "nichts"], "Іменник середнього роду (Geld) -> kein.", "У нас немає з собою грошей."],
-  ["Ich verstehe dich {{B}}.", "nicht", ["nicht", "kein", "nichts", "keine"], "Заперечується дієслово (verstehen) -> nicht.", "Я тебе не розумію."],
-  ["Sie ist {{B}} Lehrerin, sie ist Ärztin.", "keine", ["keine", "nicht", "kein", "niemand"], "Професія без артикля заперечується через kein/keine.", "Вона не вчителька, вона лікарка."],
-  ["Gefällt dir das? - Nein, das gefällt mir {{B}}.", "nicht", ["nicht", "kein", "nichts", "nie"], "Заперечення дієслова -> nicht.", "Тобі це подобається? - Ні, це мені не подобається."],
-  ["Ich habe {{B}} Hunger, ich habe gerade gegessen.", "keinen", ["keinen", "nicht", "kein", "keine"], "Іменник (Hunger) чоловічого роду в Akkusativ -> keinen.", "Я не голодний, я щойно поїв."],
-  ["Er kommt heute {{B}} zur Party.", "nicht", ["nicht", "kein", "keine", "nichts"], "Заперечення дії (kommen zur Party) -> nicht.", "Він сьогодні не прийде на вечірку."],
-  ["Das sind {{B}} meine Schuhe.", "nicht", ["nicht", "keine", "kein", "nichts"], "Присвійний займенник (meine) -> nicht.", "Це не мої туфлі."]
-].forEach(d => add("mk", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:1 }));
+ ["Ich habe ein Auto.","ein Auto","kein","Ich habe kein Auto.","У мене немає машини.","ein Auto — неозначений артикль → kein."],
+ ["Er hat Geld.","Geld","kein","Er hat kein Geld.","У нього немає грошей.","Geld — іменник без артикля → kein."],
+ ["Wir haben Zeit.","Zeit","kein","Wir haben keine Zeit.","У нас немає часу.","Zeit — без артикля (жін. р.) → keine."],
+ ["Sie trinkt Kaffee.","Kaffee","kein","Sie trinkt keinen Kaffee.","Вона не п’є каву.","Kaffee — без артикля (чол. р., Akk) → keinen."],
+ ["Das ist eine gute Idee.","eine gute Idee","kein","Das ist keine gute Idee.","Це не гарна ідея.","eine gute Idee — неозначений артикль → keine."],
+ ["Ich habe Hunger.","Hunger","kein","Ich habe keinen Hunger.","Я не голодний.","Hunger — без артикля (чол. р., Akk) → keinen."],
+ ["Es gibt hier Parkplätze.","Parkplätze","kein","Es gibt hier keine Parkplätze.","Тут немає парковок.","Parkplätze — множина без артикля → keine."],
+ ["Er ist ein Lehrer.","ein Lehrer","kein","Er ist kein Lehrer.","Він не вчитель.","ein Lehrer — неозначений артикль → kein."],
+ ["Sie ist Ärztin.","Ärztin","kein","Sie ist keine Ärztin.","Вона не лікарка.","Професія без артикля → kein(e)."],
+ ["Wir haben ein Problem.","ein Problem","kein","Wir haben kein Problem.","У нас немає проблеми.","ein Problem — неозначений артикль → kein."],
+ ["Ich kenne den Mann.","den Mann","nicht","Ich kenne den Mann nicht.","Я не знаю цього чоловіка.","den Mann — означений артикль → nicht."],
+ ["Das ist mein Buch.","mein Buch","nicht","Das ist nicht mein Buch.","Це не моя книга.","mein — присвійний займенник → nicht."],
+ ["Er arbeitet.","arbeitet","nicht","Er arbeitet nicht.","Він не працює.","Заперечуємо дієслово → nicht."],
+ ["Das Wetter ist schön.","schön","nicht","Das Wetter ist nicht schön.","Погода не гарна.","Прикметник → nicht перед ним."],
+ ["Ich komme heute.","komme heute","nicht","Ich komme heute nicht.","Я сьогодні не прийду.","Заперечуємо дієслово → nicht в кінці."],
+ ["Ich besuche Anna.","Anna","nicht","Ich besuche Anna nicht.","Я не відвідую Анну.","Власне ім’я → nicht."],
+ ["Er schläft lange.","lange","nicht","Er schläft nicht lange.","Він спить недовго.","Прислівник → nicht перед ним."],
+ ["Ich verstehe das Wort.","das Wort","nicht","Ich verstehe das Wort nicht.","Я не розумію цього слова.","das Wort — означений артикль → nicht."],
+ ["Wir fahren nach Berlin.","nach Berlin","nicht","Wir fahren nicht nach Berlin.","Ми не їдемо до Берліна.","Прийменникова група → nicht перед нею."],
+ ["Ich mag diesen Film.","diesen Film","nicht","Ich mag diesen Film nicht.","Мені не подобається цей фільм.","dieser — вказівний займенник → nicht."]
+].forEach(([pos, chunk, a, neg, ua, ex]) => add("kn", { s:pos.replace(chunk, `<span class="u P">${chunk}</span>`), sch:"Яким словом заперечимо підкреслене: nicht чи kein?", o:["nicht","kein"], a, ans:`${a} → ${neg}`, ex, lbl:ua, sp:neg, st:2 }));
 
-/* --- Stage 2: niemand vs nichts (12 завдань) --- */
+/* ---------- 3. Встав слово / Пари-антоніми ---------- */
+/* [речення, відповідь, alt, варіанти, переклад, пояснення] */
 [
-  ["Hast du etwas gehört? - Nein, ich habe {{B}} gehört.", "nichts", ["nichts", "niemand", "nicht", "kein"], "Щось (etwas) -> Нічого (nichts). Річ.", "Ти щось чув? - Ні, я нічого не чув."],
-  ["Ist jemand im Zimmer? - Nein, da ist {{B}}.", "niemand", ["niemand", "nichts", "nicht", "keiner"], "Хтось (jemand) -> Ніхто (niemand). Людина.", "Є хтось у кімнаті? - Ні, там нікого немає."],
-  ["Ich weiß {{B}} darüber.", "nichts", ["nichts", "niemand", "nicht", "nie"], "Знати що? Нічого (nichts).", "Я нічого про це не знаю."],
-  ["{{B}} hat mich angerufen.", "Niemand", ["Niemand", "Nichts", "Nicht", "Kein"], "Людина виконує дію -> Ніхто (niemand).", "Ніхто мені не дзвонив."],
-  ["Das kostet {{B}}.", "nichts", ["nichts", "niemand", "nicht", "kein"], "Річ/ціна -> нічого.", "Це нічого не коштує."],
-  ["Ich vertraue {{B}} mehr.", "niemandem", ["niemandem", "niemand", "nichts", "nicht"], "Vertrauen вимагає Dativ -> niemandem.", "Я більше нікому не довіряю."],
-  ["Hast du alles eingepackt? - Ich habe {{B}} vergessen.", "nichts", ["nichts", "niemanden", "nicht", "kein"], "Все (alles) -> Нічого (nichts).", "Ти все спакував? - Я нічого не забув."],
-  ["Wir haben dort {{B}} getroffen.", "niemanden", ["niemanden", "nichts", "nicht", "niemand"], "Treffen вимагає Akkusativ -> niemanden (людина).", "Ми там нікого не зустріли."],
-  ["Er interessiert sich für {{B}}.", "nichts", ["nichts", "niemanden", "nicht", "kein"], "Якщо мова про речі -> нічим не цікавиться.", "Він нічим не цікавиться."],
-  ["Das geht {{B}} etwas an!", "niemanden", ["niemanden", "nichts", "niemand", "nicht"], "Це нікого не стосується (люди, Akkusativ).", "Це нікого не стосується!"],
-  ["Ich habe {{B}} zu sagen.", "nichts", ["nichts", "niemand", "nicht", "kein"], "Мати що сказати? Нічого.", "Мені нічого сказати."],
-  ["Ist hier noch {{B}}?", "jemand", ["jemand", "niemand", "nichts", "keiner"], "Питання про наявність когось -> jemand (хтось).", "Тут ще хтось є?"]
-].forEach(d => add("pn", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:2 }));
-
-/* --- Stage 3: Час і місце (12 завдань) --- */
-[
-  ["Warst du schon mal in Paris? - Nein, noch {{B}}.", "nie", ["nie", "nicht", "nichts", "nirgendwo"], "Колись (schon mal) -> ніколи (nie).", "Ти колись був у Парижі? - Ні, ще ніколи."],
-  ["Wo ist mein Schlüssel? Ich kann ihn {{B}} finden.", "nirgendwo", ["nirgendwo", "nie", "nichts", "niemand"], "Місцезнаходження -> ніде (nirgendwo).", "Де мій ключ? Я ніде не можу його знайти."],
-  ["Rauchst du noch? - Nein, ich rauche {{B}}.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nicht"], "Дія припинилася -> більше не (nicht mehr).", "Ти ще куриш? - Ні, я більше не курю."],
-  ["Ist das Essen schon fertig? - Nein, {{B}}.", "noch nicht", ["noch nicht", "nicht mehr", "nie", "nichts"], "Дія ще не відбулася -> ще ні (noch nicht).", "Їжа вже готова? - Ні, ще ні."],
-  ["Ich trinke {{B}} Alkohol.", "nie", ["nie", "nirgendwo", "nichts", "nicht mehr"], "Взагалі ніколи -> nie.", "Я ніколи не п'ю алкоголь."],
-  ["Wir haben überall gesucht, aber er war {{B}}.", "nirgends", ["nirgends", "nie", "nichts", "niemand"], "Скрізь (überall) -> ніде (nirgends/nirgendwo).", "Ми скрізь шукали, але його ніде не було."],
-  ["Er wohnt {{B}} in Berlin, er ist umgezogen.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nirgendwo"], "Переїхав, отже більше там не живе.", "Він більше не живе в Берліні, він переїхав."],
-  ["Das werde ich {{B}} vergessen.", "niemals", ["niemals", "nirgendwo", "nichts", "niemand"], "Посилене «ніколи» -> niemals.", "Я цього ніколи не забуду."],
-  ["Hast du schon aufgeräumt? - Nein, {{B}}.", "noch nicht", ["noch nicht", "nicht mehr", "nie", "nichts"], "Ще ні -> noch nicht.", "Ти вже прибрав? - Ні, ще ні."],
-  ["Ich war {{B}} in diesem Restaurant, das Essen ist schlecht.", "noch nie", ["noch nie", "nie mehr", "noch nicht", "nicht mehr"], "Досвід відсутній досі -> noch nie.", "Я ніколи не був у цьому ресторані, їжа погана."],
-  ["Er ist {{B}} zu Hause, er ist im Urlaub.", "nicht", ["nicht", "kein", "nirgendwo", "nie"], "Заперечення місця -> nicht.", "Його немає вдома, він у відпустці."],
-  ["Sie sucht {{B}} nach ihrem Hund.", "überall", ["überall", "nirgends", "nirgendwo", "nie"], "Антонім до nirgends -> überall (шукає скрізь).", "Вона шукає свою собаку скрізь."],
-  ["Ich habe {{B}} Zeit für solche Diskussionen.", "nie", ["nie", "niemals", "nicht mehr", "nirgendwo"], "Звичка: ніколи не маю часу.", "Я ніколи не маю часу на такі дискусії."],
-  ["Meine Brille liegt {{B}}. Ich habe schon überall gesucht.", "nirgendwo", ["nirgendwo", "nie", "nicht mehr", "noch nicht"], "Також можна сказати: nirgends.", "Моїх окулярів ніде немає. Я вже всюди шукав."],
-  ["Seit dem Umzug wohne ich {{B}} in Hamburg.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nirgendwo"], "Раніше жив там, але після переїзду вже ні.", "Після переїзду я більше не живу в Гамбурзі."],
-  ["Wir finden den Eingang {{B}}.", "nirgendwo", ["nirgendwo", "nie", "nicht mehr", "niemals"], "Також можна сказати: nirgends.", "Ми ніде не можемо знайти вхід."],
-  ["Er vergisst {{B}}, seinen Freunden zu helfen.", "nie", ["nie", "nirgendwo", "nicht mehr", "noch nicht"], "Ніколи не забуває допомагати друзям.", "Він ніколи не забуває допомагати друзям."],
-  ["Ich esse abends {{B}} Süßigkeiten.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nirgendwo"], "Змінив звичку: тепер більше не їм солодощі ввечері.", "Я більше не їм солодощів увечері."],
-  ["In diesem Dorf gibt es {{B}} einen Geldautomaten.", "nirgendwo", ["nirgendwo", "nie", "nicht mehr", "noch nicht"], "Також можна сказати: nirgends.", "У цьому селі ніде немає банкомата."],
-  ["So etwas werde ich {{B}} wieder machen!", "niemals", ["niemals", "nirgendwo", "nicht mehr", "noch nicht"], "Емоційне, категоричне «ніколи».", "Я ніколи більше такого не робитиму!"],
-  ["Wir haben {{B}} einen Parkplatz gefunden.", "nirgendwo", ["nirgendwo", "nie", "nicht mehr", "noch nicht"], "Також можна сказати: nirgends.", "Ми ніде не знайшли місця для паркування."]
-].forEach(d => add("tz", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:3, alt:["nirgendwo","nirgends"].includes(d[1])?["nirgendwo","nirgends"].filter(x=>x!==d[1]):[] }));
-
-/* --- Stage 4: Антоніми (12 завдань, text) --- */
-[
-  ["etwas (щось)", "nichts", ["nichts", "niemand", "nie", "kein"], "", "нічого"],
-  ["jemand (хтось)", "niemand", ["niemand", "nichts", "nie", "kein"], "", "ніхто"],
-  ["alle (всі)", "niemand", ["niemand", "nichts", "nie", "kein"], "", "ніхто"],
-  ["alles (все)", "nichts", ["nichts", "niemand", "nie", "kein"], "", "нічого"],
-  ["irgendwo (десь)", "nirgendwo", ["nirgendwo", "nie", "nichts", "niemand"], "", "ніде"],
-  ["überall (скрізь)", "nirgends", ["nirgends", "nirgendwo", "nie", "nichts"], "Можна і nirgendwo, але тут як варіант nirgends.", "ніде"],
-  ["immer (завжди)", "nie", ["nie", "niemals", "nichts", "niemand"], "", "ніколи"],
-  ["schon mal (вже колись)", "noch nie", ["noch nie", "nicht mehr", "noch nicht", "nie"], "", "ще ніколи"],
-  ["schon (вже)", "noch nicht", ["noch nicht", "nicht mehr", "nie", "nichts"], "", "ще ні"],
-  ["noch (ще)", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nichts"], "", "більше не"],
-  ["irgendwohin (кудись)", "nirgendwohin", ["nirgendwohin", "nirgends", "nicht", "kein"], "", "нікуди"],
-  ["mit (з)", "ohne", ["ohne", "kein", "nicht", "nichts"], "", "без"]
-].forEach(d => add("op", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:4 }));
-
-/* --- Stage 4: Мікс (10 завдань, mc) --- */
-[
-  ["Das schmeckt mir {{B}} nicht.", "gar", ["gar", "auf keinen", "überhaupt", "nichts"], "gar nicht - зовсім не.", "Це мені зовсім не смакує."],
-  ["Das mache ich auf {{B}} Fall!", "keinen", ["keinen", "gar", "überhaupt", "nicht"], "auf keinen Fall - у жодному разі.", "Я в жодному разі цього не зроблю!"],
-  ["Ich habe {{B}} Lust dazu.", "überhaupt keine", ["überhaupt keine", "gar nicht", "auf keinen Fall", "nichts"], "Посилення для іменника -> überhaupt keine.", "Я взагалі не маю до цього бажання."],
-  ["Er hat {{B}} Geld, aber er ist glücklich.", "kaum", ["kaum", "gar nicht", "nichts", "auf keinen Fall"], "kaum - ледве, майже не.", "У нього майже немає грошей, але він щасливий."],
-  ["Das ist {{B}} wahr!", "überhaupt nicht", ["überhaupt nicht", "auf keinen Fall", "gar", "nichts"], "überhaupt nicht - взагалі не.", "Це взагалі не правда!"],
-  ["Ich bin {{B}} müde, ich kann noch arbeiten.", "gar nicht", ["gar nicht", "auf keinen Fall", "nichts", "niemand"], "gar nicht - зовсім не.", "Я зовсім не втомився, я можу ще працювати."],
-  ["Hast du {{B}} verstanden?", "nichts", ["nichts", "niemand", "nicht", "kein"], "Розуміти що? Нічого.", "Ти нічого не зрозумів?"],
-  ["Sie hat {{B}} gesagt.", "nichts", ["nichts", "niemand", "nicht", "kein"], "Сказати що? Нічого.", "Вона нічого не сказала."],
-  ["{{B}} ist perfekt.", "Niemand", ["Niemand", "Nichts", "Nicht", "Keiner"], "Людина -> ніхто.", "Ніхто не ідеальний."],
-  ["Wir haben {{B}} gesehen.", "niemanden", ["niemanden", "nichts", "nicht", "kein"], "Бачити кого? Нікого (Akkusativ).", "Ми нікого не бачили."]
-].forEach(d => add("mx", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:4 }));
-
-/* --- Stage 5: Negationswörter (10 завдань, text) --- */
-[
-  ["Man bekommt alles. → Man bekommt {{B}}.", "nichts", ["nichts", "niemand", "kein", "nie"], "alles (усе) → nichts (нічого); тут заперечується річ, а не людина.", "Людина нічого не отримує."],
-  ["Jeder kann die Karte kaufen. → {{B}} kann die Karte kaufen.", "Niemand", ["Niemand", "Nichts", "Keiner", "Nie"], "Jeder -> Niemand.", "Ніхто не може купити цю картку."],
-  ["Ich kann überallhin fahren. → Ich kann {{B}} fahren.", "nirgendwohin", ["nirgendwohin", "nirgends", "nicht", "kein"], "überallhin -> nirgendwohin.", "Я не можу нікуди поїхати."],
-  ["Ich kaufe immer eine Karte. → Ich kaufe {{B}} eine Karte.", "nie", ["nie", "nichts", "kein", "niemals"], "immer -> nie.", "Я ніколи не купую квиток."],
-  ["Ich war schon im Ausland. → Ich war {{B}} im Ausland.", "noch nie", ["noch nie", "noch nicht", "nicht mehr", "nie"], "schon -> noch nie.", "Я ще ніколи не був за кордоном."],
-  ["Fährst du noch los? → Ich fahre {{B}} los.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nichts"], "noch -> nicht mehr.", "Я більше не вирушаю."],
-  ["mit einer Fahrkarte → {{B}} Fahrkarte", "ohne", ["ohne", "kein", "nicht", "nichts"], "mit -> ohne.", "без квитка"],
-  ["Ich habe etwas dabei. → Ich habe {{B}} dabei.", "nichts", ["nichts", "niemand", "kein", "nie"], "etwas -> nichts.", "У мене із собою нічого немає."],
-  ["Er kommt immer zu spät. → Er kommt {{B}} zu spät.", "nie", ["nie", "niemals", "nichts", "niemand"], "immer -> nie.", "Він ніколи не запізнюється."],
-  ["Ich habe noch Hunger. → Ich habe {{B}} Hunger.", "keinen", ["keinen", "nicht", "kein", "keine"], "noch Hunger haben -> keinen Hunger mehr haben (або nicht mehr).", "Я більше не голодний."]
-].forEach(d => add("nw", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:5 }));
-
-/* --- Stage 6: Satznegation / Teilnegation (12 завдань, text) --- */
-[
-  ["Ich kenne den neuen Kollegen {{B}}.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, nicht в кінці.", "Я не знаю нового колегу.", "Ich kenne den neuen Kollegen nicht."],
-  ["Ich habe das {{B}} verstanden.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед Partizip II.", "Я цього не зрозумів.", "Ich habe das nicht verstanden."],
-  ["Sie findet Persönlichkeitstests {{B}} angenehm.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед прикметником.", "Вона не вважає особистісні тести приємними.", "Sie findet Persönlichkeitstests nicht angenehm."],
-  ["{{B}} ich schenke ihr heute den Ring (sondern er).", "Nicht", ["Nicht", "Kein", "Nichts", "Niemand"], "Teilnegation, перед підметом.", "Не я дарую їй сьогодні каблучку, а він.", "Nicht ich schenke ihr heute den Ring, sondern er."],
-  ["Ich schenke ihr {{B}} heute den Ring (sondern morgen).", "nicht", ["nicht", "kein", "nichts", "niemand"], "Teilnegation, перед обставиною часу.", "Я дарую їй каблучку не сьогодні, а завтра.", "Ich schenke ihr nicht heute den Ring, sondern morgen."],
-  ["Ich schenke ihr den Ring {{B}} zur Verlobung (sondern zum Geburtstag).", "nicht", ["nicht", "kein", "nichts", "niemand"], "Teilnegation, перед прийменниковою фразою.", "Я дарую їй каблучку не на заручини, а на день народження.", "Ich schenke ihr den Ring nicht zur Verlobung, sondern zum Geburtstag."],
-  ["Wir sprechen im Team {{B}} über Probleme.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед прийменниковим додатком.", "Ми не обговорюємо проблеми в команді.", "Wir sprechen im Team nicht über Probleme."],
-  ["Er kann heute {{B}} kommen.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед Infinitiv.", "Він сьогодні не може прийти.", "Er kann heute nicht kommen."],
-  ["{{B}} er hat das gemacht, sondern sie.", "Nicht", ["Nicht", "Kein", "Nichts", "Niemand"], "Teilnegation, перед підметом.", "Не він це зробив, а вона.", "Nicht er hat das gemacht, sondern sie."],
-  ["Das Buch ist {{B}} interessant.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед прикметником.", "Книга не цікава.", "Das Buch ist nicht interessant."],
-  ["Ich fahre {{B}} mit dem Auto (sondern mit dem Zug).", "nicht", ["nicht", "kein", "nichts", "niemand"], "Teilnegation, перед прийменниковою фразою.", "Я їду не автомобілем, а потягом.", "Ich fahre nicht mit dem Auto, sondern mit dem Zug."],
-  ["Sie hat den Test {{B}} bestanden.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation, перед Partizip II.", "Вона не склала тест.", "Sie hat den Test nicht bestanden."]
-].forEach(d => add("sn", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], full:d[5], st:6 }));
-
-/* --- Stage 7: Negative Conjunctions (12 завдань, mc) --- */
-[
-  ["Ich trinke {{B}} Kaffee, sondern Tee.", "keinen", ["keinen", "nicht", "kein", "nichts"], "kein ... sondern", "Я п’ю не каву, а чай."],
-  ["Er geht, {{B}} ein Wort zu sagen.", "ohne", ["ohne", "nicht", "kein", "anstatt"], "ohne ... zu + Infinitiv", "Він іде, не сказавши ні слова."],
-  ["Sie ging, {{B}} sie sich verabschiedete.", "ohne dass", ["ohne dass", "ohne zu", "anstatt dass", "als dass"], "ohne dass", "Вона пішла, не попрощавшись."],
-  ["{{B}} wir uns beeilen, gehen wir langsam.", "Anstatt dass", ["Anstatt dass", "Ohne dass", "Als dass", "Geschweige denn"], "anstatt dass", "Замість того щоб поспішати, ми йдемо повільно."],
-  ["Das Wetter ist zu schlecht, {{B}} wir spazieren gehen könnten.", "als dass", ["als dass", "ohne dass", "anstatt dass", "geschweige denn"], "als dass", "Погода надто погана, щоб ми могли піти на прогулянку."],
-  ["Er hat kein Geld für ein Auto, {{B}} für ein Fahrrad.", "geschweige denn", ["geschweige denn", "ohne dass", "als dass", "anstatt dass"], "geschweige denn", "У нього немає грошей навіть на автомобіль, не кажучи вже про велосипед."],
-  ["{{B}} heute, sondern erst morgen habe ich Zeit.", "Nicht", ["Nicht", "Kein", "Nichts", "Niemand"], "nicht ... sondern заперечує обставину часу: не сьогодні, а завтра. Природна конструкція: Nicht heute, sondern erst morgen habe ich Zeit.", "Час у мене є не сьогодні, а лише завтра."],
-  ["Sie geht zur Arbeit, {{B}} krank zu sein.", "ohne", ["ohne", "nicht", "kein", "anstatt"], "ohne ... zu + Infinitiv: вона йде на роботу, не будучи хворою.", "Вона йде на роботу, не будучи хворою."],
-  ["{{B}} dass er lernt, spielt er Videospiele.", "Anstatt", ["Anstatt", "Ohne", "Als", "Geschweige"], "Anstatt dass", "Замість того щоб навчатися, він грає у відеоігри."],
-  ["Ich bin zu müde, {{B}} ich noch ausgehen könnte.", "als dass", ["als dass", "ohne dass", "anstatt dass", "geschweige denn"], "als dass", "Я надто втомлений, щоб ще кудись іти."],
-  ["Das ist {{B}} Problem, sondern eine Chance.", "kein", ["kein", "nicht", "keine", "nichts"], "kein ... sondern", "Це не проблема, а можливість."],
-  ["Sie arbeitet, {{B}} dass sie dafür bezahlt wird.", "ohne", ["ohne", "nicht", "kein", "anstatt"], "ohne dass", "Вона працює, не отримуючи за це грошей."]
-].forEach(d => add("nc", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:7 }));
-
-
-/* --- Методичне розширення: автоматизація та важливі контрасти --- */
-[
-  ["Jemand hat an der Tür geklingelt. → {{B}} hat an der Tür geklingelt.", "Niemand", ["Niemand", "Nichts", "Nie", "Keiner"], "jemand (хтось) → niemand (ніхто); слово позначає людину й стоїть у Nominativ.", "Ніхто не дзвонив у двері."],
-  ["Ich habe noch etwas im Kühlschrank. → Ich habe {{B}} mehr im Kühlschrank.", "nichts", ["nichts", "niemand", "nie", "kein"], "etwas → nichts; конструкція nichts mehr означає «більше нічого».", "У мене більше нічого немає в холодильнику."],
-  ["Wir können überall parken. → Wir können {{B}} parken.", "nirgendwo", ["nirgendwo", "nirgendwohin", "nie", "nicht mehr"], "überall (де?) → nirgendwo (ніде); не плутай із nirgendwohin (куди?).", "Ми ніде не можемо припаркуватися."],
-  ["Er besucht uns immer. → Er besucht uns {{B}}.", "nie", ["nie", "nichts", "niemand", "nicht mehr"], "immer → nie; заперечується регулярність дії.", "Він ніколи нас не відвідує."],
-  ["Sie arbeitet noch hier. → Sie arbeitet {{B}} hier.", "nicht mehr", ["nicht mehr", "noch nicht", "nie", "nirgendwo"], "noch (досі) → nicht mehr (більше не); ситуація змінилася.", "Вона більше тут не працює."],
-  ["Ich habe schon einmal Sushi probiert. → Ich habe {{B}} Sushi probiert.", "noch nie", ["noch nie", "noch nicht", "nicht mehr", "nie mehr"], "schon einmal → noch nie; йдеться про досвід до теперішнього моменту.", "Я ще ніколи не куштував суші."]
-].forEach(d => add("nw", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:5 }));
+ ["Was hast du gekauft? — Ich habe {{B}} gekauft.","nichts",[],["nichts","niemand","nie","nirgends"],"Що ти купив? — Я нічого не купив.","was / etwas → nichts. Додаткове nicht не потрібне!"],
+ ["Wer hat angerufen? — {{B}} hat angerufen.","Niemand",[],["Niemand","Nichts","Nie","Nirgends"],"Хто телефонував? — Ніхто не телефонував.","wer / jemand → niemand."],
+ ["Wann gehst du joggen? — {{B}}! Ich hasse Sport.","Nie",["Niemals"],["Nie","Nichts","Niemand","Nirgends"],"Коли ти бігаєш? — Ніколи! Я ненавиджу спорт.","wann / immer → nie, niemals."],
+ ["Wo ist mein Handy? Ich finde es {{B}}.","nirgends",["nirgendwo"],["nirgends","nichts","niemand","nie"],"Де мій телефон? Я ніде його не знаходжу.","wo / überall → nirgends, nirgendwo."],
+ ["Ich wohne ganz allein. {{B}} wohnt bei mir.","Niemand",[],["Niemand","Nichts","Nie","Nirgends"],"Я живу зовсім сам. Ніхто не живе зі мною.","jemand → niemand."],
+ ["Im Kühlschrank ist {{B}}. Wir müssen einkaufen.","nichts",[],["nichts","niemand","nie","nirgends"],"У холодильнику нічого немає. Нам треба купити продукти.","etwas → nichts."],
+ ["Er lügt {{B}}. Er sagt immer die Wahrheit.","nie",["niemals"],["nie","nichts","niemand","nirgends"],"Він ніколи не бреше. Він завжди каже правду.","immer ↔ nie, niemals."],
+ ["Siehst du jemanden im Garten? — Nein, da ist {{B}}.","niemand",[],["niemand","nichts","nie","nirgends"],"Бачиш когось у саду? — Ні, там нікого.","jemand → niemand."],
+ ["Wo warst du am Wochenende? — Ich war {{B}}. Ich war krank.","nirgends",["nirgendwo"],["nirgends","nichts","niemand","nie"],"Де ти був на вихідних? — Я ніде не був. Я хворів.","irgendwo / überall → nirgends, nirgendwo."],
+ ["Hast du etwas gesehen? — Nein, ich habe {{B}} gesehen.","nichts",[],["nichts","niemand","nie","nirgends"],"Ти щось бачив? — Ні, я нічого не бачив.","etwas → nichts."]
+].forEach(([s, a, alt, o, ua, ex]) => add("ei", { s, sch:"Яке питання — таке й заперечення: обери слово-пару.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:3, ua }));
 
 [
-  ["Wir müssen heute {{B}} arbeiten.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation: nicht заперечує всю дію; у реченні з модальним дієсловом стоїть перед інфінітивом.", "Ми сьогодні не повинні працювати.", "Wir müssen heute nicht arbeiten."],
-  ["Ich habe den Termin {{B}} vergessen.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Satznegation у Perfekt: nicht стоїть перед Partizip II.", "Я не забув про зустріч.", "Ich habe den Termin nicht vergessen."],
-  ["Nicht am Montag, {{B}} am Dienstag findet die Besprechung statt.", "sondern", ["sondern", "aber", "und", "weil"], "Teilnegation: nicht ... sondern виправляє конкретну обставину; після sondern подається правильна альтернатива.", "Нарада відбудеться не в понеділок, а у вівторок.", "Nicht am Montag, sondern am Dienstag findet die Besprechung statt."],
-  ["Sie hat den Bericht {{B}} gestern, sondern schon vorgestern geschickt.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Teilnegation: заперечується саме час відправлення — nicht gestern, sondern vorgestern.", "Вона надіслала звіт не вчора, а ще позавчора.", "Sie hat den Bericht nicht gestern, sondern schon vorgestern geschickt."],
-  ["{{B}} der Chef, sondern seine Stellvertreterin leitet heute die Sitzung.", "Nicht", ["Nicht", "Kein", "Nichts", "Niemand"], "Teilnegation: nicht перед підметом підкреслює, хто саме не виконує дію.", "Сьогодні засідання веде не керівник, а його заступниця.", "Nicht der Chef, sondern seine Stellvertreterin leitet heute die Sitzung."],
-  ["Das Paket wurde {{B}} an mich, sondern an meinen Nachbarn geliefert.", "nicht", ["nicht", "kein", "nichts", "niemand"], "Teilnegation: заперечується адресат; nicht ... sondern.", "Посилку доставили не мені, а моєму сусідові.", "Das Paket wurde nicht an mich, sondern an meinen Nachbarn geliefert."]
-].forEach(d => add("sn", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], full:d[5], st:6 }));
+ ["etwas","nichts",[],["nichts","niemand","nie","nirgendwo"],"щось ↔ ніщо"],
+ ["alles","nichts",[],["nichts","niemand","nie","kein"],"усе ↔ ніщо"],
+ ["jemand","niemand",[],["niemand","nichts","nie","nirgendwo"],"хтось ↔ ніхто"],
+ ["alle","niemand",[],["niemand","nichts","nie","nirgendwo"],"усі ↔ ніхто"],
+ ["irgendwo","nirgendwo",["nirgends"],["nirgendwo","niemand","nichts","nie"],"десь ↔ ніде"],
+ ["überall","nirgendwo",["nirgends"],["nirgendwo","nichts","niemand","nie"],"скрізь ↔ ніде"],
+ ["immer","nie",["niemals"],["nie","nichts","niemand","nirgendwo"],"завжди ↔ ніколи"],
+ ["nichts","etwas",["alles"],["etwas","jemand","immer","überall"],"ніщо ↔ щось"],
+ ["niemand","jemand",["alle"],["jemand","etwas","immer","irgendwo"],"ніхто ↔ хтось"],
+ ["nie","immer",[],["immer","etwas","jemand","überall"],"ніколи ↔ завжди"],
+ ["nirgendwo","überall",["irgendwo"],["überall","immer","etwas","jemand"],"ніде ↔ скрізь"]
+].forEach(([q, a, alt, o, ua]) => add("an", { s:`<span class="u">${q}</span> ↔ {{B}}`, sch:"Яке слово — протилежна пара за змістом?", o, a, alt, ex:`${q} ↔ ${[a, ...alt].join(" / ")}`, lbl:ua, sp:`${q}, ${a}`, st:3, ua }));
+add("an", { s:'<span class="u">ein</span> Auto ↔ {{B}} Auto', sch:"Яке слово — протилежна пара за змістом?", o:["kein","nicht","nichts","niemand"], a:"kein", ex:"ein Auto ↔ kein Auto", lbl:"є машина ↔ немає машини", sp:"ein Auto, kein Auto", st:3, ua:"ein ↔ kein" });
+
+/* ---------- 4. schon / noch / nicht mehr ---------- */
+const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch","schon","nie"];
+[
+ ["Hast du schon gegessen? — Nein, ich habe {{B}} gegessen.","noch nicht",[],SO,"Ти вже поїв? — Ні, я ще не їв.","schon ↔ noch nicht: дія ще не відбулася, але може відбутися."],
+ ["Bist du schon einmal in Wien gewesen? — Nein, ich war {{B}} in Wien.","noch nie",[],SO,"Ти вже коли-небудь був у Відні? — Ні, я ще ніколи там не був.","schon einmal ↔ noch nie."],
+ ["Wohnst du noch in Hamburg? — Nein, ich wohne {{B}} in Hamburg.","nicht mehr",[],SO,"Ти ще живеш у Гамбурзі? — Ні, я більше не живу в Гамбурзі.","(immer) noch ↔ nicht mehr."],
+ ["Ist das Essen schon fertig? — Nein, es ist {{B}} fertig.","noch nicht",[],SO,"Їжа вже готова? — Ні, вона ще не готова.","schon ↔ noch nicht."],
+ ["Hast du schon einmal Sushi probiert? — Nein, ich habe {{B}} Sushi probiert.","noch nie",[],SO,"Ти вже пробував суші? — Ні, я ще ніколи не пробував суші.","schon einmal ↔ noch nie."],
+ ["Arbeitet Tom noch bei Siemens? — Nein, er arbeitet {{B}} bei Siemens.","nicht mehr",[],SO,"Том ще працює в Siemens? — Ні, він більше там не працює.","(immer) noch ↔ nicht mehr."],
+ ["Hast du die Hausaufgaben schon gemacht? — Nein, {{B}}.","noch nicht",[],SO,"Ти вже зробив домашнє завдання? — Ні, ще ні.","schon ↔ noch nicht."],
+ ["Früher habe ich geraucht. Jetzt rauche ich {{B}}.","nicht mehr",[],SO,"Раніше я курив. Тепер я більше не курю.","Було, але вже ні → nicht mehr."],
+ ["Ich habe {{B}} in meinem Leben so einen Film gesehen.","noch nie",[],SO,"Я ще ніколи в житті не бачив такого фільму.","noch nie — жодного разу."],
+ ["Hast du schon bezahlt? — Nein, ich habe {{B}} bezahlt.","noch nicht",[],SO,"Ти вже заплатив? — Ні, я ще не заплатив.","schon ↔ noch nicht."],
+ ["Ich will {{B}} wieder zu spät kommen!","nie mehr",["nie wieder"],SO,"Я більше ніколи не хочу запізнюватися!","nie mehr / nie wieder — ніколи більше."],
+ ["Der Bus fährt {{B}}. Die Linie wurde eingestellt.","nicht mehr",[],SO,"Автобус більше не їздить. Лінію скасували.","Раніше їздив, тепер ні → nicht mehr."],
+ ["Ist er bereits angekommen? — Nein, er ist {{B}} angekommen.","noch nicht",[],SO,"Він уже приїхав? — Ні, він ще не приїхав.","bereits = schon → noch nicht."],
+ ["Wir haben kein Brot {{B}}.","mehr",[],SM,"У нас більше немає хліба.","kein … mehr = «вже немає»: kein + іменник, в кінці — mehr."],
+ ["Ich habe keine Lust {{B}}.","mehr",[],SM,"Я вже не маю бажання.","kein … mehr = «вже немає»."],
+ ["Er hat keine Angst {{B}}.","mehr",[],SM,"Він більше не боїться.","kein … mehr = «вже немає»."]
+].forEach(([s, a, alt, o, ua, ex]) => add("sn", { s, sch:"schon → noch nicht · noch → nicht mehr · schon einmal → noch nie.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:4, ua }));
+
+/* ---------- 5. Форми kein ---------- */
+/* [речення, відповідь, підказка (рід · відмінок), переклад] */
+[
+ ["Ich habe {{B}} Hund.","keinen","der Hund (чол. р.) · Akkusativ","У мене немає собаки."],
+ ["Das ist {{B}} Hund.","kein","der Hund (чол. р.) · Nominativ","Це не собака."],
+ ["Sie hat {{B}} Katze.","keine","die Katze (жін. р.) · Akkusativ","У неї немає кішки."],
+ ["Wir haben {{B}} Auto.","kein","das Auto (сер. р.) · Akkusativ","У нас немає машини."],
+ ["Er hat {{B}} Kinder.","keine","die Kinder (множина) · Akkusativ","У нього немає дітей."],
+ ["Ich wohne in {{B}} Haus, sondern in einer Wohnung.","keinem","das Haus (сер. р.) · Dativ (in + Dativ)","Я живу не в будинку, а в квартирі."],
+ ["Mit {{B}} Frau spreche ich darüber.","keiner","die Frau (жін. р.) · Dativ (mit)","Ні з якою жінкою я про це не розмовляю."],
+ ["Ich glaube {{B}} Politikern.","keinen","die Politiker (множина) · Dativ (glauben + Dativ)","Я не вірю жодним політикам."],
+ ["Heute ist {{B}} Schule.","keine","die Schule (жін. р.) · Nominativ","Сьогодні немає школи."],
+ ["Das ist {{B}} Problem.","kein","das Problem (сер. р.) · Nominativ","Це не проблема."],
+ ["Er trägt {{B}} Mantel.","keinen","der Mantel (чол. р.) · Akkusativ","Він не носить пальта."],
+ ["Es gibt hier {{B}} Bank.","keine","die Bank (жін. р.) · Akkusativ (es gibt + Akk)","Тут немає лавки."],
+ ["Sie ist {{B}} Lehrerin.","keine","die Lehrerin (жін. р.) · Nominativ","Вона не вчителька."],
+ ["Er ist {{B}} Arzt.","kein","der Arzt (чол. р.) · Nominativ","Він не лікар."],
+ ["Wir fahren mit {{B}} Bus.","keinem","der Bus (чол. р.) · Dativ (mit)","Ми не їдемо жодним автобусом."],
+ ["Ich habe {{B}} Geschwister.","keine","die Geschwister (множина) · Akkusativ","У мене немає братів і сестер."],
+ ["Ich habe {{B}} Idee.","keine","die Idee (жін. р.) · Akkusativ","Я не маю ідеї."],
+ ["Das Spielzeug gehört {{B}} Kind.","keinem","das Kind (сер. р.) · Dativ (gehören + Dativ)","Ця іграшка не належить жодній дитині."],
+ ["Er hilft {{B}} Menschen.","keinem","der Mensch (чол. р.) · Dativ (helfen + Dativ)","Він нікому не допомагає."]
+].forEach(([s, a, h, ua]) => add("kf", { s, sch:h, o:[a, ...sh(["kein","keine","keinen","keinem","keiner"].filter(x => x !== a)).slice(0, 3)], a, ex:`${h} → ${a}`, lbl:ua, sp:s.replace("{{B}}", a), st:5, ua }));
+
+/* ---------- 6. Місце nicht ---------- */
+[
+ ["Я його не знаю.","Ich kenne ihn nicht.",["Ich nicht kenne ihn.","Nicht ich kenne ihn.","Ich kenne ihn kein."],"Заперечуємо все речення → nicht в кінці."],
+ ["Він не приходить.","Er kommt nicht.",["Er nicht kommt.","Nicht er kommt.","Er kommt kein."],"Заперечуємо дієслово → nicht в кінці."],
+ ["Це не добре.","Das ist nicht gut.",["Das nicht ist gut.","Das ist gut nicht.","Nicht das ist gut."],"nicht стоїть перед прикметником."],
+ ["Він не живе в Берліні.","Er wohnt nicht in Berlin.",["Er wohnt in Berlin nicht.","Er nicht wohnt in Berlin.","Nicht er wohnt in Berlin."],"nicht — перед прийменниковою групою (місце)."],
+ ["Я тобі не телефоную.","Ich rufe dich nicht an.",["Ich rufe dich an nicht.","Ich nicht rufe dich an.","Ich rufe dich kein an."],"nicht — перед відокремлюваним префіксом (an)."],
+ ["Я не можу прийти.","Ich kann nicht kommen.",["Ich kann kommen nicht.","Ich nicht kann kommen.","Ich kann kein kommen."],"nicht — перед інфінітивом."],
+ ["Я цього не бачив.","Ich habe das nicht gesehen.",["Ich habe das gesehen nicht.","Ich nicht habe das gesehen.","Ich habe das kein gesehen."],"nicht — перед Partizip II."],
+ ["Я не їду додому.","Ich fahre nicht nach Hause.",["Ich fahre nach Hause nicht.","Ich nicht fahre nach Hause.","Ich fahre nach nicht Hause."],"nicht — перед напрямком (nach Hause)."],
+ ["Вона не дуже висока.","Sie ist nicht sehr groß.",["Sie ist sehr nicht groß.","Sie nicht ist sehr groß.","Sie ist sehr groß nicht."],"nicht — перед sehr і прикметником."],
+ ["Ми не їмо м’яса.","Wir essen kein Fleisch.",["Wir essen nicht Fleisch.","Wir essen Fleisch nicht.","Wir nicht essen Fleisch."],"Іменник без артикля → kein, а не nicht."],
+ ["Я ніколи не їм м’яса.","Ich esse nie Fleisch.",["Ich nie esse Fleisch.","Ich esse nie nicht Fleisch.","Ich esse nicht nie Fleisch."],"nie — як прислівник; подвійного заперечення немає."],
+ ["Тут нікого немає.","Hier ist niemand.",["Hier ist nicht niemand.","Hier ist niemand nicht.","Hier ist kein niemand."],"niemand уже заперечує; nicht не потрібне."],
+ ["Я нічого не знаю.","Ich weiß nichts.",["Ich weiß nicht nichts.","Ich weiß nichts nicht.","Ich nicht weiß nichts."],"nichts уже заперечує; nicht не потрібне."],
+ ["Я їду не сьогодні, а завтра.","Ich fahre nicht heute, sondern morgen.",["Ich fahre nicht heute, aber morgen.","Ich fahre nicht heute, und morgen.","Ich nicht fahre heute, sondern morgen."],"nicht … sondern — «не …, а …»."],
+ ["Вона не вдома.","Sie ist nicht zu Hause.",["Sie ist zu Hause nicht.","Sie nicht ist zu Hause.","Sie kein ist zu Hause."],"nicht — перед прийменниковою групою zu Hause."],
+ ["Ми не купили цей телефон.","Wir haben dieses Handy nicht gekauft.",["Wir haben dieses Handy gekauft nicht.","Wir nicht haben dieses Handy gekauft.","Wir haben dieses Handy kein gekauft."],"nicht — перед Partizip II, після додатка."]
+].forEach(([ua, a, ws, ex]) => mcAdd("po", ua, a, ws, ex, 6, "Обери правильний порядок слів."));
+
+/* ---------- 7. Підсилення ---------- */
+[
+ ["Das Essen schmeckt mir {{B}}. Es ist ekelhaft.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Їжа мені зовсім не смакує. Вона огидна.","gar nicht = зовсім не (підсилене nicht)."],
+ ["Ich habe {{B}} Zeit. Nur noch fünf Minuten.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"У мене майже немає часу. Лише ще п’ять хвилин.","kaum = майже не, дуже мало."],
+ ["Darf ich das Fenster öffnen? — {{B}}! Es ist viel zu kalt.","Auf keinen Fall",[],["Auf keinen Fall","Gar nicht","Kaum","Nirgends"],"Можна відчинити вікно? — Ні в якому разі! Надто холодно.","auf keinen Fall = ні в якому разі (категорична відмова)."],
+ ["Ich war {{B}} in China, nicht ein einziges Mal.","niemals",["nie"],["niemals","auf keinen Fall","kaum","gar kein"],"Я ніколи не був у Китаї, жодного разу.","niemals = ніколи (категорично); синонім nie."],
+ ["Ich habe {{B}} Geld dabei, nicht einen Cent.","gar kein",["überhaupt kein"],["gar kein","kaum","niemals","auf keinen Fall"],"У мене з собою взагалі немає грошей, жодного цента.","gar kein / überhaupt kein = зовсім ніякого."],
+ ["Mir gefällt der Film {{B}}. Ich verlasse das Kino.","überhaupt nicht",["gar nicht"],["überhaupt nicht","auf keinen Fall","niemals","gar kein"],"Мені взагалі не подобається цей фільм. Я йду з кінотеатру.","überhaupt nicht = взагалі не."],
+ ["Ich habe {{B}} geschlafen, keine einzige Minute.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Я взагалі не спав, жодної хвилини.","überhaupt nicht / gar nicht = зовсім не."],
+ ["Willst du mit ihm sprechen? — {{B}}! Er hat mich belogen.","Auf keinen Fall",[],["Auf keinen Fall","Gar nicht","Kaum","Nirgends"],"Хочеш із ним поговорити? — Ні в якому разі! Він мене обманув.","auf keinen Fall = ні в якому разі."],
+ ["Er hat {{B}} gegessen. Er hat nur einen Bissen genommen.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"Він ледь поїв. Він узяв лише шматочок.","kaum = ледве, майже не."],
+ ["Es ist {{B}} schwer. Ich schaffe es leicht.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Це зовсім не важко. Я легко це зроблю.","gar nicht = зовсім не."],
+ ["Hier wohnen {{B}} Leute. Es sind nur drei Häuser.","kaum",[],["kaum","gar nicht","auf keinen Fall","niemals"],"Тут майже ніхто не живе. Є лише три будинки.","kaum Leute = майже немає людей."]
+].forEach(([s, a, alt, o, ua, ex]) => add("pd", { s, sch:"Підсилення чи «ледве»? Обери вираз за змістом.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:7, ua }));
+
+/* ---------- 8. Заперечи речення / Переклад ---------- */
+/* [речення, заперечене, хибні, переклад заперечного, підказка, пояснення, alt] */
+[
+ ["Ich habe einen Bruder.","Ich habe keinen Bruder.",["Ich habe nicht Bruder.","Ich habe kein Bruder.","Ich habe einen Bruder nicht."],"У мене немає брата.","Заперечи іменник.","einen Bruder — неозначений артикль (Akk, чол. р.) → keinen Bruder."],
+ ["Wir essen Fleisch.","Wir essen kein Fleisch.",["Wir essen nicht Fleisch.","Wir essen Fleisch nicht.","Wir nicht essen Fleisch."],"Ми не їмо м’яса.","Заперечи іменник.","Fleisch — без артикля → kein."],
+ ["Das Kind schläft.","Das Kind schläft nicht.",["Das Kind nicht schläft.","Das Kind schläft kein.","Das Kind kein schläft."],"Дитина не спить.","Заперечи дієслово.","Заперечуємо дієслово → nicht в кінці."],
+ ["Ich gehe heute ins Kino.","Ich gehe heute nicht ins Kino.",["Ich gehe heute ins Kino nicht.","Ich gehe heute kein Kino.","Ich nicht gehe heute ins Kino."],"Я сьогодні не йду в кіно.","Заперечи речення.","nicht — перед прийменниковою групою ins Kino.",["Heute gehe ich nicht ins Kino."]],
+ ["Sie ist müde.","Sie ist nicht müde.",["Sie ist kein müde.","Sie ist müde nicht.","Sie nicht ist müde."],"Вона не втомлена.","Заперечи прикметник.","nicht — перед прикметником."],
+ ["Wir haben Zeit.","Wir haben keine Zeit.",["Wir haben nicht Zeit.","Wir haben kein Zeit.","Wir haben Zeit nicht."],"У нас немає часу.","Заперечи іменник.","Zeit — без артикля, жін. р. → keine."],
+ ["Ich kenne die Antwort.","Ich kenne die Antwort nicht.",["Ich kenne die keine Antwort.","Ich nicht kenne die Antwort.","Ich kenne die Antwort kein."],"Я не знаю відповіді.","Заперечи речення.","die Antwort — означений артикль → nicht."],
+ ["Er hat eine Freundin.","Er hat keine Freundin.",["Er hat kein Freundin.","Er hat eine Freundin nicht.","Er nicht hat eine Freundin."],"У нього немає дівчини.","Заперечи іменник.","eine Freundin → keine Freundin."],
+ ["Ich esse oft Fisch.","Ich esse nie Fisch.",["Ich esse nie nicht Fisch.","Ich nie esse Fisch.","Ich esse Fisch nie nicht."],"Я ніколи не їм рибу.","Заміни oft на заперечну пару.","nie вже заперечує — nicht не потрібне.",["Ich esse niemals Fisch."]],
+ ["Jemand klopft an die Tür.","Niemand klopft an die Tür.",["Jemand klopft kein an die Tür.","Nichts klopft an die Tür.","Niemand klopft nicht an die Tür."],"Ніхто не стукає у двері.","Заміни jemand на заперечну пару.","jemand → niemand."],
+ ["Ich sehe etwas.","Ich sehe nichts.",["Ich sehe nicht nichts.","Ich sehe nichts nicht.","Ich sehe niemand."],"Я нічого не бачу.","Заміни etwas на заперечну пару.","etwas → nichts."],
+ ["Er ist schon hier.","Er ist noch nicht hier.",["Er ist schon nicht hier.","Er ist nicht noch hier.","Er ist noch nie hier."],"Його ще немає тут.","schon → …","schon → noch nicht."],
+ ["Ich wohne noch bei meinen Eltern.","Ich wohne nicht mehr bei meinen Eltern.",["Ich wohne nicht noch bei meinen Eltern.","Ich wohne nie bei meinen Eltern.","Ich wohne kein mehr bei meinen Eltern."],"Я більше не живу з батьками.","noch → …","(immer) noch → nicht mehr."],
+ ["Sie war schon einmal in Paris.","Sie war noch nie in Paris.",["Sie war schon nie in Paris.","Sie war nicht mehr in Paris.","Sie war nie noch in Paris."],"Вона ще ніколи не була в Парижі.","schon einmal → …","schon einmal → noch nie."],
+ ["Ich habe immer Zeit für dich.","Ich habe nie Zeit für dich.",["Ich habe nie keine Zeit für dich.","Ich nie habe Zeit für dich.","Ich habe nicht Zeit für dich nie."],"Я ніколи не маю часу для тебе.","Заміни immer на заперечну пару.","immer → nie; без kein.",["Ich habe niemals Zeit für dich."]],
+ ["Wir haben noch Milch.","Wir haben keine Milch mehr.",["Wir haben nicht mehr Milch.","Wir haben keine Milch noch.","Wir haben nicht Milch mehr."],"У нас більше немає молока.","noch + іменник → …","noch + іменник → kein … mehr."],
+ ["Alle sind gekommen.","Niemand ist gekommen.",["Alle sind nicht gekommen.","Niemand ist nicht gekommen.","Niemand sind gekommen."],"Ніхто не прийшов.","Заміни alle на заперечну пару.","alle → niemand (однина!)."],
+ ["Ich habe Hunger.","Ich habe keinen Hunger.",["Ich habe nicht Hunger.","Ich habe kein Hunger.","Ich habe Hunger nicht."],"Я не голодний.","Заперечи іменник.","der Hunger (чол. р.), Akk → keinen."],
+ ["Ich fahre mit dem Bus.","Ich fahre nicht mit dem Bus.",["Ich fahre mit dem Bus nicht.","Ich fahre kein mit dem Bus.","Ich nicht fahre mit dem Bus."],"Я не їду автобусом.","Заперечи речення.","nicht — перед прийменниковою групою mit dem Bus."]
+].forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ne", { s:esc(pos), sch:hint, o:[neg, ...ws], a:neg, alt, ex, lbl:ua, sp:neg, st:8, ua }));
 
 [
-  ["Er verließ den Raum, {{B}} sich zu verabschieden.", "ohne", ["ohne", "anstatt", "als", "geschweige denn"], "ohne ... zu + Infinitiv: підмет в обох частинах той самий (er).", "Він вийшов із кімнати, не попрощавшись."],
-  ["{{B}} lange zu diskutieren, sollten wir eine Lösung suchen.", "Anstatt", ["Anstatt", "Ohne", "Als", "Geschweige"], "anstatt ... zu + Infinitiv: замість виконання однієї дії пропонується інша.", "Замість того щоб довго сперечатися, нам слід пошукати рішення."],
-  ["Sie ging, ohne dass jemand es {{B}}.", "bemerkte", ["bemerkte", "bemerken", "bemerkt", "bemerkt hat"], "ohne dass + підрядне речення: інший підмет (jemand), тому потрібне особове дієслово в кінці.", "Вона пішла так, що ніхто цього не помітив."],
-  ["Er kann nicht einmal schwimmen, {{B}} tauchen.", "geschweige denn", ["geschweige denn", "ohne dass", "als dass", "anstatt dass"], "geschweige denn додає ще менш імовірну або складнішу можливість.", "Він навіть плавати не вміє, не кажучи вже про пірнання."],
-  ["Der Koffer ist zu schwer, {{B}} ich ihn allein tragen könnte.", "als dass", ["als dass", "ohne dass", "anstatt dass", "geschweige denn"], "zu ... als dass: наслідок неможливий; у підрядній частині дієслово стоїть у кінці.", "Валіза надто важка, щоб я міг нести її сам."],
-  ["{{B}} seine Kollegin die E-Mail beantwortet, ruft er lieber seinen Kollegen an.", "Anstatt dass", ["Anstatt dass", "Ohne dass", "Als dass", "Geschweige denn"], "anstatt dass + підрядне речення; тут підмети різні (seine Kollegin / er), тому dass є доречним.", "Замість того щоб його колега відповіла на електронний лист, він воліє зателефонувати своєму колезі."]
-].forEach(d => add("nc", { s:d[0], a:d[1], o:d[2], ex:d[3], lbl:d[4], st:7 }));
+ ["У мене немає часу.","Ich habe keine Zeit.",["Ich habe nicht Zeit.","Ich habe nichts Zeit.","Ich habe kein Zeit."],"Zeit — без артикля, жін. р. → keine."],
+ ["Я нічого не розумію.","Ich verstehe nichts.",["Ich verstehe nicht nichts.","Ich verstehe kein.","Ich nicht verstehe nichts."],"nichts уже заперечує — без nicht."],
+ ["Ніхто цього не знає.","Niemand weiß das.",["Kein weiß das.","Niemand weiß das nicht.","Nicht weiß das niemand."],"niemand — без nicht."],
+ ["Він ніколи не спізнюється.","Er kommt nie zu spät.",["Er kommt nicht nie zu spät.","Er nie kommt zu spät.","Er kommt kein zu spät."],"nie — як прислівник, без nicht.",["Er kommt niemals zu spät."]],
+ ["Я більше не курю.","Ich rauche nicht mehr.",["Ich rauche mehr nicht.","Ich rauche kein mehr.","Ich rauche nie noch."],"(immer) noch → nicht mehr."],
+ ["Я ніде не можу знайти свій ключ.","Ich kann meinen Schlüssel nirgends finden.",["Ich kann meinen Schlüssel nicht nirgends finden.","Ich kann meinen Schlüssel finden nirgends.","Ich kann meinen Schlüssel kein finden."],"nirgends / nirgendwo — ніде.",["Ich kann meinen Schlüssel nirgendwo finden."]],
+ ["Це зовсім не важко.","Das ist gar nicht schwer.",["Das ist gar kein schwer.","Das gar nicht ist schwer.","Das ist schwer gar nicht."],"gar nicht стоїть перед прикметником.",["Das ist überhaupt nicht schwer."]],
+ ["Ні в якому разі!","Auf keinen Fall!",["Auf kein Fall!","Auf nicht Fall!","Nicht auf Fall!"],"auf keinen Fall — стійкий вираз (Akk, чол. р.)."],
+ ["Я ще не був у Берліні.","Ich war noch nicht in Berlin.",["Ich war nicht noch in Berlin.","Ich war schon nicht in Berlin.","Ich war noch kein in Berlin."],"schon ↔ noch nicht."],
+ ["Вона ще ніколи не літала літаком.","Sie ist noch nie mit dem Flugzeug geflogen.",["Sie ist nie noch mit dem Flugzeug geflogen.","Sie ist noch nicht nie mit dem Flugzeug geflogen.","Sie ist schon nie mit dem Flugzeug geflogen."],"schon einmal ↔ noch nie."],
+ ["Я ледве можу ходити.","Ich kann kaum gehen.",["Ich kann gehen kaum.","Ich kann nicht kaum gehen.","Ich kaum kann gehen."],"kaum — перед інфінітивом, як прислівник."],
+ ["У мене немає собаки.","Ich habe keinen Hund.",["Ich habe kein Hund.","Ich habe nicht Hund.","Ich habe keine Hund."],"der Hund, Akk → keinen."],
+ ["Це не моя машина.","Das ist nicht mein Auto.",["Das ist kein mein Auto.","Das ist mein Auto nicht.","Das nicht ist mein Auto."],"mein — присвійний займенник → nicht."],
+ ["Він не лікар.","Er ist kein Arzt.",["Er ist nicht Arzt.","Er nicht ist Arzt.","Er ist keine Arzt."],"Професія без артикля → kein."],
+ ["Нікого немає вдома.","Niemand ist zu Hause.",["Niemand ist nicht zu Hause.","Kein ist zu Hause.","Nicht niemand ist zu Hause."],"niemand — без nicht."],
+ ["У нас більше немає хліба.","Wir haben kein Brot mehr.",["Wir haben keinen Brot mehr.","Wir haben kein mehr Brot.","Wir haben Brot kein mehr."],"kein … mehr = «вже немає»."],
+ ["Я не маю нічого проти цього.","Ich habe nichts dagegen.",["Ich habe nicht nichts dagegen.","Ich habe kein dagegen.","Ich habe dagegen nicht."],"nichts — без nicht."]
+].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"Обери правильне німецьке речення.", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
+
+/* ---------- 9. Знайди помилку / Тексти ---------- */
+[
+ ["Я нічого не знаю.","Ich weiß nichts.","Ich weiß nicht nichts.","Ich weiß kein.","Ich nicht weiß nichts.","У німецькій немає подвійного заперечення: nichts уже заперечує."],
+ ["У мене немає грошей.","Ich habe kein Geld.","Ich habe nicht Geld.","Ich habe keine Geld.","Ich habe Geld nicht.","Geld — без артикля, сер. р. → kein; nicht тут неможливий."],
+ ["Це не мій брат.","Das ist nicht mein Bruder.","Das ist kein mein Bruder.","Das ist mein Bruder nicht.","Das ist keiner mein Bruder.","Присвійний займенник mein → nicht (kein з mein не поєднується)."],
+ ["Ніхто не прийшов.","Niemand ist gekommen.","Niemand ist nicht gekommen.","Nicht niemand ist gekommen.","Nichts ist gekommen.","niemand уже заперечує — без nicht."],
+ ["Він ніколи не п’є каву.","Er trinkt nie Kaffee.","Er trinkt nicht nie Kaffee.","Er trinkt nie keinen Kaffee.","Er nie trinkt Kaffee.","nie — як прислівник; подвійного заперечення немає."],
+ ["Вона ще не прийшла.","Sie ist noch nicht gekommen.","Sie ist schon nicht gekommen.","Sie ist nicht noch gekommen.","Sie ist noch kein gekommen.","schon ↔ noch nicht."],
+ ["Я більше не маю сил.","Ich habe keine Kraft mehr.","Ich habe kein Kraft mehr.","Ich habe keine Kraft noch.","Ich habe nicht Kraft mehr.","kein … mehr: die Kraft (жін. р.) → keine."],
+ ["Це зовсім не важко.","Das ist gar nicht schwer.","Das ist gar kein schwer.","Das ist schwer gar nicht.","Das ist gar nicht nicht schwer.","gar nicht стоїть перед прикметником."],
+ ["Він не вчитель.","Er ist kein Lehrer.","Er ist nicht Lehrer.","Er ist keinen Lehrer.","Er ist Lehrer nicht.","Професія без артикля → kein (Nominativ, чол. р.)."],
+ ["Мені не подобається цей фільм.","Ich mag diesen Film nicht.","Ich mag keinen diesen Film.","Ich mag diesen Film kein.","Ich nicht mag diesen Film.","diesen Film — вказівний займенник → nicht."],
+ ["Тут ніде не сісти.","Hier kann man nirgends sitzen.","Hier kann man nicht nirgends sitzen.","Hier kann man kein sitzen.","Hier kann man sitzen nirgends nicht.","nirgends уже заперечує — без nicht."],
+ ["Ти вже поїв? — Ні, ще ні.","Nein, noch nicht.","Nein, nicht noch.","Nein, schon nicht.","Nein, noch kein.","schon ↔ noch nicht."],
+ ["Ніколи більше!","Nie wieder!","Nicht wieder nie!","Kein wieder!","Nie nicht wieder!","nie wieder / nie mehr = ніколи більше."],
+ ["У нас немає проблем.","Wir haben keine Probleme.","Wir haben nicht Probleme.","Wir haben kein Probleme.","Wir haben keinen Probleme.","Probleme — множина без артикля → keine."],
+ ["Без окулярів я не можу читати.","Ohne Brille kann ich nicht lesen.","Dohne kann ich nicht lesen.","Ohne es kann ich nicht lesen.","Darohne kann ich nicht lesen.","ohne не утворює da-форм (немає «dohne»)."]
+].forEach(([ua, a, w1, w2, w3, ex]) => mcAdd("er", ua, a, [w1, w2, w3], ex, 9, "Обери правильний варіант німецькою."));
+
+[
+ ["Wo ist Paul? — Ich weiß es nicht. Ich habe ihn {{B}} gesehen.","nirgends",["nirgendwo"],["nirgends","niemand","nichts","kein"],"Де Пауль? — Не знаю. Я ніде його не бачив.","wo → nirgends, nirgendwo."],
+ ["Der Kühlschrank ist leer. Wir haben {{B}} zu essen.","nichts",[],["nichts","nie","nirgends","kein"],"Холодильник порожній. Нам нічого їсти.","etwas → nichts."],
+ ["Mein Nachbar grüßt mich {{B}}. Er ist sehr unfreundlich.","nie",["niemals"],["nie","niemand","nichts","kein"],"Мій сусід ніколи зі мною не вітається. Він дуже непривітний.","immer ↔ nie."],
+ ["Früher hatte ich viele Hobbys. Heute habe ich {{B}} Hobby mehr.","kein",[],["kein","nicht","keine","nichts"],"Раніше в мене було багато хобі. Тепер у мене вже немає хобі.","kein … mehr; das Hobby (сер. р.) → kein."],
+ ["{{B}} war auf der Party. Alle waren krank.","Niemand",[],["Niemand","Nichts","Nie","Kein"],"На вечірці нікого не було. Усі захворіли.","jemand / alle → niemand."],
+ ["Ich liebe Tee, aber Kaffee schmeckt mir {{B}}.","gar nicht",["überhaupt nicht"],["gar nicht","nichts","nirgends","niemand"],"Я люблю чай, але кава мені зовсім не смакує.","gar nicht = зовсім не."],
+ ["Ich bin erst 15. Ich darf {{B}} Auto fahren.","noch nicht",[],["noch nicht","nicht mehr","noch nie","nie mehr"],"Мені лише 15. Мені ще не можна водити авто.","schon ↔ noch nicht (поки що ні)."],
+ ["Bitte nicht berühren! Das ist {{B}} Spielzeug.","kein",[],["kein","nicht","keine","nichts"],"Не чіпай! Це не іграшка.","das Spielzeug (сер. р.) → kein."],
+ ["Wo wohnt Anna? — Das weiß {{B}}. Sie hat ihre Adresse geheim gehalten.","niemand",[],["niemand","nichts","nie","nirgends"],"Де живе Анна? — Цього ніхто не знає. Вона тримала адресу в таємниці.","jemand → niemand."],
+ ["Rauchst du noch? — Nein, ich rauche {{B}}. Ich habe vor einem Jahr aufgehört.","nicht mehr",[],["nicht mehr","noch nicht","noch nie","kein"],"Ти ще куриш? — Ні, я більше не курю. Я кинув рік тому.","(immer) noch ↔ nicht mehr."],
+ ["Der Bus ist {{B}} da. Er kommt erst in zehn Minuten.","noch nicht",[],["noch nicht","nicht mehr","noch nie","nirgends"],"Автобуса ще немає. Він приїде лише за десять хвилин.","schon ↔ noch nicht."]
+].forEach(([s, a, alt, o, ua, ex]) => add("tx", { s, sch:"Читай речення цілком: що заперечуємо і яке слово підходить.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:9, ua }));
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
-const XP_MAX = Math.ceil(TOTAL / 10) * 10;
+const XP_MAX = TOTAL + 20;
 
-let stage = (() => { const v = parseInt(localStorage.getItem("neg_stage"), 10); return (v >= 1 && v <= 7) ? v : 1; })();
+let stage = (() => { const v = parseInt(localStorage.getItem("ng_stage"), 10); return (v >= 1 && v <= 9) ? v : 1; })();
+const UL_KEY = "ng_unlocked";
+const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
 
-// Виправлена логіка розблокування (щоб не було сірих етапів після дострокового відкриття)
-const UL_KEY = "neg_unlocked_v2";
-const getUnlocked = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
-const setUnlocked = (n) => { const u = getUnlocked(); if(!u.includes(n)) { u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u)); } };
-
-/* ============ THEME & SOUND ============ */
+/* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
 const mqLight = window.matchMedia('(prefers-color-scheme: light)');
 function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
 function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
-const savedTheme = store.get('neg-theme');
+const savedTheme = store.get('pa-theme');
 if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
 paintThemeIcon();
 if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
 function toggleTheme(){
   const n = effTheme() === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', n);
-  store.set('neg-theme', n); paintThemeIcon();
+  store.set('pa-theme', n); paintThemeIcon();
 }
 
-let soundEnabled = store.get('neg-sound') !== 'off';
+/* ============ SOUND + HAPTIC ============ */
+let soundEnabled = store.get('pa-sound') !== 'off';
 function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
 updateSoundIcon();
-function toggleSound(){ soundEnabled = !soundEnabled; store.set('neg-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
+function toggleSound(){ soundEnabled = !soundEnabled; store.set('pa-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
 let audioCtx;
 function playSound(type){
   if(!soundEnabled) return;
@@ -722,6 +992,7 @@ function playSound(type){
     if ('audioSession' in navigator) navigator.audioSession.type = 'playback';
     const now = audioCtx.currentTime;
     if(type === 'open' || type === 'close'){
+      /* тихий м'який звук: відкриття — вгору, закриття — вниз */
       const notes = type === 'open' ? [392, 523.25, 659.25] : [659.25, 523.25, 392];
       notes.forEach((f, k) => {
         const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t0 = now + k * 0.07;
@@ -755,43 +1026,42 @@ function playSound(type){
     }
   }catch(e){}
 }
-/* Вібровідгук: Telegram → navigator.vibrate (Android) → «switch»-трюк для iOS Safari (17.4+) */
-const hapticSw = (() => {
-  try {
-    const lb = document.createElement('label');
-    lb.setAttribute('aria-hidden', 'true');
-    lb.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
-    const inp = document.createElement('input');
-    inp.type = 'checkbox'; inp.setAttribute('switch', '');
-    lb.appendChild(inp); document.body.appendChild(lb);
-    return lb;
-  } catch(e){ return null; }
-})();
 function haptic(kind){
   try{
-    const tg = window.Telegram && window.Telegram.WebApp;
-    const h = tg && tg.HapticFeedback;
-    const inTg = !!(h && tg.initData && typeof tg.isVersionAtLeast === 'function' && tg.isVersionAtLeast('6.1'));
-    if(inTg){
-      if(kind === 'ok') h.notificationOccurred('success');
-      else if(kind === 'no') h.notificationOccurred('error');
-      else h.selectionChanged();
-      return;
-    }
-    if(navigator.vibrate){
-      navigator.vibrate(kind === 'ok' ? 40 : kind === 'no' ? [70, 50, 70, 50, 70] : 15);
-      return;
-    }
-    if(hapticSw){
-      const tap = () => { try{ hapticSw.click(); }catch(e){} };
-      tap();
-      if(kind === 'no'){ setTimeout(tap, 90); setTimeout(tap, 180); }
-    }
+    const h = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback;
+    if(!h) return;
+    if(kind === 'ok') h.notificationOccurred('success');
+    else if(kind === 'no') h.notificationOccurred('error');
+    else h.selectionChanged();
   }catch(e){}
 }
 
 /* ============ STATE ============ */
-const KEY = id => "tp_v2_negation_" + id;
+const TIPS = {
+  md:"Згадай значення слова.", zs:"Яке німецьке слово відповідає значенню?",
+  kn:"kein — іменник з ein / без артикля; nicht — решта.", ei:"Яке питання — таке й заперечення: etwas → nichts, jemand → niemand.",
+  an:"Знайди слово-пару за змістом.", sn:"schon → noch nicht · noch → nicht mehr.",
+  kf:"Визнач рід і відмінок іменника.", po:"nicht — в кінці або перед тим, що заперечуємо.",
+  pd:"Підсилення чи «ледве»?", ne:"kein чи nicht? Є слово-пара?",
+  ue:"Спершу що заперечуємо, потім яке слово.", er:"Перевір: nicht / kein, форму, подвійне заперечення.", tx:"Читай усе речення, а не лише пропуск."
+};
+const RULES = {
+  md:"💡 <b>nicht</b> — не · <b>kein</b> — жодний · <b>nichts</b> — ніщо · <b>niemand</b> — ніхто · <b>nie</b> — ніколи · <b>nirgends</b> — ніде.",
+  zs:"💡 <b>nie / niemals</b> — ніколи · <b>nirgendwo / nirgends</b> — ніде · <b>gar nicht / überhaupt nicht</b> — зовсім не / взагалі не.",
+  kn:"💡 <b>ein / без артикля</b> → <b>kein</b> · <b>der / mein / дієслово / прикметник</b> → <b>nicht</b>.",
+  ei:"💡 <b>etwas → nichts</b> · <b>jemand → niemand</b> · <b>immer → nie</b> · <b>überall → nirgends</b>. Без nicht!",
+  an:"💡 Пари: <b>etwas ↔ nichts</b> · <b>jemand / alle ↔ niemand</b> · <b>irgendwo / überall ↔ nirgends</b> · <b>immer ↔ nie</b>.",
+  sn:"💡 <b>schon → noch nicht</b> · <b>schon einmal → noch nie</b> · <b>noch → nicht mehr</b> · <b>noch + іменник → kein … mehr</b>.",
+  kf:"💡 Nom: <b>kein / keine / kein / keine</b> · Akk: <b>keinen</b> (чол.) · Dat: <b>keinem / keiner / keinem / keinen</b>.",
+  po:"💡 <b>nicht</b> — в кінці речення, але перед прикметником, прийм. групою, Partizip II, інфінітивом, префіксом.",
+  pd:"💡 <b>gar nicht</b> = зовсім не · <b>kaum</b> = ледве · <b>auf keinen Fall</b> = ні в якому разі · <b>gar kein</b> = жодного.",
+  ne:"💡 Алгоритм: 1) що заперечуємо 2) kein чи nicht 3) слово-пара 4) без подвійного заперечення.",
+  ue:"💡 Українське «нічого не» = німецьке <b>nichts</b> (без nicht).",
+  er:"💡 Перевір: 1) nicht / kein · 2) закінчення kein · 3) місце nicht · 4) подвійне заперечення.",
+  tx:"💡 Читай речення цілком: що заперечуємо, яке слово-пара підходить."
+};
+const KEY = id => "tp_v2_negation_" + id;   // префікс tp_v2_ — ці ключі синхронізує sync.js
+/* x і p лише зростають (для sync.js): кожна відповідь x+1, а p+0 / p+1 / p+2 дає EXP +1 / 0 / −1. Загальний EXP = Σ(x − p) по всіх вкладках. */
 const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0, p:0 });
 const S = {};
 const readState = id => {
@@ -800,12 +1070,12 @@ const readState = id => {
 };
 TABS.forEach(t => { S[t.id] = readState(t.id) || blankState(); });
 
-const bump = (t, net) => { t.x++; t.p += 1 - net; };
+const bump = (t, net) => { t.x++; t.p += 1 - net; };   // net = зміна EXP: +1, 0 або −1
 const calcXp = () => Math.max(0, Math.min(XP_MAX, TABS.reduce((a, t) => a + ((S[t.id].x || 0) - (S[t.id].p || 0)), 0)));
 let XP = calcXp();
 
-let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false;
-let mode = store.get("neg-mode") === "type" ? "type" : "mc";
+let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
+let mode = store.get("ng-mode") === "type" ? "type" : "mc";
 const TB = () => TABS.find(t => t.id === tab);
 const eMode = () => TB().typeOnly ? "type" : mode;
 const isMc = () => TB().kind === "mc" || (TB().kind === "text" && eMode() === "mc");
@@ -813,10 +1083,11 @@ const items = () => ITEMS[tab];
 const T = () => S[tab];
 const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] === stage);
 const streak = i => T().k[i] || 0;
-const maxStreak = () => 1;
-const errCount = () => Object.keys(T().err).filter(k => T().err[k] && (!stage || STG[tab][k] === stage)).length;
+const maxStreak = () => 1;   // завдання «вивчене» після 1 правильної відповіді — більше воно не повертається (помилкові повертаються)
+const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
 const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
 
+/* ============ SPEECH ============ */
 function speak(text){
   if(!window.speechSynthesis || !text) return;
   try {
@@ -831,32 +1102,24 @@ function speakCurrent(){ const it = items()[cur]; if(it) speak(it.sp); }
 
 /* ============ RENDER ============ */
 function renderTabs(){
-  const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
-  const tabsEl = $("tabs");
-  if (vis.length <= 1) {
-    tabsEl.style.display = "none";
-    tabsEl.innerHTML = "";
-  } else {
-    tabsEl.style.display = "flex";
-    tabsEl.innerHTML = vis.map(t => {
-      const st = S[t.id], idx = ITEMS[t.id].map((_, i) => i).filter(i => !stage || STG[t.id][i] === stage);
-      const done = idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
-      const cl = st.cl && st.cl[String(stage || 0)];
-      return `<button class="tab ${t.id === tab ? 'on' : ''} ${cl ? 'cl' : ''}" data-t="${t.id}">${t.label}<small>${done}/${idx.length}</small></button>`;
-    }).join("");
-  }
+  $("tabs").innerHTML = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)).map(t => {
+    const st = S[t.id], idx = ITEMS[t.id].map((_, i) => i).filter(i => !stage || STG[t.id][i] === stage);
+    const done = idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
+    const cl = st.cl && st.cl[String(stage || 0)];
+    return `<button class="tab ${t.id === tab ? 'on' : ''} ${cl ? 'cl' : ''}" data-t="${t.id}">${t.label}<small>${done}/${idx.length}</small></button>`;
+  }).join("");
   renderModes(); renderStages();
 }
 function renderModes(){
   const b = $("modeBtn");
   b.style.display = (TB().kind === "text" && !TB().typeOnly) ? "flex" : "none";
   b.textContent = mode === "mc" ? "👆 Обери" : "✏️ Впиши";
+  b.title = mode === "mc" ? "Зараз: вибір варіантів. Натисніть, щоб вписувати самому." : "Зараз: ввід. Натисніть, щоб обирати варіанти.";
 }
 function renderLab(){
   const it = items()[cur], lab = $("lab");
-  if(!it || !it.lbl || it.construct){ lab.innerHTML = ""; $("showBtn").style.display="none"; return; }
-  $("showBtn").style.display="inline-block"; $("showBtn").textContent="🌐 Перекласти";
-  lab.innerHTML = `<div class="tr-text" id="translation">${esc(it.lbl)}</div>`;
+  if(!it || !it.lbl){ lab.innerHTML = ""; return; }
+  lab.innerHTML = trShown ? `<div class="tr-text">${esc(it.lbl)}</div>` : '<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
 }
 function sentHTML(it){
   if(it.s.indexOf("{{B}}") < 0) return it.s;
@@ -864,26 +1127,15 @@ function sentHTML(it){
   const cls = answered ? ("blank fill " + (T()._ok ? "ok" : "no")) : "blank";
   return it.s.replace("{{B}}", `<span class="${cls}" id="bk">${filled}</span>`);
 }
-function renderBuilder(it){
- const area=$("builderArea"); if(!it||!it.construct){area.innerHTML="";area.style.display="none";return;}
- area.style.display="block"; const words=sh(it.sp.replace(/[.,!?]/g,"").split(/\s+/));
- area.innerHTML=`<div class="build-answer" id="buildAnswer"><span>Натискай на слова, щоб скласти речення…</span></div><div class="builder" id="buildWords">${words.map((w,i)=>`<button class="word" type="button" data-word="${i}">${esc(w)}</button>`).join("")}</div><div class="build-actions"><button id="buildClear" type="button">↶ Очистити</button><button id="buildCheck" type="button">Перевірити ✓</button></div>`;
- const chosen=[],bank=$("buildWords"),answer=$("buildAnswer");
- const paint=()=>answer.innerHTML=chosen.length?chosen.map((x,j)=>`<button class="word" type="button" data-remove="${j}">${esc(x.w)} ×</button>`).join(" "):"<span>Натискай на слова, щоб скласти речення…</span>";
- bank.onclick=e=>{const b=e.target.closest("[data-word]");if(!b||b.disabled||answered)return;chosen.push({i:+b.dataset.word,w:b.textContent});b.disabled=true;paint();};
- answer.onclick=e=>{const b=e.target.closest("[data-remove]");if(!b||answered)return;const [x]=chosen.splice(+b.dataset.remove,1);bank.querySelector(`[data-word="${x.i}"]`).disabled=false;paint();};
- $("buildClear").onclick=()=>{if(answered)return;chosen.splice(0);bank.querySelectorAll("button").forEach(b=>b.disabled=false);paint();};
- $("buildCheck").onclick=()=>{if(answered)return;finish(norm(chosen.map(x=>x.w).join(" "))===norm(it.sp.replace(/[.,!?]/g,"")));};
-}
 function renderCard(){
   const it = items()[cur], t = T(), tb = TB();
   if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
   else $("title").textContent = tb.title;
   $("sent").innerHTML = sentHTML(it);
-  if(it.construct) $("sent").textContent = it.lbl;
   $("sent").className = "sent";
+  $("sent").title = "Натисни, щоб почути німецькою";
   renderLab();
-  $("scheme").innerHTML = (!answered && it.sch) ? it.sch : "";
+  $("scheme").innerHTML = (!answered && (it.sch || TIPS[tab])) ? (it.sch || TIPS[tab]) : "";
   $("inp").placeholder = tb.ph || "";
   const total = pool().length;
   const done = pool().filter(i => (t.k[i] || 0) >= maxStreak()).length;
@@ -893,21 +1145,18 @@ function renderCard(){
   $("bar").style.width = `${total ? Math.min(done, total) / total * 100 : 0}%`;
   updateXp(XP);
   renderTabs();
-  
-  if(answered && !T()._ok) {
-    $("chk").textContent = "Далі →";
-    $("chk").style.display = "inline-block";
-    if(isMc()) $("card").classList.remove("mc");
-  } else {
-    $("chk").textContent = "Перевірити ✓";
-  }
+  $("chk").textContent = answered ? "Далі →" : "Перевірити ✓";
 }
 function renderOpts(){
   const it = items()[cur], tb = TB();
   if(!isMc() || !it.o){ curOpts = []; $("opts").innerHTML = ""; $("opts").className = "opts"; return; }
   curOpts = tb.fixed ? it.o.slice() : sh(it.o);
   $("opts").className = tb.oc || "opts";
-  $("opts").innerHTML = curOpts.map((x, j) => `<button class="chip opt" data-o="${j}">${esc(x)}</button>`).join("");
+  $("opts").innerHTML = curOpts.map((x, j) => {
+    const m = tb.fixed && OPT_META[x];
+    if(m) return `<button class="chip opt rl r-${m.r}" data-o="${j}"><b>${m.t}</b><small>${m.s}</small></button>`;
+    return `<button class="chip opt" data-o="${j}">${esc(x)}</button>`;
+  }).join("");
 }
 function markOpts(){
   const a = items()[cur].a;
@@ -928,83 +1177,59 @@ function showFb(ok, i){
   const f = $("fb"), it = items()[i];
   f.className = "fb " + (ok ? "ok" : "er");
   f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
-    <div class="ans" title="Натисни, щоб почути">${esc(it.construct ? it.sp : it.ans)}</div>
-    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<button class="next-correct" type="button" onclick="advance()">Далі →</button>' : ''}`;
+    <div class="ans" title="Натисни, щоб почути">${esc(it.ans)}</div>
+    ${it.lbl ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""}
+    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}`;
   const ansEl = f.querySelector(".ans");
   if(ansEl) ansEl.onclick = () => speak(it.sp);
 }
 
-function askConfirm(msg, yes){
-  $("cfm-msg").textContent = msg; $("cfm").hidden = false;
-  const close = () => { $("cfm").hidden = true; };
-  $("cfm-yes").onclick = () => { close(); yes(); };
-  $("cfm-no").onclick = close;
+/* ============ ЕТАПИ ============ */
+function renderRule(){
+  const r = RULES[tab] || "";
+  $("rule").innerHTML = r ? r + (stage ? `<br><span class="lsl" data-l="1">Урок етапу ${stage} ›</span>` : "") : "";
 }
-/* ============ STAGES & LESSONS ============ */
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-
-// Логіка перевірки, чи відкритий етап (враховує дострокове відкриття)
-const stOpen = n => n === 1 || getUnlocked().includes(n) || stProg(n).d > 0 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
-
+const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
-    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.n}. ${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("");
+    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
+;
 }
-
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + 
-    g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + 
-    `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
-  document.body.classList.add("lsn"); 
-  localStorage.setItem("neg_seen_" + n, "1");
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  document.body.classList.add("lsn"); localStorage.setItem("ng_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
-
-// Виправлено: тепер при кліку на етап завжди показується теорія (якщо це не поточний активний етап)
 function openStage(n){
-  if(!stOpen(n)) {
-    askConfirm("Етап заблоковано. Бажаєш відкрити достроково?", () => { setUnlocked(n); renderStages(); openStage(n); });
-    return;
-  }
-  
-  const isNewStage = stage !== n;
-  stage = n; localStorage.setItem("neg_stage", String(n));
+  if(!stOpen(n)) return;
+  stage = n; localStorage.setItem("ng_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
-  
-  if(isNewStage) {
-    setTab(vis.some(t => t.id === tab) ? tab : vis[0].id);
-    showLesson(n); // Завжди показуємо теорію при зміні етапу
-  } else {
-    // Якщо етап той самий, але ми хочемо побачити теорію знову
-    showLesson(n);
-  }
+  setTab(vis.some(t => t.id === tab) ? tab : vis[0].id);
+  showLesson(n);
 }
-
 $("xrst").addEventListener("click", () => {
-  askConfirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.", () => {
-    TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} });
-    XP = calcXp(); updateXp(XP); renderTabs();
-  });
+  if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
+  TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
+  XP = calcXp(); updateXp(XP); renderTabs();
 });
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
+$("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 
 /* ============ NAVIGATION ============ */
 function load(i){
   clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
-  if(syncPending){ syncPending = false; TABS.forEach(t => { const v = readState(t.id); if(v) S[t.id] = v; }); XP = calcXp(); }
-  cur = i; answered = false; picked = -1; T()._ok = false; T().pos = i; save();
-  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = ""; $("builderArea").innerHTML="";
+  cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
+  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
   $("card").classList.toggle("mc", isMc());
   $("card").classList.toggle("tx", TB().kind === "text");
-  document.querySelector(".card .row").style.display=items()[cur].construct?"none":"";
-  $("umRow").style.display = "flex";
-  renderOpts(); renderCard(); renderReviewBtn();
-  if(!isMc() && !items()[cur].construct) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
+  $("umRow").style.display = (TB().kind === "text" && eMode() === "type") ? "flex" : "none";
+  renderOpts(); renderRule(); renderCard(); renderReviewBtn();
+  if(!isMc()) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
 }
-let syncPending = false;
 const reviewDoneSets = {};
 const rd = () => reviewDoneSets[tab] || (reviewDoneSets[tab] = new Set());
 function reviewPool(){ return items().map((_, i) => i).filter(i => T().err[i] && (!stage || STG[tab][i] === stage)); }
@@ -1028,11 +1253,11 @@ function allDone(){
   return pool().every(i => streak(i) >= maxStreak());
 }
 
-/* ============ COMPLETION ============ */
+/* ============ COMPLETION (усе всередині тренажера, без спливаючих вікон) ============ */
 const tabDone = () => pool().every(i => streak(i) >= maxStreak());
 const stKey = () => String(stage || 0);
 const isClosed = () => !!(T().cl && T().cl[stKey()]);
-function closeTab(){ const t = T(); t.cl = Object.assign({}, t.cl, { [stKey()]: 1 }); t.x++; t.p++; save(); }
+function closeTab(){ const t = T(); t.cl = Object.assign({}, t.cl, { [stKey()]: 1 }); t.x++; t.p++; save(); }  // x+1 і p+1: EXP не змінюється, але sync.js бачить новішу версію
 function hideFin(){ $("card").classList.remove("fin"); }
 function renderFin(kind){
   clearTimeout(tm);
@@ -1040,8 +1265,8 @@ function renderFin(kind){
   const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
   let h;
   if(kind === "review") h = `<div class="ft rv">📋 Усі завдання пройдено</div><p>${st}<br>Помилок: <b>${n}</b>. Тепер можна лише повторити помилки.</p><div class="fin-actions"><button class="go" onclick="repeatReview()">🔁 Пройти помилки (${n})</button></div>`;
-  else if(kind === "confirm") h = `<div class="ft rv">Скинути прогрес вкладки?</div><p>Прогрес цієї вкладки для поточного етапу буде скинуто. Загальний EXP збережеться.</p><div class="fin-actions"><button class="go" onclick="doResetTab()">Так, скинути</button><button class="cancel" onclick="cancelReset()">Скасувати</button></div>`;
-  else h = `<div class="ft">✅ Ця категорія вже пройдена</div><p>${st}<br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p><div class="fin-actions"><button class="go" onclick="doResetTab()">↻ Почати заново</button></div>`;
+  else if(kind === "confirm") h = `<div class="ft rv">Скинути прогрес?</div><p>Прогрес цієї вкладки буде скинуто разом зі списком помилок. Загальний EXP збережеться.</p><div class="fin-actions"><button class="go" onclick="resetTab()">Так, скинути</button><button class="cancel" onclick="cancelReset()">Скасувати</button></div>`;
+  else h = `<div class="ft">✅ Ця категорія вже пройдена</div><p>${st}<br>Усі завдання та помилки повторено. Тут більше нічого робити — обери іншу вкладку або почни заново.</p><div class="fin-actions"><button class="go" onclick="finalRestart()">↻ Почати заново</button></div>`;
   $("finBox").innerHTML = h;
   $("card").classList.add("fin");
   renderReviewBtn();
@@ -1064,6 +1289,12 @@ function advance(){
 }
 function showComplete(){ syncFin(); }
 function repeatReview(){ startReview(); }
+function finalRestart(){
+  const bx = T().x + 1, bp = T().p + 1; // x+1 і p+1: EXP не змінюється, але sync.js бачить новішу версію
+  S[tab] = blankState(); S[tab].x = bx; S[tab].p = bp; reviewDoneSets[tab] = new Set();
+  save(); reviewMode = false;
+  load(pool()[0]);
+}
 function showReviewComplete(){
   if(tabDone()){ reviewMode = false; closeTab(); renderFin("closed"); }
   else exitReview();
@@ -1094,6 +1325,7 @@ function popXp(d, up){
 }
 
 /* ============ FINISH ============ */
+const completedShown = {};
 let xLocked = false;
 function finish(ok){
   const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
@@ -1105,18 +1337,27 @@ function finish(ok){
   $("sent").innerHTML = sentHTML(items()[cur]);
   renderCard(); renderReviewBtn();
   { const d = XP - xBefore; if(d) popXp(d, rankOf(XP) > rankOf(xBefore)); }
-  
   if(ok){
     const c = $("card");
     c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
     clearTimeout(tm);
-    // Переходь далі вручну кнопкою «Далі».
+    const wait = 1000;
+    if(reviewMode){
+      if(reviewQueue().length === 0) tm = setTimeout(() => { if(answered) showReviewComplete(); }, 1200);
+      else tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); else showReviewComplete(); } }, wait);
+    } else if(allDone()){
+      tm = setTimeout(() => { if(answered) showComplete(); }, 1200);
+    } else {
+      tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, wait);
+    }
   } else {
-    clearTimeout(tm);
-    try{ $("fb").scrollIntoView({ behavior:"smooth", block:"nearest" }); }catch(e){}
+    completedShown[tab] = false;
+    if(isMc()){ clearTimeout(tm); tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 3800); }
   }
+  if(!ok){ try{ $("fb").scrollIntoView({ behavior:"smooth", block:"nearest" }); }catch(e){} }
 }
 
+/* ============ CHECK / PICK ============ */
 function check(){
   if(answered){ advance(); return; }
   const it = items()[cur];
@@ -1127,26 +1368,24 @@ function check(){
 function pick(j){
   if(answered || !isMc()) return;
   picked = j;
-  finish([items()[cur].a, ...(items()[cur].alt || [])].some(x => norm(x) === norm(curOpts[j])));
+  finish(curOpts[j] === items()[cur].a);
 }
 function showSol(){
   if(answered) return;
   answered = true;
   const t = T(); t._ok = false;
-  playSound('wrong'); haptic('no');
   xLocked = XP >= XP_MAX; t.l++; bump(t, (xLocked || XP <= 0) ? 0 : -1); XP = calcXp(); t.k[cur] = 0; t.err[cur] = true;
   save(); showFb(false, cur); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
   renderCard(); renderReviewBtn();
+  completedShown[tab] = false;
 }
 
 /* ============ RESET ============ */
-function doResetTab(){
-  const bx = T().x + 1, bp = T().p + 1; 
-  pool().forEach(i => { delete T().k[i]; delete T().err[i]; });
-  if(T().cl) delete T().cl[stKey()];
-  T().x = bx; T().p = bp;
-  save(); reviewMode = false; reviewDoneSets[tab] = new Set();
+function resetTab(){
+  { const bx = T().x + 1, bp = T().p + 1; S[tab] = blankState(); S[tab].x = bx; S[tab].p = bp; }
+  save();
+  completedShown[tab] = false; reviewMode = false; reviewDoneSets[tab] = new Set();
   load(pool()[0]);
 }
 function restartTab(){ renderFin("confirm"); }
@@ -1155,14 +1394,14 @@ function cancelReset(){ hideFin(); syncFin(); }
 /* ============ ERRORS MODAL ============ */
 function openErrors(){
   const rp = reviewPool(), tb = TB();
-  $("errs-sub").textContent = `Етап ${stage} · Вкладка «${tb.label}» · помилок: ${rp.length}`;
+  $("errs-sub").textContent = `Вкладка «${tb.label}» · помилок: ${rp.length}`;
   if(rp.length === 0){
     $("errs-list").innerHTML = '<div class="errs-empty">Помилок поки немає 🎉<br>Продовжуй у тому ж дусі!</div>';
     $("errs-actions").innerHTML = '<button class="cancel" onclick="closeErrors()">Закрити</button>';
   } else {
     $("errs-list").innerHTML = rp.map(i => {
       const it = items()[i];
-      return `<div class="err-item"><div class="e-de">${it.de}</div>${it.lbl ? `<div class="e-ua">${esc(it.lbl)}</div>` : ""}${it.ex ? `<div class="e-ex">${esc(it.ex)}</div>` : ""}</div>`;
+      return `<div class="err-item"><div class="e-de">${it.de}</div>${it.ua ? `<div class="e-ua">${esc(it.ua)}</div>` : ""}${it.ex ? `<div class="e-ex">${esc(it.ex)}</div>` : ""}</div>`;
     }).join("");
     $("errs-actions").innerHTML = '<button class="go" onclick="trainErrors()">🔁 Тренувати помилки</button><button class="cancel" id="errs-clear" onclick="clearErrors()">🗑 Очистити список</button><button class="cancel" onclick="closeErrors()">Закрити</button>';
   }
@@ -1173,9 +1412,7 @@ let clearArmed = false;
 function clearErrors(){
   const b = $("errs-clear");
   if(!clearArmed){ clearArmed = true; b.textContent = "Точно очистити?"; setTimeout(() => { clearArmed = false; const bb = $("errs-clear"); if(bb) bb.textContent = "🗑 Очистити список"; }, 3000); return; }
-  clearArmed = false; 
-  reviewPool().forEach(i => delete T().err[i]); 
-  T().x++; T().p++; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); openErrors();
+  clearArmed = false; T().err = {}; T().x++; T().p++; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); openErrors();
 }
 function trainErrors(){ closeErrors(); startReview(); try{ $("card").scrollIntoView({ behavior:"smooth", block:"start" }); }catch(e){} }
 
@@ -1191,7 +1428,7 @@ function startIdx(){
   return p.find(i => i > from && streak(i) < ms) ?? p.find(i => streak(i) < ms) ?? p[0];
 }
 function setTab(t){
-  hideComplete(); reviewMode = false; tab = t; store.set('neg-tab', t);
+  hideComplete(); reviewMode = false; tab = t; store.set('ng-tab', t);
   renderTabs(); renderReviewBtn();
   load(startIdx());
   syncFin();
@@ -1211,20 +1448,40 @@ function toggleTheory(){
   } else openTheory();
 }
 
+/* ============ ШПАРГАЛКА ============ */
+const CHEAT = [
+  ["Слова","var(--c-wo)",[["nicht","не"],["nichts","ніщо, нічого"],["nie · niemals","ніколи"],["niemand","ніхто"],["kein","жодний, ніякий"],["nicht mehr","більше не"],["auf keinen Fall","ні в якому разі"],["kaum","ледве, майже не"],["gar nicht · überhaupt nicht","зовсім не · взагалі не"],["nirgendwo · nirgends","ніде"]]],
+  ["Пари","var(--c-da)",[["etwas ↔ nichts","щось ↔ ніщо"],["jemand · alle ↔ niemand","хтось · усі ↔ ніхто"],["irgendwo · überall ↔ nirgends","десь · скрізь ↔ ніде"],["immer ↔ nie · niemals","завжди ↔ ніколи"],["schon · bereits ↔ noch nicht","вже ↔ ще не"],["schon (ein)mal ↔ noch nie","вже колись ↔ ще ніколи"],["(immer) noch ↔ nicht mehr","ще, досі ↔ більше не"],["(immer) noch ↔ nie mehr","ще ↔ ніколи більше"],["ein · eine ↔ kein · keine","є ↔ немає"]]],
+  ["nicht чи kein?","var(--c-r)",[["ein / без артикля → kein","Ich habe kein Auto."],["професія без артикля → kein","Er ist kein Arzt."],["der / die / das → nicht","Ich kenne den Mann nicht."],["mein / dieser → nicht","Das ist nicht mein Buch."],["ім’я → nicht","Ich besuche Anna nicht."],["дієслово → nicht","Er arbeitet nicht."],["прикметник → nicht","Das ist nicht gut."]]],
+  ["Форми kein","var(--c-s)",[["Nom: kein · keine · kein · keine","ч. · ж. · с. · мн."],["Akk: keinen · keine · kein · keine","ч. · ж. · с. · мн."],["Dat: keinem · keiner · keinem · keinen","ч. · ж. · с. · мн."],["kein … mehr","вже немає"]]],
+  ["Місце nicht","var(--c-pn)",[["Ich kenne ihn nicht.","в кінці — заперечуємо речення"],["nicht gut","перед прикметником"],["nicht nach Hause","перед прийм. групою"],["nicht gesehen · nicht kommen","перед Partizip / інфінітивом"],["nicht heute, sondern morgen","nicht … sondern"],["nichts · niemand · nie + без nicht","немає подвійного заперечення"]]]
+];
+let cheatG = 0;
+function renderCheat(){
+  const [, c, rows] = CHEAT[cheatG];
+  $("glossary").innerHTML = '<h2 class="cheat-title">Шпаргалка</h2><p class="cheat-sub">Найважливіше з правил — для швидкого повторення</p>' +
+    '<div class="cheat-pills">' + CHEAT.map(([h, c2], i) => `<button type="button" class="cheat-pill${i === cheatG ? " on" : ""}" data-g="${i}" style="--c:${c2}">${h}</button>`).join("") + '</div>' +
+    `<div class="cheat-list" style="--c:${c}">` + rows.map(([d, u]) => `<div class="cheat-row"><b>${d}</b><span>${u}</span></div>`).join("") + '</div>';
+}
+renderCheat();
+$("glossary").onclick = e => { const b = e.target.closest("[data-g]"); if(b){ cheatG = +b.dataset.g; renderCheat(); } };
+
 /* ============ EVENTS ============ */
 $("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b) setTab(b.dataset.t); };
 $("modeBtn").onclick = () => {
-  mode = mode === "mc" ? "type" : "mc"; store.set("neg-mode", mode);
+  mode = mode === "mc" ? "type" : "mc"; store.set("ng-mode", mode);
   clearTimeout(tm);
   if(answered) advance(); else load(cur);
 };
+$("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
 $("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
 $("chk").onclick = check;
+$("fb").addEventListener("click", () => { if(answered && isMc()){ clearTimeout(tm); advance(); } });
 $("speakBtn").onclick = speakCurrent;
 $("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
 $("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
 $("inp").addEventListener("keydown", e => { if(e.key === "Enter" || e.keyCode === 13){ e.preventDefault(); check(); } });
-$("showBtn").onclick = () => { const tr=$("translation"); if(!tr)return; const open=tr.classList.toggle("show"); $("showBtn").textContent=open?"🌐 Сховати переклад":"🌐 Перекласти"; };
+$("showBtn").onclick = showSol;
 document.addEventListener("keydown", e => {
   if(!isMc() || e.ctrlKey || e.metaKey || e.altKey) return;
   if(e.target.closest && e.target.closest("button,input,textarea")) return;
@@ -1235,8 +1492,8 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("errs").hidden) closeErrors(); } });
 
 /* ============ INIT ============ */
-if(!stOpen(stage)){ let s = 1; while(s < STAGES.length && stOpen(s + 1)) s++; stage = s; localStorage.setItem("neg_stage", String(s)); }
-{ const st = store.get('neg-tab'), vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)); setTab(vis.some(t => t.id === st) ? st : vis[0].id); }
+if(!stOpen(stage)){ let s = 1; while(s < STAGES.length && stOpen(s + 1)) s++; stage = s; localStorage.setItem("ng_stage", String(s)); }
+{ const st = store.get('ng-tab'), vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)); setTab(vis.some(t => t.id === st) ? st : vis[0].id); }
 
 document.addEventListener('touchstart', function unlockAudio() {
   if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
@@ -1244,53 +1501,37 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
-/* === SYNC INTEGRATION === */
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_pronominal_*) === */
 function applyStorage(){
   try {
     TABS.forEach(t => {
-      if(answered && t.id === tab) return;
+      if(answered && t.id === tab) return; // не ламаємо відповідь, що зараз на екрані
       const v = readState(t.id);
       if(v) S[t.id] = v;
     });
-    if(answered){
-      // поточну вкладку оновимо після переходу до наступного завдання, щоб не втратити щойно дану відповідь
-      syncPending = true;
-      XP = calcXp(); updateXp(XP); renderTabs();
-      return;
-    }
     XP = calcXp();
-    const typing = !isMc() && $("inp").value.length > 0;
-    const curDone = !reviewMode && !pool().includes(cur) || (!reviewMode && streak(cur) >= maxStreak());
-    if(curDone && !typing){ load(startIdx()); syncFin(); return; }
-    if(typing){ updateXp(XP); renderTabs(); return; }
-    renderCard(); renderReviewBtn(); syncFin();
+    if(answered){ updateXp(XP); renderTabs(); }
+    else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
-
-// Автоматичне відкриття уроку при першому заході в етап
-if(stage && !localStorage.getItem("neg_seen_" + stage)){ 
-  const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); 
-  if(vis.length){ 
-    if(!vis.some(t => t.id === tab)) setTab(vis[0].id); 
-    showLesson(stage); 
-  } 
-}
-
+if(stage && !localStorage.getItem("ng_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ if(!vis.some(t => t.id === tab)) setTab(vis[0].id); showLesson(stage); } }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
-window.addEventListener("focus", tpSyncNow);
-setInterval(() => { if(!document.hidden) tpSyncNow(); }, 5000);
-try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
+setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
 
+/* === TELEGRAM: розгортання, кнопка «Назад» === */
 if (window.Telegram && window.Telegram.WebApp) {
   const tg = window.Telegram.WebApp;
   try { tg.ready(); } catch(e){}
   try { tg.expand(); } catch(e){}
   try { if(tg.disableVerticalSwipes) tg.disableVerticalSwipes(); } catch(e){}
+  try {
+    tg.BackButton.show();
+    tg.BackButton.onClick(() => { window.location.href = 'index.html'; });
+  } catch(e){}
 }
-
-/* HORIZONTAL SCROLL FOR STAGES */
+/* ===== перетягування стрічки етапів мишкою (ПК) ===== */
 (function(){
   const el = $("stages"); let d = false, moved = false, x0 = 0, s0 = 0;
   el.addEventListener("pointerdown", e => { if(e.pointerType !== "mouse" || e.button !== 0) return; d = true; moved = false; x0 = e.clientX; s0 = el.scrollLeft; });
@@ -1300,5 +1541,5 @@ if (window.Telegram && window.Telegram.WebApp) {
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
 })();
 </script>
-
-</body></html>
+</body>
+</html>
