@@ -548,18 +548,7 @@ body.lsn .lesson{padding:20px 18px 18px;background:var(--card);box-shadow:0 8px 
 <script>
 const ITEMS = {
 tab: [
-  {s:"Ich habe {{B}} Zeit.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Zeit.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"У мене немає часу.",sp:"Ich habe keine Zeit.",de:"Ich habe <b>keine</b> Zeit.",ua:"У мене немає часу.",st:1},
-  {s:"Ich habe {{B}} Hunger.",o:["keinen","kein","keine","nicht"],a:"keinen",alt:[],ans:"Ich habe keinen Hunger.",ex:"der Hunger — чоловічий рід, Akkusativ → keinen.",lbl:"Я не голодний.",sp:"Ich habe keinen Hunger.",de:"Ich habe <b>keinen</b> Hunger.",ua:"Я не голодний.",st:1},
-  {s:"Ich brauche {{B}} Auto.",o:["kein","keinen","keine","nicht"],a:"kein",alt:[],ans:"Ich brauche kein Auto.",ex:"das Auto — середній рід, Akkusativ → kein.",lbl:"Мені не потрібна машина.",sp:"Ich brauche kein Auto.",de:"Ich brauche <b>kein</b> Auto.",ua:"Мені не потрібна машина.",st:1},
-  {s:"Ich lese {{B}} Buch, sondern eine Zeitung.",o:["nicht das","kein","keine","nicht ein"],a:"nicht das",alt:[],ans:"Ich lese nicht das Buch, sondern eine Zeitung.",ex:"означений артикль das → nicht.",lbl:"Я читаю не книжку, а газету.",sp:"Ich lese nicht das Buch, sondern eine Zeitung.",de:"Ich lese <b>nicht das</b> Buch, sondern eine Zeitung.",ua:"Я читаю не книжку, а газету.",st:1},
-  {s:"Ich bin {{B}} verheiratet.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich bin nicht verheiratet.",ex:"стан → nicht.",lbl:"Я не одружений.",sp:"Ich bin nicht verheiratet.",de:"Ich bin <b>nicht</b> verheiratet.",ua:"Я не одружений.",st:1},
-  {s:"Ich wohne {{B}} in Berlin.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich wohne nicht in Berlin.",ex:"обставина місця → nicht.",lbl:"Я не живу в Берліні.",sp:"Ich wohne nicht in Berlin.",de:"Ich wohne <b>nicht</b> in Berlin.",ua:"Я не живу в Берліні.",st:1},
-  {s:"Er hat {{B}} Geschwister.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er hat keine Geschwister.",ex:"множина без артикля → keine.",lbl:"У нього немає братів і сестер.",sp:"Er hat keine Geschwister.",de:"Er hat <b>keine</b> Geschwister.",ua:"У нього немає братів і сестер.",st:1},
-  {s:"Wir haben {{B}} Geld.",o:["kein","keine","keinen","nicht"],a:"kein",alt:[],ans:"Wir haben kein Geld.",ex:"das Geld — середній рід, Akkusativ → kein.",lbl:"У нас немає грошей.",sp:"Wir haben kein Geld.",de:"Wir haben <b>kein</b> Geld.",ua:"У нас немає грошей.",st:1},
-  {s:"Das ist {{B}} Problem.",o:["kein","nicht","keine","keinen"],a:"kein",alt:[],ans:"Das ist kein Problem.",ex:"das Problem → kein.",lbl:"Це не проблема.",sp:"Das ist kein Problem.",de:"Das ist <b>kein</b> Problem.",ua:"Це не проблема.",st:1},
-  {s:"Sie hat {{B}} Lust zu kochen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Sie hat keine Lust zu kochen.",ex:"die Lust — жіночий рід, Akkusativ → keine.",lbl:"У неї немає бажання готувати.",sp:"Sie hat keine Lust zu kochen.",de:"Sie hat <b>keine</b> Lust zu kochen.",ua:"У неї немає бажання готувати.",st:1},
 
-  {s:"Ich habe {{B}} Zeit, ins Kino zu gehen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Zeit, ins Kino zu gehen.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"У мене немає часу йти в кіно.",sp:"Ich habe keine Zeit, ins Kino zu gehen.",de:"Ich habe <b>keine</b> Zeit, ins Kino zu gehen.",ua:"У мене немає часу йти в кіно.",st:1},
 
 
   {s:"Ich kann heute {{B}} kommen.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kann heute nicht kommen.",ex:"nicht перед інфінітивом.",lbl:"Я не можу сьогодні прийти.",sp:"Ich kann heute nicht kommen.",de:"Ich kann heute <b>nicht</b> kommen.",ua:"Я не можу сьогодні прийти.",st:4},
@@ -577,11 +566,6 @@ tab: [
 
 
 
-  {s:"Heute gibt es {{B}} Hausaufgaben.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Heute gibt es keine Hausaufgaben.",ex:"множина без артикля → keine.",lbl:"Сьогодні немає домашнього завдання.",sp:"Heute gibt es keine Hausaufgaben.",de:"Heute gibt es <b>keine</b> Hausaufgaben.",ua:"Сьогодні немає домашнього завдання.",st:1},
-  {s:"Ich habe {{B}} Bruder.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Ich habe keinen Bruder.",ex:"der Bruder — чоловічий рід, Akkusativ → keinen.",lbl:"У мене немає брата.",sp:"Ich habe keinen Bruder.",de:"Ich habe <b>keinen</b> Bruder.",ua:"У мене немає брата.",st:1},
-  {s:"Das ist {{B}} meine Tasche.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht meine Tasche.",ex:"присвійний займенник meine → nicht.",lbl:"Це не моя сумка.",sp:"Das ist nicht meine Tasche.",de:"Das ist <b>nicht</b> meine Tasche.",ua:"Це не моя сумка.",st:1},
-  {s:"Wir essen {{B}} Fisch.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Wir essen keinen Fisch.",ex:"der Fisch — чоловічий рід, Akkusativ → keinen.",lbl:"Ми не їмо рибу.",sp:"Wir essen keinen Fisch.",de:"Wir essen <b>keinen</b> Fisch.",ua:"Ми не їмо рибу.",st:1},
-  {s:"Ich kenne {{B}} die Lehrerin.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne nicht die Lehrerin.",ex:"означений артикль die → nicht.",lbl:"Я не знаю цю вчительку.",sp:"Ich kenne nicht die Lehrerin.",de:"Ich kenne <b>nicht</b> die Lehrerin.",ua:"Я не знаю цю вчительку.",st:1},
   {s:"Du {{B}} nicht kommen, es ist freiwillig.",o:["musst","darfst","willst","sollst"],a:"musst",alt:[],ans:"Du musst nicht kommen, es ist freiwillig.",ex:"nicht müssen = не обов'язково.",lbl:"Ти не мусиш приходити, це добровільно.",sp:"Du musst nicht kommen, es ist freiwillig.",de:"Du <b>musst</b> nicht kommen, es ist freiwillig.",ua:"Ти не мусиш приходити, це добровільно.",st:4},
   {s:"Du {{B}} hier nicht parken. Das ist verboten.",o:["darfst","musst","brauchst","kannst"],a:"darfst",alt:["kannst"],ans:"Du darfst hier nicht parken. Das ist verboten.",ex:"nicht dürfen = заборонено.",lbl:"Тут не можна паркуватися. Це заборонено.",sp:"Du darfst hier nicht parken. Das ist verboten.",de:"Du <b>darfst</b> hier nicht parken. Das ist verboten.",ua:"Тут не можна паркуватися. Це заборонено.",st:4},
   {s:"Du brauchst nicht {{B}} kommen.",o:["zu","um","ohne","dass"],a:"zu",alt:[],ans:"Du brauchst nicht zu kommen.",ex:"nicht brauchen + zu + інфінітив.",lbl:"Тобі не треба приходити.",sp:"Du brauchst nicht zu kommen.",de:"Du brauchst nicht <b>zu</b> kommen.",ua:"Тобі не треба приходити.",st:4},
@@ -590,9 +574,6 @@ tab: [
   {s:"Das schaffe ich leider zeitlich {{B}}.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das schaffe ich leider zeitlich nicht.",ex:"ділова формула відмови: nicht у кінці.",lbl:"На жаль, за часом я цього не встигну.",sp:"Das schaffe ich leider zeitlich nicht.",de:"Das schaffe ich leider zeitlich <b>nicht</b>.",ua:"На жаль, за часом я цього не встигну.",st:4},
   {s:"Entschuldigung, ich habe das {{B}} ganz verstanden.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Entschuldigung, ich habe das nicht ganz verstanden.",ex:"nicht перед ganz.",lbl:"Вибачте, я не зовсім це зрозумів.",sp:"Entschuldigung, ich habe das nicht ganz verstanden.",de:"Entschuldigung, ich habe das <b>nicht</b> ganz verstanden.",ua:"Вибачте, я не зовсім це зрозумів.",st:4},
   {s:"Er hat {{B}} Ahnung davon.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er hat keine Ahnung davon.",ex:"die Ahnung → keine.",lbl:"Він не має про це уявлення.",sp:"Er hat keine Ahnung davon.",de:"Er hat <b>keine</b> Ahnung davon.",ua:"Він не має про це уявлення.",st:4},
-  {s:"Das ist {{B}} der Fall.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht der Fall.",ex:"означений артикль der → nicht.",lbl:"Це не той випадок.",sp:"Das ist nicht der Fall.",de:"Das ist <b>nicht</b> der Fall.",ua:"Це не той випадок.",st:1},
-  {s:"Ich kenne {{B}} dieses Buch.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne nicht dieses Buch.",ex:"вказівний займенник dieses → nicht.",lbl:"Я не знаю цієї книги.",sp:"Ich kenne nicht dieses Buch.",de:"Ich kenne <b>nicht</b> dieses Buch.",ua:"Я не знаю цієї книги.",st:1},
-  {s:"Er hatte {{B}} Online-Ticket.",o:["kein","nicht","keine","keinen"],a:"kein",alt:[],ans:"Er hatte kein Online-Ticket.",ex:"das Ticket — середній рід, Akkusativ → kein.",lbl:"У нього не було онлайн-квитка.",sp:"Er hatte kein Online-Ticket.",de:"Er hatte <b>kein</b> Online-Ticket.",ua:"У нього не було онлайн-квитка.",st:1},
   {s:"Da müssen wir noch {{B}} drüber nachdenken.",o:["mal","nicht","kein","nie"],a:"mal",alt:[],ans:"Da müssen wir noch mal drüber nachdenken.",ex:"ввічливе відкладання рішення: noch mal drüber nachdenken.",lbl:"Нам треба ще раз про це подумати.",sp:"Da müssen wir noch mal drüber nachdenken.",de:"Da müssen wir noch <b>mal</b> drüber nachdenken.",ua:"Нам треба ще раз про це подумати.",st:4},
   {s:"Er hat noch {{B}} Absage bekommen.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Er hat noch keine Absage bekommen.",ex:"die Absage → keine.",lbl:"Він ще не отримав відмови.",sp:"Er hat noch keine Absage bekommen.",de:"Er hat noch <b>keine</b> Absage bekommen.",ua:"Він ще не отримав відмови.",st:4},
   {s:"Sie hat den Termin {{B}} abgesagt.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Sie hat den Termin nicht abgesagt.",ex:"nicht перед Partizip II abgesagt.",lbl:"Вона не скасувала зустріч.",sp:"Sie hat den Termin nicht abgesagt.",de:"Sie hat den Termin <b>nicht</b> abgesagt.",ua:"Вона не скасувала зустріч.",st:4},
@@ -816,13 +797,57 @@ sent: [
   {s:"Sie fuhr los, {{B}} sich anzuschnallen.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Sie fuhr los, ohne sich anzuschnallen.",ex:"ohne… zu — один підмет.",lbl:"Вона поїхала, не пристебнувшись.",sp:"Sie fuhr los, ohne sich anzuschnallen.",de:"Sie fuhr los, <b>ohne</b> sich anzuschnallen.",ua:"Вона поїхала, не пристебнувшись.",st:8},
   {s:"Er zahlt, {{B}} die Rechnung zu prüfen.",o:["ohne","anstatt"],a:"ohne",alt:[],ans:"Er zahlt, ohne die Rechnung zu prüfen.",ex:"ohne… zu — один підмет.",lbl:"Він платить, не перевіривши рахунок.",sp:"Er zahlt, ohne die Rechnung zu prüfen.",de:"Er zahlt, <b>ohne</b> die Rechnung zu prüfen.",ua:"Він платить, не перевіривши рахунок.",st:8},
   {s:"Sie liest, {{B}} zu schlafen.",o:["anstatt","ohne"],a:"anstatt",alt:["statt"],ans:"Sie liest, anstatt zu schlafen.",ex:"anstatt… zu — замість дії.",lbl:"Вона читає замість того, щоб спати.",sp:"Sie liest, anstatt zu schlafen.",de:"Sie liest, <b>anstatt</b> zu schlafen.",ua:"Вона читає замість того, щоб спати.",st:8},
+  {s:"Ich habe {{B}} Zeit.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Ich habe keine Zeit.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"У мене немає часу.",sp:"Ich habe keine Zeit.",de:"Ich habe <b>keine</b> Zeit.",ua:"У мене немає часу.",st:1},
+  {s:"Ich habe {{B}} Hunger.",o:["keinen","kein","keine","nicht"],a:"keinen",alt:[],ans:"Ich habe keinen Hunger.",ex:"der Hunger — чоловічий рід, Akkusativ → keinen.",lbl:"Я не голодний.",sp:"Ich habe keinen Hunger.",de:"Ich habe <b>keinen</b> Hunger.",ua:"Я не голодний.",st:1},
+  {s:"Heute gibt es {{B}} Hausaufgaben.",o:["keine","nicht","kein","keinen"],a:"keine",alt:[],ans:"Heute gibt es keine Hausaufgaben.",ex:"множина без артикля → keine.",lbl:"Сьогодні немає домашнього завдання.",sp:"Heute gibt es keine Hausaufgaben.",de:"Heute gibt es <b>keine</b> Hausaufgaben.",ua:"Сьогодні немає домашнього завдання.",st:1},
+  {s:"Ich habe {{B}} Bruder.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Ich habe keinen Bruder.",ex:"der Bruder — чоловічий рід, Akkusativ → keinen.",lbl:"У мене немає брата.",sp:"Ich habe keinen Bruder.",de:"Ich habe <b>keinen</b> Bruder.",ua:"У мене немає брата.",st:1},
+  {s:"Das ist {{B}} meine Tasche.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht meine Tasche.",ex:"присвійний займенник meine → nicht.",lbl:"Це не моя сумка.",sp:"Das ist nicht meine Tasche.",de:"Das ist <b>nicht</b> meine Tasche.",ua:"Це не моя сумка.",st:1},
+  {s:"Wir essen {{B}} Fisch.",o:["keinen","nicht","kein","keine"],a:"keinen",alt:[],ans:"Wir essen keinen Fisch.",ex:"der Fisch — чоловічий рід, Akkusativ → keinen.",lbl:"Ми не їмо рибу.",sp:"Wir essen keinen Fisch.",de:"Wir essen <b>keinen</b> Fisch.",ua:"Ми не їмо рибу.",st:1},
+  {s:"Ich kenne {{B}} die Lehrerin.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne nicht die Lehrerin.",ex:"означений артикль die → nicht.",lbl:"Я не знаю цю вчительку.",sp:"Ich kenne nicht die Lehrerin.",de:"Ich kenne <b>nicht</b> die Lehrerin.",ua:"Я не знаю цю вчительку.",st:1},
+  {s:"Das ist {{B}} der Fall.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Das ist nicht der Fall.",ex:"означений артикль der → nicht.",lbl:"Це не той випадок.",sp:"Das ist nicht der Fall.",de:"Das ist <b>nicht</b> der Fall.",ua:"Це не той випадок.",st:1},
+  {s:"Ich kenne {{B}} dieses Buch.",o:["nicht","kein","keine","keinen"],a:"nicht",alt:[],ans:"Ich kenne nicht dieses Buch.",ex:"вказівний займенник dieses → nicht.",lbl:"Я не знаю цієї книги.",sp:"Ich kenne nicht dieses Buch.",de:"Ich kenne <b>nicht</b> dieses Buch.",ua:"Я не знаю цієї книги.",st:1},
+  {s:"Er hatte {{B}} Online-Ticket.",o:["kein","nicht","keine","keinen"],a:"kein",alt:[],ans:"Er hatte kein Online-Ticket.",ex:"das Ticket — середній рід, Akkusativ → kein.",lbl:"У нього не було онлайн-квитка.",sp:"Er hatte kein Online-Ticket.",de:"Er hatte <b>kein</b> Online-Ticket.",ua:"У нього не було онлайн-квитка.",st:1},
+  {s:"Wir haben {{B}} Kinder.",o:["keine","nicht"],a:"keine",alt:[],ans:"Wir haben keine Kinder.",ex:"множина → keine.",lbl:"У нас немає дітей.",sp:"Wir haben keine Kinder.",de:"Wir haben <b>keine</b> Kinder.",ua:"У нас немає дітей.",st:1},
+  {s:"Das ist {{B}} mein Auto.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das ist nicht mein Auto.",ex:"присвійний mein → nicht.",lbl:"Це не моя машина.",sp:"Das ist nicht mein Auto.",de:"Das ist <b>nicht</b> mein Auto.",ua:"Це не моя машина.",st:1},
+  {s:"Ich brauche {{B}} Regenschirm.",o:["keinen","nicht"],a:"keinen",alt:[],ans:"Ich brauche keinen Regenschirm.",ex:"der Regenschirm → keinen.",lbl:"Мені не потрібна парасолька.",sp:"Ich brauche keinen Regenschirm.",de:"Ich brauche <b>keinen</b> Regenschirm.",ua:"Мені не потрібна парасолька.",st:1},
+  {s:"Sie ist {{B}} Lehrerin.",o:["keine","nicht"],a:"keine",alt:[],ans:"Sie ist keine Lehrerin.",ex:"eine Lehrerin → keine.",lbl:"Вона не вчителька.",sp:"Sie ist keine Lehrerin.",de:"Sie ist <b>keine</b> Lehrerin.",ua:"Вона не вчителька.",st:1},
+  {s:"Ich mag den Kaffee {{B}}.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich mag den Kaffee nicht.",ex:"означений артикль → nicht.",lbl:"Я не люблю цю каву.",sp:"Ich mag den Kaffee nicht.",de:"Ich mag den Kaffee <b>nicht</b>.",ua:"Я не люблю цю каву.",st:1},
+{s:"Tut mir leid, ich habe heute {{B}} Zeit.",o:["nicht","kein","keine","keinen"],a:"keine",alt:[],ans:"Tut mir leid, ich habe heute keine Zeit.",ex:"die Zeit — жіночий рід, Akkusativ → keine.",lbl:"Вибач, сьогодні в мене немає часу.",sp:"Tut mir leid, ich habe heute keine Zeit.",de:"Tut mir leid, ich habe heute <b>keine</b> Zeit.",ua:"Вибач, сьогодні в мене немає часу.",st:1},
+{s:"Ich esse {{B}} Fleisch, ich bin Vegetarier.",o:["keine","kein","nicht","keinen"],a:"kein",alt:[],ans:"Ich esse kein Fleisch, ich bin Vegetarier.",ex:"das Fleisch — середній рід, Akkusativ → kein.",lbl:"Я не їм м'яса, я вегетаріанець.",sp:"Ich esse kein Fleisch, ich bin Vegetarier.",de:"Ich esse <b>kein</b> Fleisch, ich bin Vegetarier.",ua:"Я не їм м'яса, я вегетаріанець.",st:1},
+{s:"Heute gibt es {{B}} Pizza, sondern Pasta.",o:["kein","keine","nicht","keinen"],a:"keine",alt:[],ans:"Heute gibt es keine Pizza, sondern Pasta.",ex:"die Pizza — жіночий рід → keine (після «es gibt» — Akkusativ).",lbl:"Сьогодні буде не піца, а паста.",sp:"Heute gibt es keine Pizza, sondern Pasta.",de:"Heute gibt es <b>keine</b> Pizza, sondern Pasta.",ua:"Сьогодні буде не піца, а паста.",st:1},
+{s:"Das Restaurant hat montags {{B}} geöffnet.",o:["keinen","kein","keine","nicht"],a:"nicht",alt:[],ans:"Das Restaurant hat montags nicht geöffnet.",ex:"стан / дія без іменника → nicht.",lbl:"По понеділках ресторан зачинений.",sp:"Das Restaurant hat montags nicht geöffnet.",de:"Das Restaurant hat montags <b>nicht</b> geöffnet.",ua:"По понеділках ресторан зачинений.",st:1},
+{s:"Ich finde den Film {{B}} gut.",o:["keine","nicht","kein","keinen"],a:"nicht",alt:[],ans:"Ich finde den Film nicht gut.",ex:"прикметник gut → nicht.",lbl:"Мені цей фільм не подобається.",sp:"Ich finde den Film nicht gut.",de:"Ich finde den Film <b>nicht</b> gut.",ua:"Мені цей фільм не подобається.",st:1},
+{s:"Wir haben leider {{B}} Tisch mehr frei.",o:["nicht","kein","keinen","keine"],a:"keinen",alt:[],ans:"Wir haben leider keinen Tisch mehr frei.",ex:"der Tisch — чоловічий рід, Akkusativ → keinen.",lbl:"На жаль, вільних столиків більше немає.",sp:"Wir haben leider keinen Tisch mehr frei.",de:"Wir haben leider <b>keinen</b> Tisch mehr frei.",ua:"На жаль, вільних столиків більше немає.",st:1},
+{s:"Mein Chef hat dafür {{B}} Verständnis.",o:["keine","keinen","nicht","kein"],a:"kein",alt:[],ans:"Mein Chef hat dafür kein Verständnis.",ex:"das Verständnis — середній рід → kein.",lbl:"Мій начальник цього не розуміє.",sp:"Mein Chef hat dafür kein Verständnis.",de:"Mein Chef hat dafür <b>kein</b> Verständnis.",ua:"Мій начальник цього не розуміє.",st:1},
+{s:"Er ruft mich einfach {{B}} zurück.",o:["keine","kein","keinen","nicht"],a:"nicht",alt:[],ans:"Er ruft mich einfach nicht zurück.",ex:"дія (zurückrufen) → nicht.",lbl:"Він просто не передзвонює мені.",sp:"Er ruft mich einfach nicht zurück.",de:"Er ruft mich einfach <b>nicht</b> zurück.",ua:"Він просто не передзвонює мені.",st:1},
+{s:"Sie hat heute {{B}} Lust auf Kino.",o:["keinen","kein","keine","nicht"],a:"keine",alt:[],ans:"Sie hat heute keine Lust auf Kino.",ex:"die Lust — жіночий рід → keine.",lbl:"Сьогодні вона не хоче в кіно.",sp:"Sie hat heute keine Lust auf Kino.",de:"Sie hat heute <b>keine</b> Lust auf Kino.",ua:"Сьогодні вона не хоче в кіно.",st:1},
+{s:"Das ist {{B}} meine Schuld.",o:["kein","keine","nicht","keinen"],a:"nicht",alt:[],ans:"Das ist nicht meine Schuld.",ex:"mein — присвійний займенник, не ein-слово → nicht.",lbl:"Це не моя вина.",sp:"Das ist nicht meine Schuld.",de:"Das ist <b>nicht</b> meine Schuld.",ua:"Це не моя вина.",st:1},
+{s:"Abends trinke ich {{B}} Kaffee mehr.",o:["keine","kein","nicht","keinen"],a:"keinen",alt:[],ans:"Abends trinke ich keinen Kaffee mehr.",ex:"der Kaffee — чоловічий рід, Akkusativ → keinen.",lbl:"Ввечері я більше не п'ю кави.",sp:"Abends trinke ich keinen Kaffee mehr.",de:"Abends trinke ich <b>keinen</b> Kaffee mehr.",ua:"Ввечері я більше не п'ю кави.",st:1},
+{s:"Sie ist {{B}} Lehrerin, sondern Ärztin.",o:["kein","keinen","nicht","keine"],a:"keine",alt:[],ans:"Sie ist keine Lehrerin, sondern Ärztin.",ex:"професія з ein-артиклем → keine (die Lehrerin).",lbl:"Вона не вчителька, а лікарка.",sp:"Sie ist keine Lehrerin, sondern Ärztin.",de:"Sie ist <b>keine</b> Lehrerin, sondern Ärztin.",ua:"Вона не вчителька, а лікарка.",st:1},
+{s:"Die Bahn kommt heute schon wieder {{B}} pünktlich.",o:["keinen","keine","nicht","kein"],a:"nicht",alt:[],ans:"Die Bahn kommt heute schon wieder nicht pünktlich.",ex:"прислівник / прикметник → nicht.",lbl:"Потяг знову не приходить вчасно.",sp:"Die Bahn kommt heute schon wieder nicht pünktlich.",de:"Die Bahn kommt heute schon wieder <b>nicht</b> pünktlich.",ua:"Потяг знову не приходить вчасно.",st:1},
+{s:"Wir haben {{B}} Plan für das Wochenende.",o:["kein","nicht","keinen","keine"],a:"keinen",alt:[],ans:"Wir haben keinen Plan für das Wochenende.",ex:"der Plan — чоловічий рід, Akkusativ → keinen.",lbl:"У нас немає плану на вихідні.",sp:"Wir haben keinen Plan für das Wochenende.",de:"Wir haben <b>keinen</b> Plan für das Wochenende.",ua:"У нас немає плану на вихідні.",st:1},
+{s:"Hier in der Nähe gibt es {{B}} Supermarkt.",o:["keinen","keine","kein","nicht"],a:"keinen",alt:[],ans:"Hier in der Nähe gibt es keinen Supermarkt.",ex:"der Supermarkt — чоловічий рід, Akkusativ → keinen.",lbl:"Поблизу немає жодного супермаркету.",sp:"Hier in der Nähe gibt es keinen Supermarkt.",de:"Hier in der Nähe gibt es <b>keinen</b> Supermarkt.",ua:"Поблизу немає жодного супермаркету.",st:1},
+{s:"Ich habe das Buch noch {{B}} gelesen.",o:["keine","keinen","nicht","kein"],a:"nicht",alt:[],ans:"Ich habe das Buch noch nicht gelesen.",ex:"Partizip II (gelesen) → nicht.",lbl:"Я ще не прочитав цю книжку.",sp:"Ich habe das Buch noch nicht gelesen.",de:"Ich habe das Buch noch <b>nicht</b> gelesen.",ua:"Я ще не прочитав цю книжку.",st:1},
+{s:"Heute ist das Wetter {{B}} so schön.",o:["keine","kein","nicht","keinen"],a:"nicht",alt:[],ans:"Heute ist das Wetter nicht so schön.",ex:"прикметник schön → nicht.",lbl:"Сьогодні погода не така гарна.",sp:"Heute ist das Wetter nicht so schön.",de:"Heute ist das Wetter <b>nicht</b> so schön.",ua:"Сьогодні погода не така гарна.",st:1},
+{s:"Ich habe heute {{B}} Appetit.",o:["kein","keine","keinen","nicht"],a:"keinen",alt:[],ans:"Ich habe heute keinen Appetit.",ex:"der Appetit — чоловічий рід, Akkusativ → keinen.",lbl:"Сьогодні в мене немає апетиту.",sp:"Ich habe heute keinen Appetit.",de:"Ich habe heute <b>keinen</b> Appetit.",ua:"Сьогодні в мене немає апетиту.",st:1},
+{s:"Kannst du mir helfen? – Ich habe {{B}} Ahnung.",o:["nicht","keine","keinen","kein"],a:"keine",alt:[],ans:"Kannst du mir helfen? – Ich habe keine Ahnung.",ex:"die Ahnung — жіночий рід → keine.",lbl:"Можеш допомогти? – Гадки не маю.",sp:"Kannst du mir helfen? – Ich habe keine Ahnung.",de:"Kannst du mir helfen? – Ich habe <b>keine</b> Ahnung.",ua:"Можеш допомогти? – Гадки не маю.",st:1},
+{s:"Der Zug fährt {{B}} nach Köln, sondern nach Bonn.",o:["keinen","keine","nicht","kein"],a:"nicht",alt:[],ans:"Der Zug fährt nicht nach Köln, sondern nach Bonn.",ex:"обставина місця (nach Köln) → nicht.",lbl:"Потяг їде не до Кельна, а до Бонна.",sp:"Der Zug fährt nicht nach Köln, sondern nach Bonn.",de:"Der Zug fährt <b>nicht</b> nach Köln, sondern nach Bonn.",ua:"Потяг їде не до Кельна, а до Бонна.",st:1},
+{s:"Im Hotel gibt es leider {{B}} Internet.",o:["keinen","kein","nicht","keine"],a:"kein",alt:[],ans:"Im Hotel gibt es leider kein Internet.",ex:"das Internet — середній рід → kein.",lbl:"У готелі, на жаль, немає інтернету.",sp:"Im Hotel gibt es leider kein Internet.",de:"Im Hotel gibt es leider <b>kein</b> Internet.",ua:"У готелі, на жаль, немає інтернету.",st:1},
+{s:"Wir haben {{B}} Kinder, aber einen Hund.",o:["keinen","nicht","keine","kein"],a:"keine",alt:[],ans:"Wir haben keine Kinder, aber einen Hund.",ex:"множина без артикля → keine.",lbl:"У нас немає дітей, але є собака.",sp:"Wir haben keine Kinder, aber einen Hund.",de:"Wir haben <b>keine</b> Kinder, aber einen Hund.",ua:"У нас немає дітей, але є собака.",st:1},
+{s:"Ich kenne dieses Restaurant {{B}}.",o:["nicht","keine","kein","keinen"],a:"nicht",alt:[],ans:"Ich kenne dieses Restaurant nicht.",ex:"dieses — вказівний займенник → nicht.",lbl:"Я не знаю цього ресторану.",sp:"Ich kenne dieses Restaurant nicht.",de:"Ich kenne dieses Restaurant <b>nicht</b>.",ua:"Я не знаю цього ресторану.",st:1},
+{s:"Mein Handy ist {{B}} kaputt, nur der Akku ist leer.",o:["keine","kein","keinen","nicht"],a:"nicht",alt:[],ans:"Mein Handy ist nicht kaputt, nur der Akku ist leer.",ex:"прикметник kaputt → nicht.",lbl:"Мій телефон не зламаний, просто сів акумулятор.",sp:"Mein Handy ist nicht kaputt, nur der Akku ist leer.",de:"Mein Handy ist <b>nicht</b> kaputt, nur der Akku ist leer.",ua:"Мій телефон не зламаний, просто сів акумулятор.",st:1},
+{s:"Das ist kein Kaffee, {{B}} Tee.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Das ist kein Kaffee, sondern Tee.",ex:"після заперечення (kein) → sondern.",lbl:"Це не кава, а чай.",sp:"Das ist kein Kaffee, sondern Tee.",de:"Das ist kein Kaffee, <b>sondern</b> Tee.",ua:"Це не кава, а чай.",st:5},
+{s:"Sie fährt nicht mit dem Bus, {{B}} mit dem Rad.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Sie fährt nicht mit dem Bus, sondern mit dem Rad.",ex:"nicht…, sondern — виправлення.",lbl:"Вона їде не автобусом, а велосипедом.",sp:"Sie fährt nicht mit dem Bus, sondern mit dem Rad.",de:"Sie fährt nicht mit dem Bus, <b>sondern</b> mit dem Rad.",ua:"Вона їде не автобусом, а велосипедом.",st:5},
+{s:"Er schläft nicht, {{B}} arbeitet.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Er schläft nicht, sondern arbeitet.",ex:"nicht…, sondern + нова дія (підмет не повторюємо).",lbl:"Він не спить, а працює.",sp:"Er schläft nicht, sondern arbeitet.",de:"Er schläft nicht, <b>sondern</b> arbeitet.",ua:"Він не спить, а працює.",st:5},
+{s:"Wir treffen uns nicht heute, {{B}} morgen.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Wir treffen uns nicht heute, sondern morgen.",ex:"nicht…, sondern — обставина часу.",lbl:"Ми зустрічаємося не сьогодні, а завтра.",sp:"Wir treffen uns nicht heute, sondern morgen.",de:"Wir treffen uns nicht heute, <b>sondern</b> morgen.",ua:"Ми зустрічаємося не сьогодні, а завтра.",st:5},
+{s:"Er hat nicht angerufen, {{B}} eine Nachricht geschrieben.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Er hat nicht angerufen, sondern eine Nachricht geschrieben.",ex:"nicht…, sondern — друга дія виправляє першу.",lbl:"Він не зателефонував, а написав повідомлення.",sp:"Er hat nicht angerufen, sondern eine Nachricht geschrieben.",de:"Er hat nicht angerufen, <b>sondern</b> eine Nachricht geschrieben.",ua:"Він не зателефонував, а написав повідомлення.",st:5},
+{s:"Ich habe nicht gelacht, {{B}} geweint.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Ich habe nicht gelacht, sondern geweint.",ex:"nicht…, sondern.",lbl:"Я не сміявся, а плакав.",sp:"Ich habe nicht gelacht, sondern geweint.",de:"Ich habe nicht gelacht, <b>sondern</b> geweint.",ua:"Я не сміявся, а плакав.",st:5},
+{s:"Er ist nicht krank, {{B}} nur müde.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Er ist nicht krank, sondern nur müde.",ex:"nicht…, sondern.",lbl:"Він не хворий, а лише втомлений.",sp:"Er ist nicht krank, sondern nur müde.",de:"Er ist nicht krank, <b>sondern</b> nur müde.",ua:"Він не хворий, а лише втомлений.",st:5},
+{s:"Nicht nur das Essen war gut, {{B}} auch der Service.",o:["sondern","aber","noch","und"],a:"sondern",alt:[],ans:"Nicht nur das Essen war gut, sondern auch der Service.",ex:"nicht nur…, sondern auch.",lbl:"Не лише їжа була хорошою, а й обслуговування.",sp:"Nicht nur das Essen war gut, sondern auch der Service.",de:"Nicht nur das Essen war gut, <b>sondern</b> auch der Service.",ua:"Не лише їжа була хорошою, а й обслуговування.",st:5},
+{s:"Sie spricht nicht nur Englisch, sondern {{B}} Spanisch.",o:["auch","noch","nur","immer"],a:"auch",alt:[],ans:"Sie spricht nicht nur Englisch, sondern auch Spanisch.",ex:"nicht nur…, sondern auch.",lbl:"Вона розмовляє не лише англійською, а й іспанською.",sp:"Sie spricht nicht nur Englisch, sondern auch Spanisch.",de:"Sie spricht nicht nur Englisch, sondern <b>auch</b> Spanisch.",ua:"Вона розмовляє не лише англійською, а й іспанською.",st:5},
+{s:"Das Zimmer war klein, {{B}} sehr gemütlich.",o:["aber","sondern","noch","und"],a:"aber",alt:[],ans:"Das Zimmer war klein, aber sehr gemütlich.",ex:"немає заперечення → aber (а не sondern).",lbl:"Кімната була маленькою, але дуже затишною.",sp:"Das Zimmer war klein, aber sehr gemütlich.",de:"Das Zimmer war klein, <b>aber</b> sehr gemütlich.",ua:"Кімната була маленькою, але дуже затишною.",st:5},
 ],
 ch: [
-  {s:"Ich habe {{B}} Zeit.",o:["keine","nicht"],a:"keine",alt:[],ans:"Ich habe keine Zeit.",ex:"іменник з ein / без артикля → kein.",lbl:"У мене немає часу.",sp:"Ich habe keine Zeit.",de:"Ich habe <b>keine</b> Zeit.",ua:"У мене немає часу.",st:1},
-  {s:"Ich bin {{B}} verheiratet.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich bin nicht verheiratet.",ex:"стан → nicht.",lbl:"Я не одружений.",sp:"Ich bin nicht verheiratet.",de:"Ich bin <b>nicht</b> verheiratet.",ua:"Я не одружений.",st:1},
-  {s:"Er hat {{B}} Auto.",o:["kein","nicht"],a:"kein",alt:[],ans:"Er hat kein Auto.",ex:"das Auto → kein.",lbl:"У нього немає машини.",sp:"Er hat kein Auto.",de:"Er hat <b>kein</b> Auto.",ua:"У нього немає машини.",st:1},
-  {s:"Ich wohne {{B}} in Berlin.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich wohne nicht in Berlin.",ex:"обставина місця → nicht.",lbl:"Я не живу в Берліні.",sp:"Ich wohne nicht in Berlin.",de:"Ich wohne <b>nicht</b> in Berlin.",ua:"Я не живу в Берліні.",st:1},
-  {s:"Sie hat {{B}} Lust zu kochen.",o:["keine","nicht"],a:"keine",alt:[],ans:"Sie hat keine Lust zu kochen.",ex:"die Lust → keine.",lbl:"У неї немає бажання готувати.",sp:"Sie hat keine Lust zu kochen.",de:"Sie hat <b>keine</b> Lust zu kochen.",ua:"У неї немає бажання готувати.",st:1},
 
 
 
@@ -841,15 +866,8 @@ ch: [
 
 
 
-  {s:"Wir haben {{B}} Kinder.",o:["keine","nicht"],a:"keine",alt:[],ans:"Wir haben keine Kinder.",ex:"множина → keine.",lbl:"У нас немає дітей.",sp:"Wir haben keine Kinder.",de:"Wir haben <b>keine</b> Kinder.",ua:"У нас немає дітей.",st:1},
-  {s:"Das ist {{B}} mein Auto.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das ist nicht mein Auto.",ex:"присвійний mein → nicht.",lbl:"Це не моя машина.",sp:"Das ist nicht mein Auto.",de:"Das ist <b>nicht</b> mein Auto.",ua:"Це не моя машина.",st:1},
-  {s:"Ich brauche {{B}} Regenschirm.",o:["keinen","nicht"],a:"keinen",alt:[],ans:"Ich brauche keinen Regenschirm.",ex:"der Regenschirm → keinen.",lbl:"Мені не потрібна парасолька.",sp:"Ich brauche keinen Regenschirm.",de:"Ich brauche <b>keinen</b> Regenschirm.",ua:"Мені не потрібна парасолька.",st:1},
-  {s:"Sie ist {{B}} Lehrerin.",o:["keine","nicht"],a:"keine",alt:[],ans:"Sie ist keine Lehrerin.",ex:"eine Lehrerin → keine.",lbl:"Вона не вчителька.",sp:"Sie ist keine Lehrerin.",de:"Sie ist <b>keine</b> Lehrerin.",ua:"Вона не вчителька.",st:1},
-  {s:"Ich mag den Kaffee {{B}}.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich mag den Kaffee nicht.",ex:"означений артикль → nicht.",lbl:"Я не люблю цю каву.",sp:"Ich mag den Kaffee nicht.",de:"Ich mag den Kaffee <b>nicht</b>.",ua:"Я не люблю цю каву.",st:1},
   {s:"Ich weiß, dass er {{B}} Zeit hat.",o:["keine","nicht"],a:"keine",alt:[],ans:"Ich weiß, dass er keine Zeit hat.",ex:"підрядне: die Zeit → keine.",lbl:"Я знаю, що в нього немає часу.",sp:"Ich weiß, dass er keine Zeit hat.",de:"Ich weiß, dass er <b>keine</b> Zeit hat.",ua:"Я знаю, що в нього немає часу.",st:4},
   {s:"Du {{B}} hier nicht rauchen. Es ist verboten.",o:["darfst","musst"],a:"darfst",alt:[],ans:"Du darfst hier nicht rauchen. Es ist verboten.",ex:"nicht dürfen = заборонено.",lbl:"Тут не можна палити. Це заборонено.",sp:"Du darfst hier nicht rauchen. Es ist verboten.",de:"Du <b>darfst</b> hier nicht rauchen. Es ist verboten.",ua:"Тут не можна палити. Це заборонено.",st:4},
-  {s:"Ich kenne {{B}} dieses Buch.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Ich kenne nicht dieses Buch.",ex:"вказівний займенник → nicht.",lbl:"Я не знаю цієї книги.",sp:"Ich kenne nicht dieses Buch.",de:"Ich kenne <b>nicht</b> dieses Buch.",ua:"Я не знаю цієї книги.",st:1},
-  {s:"Wir brauchen {{B}} Informationen.",o:["keine","nicht"],a:"keine",alt:[],ans:"Wir brauchen keine Informationen.",ex:"множина / нульовий артикль → keine.",lbl:"Нам не потрібна інформація.",sp:"Wir brauchen keine Informationen.",de:"Wir brauchen <b>keine</b> Informationen.",ua:"Нам не потрібна інформація.",st:1},
   {s:"Das können wir im Moment {{B}} machen.",o:["nicht","kein"],a:"nicht",alt:[],ans:"Das können wir im Moment nicht machen.",ex:"nicht перед інфінітивом machen.",lbl:"Зараз ми цього зробити не можемо.",sp:"Das können wir im Moment nicht machen.",de:"Das können wir im Moment <b>nicht</b> machen.",ua:"Зараз ми цього зробити не можемо.",st:4},
   {s:"Er hat noch {{B}} Absage bekommen.",o:["keine","nicht"],a:"keine",alt:[],ans:"Er hat noch keine Absage bekommen.",ex:"die Absage → keine.",lbl:"Він ще не отримав відмови.",sp:"Er hat noch keine Absage bekommen.",de:"Er hat noch <b>keine</b> Absage bekommen.",ua:"Він ще не отримав відмови.",st:4},
 ]
@@ -986,6 +1004,17 @@ return [
   EX(`Das ist ${K("weder")} richtig ${K("noch")} falsch.`, "прикметники") +
   EX(`${K("Weder")} er ${K("noch")} sie kommt zur Party.`, "підмети — weder на початку речення") +
   EX(`Ich habe ${K("weder")} über Jobportale ${K("noch")} über Anzeigen eine neue Stelle gefunden.`, "прийменникові групи — я не знайшов роботу ні через портали, ні через оголошення") +
+  H("nicht … sondern — «не … а» (виправлення)") +
+  EX(`Das ist ${K("kein")} Kaffee, ${K("sondern")} Tee.`, "заперечили іменник через kein — і одразу називаємо правильний") +
+  EX(`Er schläft ${K("nicht")}, ${K("sondern")} arbeitet.`, "дієслова — підмет вдруге не повторюємо") +
+  EX(`Wir treffen uns ${K("nicht")} heute, ${K("sondern")} morgen.`, "обставини часу") +
+  EX(`Sie fährt ${K("nicht")} mit dem Bus, ${K("sondern")} mit dem Rad.`, "прийменникові групи") +
+  EX(`Er hat ${K("nicht")} angerufen, ${K("sondern")} eine Nachricht geschrieben.`, "два речення в одному — друге виправляє перше") +
+  H("nicht nur … sondern auch — «не лише … а й»") +
+  EX(`Das Essen war ${K("nicht nur")} gut, ${K("sondern auch")} günstig.`, "прикметники") +
+  EX(`Sie spricht ${K("nicht nur")} Englisch, ${K("sondern auch")} Spanisch.`, "іменники") +
+  EX(`${K("Nicht nur")} er, ${K("sondern auch")} sie kommt zur Party.`, "підмети — nicht nur на початку речення") +
+  NOTE("Три правила для sondern", `1) <b>Кома завжди</b> стоїть перед sondern.<br>2) Після sondern <b>не додаємо</b> nicht / kein.<br>3) Після kein далі йде ein-слово: Das ist kein Kaffee, sondern <b>ein</b> Tee.`) +
   NOTE("sondern чи aber?", `<b>sondern</b> — після заперечення, виправляє його: Er ist nicht dumm, <b>sondern</b> faul.<br><b>aber</b> — просте протиставлення: Er ist klug, <b>aber</b> faul.`) +
   NOTE("Типова помилка", `<s>Ich habe weder Zeit, noch Lust.</s> → Ich habe weder Zeit ${K("noch")} Lust. (без коми)<br><s>Ich habe weder keine Zeit noch Lust.</s> → зайве заперечення`, "bad")
  },
@@ -1273,7 +1302,63 @@ const __M8 = {"tab": {"rm": [22, 23, 24, 25, 26, 27, 41, 42, 43, 44, 45, 46, 47,
     localStorage.setItem("pn_neg_mig_s8merge", "1");
   }catch(e){}
 })();
-TABS.forEach(t => { S[t.id] = readState(t.id) || blankState(); });
+/* ===== Прогрес прив'язано до ID завдання (не до порядку) + перенос позиції між пристроями ===== */
+const LEGACY_IDS = {"tab":["4vtlw6","1v8c6p1","172xpl6","44q757","16836z0","1pbhp8i","f3ov0q","1icufc7","116lstg","hvnxyz","18cjia1","12eckob","9xiljg","cx1ybh","1pu1r11","69rmd1","10cmzqj","1ca1876","1dejgf8","1tyu5b6","1gywevc","lzujfi","1ikzrc3","1qrz7e0","1g4hju0","1n5xv5h","pvw15g","ltbssh","k3s4n8","10net44","15fta92","1abe7x2","1rlrvre","1mva5jr","2mzfum","1svop1q","1yan5ak","1q87sy","s0r3yq","1519r6w","67qg5x"],"sent":["18cjia1","ir8dgu","1icufc7","hvnxyz","172xpl6","44q757","16836z0","1pbhp8i","f3ov0q","116lstg","1tht8qk","chxq08","1d1uec7","jx9aiu","xkon99","1ixlh6i","1rlfuhg","169tv1p","1bw66sy","1krdgfy","12eckob","9xiljg","cx1ybh","1pu1r11","69rmd1","10cmzqj","1ca1876","1dejgf8","1tyu5b6","1gywevc","lzujfi","1oqy4vn","1dq8m5m","phkgo4","1rxf9q5","1sjgo5u","k0fttf","89ods3","1fk60ux","1mpknft","1o8ywej","k55mrg","12evlcd","98szw8","14ziiw9","rftwd0","1japv06","2gqybp","c3hguw","13wye48","1i2svk9","173tk7f","ybfcn7","ci94b9","1hr2dmw","tezfpf","x0yhu5","1w91u24","12dlpvm","o9vgud","17j4k0m","189r9y8","17w4jh9","11duqir","5jaud4","5hk3y8","12d4u6x","18ynu89","fv7wdn","spejun","8pcidy","h6ul95","1rip83q","h1d4k","10o5xa2","xkessm","1iht8pr","nnruoi","m0bone","1m0u1ql","1gpm05m","1yocwh6","1yx7y5s","1i0lohe","2jursl","1r9ggkl","11wv2jv","l649zn","5ofuix","1textd8","18icb0q","166l07u","16ofjft","1tw7dww","fxfc4m","1o8untc","f8jdwl","g2jdw5","15ekc0h","10iywnw","1u8sj9x","1d841zq","fdb6pl","oggn5f","1gcvm26","ocy71d","1aud8t3","di9znx","rssglf","yuibh7","byfn79","1u1eo6t","1rrn089","1rwyuhb","1n7h1an","k4ohw7","alhpwg","qo3bdu","fa12n","qdmo3z","18mepev","19d0z7g","11drfcm","1ckknnl","996dpm","31yvvb","4583m6","vfpny","ths1d2","1rjb59p","1q8auef","1cybn2s","h3sno0","urz4kk","ebwmg7","173rwbi","1hvd6nn","1q2hi4w","1kdrrzm","1ubdx6n","t7tkdd","rui8xj","oayflx","1e5thvk","iaxdh3","1v2roi8","1neaeld","1umf1iv","1t26dwa","58basz","118teuq","cybx5f","182crje","1g3fyo1","l5yq6g","1k0kljw","4sb7o4","aikfc2","100zv2p","59u06l","wddqrz","j473n5","1hem0q8","vcushv","1r7vj1s","38d9mz","rjiqkt","1rf25vb","19xuh0x","q779ti","oj16f4","rusiq0","1l3558e","13a4lr8","y94icf","bdye5a","pw2bk6","9640ky","ebzg0k","1vl0lw0","pwoovu","zpt8mc","1foivla","18n6qfp","w34jf0","2snr10","1xiv0zk","3w94uw","1drv3pv","umw1i6","r1nlc9","1w4ro8e","1cu7z27","16ionyf","ph2fid","5gdy3t","a0td0w","1b0g8t9","h278yz","1qlfiwl","13q12mw","1rag2oa","v8rtjg","1rqi53q","17pcf80","5wygbu","1fewedf","y62b7b","pwwmai","1wlkc4d","mwid6l"],"ch":["4vtlw6","16836z0","ir8dgu","1pbhp8i","hvnxyz","12eckob","9xiljg","cx1ybh","1pu1r11","69rmd1","10cmzqj","1ca1876","1dejgf8","1tyu5b6","1gywevc","lzujfi","2uz6h7","1lp0npg","15rm3y1","18xl0v6","g96azg","5su892","3le3w3","1yan5ak","15ekc0h","vr7vfb","1519r6w"]};
+const hid = it => { const t = it.s + "|" + it.a + "|" + it.st; let h = 2166136261; for(let i = 0; i < t.length; i++){ h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h.toString(36); };
+const IDS = {}, IDX = {};
+Object.keys(ITEMS).forEach(t => { IDS[t] = ITEMS[t].map(hid); IDX[t] = {}; IDS[t].forEach((id, i) => { if(IDX[t][id] === undefined) IDX[t][id] = i; }); });
+let posDirty = false, sessionAnswered = false;
+const parseSt = id => { try { const v = JSON.parse(localStorage.getItem(KEY(id))); return (v && v.k) ? v : null; } catch(e){ return null; } };
+const idxToId = (src, ids) => { const o = {}; Object.keys(src || {}).forEach(i => { const id = ids[+i]; if(id !== undefined) o[id] = src[i]; }); return o; };
+function loadAll(){
+  const raw = {}, out = {}, legacy = {};
+  TABS.forEach(t => { raw[t.id] = parseSt(t.id); out[t.id] = { k:{}, err:{}, xk:null, pid:null }; });
+  TABS.forEach(t => {
+    const v = raw[t.id]; if(!v) return;
+    let kk, ee, pid;
+    if(v.lv === 2){ kk = v.k || {}; ee = v.err || {}; pid = v.pid; }
+    else { const ids = LEGACY_IDS[t.id] || []; kk = idxToId(v.k, ids); ee = idxToId(v.err, ids); pid = ids[v.pos]; legacy[t.id] = 1; }
+    const put = (f, id, val) => {
+      const dst = IDX[t.id][id] !== undefined ? t.id : (IDX.sent[id] !== undefined ? "sent" : null);
+      if(!dst){ const o = out[t.id]; (o.xk = o.xk || { k:{}, err:{} })[f][id] = val; return; }
+      const o = out[dst]; if(f === "k") o.k[id] = Math.max(o.k[id] === undefined ? 0 : o.k[id], val); else o.err[id] = true;
+    };
+    Object.keys(kk).forEach(id => put("k", id, kk[id]));
+    Object.keys(ee).forEach(id => { if(ee[id]) put("err", id, true); });
+    out[t.id].pid = pid || null;
+  });
+  TABS.forEach(t => {
+    const st = Object.assign(blankState(), raw[t.id] || {}), o = out[t.id];
+    delete st.lv; delete st.pid;
+    st.x = Number(st.x) || 0; st.p = Number(st.p) || 0;
+    st.k = {}; st.err = {};
+    Object.keys(o.k).forEach(id => { const i = IDX[t.id][id]; if(i !== undefined) st.k[i] = o.k[id]; });
+    Object.keys(o.err).forEach(id => { const i = IDX[t.id][id]; if(i !== undefined) st.err[i] = true; });
+    st.pos = (o.pid && IDX[t.id][o.pid] !== undefined) ? IDX[t.id][o.pid] : 0;
+    st.xk = o.xk || null;
+    if(st.cl) Object.keys(st.cl).forEach(g => { if(IDS[t.id].some((_, i) => STG[t.id][i] === +g && (st.k[i] || 0) < 1)) delete st.cl[g]; });
+    S[t.id] = st;
+  });
+  return legacy;
+}
+function toStore(tid){
+  const st = S[tid], o = {};
+  Object.keys(st).forEach(f => { if(f !== "k" && f !== "err" && f !== "pos" && f !== "xk") o[f] = st[f]; });
+  o.lv = 2; o.k = {}; o.err = {};
+  Object.keys(st.k).forEach(i => { const id = IDS[tid][+i]; if(id) o.k[id] = st.k[i]; });
+  Object.keys(st.err || {}).forEach(i => { const id = IDS[tid][+i]; if(id && st.err[i]) o.err[id] = true; });
+  if(st.xk){ Object.assign(o.k, st.xk.k); Object.assign(o.err, st.xk.err); }
+  o.pid = IDS[tid][st.pos | 0] || null;
+  return o;
+}
+function persist(tid, stamp){
+  try {
+    if(stamp){ S[tid].u = { s: stage, t: tab, m: mode, ts: Date.now() }; localStorage.setItem("pn_pos_ts", String(S[tid].u.ts)); }
+    localStorage.setItem(KEY(tid), JSON.stringify(toStore(tid)));
+  } catch(e){}
+}
+const save = () => { const st = posDirty; posDirty = false; persist(tab, st); };
+{ const lg = loadAll(); if(Object.keys(lg).length) TABS.forEach(t => persist(t.id, false)); }
 const bump = (t, net) => { t.x++; t.p += 1 - net; };
 const calcXp = () => Math.max(0, Math.min(XP_MAX, TABS.reduce((a, t) => a + ((S[t.id].x || 0) - (S[t.id].p || 0)), 0)));
 let XP = calcXp();
@@ -1289,7 +1374,6 @@ const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] ==
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;
 const errCount = () => reviewPool().length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
 
 function speak(text){
   if(!window.speechSynthesis || !text) return;
@@ -1430,14 +1514,14 @@ function openStage(n){
     alert("🔒 Цей етап наразі заблоковано!\n\nЩоб відкрити його, пройди всі завдання попереднього етапу на 100% у кожній із вкладок.");
     return; // Строго прерываем функцию, замок не снимается
   }
-  stage = n; localStorage.setItem("pn_stage", String(n));
+  posDirty = true; stage = n; localStorage.setItem("pn_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis[0].id);
   showLesson(n);
 }
 $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
-  TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} });
+  TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; persist(t.id, false); });
   XP = calcXp(); updateXp(XP); renderTabs();
 });
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
@@ -1555,6 +1639,7 @@ function popXp(d,up){
 
 let xLocked = false;
 function finish(ok){
+  sessionAnswered = true; posDirty = true;
   const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
   answered = true; t._ok = ok;
   playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
@@ -1692,8 +1777,8 @@ function renderCheat(){
 renderCheat();
 $("glossary").onclick = e => { const b = e.target.closest("[data-g]"); if(b){ cheatG = +b.dataset.g; renderCheat(); } };
 
-$("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b) setTab(b.dataset.t); };
-$("modeBtn").onclick = () => { mode = mode === "mc" ? "type" : "mc"; store.set("pn-mode", mode); clearTimeout(tm); if(answered) advance(); else load(cur); };
+$("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b){ posDirty = true; setTab(b.dataset.t); } };
+$("modeBtn").onclick = () => { posDirty = true; mode = mode === "mc" ? "type" : "mc"; store.set("pn-mode", mode); clearTimeout(tm); if(answered) advance(); else load(cur); };
 $("lab").onclick = e => { if(e.target.closest("[data-tr]")){ trShown = true; renderLab(); } };
 $("opts").onclick = e => { const b = e.target.closest("[data-o]"); if(b && !b.disabled) pick(+b.dataset.o); };
 $("chk").onclick = check;
@@ -1720,16 +1805,37 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
+function bestU(){ let b = null; TABS.forEach(t => { const u = S[t.id] && S[t.id].u; if(u && u.ts && (!b || u.ts > b.ts)) b = u; }); return b; }
+function adoptPos(){
+  const u = bestU(); if(!u) return;
+  if(!(u.ts > (Number(localStorage.getItem("pn_pos_ts")) || 0))) return;
+  if(answered || sessionAnswered || !STAGES.some(g => g.n === u.s)) return;
+  localStorage.setItem("pn_pos_ts", String(u.ts));
+  if(u.m === "mc" || u.m === "type"){ mode = u.m; store.set("pn-mode", mode); }
+  stage = u.s; localStorage.setItem("pn_stage", String(stage)); localStorage.setItem("pn_seen_" + stage, "1");
+  document.body.classList.remove("lsn");
+  const vis = TABS.filter(t => STG[t.id].some(g => g === stage));
+  setTab(vis.some(t => t.id === u.t) ? u.t : vis[0].id);
+}
+function reloadAll(){
+  const keep = answered ? S[tab] : null, kt = tab;
+  const lg = loadAll();
+  if(keep) S[kt] = keep;
+  if(Object.keys(lg).length) TABS.forEach(t => persist(t.id, false));
+  XP = calcXp();
+}
 function applyStorage(){
   try {
-    TABS.forEach(t => { if(answered && t.id === tab) return; const v = readState(t.id); if(v) S[t.id] = v; });
-    XP = calcXp();
+    reloadAll();
+    adoptPos();
     if(answered){ updateXp(XP); renderTabs(); }
     else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
-if(stage && !localStorage.getItem("pn_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ setTab(vis[0].id); showLesson(stage); } }
+const stageHasProgress = n => TABS.some(t => IDS[t.id].some((_, i) => STG[t.id][i] === n && S[t.id].k[i] !== undefined));
+const initLesson = () => { if(sessionAnswered || answered || document.body.classList.contains("lsn")) return; if(stage && !localStorage.getItem("pn_seen_" + stage) && !stageHasProgress(stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ setTab(vis[0].id); showLesson(stage); } } };
+try { if(window.TPSync && TPSync.supported && TPSync.ready) TPSync.ready.then(initLesson); else initLesson(); } catch(e){ initLesson(); }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
 setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
