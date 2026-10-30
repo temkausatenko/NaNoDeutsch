@@ -182,7 +182,7 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
 .fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
 .fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
-.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 1s linear forwards;width:100%}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2.2s linear forwards;width:100%}
 @keyframes shrink{to{width:0}}
 .foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
 .foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
@@ -433,6 +433,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .opts.afit{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 .scheme .np{color:var(--tx);font-weight:600}
 .r-nt{--c:var(--c-wo)}.r-kn{--c:var(--c-r)}.r-ng{--c:var(--c-da)}.r-ps{--c:var(--c-s)}.r-nn{--c:var(--c-p)}.r-vb{--c:var(--c-v)}
+.fb .nx{display:block;margin-top:12px;padding:10px 20px;border-radius:10px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:filter .18s}.fb .nx:hover{filter:brightness(1.1)}
 </style>
 </head>
 <body>
@@ -545,15 +546,21 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <div class="table-wrap"><table class="tk">
 <tr><th>Позитивне</th><th>Заперечне</th><th>Значення</th></tr>
 <tr><td class="h-pi">etwas</td><td class="h-ref">nichts</td><td>щось ↔ ніщо</td></tr>
-<tr><td class="h-pi">jemand / alle</td><td class="h-ref">niemand</td><td>хтось / усі ↔ ніхто</td></tr>
+<tr><td class="h-pi">jemand / alle / einer</td><td class="h-ref">niemand / keiner</td><td>хтось / усі / хтось один ↔ ніхто / жоден</td></tr>
 <tr><td class="h-pi">irgendwo / überall</td><td class="h-ref">nirgendwo / nirgends</td><td>десь / скрізь ↔ ніде</td></tr>
-<tr><td class="h-pi">immer</td><td class="h-ref">nie / niemals</td><td>завжди ↔ ніколи</td></tr>
+<tr><td class="h-pi">irgendwohin</td><td class="h-ref">nirgendwohin</td><td>кудись ↔ нікуди (питання «куди?»)</td></tr>
+<tr><td class="h-pi">immer / einmal / schon mal</td><td class="h-ref">nie / niemals</td><td>завжди / колись / вже колись ↔ ніколи</td></tr>
 <tr><td class="h-pi">schon / bereits</td><td class="h-ref">noch nicht</td><td>вже ↔ ще не</td></tr>
 <tr><td class="h-pi">schon (ein)mal</td><td class="h-ref">noch nie</td><td>вже (колись) ↔ ще ніколи</td></tr>
-<tr><td class="h-pi">(immer) noch</td><td class="h-ref">nicht mehr / nie mehr</td><td>ще, досі ↔ більше не / ніколи більше</td></tr>
-<tr><td class="h-pi">ein / eine</td><td class="h-ref">kein / keine</td><td>є ↔ немає</td></tr></table></div>
+<tr><td class="h-pi">(immer) noch</td><td class="h-ref">nicht mehr / nie mehr / kein … mehr</td><td>ще, досі ↔ більше не / ніколи більше / вже немає</td></tr>
+<tr><td class="h-pi">ein / eine</td><td class="h-ref">kein / keine</td><td>є ↔ немає</td></tr>
+<tr><td class="h-pi">mit + Dativ / Akkusativ</td><td class="h-ref">ohne + Akkusativ</td><td>з ↔ без</td></tr></table></div>
 <div class="example">Hast du <span class="hl">etwas</span> gesehen? — Nein, ich habe <span class="hl">nichts</span> gesehen.<br><em>Ти щось бачив? — Ні, я нічого не бачив.</em></div>
 <div class="example">Ist <span class="hl">jemand</span> zu Hause? — Nein, <span class="hl">niemand</span> ist zu Hause.<br><em>Хтось удома? — Ні, нікого немає вдома.</em></div>
+
+<div class="example"><span class="hl">einer</span> / <span class="hl">keiner</span> — займенники без іменника: Hat <span class="hl">einer</span> von euch Zeit? — Nein, <span class="hl">keiner</span> hat Zeit.<br><em>Чи є в когось із вас час? — Ні, ні в кого немає часу.</em><br>Hast du einen Stift? — Nein, ich habe <span class="hl">keinen</span>. <em>(Akk, чол. р.: keinen)</em></div>
+<div class="example">Fährst du <span class="hl">irgendwohin</span>? — Nein, ich fahre <span class="hl">nirgendwohin</span>.<br><em>Ти кудись їдеш? — Ні, я нікуди не їду.</em><br>Ich trinke Kaffee <span class="hl">mit</span> Zucker. ↔ Ich trinke Kaffee <span class="hl">ohne</span> Zucker.<br><em>Я п’ю каву з цукром. ↔ Я п’ю каву без цукру.</em></div>
+<div class="tip">💡 <strong>nirgendwohin</strong> відповідає на «куди?», а <strong>nirgends / nirgendwo</strong> — на «де?». <strong>ohne</strong> завжди з <strong>Akkusativ</strong> і вже містить заперечення — окремого nicht / kein не потрібно: <em>ohne Zucker</em>, <em>ohne mich</em>.</div>
 
 <h2>5. schon · noch nicht · noch nie · nicht mehr</h2>
 <p>Ці пари найчастіше плутають. Запам’ятай логіку: чи подія <strong>ще може статися</strong>, чи <strong>вже закінчилася</strong>.</p>
@@ -658,7 +665,7 @@ const STAGES = [
  { n:2, t:"nicht чи kein?", p:"Це головне питання теми. <b>kein</b> заперечує <b>іменник</b> з <b>неозначеним артиклем</b> (ein / eine) або <b>без артикля</b> (Geld, Zeit, Hunger, множина). <b>nicht</b> — у всіх інших випадках: дієслово, прикметник, прислівник, іменник із <b>означеним артиклем</b> (der / die / das), <b>присвійним займенником</b> (mein…), <b>dieser</b> або <b>власне ім’я</b>. Професія без артикля теж → <b>kein</b>: <i>Er ist kein Arzt.</i>",
    ex:[["Ich_habe|vb ein|ps Auto.|nn","є ein → заперечуємо kein"],["Ich_habe|vb kein|kn Auto.|nn","У мене немає машини"],["Ich_kenne|vb den_Mann|nn nicht|nt","означений артикль → nicht"]],
    tip:"Формула: <b>ein / без артикля → kein</b>; <b>der / mein / дієслово / прикметник → nicht</b>." },
- { n:3, t:"Пари-антоніми", p:"Заперечні слова мають позитивні «пари»: <b>etwas ↔ nichts</b>, <b>jemand / alle ↔ niemand</b>, <b>irgendwo / überall ↔ nirgendwo / nirgends</b>, <b>immer ↔ nie / niemals</b>. Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
+ { n:3, t:"Пари-антоніми", p:"Заперечні слова мають позитивні «пари»: <b>etwas ↔ nichts</b>, <b>jemand / alle ↔ niemand</b>, <b>irgendwo / überall ↔ nirgendwo / nirgends</b>, <b>immer / einmal ↔ nie / niemals</b>, <b>einer ↔ keiner</b>, <b>irgendwohin ↔ nirgendwohin</b>, <b>mit ↔ ohne</b>. Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
    ex:[["Hast_du|vb etwas|ps gesehen?|vb","питання"],["Ich_habe|vb nichts|ng gesehen.|vb","Я нічого не бачив"],["Niemand|ng ist_da.|vb","Нікого немає"]],
    tip:"Українською «Я нічого не бачив» — два заперечення. Німецькою: <b>Ich habe nichts gesehen</b> — лише одне." },
  { n:4, t:"schon · noch · nicht mehr", p:"<b>schon</b> («вже») → заперечення <b>noch nicht</b> («ще не»). <b>schon einmal</b> («вже колись») → <b>noch nie</b> («ще ніколи»). <b>(immer) noch</b> («ще, досі») → <b>nicht mehr</b> («вже не, більше не») або <b>nie mehr</b> («ніколи більше»). З іменниками: <b>noch + іменник</b> → <b>kein … mehr</b>: <i>Ich habe kein Geld mehr.</i>",
@@ -720,6 +727,7 @@ const WD = [
  ["nie","ніколи","ніколи","C","nie — ніколи; протилежне до immer."],
  ["niemals","ніколи (категорично)","ніколи (категорично, сильніше за nie)","C","niemals — те саме, що nie, але категоричніше."],
  ["niemand","ніхто","ніхто","D","niemand — ніхто; протилежне до jemand / alle."],
+ ["keiner","жоден, ніхто","жоден, ніхто (займенник без іменника)","D","keiner — «жоден»; протилежне до einer / jemand; Akk чол. р.: keinen."],
  ["kein","жодний, ніякий","жодний, ніякий (заперечення іменників)","E","kein заперечує іменники з неозначеним артиклем або без артикля."],
  ["nicht mehr","більше не","більше не, вже не","F","nicht mehr — раніше було, а тепер уже ні; протилежне до (immer) noch."],
  ["auf keinen Fall","ні в якому разі","ні в якому разі","G","auf keinen Fall — категорична відмова."],
@@ -728,6 +736,8 @@ const WD = [
  ["überhaupt nicht","взагалі не","взагалі не","I","überhaupt nicht — підсилене заперечення (як gar nicht)."],
  ["nirgendwo","ніде","ніде","J","nirgendwo / nirgends — ніде; протилежне до irgendwo / überall."],
  ["nirgends","ніде","ніде","J","nirgendwo / nirgends — ніде; протилежне до irgendwo / überall."],
+ ["nirgendwohin","нікуди","нікуди (на питання «куди?»)","M","nirgendwohin — нікуди; протилежне до irgendwohin."],
+ ["ohne","без","без (ohne + Akkusativ)","N","ohne — без; протилежне до mit; завжди + Akkusativ і вже містить заперечення."],
  ["noch nicht","ще не","ще не","K","noch nicht — «поки що ні»; протилежне до schon."],
  ["noch nie","ще ніколи","ще ніколи","L","noch nie — «ще жодного разу»; протилежне до schon einmal."]
 ];
@@ -781,6 +791,11 @@ WD.forEach(([de, us, uf, g, nt]) => {
  ["Siehst du jemanden im Garten? — Nein, da ist {{B}}.","niemand",[],["niemand","nichts","nie","nirgends"],"Бачиш когось у саду? — Ні, там нікого.","jemand → niemand."],
  ["Wo warst du am Wochenende? — Ich war {{B}}. Ich war krank.","nirgends",["nirgendwo"],["nirgends","nichts","niemand","nie"],"Де ти був на вихідних? — Я ніде не був. Я хворів.","irgendwo / überall → nirgends, nirgendwo."],
  ["Hast du etwas gesehen? — Nein, ich habe {{B}} gesehen.","nichts",[],["nichts","niemand","nie","nirgends"],"Ти щось бачив? — Ні, я нічого не бачив.","etwas → nichts."]
+,
+ ["Wohin fährst du im Urlaub? — {{B}}, ich bleibe zu Hause.","Nirgendwohin",[],["Nirgendwohin","Nirgends","Nichts","Niemand"],"Куди ти їдеш у відпустку? — Нікуди, я залишаюся вдома.","wohin / irgendwohin → nirgendwohin."],
+ ["Ist einer von euch Arzt? — Nein, {{B}} von uns ist Arzt.","keiner",[],["keiner","keinen","nichts","nie"],"Чи хтось із вас лікар? — Ні, ніхто з нас не лікар.","einer → keiner."],
+ ["Ich trinke den Tee {{B}} Milch.","ohne",[],["ohne","mit","kein","nicht"],"Я п’ю чай без молока.","mit ↔ ohne (+ Akkusativ)."],
+ ["Er geht {{B}} Jacke raus. Ihm ist nicht kalt.","ohne",[],["ohne","mit","kein","nicht"],"Він виходить без куртки. Йому не холодно.","mit ↔ ohne (+ Akkusativ)."]
 ].forEach(([s, a, alt, o, ua, ex]) => add("ei", { s, sch:"Яке питання — таке й заперечення: обери слово-пару.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:3, ua }));
 
 [
@@ -794,7 +809,15 @@ WD.forEach(([de, us, uf, g, nt]) => {
  ["nichts","etwas",["alles"],["etwas","jemand","immer","überall"],"ніщо ↔ щось"],
  ["niemand","jemand",["alle"],["jemand","etwas","immer","irgendwo"],"ніхто ↔ хтось"],
  ["nie","immer",[],["immer","etwas","jemand","überall"],"ніколи ↔ завжди"],
- ["nirgendwo","überall",["irgendwo"],["überall","immer","etwas","jemand"],"ніде ↔ скрізь"]
+ ["nirgendwo","überall",["irgendwo"],["überall","immer","etwas","jemand"],"ніде ↔ скрізь"],
+ ["einer","keiner",["niemand"],["keiner","nichts","nie","kein"],"хтось один ↔ жоден"],
+ ["keiner","einer",["jemand"],["einer","etwas","immer","überall"],"жоден ↔ хтось один"],
+ ["irgendwohin","nirgendwohin",[],["nirgendwohin","nirgends","nichts","niemand"],"кудись ↔ нікуди"],
+ ["nirgendwohin","irgendwohin",["überallhin"],["irgendwohin","überall","immer","etwas"],"нікуди ↔ кудись"],
+ ["einmal","nie",["niemals"],["nie","nichts","niemand","nirgendwo"],"колись, одного разу ↔ ніколи"],
+ ["schon mal","nie",["niemals"],["nie","nichts","niemand","nirgendwo"],"вже колись ↔ ніколи"],
+ ["mit","ohne",[],["ohne","nicht","kein","nie"],"з ↔ без"],
+ ["ohne","mit",[],["mit","etwas","immer","überall"],"без ↔ з"]
 ].forEach(([q, a, alt, o, ua]) => add("an", { s:`<span class="u">${q}</span> ↔ {{B}}`, sch:"Яке слово — протилежна пара за змістом?", o, a, alt, ex:`${q} ↔ ${[a, ...alt].join(" / ")}`, lbl:ua, sp:`${q}, ${a}`, st:3, ua }));
 add("an", { s:'<span class="u">ein</span> Auto ↔ {{B}} Auto', sch:"Яке слово — протилежна пара за змістом?", o:["kein","nicht","nichts","niemand"], a:"kein", ex:"ein Auto ↔ kein Auto", lbl:"є машина ↔ немає машини", sp:"ein Auto, kein Auto", st:3, ua:"ein ↔ kein" });
 
@@ -840,6 +863,8 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Ich habe {{B}} Geschwister.","keine","die Geschwister (множина) · Akkusativ","У мене немає братів і сестер."],
  ["Ich habe {{B}} Idee.","keine","die Idee (жін. р.) · Akkusativ","Я не маю ідеї."],
  ["Das Spielzeug gehört {{B}} Kind.","keinem","das Kind (сер. р.) · Dativ (gehören + Dativ)","Ця іграшка не належить жодній дитині."],
+ ["Hast du einen Stift? — Nein, ich habe {{B}}.","keinen","der Stift (чол. р.) · Akkusativ (без іменника)","Ти маєш ручку? — Ні, у мене немає."],
+ ["Hast du eine Schwester? — Nein, ich habe {{B}}.","keine","die Schwester (жін. р.) · Akkusativ (без іменника)","Ти маєш сестру? — Ні, у мене немає."],
  ["Er hilft {{B}} Menschen.","keinem","der Mensch (чол. р.) · Dativ (helfen + Dativ)","Він нікому не допомагає."]
 ].forEach(([s, a, h, ua]) => add("kf", { s, sch:h, o:[a, ...sh(["kein","keine","keinen","keinem","keiner"].filter(x => x !== a)).slice(0, 3)], a, ex:`${h} → ${a}`, lbl:ua, sp:s.replace("{{B}}", a), st:5, ua }));
 
@@ -899,6 +924,8 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Wir haben noch Milch.","Wir haben keine Milch mehr.",["Wir haben nicht mehr Milch.","Wir haben keine Milch noch.","Wir haben nicht Milch mehr."],"У нас більше немає молока.","noch + іменник → …","noch + іменник → kein … mehr."],
  ["Alle sind gekommen.","Niemand ist gekommen.",["Alle sind nicht gekommen.","Niemand ist nicht gekommen.","Niemand sind gekommen."],"Ніхто не прийшов.","Заміни alle на заперечну пару.","alle → niemand (однина!)."],
  ["Ich habe Hunger.","Ich habe keinen Hunger.",["Ich habe nicht Hunger.","Ich habe kein Hunger.","Ich habe Hunger nicht."],"Я не голодний.","Заперечи іменник.","der Hunger (чол. р.), Akk → keinen."],
+ ["Ich trinke Kaffee mit Zucker.","Ich trinke Kaffee ohne Zucker.",["Ich trinke Kaffee kein Zucker.","Ich trinke Kaffee nicht Zucker.","Ich trinke Kaffee ohne mit Zucker."],"Я п’ю каву без цукру.","mit → протилежне слово.","mit ↔ ohne (+ Akkusativ); окремого nicht / kein не потрібно."],
+ ["Ich fahre irgendwohin.","Ich fahre nirgendwohin.",["Ich fahre nicht nirgendwohin.","Ich fahre nirgendwo.","Ich fahre kein irgendwohin."],"Я нікуди не їду.","Заміни irgendwohin на заперечну пару.","irgendwohin → nirgendwohin (на питання «куди?»)."],
  ["Ich fahre mit dem Bus.","Ich fahre nicht mit dem Bus.",["Ich fahre mit dem Bus nicht.","Ich fahre kein mit dem Bus.","Ich nicht fahre mit dem Bus."],"Я не їду автобусом.","Заперечи речення.","nicht — перед прийменниковою групою mit dem Bus."]
 ].forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ne", { s:esc(pos), sch:hint, o:[neg, ...ws], a:neg, alt, ex, lbl:ua, sp:neg, st:8, ua }));
 
@@ -919,6 +946,9 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Він не лікар.","Er ist kein Arzt.",["Er ist nicht Arzt.","Er nicht ist Arzt.","Er ist keine Arzt."],"Професія без артикля → kein."],
  ["Нікого немає вдома.","Niemand ist zu Hause.",["Niemand ist nicht zu Hause.","Kein ist zu Hause.","Nicht niemand ist zu Hause."],"niemand — без nicht."],
  ["У нас більше немає хліба.","Wir haben kein Brot mehr.",["Wir haben keinen Brot mehr.","Wir haben kein mehr Brot.","Wir haben Brot kein mehr."],"kein … mehr = «вже немає»."],
+ ["Я нікуди не їду.","Ich fahre nirgendwohin.",["Ich fahre nicht nirgendwohin.","Ich fahre nirgends nicht.","Ich fahre kein irgendwohin."],"nirgendwohin — відповідь на «куди?», без nicht."],
+ ["Я п’ю каву без цукру.","Ich trinke Kaffee ohne Zucker.",["Ich trinke Kaffee kein Zucker.","Ich trinke Kaffee nicht mit Zucker.","Ich trinke Kaffee ohne nicht Zucker."],"ohne = без (+ Akkusativ)."],
+ ["Ніхто з нас цього не знає.","Keiner von uns weiß das.",["Keiner von uns weiß das nicht.","Kein von uns weiß das.","Nichts von uns weiß das."],"keiner — без nicht."],
  ["Я не маю нічого проти цього.","Ich habe nichts dagegen.",["Ich habe nicht nichts dagegen.","Ich habe kein dagegen.","Ich habe dagegen nicht."],"nichts — без nicht."]
 ].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"Обери правильне німецьке речення.", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
 
@@ -936,6 +966,8 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Мені не подобається цей фільм.","Ich mag diesen Film nicht.","Ich mag keinen diesen Film.","Ich mag diesen Film kein.","Ich nicht mag diesen Film.","diesen Film — вказівний займенник → nicht."],
  ["Тут ніде не сісти.","Hier kann man nirgends sitzen.","Hier kann man nicht nirgends sitzen.","Hier kann man kein sitzen.","Hier kann man sitzen nirgends nicht.","nirgends уже заперечує — без nicht."],
  ["Ти вже поїв? — Ні, ще ні.","Nein, noch nicht.","Nein, nicht noch.","Nein, schon nicht.","Nein, noch kein.","schon ↔ noch nicht."],
+ ["Я п’ю чай без молока.","Ich trinke Tee ohne Milch.","Ich trinke Tee mit keine Milch.","Ich trinke Tee ohne Milch nicht.","Ich trinke Tee kein Milch.","ohne = без (+ Akkusativ); nicht / kein не потрібні."],
+ ["Ніхто з нас не знає.","Keiner von uns weiß das.","Keiner von uns weiß das nicht.","Kein von uns weiß das.","Nichts von uns weiß das.","keiner — без nicht; не kein."],
  ["Ніколи більше!","Nie wieder!","Nicht wieder nie!","Kein wieder!","Nie nicht wieder!","nie wieder / nie mehr = ніколи більше."],
  ["У нас немає проблем.","Wir haben keine Probleme.","Wir haben nicht Probleme.","Wir haben kein Probleme.","Wir haben keinen Probleme.","Probleme — множина без артикля → keine."],
  ["Без окулярів я не можу читати.","Ohne Brille kann ich nicht lesen.","Dohne kann ich nicht lesen.","Ohne es kann ich nicht lesen.","Darohne kann ich nicht lesen.","ohne не утворює da-форм (немає «dohne»)."]
@@ -1050,7 +1082,7 @@ const RULES = {
   zs:"💡 <b>nie / niemals</b> — ніколи · <b>nirgendwo / nirgends</b> — ніде · <b>gar nicht / überhaupt nicht</b> — зовсім не / взагалі не.",
   kn:"💡 <b>ein / без артикля</b> → <b>kein</b> · <b>der / mein / дієслово / прикметник</b> → <b>nicht</b>.",
   ei:"💡 <b>etwas → nichts</b> · <b>jemand → niemand</b> · <b>immer → nie</b> · <b>überall → nirgends</b>. Без nicht!",
-  an:"💡 Пари: <b>etwas ↔ nichts</b> · <b>jemand / alle ↔ niemand</b> · <b>irgendwo / überall ↔ nirgends</b> · <b>immer ↔ nie</b>.",
+  an:"💡 Пари: <b>etwas ↔ nichts</b> · <b>jemand / alle ↔ niemand</b> · <b>irgendwo / überall ↔ nirgends</b> · <b>immer / einmal ↔ nie</b> · <b>einer ↔ keiner</b> · <b>irgendwohin ↔ nirgendwohin</b> · <b>mit ↔ ohne</b>.",
   sn:"💡 <b>schon → noch nicht</b> · <b>schon einmal → noch nie</b> · <b>noch → nicht mehr</b> · <b>noch + іменник → kein … mehr</b>.",
   kf:"💡 Nom: <b>kein / keine / kein / keine</b> · Akk: <b>keinen</b> (чол.) · Dat: <b>keinem / keiner / keinem / keinen</b>.",
   po:"💡 <b>nicht</b> — в кінці речення, але перед прикметником, прийм. групою, Partizip II, інфінітивом, префіксом.",
@@ -1179,7 +1211,8 @@ function showFb(ok, i){
   f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
     <div class="ans" title="Натисни, щоб почути">${esc(it.ans)}</div>
     ${it.lbl ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""}
-    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}`;
+    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}<button class="nx" type="button">Далі →</button>${ok ? '<div class="bar"></div>' : ''}`;
+  const nxEl = f.querySelector(".nx"); if(nxEl) nxEl.onclick = e => { e.stopPropagation(); clearTimeout(tm); advance(); };
   const ansEl = f.querySelector(".ans");
   if(ansEl) ansEl.onclick = () => speak(it.sp);
 }
@@ -1341,18 +1374,18 @@ function finish(ok){
     const c = $("card");
     c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
     clearTimeout(tm);
-    const wait = 1000;
+    const wait = 2200;
     if(reviewMode){
-      if(reviewQueue().length === 0) tm = setTimeout(() => { if(answered) showReviewComplete(); }, 1200);
+      if(reviewQueue().length === 0) tm = setTimeout(() => { if(answered) showReviewComplete(); }, 2200);
       else tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); else showReviewComplete(); } }, wait);
     } else if(allDone()){
-      tm = setTimeout(() => { if(answered) showComplete(); }, 1200);
+      tm = setTimeout(() => { if(answered) showComplete(); }, 2200);
     } else {
       tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, wait);
     }
   } else {
     completedShown[tab] = false;
-    if(isMc()){ clearTimeout(tm); tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); } }, 3800); }
+    /* помилка: без автопереходу, лише кнопка «Далі» */
   }
   if(!ok){ try{ $("fb").scrollIntoView({ behavior:"smooth", block:"nearest" }); }catch(e){} }
 }
@@ -1451,7 +1484,7 @@ function toggleTheory(){
 /* ============ ШПАРГАЛКА ============ */
 const CHEAT = [
   ["Слова","var(--c-wo)",[["nicht","не"],["nichts","ніщо, нічого"],["nie · niemals","ніколи"],["niemand","ніхто"],["kein","жодний, ніякий"],["nicht mehr","більше не"],["auf keinen Fall","ні в якому разі"],["kaum","ледве, майже не"],["gar nicht · überhaupt nicht","зовсім не · взагалі не"],["nirgendwo · nirgends","ніде"]]],
-  ["Пари","var(--c-da)",[["etwas ↔ nichts","щось ↔ ніщо"],["jemand · alle ↔ niemand","хтось · усі ↔ ніхто"],["irgendwo · überall ↔ nirgends","десь · скрізь ↔ ніде"],["immer ↔ nie · niemals","завжди ↔ ніколи"],["schon · bereits ↔ noch nicht","вже ↔ ще не"],["schon (ein)mal ↔ noch nie","вже колись ↔ ще ніколи"],["(immer) noch ↔ nicht mehr","ще, досі ↔ більше не"],["(immer) noch ↔ nie mehr","ще ↔ ніколи більше"],["ein · eine ↔ kein · keine","є ↔ немає"]]],
+  ["Пари","var(--c-da)",[["etwas ↔ nichts","щось ↔ ніщо"],["jemand · alle ↔ niemand","хтось · усі ↔ ніхто"],["einer ↔ keiner","хтось один ↔ жоден"],["irgendwo · überall ↔ nirgends","десь · скрізь ↔ ніде"],["irgendwohin ↔ nirgendwohin","кудись ↔ нікуди"],["immer · einmal · schon mal ↔ nie · niemals","завжди · колись ↔ ніколи"],["schon · bereits ↔ noch nicht","вже ↔ ще не"],["schon (ein)mal ↔ noch nie","вже колись ↔ ще ніколи"],["(immer) noch ↔ nicht mehr","ще, досі ↔ більше не"],["(immer) noch ↔ nie mehr","ще ↔ ніколи більше"],["(immer) noch ↔ kein … mehr","ще є ↔ вже немає"],["mit ↔ ohne + Akk","з ↔ без"],["ein · eine ↔ kein · keine","є ↔ немає"]]],
   ["nicht чи kein?","var(--c-r)",[["ein / без артикля → kein","Ich habe kein Auto."],["професія без артикля → kein","Er ist kein Arzt."],["der / die / das → nicht","Ich kenne den Mann nicht."],["mein / dieser → nicht","Das ist nicht mein Buch."],["ім’я → nicht","Ich besuche Anna nicht."],["дієслово → nicht","Er arbeitet nicht."],["прикметник → nicht","Das ist nicht gut."]]],
   ["Форми kein","var(--c-s)",[["Nom: kein · keine · kein · keine","ч. · ж. · с. · мн."],["Akk: keinen · keine · kein · keine","ч. · ж. · с. · мн."],["Dat: keinem · keiner · keinem · keinen","ч. · ж. · с. · мн."],["kein … mehr","вже немає"]]],
   ["Місце nicht","var(--c-pn)",[["Ich kenne ihn nicht.","в кінці — заперечуємо речення"],["nicht gut","перед прикметником"],["nicht nach Hause","перед прийм. групою"],["nicht gesehen · nicht kommen","перед Partizip / інфінітивом"],["nicht heute, sondern morgen","nicht … sondern"],["nichts · niemand · nie + без nicht","немає подвійного заперечення"]]]
