@@ -1,4 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="sync.js"></script>
 <title>Слова-заперечення</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
@@ -707,13 +709,38 @@ function playSound(type){
     }
   }catch(e){}
 }
+/* Вібровідгук: Telegram → navigator.vibrate (Android) → «switch»-трюк для iOS Safari (17.4+) */
+const hapticSw = (() => {
+  try {
+    const lb = document.createElement('label');
+    lb.setAttribute('aria-hidden', 'true');
+    lb.style.cssText = 'position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+    const inp = document.createElement('input');
+    inp.type = 'checkbox'; inp.setAttribute('switch', '');
+    lb.appendChild(inp); document.body.appendChild(lb);
+    return lb;
+  } catch(e){ return null; }
+})();
 function haptic(kind){
   try{
-    const h = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback;
-    if(!h) return;
-    if(kind === 'ok') h.notificationOccurred('success');
-    else if(kind === 'no') h.notificationOccurred('error');
-    else h.selectionChanged();
+    const tg = window.Telegram && window.Telegram.WebApp;
+    const h = tg && tg.HapticFeedback;
+    const inTg = !!(h && tg.initData && typeof tg.isVersionAtLeast === 'function' && tg.isVersionAtLeast('6.1'));
+    if(inTg){
+      if(kind === 'ok') h.notificationOccurred('success');
+      else if(kind === 'no') h.notificationOccurred('error');
+      else h.selectionChanged();
+      return;
+    }
+    if(navigator.vibrate){
+      navigator.vibrate(kind === 'ok' ? 40 : kind === 'no' ? [70, 50, 70, 50, 70] : 15);
+      return;
+    }
+    if(hapticSw){
+      const tap = () => { try{ hapticSw.click(); }catch(e){} };
+      tap();
+      if(kind === 'no'){ setTimeout(tap, 90); setTimeout(tap, 180); }
+    }
   }catch(e){}
 }
 
@@ -858,7 +885,7 @@ function askConfirm(msg, yes){
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
 
 // Логіка перевірки, чи відкритий етап (враховує дострокове відкриття)
-const stOpen = n => n === 1 || getUnlocked().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
+const stOpen = n => n === 1 || getUnlocked().includes(n) || stProg(n).d > 0 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
@@ -908,6 +935,7 @@ $("stages").addEventListener("click", e => { const b = e.target.closest(".stg");
 function load(i){
   clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
+  if(syncPending){ syncPending = false; TABS.forEach(t => { const v = readState(t.id); if(v) S[t.id] = v; }); XP = calcXp(); }
   cur = i; answered = false; picked = -1; T()._ok = false; T().pos = i; save();
   $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
   $("card").classList.toggle("mc", isMc());
@@ -916,6 +944,7 @@ function load(i){
   renderOpts(); renderCard(); renderReviewBtn();
   if(!isMc()) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
 }
+let syncPending = false;
 const reviewDoneSets = {};
 const rd = () => reviewDoneSets[tab] || (reviewDoneSets[tab] = new Set());
 function reviewPool(){ return items().map((_, i) => i).filter(i => T().err[i] && (!stage || STG[tab][i] === stage)); }
@@ -1052,6 +1081,7 @@ function showSol(){
   if(answered) return;
   answered = true;
   const t = T(); t._ok = false;
+  playSound('wrong'); haptic('no');
   xLocked = XP >= XP_MAX; t.l++; bump(t, (xLocked || XP <= 0) ? 0 : -1); XP = calcXp(); t.k[cur] = 0; t.err[cur] = true;
   save(); showFb(false, cur); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
@@ -1166,13 +1196,22 @@ document.addEventListener('touchstart', function unlockAudio() {
 function applyStorage(){
   try {
     TABS.forEach(t => {
-      if(answered && t.id === tab) return; 
+      if(answered && t.id === tab) return;
       const v = readState(t.id);
       if(v) S[t.id] = v;
     });
+    if(answered){
+      // поточну вкладку оновимо після переходу до наступного завдання, щоб не втратити щойно дану відповідь
+      syncPending = true;
+      XP = calcXp(); updateXp(XP); renderTabs();
+      return;
+    }
     XP = calcXp();
-    if(answered){ updateXp(XP); renderTabs(); }
-    else { renderCard(); renderReviewBtn(); syncFin(); }
+    const typing = !isMc() && $("inp").value.length > 0;
+    const curDone = !reviewMode && !pool().includes(cur) || (!reviewMode && streak(cur) >= maxStreak());
+    if(curDone && !typing){ load(startIdx()); syncFin(); return; }
+    if(typing){ updateXp(XP); renderTabs(); return; }
+    renderCard(); renderReviewBtn(); syncFin();
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
@@ -1188,7 +1227,9 @@ if(stage && !localStorage.getItem("neg_seen_" + stage)){
 
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
-setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
+window.addEventListener("focus", tpSyncNow);
+setInterval(() => { if(!document.hidden) tpSyncNow(); }, 5000);
+try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
 
 if (window.Telegram && window.Telegram.WebApp) {
   const tg = window.Telegram.WebApp;
