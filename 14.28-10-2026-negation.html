@@ -248,7 +248,7 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
   .card h2{padding-right:82px;line-height:32px;height:32px;}
 }
 @media(hover:hover) and (pointer:fine){
-  .tab:hover{border-color:var(--pr);color:var(--tx)}.tab.on:hover{background:#4338ca}
+  .tab:hover{color:var(--tx)}
   .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
   .btn:hover{transform:translateY(-1px)}.btn.g:hover{transform:none}
 }
@@ -434,6 +434,31 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .scheme .np{color:var(--tx);font-weight:600}
 .r-nt{--c:var(--c-wo)}.r-kn{--c:var(--c-r)}.r-ng{--c:var(--c-da)}.r-ps{--c:var(--c-s)}.r-nn{--c:var(--c-p)}.r-vb{--c:var(--c-v)}
 .fb .nx{display:block;margin-top:12px;padding:10px 20px;border-radius:10px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:filter .18s}.fb .nx:hover{filter:brightness(1.1)}
+/* ===== v2: навігація (етапи / вкладки), пари, кнопка відповіді ===== */
+.tabs{display:flex;gap:2px;padding:4px;margin:0 auto 14px;width:fit-content;max-width:100%;background:var(--pl);border:1px solid var(--bd);border-radius:14px;justify-content:center;flex-wrap:wrap}
+.tabs .tab{border:0;border-radius:10px;padding:7px 14px;background:transparent;color:var(--mu);font-size:.84rem;font-weight:600;gap:7px;box-shadow:none}
+.tabs .tab small{background:none;padding:0;font-size:.68rem;font-weight:600;color:var(--mu);opacity:.8;font-variant-numeric:tabular-nums}
+.tabs .tab:hover{color:var(--tx)}
+.tabs .tab.on,.tabs .tab.on:hover{background:var(--card);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.25),inset 0 -2px 0 var(--sa)}
+.tabs .tab.on small{background:none;color:var(--sa);opacity:1}
+
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 10px;margin:12px 0}
+.pr-cap{grid-column:1/-1;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
+.pr-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.pr-row span{font-size:.86rem;font-weight:600;line-height:1.3}
+.pr-row .l{text-align:right;color:var(--tx)}
+.pr-row .r{text-align:left;color:var(--sa)}
+.pr-row i{font-style:normal;color:var(--mu);font-weight:700}
+
+.chk{min-width:150px}
+.showbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:150px;padding:12px 14px;border-radius:12px;border:2px solid color-mix(in srgb,var(--go) 45%,var(--bd));background:linear-gradient(135deg,var(--gob),transparent);color:var(--go);font:inherit;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
+.showbtn svg{width:15px;height:15px;flex:none}
+.showbtn:hover{background:var(--gob);border-color:var(--go);transform:translateY(-1px);box-shadow:0 3px 12px rgba(245,158,11,.22)}
+.showbtn:active{transform:none}
+.showbtn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+@media(max-width:480px){.showbtn{width:100%}}
+.hintans{max-height:0;opacity:0;overflow:hidden;margin:0;text-align:center;font-size:1.05rem;font-weight:500;color:var(--tx);transition:opacity .35s,max-height .35s,margin .35s}
+.hintans.on{max-height:140px;opacity:.5;margin-top:12px}
 </style>
 </head>
 <body>
@@ -471,12 +496,13 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <div class="opts" id="opts"></div>
 
     <div class="um-row" id="umRow">
-      <button class="tool" id="showBtn" type="button">Показати відповідь</button>
+      <button class="showbtn" id="showBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="showTxt">Підказка</span></button>
     </div>
     <div class="row">
       <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
     </div>
+    <div class="hintans" id="hintAns"></div>
     <div class="fb" id="fb"></div>
   </div>
 
@@ -659,16 +685,17 @@ const ROLE = { nt:"nicht", kn:"kein", ng:"заперечення", ps:"пози�
 
 /* ============ ЕТАПИ ============ */
 const STAGES = [
- { n:1, t:"Слова-заперечення", p:"Німецькі заперечення можна поділити на групи: <b>загальні</b> — <b>nicht</b> («не») і <b>kein</b> («жодний»); <b>заперечні займенники та прислівники</b> — <b>nichts</b> (ніщо), <b>niemand</b> (ніхто), <b>nie / niemals</b> (ніколи), <b>nirgendwo / nirgends</b> (ніде); <b>вирази</b> — <b>nicht mehr</b> (більше не), <b>auf keinen Fall</b> (ні в якому разі); <b>відтінки</b> — <b>kaum</b> (ледве), <b>gar nicht / überhaupt nicht</b> (зовсім не / взагалі не). Спершу запам’ятай значення, потім навчимося їх уживати.",
+ { n:1, t:"Заперечення", p:"Німецькі заперечення можна поділити на групи: <b>загальні</b> — <b>nicht</b> («не») і <b>kein</b> («жодний»); <b>заперечні займенники та прислівники</b> — <b>nichts</b> (ніщо), <b>niemand</b> (ніхто), <b>nie / niemals</b> (ніколи), <b>nirgendwo / nirgends</b> (ніде); <b>вирази</b> — <b>nicht mehr</b> (більше не), <b>auf keinen Fall</b> (ні в якому разі); <b>відтінки</b> — <b>kaum</b> (ледве), <b>gar nicht / überhaupt nicht</b> (зовсім не / взагалі не). Спершу запам’ятай значення, потім навчимося їх уживати.",
    ex:[["nicht|nt kein|kn","не · жодний"],["nichts|ng niemand|ng nie|ng nirgends|ng","ніщо · ніхто · ніколи · ніде"],["nicht_mehr|ng auf_keinen_Fall|ng kaum|ng","більше не · ні в якому разі · ледве"]],
    tip:"Вчи слова парами з протилежним: <b>etwas ↔ nichts</b>, <b>jemand ↔ niemand</b>, <b>immer ↔ nie</b>." },
- { n:2, t:"nicht чи kein?", p:"Це головне питання теми. <b>kein</b> заперечує <b>іменник</b> з <b>неозначеним артиклем</b> (ein / eine) або <b>без артикля</b> (Geld, Zeit, Hunger, множина). <b>nicht</b> — у всіх інших випадках: дієслово, прикметник, прислівник, іменник із <b>означеним артиклем</b> (der / die / das), <b>присвійним займенником</b> (mein…), <b>dieser</b> або <b>власне ім’я</b>. Професія без артикля теж → <b>kein</b>: <i>Er ist kein Arzt.</i>",
+ { n:2, t:"nicht / kein", p:"Це головне питання теми. <b>kein</b> заперечує <b>іменник</b> з <b>неозначеним артиклем</b> (ein / eine) або <b>без артикля</b> (Geld, Zeit, Hunger, множина). <b>nicht</b> — у всіх інших випадках: дієслово, прикметник, прислівник, іменник із <b>означеним артиклем</b> (der / die / das), <b>присвійним займенником</b> (mein…), <b>dieser</b> або <b>власне ім’я</b>. Професія без артикля теж → <b>kein</b>: <i>Er ist kein Arzt.</i>",
    ex:[["Ich_habe|vb ein|ps Auto.|nn","є ein → заперечуємо kein"],["Ich_habe|vb kein|kn Auto.|nn","У мене немає машини"],["Ich_kenne|vb den_Mann|nn nicht|nt","означений артикль → nicht"]],
    tip:"Формула: <b>ein / без артикля → kein</b>; <b>der / mein / дієслово / прикметник → nicht</b>." },
- { n:3, t:"Пари-антоніми", p:"Заперечні слова мають позитивні «пари»: <b>etwas ↔ nichts</b>, <b>jemand / alle ↔ niemand</b>, <b>irgendwo / überall ↔ nirgendwo / nirgends</b>, <b>immer / einmal ↔ nie / niemals</b>, <b>einer ↔ keiner</b>, <b>irgendwohin ↔ nirgendwohin</b>, <b>mit ↔ ohne</b>. Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
+ { n:3, t:"Пари слів", p:"Заперечні слова мають позитивні «пари». Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
+   tbl:[["etwas","nichts"],["jemand / alle","niemand"],["irgendwo / überall","nirgendwo / nirgends"],["immer / einmal","nie / niemals"],["einer","keiner"],["irgendwohin","nirgendwohin"],["mit","ohne"]],
    ex:[["Hast_du|vb etwas|ps gesehen?|vb","питання"],["Ich_habe|vb nichts|ng gesehen.|vb","Я нічого не бачив"],["Niemand|ng ist_da.|vb","Нікого немає"]],
    tip:"Українською «Я нічого не бачив» — два заперечення. Німецькою: <b>Ich habe nichts gesehen</b> — лише одне." },
- { n:4, t:"schon · noch · nicht mehr", p:"<b>schon</b> («вже») → заперечення <b>noch nicht</b> («ще не»). <b>schon einmal</b> («вже колись») → <b>noch nie</b> («ще ніколи»). <b>(immer) noch</b> («ще, досі») → <b>nicht mehr</b> («вже не, більше не») або <b>nie mehr</b> («ніколи більше»). З іменниками: <b>noch + іменник</b> → <b>kein … mehr</b>: <i>Ich habe kein Geld mehr.</i>",
+ { n:4, t:"schon / noch", p:"<b>schon</b> («вже») → заперечення <b>noch nicht</b> («ще не»). <b>schon einmal</b> («вже колись») → <b>noch nie</b> («ще ніколи»). <b>(immer) noch</b> («ще, досі») → <b>nicht mehr</b> («вже не, більше не») або <b>nie mehr</b> («ніколи більше»). З іменниками: <b>noch + іменник</b> → <b>kein … mehr</b>: <i>Ich habe kein Geld mehr.</i>",
    ex:[["Hast_du|vb schon|ps gegessen?|vb","вже"],["Nein,_ich_habe|vb noch_nicht|ng gegessen.|vb","ще не"],["Ich_wohne|vb nicht_mehr|ng hier.|vb","вже не живу тут"]],
    tip:"<b>noch nicht</b> — «поки що ні» (ще може бути). <b>nicht mehr</b> — «було, але вже ні»." },
  { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>: закінчення залежать від роду й відмінка. Nominativ: <b>kein / keine / kein / keine</b> (ч. / ж. / с. / мн.). Akkusativ змінюється лише в чоловічому роді: <b>keinen</b>. Dativ: <b>keinem / keiner / keinem / keinen</b>. У множині Nom і Akk — <b>keine</b>.",
@@ -677,31 +704,31 @@ const STAGES = [
  { n:6, t:"Місце nicht", p:"Якщо заперечуємо <b>усе речення</b> (дієслово), <b>nicht</b> стоїть <b>в кінці</b>: <i>Ich kenne ihn nicht.</i> Але <b>перед</b> прикметником чи прислівником (<i>nicht gut</i>), перед <b>прийменниковою групою</b> (<i>nicht in Berlin</i>, <i>nicht nach Hause</i>) і перед <b>другою частиною дієслівної рамки</b> — Partizip, інфінітив, відокремлюваний префікс (<i>nicht gesehen, nicht kommen, nicht an</i>). Якщо заперечуємо <b>одне слово</b> — nicht ставимо перед ним, далі йде <b>sondern</b>.",
    ex:[["Ich_kenne_ihn|vb nicht|nt","в кінці речення"],["Das_ist|vb nicht|nt gut|nn","перед прикметником"],["Ich_habe_ihn|vb nicht|nt gesehen|vb","перед Partizip"],["Ich_fahre|vb nicht|nt heute,_sondern_morgen.|nn","nicht … sondern"]],
    tip:"<b>kein</b> стоїть перед іменником, а <b>nicht</b> — «навколо» того, що заперечуємо (часто в кінці)." },
- { n:7, t:"Підсилення і відтінки", p:"<b>gar nicht</b> і <b>überhaupt nicht</b> — «зовсім не / взагалі не» (підсилюють nicht). <b>gar kein / überhaupt kein</b> — «жодного взагалі». <b>kaum</b> — «ледве, майже не» (це не повне заперечення, а «дуже мало»). <b>auf keinen Fall</b> — «ні в якому разі» (категорична відмова). <b>niemals</b> — те саме, що <b>nie</b>, але категоричніше.",
+ { n:7, t:"Відтінки", p:"<b>gar nicht</b> і <b>überhaupt nicht</b> — «зовсім не / взагалі не» (підсилюють nicht). <b>gar kein / überhaupt kein</b> — «жодного взагалі». <b>kaum</b> — «ледве, майже не» (це не повне заперечення, а «дуже мало»). <b>auf keinen Fall</b> — «ні в якому разі» (категорична відмова). <b>niemals</b> — те саме, що <b>nie</b>, але категоричніше.",
    ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
    tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
- { n:8, t:"Заперечи та перекладай", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Алгоритм: <b>1)</b> що саме заперечуємо; <b>2)</b> іменник з ein / без артикля → <b>kein</b>, інакше → <b>nicht</b>; <b>3)</b> є слово-пара (etwas, jemand, immer, schon, noch)? → заміни на <b>nichts, niemand, nie, noch nicht, nicht mehr</b>; <b>4)</b> без подвійного заперечення!",
+ { n:8, t:"Практика", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Алгоритм: <b>1)</b> що саме заперечуємо; <b>2)</b> іменник з ein / без артикля → <b>kein</b>, інакше → <b>nicht</b>; <b>3)</b> є слово-пара (etwas, jemand, immer, schon, noch)? → заміни на <b>nichts, niemand, nie, noch nicht, nicht mehr</b>; <b>4)</b> без подвійного заперечення!",
    ex:[["Ich_habe|vb einen|ps Bruder.|nn","→ Ich habe keinen Bruder."],["Er_ist|vb noch|ps hier.|nn","→ Er ist nicht mehr hier."]],
    tip:"Українське «Ніхто не прийшов» = німецьке <b>Niemand ist gekommen</b> (без nicht)." },
- { n:9, t:"Підсумок і тексти", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе: <b>1)</b> що заперечуємо — іменник, дієслово, прикметник? <b>2)</b> nicht чи kein (і яка форма)? <b>3)</b> чи є слово-пара (nichts, niemand, nie…)? <b>4)</b> де стоїть nicht? <b>5)</b> чи немає подвійного заперечення?",
+ { n:9, t:"Підсумок", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе: <b>1)</b> що заперечуємо — іменник, дієслово, прикметник? <b>2)</b> nicht чи kein (і яка форма)? <b>3)</b> чи є слово-пара (nichts, niemand, nie…)? <b>4)</b> де стоїть nicht? <b>5)</b> чи немає подвійного заперечення?",
    ex:[["Ich_habe|vb keine|kn Zeit.|nn","kein — іменник без артикля"],["Niemand|ng hilft_mir.|vb","niemand — без nicht"]],
    tip:"Алгоритм: 1) що заперечуємо 2) nicht / kein 3) слово-пара 4) місце 5) без подвійного заперечення." }
 ];
 
 /* ============ ВПРАВИ ============ */
 const TABS = [
- { id:"md", label:"Слово — значення", kind:"mc",   title:"ЩО ОЗНАЧАЄ СЛОВО?",       oc:"opts col" },
- { id:"zs", label:"Переклад слова",   kind:"text", title:"ЯКЕ ЦЕ НІМЕЦЬКЕ СЛОВО?",  ph:"Введи слово …", oc:"opts grid4" },
- { id:"kn", label:"nicht чи kein?",   kind:"mc",   title:"NICHT ЧИ KEIN?",          fixed:1, oc:"opts afit" },
- { id:"ei", label:"Встав слово",      kind:"text", title:"ВСТАВ ЗАПЕРЕЧЕННЯ",       ph:"Введи слово …", oc:"opts grid4" },
- { id:"an", label:"Пари-антоніми",   kind:"text", title:"ЯКЕ СЛОВО — ПАРА?",       ph:"Введи слово …", oc:"opts grid4" },
- { id:"sn", label:"schon / noch",     kind:"text", title:"SCHON · NOCH · NICHT MEHR", ph:"Введи вираз …", oc:"opts grid4" },
- { id:"kf", label:"Форми kein",       kind:"text", title:"ЯКА ФОРМА KEIN?",         ph:"Введи форму …", oc:"opts grid4" },
- { id:"po", label:"Місце nicht",      kind:"mc",   title:"ДЕ СТОЇТЬ NICHT?",        oc:"opts col" },
- { id:"pd", label:"Підсилення",       kind:"text", title:"ВСТАВ ПІДСИЛЕННЯ",        ph:"Введи вираз …", oc:"opts grid4" },
- { id:"ne", label:"Заперечи речення", kind:"text", title:"ЗАПЕРЕЧИ РЕЧЕННЯ",        ph:"Введи повне речення …", oc:"opts col" },
+ { id:"md", label:"Значення", kind:"mc",   title:"ЩО ОЗНАЧАЄ СЛОВО?",       oc:"opts col" },
+ { id:"zs", label:"Німецькою",   kind:"text", title:"ЯКЕ ЦЕ НІМЕЦЬКЕ СЛОВО?",  ph:"Введи слово …", oc:"opts grid4" },
+ { id:"kn", label:"nicht / kein", kind:"text", typeOnly:1, title:"NICHT ЧИ KEIN?", ph:"nicht чи kein …", oc:"opts" },
+ { id:"ei", label:"Вставка",      kind:"text", title:"ВСТАВ ЗАПЕРЕЧЕННЯ",       ph:"Введи слово …", oc:"opts grid4" },
+ { id:"an", label:"Пари",   kind:"text", title:"ЯКЕ СЛОВО — ПАРА?",       ph:"Введи слово …", oc:"opts grid4" },
+ { id:"sn", label:"Вирази",     kind:"text", title:"SCHON · NOCH · NICHT MEHR", ph:"Введи вираз …", oc:"opts grid4" },
+ { id:"kf", label:"Форми",       kind:"text", title:"ЯКА ФОРМА KEIN?",         ph:"Введи форму …", oc:"opts grid4" },
+ { id:"po", label:"Порядок",      kind:"mc",   title:"ДЕ СТОЇТЬ NICHT?",        oc:"opts col" },
+ { id:"pd", label:"Відтінки",       kind:"text", title:"ВСТАВ ПІДСИЛЕННЯ",        ph:"Введи вираз …", oc:"opts grid4" },
+ { id:"ne", label:"Заперечення", kind:"text", title:"ЗАПЕРЕЧИ РЕЧЕННЯ",        ph:"Введи повне речення …", oc:"opts col" },
  { id:"ue", label:"Переклад",         kind:"text", title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ",     ph:"Введи речення німецькою …", oc:"opts col" },
- { id:"er", label:"Знайди помилку",   kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",    oc:"opts col" },
+ { id:"er", label:"Помилки",   kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",    oc:"opts col" },
  { id:"tx", label:"Тексти",           kind:"text", title:"ВСТАВ У ТЕКСТ",           ph:"Введи слово …", oc:"opts grid4" }
 ];
 const OPT_META = {
@@ -776,7 +803,7 @@ WD.forEach(([de, us, uf, g, nt]) => {
  ["Ich verstehe das Wort.","das Wort","nicht","Ich verstehe das Wort nicht.","Я не розумію цього слова.","das Wort — означений артикль → nicht."],
  ["Wir fahren nach Berlin.","nach Berlin","nicht","Wir fahren nicht nach Berlin.","Ми не їдемо до Берліна.","Прийменникова група → nicht перед нею."],
  ["Ich mag diesen Film.","diesen Film","nicht","Ich mag diesen Film nicht.","Мені не подобається цей фільм.","dieser — вказівний займенник → nicht."]
-].forEach(([pos, chunk, a, neg, ua, ex]) => add("kn", { s:pos.replace(chunk, `<span class="u P">${chunk}</span>`), sch:"Яким словом заперечимо підкреслене: nicht чи kein?", o:["nicht","kein"], a, ans:`${a} → ${neg}`, ex, lbl:ua, sp:neg, st:2 }));
+].forEach(([pos, chunk, a, neg, ua, ex]) => add("kn", { s:pos.replace(chunk, `<span class="u P">${chunk}</span>`), sch:"Впиши, чим заперечимо підкреслене: <b>nicht</b> чи <b>kein</b>?", o:["nicht","kein"], a, alt:(a === "kein" ? ["keine","keinen","keinem","keiner"] : []), ans:`${a} → ${neg}`, ex, lbl:ua, sp:neg, st:2 }));
 
 /* ---------- 3. Встав слово / Пари-антоніми ---------- */
 /* [речення, відповідь, alt, варіанти, переклад, пояснення] */
@@ -1107,7 +1134,7 @@ const calcXp = () => Math.max(0, Math.min(XP_MAX, TABS.reduce((a, t) => a + ((S[
 let XP = calcXp();
 
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
-let mode = store.get("ng-mode") === "type" ? "type" : "mc";
+let mode = "type";   // при відкритті завжди «Впиши»
 const TB = () => TABS.find(t => t.id === tab);
 const eMode = () => TB().typeOnly ? "type" : mode;
 const isMc = () => TB().kind === "mc" || (TB().kind === "text" && eMode() === "mc");
@@ -1134,7 +1161,9 @@ function speakCurrent(){ const it = items()[cur]; if(it) speak(it.sp); }
 
 /* ============ RENDER ============ */
 function renderTabs(){
-  $("tabs").innerHTML = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)).map(t => {
+  const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
+  $("tabs").style.display = vis.length < 2 ? "none" : "";
+  $("tabs").innerHTML = vis.map(t => {
     const st = S[t.id], idx = ITEMS[t.id].map((_, i) => i).filter(i => !stage || STG[t.id][i] === stage);
     const done = idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
     const cl = st.cl && st.cl[String(stage || 0)];
@@ -1178,6 +1207,7 @@ function renderCard(){
   updateXp(XP);
   renderTabs();
   $("chk").textContent = answered ? "Далі →" : "Перевірити ✓";
+  $("showBtn").disabled = answered;
 }
 function renderOpts(){
   const it = items()[cur], tb = TB();
@@ -1226,13 +1256,15 @@ const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, 
 const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
-    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
+    const dn = q.t > 0 && q.d >= q.t;
+    return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${dn ? "✓ " : ""}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
 ;
 }
+const pairsHTML = rows => '<div class="pairs"><div class="pr-cap">Позитив ↔ Заперечення</div>' + rows.map(([a, b]) => `<div class="pr-row"><span class="l">${esc(a)}</span><i>↔</i><span class="r">${esc(b)}</span></div>`).join("") + '</div>';
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl) : "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("ng_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
@@ -1252,13 +1284,25 @@ $("stages").addEventListener("click", e => { const b = e.target.closest(".stg");
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 
 /* ============ NAVIGATION ============ */
+let hintUsed = false, hintTm;
+function hideHint(){ clearTimeout(hintTm); $("hintAns").classList.remove("on"); }
+function resetHint(){ hintUsed = false; hideHint(); $("showTxt").textContent = "Підказка"; }
+function hintOrShow(){
+  if(answered) return;
+  if(!hintUsed){
+    hintUsed = true;
+    const h = $("hintAns"); h.textContent = items()[cur].a; h.classList.add("on");
+    clearTimeout(hintTm); hintTm = setTimeout(hideHint, 2000);
+    $("showTxt").textContent = "Показати відповідь";
+  } else { hideHint(); showSol(); }
+}
 function load(i){
   clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
   cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
-  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = "";
+  $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = ""; resetHint();
   $("card").classList.toggle("mc", isMc());
-  $("card").classList.toggle("tx", TB().kind === "text");
+  $("card").classList.toggle("tx", TB().kind === "text" && !TB().typeOnly);
   $("umRow").style.display = (TB().kind === "text" && eMode() === "type") ? "flex" : "none";
   renderOpts(); renderRule(); renderCard(); renderReviewBtn();
   if(!isMc()) { try { $("inp").focus({ preventScroll: true }); } catch(e){} }
@@ -1362,7 +1406,7 @@ const completedShown = {};
 let xLocked = false;
 function finish(ok){
   const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
-  answered = true; t._ok = ok;
+  answered = true; t._ok = ok; hideHint();
   playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
   if(ok){ t.r++; bump(t, xLocked ? 0 : 1); XP = calcXp(); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
   else  { t.w++; bump(t, (xLocked || XP <= 0) ? 0 : -1); XP = calcXp(); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
@@ -1502,7 +1546,7 @@ $("glossary").onclick = e => { const b = e.target.closest("[data-g]"); if(b){ ch
 /* ============ EVENTS ============ */
 $("tabs").onclick = e => { const b = e.target.closest("[data-t]"); if(b) setTab(b.dataset.t); };
 $("modeBtn").onclick = () => {
-  mode = mode === "mc" ? "type" : "mc"; store.set("ng-mode", mode);
+  mode = mode === "mc" ? "type" : "mc";
   clearTimeout(tm);
   if(answered) advance(); else load(cur);
 };
@@ -1514,7 +1558,7 @@ $("speakBtn").onclick = speakCurrent;
 $("sent").addEventListener("click", () => { if(window.getSelection().toString().trim().length === 0) speakCurrent(); });
 $("errs").addEventListener("click", e => { if(e.target.id === "errs") closeErrors(); });
 $("inp").addEventListener("keydown", e => { if(e.key === "Enter" || e.keyCode === 13){ e.preventDefault(); check(); } });
-$("showBtn").onclick = showSol;
+$("showBtn").onclick = hintOrShow;
 document.addEventListener("keydown", e => {
   if(!isMc() || e.ctrlKey || e.metaKey || e.altKey) return;
   if(e.target.closest && e.target.closest("button,input,textarea")) return;
