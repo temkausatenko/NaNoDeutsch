@@ -449,6 +449,18 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .pr-row .l{text-align:right;color:var(--tx)}
 .pr-row .r{text-align:left;color:var(--sa)}
 .pr-row i{font-style:normal;color:var(--mu);font-weight:700}
+.pr-row small{grid-column:1/-1;margin-top:-2px;text-align:center;color:var(--mu);font-size:.74rem;font-weight:500;line-height:1.35}
+.kv{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.kv-r{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:4px 14px;align-items:baseline;padding:9px 13px;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.kv-r b{font-size:.82rem;font-weight:700;color:var(--sa);line-height:1.35}
+.kv-r span{font-size:.88rem;line-height:1.5}
+.kv-r i{color:var(--mu)}
+@media(max-width:480px){.kv-r{grid-template-columns:1fr;gap:2px}}
+.ltab{width:100%;border-collapse:separate;border-spacing:4px;margin:10px 0;font-size:.9rem;text-align:center}
+.ltab th{color:var(--mu);font-size:.72rem;font-weight:700;letter-spacing:.08em;padding:4px}
+.ltab td{padding:9px 6px;border:1px solid var(--bd);border-radius:10px;background:var(--card);font-weight:600}
+.ltab td:first-child{color:var(--mu);font-size:.78rem;text-align:left;padding-left:12px}
+.ltab td.hi{color:var(--go);border-color:var(--go);background:var(--gob)}
 
 .chk{min-width:150px}
 .showbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:150px;padding:12px 14px;border-radius:12px;border:2px solid color-mix(in srgb,var(--go) 45%,var(--bd));background:linear-gradient(135deg,var(--gob),transparent);color:var(--go);font:inherit;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
@@ -685,32 +697,41 @@ const ROLE = { nt:"nicht", kn:"kein", ng:"заперечення", ps:"пози�
 
 /* ============ ЕТАПИ ============ */
 const STAGES = [
- { n:1, t:"Заперечення", p:"Німецькі заперечення можна поділити на групи: <b>загальні</b> — <b>nicht</b> («не») і <b>kein</b> («жодний»); <b>заперечні займенники та прислівники</b> — <b>nichts</b> (ніщо), <b>niemand</b> (ніхто), <b>nie / niemals</b> (ніколи), <b>nirgendwo / nirgends</b> (ніде); <b>вирази</b> — <b>nicht mehr</b> (більше не), <b>auf keinen Fall</b> (ні в якому разі); <b>відтінки</b> — <b>kaum</b> (ледве), <b>gar nicht / überhaupt nicht</b> (зовсім не / взагалі не). Спершу запам’ятай значення, потім навчимося їх уживати.",
+ { n:1, t:"Заперечення", p:"Німецькі заперечення — це кілька груп слів. Спершу запам’ятай значення, потім навчимося їх уживати.",
+   kv:[["Загальні","<b>nicht</b> — не · <b>kein</b> — жодний"],["Займенники й прислівники","<b>nichts</b> — ніщо · <b>niemand</b> — ніхто · <b>nie / niemals</b> — ніколи · <b>nirgendwo / nirgends</b> — ніде"],["Вирази","<b>nicht mehr</b> — більше не · <b>auf keinen Fall</b> — ні в якому разі"],["Відтінки","<b>kaum</b> — ледве, майже не · <b>gar nicht / überhaupt nicht</b> — зовсім не / взагалі не"]],
    ex:[["nicht|nt kein|kn","не · жодний"],["nichts|ng niemand|ng nie|ng nirgends|ng","ніщо · ніхто · ніколи · ніде"],["nicht_mehr|ng auf_keinen_Fall|ng kaum|ng","більше не · ні в якому разі · ледве"]],
    tip:"Вчи слова парами з протилежним: <b>etwas ↔ nichts</b>, <b>jemand ↔ niemand</b>, <b>immer ↔ nie</b>." },
- { n:2, t:"nicht / kein", p:"Це головне питання теми. <b>kein</b> заперечує <b>іменник</b> з <b>неозначеним артиклем</b> (ein / eine) або <b>без артикля</b> (Geld, Zeit, Hunger, множина). <b>nicht</b> — у всіх інших випадках: дієслово, прикметник, прислівник, іменник із <b>означеним артиклем</b> (der / die / das), <b>присвійним займенником</b> (mein…), <b>dieser</b> або <b>власне ім’я</b>. Професія без артикля теж → <b>kein</b>: <i>Er ist kein Arzt.</i>",
+ { n:2, t:"nicht / kein", p:"Головне питання теми: що саме ми заперечуємо?",
+   kv:[["→ kein","іменник з ein / eine: <i>Ich habe kein Auto.</i>"],["→ kein","іменник без артикля (Geld, Zeit, Hunger, множина): <i>Ich habe keine Zeit.</i>"],["→ kein","професія без артикля: <i>Er ist kein Arzt.</i>"],["→ nicht","дієслово: <i>Er arbeitet nicht.</i>"],["→ nicht","прикметник, прислівник: <i>Das ist nicht gut.</i>"],["→ nicht","іменник з der / die / das: <i>Ich kenne den Mann nicht.</i>"],["→ nicht","mein, dein, dieser…: <i>Das ist nicht mein Buch.</i>"],["→ nicht","власне ім’я: <i>Ich besuche Anna nicht.</i>"]],
    ex:[["Ich_habe|vb ein|ps Auto.|nn","є ein → заперечуємо kein"],["Ich_habe|vb kein|kn Auto.|nn","У мене немає машини"],["Ich_kenne|vb den_Mann|nn nicht|nt","означений артикль → nicht"]],
    tip:"Формула: <b>ein / без артикля → kein</b>; <b>der / mein / дієслово / прикметник → nicht</b>." },
- { n:3, t:"Пари слів", p:"Заперечні слова мають позитивні «пари». Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару. <b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
+ { n:3, t:"Пари слів", p:"Заперечні слова мають позитивні «пари». Якщо в питанні стоїть позитивне слово — у відповіді заміни його на заперечну пару.<br><b>Важливо:</b> у німецькій <b>немає подвійного заперечення</b> — після nichts, niemand, nie слово <b>nicht</b> не потрібне.",
    tbl:[["etwas","nichts"],["jemand / alle","niemand"],["irgendwo / überall","nirgendwo / nirgends"],["immer / einmal","nie / niemals"],["einer","keiner"],["irgendwohin","nirgendwohin"],["mit","ohne"]],
    ex:[["Hast_du|vb etwas|ps gesehen?|vb","питання"],["Ich_habe|vb nichts|ng gesehen.|vb","Я нічого не бачив"],["Niemand|ng ist_da.|vb","Нікого немає"]],
    tip:"Українською «Я нічого не бачив» — два заперечення. Німецькою: <b>Ich habe nichts gesehen</b> — лише одне." },
- { n:4, t:"schon / noch", p:"<b>schon</b> («вже») → заперечення <b>noch nicht</b> («ще не»). <b>schon einmal</b> («вже колись») → <b>noch nie</b> («ще ніколи»). <b>(immer) noch</b> («ще, досі») → <b>nicht mehr</b> («вже не, більше не») або <b>nie mehr</b> («ніколи більше»). З іменниками: <b>noch + іменник</b> → <b>kein … mehr</b>: <i>Ich habe kein Geld mehr.</i>",
+ { n:4, t:"schon / noch", p:"Дивись, чи подія <b>ще може статися</b>, чи вже <b>закінчилась</b>. Кожному слову з питання відповідає своя заперечна пара.",
+   cap:"Питання → Заперечення", ar:"→",
+   tbl:[["schon","noch nicht","вже → ще не (але ще може бути)"],["schon einmal","noch nie","вже колись → ще ніколи"],["(immer) noch","nicht mehr","ще, досі → вже не, більше не"],["(immer) noch","nie mehr","ще, досі → ніколи більше"],["noch + іменник","kein … mehr","<i>Ich habe kein Geld mehr.</i>"]],
    ex:[["Hast_du|vb schon|ps gegessen?|vb","вже"],["Nein,_ich_habe|vb noch_nicht|ng gegessen.|vb","ще не"],["Ich_wohne|vb nicht_mehr|ng hier.|vb","вже не живу тут"]],
    tip:"<b>noch nicht</b> — «поки що ні» (ще може бути). <b>nicht mehr</b> — «було, але вже ні»." },
- { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>: закінчення залежать від роду й відмінка. Nominativ: <b>kein / keine / kein / keine</b> (ч. / ж. / с. / мн.). Akkusativ змінюється лише в чоловічому роді: <b>keinen</b>. Dativ: <b>keinem / keiner / keinem / keinen</b>. У множині Nom і Akk — <b>keine</b>.",
+ { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>. Змінюється лише чоловічий рід в Akkusativ: <b>keinen</b>.",
+   html:'<div class="table-wrap"><table class="ltab"><tr><th></th><th>ч.</th><th>ж.</th><th>с.</th><th>мн.</th></tr><tr><td>Nominativ</td><td>kein</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Akkusativ</td><td class="hi">keinen</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Dativ</td><td>keinem</td><td>keiner</td><td>keinem</td><td>keinen</td></tr></table></div>',
    ex:[["Ich_habe|vb keinen|kn Hund.|nn","Akkusativ, чол. р."],["Das_ist|vb keine|kn Katze.|nn","Nominativ, жін. р."],["mit|vb keinem|kn Kind|nn","Dativ, сер. р."]],
    tip:"Закінчення такі самі, як у <b>ein</b>: ein → kein, einen → keinen, einem → keinem; у множині — keine." },
- { n:6, t:"Місце nicht", p:"Якщо заперечуємо <b>усе речення</b> (дієслово), <b>nicht</b> стоїть <b>в кінці</b>: <i>Ich kenne ihn nicht.</i> Але <b>перед</b> прикметником чи прислівником (<i>nicht gut</i>), перед <b>прийменниковою групою</b> (<i>nicht in Berlin</i>, <i>nicht nach Hause</i>) і перед <b>другою частиною дієслівної рамки</b> — Partizip, інфінітив, відокремлюваний префікс (<i>nicht gesehen, nicht kommen, nicht an</i>). Якщо заперечуємо <b>одне слово</b> — nicht ставимо перед ним, далі йде <b>sondern</b>.",
+ { n:6, t:"Місце nicht", p:"Де ставити <b>nicht</b>? Залежить від того, що заперечуємо.",
+   kv:[["В кінці речення","заперечуємо все речення: <i>Ich kenne ihn nicht.</i>"],["Перед прикметником або прислівником","<i>Das ist nicht gut.</i>"],["Перед прийменниковою групою","<i>Er wohnt nicht in Berlin. Ich fahre nicht nach Hause.</i>"],["Перед Partizip II, інфінітивом, префіксом","<i>Ich habe ihn nicht gesehen. Ich kann nicht kommen. Ich rufe dich nicht an.</i>"],["nicht … sondern","заперечуємо одне слово, далі «а…»: <i>Ich fahre nicht heute, sondern morgen.</i>"]],
    ex:[["Ich_kenne_ihn|vb nicht|nt","в кінці речення"],["Das_ist|vb nicht|nt gut|nn","перед прикметником"],["Ich_habe_ihn|vb nicht|nt gesehen|vb","перед Partizip"],["Ich_fahre|vb nicht|nt heute,_sondern_morgen.|nn","nicht … sondern"]],
    tip:"<b>kein</b> стоїть перед іменником, а <b>nicht</b> — «навколо» того, що заперечуємо (часто в кінці)." },
- { n:7, t:"Відтінки", p:"<b>gar nicht</b> і <b>überhaupt nicht</b> — «зовсім не / взагалі не» (підсилюють nicht). <b>gar kein / überhaupt kein</b> — «жодного взагалі». <b>kaum</b> — «ледве, майже не» (це не повне заперечення, а «дуже мало»). <b>auf keinen Fall</b> — «ні в якому разі» (категорична відмова). <b>niemals</b> — те саме, що <b>nie</b>, але категоричніше.",
+ { n:7, t:"Відтінки", p:"Заперечення можна підсилити або, навпаки, пом’якшити.",
+   kv:[["gar nicht<br>überhaupt nicht","зовсім не · взагалі не (підсилюють nicht)"],["gar kein<br>überhaupt kein","жодного взагалі"],["kaum","ледве, майже не — це не повне заперечення, а «дуже мало»"],["auf keinen Fall","ні в якому разі (категорична відмова)"],["niemals","те саме, що nie, але категоричніше"]],
    ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
    tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
- { n:8, t:"Практика", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Алгоритм: <b>1)</b> що саме заперечуємо; <b>2)</b> іменник з ein / без артикля → <b>kein</b>, інакше → <b>nicht</b>; <b>3)</b> є слово-пара (etwas, jemand, immer, schon, noch)? → заміни на <b>nichts, niemand, nie, noch nicht, nicht mehr</b>; <b>4)</b> без подвійного заперечення!",
+ { n:8, t:"Практика", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Іди за алгоритмом:",
+   kv:[["1","що саме заперечуємо?"],["2","іменник з ein / без артикля → <b>kein</b>, усе інше → <b>nicht</b>"],["3","є слово-пара (etwas, jemand, immer, schon, noch)? → <b>nichts, niemand, nie, noch nicht, nicht mehr</b>"],["4","без подвійного заперечення!"]],
    ex:[["Ich_habe|vb einen|ps Bruder.|nn","→ Ich habe keinen Bruder."],["Er_ist|vb noch|ps hier.|nn","→ Er ist nicht mehr hier."]],
    tip:"Українське «Ніхто не прийшов» = німецьке <b>Niemand ist gekommen</b> (без nicht)." },
- { n:9, t:"Підсумок", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе: <b>1)</b> що заперечуємо — іменник, дієслово, прикметник? <b>2)</b> nicht чи kein (і яка форма)? <b>3)</b> чи є слово-пара (nichts, niemand, nie…)? <b>4)</b> де стоїть nicht? <b>5)</b> чи немає подвійного заперечення?",
+ { n:9, t:"Підсумок", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе:",
+   kv:[["1","що заперечуємо — іменник, дієслово, прикметник?"],["2","<b>nicht</b> чи <b>kein</b> (і яка форма)?"],["3","чи є слово-пара (nichts, niemand, nie…)?"],["4","де стоїть <b>nicht</b>?"],["5","чи немає подвійного заперечення?"]],
    ex:[["Ich_habe|vb keine|kn Zeit.|nn","kein — іменник без артикля"],["Niemand|ng hilft_mir.|vb","niemand — без nicht"]],
    tip:"Алгоритм: 1) що заперечуємо 2) nicht / kein 3) слово-пара 4) місце 5) без подвійного заперечення." }
 ];
@@ -1248,10 +1269,7 @@ function showFb(ok, i){
 }
 
 /* ============ ЕТАПИ ============ */
-function renderRule(){
-  const r = RULES[tab] || "";
-  $("rule").innerHTML = r ? r + (stage ? `<br><span class="lsl" data-l="1">Урок етапу ${stage} ›</span>` : "") : "";
-}
+function renderRule(){ $("rule").innerHTML = ""; }   // підказки під вкладками вимкнено
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
 const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
@@ -1260,11 +1278,12 @@ function renderStages(){
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${dn ? "✓ " : ""}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("")
 ;
 }
-const pairsHTML = rows => '<div class="pairs"><div class="pr-cap">Позитив ↔ Заперечення</div>' + rows.map(([a, b]) => `<div class="pr-row"><span class="l">${esc(a)}</span><i>↔</i><span class="r">${esc(b)}</span></div>`).join("") + '</div>';
+const pairsHTML = (rows, ar, cap) => `<div class="pairs"><div class="pr-cap">${cap || "Позитив ↔ Заперечення"}</div>` + rows.map(([a, b, n]) => `<div class="pr-row"><span class="l">${esc(a)}</span><i>${ar || "↔"}</i><span class="r">${esc(b)}</span>${n ? `<small>${n}</small>` : ""}</div>`).join("") + '</div>';
+const kvHTML = rows => '<div class="kv">' + rows.map(([a, b]) => `<div class="kv-r"><b>${a}</b><span>${b}</span></div>`).join("") + '</div>';
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl) : "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl, g.ar, g.cap) : "") + (g.kv ? kvHTML(g.kv) : "") + (g.html || "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("ng_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
@@ -1293,7 +1312,7 @@ function hintOrShow(){
     hintUsed = true;
     const h = $("hintAns"); h.textContent = items()[cur].a; h.classList.add("on");
     clearTimeout(hintTm); hintTm = setTimeout(hideHint, 2000);
-    $("showTxt").textContent = "Показати відповідь";
+    $("showTxt").textContent = "Відповідь";
   } else { hideHint(); showSol(); }
 }
 function load(i){
