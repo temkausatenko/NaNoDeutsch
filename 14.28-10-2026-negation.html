@@ -600,6 +600,15 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <div class="example">Ich habe <span class="hl">keinen</span> Hund. <em>(Akk, чол.)</em><br>Das ist <span class="hl">keine</span> Katze. <em>(Nom, жін.)</em><br>Ich wohne in <span class="hl">keinem</span> Haus. <em>(Dat, сер.)</em></div>
 <div class="tip">💡 Змінюється лише <strong>чоловічий рід в Akkusativ</strong> (<em>keinen</em>). Жіночий, середній і множина в Akkusativ збігаються з Nominativ.</div>
 
+<h3>Kein без іменника</h3>
+<p>Коли іменник уже названо, kein стає займенником і набуває закінчення артикля: <em>Hast du ein Auto? — Nein, ich habe <strong>keins</strong>.</em></p>
+<div class="table-wrap"><table class="tk">
+<tr><th></th><th>чол.</th><th>жін.</th><th>сер.</th><th>множина</th></tr>
+<tr><td><strong>Nominativ</strong></td><td class="h-ref">keiner</td><td class="h-ref">keine</td><td class="h-ref">keins</td><td class="h-ref">keine</td></tr>
+<tr><td><strong>Akkusativ</strong></td><td class="h-ref">keinen</td><td class="h-ref">keine</td><td class="h-ref">keins</td><td class="h-ref">keine</td></tr>
+<tr><td><strong>Dativ</strong></td><td class="h-ref">keinem</td><td class="h-ref">keiner</td><td class="h-ref">keinem</td><td class="h-ref">keinen</td></tr></table></div>
+<div class="tip">💡 Відмінність від <strong>kein + іменник</strong> лише в Nominativ чол. (<em>keiner</em>) і в сер. р. (<em>keins</em>, також <em>keines</em>). <em>Ist hier ein Arzt? — Nein, hier ist <strong>keiner</strong>.</em></div>
+
 <h2>4. Пари-антоніми</h2>
 <p>Заперечні слова мають позитивні «пари». У відповіді на питання з позитивним словом використовуй заперечну пару.</p>
 <div class="table-wrap"><table class="tk">
@@ -656,7 +665,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <tr><td class="h-pi">gar kein<br>überhaupt kein</td><td>жодного, зовсім ніякого</td><td>Ich habe <strong>gar kein</strong> Geld.</td></tr>
 <tr><td class="h-pi">kaum</td><td>ледве, майже не (дуже мало)</td><td>Ich habe <strong>kaum</strong> Zeit.</td></tr>
 <tr><td class="h-pi">auf keinen Fall</td><td>ні в якому разі</td><td><strong>Auf keinen Fall</strong>! Das ist gefährlich.</td></tr>
-<tr><td class="h-pi">niemals</td><td>ніколи (категорично)</td><td>Ich werde das <strong>niemals</strong> vergessen.</td></tr></table></div>
+<tr><td class="h-pi">niemals</td><td>ніколи (категорично)</td><td>Ich werde das <strong>niemals</strong> vergessen.</td></tr>
+<tr><td class="h-pi">nicht einmal</td><td>навіть не</td><td>Er hat <strong>nicht einmal</strong> Danke gesagt.</td></tr>
+<tr><td class="h-pi">kein einziger</td><td>жодного, ні одного</td><td><strong>Kein einziger</strong> Gast kam. Ich habe <strong>keinen einzigen</strong> Fehler gemacht.</td></tr>
+<tr><td class="h-pi">nie wieder<br>nie mehr</td><td>більше ніколи</td><td>Das passiert <strong>nie wieder</strong>!</td></tr></table></div>
 <div class="tip">💡 <strong>kaum</strong> — це <strong>не</strong> повне заперечення. Шкала частоти: <strong>immer → oft → manchmal → selten → kaum → nie</strong>.</div>
 
 <h2>8. Немає подвійного заперечення!</h2>
@@ -771,16 +783,16 @@ const STAGES = [
    tbl:[["schon","noch nicht","вже → ще не (але ще може бути)"],["schon einmal","noch nie","вже колись → ще ніколи"],["(immer) noch","nicht mehr","ще, досі → вже не, більше не"],["(immer) noch","nie mehr","ще, досі → ніколи більше"],["noch + іменник","kein … mehr","<i>Ich habe kein Geld mehr.</i>"]],
    ex:[["Hast_du|vb schon|ps gegessen?|vb","вже"],["Nein,_ich_habe|vb noch_nicht|ng gegessen.|vb","ще не"],["Ich_wohne|vb nicht_mehr|ng hier.|vb","вже не живу тут"]],
    tip:"<b>noch nicht</b> — «поки що ні» (ще може бути). <b>nicht mehr</b> — «було, але вже ні»." },
- { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>. Змінюється лише чоловічий рід в Akkusativ: <b>keinen</b>.",
-   html:'<div class="table-wrap"><table class="ltab"><tr><th></th><th>ч.</th><th>ж.</th><th>с.</th><th>мн.</th></tr><tr><td>Nominativ</td><td>kein</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Akkusativ</td><td class="hi">keinen</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Dativ</td><td>keinem</td><td>keiner</td><td>keinem</td><td>keinen</td></tr></table></div>',
-   ex:[["Ich_habe|vb keinen|kn Hund.|nn","Akkusativ, чол. р."],["Das_ist|vb keine|kn Katze.|nn","Nominativ, жін. р."],["mit|vb keinem|kn Kind|nn","Dativ, сер. р."]],
+ { n:5, t:"Форми kein", p:"<b>kein</b> змінюється так само, як <b>ein</b>. Змінюється лише чоловічий рід в Akkusativ: <b>keinen</b>. Без іменника kein стає займенником: <b>keiner · keine · keins</b>.",
+   html:'<div class="table-wrap"><table class="ltab"><tr><th></th><th>ч.</th><th>ж.</th><th>с.</th><th>мн.</th></tr><tr><td>Nominativ</td><td>kein</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Akkusativ</td><td class="hi">keinen</td><td>keine</td><td>kein</td><td>keine</td></tr><tr><td>Dativ</td><td>keinem</td><td>keiner</td><td>keinem</td><td>keinen</td></tr></table></div><p class="pr-cap" style="margin:16px 0 4px">Без іменника — займенник</p><div class="table-wrap"><table class="ltab"><tr><th></th><th>ч.</th><th>ж.</th><th>с.</th><th>мн.</th></tr><tr><td>Nominativ</td><td class="hi">keiner</td><td>keine</td><td class="hi">keins</td><td>keine</td></tr><tr><td>Akkusativ</td><td>keinen</td><td>keine</td><td class="hi">keins</td><td>keine</td></tr><tr><td>Dativ</td><td>keinem</td><td>keiner</td><td>keinem</td><td>keinen</td></tr></table></div><p style="font-size:.86rem;color:var(--mu);line-height:1.5;margin:6px 0 0"><i>Hast du ein Auto? — Nein, ich habe <b>keins</b>.</i> Іменник уже названо в питанні, тому у відповіді його не повторюємо. Відрізняються лише <b>keiner</b> (ч., Nom) і <b>keins</b> / keines (с., Nom і Akk).</p>',
+   ex:[["Ich_habe|vb keinen|kn Hund.|nn","Akkusativ, чол. р."],["Das_ist|vb keine|kn Katze.|nn","Nominativ, жін. р."],["mit|vb keinem|kn Kind|nn","Dativ, сер. р."],["Ich_habe|vb keins.|kn","kein без іменника, сер. р."]],
    tip:"Закінчення такі самі, як у <b>ein</b>: ein → kein, einen → keinen, einem → keinem; у множині — keine." },
  { n:6, t:"Місце nicht", p:"Де ставити <b>nicht</b>? Залежить від того, що заперечуємо.",
    kv:[["В кінці речення","заперечуємо все речення: <i>Ich kenne ihn nicht.</i>"],["Перед прикметником або прислівником","<i>Das ist nicht gut.</i>"],["Перед прийменниковою групою","<i>Er wohnt nicht in Berlin. Ich fahre nicht nach Hause.</i>"],["Перед Partizip II, інфінітивом, префіксом","<i>Ich habe ihn nicht gesehen. Ich kann nicht kommen. Ich rufe dich nicht an.</i>"],["nicht … sondern","заперечуємо одне слово, далі «а…»: <i>Ich fahre nicht heute, sondern morgen.</i>"]],
    ex:[["Ich_kenne_ihn|vb nicht|nt","в кінці речення"],["Das_ist|vb nicht|nt gut|nn","перед прикметником"],["Ich_habe_ihn|vb nicht|nt gesehen|vb","перед Partizip"],["Ich_fahre|vb nicht|nt heute,_sondern_morgen.|nn","nicht … sondern"]],
    tip:"<b>kein</b> стоїть перед іменником, а <b>nicht</b> — «навколо» того, що заперечуємо (часто в кінці)." },
  { n:7, t:"Відтінки", p:"Заперечення можна підсилити або, навпаки, пом’якшити.",
-   kv:[["gar nicht<br>überhaupt nicht","зовсім не · взагалі не (підсилюють nicht)"],["gar kein<br>überhaupt kein","жодного взагалі"],["kaum","ледве, майже не — це не повне заперечення, а «дуже мало»"],["auf keinen Fall","ні в якому разі (категорична відмова)"],["niemals","те саме, що nie, але категоричніше"]],
+   kv:[["gar nicht<br>überhaupt nicht","зовсім не · взагалі не (підсилюють nicht)"],["gar kein<br>überhaupt kein","жодного взагалі"],["kaum","ледве, майже не — це не повне заперечення, а «дуже мало»"],["auf keinen Fall","ні в якому разі (категорична відмова)"],["niemals","те саме, що nie, але категоричніше"],["nicht einmal","навіть не: <i>Er hat nicht einmal Danke gesagt.</i>"],["kein einziger","жодного (ні одного): <i>Kein einziger Gast kam.</i><br>Форми: kein einziger · keine einzige · kein einziges · keinen einzigen"],["nie wieder<br>nie mehr","більше ніколи: <i>Das passiert nie wieder!</i>"]],
    ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
    tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
  { n:8, t:"Практика", p:"Бачиш речення українською — пиши його німецькою. Щоб не помилитись, проходь три кроки по черзі:",
@@ -806,6 +818,7 @@ const TABS = [
  { id:"an", label:"Пари",   kind:"text", title:"ЯКЕ СЛОВО — ПАРА?",       ph:"Введи слово …", oc:"opts grid4" },
  { id:"sn", label:"Вирази",     kind:"text", title:"SCHON · NOCH · NICHT MEHR", ph:"Введи вираз …", oc:"opts grid4" },
  { id:"kf", label:"Форми",       kind:"text", title:"ЯКА ФОРМА KEIN?",         ph:"Введи форму …", oc:"opts grid4" },
+ { id:"kp", label:"Займенник", kind:"text", title:"KEIN БЕЗ ІМЕННИКА", ph:"Введи форму …", oc:"opts grid4" },
  { id:"po", label:"Порядок",      kind:"mc",   title:"ДЕ СТОЇТЬ NICHT?",        oc:"opts col" },
  { id:"pd", label:"Відтінки",       kind:"text", title:"ВСТАВ ПІДСИЛЕННЯ",        ph:"Введи вираз …", oc:"opts grid4" },
  { id:"ue", label:"Переклад", kind:"text", typeOnly:1, title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ", ph:"Введи речення німецькою …", oc:"opts col" },
@@ -977,6 +990,28 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Er hilft {{B}} Menschen.","keinem","der Mensch (чол. р.) · Dativ (helfen + Dativ)","Він нікому не допомагає."]
 ].forEach(([s, a, h, ua]) => add("kf", { s, sch:h, o:[a, ...sh(["kein","keine","keinen","keinem","keiner"].filter(x => x !== a)).slice(0, 3)], a, ex:`${h} → ${a}`, lbl:ua, sp:s.replace("{{B}}", a), st:5, ua }));
 
+/* ---------- 5b. kein без іменника: keiner / keine / keins ---------- */
+const KP = ["keiner","keine","keins","keinen","keinem"];
+[
+ ["Hast du einen Bruder? — Nein, ich habe {{B}}.","keinen",[],"der Bruder (чол. р.) · Akkusativ","Ти маєш брата? — Ні, не маю."],
+ ["Hast du eine Schwester? — Nein, ich habe {{B}}.","keine",[],"die Schwester (жін. р.) · Akkusativ","Ти маєш сестру? — Ні, не маю."],
+ ["Hast du ein Auto? — Nein, ich habe {{B}}.","keins",["keines"],"das Auto (сер. р.) · Akkusativ","Ти маєш машину? — Ні, не маю."],
+ ["Ist hier ein Arzt? — Nein, hier ist {{B}}.","keiner",[],"der Arzt (чол. р.) · Nominativ","Тут є лікар? — Ні, жодного."],
+ ["Gibt es hier eine Bank? — Nein, hier gibt es {{B}}.","keine",[],"die Bank (жін. р.) · Akkusativ","Тут є банк? — Ні, немає."],
+ ["Ist da ein Kind? — Nein, da ist {{B}}.","keins",["keines"],"das Kind (сер. р.) · Nominativ","Там є дитина? — Ні, нікого."],
+ ["Hast du Fragen? — Nein, ich habe {{B}}.","keine",[],"die Fragen (множина) · Akkusativ","У тебе є питання? — Ні, немає."],
+ ["Brauchst du einen Stift? — Nein, ich brauche {{B}}.","keinen",[],"der Stift (чол. р.) · Akkusativ","Тобі потрібна ручка? — Ні, не потрібна."],
+ ["Kennst du ein gutes Restaurant? — Leider kenne ich {{B}}.","keins",["keines"],"das Restaurant (сер. р.) · Akkusativ","Знаєш добрий ресторан? — На жаль, жодного."],
+ ["Hat jemand einen Kuli? — Nein, {{B}} hat einen.","keiner",[],"jemand → keiner (Nominativ)","У когось є ручка? — Ні, ні в кого."],
+ ["Hast du mit einem Lehrer gesprochen? — Nein, mit {{B}}.","keinem",[],"der Lehrer (чол. р.) · Dativ (mit)","Ти говорив з учителем? — Ні, з жодним."],
+ ["Hast du mit Kindern gesprochen? — Nein, mit {{B}}.","keinen",[],"die Kinder (множина) · Dativ (mit)","Ти говорив з дітьми? — Ні, з жодними."],
+ ["Möchtest du ein Stück Kuchen? — Nein danke, ich möchte {{B}}.","keins",["keines"],"das Stück (сер. р.) · Akkusativ","Хочеш шматок пирога? — Ні, дякую, не хочу."],
+ ["Ich habe einen Bruder, aber meine Freundin hat {{B}}.","keinen",[],"der Bruder (чол. р.) · Akkusativ","У мене є брат, а в моєї подруги немає."],
+ ["Hast du einen Schlüssel dabei? — Nein, ich habe {{B}} dabei.","keinen",[],"der Schlüssel (чол. р.) · Akkusativ","У тебе є ключ? — Ні, не маю з собою."],
+ ["Hat jemand ein Handy? — Nein, {{B}} von uns hat eins.","keiner",[],"jemand / niemand → keiner (Nominativ)","У когось є телефон? — Ні, ні в кого з нас."],
+ ["Hast du einer Frau geholfen? — Nein, ich habe {{B}} geholfen.","keiner",[],"die Frau (жін. р.) · Dativ (helfen + Dativ)","Ти допоміг якійсь жінці? — Ні, жодній."]
+].forEach(([s, a, alt, h, ua]) => add("kp", { s, sch:h, o:[a, ...sh(KP.filter(x => x !== a)).slice(0, 3)], a, alt, ex:`${h} → ${a}${alt.length ? " (також " + alt[0] + ")" : ""}`, lbl:ua, sp:s.replace("{{B}}", a), st:5, ua }));
+
 /* ---------- 6. Місце nicht ---------- */
 [
  ["Я його не знаю.","Ich kenne ihn nicht.",["Ich nicht kenne ihn.","Nicht ich kenne ihn.","Ich kenne ihn kein."],"Заперечуємо все речення → nicht в кінці."],
@@ -1031,7 +1066,19 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Sie hat {{B}} Erfahrung mit Kindern.","überhaupt keine",["gar keine"],["überhaupt keine","kaum","niemals","auf keinen Fall"],"У неї взагалі немає досвіду з дітьми.","die Erfahrung — жін. р. → überhaupt keine."],
  ["Das Essen war {{B}} gut. Wir haben fast nichts gegessen.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Їжа була зовсім не гарна. Ми майже нічого не з’їли.","überhaupt nicht стоїть перед прикметником."],
  ["Ich habe heute {{B}} Appetit. Mir ist schlecht.","überhaupt keinen",["gar keinen"],["überhaupt keinen","kaum","niemals","auf keinen Fall"],"Сьогодні я взагалі не маю апетиту. Мені зле.","der Appetit — чол. р., Akk → überhaupt keinen."],
- ["Es regnet {{B}}. Die Sonne scheint den ganzen Tag.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Дощу взагалі немає. Сонце світить цілий день.","überhaupt nicht заперечує дієслово."]
+ ["Es regnet {{B}}. Die Sonne scheint den ganzen Tag.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Дощу взагалі немає. Сонце світить цілий день.","überhaupt nicht заперечує дієслово."],
+ ["Er war so unhöflich: Er hat {{B}} Danke gesagt.","nicht einmal",[],["nicht einmal","kaum","niemals","auf keinen Fall"],"Він був такий нечемний: навіть «дякую» не сказав.","nicht einmal = навіть не; ставиться перед тим, що підкреслюємо."],
+ ["Ich habe {{B}} einen Euro. Mein Portemonnaie ist leer.","nicht einmal",[],["nicht einmal","kaum","niemals","auf keinen Fall"],"У мене немає навіть одного євро. Мій гаманець порожній.","nicht einmal = навіть не."],
+ ["Sie hat uns {{B}} angerufen, geschweige denn besucht.","nicht einmal",[],["nicht einmal","kaum","niemals","auf keinen Fall"],"Вона навіть не зателефонувала нам, не кажучи вже про візит.","nicht einmal = навіть не."],
+ ["Es war so laut, dass ich {{B}} mein eigenes Wort verstanden habe.","nicht einmal",[],["nicht einmal","kaum","niemals","auf keinen Fall"],"Було так гучно, що я не розумів навіть власного слова.","nicht einmal = навіть не."],
+ ["Im Restaurant war {{B}} Gast. Es war völlig leer.","kein einziger",[],["kein einziger","keinen einzigen","keine einzige","kein einziges"],"У ресторані не було жодного гостя. Він був зовсім порожній.","der Gast (чол. р.) · Nominativ → kein einziger."],
+ ["Ich habe {{B}} Fehler gemacht. Der Test war perfekt.","keinen einzigen",[],["keinen einzigen","kein einziger","keine einzige","kein einziges"],"Я не зробив жодної помилки. Тест був ідеальний.","der Fehler (чол. р.) · Akkusativ → keinen einzigen."],
+ ["Sie hat {{B}} Frage gestellt. Sie hat nur zugehört.","keine einzige",[],["keine einzige","kein einziger","keinen einzigen","kein einziges"],"Вона не поставила жодного питання. Вона лише слухала.","die Frage (жін. р.) · Akkusativ → keine einzige."],
+ ["Im Kühlschrank war {{B}} Ei mehr.","kein einziges",[],["kein einziges","kein einziger","keinen einzigen","keine einzige"],"У холодильнику не лишилось жодного яйця.","das Ei (сер. р.) · Nominativ → kein einziges."],
+ ["Das war schrecklich! Ich fliege {{B}} mit dieser Airline.","nie wieder",["nie mehr"],["nie wieder","nicht einmal","kaum","gar nicht"],"Це було жахливо! Я більше ніколи не літатиму цією авіакомпанією.","nie wieder = nie mehr = більше ніколи."],
+ ["Ich trinke {{B}} Alkohol. Das habe ich mir geschworen.","nie wieder",["nie mehr"],["nie wieder","nicht einmal","kaum","gar nicht"],"Я більше ніколи не питиму алкоголь. Я собі присягнув.","nie wieder = більше ніколи."],
+ ["Er hat sich entschuldigt. Das passiert {{B}}!","nie wieder",["nie mehr"],["nie wieder","nicht einmal","kaum","gar nicht"],"Він вибачився. Це більше ніколи не повториться!","nie wieder = більше ніколи."],
+ ["Nach dem Streit hat sie {{B}} mit ihm gesprochen.","nie wieder",["nie mehr"],["nie wieder","nicht einmal","kaum","gar nicht"],"Після сварки вона більше ніколи з ним не розмовляла.","nie wieder = більше ніколи."]
 ].forEach(([s, a, alt, o, ua, ex]) => add("pd", { s, sch:"", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:7, ua }));
 
 /* ---------- 8. Практика: переклад з української ---------- */
@@ -1821,9 +1868,9 @@ const CHEAT = [
   ["Слова","var(--c-wo)",[["nicht","не"],["nichts","ніщо, нічого"],["nie · niemals","ніколи"],["niemand","ніхто"],["kein","жодний, ніякий"],["nicht mehr","більше не"],["auf keinen Fall","ні в якому разі"],["kaum","ледве, майже не"],["gar nicht · überhaupt nicht","зовсім не · взагалі не"],["nirgendwo · nirgends","ніде"]]],
   ["Пари","var(--c-da)",[["etwas ↔ nichts","щось ↔ ніщо"],["jemand · alle ↔ niemand","хтось · усі ↔ ніхто"],["einer ↔ keiner","хтось один ↔ жоден"],["irgendwo · überall ↔ nirgends","десь · скрізь ↔ ніде"],["irgendwohin ↔ nirgendwohin","кудись ↔ нікуди"],["immer · einmal · schon mal ↔ nie · niemals","завжди · колись ↔ ніколи"],["schon · bereits ↔ noch nicht","вже ↔ ще не"],["schon (ein)mal ↔ noch nie","вже колись ↔ ще ніколи"],["(immer) noch ↔ nicht mehr","ще, досі ↔ більше не"],["(immer) noch ↔ nie mehr","ще ↔ ніколи більше"],["(immer) noch ↔ kein … mehr","ще є ↔ вже немає"],["mit ↔ ohne + Akk","з ↔ без"],["ein · eine ↔ kein · keine","є ↔ немає"]]],
   ["nicht чи kein?","var(--c-r)",[["ein / без артикля → kein","Ich habe kein Auto."],["професія без артикля → kein","Er ist kein Arzt."],["der / die / das → nicht","Ich kenne den Mann nicht."],["mein / dieser → nicht","Das ist nicht mein Buch."],["ім’я → nicht","Ich besuche Anna nicht."],["дієслово → nicht","Er arbeitet nicht."],["прикметник → nicht","Das ist nicht gut."]]],
-  ["Форми kein","var(--c-s)",[["Nom: kein · keine · kein · keine","ч. · ж. · с. · мн."],["Akk: keinen · keine · kein · keine","ч. · ж. · с. · мн."],["Dat: keinem · keiner · keinem · keinen","ч. · ж. · с. · мн."],["kein … mehr","вже немає"]]],
+  ["Форми kein","var(--c-s)",[["Nom: kein · keine · kein · keine","ч. · ж. · с. · мн."],["Akk: keinen · keine · kein · keine","ч. · ж. · с. · мн."],["Dat: keinem · keiner · keinem · keinen","ч. · ж. · с. · мн."],["kein … mehr","вже немає"],["keiner · keine · keins","kein без іменника: Ich habe keins."]]],
   ["Місце nicht","var(--c-pn)",[["Ich kenne ihn nicht.","в кінці — заперечуємо речення"],["nicht gut","перед прикметником"],["nicht nach Hause","перед прийм. групою"],["nicht gesehen · nicht kommen","перед Partizip / інфінітивом"],["nicht heute, sondern morgen","nicht … sondern"],["nichts · niemand · nie + без nicht","немає подвійного заперечення"]]],
-  ["Додатково","var(--c-p)",[["Kommst du nicht? — Doch!","та ні, прийду"],["Kommst du nicht? — Nein.","так, не прийду"],["weder … noch","ні … ні (без nicht)"],["nicht nur … sondern auch","не лише … а й"],["nicht … sondern","не …, а …"],["brauchen nicht zu + Inf.","не потрібно"],["nicht dürfen","заборонено"],["ohne … zu / ohne dass","без того щоб…"],["anstatt … zu","замість того щоб…"],["zu … als dass + Konj. II","надто …, щоб…"],["zwar … aber","щоправда …, але …"],["einerseits … andererseits","з одного боку … з іншого"]]]
+  ["Додатково","var(--c-p)",[["Kommst du nicht? — Doch!","та ні, прийду"],["Kommst du nicht? — Nein.","так, не прийду"],["weder … noch","ні … ні (без nicht)"],["nicht nur … sondern auch","не лише … а й"],["nicht … sondern","не …, а …"],["brauchen nicht zu + Inf.","не потрібно"],["nicht dürfen","заборонено"],["nicht einmal","навіть не"],["kein einziger","жодного"],["nie wieder / nie mehr","більше ніколи"],["ohne … zu / ohne dass","без того щоб…"],["anstatt … zu","замість того щоб…"],["zu … als dass + Konj. II","надто …, щоб…"],["zwar … aber","щоправда …, але …"],["einerseits … andererseits","з одного боку … з іншого"]]]
 ];
 let cheatG = 0;
 function renderCheat(){
