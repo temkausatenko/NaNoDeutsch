@@ -487,11 +487,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .diff .dm{color:var(--ok);background:var(--okb);border-radius:5px;padding:1px 4px;font-weight:700}
 .diff.c .dx,.diff.c .dm{padding:1px 0}
 
-.ng{font-weight:700;border-radius:5px;padding:0 3px;margin:0 -1px}
-.ng.n1{color:var(--c-wo);background:color-mix(in srgb,var(--c-wo) 15%,transparent)}
-.ng.n2{color:var(--c-r);background:color-mix(in srgb,var(--c-r) 15%,transparent)}
-.ng.n3{color:var(--c-da);background:color-mix(in srgb,var(--c-da) 15%,transparent)}
-.ng.n4{color:var(--c-wn);background:color-mix(in srgb,var(--c-wn) 15%,transparent)}
 
 .confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
 .toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
@@ -816,11 +811,7 @@ const TABS = [
  { id:"ue", label:"Переклад", kind:"text", typeOnly:1, title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ", ph:"Введи речення німецькою …", oc:"opts col" },
  { id:"er", label:"Помилки",   kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",    oc:"opts col" },
  { id:"tx", label:"Тексти",           kind:"text", title:"ВСТАВ У ТЕКСТ",           ph:"Введи слово …", oc:"opts grid4" },
- { id:"dc", label:"Ja · nein · doch", kind:"text", title:"JA, NEIN ЧИ DOCH?",     ph:"Введи слово …", oc:"opts afit" },
- { id:"ko", label:"weder · nicht nur", kind:"text", title:"ВСТАВ СПОЛУЧНИК",     ph:"Введи слово …", oc:"opts grid4" },
- { id:"br", label:"brauchen",          kind:"text", title:"BRAUCHEN NICHT ZU",   ph:"Введи слово …", oc:"opts grid4" },
- { id:"oh", label:"ohne · anstatt",   kind:"text", title:"ВСТАВ КОНСТРУКЦІЮ", ph:"Введи слово …", oc:"opts grid4" },
- { id:"zw", label:"zwar · einerseits", kind:"text", title:"ВСТАВ ПАРУ",        ph:"Введи слово …", oc:"opts grid4" }
+ { id:"ad", label:"Додатково", kind:"text", title:"ВСТАВ ПРОПУЩЕНЕ СЛОВО", ph:"Введи слово …", oc:"opts afit" }
 ];
 const OPT_META = {
   "nicht": { r:"nt", t:"nicht", s:"дієслово · прикметник · der/mein" },
@@ -1146,7 +1137,7 @@ const O3 = ["Ja","Nein","Doch"];
  ["Hast du das nicht gewusst? — {{B}}, ich habe es gewusst.","Doch","Ти цього не знав? — Та знав.","Заперечне питання, відповідь «знав» → Doch."],
  ["Wohnst du in Berlin? — {{B}}, ich wohne in Hamburg.","Nein","Ти живеш у Берліні? — Ні, я живу в Гамбурзі.","Питання без заперечення, відповідь «ні» → Nein."],
  ["Du kommst nicht? — {{B}}! Ich komme gern.","Doch","Ти не прийдеш? — Та прийду, звісно!","Питання-твердження із запереченням, відповідь «навпаки» → Doch."]
-].forEach(([s, a, ua, ex]) => add("dc", { s, sch:"Обери відповідь: Ja, Nein чи Doch.", o:O3, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, ua, ex]) => add("ad", { s, sch:"", o:O3, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 const KO = ["weder","noch","sondern","auch"];
 [
@@ -1162,7 +1153,7 @@ const KO = ["weder","noch","sondern","auch"];
  ["Sie hat nicht nur Hunger, sondern {{B}} Durst.","auch","Вона має не лише голод, а й спрагу.","nicht nur … sondern auch.",KO],
  ["Ich möchte nicht Tee, {{B}} Kaffee.","sondern","Я хочу не чай, а каву.","nicht … sondern = не …, а …",KO],
  ["Er ist nicht müde, {{B}} hungrig.","sondern","Він не втомлений, а голодний.","nicht … sondern = не …, а …",KO]
-].forEach(([s, a, ua, ex, o]) => add("ko", { s, sch:"Яке слово пасує до пари: weder … noch · nicht nur … sondern auch · nicht … sondern?", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, ua, ex, o]) => add("ad", { s, sch:"", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 [
  ["Du {{B}} nicht zu kommen. Wir schaffen das allein.","brauchst",["brauchst","musst","darfst","kannst"],"Тобі не потрібно приходити. Ми впораємося самі.","brauchen nicht zu + Infinitiv = не потрібно. Du → brauchst."],
@@ -1175,7 +1166,7 @@ const KO = ["weder","noch","sondern","auch"];
  ["Hier {{B}} man nicht rauchen. Es ist verboten.","darf",["darf","muss","braucht","kann"],"Тут не можна курити. Це заборонено.","nicht dürfen = заборонено. Не плутай із nicht müssen / nicht brauchen!"],
  ["Ich brauche {{B}} Hilfe. Ich schaffe es allein.","keine",["keine","nicht","kein","nichts"],"Мені не потрібна допомога. Я впораюся сам.","brauchen + іменник → kein: keine Hilfe."],
  ["Sie braucht heute {{B}} zu kochen. Wir gehen essen.","nicht",["nicht","kein","nie","nichts"],"Їй сьогодні не потрібно готувати. Ми йдемо їсти.","nicht стоїть перед zu + Infinitiv."]
-].forEach(([s, a, o, ua, ex]) => add("br", { s, sch:"Форма brauchen, zu, nicht чи інше слово? Подумай, що означає речення.", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, o, ua, ex]) => add("ad", { s, sch:"", o, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 
 [
@@ -1191,7 +1182,7 @@ const KO = ["weder","noch","sondern","auch"];
  ["Das Problem ist zu schwierig, als dass ich es lösen {{B}}.","könnte",[],["könnte","kann","konnte","können"],"Проблема надто складна, щоб я міг її розв’язати.","Після als dass — Konjunktiv II: können → könnte."],
  ["Sie ist zu klug, {{B}} dass sie darauf hereinfallen würde.","als",[],["als","damit","um","wie"],"Вона надто розумна, щоб на це купитися.","zu … als dass + Konjunktiv II."],
  ["Es ist zu spät, als dass wir noch anrufen {{B}}.","könnten",[],["könnten","können","konnten","kann"],"Надто пізно, щоб ми ще могли зателефонувати.","als dass + Konjunktiv II: könnten."]
-].forEach(([s, a, alt, o, ua, ex]) => add("oh", { s, sch:"ohne … zu / dass · anstatt … zu · zu … als dass: яке слово пропущено?", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, alt, o, ua, ex]) => add("ad", { s, sch:"", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[0].toUpperCase() ? cap(x) : x);
 [
@@ -1204,7 +1195,7 @@ const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[
  ["Einerseits ist die Stadt laut, {{B}} ist sie sehr lebendig.","andererseits",[],"З одного боку, місто гучне, з іншого — дуже жваве.","einerseits … andererseits."],
  ["Einerseits will er studieren, {{B}} muss er Geld verdienen.","andererseits",[],"З одного боку, він хоче вчитися, з іншого — мусить заробляти гроші.","einerseits … andererseits."],
  ["{{B}} schmeckt das Essen gut, andererseits ist es zu teuer.","Einerseits",[],"З одного боку, їжа смачна, з іншого — надто дорога.","einerseits … andererseits."]
-].forEach(([s, a, alt, ua, ex]) => add("zw", { s, sch:"zwar … aber · einerseits … andererseits: яке слово пропущено?", o:ZW(a), a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, alt, ua, ex]) => add("ad", { s, sch:"", o:ZW(a), a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 
 /* ---------- 10. Додатково: ще приклади для тренування ---------- */
@@ -1215,7 +1206,7 @@ const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[
  ["Wir haben nicht nur Zeit, sondern {{B}} Lust.","auch","У нас є не лише час, а й бажання.","nicht nur … sondern auch."],
  ["Ich mag {{B}} Fisch noch Fleisch.","weder","Я люблю ні рибу, ні м’ясо.","weder … noch = ні … ні."],
  ["Er hat weder angerufen {{B}} geschrieben.","noch","Він ні подзвонив, ні написав.","weder … noch = ні … ні. Додаткове nicht не потрібне."]
-].forEach(([s, a, ua, ex]) => add("ko", { s, sch:"Яке слово пасує до пари: weder … noch · nicht nur … sondern auch · nicht … sondern?", o:KO, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, ua, ex]) => add("ad", { s, sch:"", o:KO, a, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 [
  ["Sie ging an mir vorbei, ohne mich {{B}} grüßen.","zu",[],["zu","dass","um","als"],"Вона пройшла повз мене, не привітавшись.","ohne … zu + Infinitiv."],
@@ -1224,14 +1215,14 @@ const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[
  ["{{B}} ins Kino zu gehen, bleiben wir zu Hause.","Statt",["Anstatt"],["Statt","Ohne","Zwar","Weder"],"Замість того щоб іти в кіно, ми залишаємось вдома.","statt … zu = anstatt … zu."],
  ["Die Aufgabe ist zu leicht, {{B}} dass sie uns Probleme machen würde.","als",[],["als","damit","um","wie"],"Завдання надто легке, щоб воно створило нам проблеми.","zu … als dass + Konjunktiv II."],
  ["Er ist zu stolz, als dass er um Hilfe bitten {{B}}.","würde",[],["würde","wird","wurde","werden"],"Він надто гордий, щоб просити про допомогу.","als dass + Konjunktiv II: würde bitten."]
-].forEach(([s, a, alt, o, ua, ex]) => add("oh", { s, sch:"ohne … zu / dass · anstatt … zu · zu … als dass: яке слово пропущено?", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, alt, o, ua, ex]) => add("ad", { s, sch:"", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 [
  ["Ich bin {{B}} müde, aber ich arbeite weiter.","zwar",[],"Я, щоправда, втомлений, але працюю далі.","zwar … aber."],
  ["Das Hotel ist zwar günstig, {{B}} liegt weit vom Zentrum.","aber",["doch"],"Готель, щоправда, недорогий, але розташований далеко від центру.","zwar … aber."],
  ["Einerseits möchte ich helfen, {{B}} habe ich keine Zeit.","andererseits",[],"З одного боку, я хочу допомогти, з іншого — не маю часу.","einerseits … andererseits."],
  ["{{B}} ist das Leben auf dem Land ruhig, andererseits gibt es dort wenig Arbeit.","Einerseits",[],"З одного боку, життя на селі спокійне, з іншого — там мало роботи.","einerseits … andererseits."]
-].forEach(([s, a, alt, ua, ex]) => add("zw", { s, sch:"zwar … aber · einerseits … andererseits: яке слово пропущено?", o:ZW(a), a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
+].forEach(([s, a, alt, ua, ex]) => add("ad", { s, sch:"", o:ZW(a), a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:10, ua }));
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
@@ -1414,7 +1405,6 @@ function renderCard(){
   $("sent").innerHTML = sentHTML(it);
   $("sent").className = "sent";
   $("sent").title = "Натисни, щоб почути німецькою";
-  if(answered) paintNeg($("sent"));
   renderLab();
   $("scheme").innerHTML = (!answered && (it.sch || TIPS[tab])) ? (it.sch || TIPS[tab]) : "";
   $("inp").placeholder = tb.ph || "";
@@ -1487,34 +1477,6 @@ function diffHTML(user, it, mcMode){
   return `<div class="diff${best.single ? " c" : ""}"><div class="dl"><i>Ваше</i><span>${u}</span></div><div class="dl"><i>Треба</i><span>${c}</span></div></div>`;
 }
 
-const NEG_GROUPS = {
-  n1:"nicht|gar nicht|überhaupt nicht|nicht mehr|noch nicht|kaum",
-  n2:"kein|keine|keinen|keinem|keiner|keines|auf keinen Fall",
-  n3:"nichts|niemand|nie|niemals|nirgends|nirgendwo|nirgendwohin|noch nie|nie mehr|nie wieder",
-  n4:"weder|noch|sondern|ohne dass|ohne|anstatt|statt|als dass|zwar|einerseits|andererseits|nicht nur"
-};
-const NEG_MAP = {}, NEG_LIST = [];
-Object.keys(NEG_GROUPS).forEach(c => NEG_GROUPS[c].split("|").forEach(p => { NEG_MAP[p.toLowerCase()] = c; NEG_LIST.push(p); }));
-NEG_LIST.sort((a, b) => b.length - a.length);
-const mkRx = list => { try { return new RegExp("(^|[^\\p{L}])(" + list.map(p => p.replace(/ /g, "\\s+")).join("|") + ")(?![\\p{L}])", "giu"); } catch(e){ return null; } };
-const NEG_RX_ALL = mkRx(NEG_LIST), NEG_RX_NN = mkRx(NEG_LIST.filter(p => p !== "noch"));
-function paintNeg(el){
-  if(!el) return;
-  const rx = /weder/i.test(el.textContent) ? NEG_RX_ALL : NEG_RX_NN;
-  if(!rx) return;
-  const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
-  while(w.nextNode()) nodes.push(w.currentNode);
-  nodes.forEach(n => {
-    const p = n.parentElement;
-    if(!p || p.closest(".blank")) return;
-    const t = n.nodeValue;
-    if(t.search(rx) < 0) return;
-    const box = document.createElement("span");
-    box.innerHTML = esc(t).replace(rx, (m, pre, wd) => pre + '<span class="ng ' + (NEG_MAP[wd.toLowerCase().replace(/\s+/g, " ")] || "n4") + '">' + wd + '</span>');
-    n.replaceWith(...Array.from(box.childNodes));
-  });
-}
-
 let cvs, cctx, parts = [], raf = 0, toastTm;
 function confetti(n, gold){
   try {
@@ -1567,7 +1529,6 @@ function showFb(ok, i, ua){
     ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}<button class="nx" type="button">Далі →</button>${ok ? '<div class="bar"></div>' : ''}`;
   const nxEl = f.querySelector(".nx"); if(nxEl) nxEl.onclick = e => { e.stopPropagation(); clearTimeout(tm); advance(); };
   const ansEl = f.querySelector(".ans");
-  paintNeg(ansEl);
   if(ansEl) ansEl.onclick = () => speak(it.sp);
 }
 
@@ -1646,7 +1607,14 @@ function nextIdx(){
   if(list.length === 1) return list[0];
   const c = list.filter(i => i !== cur), fresh = c.filter(i => streak(i) === 0), once = c.filter(i => streak(i) > 0);
   const from = (fresh.length && (!once.length || Math.random() < .7)) ? fresh : once;
-  return from[Math.random() * from.length | 0];
+  let pick = from;
+  if(tab === "pd" || tab === "ad"){
+    const key = i => String(items()[i].a).toLowerCase().replace("überhaupt", "gar"), last = key(cur);
+    const diff = from.filter(i => key(i) !== last);
+    if(diff.length) pick = diff;
+    else { const all = c.filter(i => key(i) !== last); if(all.length) pick = all; }
+  }
+  return pick[Math.random() * pick.length | 0];
 }
 function allDone(){
   if(reviewMode) return reviewQueue().length === 0;
