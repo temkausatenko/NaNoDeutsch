@@ -482,7 +482,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 .confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
 .toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
-.toast.on{transform:translate(-50%,0)}
+.toast.on{transform:translate(-50%,0)}.toast.wrap{white-space:normal;text-align:center;border-radius:18px;line-height:1.4;width:max-content}.toast.wrap small{font-weight:500;opacity:.8}
 
 .r-pt{--c:var(--pp)}.r-kj{--c:var(--go)}.r-vf,.r-ad{--c:var(--ne)}.r-kein{--c:var(--no)}
 </style>
@@ -1781,7 +1781,7 @@ function tickConfetti(){
 function toast(html){
   let t = document.getElementById("toast");
   if(!t){ t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
-  t.innerHTML = html; void t.offsetWidth; t.classList.add("on");
+  t.classList.remove("wrap"); t.innerHTML = html; void t.offsetWidth; t.classList.add("on");
   clearTimeout(toastTm); toastTm = setTimeout(() => t.classList.remove("on"), 3200);
 }
 function celebrateTab(){
@@ -1825,7 +1825,7 @@ const stOpen = n => {
 };
 function stLockedMsg(n){
   const p = stPrev(n), q = p ? stProg(p.n) : { d:0, t:0 }, pc = q.t ? Math.floor(q.d / q.t * 100) : 0;
-  toast(`🔒 Спершу пройди «${p ? p.t : ""}» на 100%<br><small>зараз ${pc}%</small>`);
+  toast(`🔒 Спершу пройди «${p ? p.t : ""}» на 100%<br><small>зараз ${pc}%</small>`); const tt = document.getElementById("toast"); if(tt) tt.classList.add("wrap");
 }
 function ensureStageOpen(){
   if(stage && !stOpen(stage)){ const f = STAGES.find(g => stOpen(g.n)); stage = f ? f.n : 1; localStorage.setItem("tk_stage", String(stage)); }
