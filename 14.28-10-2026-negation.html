@@ -435,12 +435,16 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .r-nt{--c:var(--c-wo)}.r-kn{--c:var(--c-r)}.r-ng{--c:var(--c-da)}.r-ps{--c:var(--c-s)}.r-nn{--c:var(--c-p)}.r-vb{--c:var(--c-v)}
 .fb .nx{display:block;margin-top:12px;padding:10px 20px;border-radius:10px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:filter .18s}.fb .nx:hover{filter:brightness(1.1)}
 /* ===== v2: навігація (етапи / вкладки), пари, кнопка відповіді ===== */
-.tabs{display:flex;gap:2px;padding:4px;margin:0 auto 14px;width:fit-content;max-width:100%;background:var(--pl);border:1px solid var(--bd);border-radius:14px;justify-content:center;flex-wrap:wrap}
-.tabs .tab{border:0;border-radius:10px;padding:7px 14px;background:transparent;color:var(--mu);font-size:.84rem;font-weight:600;gap:7px;box-shadow:none}
-.tabs .tab small{background:none;padding:0;font-size:.68rem;font-weight:600;color:var(--mu);opacity:.8;font-variant-numeric:tabular-nums}
-.tabs .tab:hover{color:var(--tx)}
-.tabs .tab.on,.tabs .tab.on:hover{background:var(--card);color:var(--tx);box-shadow:0 1px 5px rgba(0,0,0,.25),inset 0 -2px 0 var(--sa)}
-.tabs .tab.on small{background:none;color:var(--sa);opacity:1}
+.tabs{display:flex;gap:4px;padding:4px;margin:0 auto 16px;width:fit-content;max-width:100%;background:var(--pl);border:1px solid var(--bd);border-radius:16px;justify-content:center;flex-wrap:wrap;box-shadow:inset 0 1px 3px rgba(0,0,0,.18)}
+.tabs .tab{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:8px 8px 8px 15px;background:transparent;color:var(--mu);font-size:.86rem;font-weight:600;box-shadow:none;transition:background .2s,color .2s,box-shadow .2s,transform .15s}
+.tabs .tab small{font-size:.68rem;font-weight:700;line-height:1;padding:4px 8px;border-radius:99px;background:color-mix(in srgb,var(--mu) 14%,transparent);color:var(--mu);font-variant-numeric:tabular-nums;transition:all .2s}
+.tabs .tab:hover{color:var(--tx);background:color-mix(in srgb,var(--mu) 10%,transparent)}
+.tabs .tab:active{transform:scale(.97)}
+.tabs .tab.on,.tabs .tab.on:hover{background:color-mix(in srgb,var(--pr) 14%,transparent);color:var(--tx);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pr) 55%,transparent)}
+.tabs .tab.on small{background:color-mix(in srgb,var(--pr) 22%,transparent);color:var(--sa)}
+.tabs .tab.cl small{background:var(--okb);color:var(--ok)}
+.tabs .tab.on.cl small{background:var(--okb);color:var(--ok)}
+@media(max-width:480px){.tabs{width:100%;border-radius:14px}.tabs .tab{flex:1 1 auto;justify-content:center;padding:8px 6px 8px 11px;font-size:.82rem}}
 
 .pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 10px;margin:12px 0}
 .pr-cap{grid-column:1/-1;font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)}
@@ -1129,7 +1133,7 @@ const NE_ROWS = [
  ["Ніхто з нас цього не знає.","Keiner von uns weiß das.",["Keiner von uns weiß das nicht.","Kein von uns weiß das.","Nichts von uns weiß das."],"keiner — без nicht."],
  ["Я не маю нічого проти цього.","Ich habe nichts dagegen.",["Ich habe nicht nichts dagegen.","Ich habe kein dagegen.","Ich habe dagegen nicht."],"nichts — без nicht."]
 ].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
-NE_ROWS.filter(r => !ITEMS.ue.some(x => x.ua === r[3])).forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ue", { s:ua, sch:"", o:[neg, ...ws], a:neg, alt, ex:`${ex} <i>(Без заперечення: ${esc(pos)})</i>`, lbl:"", ua, sp:neg, st:8, de:`<b>${esc(neg)}</b>` }));
+NE_ROWS.filter(r => !ITEMS.ue.some(x => x.ua === r[3])).forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ue", { s:ua, sch:"", o:[neg, ...ws], a:neg, alt, ex:`${ex} (Без заперечення: ${pos})`, lbl:"", ua, sp:neg, st:8, de:`<b>${esc(neg)}</b>` }));
 
 /* ---------- 9. Знайди помилку / Тексти ---------- */
 [
@@ -1385,9 +1389,11 @@ const readState = id => {
   return null;
 };
 TABS.forEach(t => { S[t.id] = readState(t.id) || blankState(); });
+/* вкладки, об’єднані в інші (ne→ue, dc/ko/br/oh/zw→ad): їхній заробений EXP зберігаємо */
+const legacyXp = () => ["ne","dc","ko","br","oh","zw"].reduce((a, id) => { const v = readState(id); return a + (v ? v.x - v.p : 0); }, 0);
 
 const bump = (t, net) => { t.x++; t.p += 1 - net; };   // net = зміна EXP: +1, 0 або −1
-const calcXp = () => Math.max(0, Math.min(XP_MAX, TABS.reduce((a, t) => a + ((S[t.id].x || 0) - (S[t.id].p || 0)), 0)));
+const calcXp = () => Math.max(0, Math.min(XP_MAX, legacyXp() + TABS.reduce((a, t) => a + ((S[t.id].x || 0) - (S[t.id].p || 0)), 0)));
 let XP = calcXp();
 
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false, trShown = false;
@@ -1442,12 +1448,12 @@ function renderLab(){
 function sentHTML(it){
   if(it.s.indexOf("{{B}}") < 0) return it.s;
   const filled = answered ? esc(it.a) : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-  const cls = answered ? ("blank fill " + (T()._ok ? "ok" : "no")) : "blank";
+  const cls = answered ? "blank fill ok" : "blank";
   return it.s.replace("{{B}}", `<span class="${cls}" id="bk">${filled}</span>`);
 }
 function renderCard(){
   const it = items()[cur], t = T(), tb = TB();
-  if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewPool().length}</span>`;
+  if(reviewMode) $("title").innerHTML = `🔁 РОБОТА НАД ПОМИЛКАМИ · залишилось <span class="rv-count">${reviewQueue().length}<i>/</i>${reviewQueue().length + rd().size}</span>`;
   else $("title").textContent = tb.title;
   $("sent").innerHTML = sentHTML(it);
   $("sent").className = "sent";
@@ -1487,7 +1493,7 @@ function markOpts(){
 }
 function renderReviewBtn(){
   const n = errCount(), btn = $("reviewBtn");
-  if(!reviewMode && !isClosed()){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
+  if(!reviewMode && !isClosed() && n > 0){ btn.style.display = "inline-block"; btn.textContent = `🔁 Помилки (${n})`; }
   else btn.style.display = "none";
 }
 
@@ -1576,7 +1582,7 @@ function showFb(ok, i, ua){
     ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}<button class="nx" type="button">Далі →</button>${ok ? '<div class="bar"></div>' : ''}`;
   const nxEl = f.querySelector(".nx"); if(nxEl) nxEl.onclick = e => { e.stopPropagation(); clearTimeout(tm); advance(); };
   const ansEl = f.querySelector(".ans");
-  if(ansEl) ansEl.onclick = () => speak(it.sp);
+  if(ansEl) ansEl.onclick = e => { e.stopPropagation(); speak(it.sp); };
 }
 
 /* ============ ЕТАПИ ============ */
@@ -1630,7 +1636,7 @@ function hintOrShow(){
 function load(i){
   clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
-  cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
+  cur = i; answered = false; picked = -1; trShown = false; T().pos = i; save();
   $("inp").value = ""; $("fb").className = "fb"; $("fb").innerHTML = ""; resetHint();
   $("card").classList.toggle("mc", isMc());
   $("card").classList.toggle("tx", TB().kind === "text" && !TB().typeOnly);
@@ -1744,9 +1750,9 @@ const completedShown = {};
 let xLocked = false;
 function finish(ok, ua){
   const t = T(), xBefore = XP; xLocked = XP >= XP_MAX;
-  answered = true; t._ok = ok; hideHint();
+  answered = true; hideHint();
   playSound(ok ? 'correct' : 'wrong'); haptic(ok ? 'ok' : 'no');
-  if(ok){ t.r++; bump(t, xLocked ? 0 : 1); XP = calcXp(); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
+  if(ok){ t.r++; bump(t, xLocked ? 0 : 1); XP = calcXp(); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode){ rd().add(cur); delete t.err[cur]; } }
   else  { t.w++; bump(t, (xLocked || XP <= 0) ? 0 : -1); XP = calcXp(); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
   save(); showFb(ok, cur, ua); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
@@ -1788,7 +1794,7 @@ function pick(j){
 function showSol(){
   if(answered) return;
   answered = true;
-  const t = T(); t._ok = false;
+  const t = T();
   xLocked = XP >= XP_MAX; t.l++; bump(t, (xLocked || XP <= 0) ? 0 : -1); XP = calcXp(); t.k[cur] = 0; t.err[cur] = true;
   save(); showFb(false, cur); markOpts();
   $("sent").innerHTML = sentHTML(items()[cur]);
@@ -1917,7 +1923,7 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
-/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_pronominal_*) === */
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_negation_*) === */
 function applyStorage(){
   try {
     TABS.forEach(t => {
@@ -1931,6 +1937,7 @@ function applyStorage(){
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
+try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
 if(stage && !localStorage.getItem("ng_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ if(!vis.some(t => t.id === tab)) setTab(vis[0].id); showLesson(stage); } }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
