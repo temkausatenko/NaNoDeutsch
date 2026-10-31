@@ -450,6 +450,12 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .pr-row .r{text-align:left;color:var(--sa)}
 .pr-row i{font-style:normal;color:var(--mu);font-weight:700}
 .pr-row small{grid-column:1/-1;margin-top:-2px;text-align:center;color:var(--mu);font-size:.74rem;font-weight:500;line-height:1.35}
+.steps{list-style:none;counter-reset:st;margin:14px 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.steps li{counter-increment:st;position:relative;display:flex;flex-direction:column;gap:3px;padding:11px 14px 11px 54px;border:1px solid var(--bd);border-radius:14px;background:var(--card)}
+.steps li::before{content:counter(st);position:absolute;left:13px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--pr),var(--pe));color:#fff;font-size:.82rem;font-weight:800}
+.steps li b{font-size:.92rem;font-weight:700;color:var(--tx)}
+.steps li span{font-size:.86rem;line-height:1.5;color:var(--mu)}
+.steps li span b{font-size:inherit;color:var(--sa)}
 .kv{display:flex;flex-direction:column;gap:6px;margin:12px 0}
 .kv-r{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:4px 14px;align-items:baseline;padding:9px 13px;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
 .kv-r b{font-size:.82rem;font-weight:700;color:var(--sa);line-height:1.35}
@@ -782,12 +788,12 @@ const STAGES = [
    kv:[["gar nicht<br>überhaupt nicht","зовсім не · взагалі не (підсилюють nicht)"],["gar kein<br>überhaupt kein","жодного взагалі"],["kaum","ледве, майже не — це не повне заперечення, а «дуже мало»"],["auf keinen Fall","ні в якому разі (категорична відмова)"],["niemals","те саме, що nie, але категоричніше"]],
    ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
    tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
- { n:8, t:"Практика", p:"Об’єднуємо все: бачиш речення українською — пишеш його німецькою. Іди за алгоритмом:",
-   kv:[["1","що саме заперечуємо?"],["2","іменник з ein / без артикля → <b>kein</b>, усе інше → <b>nicht</b>"],["3","є слово-пара (etwas, jemand, immer, schon, noch)? → <b>nichts, niemand, nie, noch nicht, nicht mehr</b>"],["4","без подвійного заперечення!"]],
+ { n:8, t:"Практика", p:"Бачиш речення українською — пиши його німецькою. Щоб не помилитись, проходь три кроки по черзі:",
+   steps:[["Є слово-пара?","«нічого, ніхто, ніколи, ніде, ще не, більше не» → <b>nichts · niemand · nie · nirgends · noch nicht · nicht mehr</b>. Тоді <b>nicht</b> не потрібне!"],["Є іменник?","з <b>ein</b> або без артикля → <b>kein</b> (зміни за родом і відмінком).<br>З <b>der / die / das</b>, <b>mein</b> або з іменем → <b>nicht</b>."],["Усе інше","дієслово, прикметник, прислівник → <b>nicht</b>: у кінці речення або перед тим, що заперечуєш."]],
    ex:[["Ich_habe|vb einen|ps Bruder.|nn","→ Ich habe keinen Bruder."],["Er_ist|vb noch|ps hier.|nn","→ Er ist nicht mehr hier."]],
    tip:"Українське «Ніхто не прийшов» = німецьке <b>Niemand ist gekommen</b> (без nicht)." },
- { n:9, t:"Підсумок", p:"Фінал: завдання на пошук помилок і короткі тексти. Для кожного речення питай себе:",
-   kv:[["1","що заперечуємо — іменник, дієслово, прикметник?"],["2","<b>nicht</b> чи <b>kein</b> (і яка форма)?"],["3","чи є слово-пара (nichts, niemand, nie…)?"],["4","де стоїть <b>nicht</b>?"],["5","чи немає подвійного заперечення?"]],
+ { n:9, t:"Підсумок", p:"Фінал: пошук помилок і короткі тексти. До кожного речення став собі п’ять питань:",
+   steps:[["Що заперечуємо?","іменник, дієслово чи прикметник"],["nicht чи kein?","і яка форма kein, якщо kein"],["Є слово-пара?","nichts, niemand, nie … — тоді без nicht"],["Де стоїть nicht?","у кінці, перед прикметником чи прийменниковою групою"],["Без подвійного заперечення","не став nicht поруч із nichts, niemand, nie"]],
    ex:[["Ich_habe|vb keine|kn Zeit.|nn","kein — іменник без артикля"],["Niemand|ng hilft_mir.|vb","niemand — без nicht"]],
    tip:"Алгоритм: 1) що заперечуємо 2) nicht / kein 3) слово-пара 4) місце 5) без подвійного заперечення." },
  { n:10, t:"Додатково", p:"Сполучники й конструкції, де на рівнях A2–B2 помиляються найчастіше.",
@@ -1024,8 +1030,18 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Das Wetter ist {{B}} schlecht. Ich finde es sogar schön.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Погода зовсім не погана. Мені навіть здається, що гарна.","gar nicht стоїть перед прикметником."],
  ["Ich habe {{B}} Hunger. Ich habe gerade gegessen.","gar keinen",["überhaupt keinen"],["gar keinen","kaum","niemals","auf keinen Fall"],"Я зовсім не голодний. Я щойно поїв.","Hunger — чол. р., Akk → gar keinen."],
  ["Das Kind spricht noch {{B}}. Es ist erst ein Jahr alt.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"Дитина ще майже не говорить. Їй лише рік.","kaum = ледве, майже не."],
- ["Ich esse {{B}} Fleisch. Ich bin Vegetarier.","niemals",["nie"],["niemals","kaum","gar nicht","auf keinen Fall"],"Я ніколи не їм м’яса. Я вегетаріанець.","niemals / nie = ніколи."]
-].forEach(([s, a, alt, o, ua, ex]) => add("pd", { s, sch:"Підсилення чи «ледве»? Обери вираз за змістом.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:7, ua }));
+ ["Ich esse {{B}} Fleisch. Ich bin Vegetarier.","niemals",["nie"],["niemals","kaum","gar nicht","auf keinen Fall"],"Я ніколи не їм м’яса. Я вегетаріанець.","niemals / nie = ніколи."],
+ ["Er hat {{B}} Lust zu arbeiten. Er will nur schlafen.","überhaupt keine",["gar keine"],["überhaupt keine","kaum","niemals","auf keinen Fall"],"У нього взагалі немає бажання працювати. Він хоче лише спати.","überhaupt kein(e) = взагалі жодного. Lust — жін. р. → keine."],
+ ["Ich habe dich {{B}} verstanden. Bitte wiederhole es.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Я тебе взагалі не зрозумів. Повтори, будь ласка.","überhaupt nicht = взагалі не; стоїть перед Partizip II."],
+ ["Das ist {{B}} wichtig. Das können wir vergessen.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Це взагалі не важливо. Це можна забути.","überhaupt nicht стоїть перед прикметником."],
+ ["Ich habe {{B}} Geld. Mein Konto ist leer.","überhaupt kein",["gar kein"],["überhaupt kein","kaum","niemals","auf keinen Fall"],"У мене взагалі немає грошей. Мій рахунок порожній.","Geld — сер. р., без артикля → überhaupt kein."],
+ ["Er interessiert sich {{B}} für Sport.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Він взагалі не цікавиться спортом.","überhaupt nicht = взагалі не; заперечує дієслово."],
+ ["Wir haben {{B}} Problem. Alles läuft perfekt.","überhaupt kein",["gar kein"],["überhaupt kein","kaum","niemals","auf keinen Fall"],"У нас взагалі немає проблем. Усе йде ідеально.","das Problem — сер. р. → überhaupt kein."],
+ ["Sie hat {{B}} Erfahrung mit Kindern.","überhaupt keine",["gar keine"],["überhaupt keine","kaum","niemals","auf keinen Fall"],"У неї взагалі немає досвіду з дітьми.","die Erfahrung — жін. р. → überhaupt keine."],
+ ["Das Essen war {{B}} gut. Wir haben fast nichts gegessen.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Їжа була зовсім не гарна. Ми майже нічого не з’їли.","überhaupt nicht стоїть перед прикметником."],
+ ["Ich habe heute {{B}} Appetit. Mir ist schlecht.","überhaupt keinen",["gar keinen"],["überhaupt keinen","kaum","niemals","auf keinen Fall"],"Сьогодні я взагалі не маю апетиту. Мені зле.","der Appetit — чол. р., Akk → überhaupt keinen."],
+ ["Es regnet {{B}}. Die Sonne scheint den ganzen Tag.","überhaupt nicht",["gar nicht"],["überhaupt nicht","kaum","niemals","auf keinen Fall"],"Дощу взагалі немає. Сонце світить цілий день.","überhaupt nicht заперечує дієслово."]
+].forEach(([s, a, alt, o, ua, ex]) => add("pd", { s, sch:"", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:7, ua }));
 
 /* ---------- 8. Практика: переклад з української ---------- */
 /* [речення, заперечене, хибні, переклад заперечного, підказка, пояснення, alt] */
@@ -1074,8 +1090,8 @@ const NE_ROWS = [
  ["Я п’ю каву без цукру.","Ich trinke Kaffee ohne Zucker.",["Ich trinke Kaffee kein Zucker.","Ich trinke Kaffee nicht mit Zucker.","Ich trinke Kaffee ohne nicht Zucker."],"ohne = без (+ Akkusativ)."],
  ["Ніхто з нас цього не знає.","Keiner von uns weiß das.",["Keiner von uns weiß das nicht.","Kein von uns weiß das.","Nichts von uns weiß das."],"keiner — без nicht."],
  ["Я не маю нічого проти цього.","Ich habe nichts dagegen.",["Ich habe nicht nichts dagegen.","Ich habe kein dagegen.","Ich habe dagegen nicht."],"nichts — без nicht."]
-].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"Переклади речення німецькою.", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
-NE_ROWS.filter(r => !ITEMS.ue.some(x => x.ua === r[3])).forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ue", { s:ua, sch:"Переклади речення німецькою.", o:[neg, ...ws], a:neg, alt, ex:`${ex} <i>(Без заперечення: ${esc(pos)})</i>`, lbl:"", ua, sp:neg, st:8, de:`<b>${esc(neg)}</b>` }));
+].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
+NE_ROWS.filter(r => !ITEMS.ue.some(x => x.ua === r[3])).forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ue", { s:ua, sch:"", o:[neg, ...ws], a:neg, alt, ex:`${ex} <i>(Без заперечення: ${esc(pos)})</i>`, lbl:"", ua, sp:neg, st:8, de:`<b>${esc(neg)}</b>` }));
 
 /* ---------- 9. Знайди помилку / Тексти ---------- */
 [
@@ -1304,8 +1320,8 @@ const TIPS = {
   kn:"kein — іменник з ein / без артикля; nicht — решта.", ei:"Яке питання — таке й заперечення: etwas → nichts, jemand → niemand.",
   an:"Знайди слово-пару за змістом.", sn:"schon → noch nicht · noch → nicht mehr.",
   kf:"Визнач рід і відмінок іменника.", po:"nicht — в кінці або перед тим, що заперечуємо.",
-  pd:"Підсилення чи «ледве»?", ne:"kein чи nicht? Є слово-пара?",
-  ue:"Спершу що заперечуємо, потім яке слово.", er:"Перевір: nicht / kein, форму, подвійне заперечення.", tx:"Читай усе речення, а не лише пропуск."
+  pd:"", ne:"kein чи nicht? Є слово-пара?",
+  ue:"", er:"Перевір: nicht / kein, форму, подвійне заперечення.", tx:"Читай усе речення, а не лише пропуск."
 };
 const RULES = {
   md:"💡 <b>nicht</b> — не · <b>kein</b> — жодний · <b>nichts</b> — ніщо · <b>niemand</b> — ніхто · <b>nie</b> — ніколи · <b>nirgends</b> — ніде.",
@@ -1566,11 +1582,12 @@ function renderStages(){
 ;
 }
 const pairsHTML = (rows, ar, cap) => `<div class="pairs"><div class="pr-cap">${cap || "Позитив ↔ Заперечення"}</div>` + rows.map(([a, b, n]) => `<div class="pr-row"><span class="l">${esc(a)}</span><i>${ar || "↔"}</i><span class="r">${esc(b)}</span>${n ? `<small>${n}</small>` : ""}</div>`).join("") + '</div>';
+const stepsHTML = rows => '<ol class="steps">' + rows.map(([t, b]) => `<li><b>${t}</b><span>${b}</span></li>`).join("") + '</ol>';
 const kvHTML = rows => '<div class="kv">' + rows.map(([a, b]) => `<div class="kv-r"><b>${a}</b><span>${b}</span></div>`).join("") + '</div>';
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl, g.ar, g.cap) : "") + (g.kv ? kvHTML(g.kv) : "") + (g.html || "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  el.innerHTML = `<h3>Етап ${g.n}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl, g.ar, g.cap) : "") + (g.kv ? kvHTML(g.kv) : "") + (g.steps ? stepsHTML(g.steps) : "") + (g.html || "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("ng_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
