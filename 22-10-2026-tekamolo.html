@@ -160,11 +160,11 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .stg i{position:absolute;left:0;bottom:0;height:2px;background:var(--go)}
 .stg:hover{color:var(--tx);border-color:var(--pr)}
 .stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}.stg.on i{background:#fff}
-.stg.lk{opacity:.5}
+.stg.lk{opacity:.5;filter:grayscale(.6);cursor:not-allowed}.stg.lk small{display:none}.stg.lk:hover{color:var(--mu);border-color:var(--bd)}
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
-.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.lesson .pts{list-style:none;margin:6px 0 14px;padding:0}.lesson .pts li{position:relative;padding:0 0 0 18px;margin:0 0 12px;line-height:1.65;font-size:.97rem;color:var(--tx)}.lesson .pts li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--pr)}.lesson .pts li b{color:var(--tx);font-weight:700}.lesson .pts li i{color:var(--mu)}.lesson .kv{margin:0 0 14px}.lesson .tip{margin-top:14px;line-height:1.6}.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
 .lsl:hover{color:var(--tx)}
 .rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
@@ -1262,42 +1262,42 @@ const stageOf0 = (tid, it) => {
 const stageOf = (tid, it) => { if(tid === "build2" || tid === "build3") return 3; const g = stageOf0(tid, it); return (g === 2 || g === 4) ? 3 : g; };   // етапи 2 і 4 об’єднано в етап 3 («Теперішній і минулий час»)
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => stageOf(t, it)); });
 const STAGES = [
- { n:1, t:"Основа: TE KA MO LO", p:"Обставини (<i>Angaben</i>) відповідають на питання. Не вчи терміни напам’ять: постав питання до слова — і тип відомий. У головному реченні дієслово завжди на <b>2-му місці</b>, а решта обставин іде в порядку <b>коли → чому → як → де</b> (<b>TE → KA → MO → LO</b>). Жорстких правил немає, але речення за цією формулою завжди правильне.",
+ { n:1, t:"Основа: TE KA MO LO", p:["Обставини (<i>Angaben</i>) відповідають на питання. Не вчи терміни: постав питання до слова — і тип відомий.", "Дієслово в головному реченні — завжди на <b>2-му місці</b>.", "Решта обставин іде в порядку <b>коли → чому → як → де</b> (<b>TE → KA → MO → LO</b>).", "Жорстких правил немає, але за цією формулою речення завжди правильне."],
    kv:[["TE · wann?","gestern · am Montag · seit 2017 · jeden Tag · zwei Stunden lang"],["KA · warum?","wegen des Regens · aus Neugier · vor Angst · trotz des Wetters"],["MO · wie?","gern · schnell · mit dem Bus · zu Fuß · in großer Eile"],["LO · wo? wohin? woher?","in Köln · nach Berlin · aus London · zur Arbeit"]],
    ex:[["Ich|s arbeite|v1 heute|te zu_Hause|lo","Сьогодні я працюю вдома. (wann? → heute, wo? → zu Hause)"],["Wir|s fahren|v1 gern|mo nach_Italien|lo","Ми охоче їдемо до Італії. (wie? → gern, wohin? → nach Italien)"],["Ich|s bleibe|v1 wegen_der_Kälte|ka zu_Hause|lo","Через холод я залишаюся вдома. (warum? → wegen der Kälte)"]],
    tip:"Ритм відповідей: <b>коли → чому → як → де</b>. Якщо якогось типу в реченні немає — просто пропусти його, порядок решти не змінюється." },
 
- { n:3, t:"Präsens · Perfekt · Präteritum", p:"Порядок TE-KA-MO-LO однаковий в <b>будь-якому часі</b>. Змінюється лише дієслово. У <b>Präsens</b> і <b>Präteritum</b> воно одне й стоїть на 2-му місці. У <b>Perfekt</b> (<i>haben/sein + Partizip II</i>), з модальним дієсловом і з відокремлюваним префіксом дієслово <b>ділиться</b>: змінювана частина — на 2-му місці, друга — <b>в самому кінці</b>. Це і є «рамка» (<i>Satzklammer</i>), а все між ними — середнє поле, де працює TEKAMOLO. На 1-му місці може стояти й обставина — тоді підмет іде одразу після дієслова (інверсія).",
+ { n:3, t:"Präsens · Perfekt · Präteritum", p:["Порядок TE-KA-MO-LO <b>однаковий у будь-якому часі</b>. Змінюється лише дієслово.", "<b>Präsens</b> і <b>Präteritum</b>: одне дієслово, на 2-му місці.", "<b>Perfekt</b> (<i>haben/sein + Partizip II</i>), модальне дієслово або відокремлюваний префікс: дієслово <b>ділиться</b>. Змінювана частина — на 2-му місці, друга — <b>в самому кінці</b>.", "Це «рамка» (<i>Satzklammer</i>). Усе між частинами — середнє поле, де працює TEKAMOLO.", "На 1-му місці може стояти обставина — тоді підмет іде одразу після дієслова (інверсія)."],
    kv:[["Präsens","<b>Ich fahre</b> heute mit dem Bus zur Arbeit. — одне дієслово. Теж для близького майбутнього: <i>Morgen fahre ich nach Berlin.</i>"],["Perfekt","<b>Ich bin</b> gestern mit dem Bus zur Arbeit <b>gefahren</b>. — розмовне минуле. <b>sein</b> — для руху й зміни стану (<i>fahren, gehen, kommen, bleiben, einschlafen</i>), решта — <b>haben</b>."],["Präteritum","<b>Ich fuhr</b> gestern mit dem Bus zur Arbeit. — письмове минуле (розповідь, новини). Але <b>war, hatte</b> і модальні (<i>konnte, musste, wollte</i>) вживають і в розмові."]],
    ex:[["Ich|s fahre|v1 morgen|te mit_dem_Bus|mo zur_Arbeit|lo","Präsens: завтра я їду автобусом на роботу. (коли → як → куди)"],["Ich|s bin|v1 gestern|te mit_dem_Bus|mo zur_Arbeit|lo gefahren|v2","Perfekt: bin … gefahren — рамка навколо середнього поля."],["Ich|s fuhr|v1 gestern|te mit_dem_Bus|mo zur_Arbeit|lo","Präteritum: одне дієслово, рамки немає."],["Gestern|te war|v1 ich|s wegen_einer_Erkältung|ka zu_Hause|lo","Інверсія: на 1-му місці час, підмет — після дієслова."]],
    tip:"Спочатку склади середнє поле за схемою TE → KA → MO → LO, потім розстав дієслова. У Perfekt і з модальним друга частина завжди остання." },
 
- { n:5, t:"Dativ і Akkusativ", p:"<b>Dativ</b> — кому? (зазвичай особа), <b>Akkusativ</b> — що? (зазвичай річ). Два іменники: спочатку Dativ, потім Akkusativ. <b>Займенник завжди раніше за іменник</b>. Два займенники: спочатку Akkusativ, потім Dativ (<i>ihn ihm</i>). Dativ стоїть переважно перед temporal, а Akkusativ-іменник — після нього; <b>відомий</b> (означений артикль) об’єкт можна поставити ліворуч, а <b>нове й важливе</b> (неозначений артикль) — праворуч.",
+ { n:5, t:"Dativ і Akkusativ", p:["<b>Dativ</b> — кому? (зазвичай особа). <b>Akkusativ</b> — що? (зазвичай річ).", "Два іменники: спочатку Dativ, потім Akkusativ.", "<b>Займенник завжди раніше за іменник.</b>", "Два займенники: спочатку Akkusativ, потім Dativ (<i>ihn ihm</i>).", "Dativ стоїть переважно перед temporal, Akkusativ-іменник — після нього.", "<b>Відомий</b> об’єкт (означений артикль) — ліворуч, <b>нове й важливе</b> (неозначений артикль) — праворуч."],
    kv:[["Akkusativ","der → <b>ihn</b> · die → <b>sie</b> · das → <b>es</b> · множина → <b>sie</b>"],["Dativ","er/es → <b>ihm</b> · sie → <b>ihr</b> · множина → <b>ihnen</b> · ich → <b>mir</b> · du → <b>dir</b> · wir → <b>uns</b> · Sie → <b>Ihnen</b>"],["Wohin?","Akkusativ стоїть ліворуч від lokal: <i>Er stellt die Vase ins Regal.</i>"]],
    ex:[["Ich|s gebe|v1 dem_Kind|dat einen_Ball|akk","Іменники: кому → що."],["Ich|s gebe|v1 ihm|pd einen_Ball|akk","Займенник раніше за іменник."],["Ich|s gebe|v1 ihn|pa ihm|pd","Два займенники: Akk → Dat."],["Ich|s habe|v1 sie|pa dir|pd doch_schon|te geschickt|v2","Займенники стоять перед temporal."]],
    tip:"Спершу питай: кому? (Dativ), потім: що? (Akkusativ). Якщо є займенник — він іде першим." },
 
- { n:8, t:"Reflexivpronomen", p:"Зворотні дієслова (<i>sich freuen, sich treffen, sich beeilen, sich vorstellen</i>) мають зворотний займенник, що узгоджується з підметом. Для <b>er/sie/es/man, sie, Sie</b> форма завжди <b>sich</b>. Займенник стоїть <b>одразу після Verb 1</b> (і після підмета-займенника), <b>перед</b> усіма обставинами. У питанні: <i>Verb 1 → підмет → sich</i>. Якщо підмет — іменник, sich зазвичай ставлять перед ним: <i>Hat sich Max entschuldigt?</i> Зворотний займенник не стоїть на позиції 1.",
+ { n:8, t:"Reflexivpronomen", p:["Зворотні дієслова (<i>sich freuen, sich treffen, sich beeilen, sich vorstellen</i>) мають зворотний займенник, який узгоджується з підметом.", "Для <b>er/sie/es/man, sie, Sie</b> — завжди <b>sich</b>.", "Займенник стоїть <b>одразу після Verb 1</b> (або після підмета-займенника), <b>перед</b> усіма обставинами.", "У питанні: <i>Verb 1 → підмет → sich</i>. Якщо підмет — іменник, sich зазвичай перед ним: <i>Hat sich Max entschuldigt?</i>", "На позиції 1 зворотний займенник не стоїть."],
    kv:[["Akkusativ","ich <b>mich</b> · du <b>dich</b> · er/sie/es/man <b>sich</b> · wir <b>uns</b> · ihr <b>euch</b> · sie/Sie <b>sich</b>"],["Dativ","ich <b>mir</b> · du <b>dir</b> · решта як в Akkusativ. Dativ — коли в реченні вже є Akkusativ-об’єкт: <i>Ich wasche <b>mir</b> die Hände.</i>"],["З двома займенниками","Reflexiv перед Dativ-займенником: <i>Ich habe <b>mich ihnen</b> vorgestellt.</i>"],["З Präp.-Objekt","<i>sich freuen auf / über, sich interessieren für, sich gewöhnen an</i> — Präp.-Objekt стоїть наприкінці."]],
    ex:[["Ich|s freue|v1 mich|refl auf_das_Wochenende|prep","Я радію вихідним."],["Gestern|te hat|v1 sich|refl Max|s entschuldigt|v2","Інверсія з іменником: sich перед підметом."],["Ich|s habe|v1 mir|refl den_Fuß|akk verletzt|v2","Dativ-reflexiv, бо є Akkusativ."],["Hast|v1 du|s dich|refl gut|mo erholt|v2","Питання: Verb 1 → підмет → sich."]],
    tip:"Зворотний займенник — «прив’язаний» до дієслова: ставимо його одразу після Verb 1 (або після підмета-займенника) і лише потім додаємо TE-KA-MO-LO." },
 
- { n:9, t:"Trennbare Verben", p:"У відокремлюваних дієсловах (<i>aufstehen, anrufen, einkaufen, mitkommen, zurückgeben</i>) префікс <b>відділяється й іде в самий кінець</b> речення — це Verb 2. Наголос у таких дієсловах стоїть на <b>префіксі</b> (<i>ÁUFstehen</i>). Нероздільні префікси (<i>be-, ge-, er-, ver-, zer-, ent-, emp-, miss-</i>) <b>ніколи не відділяються</b>: <i>besuchen → Ich besuche dich.</i> У <b>Partizip II</b> частка <i>-ge-</i> стоїть між префіксом і коренем: <i>an-ge-rufen, ein-ge-kauft</i>. З модальним дієсловом і в підрядному реченні дієслово не ділиться: <i>Ich will früh aufstehen.</i>",
+ { n:9, t:"Trennbare Verben", p:["Відокремлюваний префікс (<i>aufstehen, anrufen, einkaufen, mitkommen, zurückgeben</i>) іде <b>в самий кінець</b> речення — це Verb 2. Наголос — на префіксі (<i>ÁUFstehen</i>).", "Нероздільні префікси (<i>be-, ge-, er-, ver-, zer-, ent-, emp-, miss-</i>) <b>ніколи не відділяються</b>: <i>besuchen → Ich besuche dich.</i>", "У <b>Partizip II</b> частка <i>-ge-</i> стоїть між префіксом і коренем: <i>an-ge-rufen, ein-ge-kauft</i>.", "З модальним дієсловом і в підрядному реченні дієслово не ділиться: <i>Ich will früh aufstehen.</i>"],
    kv:[["Роздільні","ab-, an-, auf-, aus-, ein-, fest-, los-, mit-, teil-, um-, vor-, vorbei-, weg-, zu-, zurück-"],["Нероздільні","be-, emp-, ent-, er-, ge-, miss-, ver-, zer-"],["Perfekt","<i>aufstehen → ist aufgestanden · anrufen → hat angerufen · einkaufen → hat eingekauft</i>"],["Інфінітив з zu","<i>Ich habe vergessen, dich anzurufen.</i> (zu між префіксом і коренем)"]],
    ex:[["Ich|s stehe|v1 jeden_Morgen|te um_sechs_Uhr|te auf|v2","Щоранку о шостій я встаю."],["Wir|s sind|v1 gestern|te sehr_spät|mo angekommen|v2","Perfekt: an-ge-kommen — одне слово."],["Ich|s will|v1 morgen|te früh|mo aufstehen|v2","З модальним дієсловом: aufstehen цілком у кінці."],["Ruf|v1 mich|pa bitte|pt an|v2","Імператив: Ruf mich bitte an!"]],
    tip:"Запам’ятай: <b>префікс — у кінець</b>. Якщо в реченні вже є Verb 2 (Partizip чи Infinitiv), відокремлюваність не проявляється — дієслово йде цілим словом." },
 
- { n:6, t:"Заперечення: nicht і kein", p:"<b>kein</b> заперечує <b>іменник</b> з неозначеним артиклем (<i>ein Auto → kein Auto</i>) або <b>без артикля</b> (<i>Zeit → keine Zeit, Hunger → keinen Hunger</i>). <b>nicht</b> заперечує все інше: дієслово, іменник з означеним артиклем або присвійним займенником (<i>das Auto, mein Auto</i>), прикметник, прислівник, обставину. <b>kein</b> стоїть <b>перед своїм іменником</b> і відмінюється як <i>ein</i>. <b>nicht</b> стоїть <b>після temporal і kausal, перед modal і lokal</b>; якщо заперечується все речення, воно йде <b>в кінець середнього поля</b> (перед Verb 2); перед Präpositionalobjekt і Verbgefährte — теж перед ними.",
+ { n:6, t:"Заперечення: nicht і kein", p:["<b>kein</b> заперечує іменник з неозначеним артиклем (<i>ein Auto → kein Auto</i>) або без артикля (<i>Zeit → keine Zeit</i>). Стоїть <b>перед іменником</b>, відмінюється як <i>ein</i>.", "<b>nicht</b> заперечує все інше: дієслово, іменник з означеним артиклем чи присвійним займенником (<i>das Auto, mein Auto</i>), прикметник, прислівник, обставину.", "Місце <b>nicht</b>: <b>після TE і KA, перед MO і LO</b>.", "Якщо заперечується все речення — <b>в кінець середнього поля</b> (перед Verb 2).", "Перед Präpositionalobjekt і Verbgefährte — теж перед ними."],
    kv:[["Відмінювання kein","Nom: <b>kein / keine / kein / keine</b> (m / f / n / pl) · Akk: <b>keinen</b> / keine / kein / keine · Dat: <b>keinem</b> / keiner / keinem / keinen"],["kein","<i>Ich habe keine Zeit.</i> · <i>Er hat keinen Hunger.</i> · <i>Hier gibt es keinen Parkplatz.</i>"],["nicht","<i>Ich habe das Auto nicht gesehen.</i> · <i>Er arbeitet heute nicht.</i> · <i>Das ist nicht mein Buch.</i>"],["noch · mehr","<b>noch nicht</b> — ще не · <b>nicht mehr</b> — вже не · <b>noch kein</b> — ще немає · <b>kein … mehr</b> — вже немає"]],
    ex:[["Ich|s habe|v1 heute|te leider|mo keine_Zeit|kein","kein: Zeit — без артикля."],["Ich|s bin|v1 gestern|te nicht|neg mit_dem_Bus|mo zur_Arbeit|lo gefahren|v2","nicht — після TE, перед MO і LO."],["Er|s hat|v1 seiner_Frau|dat keine_Blumen|kein mitgebracht|v2","kein + множина (Akkusativ)."],["Wir|s denken|v1 heute|te nicht|neg an_den_Urlaub|prep","nicht — перед Präpositionalobjekt."]],
    tip:"Перевір артикль: ein / без артикля → <b>kein</b>; der, mein, дієслово, прислівник → <b>nicht</b>." },
 
- { n:10, t:"Nebensatz (підрядне речення)", p:"Підрядне речення відкривається сполучником (<i>dass, weil, wenn, ob, obwohl, als, damit, während, nachdem</i>) або питальним словом (<i>wann, warum, wie</i>). Тут <b>змінюване дієслово стоїть у самому кінці</b>, а порядок решти слів майже той самий: підмет → займенники → TE → KA → MO → LO → дієслово. Підрядне відділяють комою. Якщо підрядне речення стоїть <b>першим</b>, воно займає позицію 1 головного — тому головне починається з дієслова: <i>Wenn es regnet, <b>bleiben wir</b> zu Hause.</i> У складених формах змінюване дієслово — останнє: <i>…, weil ich gestern nicht gekommen <b>bin</b>.</i>",
+ { n:10, t:"Nebensatz (підрядне речення)", p:["Підрядне речення починається зі сполучника (<i>dass, weil, wenn, ob, obwohl, als, damit, während, nachdem</i>) або питального слова (<i>wann, warum, wie</i>) і відділяється комою.", "<b>Змінюване дієслово — в самому кінці.</b>", "Решта слів: підмет → займенники → TE → KA → MO → LO → дієслово.", "Якщо підрядне стоїть <b>першим</b>, воно займає позицію 1 — головне починається з дієслова: <i>Wenn es regnet, <b>bleiben wir</b> zu Hause.</i>", "У складених формах змінюване дієслово — останнє: <i>…, weil ich gestern nicht gekommen <b>bin</b>.</i>"],
    kv:[["dass","що: <i>Ich glaube, dass er kommt.</i>"],["weil","бо: <i>…, weil ich krank bin.</i> (на відміну від <b>denn</b> — той порядку не міняє: <i>…, denn ich bin krank.</i>)"],["wenn / als","wenn — якщо; щоразу · als — один раз у минулому: <i>Als ich kam, …</i>"],["ob","чи (непряме питання «так/ні»): <i>Ich weiß nicht, ob er kommt.</i>"],["obwohl · damit","хоча · щоб: <i>…, damit ich arbeiten kann.</i>"],["wann · warum · wie","непряме W-питання: <i>Sag mir, wann der Bus abfährt.</i>"]],
    ex:[["Ich|s glaube,|v1 dass|kj er|s morgen|te pünktlich|mo kommt|vf","Я вважаю, що він завтра прийде вчасно."],["Wenn|kj es|s morgen|te regnet,|vf bleiben|v1 wir|s zu_Hause|lo","Підрядне першим — тоді головне починається з дієслова."],["Ich|s weiß|v1 nicht,|neg ob|kj er|s heute_Abend|te noch|pt Zeit|akk hat|vf","Непряме питання через ob."],["Er|s fragt,|v1 warum|kj ich|s gestern|te nicht|neg gekommen|v2 bin|vf","Perfekt у підрядному: Partizip → bin."]],
    tip:"Побачив сполучник — відразу «відправ» змінюване дієслово в кінець речення. Інші слова розставляй за звичайною схемою." },
 
- { n:7, t:"Нюанси: частки, Futur, Passiv, Konjunktiv II", p:"Живу німецьку мову роблять дрібниці. <b>Modalpartikeln</b> (<i>doch, mal, ja, halt/eben, eigentlich, denn, bloß</i>) стоять у середньому полі, зазвичай після займенників і перед TE-KA-MO-LO, і не можуть стояти на позиції 1. <b>Focuspartikeln</b> (<i>nur, auch, sogar, besonders</i>) стоять безпосередньо перед тим, що виділяють. <b>Futur I</b> (<i>werden + Infinitiv</i>), <b>Passiv</b> (<i>werden + Partizip II</i>) і <b>Konjunktiv II</b> (<i>würde, hätte, wäre + …</i>) також утворюють рамку. Нарешті, порівняння: <i>gern → lieber → am liebsten</i>; нерівність — <b>als</b>, рівність — <b>(genau)so … wie</b>; <b>seit</b> + Dativ = триває досі (Präsens), <b>vor</b> + Dativ = завершено (Perfekt).",
+ { n:7, t:"Нюанси: частки, Futur, Passiv, Konjunktiv II", p:["<b>Modalpartikeln</b> (<i>doch, mal, ja, halt/eben, eigentlich, denn, bloß</i>) стоять у середньому полі, зазвичай після займенників і перед TE-KA-MO-LO. На позиції 1 їх не буває.", "<b>Focuspartikeln</b> (<i>nur, auch, sogar, besonders</i>) — безпосередньо перед тим, що виділяють.", "<b>Futur I</b> (<i>werden + Infinitiv</i>), <b>Passiv</b> (<i>werden + Partizip II</i>) і <b>Konjunktiv II</b> (<i>würde, hätte, wäre + …</i>) теж утворюють рамку.", "Порівняння: <i>gern → lieber → am liebsten</i>. Нерівність — <b>als</b>, рівність — <b>(genau)so … wie</b>.", "<b>seit</b> + Dativ = триває досі (Präsens). <b>vor</b> + Dativ = завершено (Perfekt)."],
    kv:[["Modalpartikeln","<i>Komm doch mal vorbei! · Das habe ich dir doch gesagt. · Wie war es denn? · Sei bloß nicht zu spät!</i>"],["Focuspartikeln","<i>Ich habe nur kurz mit dir gesprochen. · Sogar am Sonntag arbeitet er.</i>"],["Futur I","<i>Ich werde nächstes Jahr in Berlin studieren.</i>"],["Passiv","<i>Das Haus wurde vor zwei Jahren von einem Architekten gebaut.</i>"],["Konjunktiv II","<i>Ich würde am liebsten zu Hause bleiben. · Hättest du morgen Zeit?</i>"],["seit · vor","<i>Ich wohne seit zwei Jahren in Leipzig.</i> / <i>Vor zwei Jahren bin ich nach Leipzig gezogen.</i>"],["als · wie","<i>besser als ich</i> / <i>so schnell wie ihr Bruder</i>"],["man · Genitiv","<i>Hier darf man nicht rauchen.</i> · <i>das Auto meines Vaters · wegen des Wetters</i>"]],
    ex:[["Komm|v1 doch|pt morgen|te mal|pt vorbei|v2","Заходь-но якось завтра!"],["Ich|s werde|v1 nächstes_Jahr|te in_Berlin|lo studieren|v2","Futur I: werden … studieren."],["Ich|s würde|v1 heute|te am_liebsten|mo zu_Hause|lo bleiben|v2","Konjunktiv II: würde … bleiben."],["Ich|s fahre|v1 lieber|mo mit_dem_Zug|mo als_mit_dem_Auto|mo","Komparativ: lieber … als."]],
    tip:"Частки не перекладають дослівно — вони передають настрій. Спочатку склади речення без них, потім додай doch / mal / eigentlich у середнє поле." }
@@ -1786,7 +1786,7 @@ function toast(html){
 }
 function celebrateTab(){
   const st = stage ? stProg(stage) : null, g = STAGES.find(x => x.n === stage);
-  if(st && st.t && st.d >= st.t && g){ confetti(170); toast(`🎉 Етап ${STAGES.indexOf(g) + 1} «${g.t}» пройдено!`); }
+  if(st && st.t && st.d >= st.t && g){ const nx = STAGES[STAGES.indexOf(g) + 1]; confetti(170); toast(`🎉 Етап ${STAGES.indexOf(g) + 1} «${g.t}» пройдено!` + (nx ? `<br>🔓 Відкрито: «${nx.t}»` : "")); }
   else { confetti(70); toast("✅ Вкладку пройдено"); }
 }
 function celebrateRank(r){
@@ -1814,7 +1814,22 @@ function showFb(ok, i, ua){
 /* ============ ЕТАПИ ============ */
 function renderRule(){ $("rule").innerHTML = ""; }   // підказки під вкладками вимкнено
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = () => true;   // усі етапи відкриті одразу
+/* 🔒 Етап відкривається, лише коли попередній пройдено на 100% (після відкриття — лишається відкритим) */
+const stPrev = n => { const i = STAGES.findIndex(g => g.n === n); return i > 0 ? STAGES[i - 1] : null; };
+const stOpen = n => {
+  const p = stPrev(n); if(!p) return true;
+  const ul = ulSet(); if(ul.includes(n)) return true;
+  const q = stProg(p.n);
+  if(stOpen(p.n) && q.t > 0 && q.d >= q.t){ ul.push(n); try { localStorage.setItem(UL_KEY, JSON.stringify(ul)); } catch(e){} return true; }
+  return false;
+};
+function stLockedMsg(n){
+  const p = stPrev(n), q = p ? stProg(p.n) : { d:0, t:0 }, pc = q.t ? Math.floor(q.d / q.t * 100) : 0;
+  toast(`🔒 Спершу пройди «${p ? p.t : ""}» на 100%<br><small>зараз ${pc}%</small>`);
+}
+function ensureStageOpen(){
+  if(stage && !stOpen(stage)){ const f = STAGES.find(g => stOpen(g.n)); stage = f ? f.n : 1; localStorage.setItem("tk_stage", String(stage)); }
+}
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     const dn = q.t > 0 && q.d >= q.t;
@@ -1826,7 +1841,7 @@ const kvHTML = rows => '<div class="kv">' + rows.map(([a, b]) => `<div class="kv
 function showLesson(n){
   const g = STAGES.find(x => x.n === n), el = $("lesson");
   if(!g){ el.innerHTML = ""; document.body.classList.remove("lsn"); return; }
-  el.innerHTML = `<h3>Етап ${STAGES.indexOf(g) + 1}. ${g.t}</h3><p>${g.p}</p>` + (g.tbl ? pairsHTML(g.tbl, g.ar, g.cap) : "") + (g.kv ? kvHTML(g.kv) : "") + (g.steps ? stepsHTML(g.steps) : "") + (g.html || "") + g.ex.map(([sp, ua]) => `<div class="lx"><div class="sch">${parseSpec(sp).map(x => `<span class="un r-${x.r}"><span class="wc col">${esc(x.t)}</span><span class="cap">${ROLE[x.r] || x.r}</span></span>`).join("")}</div><div class="ex">${ua}</div></div>`).join("") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
+  el.innerHTML = `<h3>Етап ${STAGES.indexOf(g) + 1}. ${g.t}</h3>${Array.isArray(g.p) ? `<ul class="pts">${g.p.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p>${g.p}</p>`}` + (g.tbl ? pairsHTML(g.tbl, g.ar, g.cap) : "") + (g.kv ? kvHTML(g.kv) : "") + (g.steps ? stepsHTML(g.steps) : "") + (g.html || "") + `<p class="tip">${g.tip}</p><button class="lgo" id="lgo" type="button">Почати вправи ▶</button>`;
   document.body.classList.add("lsn"); localStorage.setItem("tk_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
@@ -1836,6 +1851,7 @@ function centerStage(smooth){
   try { c.scrollTo({ left:x, behavior: smooth ? "smooth" : "auto" }); } catch(e){ c.scrollLeft = x; }
 }
 function openStage(n){
+  if(n && !stOpen(n)){ stLockedMsg(n); return; }
   stage = n; localStorage.setItem("tk_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis[0].id);
@@ -1846,7 +1862,12 @@ $("xrst").addEventListener("click", () => {
   TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
   XP = calcXp(); updateXp(XP); renderTabs();
 });
-$("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
+$("stages").addEventListener("click", e => {
+  const b = e.target.closest(".stg"); if(!b) return;
+  const n = +b.dataset.s;
+  if(!stOpen(n)){ stLockedMsg(n); b.style.animation = "none"; void b.offsetWidth; b.style.animation = "shake .35s"; haptic("no"); return; }
+  openStage(n);
+});
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 
 
@@ -1859,6 +1880,8 @@ $("resetAllBtn").addEventListener("click", () => {
     try { localStorage.setItem(KEY(t.id), JSON.stringify(S[t.id])); } catch(e){}
   });
   reviewMode = false; hideFin();
+  try { localStorage.removeItem(UL_KEY); } catch(e){}
+  stage = STAGES[0].n; localStorage.setItem("tk_stage", String(stage));
   XP = calcXp(); updateXp(XP); renderTabs();
   load(pool()[0]); renderReviewBtn(); syncFin();
   try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch(e){}
@@ -2184,6 +2207,7 @@ document.addEventListener("keydown", e => {
 document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("errs").hidden) closeErrors(); } });
 
 /* ============ INIT ============ */
+ensureStageOpen();
 { const st = store.get('tk-tab'), vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage)); setTab(vis.some(t => t.id === st) ? st : vis[0].id); centerStage(false); }
 
 document.addEventListener('touchstart', function unlockAudio() {
