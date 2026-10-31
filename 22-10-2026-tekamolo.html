@@ -845,6 +845,16 @@ const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); re
  ["Вчора він довго говорив з начальником про зарплату.","Er|s hat|v1 gestern|te lange|te mit_seinem_Chef|prep über_das_Gehalt|prep gesprochen|v2",2,7,"Два Präpositionalobjekte: спочатку те, що з особою."],
  ["Вони вже давно сперечаються з сусідами про шум.","Sie|s streiten|v1 sich|refl schon_lange|te mit_den_Nachbarn|prep über_den_Lärm|prep",2,7,"Зворотний займенник → temporal → Präp. з особою → Präp. з річчю."]
   ,["Я ходжу до стоматолога кожні півроку.","Ich|s gehe|v1 alle_sechs_Monate|te zum_Zahnarzt|lo",2,1]
+  ,["Сьогодні ми граємо в парку.","Wir|s spielen|v1 heute|te im_Park|lo",2,1]
+  ,["Він завжди охоче працює.","Er|s arbeitet|v1 immer|te gern|mo",2,1]
+  ,["Мій батько вранці працює в саду.","Mein_Vater|s arbeitet|v1 morgens|te im_Garten|lo",2,1]
+  ,["Через дощ вона залишається вдома.","Sie|s bleibt|v1 wegen_des_Regens|ka zu_Hause|lo",2,1]
+  ,["Діти зараз зосереджено вчаться.","Die_Kinder|s lernen|v1 jetzt|te konzentriert|mo",2,1]
+  ,["Її брат охоче живе в Гамбурзі.","Ihr_Bruder|s wohnt|v1 gern|mo in_Hamburg|lo",2,1]
+  ,["Сьогодні ми їмо в ресторані.","Wir|s essen|v1 heute|te im_Restaurant|lo",2,1]
+  ,["Автобус щодня їде до вокзалу.","Der_Bus|s fährt|v1 jeden_Tag|te zum_Bahnhof|lo",2,1]
+  ,["З цікавості я йду в музей.","Ich|s gehe|v1 aus_Neugier|ka ins_Museum|lo",2,1]
+  ,["Сьогодні ми вчимося разом.","Wir|s lernen|v1 heute|te zusammen|mo",2,1]
 ].forEach(([ua, sp, lock, st, exx, endc]) => {
   const c = parseSpec(sp), a = c.map(x => x.t).join(" ") + (endc || ".");
   const ex = (ANG.includes(c[0].r) ? "Обставина на 1-му місці — дієслово все одно 2-ге, підмет після нього. " : "") + "Порядок обставин: " + c.filter(x => ANG.includes(x.r)).map(x => x.r.toUpperCase()).join(" → ") + ".";
@@ -954,8 +964,26 @@ const parseSpec = sp => sp.split(" ").map(w => { const [t, r] = w.split("|"); re
   ak(7,"Sie erinnert sich gern an ihre Kindheit.","an ihre Kindheit","PRP","Вона охоче згадує своє дитинство.");
   ak(7,"Das hängt vom Wetter ab.","vom Wetter","PRP","Це залежить від погоди.");
   ak(7,"Sie nimmt jeden Montag am Deutschkurs teil.","am Deutschkurs","PRP","Щопонеділка вона бере участь у курсі німецької.");
+  /* --- Етап 1: різні члени речення (підмет, Akk, Dat, Präp.-Objekt, обставини) --- */
+  ak(1,"Der Hund schläft im Garten.","Der Hund","S","Собака спить у саду.");
+  ak(1,"Meine Schwester arbeitet heute zu Hause.","Meine Schwester","S","Моя сестра сьогодні працює вдома.");
+  ak(1,"Wir lernen jeden Tag Deutsch.","Wir","S","Ми щодня вчимо німецьку.");
+  ak(1,"Ich trinke jeden Morgen einen Kaffee.","einen Kaffee","AKK","Щоранку я п’ю каву.");
+  ak(1,"Er liest ein Buch.","ein Buch","AKK","Він читає книгу.");
+  ak(1,"Ich esse einen Apfel.","einen Apfel","AKK","Я їм яблуко.");
+  ak(1,"Sie kauft ein Brot.","ein Brot","AKK","Вона купує хліб.");
+  ak(1,"Ich gebe meinem Bruder das Buch.","meinem Bruder","DAT","Я даю своєму братові книгу.");
+  ak(1,"Er hilft seiner Mutter.","seiner Mutter","DAT","Він допомагає своїй мамі.");
+  ak(1,"Die Lehrerin zeigt dem Kind das Bild.","dem Kind","DAT","Вчителька показує дитині малюнок.");
+  ak(1,"Das Eis schmeckt dem Mädchen.","dem Mädchen","DAT","Морозиво смакує дівчинці.");
+  ak(1,"Sie spricht mit ihrer Freundin.","mit ihrer Freundin","PRP","Вона розмовляє зі своєю подругою.");
+  ak(1,"Sie lacht über den Witz.","über den Witz","PRP","Вона сміється з жарту.");
+  ak(1,"Ich suche nach meinem Schlüssel.","nach meinem Schlüssel","PRP","Я шукаю свій ключ.");
+  ak(1,"Ich glaube an dich.","an dich","PRP","Я вірю в тебе.");
+  ak(1,"Wegen der Hitze schlafen wir schlecht.","Wegen der Hitze","KA","Через спеку ми погано спимо.");
+  ak(1,"Am Montag beginnt der Kurs.","Am Montag","TE","У понеділок починається курс.");
 })();
-const stageOf = (tid, it) => {
+const stageOf0 = (tid, it) => {
   if(it.st) return it.st;
   const ex = (it.ex || "") + " " + (it.ans || "");
   if(tid === "classify") return 1;
@@ -976,17 +1004,17 @@ const stageOf = (tid, it) => {
   const k = (ex.match(/\b(TE|KA|MO|LO)\b|temporal|kausal|modal|lokal/gi) || []).length;
   return k >= 4 ? 3 : k === 3 ? 2 : 1;
 };
+const stageOf = (tid, it) => { const g = stageOf0(tid, it); return g === 2 ? 3 : g; };   // етап 2 вилучено: його завдання — в етапі 3
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => stageOf(t, it)); });
 const STAGES = [
  { n:1, t:"Основа: TE KA MO LO", p:"Обставини відповідають на питання. <b>TE</b> — <i>wann?</i> (коли), <b>KA</b> — <i>warum?</i> (чому), <b>MO</b> — <i>wie?</i> (як), <b>LO</b> — <i>wo? wohin?</i> (де, куди). Не вчи терміни: постав питання до слова — і тип відомий.", ex:[["Ich|s arbeite|v1 heute|te zu_Hause|lo","Сьогодні я працюю вдома. (wann? → heute, wo? → zu Hause)"],["Wir|s fahren|v1 gern|mo nach_Italien|lo","Ми охоче їдемо до Італії. (wie? → gern, wohin? → nach Italien)"]], tip:"Запам’ятай ритм відповідей: коли → чому → як → де." },
- { n:2, t:"Три елементи", p:"Тепер у реченні три обставини: час, спосіб, місце. Дієслово — 2-ге. Далі йдемо по питаннях: <i>wann? wie? wohin?</i>", ex:[["Ich|s fahre|v1 morgen|te mit_dem_Bus|mo zur_Arbeit|lo","Завтра я їду автобусом на роботу. (коли → як → куди)"]], tip:"Перед тим як складати, назви кожну частину: це час? спосіб? місце?" },
- { n:3, t:"Чотири елементи", p:"Додаємо причину: <b>TE → KA → MO → LO</b>. Причина (<i>wegen, aus, trotz…</i>) стоїть після часу й перед способом.", ex:[["Ich|s fahre|v1 heute|te wegen_des_Regens|ka mit_dem_Bus|mo zur_Arbeit|lo","Сьогодні я через дощ їду автобусом на роботу."]], tip:"Спочатку знайди дієслово й підмет, потім став частини за ритмом коли–чому–як–де." },
+ { n:3, t:"Три і чотири елементи", p:"Тепер у реченні кілька обставин. Спочатку три: час, спосіб, місце — <b>TE → MO → LO</b> (<i>wann? wie? wohin?</i>). Потім додаємо причину: <b>TE → KA → MO → LO</b>. Причина (<i>wegen, aus, trotz…</i>) стоїть після часу й перед способом. Дієслово — 2-ге.", ex:[["Ich|s fahre|v1 morgen|te mit_dem_Bus|mo zur_Arbeit|lo","Завтра я їду автобусом на роботу. (коли → як → куди)"],["Ich|s fahre|v1 heute|te wegen_des_Regens|ka mit_dem_Bus|mo zur_Arbeit|lo","Сьогодні я через дощ їду автобусом на роботу."]], tip:"Назви кожну частину: це час? причина? спосіб? місце? — і став за ритмом коли–чому–як–де." },
  { n:4, t:"Справжні речення", p:"Дієслово завжди на 2-му місці, але на 1-му може стояти й обставина: <i>Heute fahre ich…</i> (інверсія — підмет після дієслова). У Perfekt та з модальними дієслово ділиться: друга частина стоїть <b>в самому кінці</b> (рамка). Відокремлюваний префікс теж іде в кінець.", ex:[["Heute|te fahre|v1 ich|s zur_Arbeit|lo","Інверсія: на 1-му місці час, підмет — після дієслова."],["Ich|s bin|v1 gestern|te mit_dem_Bus|mo zur_Arbeit|lo gefahren|v2","Perfekt: bin … gefahren — рамка навколо решти речення."]], tip:"Одна й та сама послідовність TE → KA → MO → LO працює у будь-якому часі." },
  { n:5, t:"Dativ і Akkusativ", p:"<b>Dativ</b> — кому? <b>Akkusativ</b> — що? Іменники: спочатку Dativ, потім Akkusativ. <b>Займенник завжди раніше за іменник</b>. Два займенники: спочатку Akkusativ, потім Dativ (<i>sie ihm</i>). Не змішуй це з обставинами, поки не звикнеш до самих об’єктів.", ex:[["Ich|s gebe|v1 dem_Kind|dat einen_Ball|akk","Іменники: кому → що."],["Ich|s gebe|v1 ihn|pa ihm|pd","Два займенники: Akk → Dat."]], tip:"Спершу питай: кому? (Dativ), потім: що? (Akkusativ)." },
  { n:6, t:"Заперечення nicht", p:"<b>nicht</b> заперечує все речення, тому йде до кінця «середини»: після часу й причини, перед способом і місцем. Перед прийменниковим доповненням і перед другою частиною дієслова — теж.", ex:[["Wir|s gehen|v1 danach|te nicht|neg zum_Deutschkurs|lo","Ми після цього не йдемо на курс."]], tip:"Спочатку склади речення без nicht, потім встав nicht перед тим, що тісно пов’язане з дієсловом." },
  { n:7, t:"Нюанси", p:"Прийменникове доповнення (<i>an Marie denken</i>) стоїть майже в кінці — перед Verb 2. Кілька обставин одного типу: час — від більшого до меншого, місце — від меншого до більшого. Нова, важлива інформація стоїть праворуч.", ex:[["Ich|s denke|v1 oft|te an_meine_Familie|prep","Обставина перед прийменниковим доповненням."]], tip:"Якщо вагаєшся — іди до кінця речення: що найважливіше й нове, те праворуч." }
 ];
-let stage = (() => { const v = localStorage.getItem("tk_stage"); return v === null ? 1 : (parseInt(v, 10) || 0); })();
+let stage = (() => { const v = localStorage.getItem("tk_stage"); let n = v === null ? 1 : (parseInt(v, 10) || 0); if(n && !STAGES.some(g => g.n === n)) n = n === 2 ? 3 : 1; return n; })();
 const UL_KEY = "tk_unlocked";
 const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || []; } catch(e){ return []; } };
 const EL={"S":["Subjekt","wer? was?"],"TE":["Temporal","wann? wie oft? wie lange?"],"KA":["Kausal","warum?"],"MO":["Modal","wie?"],"LO":["Lokal","wo? wohin? woher?"],"AKK":["Akkusativ-Objekt","wen? was?"],"DAT":["Dativ-Objekt","wem?"],"PRP":["Präpositional-Objekt","für wen? wofür? mit wem? womit?"]};
@@ -1422,7 +1450,7 @@ function showFb(ok, i, ua){
 /* ============ ЕТАПИ ============ */
 function renderRule(){ $("rule").innerHTML = ""; }   // підказки під вкладками вимкнено
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= 15 || q.d / q.t >= .6; })();
+const stOpen = n => n === STAGES[0].n || ulSet().includes(n) || (() => { const ix = STAGES.findIndex(g => g.n === n), q = stProg(ix > 0 ? STAGES[ix - 1].n : n - 1); return q.t === 0 || q.d >= 15 || q.d / q.t >= .6; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     const dn = q.t > 0 && q.d >= q.t;
