@@ -730,6 +730,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     </div>
 
   </div>
+
+  <div class="foot" style="margin-top:32px">
+    <button class="btn danger" id="resetAllBtn" type="button">🗑 Скинути весь прогрес тренажеру</button>
+  </div>
 </div>
 
 <div class="complete" id="errs" hidden>
@@ -1429,6 +1433,21 @@ $("xrst").addEventListener("click", () => {
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 
+
+$("resetAllBtn").addEventListener("click", () => {
+  if(!confirm("Скинути ВЕСЬ прогрес тренажеру? EXP і всі вкладки повернуться до 0%. Це не можна скасувати.")) return;
+  TABS.forEach(t => {
+    const bx = Math.max(S[t.id].x, S[t.id].p) + 1; // x та p лише зростають: sync.js бачить новішу версію, EXP = x − p = 0
+    S[t.id] = blankState(); S[t.id].x = bx; S[t.id].p = bx;
+    reviewDoneSets[t.id] = new Set(); completedShown[t.id] = false;
+    try { localStorage.setItem(KEY(t.id), JSON.stringify(S[t.id])); } catch(e){}
+  });
+  reviewMode = false; hideFin();
+  XP = calcXp(); updateXp(XP); renderTabs();
+  load(pool()[0]); renderReviewBtn(); syncFin();
+  try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch(e){}
+  try { tpSyncNow(); } catch(e){}
+});
 /* ============ NAVIGATION ============ */
 let hintUsed = false, hintTm;
 function hideHint(){ clearTimeout(hintTm); $("hintAns").classList.remove("on"); }
