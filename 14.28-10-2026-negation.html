@@ -782,7 +782,7 @@ const STAGES = [
    kv:[["gar nicht<br>überhaupt nicht","зовсім не · взагалі не (підсилюють nicht)"],["gar kein<br>überhaupt kein","жодного взагалі"],["kaum","ледве, майже не — це не повне заперечення, а «дуже мало»"],["auf keinen Fall","ні в якому разі (категорична відмова)"],["niemals","те саме, що nie, але категоричніше"]],
    ex:[["Das_ist|vb gar_nicht|ng schwer.|nn","зовсім не"],["Ich_habe|vb kaum|ng Zeit.|nn","майже немає"],["Auf_keinen_Fall!|ng","ні в якому разі!"]],
    tip:"Шкала частоти: <b>immer → oft → manchmal → selten → kaum → nie</b>." },
- { n:8, t:"Практика", p:"Об’єднуємо все: заперечуємо речення й перекладаємо з української. Іди за алгоритмом:",
+ { n:8, t:"Практика", p:"Об’єднуємо все: бачиш речення українською — пишеш його німецькою. Іди за алгоритмом:",
    kv:[["1","що саме заперечуємо?"],["2","іменник з ein / без артикля → <b>kein</b>, усе інше → <b>nicht</b>"],["3","є слово-пара (etwas, jemand, immer, schon, noch)? → <b>nichts, niemand, nie, noch nicht, nicht mehr</b>"],["4","без подвійного заперечення!"]],
    ex:[["Ich_habe|vb einen|ps Bruder.|nn","→ Ich habe keinen Bruder."],["Er_ist|vb noch|ps hier.|nn","→ Er ist nicht mehr hier."]],
    tip:"Українське «Ніхто не прийшов» = німецьке <b>Niemand ist gekommen</b> (без nicht)." },
@@ -807,8 +807,7 @@ const TABS = [
  { id:"kf", label:"Форми",       kind:"text", title:"ЯКА ФОРМА KEIN?",         ph:"Введи форму …", oc:"opts grid4" },
  { id:"po", label:"Порядок",      kind:"mc",   title:"ДЕ СТОЇТЬ NICHT?",        oc:"opts col" },
  { id:"pd", label:"Відтінки",       kind:"text", title:"ВСТАВ ПІДСИЛЕННЯ",        ph:"Введи вираз …", oc:"opts grid4" },
- { id:"ne", label:"Заперечення", kind:"text", title:"ЗАПЕРЕЧИ РЕЧЕННЯ",        ph:"Введи повне речення …", oc:"opts col" },
- { id:"ue", label:"Переклад",         kind:"text", title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ",     ph:"Введи речення німецькою …", oc:"opts col" },
+ { id:"ue", label:"Переклад", kind:"text", typeOnly:1, title:"ПЕРЕКЛАДИ НІМЕЦЬКОЮ", ph:"Введи речення німецькою …", oc:"opts col" },
  { id:"er", label:"Помилки",   kind:"mc",   title:"ЯКА ФОРМА ПРАВИЛЬНА?",    oc:"opts col" },
  { id:"tx", label:"Тексти",           kind:"text", title:"ВСТАВ У ТЕКСТ",           ph:"Введи слово …", oc:"opts grid4" },
  { id:"dc", label:"Ja · nein · doch", kind:"text", title:"JA, NEIN ЧИ DOCH?",     ph:"Введи слово …", oc:"opts afit" },
@@ -1013,12 +1012,24 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Willst du mit ihm sprechen? — {{B}}! Er hat mich belogen.","Auf keinen Fall",[],["Auf keinen Fall","Gar nicht","Kaum","Nirgends"],"Хочеш із ним поговорити? — Ні в якому разі! Він мене обманув.","auf keinen Fall = ні в якому разі."],
  ["Er hat {{B}} gegessen. Er hat nur einen Bissen genommen.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"Він ледь поїв. Він узяв лише шматочок.","kaum = ледве, майже не."],
  ["Es ist {{B}} schwer. Ich schaffe es leicht.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Це зовсім не важко. Я легко це зроблю.","gar nicht = зовсім не."],
- ["Hier wohnen {{B}} Leute. Es sind nur drei Häuser.","kaum",[],["kaum","gar nicht","auf keinen Fall","niemals"],"Тут майже ніхто не живе. Є лише три будинки.","kaum Leute = майже немає людей."]
+ ["Hier wohnen {{B}} Leute. Es sind nur drei Häuser.","kaum",[],["kaum","gar nicht","auf keinen Fall","niemals"],"Тут майже ніхто не живе. Є лише три будинки.","kaum Leute = майже немає людей."],
+ ["Ich spreche {{B}} Französisch. Ich habe es nie gelernt.","gar kein",["überhaupt kein"],["gar kein","kaum","niemals","auf keinen Fall"],"Я зовсім не знаю французької. Я ніколи її не вчив.","gar kein / überhaupt kein = зовсім ніякого."],
+ ["Wir haben {{B}} Zeit. Der Zug fährt in zwei Minuten.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"У нас майже немає часу. Потяг відправляється за дві хвилини.","kaum = майже не, дуже мало."],
+ ["Kannst du mir 1000 Euro leihen? — {{B}}! Das ist viel zu viel.","Auf keinen Fall",[],["Auf keinen Fall","Gar nicht","Kaum","Nirgends"],"Можеш позичити мені 1000 євро? — Ні в якому разі! Це надто багато.","auf keinen Fall = категорична відмова."],
+ ["Ich habe {{B}} gewusst, dass du kommst. Das ist eine Überraschung!","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Я зовсім не знав, що ти прийдеш. Це сюрприз!","gar nicht = зовсім не; стоїть перед Partizip II."],
+ ["Er hat {{B}} geschlafen. Er ist todmüde.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"Він ледве спав. Він смертельно втомлений.","kaum = майже не, зовсім небагато."],
+ ["Ich war {{B}} krank, nicht einmal als Kind.","niemals",["nie"],["niemals","kaum","gar nicht","auf keinen Fall"],"Я ніколи не хворів, навіть дитиною.","niemals / nie = ніколи."],
+ ["Du musst {{B}} warten. Wir können sofort anfangen.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Тобі зовсім не треба чекати. Ми можемо почати одразу.","gar nicht = зовсім не."],
+ ["Sie hat {{B}} Freunde in der Stadt. Sie kennt fast niemanden.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"У неї майже немає друзів у місті. Вона майже нікого не знає.","kaum + іменник = майже немає."],
+ ["Das Wetter ist {{B}} schlecht. Ich finde es sogar schön.","gar nicht",["überhaupt nicht"],["gar nicht","kaum","niemals","auf keinen Fall"],"Погода зовсім не погана. Мені навіть здається, що гарна.","gar nicht стоїть перед прикметником."],
+ ["Ich habe {{B}} Hunger. Ich habe gerade gegessen.","gar keinen",["überhaupt keinen"],["gar keinen","kaum","niemals","auf keinen Fall"],"Я зовсім не голодний. Я щойно поїв.","Hunger — чол. р., Akk → gar keinen."],
+ ["Das Kind spricht noch {{B}}. Es ist erst ein Jahr alt.","kaum",[],["kaum","gar nicht","niemals","auf keinen Fall"],"Дитина ще майже не говорить. Їй лише рік.","kaum = ледве, майже не."],
+ ["Ich esse {{B}} Fleisch. Ich bin Vegetarier.","niemals",["nie"],["niemals","kaum","gar nicht","auf keinen Fall"],"Я ніколи не їм м’яса. Я вегетаріанець.","niemals / nie = ніколи."]
 ].forEach(([s, a, alt, o, ua, ex]) => add("pd", { s, sch:"Підсилення чи «ледве»? Обери вираз за змістом.", o, a, alt, ex, lbl:ua, sp:s.replace("{{B}}", a), st:7, ua }));
 
-/* ---------- 8. Заперечи речення / Переклад ---------- */
+/* ---------- 8. Практика: переклад з української ---------- */
 /* [речення, заперечене, хибні, переклад заперечного, підказка, пояснення, alt] */
-[
+const NE_ROWS = [
  ["Ich habe einen Bruder.","Ich habe keinen Bruder.",["Ich habe nicht Bruder.","Ich habe kein Bruder.","Ich habe einen Bruder nicht."],"У мене немає брата.","Заперечи іменник.","einen Bruder — неозначений артикль (Akk, чол. р.) → keinen Bruder."],
  ["Wir essen Fleisch.","Wir essen kein Fleisch.",["Wir essen nicht Fleisch.","Wir essen Fleisch nicht.","Wir nicht essen Fleisch."],"Ми не їмо м’яса.","Заперечи іменник.","Fleisch — без артикля → kein."],
  ["Das Kind schläft.","Das Kind schläft nicht.",["Das Kind nicht schläft.","Das Kind schläft kein.","Das Kind kein schläft."],"Дитина не спить.","Заперечи дієслово.","Заперечуємо дієслово → nicht в кінці."],
@@ -1040,7 +1051,7 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Ich trinke Kaffee mit Zucker.","Ich trinke Kaffee ohne Zucker.",["Ich trinke Kaffee kein Zucker.","Ich trinke Kaffee nicht Zucker.","Ich trinke Kaffee ohne mit Zucker."],"Я п’ю каву без цукру.","mit → протилежне слово.","mit ↔ ohne (+ Akkusativ); окремого nicht / kein не потрібно."],
  ["Ich fahre irgendwohin.","Ich fahre nirgendwohin.",["Ich fahre nicht nirgendwohin.","Ich fahre nirgendwo.","Ich fahre kein irgendwohin."],"Я нікуди не їду.","Заміни irgendwohin на заперечну пару.","irgendwohin → nirgendwohin (на питання «куди?»)."],
  ["Ich fahre mit dem Bus.","Ich fahre nicht mit dem Bus.",["Ich fahre mit dem Bus nicht.","Ich fahre kein mit dem Bus.","Ich nicht fahre mit dem Bus."],"Я не їду автобусом.","Заперечи речення.","nicht — перед прийменниковою групою mit dem Bus."]
-].forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ne", { s:esc(pos), sch:hint, o:[neg, ...ws], a:neg, alt, ex, lbl:ua, sp:neg, st:8, ua }));
+];
 
 [
  ["У мене немає часу.","Ich habe keine Zeit.",["Ich habe nicht Zeit.","Ich habe nichts Zeit.","Ich habe kein Zeit."],"Zeit — без артикля, жін. р. → keine."],
@@ -1063,7 +1074,8 @@ const SO = ["noch nicht","noch nie","nicht mehr","nie mehr"], SM = ["mehr","noch
  ["Я п’ю каву без цукру.","Ich trinke Kaffee ohne Zucker.",["Ich trinke Kaffee kein Zucker.","Ich trinke Kaffee nicht mit Zucker.","Ich trinke Kaffee ohne nicht Zucker."],"ohne = без (+ Akkusativ)."],
  ["Ніхто з нас цього не знає.","Keiner von uns weiß das.",["Keiner von uns weiß das nicht.","Kein von uns weiß das.","Nichts von uns weiß das."],"keiner — без nicht."],
  ["Я не маю нічого проти цього.","Ich habe nichts dagegen.",["Ich habe nicht nichts dagegen.","Ich habe kein dagegen.","Ich habe dagegen nicht."],"nichts — без nicht."]
-].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"Обери правильне німецьке речення.", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
+].forEach(([ua, a, ws, ex, alt]) => add("ue", { s:ua, sch:"Переклади речення німецькою.", o:[a, ...ws], a, alt, ex, lbl:"", ua, sp:a, st:8, de:`<b>${esc(a)}</b>` }));
+NE_ROWS.filter(r => !ITEMS.ue.some(x => x.ua === r[3])).forEach(([pos, neg, ws, ua, hint, ex, alt]) => add("ue", { s:ua, sch:"Переклади речення німецькою.", o:[neg, ...ws], a:neg, alt, ex:`${ex} <i>(Без заперечення: ${esc(pos)})</i>`, lbl:"", ua, sp:neg, st:8, de:`<b>${esc(neg)}</b>` }));
 
 /* ---------- 9. Знайди помилку / Тексти ---------- */
 [
