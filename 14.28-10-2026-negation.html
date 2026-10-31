@@ -491,21 +491,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
 .toast.on{transform:translate(-50%,0)}
 
-.card.mc .dock{display:none}
-body.th .dock{display:none}
-@media(max-width:640px){
-  .w{padding-bottom:160px}
-  .dock{position:fixed;left:0;right:0;bottom:var(--kb,0px);z-index:60;
-    padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
-    background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-    border-top:1px solid var(--bd);box-shadow:0 -6px 22px rgba(0,0,0,.2)}
-  body.kbd .dock{padding-bottom:8px}
-  .dock .um-row{margin:0 0 8px}
-  .dock .row{margin:0;flex-direction:row;flex-wrap:nowrap;gap:8px}
-  .dock .row input{min-width:0}
-  .dock .chk{min-width:0;padding:12px 18px}
-  .fb{scroll-margin-bottom:170px}
-}
 </style>
 </head>
 <body>
@@ -542,14 +527,12 @@ body.th .dock{display:none}
 
     <div class="opts" id="opts"></div>
 
-    <div class="dock" id="dock">
     <div class="um-row" id="umRow">
       <button class="showbtn" id="showBtn" type="button"><svg class="ic-h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><svg class="ic-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="showTxt">Підказка</span></button>
     </div>
     <div class="row">
       <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
-    </div>
     </div>
     <div class="hintans" id="hintAns"></div>
     <div class="fb" id="fb"></div>
@@ -1908,17 +1891,6 @@ if(stage && !localStorage.getItem("ng_seen_" + stage)){ const vis = TABS.filter(
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
 setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
-
-/* === Панель введення над клавіатурою (iOS/Telegram: клавіатура зменшує visualViewport) === */
-if(window.visualViewport){
-  const vv = window.visualViewport;
-  const updKb = () => {
-    const kb = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-    document.documentElement.style.setProperty("--kb", kb + "px");
-    document.body.classList.toggle("kbd", kb > 80);
-  };
-  vv.addEventListener("resize", updKb); vv.addEventListener("scroll", updKb); updKb();
-}
 
 /* === TELEGRAM: розгортання, кнопка «Назад» === */
 if (window.Telegram && window.Telegram.WebApp) {
