@@ -373,7 +373,10 @@
 
         // EXP считаем из реального состояния вкладок (tp_v2_<id>_*), а не из залипшего tp_v2_exp_<id>
         const exp = computeExpFromState(trainerId);
-        const expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
+        let expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
+        
+        // Защита: если максимум застрял на старом значении, берем реальный
+        if (expMax < exp) expMax = exp; 
 
         let val = 0;
         if (expMax > 0) {
