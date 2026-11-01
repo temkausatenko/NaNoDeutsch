@@ -11,7 +11,7 @@
     --bg: #0d1117;
     --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
     --ok: #10b981;
-    --go: #f59e0b;
+    --no: #ef4444;
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -29,11 +29,12 @@
   /* Сетка для карточек-картинок */
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 колонки на телефонах */
     gap: 12px;
     animation: fadeIn 0.6s var(--ease) both;
   }
 
+  /* На больших экранах (планшетах и ПК) делаем 3 колонки */
   @media (min-width: 600px) {
     .grid {
       grid-template-columns: repeat(3, 1fr);
@@ -49,23 +50,40 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    transition: transform 0.15s var(--ease);
+    /* Добавляем плавность для обводки */
+    transition: transform 0.15s var(--ease), box-shadow 0.3s ease;
     background: #1a202c;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1; /* Идеальный квадрат */
   }
 
   .card:active {
-    transform: scale(0.95);
+    transform: scale(0.95); /* Эффект нажатия */
   }
 
+  /* Сама картинка */
   .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Заполняет весь квадрат без искажений */
     display: block;
   }
 
-  /* --- Бейджи на карточках --- */
+  /* --- Обводки для прогресса --- */
+  /* Мягкая красная обводка (прогресс есть, но не 100%) */
+  .card.red-border {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
+                inset 0 0 0 3px var(--no), 
+                0 0 12px rgba(239, 68, 68, 0.4);
+  }
+
+  /* Зеленая обводка (100% EXP) */
+  .card.green-border {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
+                inset 0 0 0 3px var(--ok), 
+                0 0 16px rgba(16, 185, 129, 0.5);
+  }
+
+  /* --- Бейдж с процентами --- */
   .badge {
     position: absolute;
     bottom: 10px;
@@ -79,12 +97,12 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    pointer-events: none;
+    pointer-events: none; /* Чтобы клик проходил на карточку */
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
   .badge.done { color: var(--ok); border-color: rgba(16, 185, 129, 0.4); }
-  .badge.half { color: var(--go); border-color: rgba(245, 158, 11, 0.4); }
+  .badge.half { color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
   .badge.started { color: #f0f6fc; }
 
   @keyframes fadeIn {
@@ -100,85 +118,85 @@
     <!-- 28.10 (Negation) -->
     <a href="14.28-10-2026-negation.html" class="card">
       <img src="icons/14.28-10-2026-negation.png" alt="Negation Trainer" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_negation">—</span>
+      <span class="badge" data-id="negation">—</span>
     </a>
 
     <!-- 24.10 -->
     <a href="24-10-2026-partizip-I.html" class="card">
       <img src="icons/24.10.2026_partizip-I.png" alt="Partizip I" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_partizip1">—</span>
+      <span class="badge" data-id="partizip1">—</span>
     </a>
 
     <!-- 22.10 -->
     <a href="22-10-2026-tekamolo.html" class="card">
       <img src="icons/22.10.2026_tekamolo.png" alt="TEKAMOLO" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_tekamolo">—</span>
+      <span class="badge" data-id="tekamolo">—</span>
     </a>
 
     <!-- 19.10 -->
     <a href="19-10-2026-temporale-konnektoren.html" class="card">
       <img src="icons/19.10.2026_temporale-konnektoren.png" alt="Temporale Konnektoren" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_temporale_konnektoren">—</span>
+      <span class="badge" data-id="temporale_konnektoren">—</span>
     </a>
 
     <!-- 18.10 -->
     <a href="18-10-2026-pronomen.html" class="card">
       <img src="icons/18.10.2026_pronomen.png" alt="Pronomen Trainer" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_pronomen">—</span>
+      <span class="badge" data-id="pronomen">—</span>
     </a>
 
     <!-- 16.10 -->
     <a href="16-10-2026-pronominaladverbien.html" class="card">
       <img src="icons/16.10.2026_pronominaladverbien.png" alt="Pronominaladverbien" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_pronominaladverbien">—</span>
+      <span class="badge" data-id="pronominaladverbien">—</span>
     </a>
 
     <!-- 15.10 -->
     <a href="15.10.2026-konjuktiv-II.html" class="card">
       <img src="icons/15.10.2026_konjunktiv-II.png" alt="Konjunktiv II" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_konjunktiv2">—</span>
+      <span class="badge" data-id="konjunktiv2">—</span>
     </a>
 
     <!-- 14.10 -->
     <a href="14-10-2026-wechsel-akk-dativ-prapositionen.html" class="card">
       <img src="icons/14.10.2026_wechsel-akk-dativ-prapositionen.png" alt="Präpositionen Trainer" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_wechselpraep">—</span>
+      <span class="badge" data-id="wechselpraep">—</span>
     </a>
 
     <!-- 07.10 -->
     <a href="07-10-2026-temporale-prapositionen.html" class="card">
       <img src="icons/07.10.2026_temporale-prapositionen.png" alt="Temporale Präpositionen" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_temporalpraep">—</span>
+      <span class="badge" data-id="temporalpraep">—</span>
     </a>
 
     <!-- 30.09 -->
     <a href="30-09-2026-alle-konnektoren.html" class="card">
       <img src="icons/30.09.2026_alle-konnektoren.png" alt="Alle Konnektoren" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_allekonnektoren">—</span>
+      <span class="badge" data-id="allekonnektoren">—</span>
     </a>
 
     <!-- 28.09 -->
     <a href="28-09-2026-adjektivdeklination.html" class="card">
       <img src="icons/28.09.2026_adjektivdeklination.png" alt="Adjektivdeklination" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_adjektivdekl">—</span>
+      <span class="badge" data-id="adjektivdekl">—</span>
     </a>
 
     <!-- 25.09 -->
     <a href="25-09-2026-komparation-der-adjektive.html" class="card">
       <img src="icons/25.09.2026_komparation-der-adjektive.png" alt="Komparation" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_komparation">—</span>
+      <span class="badge" data-id="komparation">—</span>
     </a>
 
     <!-- 21.09 -->
     <a href="21-09-2026-futur-i.html" class="card">
       <img src="icons/21.09.2026_futur-i.png" alt="Futur I" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_futur1">—</span>
+      <span class="badge" data-id="futur1">—</span>
     </a>
 
     <!-- 15.09 -->
     <a href="15-09-2026-perfekt-prateritum.html" class="card">
       <img src="icons/15.09.2026_perfekt-prateritum.png" alt="Perfekt & Präteritum" loading="lazy">
-      <span class="badge" data-track="tp_v2_progress_perfekt">—</span>
+      <span class="badge" data-id="perfekt">—</span>
     </a>
 
   </div>
@@ -200,25 +218,46 @@
       }, { passive: true });
     });
 
-    // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА НА КАРТОЧКАХ ---
+    // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА (НА ОСНОВЕ EXP) ---
     function updateProgress() {
       const badges = document.querySelectorAll('.badge');
 
       badges.forEach(badge => {
-        const key = badge.getAttribute('data-track');
-        // Если прогресса нет, получаем -1
-        const val = parseInt(localStorage.getItem(key) || '-1', 10);
+        const trainerId = badge.getAttribute('data-id'); // получаем 'tekamolo', 'negation' и т.д.
         
+        // Читаем EXP и МАКС EXP из localStorage
+        const exp = parseInt(localStorage.getItem('tp_v2_exp_' + trainerId) || '0', 10);
+        const expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
+        
+        // Считаем процент
+        let val = -1; // -1 значит "нет данных"
+        if (expMax > 0) {
+          val = Math.round((exp / expMax) * 100);
+          if (val > 100) val = 100; // Защита
+        }
+        
+        // Обновляем бейдж
         if (val >= 0) {
           badge.textContent = val + '%';
           badge.classList.remove('started', 'half', 'done');
-          
           if (val >= 100) badge.classList.add('done');
           else if (val >= 50) badge.classList.add('half');
           else if (val > 0) badge.classList.add('started');
         } else {
           badge.textContent = '—';
           badge.classList.remove('started', 'half', 'done');
+        }
+
+        // Обновляем обводку карточки
+        const card = badge.closest('.card');
+        if (card) {
+          card.classList.remove('red-border', 'green-border');
+          
+          if (val >= 100) {
+            card.classList.add('green-border'); // Максимум достигнут
+          } else if (exp > 0) {
+            card.classList.add('red-border');   // Есть прогресс, но не 100%
+          }
         }
       });
     }
@@ -232,7 +271,7 @@
     });
     window.addEventListener('focus', updateProgress);
     
-    // Слушаем событие синхронизации от sync.js (когда данные пришли из облака)
+    // Слушаем событие синхронизации от sync.js
     window.addEventListener('tpsync:updated', updateProgress);
   </script>
 </body>
