@@ -1997,6 +1997,8 @@ function publishProgress() {
     
     localStorage.setItem('tp_v2_exp_' + trainerId, currentXp);
     localStorage.setItem('tp_v2_exp_max_' + trainerId, maxXP);
+    // Список вкладок этого тренажера: index.html считает опыт только по ним
+    localStorage.setItem('tp_v2_exp_tabs_' + trainerId, JSON.stringify(TABS.map(t => t.id).concat(['ne','dc','ko','br','oh','zw'])));
   } catch(e) {}
 }
 publishProgress(); // Запуск при загрузке
