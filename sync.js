@@ -100,6 +100,13 @@
     if (remoteStr == null || remoteStr === '') return localStr;
     if (localStr == null) return remoteStr;
     if (localStr === remoteStr) return localStr;
+
+    // Числові значення (tp_v2_exp_*, tp_v2_exp_max_*) — беремо максимум
+    var lnum = Number(localStr), rnum = Number(remoteStr);
+    if (localStr.trim() !== '' && remoteStr.trim() !== '' && !isNaN(lnum) && !isNaN(rnum)) {
+      return String(Math.max(lnum, rnum));
+    }
+
     var l = parse(localStr), r = parse(remoteStr);
     if (!l || !r) return localStr;
 
