@@ -898,9 +898,6 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
   </div>
 
-  <div class="foot" style="margin-top:32px">
-    <button class="btn danger" id="resetAllBtn" type="button">🗑 Скинути весь прогрес тренажеру</button>
-  </div>
 </div>
 
 <div class="complete" id="errs" hidden>
@@ -1888,6 +1885,7 @@ $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
   TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
   XP = calcXp(); updateXp(XP); renderTabs();
+  if(typeof publishProgress === 'function') publishProgress();
 });
 $("stages").addEventListener("click", e => {
   const b = e.target.closest(".stg"); if(!b) return;
@@ -1898,22 +1896,7 @@ $("stages").addEventListener("click", e => {
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 
 
-$("resetAllBtn").addEventListener("click", () => {
-  if(!confirm("Скинути ВЕСЬ прогрес тренажеру? EXP і всі вкладки повернуться до 0%. Це не можна скасувати.")) return;
-  TABS.forEach(t => {
-    const bx = Math.max(S[t.id].x, S[t.id].p) + 1; // x та p лише зростають: sync.js бачить новішу версію, EXP = x − p = 0
-    S[t.id] = blankState(); S[t.id].x = bx; S[t.id].p = bx;
-    reviewDoneSets[t.id] = new Set(); completedShown[t.id] = false;
-    try { localStorage.setItem(KEY(t.id), JSON.stringify(S[t.id])); } catch(e){}
-  });
-  reviewMode = false; hideFin();
-  try { localStorage.removeItem(UL_KEY); } catch(e){}
-  stage = STAGES[0].n; localStorage.setItem("tk_stage", String(stage));
-  XP = calcXp(); updateXp(XP); renderTabs();
-  load(pool()[0]); renderReviewBtn(); syncFin();
-  try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch(e){}
-  try { tpSyncNow(); } catch(e){}
-});
+
 /* ============ NAVIGATION ============ */
 let hintUsed = false, hintTm;
 function hideHint(){ clearTimeout(hintTm); $("hintAns").classList.remove("on"); }
@@ -2283,21 +2266,20 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
 })();
-  // === ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ===
+
+/* ============ ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ============ */
 function publishProgress() {
   try {
-    let done = 0, total = 0;
-    TABS.forEach(t => {
-      const st = S[t.id];
-      const idx = ITEMS[t.id].map((_, i) => i);
-      done += idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
-      total += idx.length;
-    });
-    const pct = total > 0 ? Math.round(done / total * 100) : 0;
-    localStorage.setItem('tp_v2_progress_tekamolo', pct);
+    // ID должен совпадать с data-id в index.html
+    const trainerId = 'tekamolo'; 
+    
+    if (typeof calcXp === 'function' && typeof XP_MAX !== 'undefined') {
+      localStorage.setItem('tp_v2_exp_' + trainerId, calcXp());
+      localStorage.setItem('tp_v2_exp_max_' + trainerId, XP_MAX);
+    }
   } catch(e) {}
 }
-publishProgress(); // Запуск при загрузке страницы
+publishProgress(); // Запускаем при загрузке страницы
 </script>
 </body>
 </html>
