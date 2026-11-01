@@ -6,21 +6,21 @@
 <script src="sync.js"></script>
 <style>
 :root{
-  --bg:#090b10;--bg-grad:#151b2b;--card:#12161f;--card-hover:#1a202c;
-  --tx:#f1f5f9;--mu:#94a3b8;--pr:#6366f1;--pr-glow:rgba(99,102,241,.4);
-  --pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.1);
-  --no:#ef4444;--nob:rgba(239,68,68,.1);--bd:#2a3441;
-  --go:#f59e0b;--gob:rgba(245,158,11,.12);--radius:16px;
+  --bg:#0c0f16;--bg-grad:#1a2035;--card:#131a24;--card-hover:#1c2532;
+  --tx:#e8eef5;--mu:#8892a7;--pr:#6366f1;--pr-glow:rgba(99,102,241,.35);
+  --pl:#1e293b;--ok:#10b981;--okb:rgba(16,185,129,.12);
+  --no:#ef4444;--nob:rgba(239,68,68,.12);--bd:#1e293b;
+  --go:#f59e0b;--gob:rgba(245,158,11,.12);--sa:#818cf8;--pe:#a78bfa;--radius:16px;color-scheme:dark;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
 }
 [data-theme="light"]{
-  --bg:#f8fafc;--bg-grad:#e2e8f0;--card:#fff;--card-hover:#f1f5f9;
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
   --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);
-  --pl:#e2e8f0;--ok:#059669;--okb:rgba(5,150,105,.1);
-  --no:#dc2626;--nob:rgba(220,38,38,.1);--bd:#cbd5e1;
-  --go:#d97706;--gob:rgba(217,119,6,.1);
+  --pl:#eef2ff;--ok:#059669;--okb:rgba(5,150,105,.1);
+  --no:#dc2626;--nob:rgba(220,38,38,.1);--bd:#e2e8f0;
+  --go:#d97706;--gob:rgba(217,119,6,.1);--sa:#6366f1;--pe:#7c3aed;color-scheme:light;
 }
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
@@ -191,8 +191,8 @@ h1{font-size:1.8rem;font-weight:700;letter-spacing:-.5px;margin:0;background:lin
 @keyframes xgoldLegend{to{background-position:200% 0}}
 .xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgoldLegend 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
 .xp.max .xnx{color:var(--go);font-weight:600}
-:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgoldLegend 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
-:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
+:root.xp-legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgoldLegend 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.xp-legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 
 .complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));animation:pop .35s ease}
 .complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -234,10 +234,124 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
 .fin-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
 .fin-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
 .fin-actions .go:hover{filter:brightness(1.1)}
+
+.xp{min-width:0;max-width:100%;overflow:hidden}.xrank{flex-wrap:wrap}.xrank>*{min-width:0}
+.card.cc{padding-top:62px}.card.cc .q{padding-right:0}
+.rulesbtn{position:absolute;top:16px;right:98px;height:34px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
+.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
+.lesson{display:none}
+body.lsn .lesson{display:block;margin:0 0 18px;padding:18px 16px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.1);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards}
+body.lsn #main,body.lsn #foot{display:none}
+.lesson h3{margin:0 0 10px;font-size:1.12rem;line-height:1.3}
+.lesson .llead{margin:0 0 6px;padding:12px 14px;border-radius:12px;background:var(--pl);border:1px solid var(--bd);line-height:1.65;font-size:.95rem}
+.lesson ul{margin:12px 0;padding-left:20px;line-height:1.6;font-size:.92rem}.lesson li{margin:6px 0}
+.lesson .lex{margin:8px 0;padding:10px 12px;border-left:4px solid var(--pr);border-radius:8px;background:var(--pl);line-height:1.5}
+.lesson .lex b{font-size:.98rem}.lesson .lex span{display:block;margin-top:2px;color:var(--mu);font-size:.84rem}
+.lesson .lbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.lesson .lbtns .btn{flex:1 1 160px}
+
+/* ===== ДИЗАЙН «PARTIZIP» ===== */
+h1{font-size:1.6rem;letter-spacing:-.5px;line-height:1.2;background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
+.stages{display:grid;grid-auto-flow:column;grid-template-rows:auto;grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
+.stages::-webkit-scrollbar{display:none}
+.stages.drag{cursor:grabbing;user-select:none}.stages.drag .stg{pointer-events:none}
+.stg{flex:none;border:1px solid var(--bd);border-radius:10px;padding:6px 10px 8px;font-size:.72rem;transition:all .18s}
+.stg small{margin-left:6px;font-size:.62rem;opacity:.65}
+.stg:hover{color:var(--tx);border-color:var(--pr)}
+.stg.on{border-color:var(--pr);background:var(--pr);color:#fff}.stg.on small{opacity:.85}
+.stg.lk{opacity:.5;cursor:pointer}
+.rv-pill{white-space:nowrap}
+.pg{margin:10px 0 14px}
+.pg i{background:linear-gradient(90deg,var(--sa),var(--pe))}
+.stats-panel{margin-bottom:18px}
+.stat-box{padding:10px 4px}
+.stat-label{font-size:.66rem;margin-bottom:2px}
+.stat-val{font-size:1.2rem}
+.card{padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.card.cc{padding-top:22px}
+.card .q{padding-right:0;font-size:1.2rem;margin:0 0 8px}
+.card h2.ttl{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);text-transform:uppercase;line-height:32px;min-height:32px;padding-right:200px}
+.speak,.rst,.rulesbtn{top:22px;width:32px;height:32px}
+.rulesbtn{width:auto;right:102px}
+.rst{right:22px}.speak{right:62px}
+.rst,.speak{font-size:1.1rem}
+@media(max-width:480px){.speak,.rst,.rulesbtn{top:18px}.rst{right:18px}.speak{right:58px}.rulesbtn{right:98px}.card{padding:18px}.card h2.ttl{padding-right:196px}}
+.lab{margin:0 0 16px;font-size:.8rem;line-height:1.4}
+.tr-text{font-style:normal;font-size:.8rem}
+.tr{font-style:normal;font-size:.8rem;margin:0 0 14px}
+.opts{gap:10px;margin-top:14px}
+.o{flex:1 1 auto;min-height:44px;padding:11px 20px;text-align:center;border-radius:12px}
+.o.ok,.o.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.o.no,.o.no:hover{border-color:var(--no);background:var(--nob);color:var(--no)}
+.row{margin-top:14px;gap:10px;justify-content:stretch;flex-wrap:wrap}
+.chk{flex:1 1 auto;padding:12px 20px;border-radius:12px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
+.chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.row .btn.g{border-color:var(--bd)}
+.inp{border-radius:8px}
+/* підказка / відповідь */
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.showbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 13px 5px 9px;border-radius:99px;border:1px solid var(--bd);background:var(--pl);color:var(--mu);font:inherit;font-size:.78rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
+.showbtn svg{width:14px;height:14px;flex:none;color:var(--go)}
+.showbtn:not(.rev) .ic-a,.showbtn.rev .ic-h{display:none}
+.showbtn:hover{color:var(--tx);border-color:var(--go);transform:translateY(-1px)}
+.showbtn.rev{color:var(--go);border-color:color-mix(in srgb,var(--go) 50%,var(--bd));background:var(--gob)}
+.hintans{max-height:0;opacity:0;overflow:hidden;margin:0;text-align:center;font-size:1.05rem;font-weight:500;color:var(--tx);transition:opacity .35s,max-height .35s,margin .35s}
+.hintans.on{max-height:140px;opacity:.5;margin-top:12px}
+/* блок результату + «Далі →» всередині */
+.fb{margin-top:18px;padding:14px 16px;border:0;border-left:4px solid;border-radius:10px;animation:pop .4s ease}
+.fb.ok{background:var(--okb);border-left-color:var(--ok)}
+.fb.no{background:var(--nob);border-left-color:var(--no);animation:shake .4s}
+.fb b{display:inline;margin:0;font-size:inherit}.fb.ok b,.fb.no b{color:inherit}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}.fb.no .k{color:var(--no)}
+.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
+.fb .ans b{color:var(--ok);font-weight:700}
+.fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
+.fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
+.fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2.2s linear forwards;width:100%}
+@keyframes shrink{to{width:0}}
+.fb .nx{display:block;margin-top:12px;padding:10px 20px;border-radius:10px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:filter .18s}
+.fb .nx:hover{filter:brightness(1.1)}
+/* етап: урок */
+.lh{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.lbadge{flex:none;padding:3px 10px;border-radius:99px;background:var(--pr);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.lesson h3{margin:0}
+.lsec{margin:18px 0 0}
+.lst{margin:0 0 8px;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mu)}
+.lsteps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ls}
+.lsteps li{counter-increment:ls;position:relative;padding:9px 12px 9px 46px;border:1px solid var(--bd);border-radius:12px;background:var(--card);line-height:1.55;font-size:.9rem}
+.lsteps li::before{content:counter(ls);position:absolute;left:11px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--pr);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.lgo{display:block;width:100%;margin-top:16px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.ltheory{display:block;width:100%;margin-top:8px}
+/* шпаргалка */
+.cheat{margin:24px 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.cheat-title{margin:0 0 2px;font-size:1.05rem;font-weight:700;color:var(--tx)}
+.cheat-sub{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
+.cheat-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.cheat-pill{font:inherit;font-size:.8rem;font-weight:500;color:var(--mu);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.cheat-pill:hover{color:var(--tx);border-color:var(--c,var(--sa))}
+.cheat-pill.on{color:var(--tx);border-color:var(--c,var(--sa));background:var(--pl);box-shadow:inset 0 -2px 0 var(--c,var(--sa))}
+.cheat-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px}
+.cheat-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--bd)}
+.cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
+.cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
+@media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
+/* теорія */
+.theory-card{padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.theory-card h2{font-size:1.2rem;color:var(--sa);padding-bottom:6px;margin-top:24px}
+.theory-card p,.theory-card li{font-size:.92rem}
+.theory-card .example{font-size:.9rem}
+.theory-card .example span.highlight{color:var(--sa)}
+/* конфеті + тост */
+.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+.toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
+.toast.on{transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style></head><body><div class="w">
 
 <div class="header-wrap">
-  <h1>Temporale Konnektoren</h1>
+  <h1>Temporale Konnektoren<small>nachdem · bevor · während · seit · bis · sobald · тренажер</small></h1>
   <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
   <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Увімкнути/Вимкнути звук">🔊</button>
   <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -247,14 +361,15 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
 <div class="pg"><i id="bar"></i></div>
 
 <div class="stats-panel">
-  <div class="stat-box"><div class="stat-label">Речення</div><div class="stat-val" id="stat-done">0 / 0</div></div>
+  <div class="stat-box"><div class="stat-label">Завдань</div><div class="stat-val" id="stat-done">0 / 0</div></div>
   <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="stat-correct">0</div></div>
   <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
 </div>
 
+<div class="lesson" id="lesson"></div>
 <div id="main"></div>
 
-<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>Загальний EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 250</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+<div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>Загальний EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 352</small><em class="xpop" id="xpop"></em></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
 
 <div class="foot" id="foot"></div>
 
@@ -275,20 +390,7 @@ html.in-tg,html.in-tg body{overscroll-behavior-y:none}
   </div>
 </div>
 
-<div class="glossary">
-  <div><b>wenn</b><span>коли / якщо</span></div>
-  <div><b>als</b><span>коли (один раз у мин.)</span></div>
-  <div><b>nachdem</b><span>після того як</span></div>
-  <div><b>bevor / ehe</b><span>перед тим як</span></div>
-  <div><b>während</b><span>у той час як</span></div>
-  <div><b>solange</b><span>доти, поки</span></div>
-  <div><b>bis</b><span>поки не / до</span></div>
-  <div><b>seit / seitdem</b><span>з тих пір як</span></div>
-  <div><b>sobald</b><span>як тільки</span></div>
-  <div><b>sooft</b><span>щоразу як</span></div>
-  <div><b>immer wenn</b><span>щоразу, коли</span></div>
-  <div><b>jedes Mal wenn</b><span>кожного разу</span></div>
-</div>
+<div class="cheat" id="glossary"></div>
 
 <div id="theory-section">
   <div class="theory-card">
@@ -372,7 +474,7 @@ const store = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
   set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
 };
-const savedTheme = store.get('tp_v2_tk_theme') || ((window.Telegram && Telegram.WebApp && Telegram.WebApp.colorScheme) || 'dark');
+const savedTheme = store.get('tk_theme') || store.get('tp_v2_tk_theme') || ((window.Telegram && Telegram.WebApp && Telegram.WebApp.colorScheme) || 'dark');
 if (savedTheme === 'light') {
   document.documentElement.setAttribute('data-theme', 'light');
   document.getElementById('theme-toggle').textContent = '☀️';
@@ -381,18 +483,18 @@ function toggleTheme() {
   const isLight = document.documentElement.getAttribute('data-theme') === 'light';
   if (isLight) {
     document.documentElement.removeAttribute('data-theme');
-    store.set('tp_v2_tk_theme', 'dark');
+    store.set('tk_theme', 'dark');
     document.getElementById('theme-toggle').textContent = '🌙';
     tgChrome();
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
-    store.set('tp_v2_tk_theme', 'light');
+    store.set('tk_theme', 'light');
     document.getElementById('theme-toggle').textContent = '☀️';
     tgChrome();
   }
 }
 
-let soundEnabled = store.get('tp_v2_tk_sound') !== 'off';
+let soundEnabled = (store.get('tk_sound') || store.get('tp_v2_tk_sound')) !== 'off';
 function updateSoundIcon() {
   const b = document.getElementById('sound-toggle');
   if (b) b.textContent = soundEnabled ? '🔊' : '🔇';
@@ -400,7 +502,7 @@ function updateSoundIcon() {
 updateSoundIcon();
 function toggleSound() {
   soundEnabled = !soundEnabled;
-  store.set('tp_v2_tk_sound', soundEnabled ? 'on' : 'off');
+  store.set('tk_sound', soundEnabled ? 'on' : 'off');
   updateSoundIcon();
   if (soundEnabled) playSound('correct');
 }
@@ -815,7 +917,7 @@ const K='tp_v2_temporale_konnektoren';
 const T=(L,it)=>L.t=='m'?it[3]:L.t;
 const UA=(L,it)=>L.t=='m'?it[5]:it[3];
 
-const XP_MAX=250;
+const XP_MAX=D.reduce((n,L)=>n+L.it.length,0);   // максимум EXP = кількість усіх завдань (рахується автоматично)
 const RANKS=[[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','Дослідник'],[.44,'⚡','Знавець'],[.68,'🔥','Профі'],[.92,'💎','Майстер'],[1,'🏆','Легенда']]
   .map(q=>[Math.round(q[0]*XP_MAX),q[1],q[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
@@ -879,11 +981,33 @@ function loadState(){
 const _initialState = loadState();
 if (_initialState) S = _initialState;
 XP = S.xp || 0;
+if (typeof publishProgress === 'function') publishProgress();
 
+/* Отправка прогресса на главную (ID должен совпадать с data-id в index.html).
+   index.html считает EXP как сумму (x − p) по ключам tp_v2_<id>_*, поэтому кроме основного
+   состояния пишем «теневой» ключ в этом формате: x = S.x, p = x − xp, то есть x − p = xp.
+   p при этом тоже только растёт (x растёт минимум на 1 за ответ, а xp — максимум на 1). */
+function publishProgress(){
+  try{
+    const id='temporale_konnektoren';
+    const xp=Math.min(XP_MAX, Math.max(0, S.xp||0));
+    localStorage.setItem('tp_v2_exp_'+id, xp);
+    localStorage.setItem('tp_v2_exp_max_'+id, XP_MAX);
+    localStorage.setItem('tp_v2_exp_tabs_'+id, JSON.stringify(['exp']));
+    const SK=K+'_exp';
+    let old=null; try{ old=JSON.parse(localStorage.getItem(SK)); }catch(e){}
+    const x=Math.max(0, parseInt(S.x)||0);
+    if(old && (Number(old.x)||0) > x) return;       // в облаке новее: не откатываем
+    const sh={k:{}, x:x, p:Math.max(0, x-xp)};
+    if(old && Number(old.x)===sh.x && Number(old.p)===sh.p) return;
+    localStorage.setItem(SK, JSON.stringify(sh));
+  }catch(e){}
+}
 const save=()=>{
   if (S.x < S.xp) S.x = S.xp;                   // x всегда ≥ xp
   S.xp = Math.min(XP_MAX, Math.max(0, S.xp));    // клампим xp
   try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}
+  publishProgress();
 };
 const $=id=>document.getElementById(id);
 const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ');
@@ -898,7 +1022,7 @@ const isAllCorrect = l => {
   }
   return true;
 };
-function closeCat(l){ if(!S.cl) S.cl = []; S.cl[l] = 1; }
+function closeCat(l){ if(!S.cl) S.cl = []; S.cl[l] = 1; S.x = (S.x||0) + 1; try{celebrateCat(l)}catch(e){} }
 function finBoxHTML(l){
   const c = (S.corr && S.corr[l]) || 0;
   const w = (S.wrng && S.wrng[l]) || 0;
@@ -962,7 +1086,8 @@ function getContext(){
 
 function fresh(){
   try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}
-  st={done:false,ok:false,dx:0,pick:null,vals:[],pool:[],ans:[]};
+  try{clearTimeout(st.hintTm)}catch(e){}
+  st={done:false,ok:false,dx:0,pick:null,vals:[],pool:[],ans:[],hint:0,hintOn:false,hintTm:0};
   trShown=false;
   if(!rvMode){
     const l = S.l;
@@ -986,19 +1111,51 @@ function fresh(){
 function stageDone(n){
   const idx=n-1;
   if(idx<0||idx>=D.length) return true;
-  return S.r[idx].filter(Boolean).length >= D[idx].it.length*0.6;
+  return S.r[idx].filter(Boolean).length >= D[idx].it.length;
 }
 function stOpen(n){
   if(n===1) return true;
   return stageDone(n-1);
 }
 
+
+/* === Правила етапів: показуються один раз, далі — кнопка «📘 Правила» === */
+const LESSONS = {
+ 1:{t:'Nachdem — «після того як»',pts:['Nachdem — підрядний союз: дієвідмінюване дієслово стоїть в кінці підрядного речення.','Головне речення в Präsens → у nachdem-частині Perfekt. Головне в Perfekt або Präteritum → у nachdem-частині Plusquamperfekt.','Спочатку відбувається дія з nachdem-частини, потім — дія головного речення.'],ex:[['Nachdem ich gegessen habe, gehe ich spazieren.','Після того як я поїв, я йду гуляти.'],['Nachdem wir gegessen hatten, sind wir ins Kino gegangen.','Після того як ми поїли, ми пішли в кіно.']]},
+ 2:{t:'Bevor / Ehe — «перед тим як»',pts:['Bevor і ehe — синоніми. У розмовній мові майже завжди кажуть bevor, ehe звучить більш книжно.','Дієслово йде в кінець підрядного речення.','Заперечення nicht тут не потрібне: bevor — це просто «до того, як».'],ex:[['Bevor ich zur Arbeit fahre, trinke ich einen Kaffee.','Перед тим як поїхати на роботу, я п’ю каву.'],['Ehe er das Haus verließ, hat er das Licht ausgemacht.','Перш ніж вийти з дому, він вимкнув світло.']]},
+ 3:{t:'Während — «у той час як»',pts:['Während показує, що дві дії відбуваються одночасно.','Дієслово — в кінець підрядного речення; зазвичай в обох частинах однаковий час.','Також може виражати протиставлення: «тоді як».'],ex:[['Während ich koche, hört mein Mann Musik.','Поки я готую, мій чоловік слухає музику.'],['Während sie telefonierte, hat er das Geschirr gespült.','Поки вона розмовляла по телефону, він мив посуд.']]},
+ 4:{t:'Solange — «доти, поки»',pts:['Solange — поки триває певний стан або дія.','Дія головного речення діє лише в межах тривалості підрядного.','Не плутай з bis: solange — «весь час, поки», bis — «до моменту, коли».'],ex:[['Solange es regnet, bleiben wir zu Hause.','Поки йде дощ, ми залишаємося вдома.'],['Solange ich Fieber hatte, musste ich im Bett bleiben.','Поки в мене була температура, я мусив лежати в ліжку.']]},
+ 5:{t:'Seit / Seitdem — «з тих пір як»',pts:['Seit і seitdem — це момент, з якого щось почалося, і воно триває далі. Як союзи вони взаємозамінні.','Дієслово — в кінець підрядного речення.','Якщо дія триває досі, в обох частинах найчастіше Präsens.'],ex:[['Seit ich in Deutschland wohne, lerne ich Deutsch.','З тих пір як я живу в Німеччині, я вчу німецьку.'],['Seitdem er umgezogen ist, sehen wir uns selten.','Відтоді як він переїхав, ми рідко бачимося.']]},
+ 6:{t:'Bis — «поки не»',pts:['Bis — дія триває до певного моменту.','Заперечення nicht не ставимо: «Wir warten, bis er kommt», а не «bis er nicht kommt».','Дієслово — в кінець підрядного речення.'],ex:[['Wir warten, bis der Bus kommt.','Ми чекаємо, поки не прийде автобус.'],['Ich bleibe hier, bis du fertig bist.','Я залишаюся тут, поки ти не закінчиш.']]},
+ 7:{t:'Sobald — «як тільки»',pts:['Sobald — друга дія відбувається одразу після першої.','Про майбутнє німецька зазвичай використовує Präsens в обох частинах.','Дієслово — в кінець підрядного речення.'],ex:[['Sobald ich Zeit habe, rufe ich dich an.','Як тільки в мене буде час, я тобі зателефоную.'],['Sobald er angekommen war, hat er uns geschrieben.','Як тільки він приїхав, він нам написав.']]},
+ 8:{t:'Sooft — «щоразу як»',pts:['Sooft — повторювана дія; близькі за змістом immer wenn і jedes Mal wenn.','Sooft звучить дещо урочисто, у розмові частіше кажуть immer wenn.','Дієслово — в кінець підрядного речення.'],ex:[['Sooft ich ihn sehe, lächelt er.','Щоразу, як я його бачу, він усміхається.'],['Immer wenn es regnet, nehme ich einen Schirm mit.','Щоразу, коли йде дощ, я беру парасольку.']]},
+ 9:{t:'Mix — усі союзи разом',pts:['Визнач союз за змістом: послідовність (nachdem, bevor/ehe), одночасність (während, solange), початок і межа (seit/seitdem, bis), миттєвість (sobald), повторюваність (sooft).','Синоніми приймаються обидва: bevor/ehe, seit/seitdem.','Перевір, куди йде дієслово: в кінець підрядного речення.'],ex:[['Sobald ich zu Hause bin, esse ich.','Як тільки я буду вдома, я поїм.'],['Solange du krank bist, bleibst du im Bett.','Поки ти хворий, ти лежиш у ліжку.']]},
+ 10:{t:'Finale — усе разом у контексті',pts:['Wenn — повторювана дія в минулому або будь-яка дія в теперішньому і майбутньому. Als — одноразова подія в минулому.','У nachdem-реченнях стеж за послідовністю часів: Perfekt ↔ Plusquamperfekt.','Якщо підрядне речення стоїть першим, у головному дієслово йде одразу після коми, перед підметом.'],ex:[['Als ich ein Kind war, habe ich viel gelesen.','Коли я був дитиною, я багато читав.'],['Wenn ich Zeit habe, gehe ich schwimmen.','Коли в мене є час, я ходжу плавати.'],['Nachdem er gegessen hatte, ist er schlafen gegangen.','Після того як він поїв, він пішов спати.']]}
+};
+const lessonKey = n => 'tk_seen_' + n;
+const lessonSeen = n => !!store.get(lessonKey(n));
+function showLesson(n){
+  const g = LESSONS[n], d = D[n-1], el = $('lesson');
+  if(!g || !d){ if(el) el.innerHTML=''; document.body.classList.remove('lsn'); return; }
+  clearTimeout(autoAdvanceTimer);
+  el.innerHTML = `<div class="lh"><span class="lbadge">Етап ${n} із ${D.length}</span><h3>${g.t}</h3></div>`
+    + `<p class="llead">${d.tip}</p>`
+    + `<div class="lsec"><div class="lst">📝 Правила етапу</div><ol class="lsteps">${g.pts.map(x=>`<li>${x}</li>`).join('')}</ol></div>`
+    + `<div class="lsec"><div class="lst">👀 Подивись на прикладах</div>${g.ex.map(e=>`<div class="lex"><b>${e[0]}</b><span>${e[1]}</span></div>`).join('')}</div>`
+    + `<button class="lgo" id="lgo" type="button">Почати вправи ▶</button><button class="btn g ltheory" id="ltheory" type="button">📖 Повна теорія</button>`;
+  document.body.classList.add('lsn');
+  store.set(lessonKey(n), '1');
+  $('lgo').onclick = () => { document.body.classList.remove('lsn'); try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){} };
+  $('ltheory').onclick = () => { document.body.classList.remove('lsn'); openTheory(); };
+  try{window.scrollTo({top:0,behavior:'smooth'})}catch(e){}
+}
 function go(k){
   if(!stOpen(k+1)) return;
   clearTimeout(autoAdvanceTimer);
   rvMode=false; hideComplete(); closeErrors();
   _recent = [];
-  S.l=k; save(); fresh(); render();
+  S.l=k; save(); fresh(); render(); centerStage();
+  if(!lessonSeen(k+1)) showLesson(k+1); else document.body.classList.remove('lsn');
 }
 function nextQ(){
   clearTimeout(autoAdvanceTimer);
@@ -1028,6 +1185,7 @@ function resetTab(){
   S.i[l]=0; S.r[l]=[];
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
+  S.x=(S.x||0)+1;   // x лише зростає: sync.js має бачити скидання як новішу версію
   rvMode=false;
   _recent = [];
   save(); hideComplete(); fresh(); render();
@@ -1038,6 +1196,7 @@ function finalRestart(){
   S.i[l]=0; S.r[l]=[];
   S.cl[l]=0; S.corr[l]=0; S.wrng[l]=0;
   Object.keys(S.errors).forEach(k=>{if(k.startsWith(l+'_'))delete S.errors[k];});
+  S.x=(S.x||0)+1;   // x лише зростає: sync.js має бачити скидання як новішу версію
   rvMode=false;
   _recent = [];
   save(); hideComplete(); fresh(); render();
@@ -1129,6 +1288,7 @@ function startReview(){
   if (!pool.length) return;
   clearTimeout(autoAdvanceTimer);
   rvMode = true; rvCur = pool[0]; rvInitial = pool.length;
+  document.body.classList.remove('lsn');
   fresh(); render();
 }
 function exitReview(){
@@ -1165,7 +1325,7 @@ function updateXp(xv){
   box.dataset.r=r;
   const isMax=xv>=XP_MAX;
   box.classList.toggle('max',isMax);
-  document.documentElement.classList.toggle('legend',isMax);
+  document.documentElement.classList.toggle('xp-legend',isMax);
   $('xf').style.width=(xv/XP_MAX*100)+'%';
   $('xt').textContent=xv;
   $('xn').textContent=isMax?'MAX':('/ '+XP_MAX);
@@ -1208,10 +1368,14 @@ function done(ok){
   st.done=true; st.ok=ok; st.dx=dx;
   save(); render();
   if(dx) popXp(dx, rankOf(XP)>rankOf(xBefore));
+  if(rankOf(XP)>rankOf(xBefore)) celebrateRank(rankOf(XP));
   if(ok){
     const c=document.querySelector('#main .card');
     if(c){c.classList.remove('win');void c.offsetWidth;c.classList.add('win');}
-    autoAdvanceTimer=setTimeout(()=>{nextQ();},2000);
+    autoAdvanceTimer=setTimeout(()=>{nextQ();},2200);   // правильна відповідь → автоперехід через 2.2 с
+  } else {
+    // неправильна відповідь: автопереходу немає — далі лише кнопкою «Далі →»
+    setTimeout(()=>{try{document.querySelector('#main .fb').scrollIntoView({behavior:'smooth',block:'nearest'})}catch(e){}},60);
   }
 }
 
@@ -1252,39 +1416,25 @@ function showTr(){
 
 function fb(L,it){
   const t=T(L,it);
-  let right;
-  if(t=='c'){
-    const acc=it[6]||[it[1]];
-    right=acc.map(x=>it[0].startsWith('___')?cap(x):x).join(' / ');
-  } else if(t=='i'){
-    right=it[1].join(' … ').replace(/\|/g,' / ');
-  } else {
-    right=it[0];
-  }
-  const xpTag=st.ok?(st.dx>0?' · +1 EXP':' · EXP MAX'):(st.dx<0?' · −1 EXP':'');
-  const left=rvMode?rvPool().length:0;
-  const nextLabel=rvMode?(left===0?'Помилки виправлено':'Weiter'):(S.r[S.l].filter(Boolean).length>=L.it.length?'Ergebnis anzeigen':'Weiter');
+  const xpTag=st.ok?(st.dx>0?' · +1 EXP':' · EXP на максимумі 🏆'):(st.dx<0?' · −1 EXP':'');
   return `<div class="fb ${st.ok?'ok':'no'}">
-    <b>${st.ok?'✓ Richtig!':'✗ Leider falsch.'}${xpTag}</b>
-    ${st.ok?'':'Правильно: <b style="display:inline">'+right+'</b><br>'}
-    ${it[2]}
-  </div>
-  <div class="row">
-    <button class="btn p" onclick="nextQ()">${nextLabel} →</button>
-  </div>
-  ${st.ok?'<div class="advance-bar"><i></i></div>':''}`;
+    <div class="k">${st.ok?'✓ ПРАВИЛЬНО':'✗ НЕПРАВИЛЬНО'}${xpTag}</div>
+    <div class="ans" title="Натисни, щоб почути" onclick="speakCurrent()">${errText(L,it)}</div>
+    ${it[2]?`<div class="ex">${it[2]}</div>`:''}
+    ${st.ok?'<div class="bar"></div>':''}
+    <button class="nx" type="button" onclick="nextQ()">Далі →</button>
+  </div>`;
 }
 
 function renderStages(){
-  const html=D.map((d,k)=>{
-    const n=k+1;
-    const open=stOpen(n);
-    const done=S.r[k].filter(Boolean).length;
-    const total=d.it.length;
-    const pct=total?Math.round(done/total*100):0;
-    return `<button class="stg ${k==S.l?'on':''} ${open?'':'lk'}" data-s="${k}" ${open?'':'disabled'} title="${open?'':'🔒 Пройди попередній етап на 60%'}">${open?'':'🔒 '}${d.n}<small>${pct}%</small><i style="width:${pct}%"></i></button>`;
+  const el=$('stages'), sl=el.scrollLeft;
+  el.innerHTML=D.map((d,k)=>{
+    const n=k+1, open=stOpen(n);
+    const done=S.r[k].filter(Boolean).length, total=d.it.length;
+    const pct=total?Math.round(done/total*100):0, dn=total>0&&done>=total;
+    return `<button class="stg ${k==S.l?'on':''} ${open?'':'lk'}" data-s="${k}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">${open?'':'🔒 '}${dn?'✓ ':''}${d.n}<small>${pct}%</small><i style="width:${pct}%"></i></button>`;
   }).join('');
-  $('stages').innerHTML=html;
+  el.scrollLeft=sl;
 }
 
 function render(){
@@ -1354,20 +1504,22 @@ function render(){
   const it=L.it[i];
   const ua=UA(L,it);
   const uaLine=trHTML(ua);
-  let h=`<div class="card"><button class="speak" onclick="speakCurrent()" title="Озвучити німецькою">🔊</button><button class="rst" onclick="restartTab()" title="Скинути прогрес цієї категорії">↺</button>`;
   const t=T(L,it);
+  const TTL={c:'Обери союз',i:'Впиши слова',o:'Склади речення'};
+  let h=`<div class="card cc"><button class="rulesbtn" onclick="showLesson(S.l+1)" title="Показати правила етапу">📘 Правила</button><button class="speak" onclick="speakCurrent()" title="Озвучити німецькою">🔊</button><button class="rst" onclick="restartTab()" title="Скинути прогрес цієї категорії">↺</button><h2 class="ttl">${TTL[t]||''}</h2>`;
+  const hintBtn=st.done?'':`<div class="um-row"><button class="showbtn${st.hint?' rev':''}" type="button" onclick="showSol()">${SVG_H}${SVG_A}<span>${st.hint?'Відповідь':'Підказка'}</span></button></div><div class="hintans${st.hintOn?' on':''}" id="hintAns">${st.hintOn?hintText(it,L):''}</div>`;
 
   if(t=='c'){
     const acc=it[6]||[it[1]];
     const q=it[0].replace('___',`<span class="blank ${st.done?(st.ok?'ok':'no'):''}">${st.done?(it[0].startsWith('___')?cap(st.pick):st.pick):'&nbsp;&nbsp;&nbsp;'}</span>`);
-    h+=`<p class="q">${q}</p>${uaLine}<div class="opts">${(L.o||it[4]).map(o=>`<button class="o ${st.done?(acc.includes(o)?'ok':o===st.pick?'no':''):''}" ${st.done?'disabled':''} onclick="pickC('${o}')">${o}</button>`).join('')}</div>`;
+    h+=`<p class="q">${q}</p>${uaLine}<div class="opts">${(L.o||it[4]).map(o=>`<button class="o ${st.done?(acc.includes(o)?'ok':o===st.pick?'no':''):''}" ${st.done?'disabled':''} onclick="pickC('${o}')">${o}</button>`).join('')}</div>${hintBtn}`;
   } else if(t=='i'){
     let k=0; const parts=it[0].split('___');
     h+=`<p class="q sent">`+parts.map((p,j)=>p+(j<parts.length-1?(()=>{const x=k++;return `<input class="inp ${st.done?(st.ok||okv(st.vals[x],it[1][x])?'ok':'no'):''}" id="in${x}" value="${(st.vals[x]||'').replace(/"/g,'&quot;')}" ${st.done?'disabled':''} autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" onkeydown="if(event.key==='Enter'){event.preventDefault();var n=document.getElementById('in${x+1}');n?n.focus():chkI()}">`})():'')).join('')+`</p>${uaLine}`;
-    if(!st.done) h+=`<div class="row"><button class="btn p" onclick="chkI()">Prüfen</button></div>`;
+    if(!st.done) h+=hintBtn+`<div class="row"><button class="chk" onclick="chkI()">Перевірити ✓</button></div>`;
   } else {
-    h+=`<p class="q">Bringe die Wörter in die richtige Reihenfolge:</p><p class="tr">🇺🇦 ${it[1]}</p><div class="area ${st.done?(st.ok?'ok':'no'):''}">${st.ans.map(p=>`<button class="t" onclick="back(${p.k})">${p.x}</button>`).join('')}</div><div class="opts">${st.pool.map(p=>`<button class="t" onclick="put(${p.k})">${p.x}</button>`).join('')}</div>`;
-    if(!st.done) h+=`<div class="row"><button class="btn p" onclick="chkO()">Prüfen</button><button class="btn g" onclick="st.pool=st.pool.concat(st.ans);st.ans=[];render()">Leeren</button></div>`;
+    h+=`<p class="q">Постав слова в правильному порядку:</p><p class="tr">🇺🇦 ${it[1]}</p><div class="area ${st.done?(st.ok?'ok':'no'):''}">${st.ans.map(p=>`<button class="t" onclick="back(${p.k})">${p.x}</button>`).join('')}</div><div class="opts">${st.pool.map(p=>`<button class="t" onclick="put(${p.k})">${p.x}</button>`).join('')}</div>`;
+    if(!st.done) h+=hintBtn+`<div class="row"><button class="chk" onclick="chkO()">Перевірити ✓</button><button class="btn g" onclick="st.pool=st.pool.concat(st.ans);st.ans=[];render()">Очистити</button></div>`;
   }
 
   if(st.done) h+=fb(L,it);
@@ -1413,7 +1565,7 @@ const modalOpen=()=>!$('complete').hidden||!$('errs').hidden;
 document.addEventListener('keydown',e=>{
   if(e.ctrlKey||e.metaKey||e.altKey) return;
   if(e.key==='Escape'){hideComplete();closeErrors();return;}
-  if(modalOpen()) return;
+  if(modalOpen()||document.body.classList.contains('lsn')) return;
   const tag=(e.target&&e.target.tagName)||'';
   if(e.key==='Enter'){
     if(tag==='BUTTON'||tag==='INPUT'||tag==='TEXTAREA') return;
@@ -1437,9 +1589,10 @@ $('errs').addEventListener('click',e=>{if(e.target.id==='errs')closeErrors();});
 
 $('stages').addEventListener('click',e=>{
   const b=e.target.closest('.stg[data-s]');
-  if(!b||b.disabled) return;
+  if(!b) return;
   const k=+b.dataset.s;
-  if(stOpen(k+1)) go(k);
+  if(!stOpen(k+1)){ toast('🔒 Етап '+(k+1)+' відкриється, коли ти пройдеш етап '+k+' на 100%'); return; }
+  go(k);
 });
 
 /* === Telegram Mini App === */
@@ -1448,7 +1601,7 @@ function tgChrome(){
   if(!tg) return;
   try{
     const light=document.documentElement.getAttribute('data-theme')==='light';
-    const col=light?'#f8fafc':'#090b10';
+    const col=light?'#f8fafc':'#0c0f16';
     if(tg.setHeaderColor) tg.setHeaderColor(col);
     if(tg.setBackgroundColor) tg.setBackgroundColor(col);
     if(tg.setBottomBarColor) tg.setBottomBarColor(col);
@@ -1460,8 +1613,10 @@ if(tg){
   try{if(tg.disableVerticalSwipes) tg.disableVerticalSwipes();}catch(e){}
   document.documentElement.classList.add('in-tg');
   tgChrome();
-  tg.BackButton.show();
-  tg.BackButton.onClick(()=>{window.location.href='index.html';});
+  try{
+    tg.BackButton.show();
+    tg.BackButton.onClick(()=>{window.location.href='index.html';});
+  }catch(e){}
 }
 
 document.addEventListener('touchstart',function unlockAudio(){
@@ -1472,7 +1627,104 @@ document.addEventListener('touchstart',function unlockAudio(){
   document.removeEventListener('touchstart',unlockAudio);
 },{once:true});
 
-fresh();render();
+/* ===== підказка / відповідь ===== */
+const SVG_H='<svg class="ic-h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>';
+const SVG_A='<svg class="ic-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+function hintText(it,L){
+  const t=T(L,it);
+  if(t==='c') return it[0].startsWith('___')?cap(it[1]):it[1];
+  if(t==='i') return it[1].map(x=>String(x).split('|')[0]).join(' … ');
+  return it[0];
+}
+function showSol(){   // 1-й клік: підказка на 2 с · 2-й клік: показати відповідь (як помилка, −1 EXP)
+  if(st.done) return;
+  const ctx=getContext(), it=ctx.it, t=T(ctx.L,it);
+  if(!st.hint){
+    st.hint=1; st.hintOn=true;
+    const h=$('hintAns'); if(h){ h.textContent=hintText(it,ctx.L); h.classList.add('on'); }
+    const b=document.querySelector('#main .showbtn'); if(b){ b.classList.add('rev'); const sp=b.querySelector('span'); if(sp) sp.textContent='Відповідь'; }
+    clearTimeout(st.hintTm);
+    st.hintTm=setTimeout(()=>{ st.hintOn=false; const hh=$('hintAns'); if(hh) hh.classList.remove('on'); },2000);
+    return;
+  }
+  clearTimeout(st.hintTm);
+  if(t==='c') st.pick=it[1];
+  else if(t==='i') st.vals=it[1].map((_,k)=>{ const e=$('in'+k); return e?e.value:''; });
+  done(false);
+}
+
+/* ===== свято: конфеті + плашка ===== */
+let cvs,cctx,parts=[],raf=0,toastTm;
+function confetti(n,gold){
+  try{
+    if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    if(!cvs){ cvs=document.createElement('canvas'); cvs.className='confetti'; document.body.appendChild(cvs); cctx=cvs.getContext('2d'); }
+    const dpr=window.devicePixelRatio||1;
+    cvs.width=innerWidth*dpr; cvs.height=innerHeight*dpr; cctx.setTransform(dpr,0,0,dpr,0,0);
+    const cols=gold?['#fcd34d','#f59e0b','#b45309','#fff7d6']:['#f59e0b','#6366f1','#10b981','#fb7185','#60a5fa','#a78bfa'];
+    for(let i=0;i<n;i++) parts.push({x:innerWidth/2+(Math.random()-.5)*innerWidth*.3,y:innerHeight*.38,vx:(Math.random()-.5)*14,vy:-Math.random()*12-4,w:5+Math.random()*6,h:3+Math.random()*5,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,c:cols[Math.random()*cols.length|0],life:0});
+    if(!raf) raf=requestAnimationFrame(tickConfetti);
+  }catch(e){}
+}
+function tickConfetti(){
+  cctx.clearRect(0,0,innerWidth,innerHeight);
+  parts=parts.filter(p=>p.y<innerHeight+20&&p.life<140);
+  parts.forEach(p=>{
+    p.vy+=.32; p.vx*=.99; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life++;
+    cctx.save(); cctx.translate(p.x,p.y); cctx.rotate(p.r); cctx.globalAlpha=Math.min(1,(140-p.life)/40);
+    cctx.fillStyle=p.c; cctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); cctx.restore();
+  });
+  if(parts.length) raf=requestAnimationFrame(tickConfetti); else { raf=0; cctx.clearRect(0,0,innerWidth,innerHeight); }
+}
+function toast(html){
+  let t=document.getElementById('toast');
+  if(!t){ t=document.createElement('div'); t.id='toast'; t.className='toast'; document.body.appendChild(t); }
+  t.innerHTML=html; void t.offsetWidth; t.classList.add('on');
+  clearTimeout(toastTm); toastTm=setTimeout(()=>t.classList.remove('on'),3200);
+}
+function celebrateCat(l){ confetti(170); toast('🎉 Етап '+(l+1)+' «'+D[l].n+'» пройдено!'); }
+function celebrateRank(r){
+  const R=RANKS[r];
+  toast(R[1]+' Новий ранг: '+R[2]);
+  confetti(r>=RANKS.length-1?220:120, r>=RANKS.length-1);
+}
+
+/* ===== стрічка етапів в один ряд: центрування + перетягування мишкою ===== */
+function centerStage(){
+  const c=$('stages'), on=c&&c.querySelector('.stg.on');
+  if(!on) return;
+  const x=on.getBoundingClientRect().left-c.getBoundingClientRect().left+c.scrollLeft;
+  c.scrollLeft=x-(c.clientWidth-on.offsetWidth)/2;
+}
+(function(){
+  const el=$('stages'); let d=false,moved=false,x0=0,s0=0;
+  el.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; d=true; moved=false; x0=e.clientX; s0=el.scrollLeft; });
+  window.addEventListener('pointermove',e=>{ if(!d) return; const dx=e.clientX-x0; if(Math.abs(dx)>4){ moved=true; el.classList.add('drag'); } if(moved) el.scrollLeft=s0-dx; });
+  window.addEventListener('pointerup',()=>{ d=false; el.classList.remove('drag'); });
+  document.addEventListener('click',e=>{ if(moved&&e.target.closest&&e.target.closest('#stages')){ e.stopPropagation(); e.preventDefault(); } moved=false; },true);
+  el.addEventListener('wheel',e=>{ if(el.scrollWidth>el.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){ el.scrollLeft+=e.deltaY; e.preventDefault(); } },{passive:false});
+})();
+
+/* ===== шпаргалка ===== */
+const CHEAT=[
+  ['Послідовність','#f59e0b',[['nachdem','після того як (Zeitenfolge!)'],['bevor / ehe','перед тим як']]],
+  ['Одночасність','#60a5fa',[['während','у той час як'],['solange','доти, поки']]],
+  ['Початок і межа','#2dd4bf',[['seit / seitdem','з тих пір як'],['bis','поки не / до'],['sobald','як тільки']]],
+  ['Повторюваність','#fb7185',[['sooft','щоразу як'],['immer wenn','щоразу, коли'],['jedes Mal wenn','кожного разу, коли']]],
+  ['wenn / als','#a78bfa',[['wenn','теперішнє, майбутнє або повторення'],['als','одна подія в минулому'],['Immer wenn …','повторення → wenn']]]
+];
+let cheatG=0;
+function renderCheat(){
+  const c=CHEAT[cheatG];
+  $('glossary').innerHTML='<h2 class="cheat-title">Шпаргалка</h2><p class="cheat-sub">Усі союзи — для швидкого повторення</p>'
+    +'<div class="cheat-pills">'+CHEAT.map((x,i)=>`<button type="button" class="cheat-pill${i===cheatG?' on':''}" data-g="${i}" style="--c:${x[1]}">${x[0]}</button>`).join('')+'</div>'
+    +`<div class="cheat-list" style="--c:${c[1]}">`+c[2].map(r=>`<div class="cheat-row"><b>${r[0]}</b><span>${r[1]}</span></div>`).join('')+'</div>';
+}
+renderCheat();
+$('glossary').onclick=e=>{ const b=e.target.closest('[data-g]'); if(b){ cheatG=+b.dataset.g; renderCheat(); } };
+
+fresh();render();centerStage();
+if(!lessonSeen(S.l+1)) showLesson(S.l+1);
 
 /* === Синхронізація === */
 function stateEqual(a, b){
@@ -1508,6 +1760,7 @@ function reloadFromStorage(){
   closeErrors();
   S = loaded;
   XP = S.xp || 0;
+  publishProgress();
   fresh();
   render();
 }
@@ -1515,4 +1768,7 @@ window.addEventListener('tpsync:updated', reloadFromStorage);
 if (window.TPSync && window.TPSync.ready) {
   window.TPSync.ready.then(reloadFromStorage).catch(function(){});
 }
+const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
+document.addEventListener('visibilitychange', () => { if(!document.hidden) tpSyncNow(); });
+setInterval(() => { if(!document.hidden && !st.done) tpSyncNow(); }, 30000);
 </script></body></html>
