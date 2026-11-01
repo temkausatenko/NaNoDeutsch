@@ -1277,7 +1277,7 @@ const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
-const XP_MAX = TOTAL + 20;
+const XP_MAX = TOTAL;
 
 let stage = (() => { const v = parseInt(localStorage.getItem("ng_stage"), 10); return (v >= 1 && v <= STAGES.length) ? v : 1; })();
 const UL_KEY = "ng_unlocked";
