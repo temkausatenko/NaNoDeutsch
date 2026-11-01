@@ -140,6 +140,11 @@
     100% { background-position: -20% 0; }
   }
 
+  /* Пока приложение свернуто, анимации стоят: экономия батареи */
+  html.is-hidden .card.done,
+  html.is-hidden .card.done::before,
+  html.is-hidden .card.done::after { animation-play-state: paused; }
+
   @media (prefers-reduced-motion: reduce) {
     .card.done, .card.done::before, .card.done::after { animation: none; }
   }
@@ -321,7 +326,10 @@
   </div>
 
   <script>
-    const tg = window.Telegram.WebApp;
+    const tg = (window.Telegram && window.Telegram.WebApp) || {
+      ready() {}, expand() {}, setHeaderColor() {}, setBackgroundColor() {},
+      HapticFeedback: { impactOccurred() {} }
+    };
     tg.ready();
     tg.expand();
     
@@ -385,12 +393,11 @@
         // Максимум НЕ подгоняем под опыт: если он неизвестен, прогресса нет. Опыт не больше максимума.
         const exp = Math.min(computeExpFromState(trainerId), expMax > 0 ? expMax : 0);
 
+        // 100% и золото - только при реально набранном максимуме; иначе от 1 до 99
         let val = 0;
-        if (expMax > 0) {
-          val = Math.round((exp / expMax) * 100);
-          if (val > 100) val = 100;
-          if (val < 0) val = 0;
-        }
+        const finished = expMax > 0 && exp >= expMax;
+        if (finished) val = 100;
+        else if (expMax > 0 && exp > 0) val = Math.min(99, Math.max(1, Math.floor((exp / expMax) * 100)));
 
         badge.classList.remove('neu', 'done');
         card.classList.remove('prog', 'done');
@@ -400,7 +407,7 @@
         if (val <= 0) {
           badge.classList.add('neu');
           badge.innerHTML = 'NEU';
-        } else if (val >= 100) {
+        } else if (finished) {
           badge.classList.add('done');
           card.classList.add('done');
           badge.innerHTML = RING + CHECK;
@@ -420,6 +427,7 @@
 
     // Обновляем, когда пользователь возвращается с тренажера
     document.addEventListener('visibilitychange', () => {
+      document.documentElement.classList.toggle('is-hidden', document.hidden);
       if (!document.hidden) updateProgress();
     });
     window.addEventListener('focus', updateProgress);
