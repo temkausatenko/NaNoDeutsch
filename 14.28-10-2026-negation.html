@@ -1933,6 +1933,7 @@ function applyStorage(){
       if(v) S[t.id] = v;
     });
     XP = calcXp();
+    if(typeof publishProgress === 'function') publishProgress();
     if(answered){ updateXp(XP); renderTabs(); }
     else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
