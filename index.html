@@ -44,71 +44,174 @@
     }
   }
 
+  @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  @property --h { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+
   .card {
     display: block;
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    /* Толщина и прозрачность рамки */
-    border: 3px solid transparent; 
-    /* Магия градиентной рамки */
-    background: linear-gradient(#1a202c, #1a202c) padding-box, 
-                linear-gradient(#1a202c, #1a202c) border-box;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    transition: transform 0.15s var(--ease), box-shadow 0.3s ease, background 0.3s ease;
+    border: 3px solid transparent;
     aspect-ratio: 1 / 1;
+    --p: 0;
+    --c1: #ff4b6e;
+    --c2: #ff8a5b;
+    --glow: rgba(255, 90, 100, 0.35);
+    /* внутри - картинка, снаружи - рамка-прогресс по периметру */
+    background:
+      linear-gradient(#1a202c, #1a202c) padding-box,
+      conic-gradient(from 0deg,
+        var(--c1) 0%,
+        var(--c2) calc(var(--p) * 1%),
+        rgba(255, 255, 255, 0.08) calc(var(--p) * 1%)) border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s var(--ease), box-shadow 0.3s ease;
   }
 
-  .card:active {
-    transform: scale(0.95);
-  }
+  .card:active { transform: scale(0.95); }
 
-  /* Сама картинка (радиус меньше, чтобы вписаться в рамку) */
   .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     display: block;
-    border-radius: 13px; /* 16 - 3 = 13 */
+    border-radius: 13px;
   }
 
-  /* --- Премиальная красная обводка (в процессе) --- */
-  .card.red-border {
-    background: linear-gradient(#1a202c, #1a202c) padding-box, 
-                linear-gradient(135deg, #ff416c, #ff4b2b) border-box;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 
-                0 0 15px rgba(255, 65, 108, 0.3); /* Мягкое свечение */
+  /* В процессе: мягкое фиолетовое свечение */
+  .card.prog {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 16px var(--glow);
   }
 
-  /* --- Премиальная зеленая обводка (100% завершено) --- */
-  .card.green-border {
-    background: linear-gradient(#1a202c, #1a202c) padding-box, 
-                linear-gradient(135deg, #00b09b, #96c93d) border-box;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 
-                0 0 20px rgba(0, 176, 155, 0.4); /* Более яркое свечение */
+  /* 100%: вращающаяся золотая рамка */
+  .card.done {
+    background:
+      linear-gradient(#1a202c, #1a202c) padding-box,
+      conic-gradient(from var(--a), #ffd86b, #ff9a3c, #fff3b0, #ffb347, #ffd86b) border-box;
+    animation: spin 4s linear infinite;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 190, 70, 0.4);
   }
 
-  /* --- Бейдж с процентами --- */
+  @keyframes spin { to { --a: 360deg; } }
+
+  /* --- Голографический эффект для 100% --- */
+  .card.done::before,
+  .card.done::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  /* Мягкое радужное мерцание: плавно вращается без рывков */
+  .card.done::before {
+    background: conic-gradient(from var(--h) at 50% 50%,
+      rgba(255, 90, 170, 0.16),
+      rgba(90, 200, 255, 0.16),
+      rgba(255, 225, 110, 0.16),
+      rgba(130, 255, 190, 0.16),
+      rgba(255, 90, 170, 0.16));
+    mix-blend-mode: screen;
+    opacity: 0.85;
+    animation: holoSpin 9s linear infinite;
+  }
+  /* Широкий мягкий блик, проплывающий по карточке */
+  .card.done::after {
+    background: linear-gradient(115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.05) 38%,
+      rgba(120, 220, 255, 0.16) 44%,
+      rgba(255, 255, 255, 0.24) 50%,
+      rgba(255, 150, 230, 0.16) 56%,
+      rgba(255, 230, 140, 0.08) 62%,
+      transparent 70%);
+    background-size: 300% 100%;
+    background-position: 120% 0;
+    mix-blend-mode: screen;
+    animation: holoSweep 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  @keyframes holoSpin { to { --h: 360deg; } }
+  @keyframes holoSweep {
+    0%   { background-position: 120% 0; }
+    55%  { background-position: -20% 0; }
+    100% { background-position: -20% 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card.done, .card.done::before, .card.done::after { animation: none; }
+  }
+
+
+  /* --- Бейдж справа снизу --- */
   .badge {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    padding: 4px 10px;
-    border-radius: 8px;
-    background: rgba(13, 17, 23, 0.85);
-    color: #8b949e;
-    font-size: 11px;
+    right: 8px;
+    bottom: 8px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(13, 17, 23, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #f0f6fc;
+    font-size: 10.5px;
     font-weight: 800;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    pointer-events: none; /* Чтобы клик проходил на карточку */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   }
 
-  .badge.done { color: var(--ok); border-color: rgba(16, 185, 129, 0.4); }
-  .badge.half { color: #f59e0b; border-color: rgba(245, 158, 11, 0.4); }
-  .badge.started { color: #f0f6fc; }
+  .badge svg.ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .badge svg.ring circle { fill: none; stroke-width: 3; stroke-linecap: round; }
+  .badge svg.ring .tr { stroke: rgba(255, 255, 255, 0.12); }
+  .badge svg.ring .fg {
+    stroke: var(--c2);
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--p));
+    filter: drop-shadow(0 0 3px var(--glow));
+    transition: stroke-dashoffset 1s var(--ease);
+  }
+  .badge .num { position: relative; }
+
+  /* Новый тренажёр */
+  .badge.neu {
+    width: auto;
+    height: auto;
+    border-radius: 99px;
+    padding: 5px 11px;
+    color: #22d3ee;
+    letter-spacing: 0.8px;
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 10px rgba(34, 211, 238, 0.25);
+  }
+
+  /* 100%: золотой круг с галочкой */
+  .badge.done svg.ring .fg {
+    stroke: url(#gGold);
+    filter: drop-shadow(0 0 4px rgba(255, 200, 80, 0.9));
+  }
+  .badge .ck {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: #ffd666;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(255, 200, 80, 0.8));
+  }
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -117,6 +220,17 @@
 </style>
 </head>
 <body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="gRing" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ff6b81"/><stop offset="0.5" stop-color="#a855f7"/><stop offset="1" stop-color="#22d3ee"/>
+      </linearGradient>
+      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffd86b"/><stop offset="1" stop-color="#ff9a3c"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
   <div class="grid">
     
@@ -224,45 +338,51 @@
     });
 
     // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА (НА ОСНОВЕ EXP) ---
-    function updateProgress() {
-      const badges = document.querySelectorAll('.badge');
+    const RING = '<svg class="ring" viewBox="0 0 42 42"><circle class="tr" cx="21" cy="21" r="18" pathLength="100"/><circle class="fg" cx="21" cy="21" r="18" pathLength="100"/></svg>';
+    const CHECK = '<svg class="ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 
-      badges.forEach(badge => {
-        const trainerId = badge.getAttribute('data-id'); // получаем 'tekamolo', 'negation' и т.д.
-        
-        // Читаем EXP и МАКС EXP из localStorage
+    // Цвета по уровням прогресса: до 25 / до 50 / до 75 / до 99, на 100 - золото (в CSS)
+    const TIERS = [
+      { max: 25, c1: '#ff4b6e', c2: '#ff8a5b', glow: 'rgba(255, 90, 100, 0.35)' },
+      { max: 50, c1: '#a855f7', c2: '#ec4899', glow: 'rgba(168, 85, 247, 0.35)' },
+      { max: 75, c1: '#3b82f6', c2: '#22d3ee', glow: 'rgba(34, 211, 238, 0.35)' },
+      { max: 99, c1: '#10b981', c2: '#84e36b', glow: 'rgba(16, 185, 129, 0.38)' }
+    ];
+
+    function updateProgress() {
+      document.querySelectorAll('.badge').forEach(badge => {
+        const trainerId = badge.getAttribute('data-id');
+        const card = badge.closest('.card');
+
         const exp = parseInt(localStorage.getItem('tp_v2_exp_' + trainerId) || '0', 10);
         const expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
-        
-        // Считаем процент
-        let val = -1; // -1 значит "нет данных"
+
+        let val = 0;
         if (expMax > 0) {
           val = Math.round((exp / expMax) * 100);
-          if (val > 100) val = 100; // Защита
-        }
-        
-        // Обновляем бейдж
-        if (val >= 0) {
-          badge.textContent = val + '%';
-          badge.classList.remove('started', 'half', 'done');
-          if (val >= 100) badge.classList.add('done');
-          else if (val >= 50) badge.classList.add('half');
-          else if (val > 0) badge.classList.add('started');
-        } else {
-          badge.textContent = '—';
-          badge.classList.remove('started', 'half', 'done');
+          if (val > 100) val = 100;
+          if (val < 0) val = 0;
         }
 
-        // Обновляем обводку карточки
-        const card = badge.closest('.card');
-        if (card) {
-          card.classList.remove('red-border', 'green-border');
-          
-          if (val >= 100) {
-            card.classList.add('green-border'); // Максимум достигнут
-          } else if (exp > 0) {
-            card.classList.add('red-border');   // Есть прогресс, но не 100%
-          }
+        badge.classList.remove('neu', 'done');
+        card.classList.remove('prog', 'done');
+        card.style.setProperty('--p', val);
+        badge.style.setProperty('--p', val);
+
+        if (val <= 0) {
+          badge.classList.add('neu');
+          badge.innerHTML = 'NEU';
+        } else if (val >= 100) {
+          badge.classList.add('done');
+          card.classList.add('done');
+          badge.innerHTML = RING + CHECK;
+        } else {
+          card.classList.add('prog');
+          const t = TIERS.find(x => val <= x.max) || TIERS[TIERS.length - 1];
+          card.style.setProperty('--c1', t.c1);
+          card.style.setProperty('--c2', t.c2);
+          card.style.setProperty('--glow', t.glow);
+          badge.innerHTML = RING + '<span class="num">' + val + '%</span>';
         }
       });
     }
