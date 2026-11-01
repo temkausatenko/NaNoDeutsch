@@ -1277,7 +1277,7 @@ const ZW = a => ["zwar","aber","einerseits","andererseits"].map(x => a[0] === a[
 
 const STG = {}; Object.keys(ITEMS).forEach(t => { STG[t] = ITEMS[t].map(it => it.st); });
 const TOTAL = Object.keys(ITEMS).reduce((a, t) => a + ITEMS[t].length, 0);
-const XP_MAX = TOTAL;
+const XP_MAX = TOTAL + 20;
 
 let stage = (() => { const v = parseInt(localStorage.getItem("ng_stage"), 10); return (v >= 1 && v <= STAGES.length) ? v : 1; })();
 const UL_KEY = "ng_unlocked";
@@ -1443,7 +1443,7 @@ function renderModes(){
 function renderLab(){
   const it = items()[cur], lab = $("lab");
   if(!it || !it.lbl){ lab.innerHTML = ""; return; }
-  lab.innerHTML = trShown ? `<div class="tr-text">${esc(it.lbl)}</div>` : '<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
+  lab.innerHTML = (trShown || tab === "ad") ? `<div class="tr-text">${esc(it.lbl)}</div>` : '<button class="tr-btn" type="button" data-tr="1">🌐 Перекласти</button>';
 }
 function sentHTML(it){
   if(it.s.indexOf("{{B}}") < 0) return it.s;
@@ -1964,35 +1964,28 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
 })();
-  /* ============ ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ============ */
+  /* ============ УНИВЕРСАЛЬНАЯ ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ============ */
 function publishProgress() {
   try {
-    const trainerId = 'negation'; // ID этого тренажера
+    // ВАЖНО: ЗАМЕНИТЕ 'negation' НА ID ЭТОГО ТРЕНАЖЕРА (см. шпаргалку выше)
+    const trainerId = 'negation'; 
     
-    let currentXp = 0;
-    // 1. Пытаемся использовать встроенную функцию calcXp (самый точный вариант)
-    if (typeof calcXp === 'function') {
-      currentXp = calcXp();
-    } else {
-      // 2. Если функции нет, считаем вручную
-      let totalX = 0, totalP = 0;
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k.startsWith('tp_v2_' + trainerId + '_')) {
-          const val = JSON.parse(localStorage.getItem(k));
-          if (val) {
-            totalX += (Number(val.x) || 0);
-            totalP += (Number(val.p) || 0);
-          }
+    // Считаем текущий XP из localStorage (сумма всех x - p)
+    let totalX = 0, totalP = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k.startsWith('tp_v2_' + trainerId + '_')) {
+        const val = JSON.parse(localStorage.getItem(k));
+        if (val) {
+          totalX += (Number(val.x) || 0);
+          totalP += (Number(val.p) || 0);
         }
       }
-      currentXp = Math.max(0, totalX - totalP);
     }
+    const currentXp = Math.max(0, totalX - totalP);
     
+    // Берем максимальный EXP из переменной тренажера
     const maxXP = (typeof XP_MAX !== 'undefined') ? XP_MAX : 100;
-    
-    // 3. ЗАЩИТА: currentXp не может быть больше maxXP
-    if (currentXp > maxXP) currentXp = maxXP;
     
     localStorage.setItem('tp_v2_exp_' + trainerId, currentXp);
     localStorage.setItem('tp_v2_exp_max_' + trainerId, maxXP);
