@@ -371,9 +371,8 @@
         const trainerId = badge.getAttribute('data-id');
         const card = badge.closest('.card');
 
-        const expStored = parseInt(localStorage.getItem('tp_v2_exp_' + trainerId) || '0', 10);
-        const expComputed = computeExpFromState(trainerId);
-        const exp = Math.max(expStored, expComputed);
+        // EXP считаем из реального состояния вкладок (tp_v2_<id>_*), а не из залипшего tp_v2_exp_<id>
+        const exp = computeExpFromState(trainerId);
         const expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
 
         let val = 0;
