@@ -349,6 +349,21 @@
       { max: 99, c1: '#10b981', c2: '#84e36b', glow: 'rgba(16, 185, 129, 0.38)' }
     ];
     function computeExpFromState(trainerId) {
+      // Для тренажёра negation используем точный список его вкладок
+      if (trainerId === 'negation') {
+        const TABS_IDS = ["md", "zs", "kn", "ei", "an", "sn", "kf", "kp", "po", "pd", "ue", "er", "tx", "ad"];
+        const LEGACY_IDS = ["ne", "dc", "ko", "br", "oh", "zw"];
+        let xp = 0;
+        [...TABS_IDS, ...LEGACY_IDS].forEach(id => {
+          try {
+            const v = JSON.parse(localStorage.getItem('tp_v2_negation_' + id));
+            if (v && v.k) xp += (Number(v.x) || 0) - (Number(v.p) || 0);
+          } catch(e) {}
+        });
+        return Math.max(0, xp);
+      }
+
+      // Для остальных тренажёров — универсальный подсчёт
       let totalX = 0, totalP = 0;
       const prefix = 'tp_v2_' + trainerId + '_';
       for (let i = 0; i < localStorage.length; i++) {
@@ -356,7 +371,7 @@
         if (k && k.startsWith(prefix)) {
           try {
             const val = JSON.parse(localStorage.getItem(k));
-            if (val && typeof val === 'object') {
+            if (val && typeof val === 'object' && val.k) { // проверяем val.k!
               totalX += Number(val.x) || 0;
               totalP += Number(val.p) || 0;
             }
@@ -371,12 +386,13 @@
         const trainerId = badge.getAttribute('data-id');
         const card = badge.closest('.card');
 
-        // EXP считаем из реального состояния вкладок (tp_v2_<id>_*), а не из залипшего tp_v2_exp_<id>
         const exp = computeExpFromState(trainerId);
-        let expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
         
-        // Защита: если максимум застрял на старом значении, берем реальный
-        if (expMax < exp) expMax = exp; 
+        // Если expMax застрял на 0, ставим 364 для negation (и 100 для остальных)
+        let expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
+        if (expMax === 0) {
+          expMax = (trainerId === 'negation') ? 364 : 100;
+        }
 
         let val = 0;
         if (expMax > 0) {
