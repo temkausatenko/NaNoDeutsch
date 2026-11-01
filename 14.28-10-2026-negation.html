@@ -1967,25 +1967,32 @@ if (window.Telegram && window.Telegram.WebApp) {
   /* ============ УНИВЕРСАЛЬНАЯ ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ============ */
 function publishProgress() {
   try {
-    // ВАЖНО: ЗАМЕНИТЕ 'negation' НА ID ЭТОГО ТРЕНАЖЕРА (см. шпаргалку выше)
-    const trainerId = 'negation'; 
+    const trainerId = 'negation'; // ID этого тренажера
     
-    // Считаем текущий XP из localStorage (сумма всех x - p)
-    let totalX = 0, totalP = 0;
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k.startsWith('tp_v2_' + trainerId + '_')) {
-        const val = JSON.parse(localStorage.getItem(k));
-        if (val) {
-          totalX += (Number(val.x) || 0);
-          totalP += (Number(val.p) || 0);
+    let currentXp = 0;
+    // 1. Используем встроенную функцию calcXp (она уже имеет защиту от превышения)
+    if (typeof calcXp === 'function') {
+      currentXp = calcXp();
+    } else {
+      // Резервный подсчет, если функции нет
+      let totalX = 0, totalP = 0;
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k.startsWith('tp_v2_' + trainerId + '_')) {
+          const val = JSON.parse(localStorage.getItem(k));
+          if (val) {
+            totalX += (Number(val.x) || 0);
+            totalP += (Number(val.p) || 0);
+          }
         }
       }
+      currentXp = Math.max(0, totalX - totalP);
     }
-    const currentXp = Math.max(0, totalX - totalP);
     
-    // Берем максимальный EXP из переменной тренажера
     const maxXP = (typeof XP_MAX !== 'undefined') ? XP_MAX : 100;
+    
+    // 2. Двойная защита: очки не могут быть больше максимума
+    if (currentXp > maxXP) currentXp = maxXP;
     
     localStorage.setItem('tp_v2_exp_' + trainerId, currentXp);
     localStorage.setItem('tp_v2_exp_max_' + trainerId, maxXP);
