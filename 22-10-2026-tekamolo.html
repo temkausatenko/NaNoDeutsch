@@ -1456,8 +1456,8 @@ const readState = id => {
 };
 TABS.forEach(t => { S[t.id] = readState(t.id) || blankState(); });
 const OLD_KEY = id => "tk_v1_" + id;        // старий формат (лише для одноразової міграції)
-/* максимум EXP = кількість усіх завдань + 20, округлено вгору до десятків */
-const XP_MAX = Math.ceil((Object.keys(ITEMS).reduce((n, k) => n + ITEMS[k].length, 0) + 20) / 10) * 10;
+/* максимум EXP = кількість усіх завдань */
+const XP_MAX = Object.keys(ITEMS).reduce((n, k) => n + ITEMS[k].length, 0);
 /* одноразова міграція зі старого формату tk_v1_* (тільки якщо нових ключів ще немає) */
 if(!TABS.some(t => readState(t.id))){
   try {
