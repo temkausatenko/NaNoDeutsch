@@ -49,41 +49,43 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    /* Прозрачная рамка, чтобы картинка не прыгала при появлении цвета */
-    border: 4px solid transparent; 
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    /* Плавное появление рамки */
-    transition: transform 0.15s var(--ease), border-color 0.3s ease, box-shadow 0.3s ease;
-    background: #1a202c;
-    aspect-ratio: 1 / 1; /* Идеальный квадрат */
+    /* Толщина и прозрачность рамки */
+    border: 3px solid transparent; 
+    /* Магия градиентной рамки */
+    background: linear-gradient(#1a202c, #1a202c) padding-box, 
+                linear-gradient(#1a202c, #1a202c) border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s var(--ease), box-shadow 0.3s ease, background 0.3s ease;
+    aspect-ratio: 1 / 1;
   }
 
   .card:active {
-    transform: scale(0.95); /* Эффект нажатия */
+    transform: scale(0.95);
   }
 
-  /* Сама картинка */
+  /* Сама картинка (радиус меньше, чтобы вписаться в рамку) */
   .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Заполняет весь квадрат без искажений */
+    object-fit: cover; 
     display: block;
-    border-radius: 12px; /* Скругляем картинку внутри рамки */
+    border-radius: 13px; /* 16 - 3 = 13 */
   }
 
-  /* --- Обводки для прогресса --- */
-  /* Мягкая красная обводка (прогресс есть, но не 100%) */
+  /* --- Премиальная красная обводка (в процессе) --- */
   .card.red-border {
-    border-color: var(--no);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
-                0 0 12px rgba(239, 68, 68, 0.5); /* Свечение снаружи */
+    background: linear-gradient(#1a202c, #1a202c) padding-box, 
+                linear-gradient(135deg, #ff416c, #ff4b2b) border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 
+                0 0 15px rgba(255, 65, 108, 0.3); /* Мягкое свечение */
   }
 
-  /* Зеленая обводка (100% EXP) */
+  /* --- Премиальная зеленая обводка (100% завершено) --- */
   .card.green-border {
-    border-color: var(--ok);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), 
-                0 0 16px rgba(16, 185, 129, 0.6); /* Свечение снаружи */
+    background: linear-gradient(#1a202c, #1a202c) padding-box, 
+                linear-gradient(135deg, #00b09b, #96c93d) border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 
+                0 0 20px rgba(0, 176, 155, 0.4); /* Более яркое свечение */
   }
 
   /* --- Бейдж с процентами --- */
