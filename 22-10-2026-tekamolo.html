@@ -163,6 +163,10 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .stg.lk{opacity:.5;filter:grayscale(.6);cursor:not-allowed}.stg.lk small{display:none}.stg.lk:hover{color:var(--mu);border-color:var(--bd)}
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
+.ctl{position:absolute;top:22px;right:102px;display:flex;align-items:center;gap:6px;z-index:2}.ctl .mode-toggle{position:static;top:auto;right:auto}
+.rulesbtn{height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
+.card h2#title{padding-right:290px}
+@media(max-width:480px){.ctl{top:18px;right:98px}.card h2#title{padding-right:255px}}
 .lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
 .lesson .pts{list-style:none;margin:6px 0 14px;padding:0}.lesson .pts li{position:relative;padding:0 0 0 18px;margin:0 0 12px;line-height:1.65;font-size:.97rem;color:var(--tx)}.lesson .pts li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--pr)}.lesson .pts li b{color:var(--tx);font-weight:700}.lesson .pts li i{color:var(--mu)}.lesson .kv{margin:0 0 14px}.lesson .tip{margin-top:14px;line-height:1.6}.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
@@ -510,7 +514,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   <div class="rule" id="rule"></div>
   <div class="card" id="card">
     <h2 id="title"></h2>
-    <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
+    <div class="ctl"><button class="rulesbtn" id="lessonBtn" type="button" title="Показати правила етапу">📘 Правила</button><button class="mode-toggle" id="modeBtn" title="Змінити режим"></button></div>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rstBtn" title="Скинути прогрес цієї вкладки" onclick="restartTab()">↺</button>
     <div id="finBox"></div>
@@ -1879,8 +1883,11 @@ function openStage(n){
   stage = n; localStorage.setItem("tk_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis[0].id);
-  showLesson(n); centerStage(true);
+  if(n && !localStorage.getItem("tk_seen_" + n)) showLesson(n); else document.body.classList.remove("lsn");
+  updateLessonBtn(); centerStage(true);
 }
+function updateLessonBtn(){ $("lessonBtn").hidden = !STAGES.find(x => x.n === stage); }
+$("lessonBtn").addEventListener("click", () => showLesson(stage));
 $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
   TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
@@ -2242,6 +2249,7 @@ function applyStorage(){
 }
 window.addEventListener("tpsync:updated", applyStorage);
 try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
+updateLessonBtn();
 if(stage && !localStorage.getItem("tk_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ setTab(vis[0].id); showLesson(stage); } }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
