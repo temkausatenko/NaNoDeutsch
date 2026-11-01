@@ -162,6 +162,10 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .stg.lk{opacity:.5}
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
+.ctl{position:absolute;top:22px;right:102px;display:flex;align-items:center;gap:6px;z-index:2}.ctl .mode-toggle{position:static;top:auto;right:auto}
+.rulesbtn{height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
+.card h2#title{padding-right:290px}
+@media(max-width:480px){.ctl{top:18px;right:98px}.card h2#title{padding-right:255px}}
 .lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
 .lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
@@ -299,8 +303,8 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
 .xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
 .xp.max .xnx{color:var(--go);font-weight:600}
-:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
-:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
+:root.xp-legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.xp-legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
 
 /* кнопка режиму з підписом */
@@ -483,7 +487,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   <div class="rule" id="rule"></div>
   <div class="card" id="card">
     <h2 id="title"></h2>
-    <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
+    <div class="ctl"><button class="rulesbtn" id="lessonBtn" type="button" title="Показати правила етапу">📘 Правила</button><button class="mode-toggle" id="modeBtn" title="Змінити режим"></button></div>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rstBtn" title="Скинути прогрес цієї вкладки" onclick="restartTab()">↺</button>
     <div id="finBox"></div>
@@ -751,7 +755,7 @@ const TIPS = {
 
 /* ============ STATE ============ */
 const KEY = id => "tp_v2_partizip1_" + id;   // префікс tp_v2_ — ці ключі синхронізує sync.js
-const XP_MAX = 555;   // = кількість завдань (532) + ~20, округлено вгору до 5
+const XP_MAX = Object.keys(ITEMS).reduce((n, k) => n + ITEMS[k].length, 0);   // максимум EXP = кількість усіх завдань (рахується автоматично)
 /* x і p лише зростають (для sync.js): кожна відповідь x+1, а p+0 / p+1 / p+2 дає EXP +1 / 0 / −1. Загальний EXP = Σ(x − p) по всіх вкладках. */
 const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0, p:0 });
 const S = {};
@@ -778,7 +782,7 @@ const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] ==
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;   // завдання «вивчене» після 1 правильної відповіді — більше воно не повертається (помилкові повертаються)
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); if(typeof publishProgress === 'function') publishProgress(); } catch(e){} };
 
 /* ============ SPEECH ============ */
 function speak(text){
@@ -987,12 +991,16 @@ function openStage(n){
   stage = n; localStorage.setItem("pi_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis.some(t => t.id === tab) ? tab : vis[0].id);
-  showLesson(n);
+  if(n && !localStorage.getItem("pi_seen_" + n)) showLesson(n); else document.body.classList.remove("lsn");
+  updateLessonBtn();
 }
+function updateLessonBtn(){ $("lessonBtn").hidden = !STAGES.find(x => x.n === stage); }
+$("lessonBtn").addEventListener("click", () => showLesson(stage));
 $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
   TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
   XP = calcXp(); updateXp(XP); renderTabs();
+  if(typeof publishProgress === 'function') publishProgress();
 });
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
@@ -1090,7 +1098,7 @@ const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 function updateXp(xv){
   const r=rankOf(xv),R=RANKS[r],N=RANKS[r+1],box=$("xp");
   box.dataset.r=r;
-  box.classList.toggle("max",xv>=XP_MAX);document.documentElement.classList.toggle("legend",xv>=XP_MAX);
+  box.classList.toggle("max",xv>=XP_MAX);document.documentElement.classList.toggle("xp-legend",xv>=XP_MAX);
   $("xf").style.width=`${xv/XP_MAX*100}%`;
   $("xt").textContent=xv;
   $("xn").textContent=xv>=XP_MAX?"MAX":`/ ${XP_MAX}`;
@@ -1321,7 +1329,7 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
-/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_tekamolo_*) === */
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_partizip1_*) === */
 function applyStorage(){
   try {
     TABS.forEach(t => {
@@ -1330,11 +1338,14 @@ function applyStorage(){
       if(v) S[t.id] = v;
     });
     XP = calcXp();
+    if(typeof publishProgress === 'function') publishProgress();
     if(answered){ updateXp(XP); renderTabs(); }
     else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
+try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
+updateLessonBtn();
 if(stage && !localStorage.getItem("pi_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ if(!vis.some(t => t.id === tab)) setTab(vis[0].id); showLesson(stage); } }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
@@ -1360,6 +1371,18 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
 })();
+
+/* ============ ВІДПРАВКА ПРОГРЕСУ НА ГОЛОВНУ ============ */
+function publishProgress() {
+  try {
+    // ID має збігатися з data-id у index.html
+    const trainerId = 'partizip1';
+    localStorage.setItem('tp_v2_exp_' + trainerId, calcXp());
+    localStorage.setItem('tp_v2_exp_max_' + trainerId, XP_MAX);
+    localStorage.setItem('tp_v2_exp_tabs_' + trainerId, JSON.stringify(TABS.map(t => t.id)));
+  } catch(e) {}
+}
+publishProgress(); // при завантаженні
 </script>
 </body>
 </html>
