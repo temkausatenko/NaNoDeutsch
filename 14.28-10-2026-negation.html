@@ -304,8 +304,8 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
 .xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
 .xp.max .xnx{color:var(--go);font-weight:600}
-:root.legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
-:root.legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
+:root.xp-legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.xp-legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
 
 /* кнопка режиму з підписом */
@@ -1736,7 +1736,7 @@ const rankOf = x => { let r = 0; RANKS.forEach((q, i) => { if(x >= q[0]) r = i; 
 function updateXp(xv){
   const r = rankOf(xv), R = RANKS[r], N = RANKS[r + 1], box = $("xp");
   box.dataset.r = r;
-  box.classList.toggle("max", xv >= XP_MAX); document.documentElement.classList.toggle("legend", xv >= XP_MAX);
+  box.classList.toggle("max", xv >= XP_MAX); document.documentElement.classList.toggle("xp-legend", xv >= XP_MAX);
   $("xf").style.width = `${xv / XP_MAX * 100}%`;
   $("xt").textContent = xv;
   $("xn").textContent = xv >= XP_MAX ? "MAX" : `/ ${XP_MAX}`;
