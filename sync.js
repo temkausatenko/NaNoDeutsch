@@ -29,6 +29,15 @@
   var PUSH_EVERY = 4000;
   var READY_TIMEOUT = 6000;
 
+  // ← NEW: єдині правила, які ключі НЕ синхронізуються.
+  //    Всі tp_v2_exp_* (і exp_max) — це лише локальний кэш/константи,
+  //    реальне джерело правди — tp_v2_<trainer>_<tab> (JSON з x, p, k, err).
+  function isLocalOnly(key) {
+    if (LOCAL_ONLY.indexOf(key) !== -1) return true;
+    if (key.indexOf(PREFIX + 'exp_') === 0) return true;
+    return false;
+  }
+
   var tg = window.Telegram && window.Telegram.WebApp;
   var cs = tg && tg.CloudStorage;
   var supported = !!(cs && tg.initData && typeof tg.isVersionAtLeast === 'function' && tg.isVersionAtLeast('6.9'));
@@ -80,7 +89,7 @@
     var out = [];
     for (var i = 0; i < localStorage.length; i++) {
       var k = localStorage.key(i);
-      if (k && k.indexOf(PREFIX) === 0 && LOCAL_ONLY.indexOf(k) === -1) out.push(k);
+      if (k && k.indexOf(PREFIX) === 0 && !isLocalOnly(k)) out.push(k);
     }
     return out;
   }
@@ -101,7 +110,8 @@
     if (localStr == null) return remoteStr;
     if (localStr === remoteStr) return localStr;
 
-    // Числові значення (tp_v2_exp_*, tp_v2_exp_max_*) — беремо максимум
+    // Числові значення — беремо максимум (зараз це не критично:
+    // всі tp_v2_exp_* вже в LOCAL_ONLY, а решта ключів — JSON-об'єкти)
     var lnum = Number(localStr), rnum = Number(remoteStr);
     if (localStr.trim() !== '' && remoteStr.trim() !== '' && !isNaN(lnum) && !isNaN(rnum)) {
       return String(Math.max(lnum, rnum));
@@ -204,7 +214,7 @@
       var remoteKeys = cloudKeys
         .filter(function (k) { return k.indexOf(PREFIX) === 0 && k.slice(-3) === '__n'; })
         .map(function (k) { return k.slice(0, -3); })
-        .filter(function (k) { return LOCAL_ONLY.indexOf(k) === -1; });
+        .filter(function (k) { return !isLocalOnly(k); }); // ← CHANGED: використовуємо isLocalOnly
 
       var remote = await readRemote(remoteKeys);
       remoteKeys.forEach(function (k) {
@@ -308,10 +318,12 @@
     }
   }
 
+  // ← CHANGED: тепер кожен тік — повний sync (pull + push), а не лише push.
+  //    Це означає, що відкрита сторона (напр. index.html) сама побачить зміни
+  //    з іншого пристрою протягом ≤ 4 секунд, без перезавантаження.
   function tick() {
     if (!supported) return;
-    if (!pulled) sync();
-    else push();
+    sync();
   }
 
   api.sync = sync;
@@ -326,8 +338,10 @@
 
   if (supported) {
     setInterval(tick, PUSH_EVERY);
+    // ← CHANGED: при поверненні на вкладку — повний sync (щоб підтягнути чуже)
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) push();
+      else sync();
     });
     window.addEventListener('pagehide', function () { push(); });
   }
