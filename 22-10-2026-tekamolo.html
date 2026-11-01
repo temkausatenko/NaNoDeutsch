@@ -2226,7 +2226,7 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
-/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_negation_*) === */
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_tekamolo_*) === */
 function applyStorage(){
   try {
     TABS.forEach(t => {
@@ -2235,6 +2235,7 @@ function applyStorage(){
       if(v) S[t.id] = v;
     });
     XP = calcXp();
+    if(typeof publishProgress === 'function') publishProgress();
     if(answered){ updateXp(XP); renderTabs(); }
     else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
@@ -2276,6 +2277,9 @@ function publishProgress() {
     if (typeof calcXp === 'function' && typeof XP_MAX !== 'undefined') {
       localStorage.setItem('tp_v2_exp_' + trainerId, calcXp());
       localStorage.setItem('tp_v2_exp_max_' + trainerId, XP_MAX);
+      // Только актуальные вкладки: EXP удалённых (insert, errors, pron) уже перенесён в build,
+      // поэтому их старые ключи главная считать не должна, иначе опыт задвоится
+      localStorage.setItem('tp_v2_exp_tabs_' + trainerId, JSON.stringify(TABS.map(t => t.id)));
     }
   } catch(e) {}
 }
