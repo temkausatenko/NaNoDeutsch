@@ -139,20 +139,8 @@
       Object.keys(r).forEach(function (d) { out[d] = Math.max(out[d] || 0, Number(r[d]) || 0); });
       return JSON.stringify(out);
     }
-    // Тренажери: перемагає версія з більшим XP, при рівності — локальна.
-    // З «програвшої» версії додаємо лише ті картки (k), яких у переможця ще немає.
-    var rWins = (Number(r.x) || 0) > (Number(l.x) || 0);
-    var win = rWins ? r : l, lose = rWins ? l : r;
-    var winStr = rWins ? remoteStr : localStr;
-    if (lose.k && typeof lose.k === 'object' && win.k && typeof win.k === 'object') {
-      var added = false;
-      var out2 = JSON.parse(JSON.stringify(win));
-      Object.keys(lose.k).forEach(function (id) {
-        if (!(id in out2.k)) { out2.k[id] = lose.k[id]; added = true; }
-      });
-      if (added) return JSON.stringify(out2);
-    }
-    return winStr;
+    // Тренажери: перемагає версія з більшим XP, при рівності — локальна
+    return (Number(r.x) || 0) > (Number(l.x) || 0) ? remoteStr : localStr;
   }
 
   function splitChunks(str) {
