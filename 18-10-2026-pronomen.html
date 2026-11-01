@@ -117,7 +117,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
 .scheme{font-size:.95rem;color:var(--mu);margin:8px 0 0;line-height:1.5}
 .scheme:empty{display:none}
-.cue-line{margin:-4px 0 10px}
+.cue-line{margin:12px 0 12px}
 .cue-line:empty{display:none}
 .scheme .np{color:var(--tx);font-weight:500}
 .blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
@@ -164,6 +164,9 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .lesson .lp{line-height:1.6;font-size:.95rem}.lesson .lp p{margin:8px 0}.lesson .lp .lead{font-size:1rem}.lesson .lp ul{margin:4px 0 10px;padding-left:22px}.lesson .lp li{margin:3px 0}
 .lesson .lt{border-collapse:collapse;margin:8px 0 12px;width:100%;max-width:420px;font-size:.92rem}.lesson .lt th,.lesson .lt td{border:1px solid var(--bd);padding:6px 10px;text-align:left}.lesson .lt th{font-weight:700}
 .lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.rulesbtn{position:absolute;top:22px;right:200px;height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s;z-index:2}
+.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
+@media(max-width:480px){.rulesbtn{top:18px}}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
 .lsl:hover{color:var(--tx)}
 .rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
@@ -387,6 +390,14 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .mode-toggle{right:102px;font-size:.8rem}
 .card:not(.tx) h2{padding-right:100px}
 .card.tx h2{padding-right:200px}
+.showbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 13px 5px 9px;border-radius:99px;border:1px solid var(--bd);background:var(--pl);color:var(--mu);font:inherit;font-size:.78rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
+.showbtn svg{width:14px;height:14px;flex:none;color:var(--go)}
+.showbtn:not(.rev) .ic-a,.showbtn.rev .ic-h{display:none}
+.showbtn:hover{color:var(--tx);border-color:var(--go);transform:translateY(-1px)}
+.showbtn.rev{color:var(--go);border-color:color-mix(in srgb,var(--go) 50%,var(--bd));background:var(--gob)}
+.showbtn:disabled{opacity:.35;pointer-events:none}
+.hintans{max-height:0;opacity:0;overflow:hidden;margin:0;text-align:center;font-size:1.05rem;font-weight:500;color:var(--tx);transition:opacity .35s,max-height .35s,margin .35s}
+.hintans.on{max-height:140px;opacity:.6;margin-top:12px}
 .um-row{justify-content:flex-end}
 @media(max-width:480px){
   .speak,.rst,.mode-toggle{top:18px}
@@ -428,9 +439,9 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="stat-wrong">0</div></div>
   </div>
 
-  <div class="rule" id="rule"></div>
   <div class="card" id="card">
     <h2 id="title"></h2>
+    <button class="rulesbtn" id="rulesBtn" type="button" title="Показати правила етапу">📘 Правила</button>
     <button class="mode-toggle" id="modeBtn" title="Змінити режим"></button>
     <button class="speak" id="speakBtn" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rstBtn" title="Скинути прогрес цієї вкладки" onclick="restartTab()">↺</button>
@@ -449,15 +460,16 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
         <button class="tool" id="blHint" type="button">💡 Підсвітити типи</button>
         <button class="tool" id="blType" type="button">⌨️ Введи сам</button>
         <button class="tool" id="blReset" type="button">↺ Скинути</button>
-        <button class="tool" id="blShow" type="button">👁 Показати відповідь</button>
+        <button class="tool" id="blShow" type="button">💡 Підказка</button>
       </div>
     </div>
 
     <div class="opts" id="opts"></div>
 
     <div class="um-row" id="umRow">
-      <button class="tool" id="showBtn" type="button">Показати відповідь</button>
+      <button class="showbtn" id="showBtn" type="button"><svg class="ic-h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg><svg class="ic-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Підказка</span></button>
     </div>
+    <div class="hintans" id="hintAns"></div>
     <div class="row">
       <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Введи …" enterkeyhint="done">
       <button class="chk" id="chk">Перевірити ✓</button>
@@ -825,9 +837,9 @@ const ROLE = { nom:"Nominativ", akk:"Akkusativ", dat:"Dativ", pos:"Possessiv", r
 const NM = {};
 const OPT_META = {};
 const TIPS = {
-  tab:"Nominativ → Akkusativ → Dativ. Згадай рядок таблиці.",
+  tab:"",
   sent:"",
-  ch:"Одна форма — Akkusativ, інша — Dativ. Яка підходить?"
+  ch:""
 };
 
 /* ============ STATE ============ */
@@ -1021,16 +1033,24 @@ function showFb(ok, i){
 
 /* ============ ПРАВИЛО ВКЛАДКИ ============ */
 const RULES = {
-  tab:"💡 ich → mich / mir · du → dich / dir · er → ihn / ihm · sie → sie / ihr · es → es / ihm · wir → uns / uns · ihr → euch / euch · sie (мн.) → sie / ihnen.",
+  tab:"",
   sent:"",
-  ch:"💡 Akk.: sehen, kennen, besuchen, lieben, fragen, anrufen · Dat.: helfen, danken, antworten, gefallen, gehören, schmecken."
+  ch:""
 };
+function placeRules(){
+  const b = $("rulesBtn"), card = $("card"); if(!b || !card) return;
+  b.style.display = stage ? "" : "none";
+  const m = $("modeBtn"), ref = (m && m.offsetWidth) ? m : $("speakBtn");
+  if(ref && ref.offsetWidth) b.style.right = (card.offsetWidth - ref.offsetLeft + 8) + "px";
+}
+window.addEventListener("resize", () => placeRules());
+$("rulesBtn").addEventListener("click", () => { if(stage) showLesson(stage); });
 function renderRule(){
   const r = RULES[tab] || "";
-  $("rule").innerHTML = r ? r + (stage ? `<br><span class="lsl" data-l="1">Урок етапу ${stage} ›</span>` : "") : "";
+  placeRules();
 }
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = n => n === 1 || ulSet().includes(n) || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
+const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("");
@@ -1042,15 +1062,24 @@ function showLesson(n){
   document.body.classList.add("lsn"); localStorage.setItem("pn_seen_" + n, "1");
   $("lgo").onclick = () => document.body.classList.remove("lsn");
 }
+function stageToast(msg){
+  let t = document.getElementById("stToast");
+  if(!t){ t = document.createElement("div"); t.id = "stToast";
+    t.style.cssText = "position:fixed;left:50%;top:max(18px,env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:9999;max-width:92vw;padding:12px 20px;border-radius:999px;border:2px solid #f5a623;background:#161b2e;color:#fff;font-weight:600;font-size:.9rem;box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .25s;pointer-events:none";
+    document.body.appendChild(t); }
+  t.textContent = "🔒 " + msg; t.style.opacity = "1";
+  clearTimeout(t._h); t._h = setTimeout(() => { t.style.opacity = "0"; }, 2800);
+}
 function openStage(n){
   if(n && !stOpen(n)){
-    if(!confirm("Цей етап відкриється, коли ти опануєш 100% завдань попереднього етапу. Відкрити достроково?")) return;
-    const u = ulSet(); u.push(n); localStorage.setItem(UL_KEY, JSON.stringify(u));
+    stageToast("Етап " + n + " відкриється, коли ти пройдеш етап " + (n - 1) + " на 100%");
+    return;
   }
   stage = n; localStorage.setItem("pn_stage", String(n));
   const vis = TABS.filter(t => STG[t.id].some(g => !stage || g === stage));
   setTab(vis.some(t => t.id === tab) ? tab : vis[0].id);
-  showLesson(n);
+  if(n && !localStorage.getItem("pn_seen_" + n)) showLesson(n);
+  placeRules();
 }
 $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
@@ -1059,11 +1088,11 @@ $("xrst").addEventListener("click", () => {
   if(typeof publishProgress === 'function') publishProgress();
 });
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
-$("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
 $("blType").addEventListener("click", () => { if(answered) return; bType = !bType; renderBuild(); if(bType){ try { $("inp").focus(); } catch(e){} } });
 
 /* ============ NAVIGATION ============ */
 function load(i){
+  hintUsed = false; clearTimeout(hintTm); syncHint();
   clearTimeout(tm); hideFin();
   $("card").classList.remove("win");
   cur = i; answered = false; picked = -1; trShown = false; T()._ok = false; T().pos = i; save();
@@ -1245,7 +1274,26 @@ function checkBuild(){
   if(!exact && alt){ bPlaced = [...Array(free.length).keys()]; }
   finish(exact || alt);
 }
+let hintUsed = false, hintTm = 0;
+function hintTxt(){ const it = items()[cur]; if(isBuild()) return it.ans; const a = String(it.a); return it.cap ? a.charAt(0).toUpperCase() + a.slice(1) : a; }
+function syncHint(){
+  const b = $("showBtn"), h = $("hintAns"), bs = $("blShow");
+  if(b){ b.classList.toggle("rev", hintUsed); b.querySelector("span").textContent = hintUsed ? "Відповідь" : "Підказка"; }
+  if(bs) bs.textContent = hintUsed ? "👁 Відповідь" : "💡 Підказка";
+  if(h && !hintUsed){ h.classList.remove("on"); h.textContent = ""; }
+}
 function showSol(){
+  if(answered) return;
+  if(!hintUsed){
+    hintUsed = true; syncHint();
+    const h = $("hintAns"); h.textContent = hintTxt(); h.classList.add("on");
+    clearTimeout(hintTm); hintTm = setTimeout(() => h.classList.remove("on"), 2000);
+    return;
+  }
+  clearTimeout(hintTm); $("hintAns").classList.remove("on");
+  revealAnswer();
+}
+function revealAnswer(){
   if(answered) return;
   answered = true;
   const t = T(); t._ok = false;
