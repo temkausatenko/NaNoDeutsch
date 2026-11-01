@@ -34,7 +34,8 @@
   //    реальне джерело правди — tp_v2_<trainer>_<tab> (JSON з x, p, k, err).
   function isLocalOnly(key) {
     if (LOCAL_ONLY.indexOf(key) !== -1) return true;
-    if (key.indexOf(PREFIX + 'exp_') === 0) return true;
+    // Синхронізуємо exp_max (він однаковий на всіх пристроях), але не поточний exp
+    if (key.indexOf(PREFIX + 'exp_') === 0 && key.indexOf('_max') === -1) return true;
     return false;
   }
 
