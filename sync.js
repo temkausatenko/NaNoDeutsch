@@ -28,14 +28,23 @@
   var CHUNK = 3500;                         // ліміт значення в CloudStorage — 4096 символів
   var PUSH_EVERY = 4000;
   var READY_TIMEOUT = 6000;
+  var PULL_EVERY = 45000;                   // повний pull з хмари раз на 45 с (push - кожні 4 с, він дешевий)
+  var RESET_T = 'tpsync_resetT_';           // у localStorage: мітка скидання окремого тренажера
+  var lastPull = 0;
 
   // ← NEW: єдині правила, які ключі НЕ синхронізуються.
   //    Всі tp_v2_exp_* (і exp_max) — це лише локальний кэш/константи,
   //    реальне джерело правди — tp_v2_<trainer>_<tab> (JSON з x, p, k, err).
+  // exp_max_<id> і exp_tabs_<id> - метадані, які публікує сам тренажер (однакові на всіх пристроях).
+  // Вони синхронізуються, але зливаються за принципом «локальне значення головніше»:
+  // тренажер перезаписує їх при кожному відкритті, тому максимум може і зменшуватись.
+  function isSharedMeta(key) {
+    return key.indexOf(PREFIX + 'exp_max_') === 0 || key.indexOf(PREFIX + 'exp_tabs_') === 0;
+  }
   function isLocalOnly(key) {
     if (LOCAL_ONLY.indexOf(key) !== -1) return true;
-    // Синхронізуємо exp_max (він однаковий на всіх пристроях), але не поточний exp
-    if (key.indexOf(PREFIX + 'exp_') === 0 && key.indexOf('_max') === -1) return true;
+    // Поточний exp - лише локальний кеш; синхронізуємо тільки метадані
+    if (key.indexOf(PREFIX + 'exp_') === 0 && !isSharedMeta(key)) return true;
     return false;
   }
 
@@ -107,6 +116,9 @@
 
   // Як зливаємо дві версії одного ключа
   function mergeValue(key, localStr, remoteStr) {
+    if (isSharedMeta(key)) {
+      return (localStr != null && localStr !== '') ? localStr : remoteStr;
+    }
     if (remoteStr == null || remoteStr === '') return localStr;
     if (localStr == null) return remoteStr;
     if (localStr === remoteStr) return localStr;
@@ -127,8 +139,20 @@
       Object.keys(r).forEach(function (d) { out[d] = Math.max(out[d] || 0, Number(r[d]) || 0); });
       return JSON.stringify(out);
     }
-    // Тренажери: перемагає версія з більшим XP, при рівності — локальна
-    return (Number(r.x) || 0) > (Number(l.x) || 0) ? remoteStr : localStr;
+    // Тренажери: перемагає версія з більшим XP, при рівності — локальна.
+    // З «програвшої» версії додаємо лише ті картки (k), яких у переможця ще немає.
+    var rWins = (Number(r.x) || 0) > (Number(l.x) || 0);
+    var win = rWins ? r : l, lose = rWins ? l : r;
+    var winStr = rWins ? remoteStr : localStr;
+    if (lose.k && typeof lose.k === 'object' && win.k && typeof win.k === 'object') {
+      var added = false;
+      var out2 = JSON.parse(JSON.stringify(win));
+      Object.keys(lose.k).forEach(function (id) {
+        if (!(id in out2.k)) { out2.k[id] = lose.k[id]; added = true; }
+      });
+      if (added) return JSON.stringify(out2);
+    }
+    return winStr;
   }
 
   function splitChunks(str) {
@@ -189,10 +213,19 @@
       .forEach(function (k) { localStorage.removeItem(k); });
   }
 
+  function clearTrainerLocal(id) {
+    var pre = PREFIX + id + '_';
+    Object.keys(localStorage)
+      .filter(function (k) { return k.indexOf(pre) === 0; })
+      .forEach(function (k) { localStorage.removeItem(k); });
+    Object.keys(cloud).forEach(function (k) { if (k.indexOf(pre) === 0) delete cloud[k]; });
+  }
+
   async function pull() {
     if (pulling) return;
     pulling = true;
     try {
+      lastPull = Date.now();
       setStatus('syncing');
       var changed = false;
       var base = totalXP();
@@ -211,6 +244,19 @@
         base = 0;
         changed = true;
       }
+
+      // Скидання окремих тренажерів на інших пристроях
+      var trainers = meta.trainers || {};
+      Object.keys(trainers).forEach(function (id) {
+        var rt = Number(trainers[id]) || 0;
+        var lt = Number(localStorage.getItem(RESET_T + id)) || 0;
+        if (rt > lt) {
+          clearTrainerLocal(id);
+          localStorage.setItem(RESET_T + id, String(rt));
+          base = totalXP();
+          changed = true;
+        }
+      });
 
       var remoteKeys = cloudKeys
         .filter(function (k) { return k.indexOf(PREFIX) === 0 && k.slice(-3) === '__n'; })
@@ -319,17 +365,47 @@
     }
   }
 
+  // Скинути прогрес одного тренажера (локально і в хмарі, на всіх пристроях).
+  // Відкритий тренажер після цього варто перезавантажити (location.reload()).
+  async function resetTrainer(id) {
+    if (!id) return;
+    locked = true;
+    try {
+      var now = Date.now();
+      clearTrainerLocal(id);
+      localStorage.setItem(RESET_T + id, String(now));
+      if (supported) {
+        setStatus('syncing');
+        var pre = PREFIX + id + '_';
+        var keys = (await call('getKeys')).filter(function (k) { return k.indexOf(pre) === 0; });
+        if (keys.length) await call('removeItems', keys);
+        var meta = parse(await call('getItem', META_KEY)) || {};
+        meta.trainers = meta.trainers || {};
+        meta.trainers[id] = now;
+        await call('setItem', META_KEY, JSON.stringify(meta));
+        setStatus('ok');
+      }
+    } catch (e) {
+      setStatus('error');
+    } finally {
+      locked = false;
+    }
+  }
+
   // ← CHANGED: тепер кожен тік — повний sync (pull + push), а не лише push.
   //    Це означає, що відкрита сторона (напр. index.html) сама побачить зміни
   //    з іншого пристрою протягом ≤ 4 секунд, без перезавантаження.
   function tick() {
     if (!supported) return;
-    sync();
+    if (Date.now() - lastPull >= PULL_EVERY) sync();   // повний pull + push раз на 45 с
+    else push();                                       // решту часу - лише дешевий push
   }
 
   api.sync = sync;
   api.push = push;
   api.reset = reset;
+  api.resetTrainer = resetTrainer;
+  api._merge = mergeValue;
 
   var firstSync = supported ? sync() : Promise.resolve();
   api.ready = Promise.race([
