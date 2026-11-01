@@ -10,8 +10,6 @@
   :root {
     --bg: #0d1117;
     --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-    --pr: #6366f1;
-    --pr-glow: rgba(99, 102, 241, 0.2);
     --ok: #10b981;
     --go: #f59e0b;
   }
@@ -26,43 +24,6 @@
     -webkit-font-smoothing: antialiased;
     padding: calc(16px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
     min-height: 100vh;
-  }
-
-  /* --- Блок общего прогресса --- */
-  .global-progress {
-    max-width: 800px;
-    margin: 0 auto 20px;
-    padding: 14px 18px;
-    background: #161b22;
-    border: 1px solid #21262d;
-    border-radius: 16px;
-    animation: fadeIn 0.6s var(--ease) both;
-  }
-  .gp-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #8b949e;
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  #gp-percent {
-    color: #f0f6fc;
-    font-size: 16px;
-    font-weight: 800;
-  }
-  .gp-bar {
-    height: 10px;
-    background: #21262d;
-    border-radius: 99px;
-    overflow: hidden;
-  }
-  .gp-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--pr), #a78bfa);
-    border-radius: 99px;
-    transition: width 0.8s var(--ease);
   }
 
   /* Сетка для карточек-картинок */
@@ -133,17 +94,6 @@
 </style>
 </head>
 <body>
-
-  <!-- Общий прогресс -->
-  <div class="global-progress">
-    <div class="gp-header">
-      <span>Загальний прогрес</span>
-      <span id="gp-percent">0%</span>
-    </div>
-    <div class="gp-bar">
-      <div id="gp-fill" class="gp-fill"></div>
-    </div>
-  </div>
 
   <div class="grid">
     
@@ -250,14 +200,13 @@
       }, { passive: true });
     });
 
-    // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА ---
+    // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА НА КАРТОЧКАХ ---
     function updateProgress() {
       const badges = document.querySelectorAll('.badge');
-      let totalPct = 0;
-      let activeCount = 0; // Считаем среднее только по тем тренажерам, где есть прогресс > 0
 
       badges.forEach(badge => {
         const key = badge.getAttribute('data-track');
+        // Если прогресса нет, получаем -1
         const val = parseInt(localStorage.getItem(key) || '-1', 10);
         
         if (val >= 0) {
@@ -267,22 +216,11 @@
           if (val >= 100) badge.classList.add('done');
           else if (val >= 50) badge.classList.add('half');
           else if (val > 0) badge.classList.add('started');
-          
-          totalPct += val;
-          activeCount++;
         } else {
           badge.textContent = '—';
           badge.classList.remove('started', 'half', 'done');
         }
       });
-
-      const avg = activeCount > 0 ? Math.round(totalPct / activeCount) : 0;
-      
-      const gpPercent = document.getElementById('gp-percent');
-      const gpFill = document.getElementById('gp-fill');
-      
-      if (gpPercent) gpPercent.textContent = avg + '%';
-      if (gpFill) gpFill.style.width = avg + '%';
     }
 
     // Запускаем при загрузке
