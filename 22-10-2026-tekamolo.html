@@ -1588,7 +1588,7 @@ const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] ==
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;   // завдання «вивчене» після 1 правильної відповіді — більше воно не повертається (помилкові повертаються)
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); if(typeof publishProgress === 'function') publishProgress(); } catch(e){} };
 
 /* ============ SPEECH ============ */
 function speak(text){
@@ -2283,6 +2283,21 @@ if (window.Telegram && window.Telegram.WebApp) {
   document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
 })();
+  // === ОТПРАВКА ПРОГРЕССА НА ГЛАВНУЮ ===
+function publishProgress() {
+  try {
+    let done = 0, total = 0;
+    TABS.forEach(t => {
+      const st = S[t.id];
+      const idx = ITEMS[t.id].map((_, i) => i);
+      done += idx.filter(i => (st.k[i] || 0) >= maxStreak()).length;
+      total += idx.length;
+    });
+    const pct = total > 0 ? Math.round(done / total * 100) : 0;
+    localStorage.setItem('tp_v2_progress_tekamolo', pct);
+  } catch(e) {}
+}
+publishProgress(); // Запуск при загрузке страницы
 </script>
 </body>
 </html>
