@@ -6,6 +6,10 @@
 <title>Pronomen - Trainer 27.10.2026</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
+<script>
+(function(){var T=['dark','light','sakura','candy'],t=null;try{t=localStorage.getItem('pn-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'light');})();
+</script>
 <style>
 :root{
   --bg:#0c0f16;--bg-grad:#1a2035;
@@ -20,7 +24,7 @@
   --sa:#818cf8;--pe:#a78bfa;
   --radius:16px;color-scheme:dark;
 }
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+@media (prefers-color-scheme:light){:root:not([data-theme]){
   --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
   --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
   --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
@@ -313,7 +317,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   .card h2{padding-right:160px;height:auto;min-height:32px}
 }
 :root{--te:#f59e0b;--ka:#fb7185;--mo:#a78bfa;--lo:#2dd4bf;--dt:#60a5fa;--ak:#a3e635;--pp:#94a3b8;--ne:#cbd5e1}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
 :root[data-theme="light"]{--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}
 .r-te{--c:var(--te)}.r-ka{--c:var(--ka)}.r-mo{--c:var(--mo)}.r-lo{--c:var(--lo)}
 .r-dat,.r-pd{--c:var(--dt)}.r-akk,.r-pa{--c:var(--ak)}.r-prep{--c:var(--pp)}
@@ -409,7 +413,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   .card.tx h2{padding-right:196px}
 }
 :root{--c-nom:#60a5fa;--c-akk:#f59e0b;--c-dat:#2dd4bf;--c-pos:#a78bfa;--c-ref:#fb7185;--c-dem:#a3e635;--c-wq:#f472b6;--c-man:#94a3b8;--c-v:#cbd5e1;--c-pr:#fcd34d;--c-n:#7dd3fc}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--c-nom:#2563eb;--c-akk:#d97706;--c-dat:#0d9488;--c-pos:#7c3aed;--c-ref:#e11d48;--c-dem:#4d7c0f;--c-wq:#be185d;--c-man:#64748b;--c-v:#475569;--c-pr:#b45309;--c-n:#0369a1}}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--c-nom:#2563eb;--c-akk:#d97706;--c-dat:#0d9488;--c-pos:#7c3aed;--c-ref:#e11d48;--c-dem:#4d7c0f;--c-wq:#be185d;--c-man:#64748b;--c-v:#475569;--c-pr:#b45309;--c-n:#0369a1}}
 :root[data-theme="light"]{--c-nom:#2563eb;--c-akk:#d97706;--c-dat:#0d9488;--c-pos:#7c3aed;--c-ref:#e11d48;--c-dem:#4d7c0f;--c-wq:#be185d;--c-man:#64748b;--c-v:#475569;--c-pr:#b45309;--c-n:#0369a1}
 .r-nom{--c:var(--c-nom)}.r-akk{--c:var(--c-akk)}.r-dat{--c:var(--c-dat)}.r-pos{--c:var(--c-pos)}.r-ref{--c:var(--c-ref)}.r-dem{--c:var(--c-dem)}.r-wq{--c:var(--c-wq)}.r-man{--c:var(--c-man)}.r-v{--c:var(--c-v)}.r-pr{--c:var(--c-pr)}.r-n{--c:var(--c-n)}
 .opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
@@ -420,6 +424,34 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .stages.drag{cursor:grabbing;user-select:none}
 .stages.drag .stg{pointer-events:none}
 .stg{flex:none}
+
+/* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
+:root[data-theme="sakura"]{
+  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
+  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
+  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
+  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;
+  --c-nom:#2563eb;--c-akk:#d97706;--c-dat:#0d9488;--c-pos:#9333ea;--c-ref:#e11d48;--c-dem:#4d7c0f;--c-wq:#be185d;--c-man:#8a6a7e;--c-v:#6b4a5c;--c-pr:#b45309;--c-n:#0369a1;}
+:root[data-theme="candy"]{
+  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
+  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
+  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
+  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-nom:#8ec5ff;--c-akk:#ffc46b;--c-dat:#6fe3d0;--c-pos:#c4b0ff;--c-ref:#ff8fb1;--c-dem:#b8f07a;--c-wq:#ff9ccc;--c-man:#c3a2d6;--c-v:#f0dcf7;--c-pr:#ffd98f;--c-n:#9be0ff;}
+
+:root[data-theme="sakura"] .theory-card,:root[data-theme="sakura"] .cheat{box-shadow:0 8px 30px rgba(236,95,151,.15)}
+:root[data-theme="sakura"] .tab,:root[data-theme="candy"] .tab{border-width:2px;font-weight:700}
+:root[data-theme="sakura"] .theory-card,:root[data-theme="candy"] .theory-card,
+:root[data-theme="sakura"] .cheat,:root[data-theme="candy"] .cheat{border-width:2px;border-radius:22px}
+:root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
+:root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
+:root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+@media(hover:hover) and (pointer:fine){
+  :root[data-theme="sakura"] .tab.on:hover{background:#d94a85}
+  :root[data-theme="candy"] .tab.on:hover{background:#e0428c}
+}
 </style>
 </head>
 <body>
@@ -763,15 +795,14 @@ const stripHTML = s => String(s || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const mqLight = window.matchMedia('(prefers-color-scheme: light)');
-function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
-function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
-const savedTheme = store.get('pn-theme');
-if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+const THEMES = ['candy','sakura','light','dark'];
+const THEME_ICON = {candy:'🍬', sakura:'🌸', light:'☀️', dark:'🌙'};
+const THEME_NAME = {candy:'Цукеркова ніч', sakura:'Сакура', light:'Світла', dark:'Темна'};
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'light'; }
+function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 paintThemeIcon();
-if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
 function toggleTheme(){
-  const n = effTheme() === 'light' ? 'dark' : 'light';
+  const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
   document.documentElement.setAttribute('data-theme', n);
   store.set('pn-theme', n); paintThemeIcon();
 }
