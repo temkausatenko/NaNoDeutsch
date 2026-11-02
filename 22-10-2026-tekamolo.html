@@ -48,11 +48,11 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
   background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+.theme-toggle,.sound-toggle,.theory-top-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
   color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
 .theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
-.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
 .tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
   padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
@@ -515,12 +515,24 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 :root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
 :root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
 :root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+.fx-toggle{right:144px}
+.fx-toggle.off{opacity:.45;filter:grayscale(1)}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear forwards}
+.mp.up{top:auto;bottom:-30px;animation-name:mcRise}
+@keyframes mcFall{to{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
+@keyframes mcRise{12%{opacity:1}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+.mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
+.mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
+@media (prefers-reduced-motion:reduce){.mp{display:none}}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
     <h1>TEKAMOLO<small>Порядок слів у реченні · тренажер</small></h1>
+    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -2319,6 +2331,47 @@ function publishProgress() {
   } catch(e) {}
 }
 publishProgress(); // Запускаем при загрузке страницы
+</script>
+<script>
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+(function(){
+const rnd=a=>a[Math.random()*a.length|0];
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['candy','sakura','light','dark'].includes(t)?t:'light'};
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+let on=store.get('tk-fx')!=='off',ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paint(){btn.classList.toggle('off',!on);btn.title=on?'Ефекти: увімкнено':'Ефекти: вимкнено';}
+function spawn(kind,n){
+  if(RM.matches||!on)return;n=Math.round(n*(innerWidth<600?.55:1));
+  for(let i=0;i<n;i++){
+    if(live>140)return;const el=document.createElement('div');el.className='mp';let dur=3+Math.random()*3,z;
+    if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
+    else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
+    else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
+    else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
+    else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');
+    el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
+    document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
+  }
+}
+function fx(n){const t=th();
+  if(t==='sakura')spawn('petal',n);
+  else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
+  else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
+}
+window.toggleFx=function(){on=!on;store.set('tk-fx',on?'on':'off');paint();if(on)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
+function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
+wrap('finish',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
+wrap('popXp',(d,up)=>{if(up)fx(70);});
+const celeb=()=>{fx(120);setTimeout(()=>fx(70),1000);};
+wrap('showComplete',celeb);
+wrap('showReviewComplete',()=>{try{if(tabDone())celeb();}catch(e){}});
+new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+paint();
+})();
 </script>
 </body>
 </html>
