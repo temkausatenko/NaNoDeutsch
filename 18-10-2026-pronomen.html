@@ -46,11 +46,11 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
   background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+.theme-toggle,.sound-toggle,.theory-top-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
   color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
 .theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
-.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
 .tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
   padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
@@ -452,20 +452,9 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   :root[data-theme="sakura"] .tab.on:hover{background:#d94a85}
   :root[data-theme="candy"] .tab.on:hover{background:#e0428c}
 }
-
-/* ===== ТАЛІСМАН + ЕФЕКТИ ПІД ТЕМУ ===== */
-#mc{position:fixed;left:max(8px,env(safe-area-inset-left,0px));bottom:max(8px,env(safe-area-inset-bottom,0px));z-index:40;display:flex;align-items:flex-end;gap:6px;pointer-events:none}
-#mc .mm{transform-origin:50% 100%;flex:none}
-#mcb{background:var(--card);color:var(--tx);border:2px solid var(--bd);border-radius:16px 16px 16px 4px;padding:7px 11px;font-weight:700;font-size:.82rem;line-height:1.3;max-width:min(190px,48vw);margin-bottom:34%;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
-#mcb.on{opacity:1;transform:none}
-#mcT{position:absolute;left:-2px;top:-14px;width:26px;height:26px;border-radius:50%;border:2px solid var(--bd);background:var(--card);color:var(--mu);font-size:.7rem;line-height:1;padding:0;cursor:pointer;pointer-events:auto;opacity:.85}
-#mc.off .mm,#mc.off #mcb{display:none}#mc.off #mcT{position:static;width:34px;height:34px;font-size:1rem}
-body.mc-on .w{padding-block-end:150px}
-.mm.idle svg{animation:mcF 3s ease-in-out infinite}.mm.happy svg{animation:mcH .7s ease-out 2}.mm.sad svg{animation:mcS 1.2s ease-out forwards}.mm.dance svg{animation:mcD .8s ease-in-out infinite}
-@keyframes mcF{50%{transform:translateY(-4px)}}
-@keyframes mcH{0%,100%{transform:none}30%{transform:translateY(-22px) rotate(-6deg)}60%{transform:translateY(-8px) rotate(5deg)}}
-@keyframes mcS{30%{transform:translateY(5px) rotate(-5deg)}100%{transform:translateY(4px) rotate(-3deg)}}
-@keyframes mcD{0%,100%{transform:rotate(-8deg)}25%{transform:translateY(-16px) rotate(8deg)}50%{transform:rotate(-8deg)}75%{transform:translateY(-10px) rotate(8deg)}}
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+.fx-toggle{right:144px}
+.fx-toggle.off{opacity:.45;filter:grayscale(1)}
 .mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear forwards}
 .mp.up{top:auto;bottom:-30px;animation-name:mcRise}
 @keyframes mcFall{to{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
@@ -473,21 +462,14 @@ body.mc-on .w{padding-block-end:150px}
 .mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
 .mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
 .mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
-#mcE{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;background:rgba(10,5,20,.5);padding:20px}
-#mcE.on{display:flex}
-#mcE .ec{background:var(--card);color:var(--tx);border:3px solid var(--pr);border-radius:28px;padding:20px 24px;text-align:center;max-width:340px;width:100%;box-shadow:0 20px 60px var(--pr-glow);animation:mcPop .5s cubic-bezier(.2,1.4,.4,1)}
-#mcE h2{margin:4px 0 2px;font-size:1.25rem}#mcE p{margin:0;color:var(--mu);font-weight:600}
-#mcE .stars{font-size:2.1rem;letter-spacing:6px;margin:8px 0 6px;min-height:44px}
-#mcE .stars span{display:inline-block;animation:mcPop .5s cubic-bezier(.2,1.6,.4,1) backwards}
-#mcE small{color:var(--mu);font-size:.72rem}
-@keyframes mcPop{from{transform:scale(.6);opacity:0}}
-@media (prefers-reduced-motion:reduce){.mp{display:none}.mm.idle svg,.mm.happy svg,.mm.dance svg{animation:none}}
+@media (prefers-reduced-motion:reduce){.mp{display:none}}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
     <h1>Pronomen<small>Особові · присвійні · зворотні · man · Wer/Wen/Wem</small></h1>
+    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -1590,61 +1572,14 @@ function publishProgress() {
 publishProgress(); // при завантаженні
 </script>
 <script>
-/* ===== ТАЛІСМАН + ЕФЕКТИ ПІД ТЕМУ ===== */
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 (function(){
-const $=id=>document.getElementById(id),rnd=a=>a[Math.random()*a.length|0],S='#5a3a4a';
-const TH={
- candy:{a:'uni',hi:'Привіт! Я Зірочка ✨ Вчимося разом?'},
- sakura:{a:'bunny',hi:'Привіт! Я Сакурка 🌸 Починаємо?'},
- light:{a:'cat',hi:'Привіт! Я Мурка ☀️ Готова вчитися!'},
- dark:{a:'owl',hi:'Привіт! Я Совуня 🌙 Вчимося разом?'}};
-const GOOD=['Так тримати! 💖','Молодець!','Супер! ✨','Правильно!','Вогонь! 🔥','Блискуче! 🌟'];
-const BAD=['Нічого, спробуємо ще 🤍','Буває, ти впораєшся!','Майже! Наступного разу вийде','Не сумуй, я з тобою 🌷'];
-const th=()=>{const t=document.documentElement.getAttribute('data-theme');return TH[t]?t:'light'};
+const rnd=a=>a[Math.random()*a.length|0];
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['candy','sakura','light','dark'].includes(t)?t:'light'};
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
-let rank=0,ses=0,on=(store.get('pn-mascot')!=='off'),ruFlag=false,live=0,dt,bt,lastCel=0;
-const W=()=>innerWidth<520?54+rank*7:66+rank*9;
-
-function svg(a,mood,r){
-  const c={cat:'#ffd9b8',bunny:'#ffffff',uni:'#ffffff',owl:'#c4b2f0'}[a],st='stroke="'+S+'" stroke-width="2.5"';
-  let e='',eyes,mouth='',nose='';
-  if(a==='cat')e='<polygon points="16,42 20,10 44,28" fill="'+c+'" '+st+'/><polygon points="84,42 80,10 56,28" fill="'+c+'" '+st+'/><polygon points="22,34 24,19 35,28" fill="#ffb3c6"/><polygon points="78,34 76,19 65,28" fill="#ffb3c6"/>';
-  if(a==='bunny')e='<ellipse cx="34" cy="20" rx="9" ry="22" fill="'+c+'" '+st+'/><ellipse cx="66" cy="20" rx="9" ry="22" fill="'+c+'" '+st+'/><ellipse cx="34" cy="22" rx="4" ry="15" fill="#ffb3c6"/><ellipse cx="66" cy="22" rx="4" ry="15" fill="#ffb3c6"/>';
-  if(a==='uni')e='<circle cx="20" cy="46" r="10" fill="#f9a8d4"/><circle cx="16" cy="60" r="9" fill="#c4b5fd"/><circle cx="24" cy="72" r="8" fill="#f9a8d4"/><polygon points="24,40 26,22 38,34" fill="'+c+'" '+st+'/><polygon points="68,6 60,32 74,32" fill="#ffd54a" stroke="'+S+'" stroke-width="2"/>';
-  if(a==='owl')e='<polygon points="18,42 22,12 44,30" fill="'+c+'" '+st+'/><polygon points="82,42 78,12 56,30" fill="'+c+'" '+st+'/>';
-  const ow=a==='owl',ex=ow?[36,64]:[38,62];
-  const disc=ow?'<circle cx="36" cy="60" r="11" fill="#fff" '+st+'/><circle cx="64" cy="60" r="11" fill="#fff" '+st+'/>':'';
-  const pr=ow?5:4.5,hl=!ow;
-  if(mood==='happy'){eyes='<path d="M'+(ex[0]-6)+' 63q6-10 12 0M'+(ex[1]-6)+' 63q6-10 12 0" stroke="'+S+'" stroke-width="3" fill="none" stroke-linecap="round"/>';if(!ow)mouth='<path d="M42 72q8 13 16 0z" fill="#ff8fa8" stroke="'+S+'" stroke-width="2"/>';}
-  else if(mood==='sad'){eyes='<circle cx="'+ex[0]+'" cy="61" r="'+pr+'" fill="'+S+'"/><circle cx="'+ex[1]+'" cy="61" r="'+pr+'" fill="'+S+'"/><path d="M'+(ex[0]-5)+' 49l10 3M'+(ex[1]+5)+' 49l-10 3" stroke="'+S+'" stroke-width="2.5" stroke-linecap="round"/><path d="M'+(ex[0]-2)+' 68q-3 7 0 9q3-2 0-9z" fill="#7dd3fc"/>';if(!ow)mouth='<path d="M43 79q7-7 14 0" stroke="'+S+'" stroke-width="3" fill="none" stroke-linecap="round"/>';}
-  else{eyes='<circle cx="'+ex[0]+'" cy="61" r="'+pr+'" fill="'+S+'"/><circle cx="'+ex[1]+'" cy="61" r="'+pr+'" fill="'+S+'"/><circle cx="'+(ex[0]+1.5)+'" cy="59.5" r="1.6" fill="#fff"/><circle cx="'+(ex[1]+1.5)+'" cy="59.5" r="1.6" fill="#fff"/>';if(!ow)mouth='<path d="M44 73q6 5 12 0" stroke="'+S+'" stroke-width="3" fill="none" stroke-linecap="round"/>';}
-  if(a==='cat')nose='<circle cx="50" cy="68" r="2" fill="#ff8fa8"/>';
-  if(ow)nose='<polygon points="46,68 54,68 50,77" fill="#ffb347" stroke="'+S+'" stroke-width="1.6" stroke-linejoin="round"/>';
-  const cheeks='<circle cx="'+(ow?22:27)+'" cy="73" r="5.5" fill="#ffb3c6" opacity=".75"/><circle cx="'+(ow?78:73)+'" cy="73" r="5.5" fill="#ffb3c6" opacity=".75"/>';
-  const sh=a==='uni'?-6:0;let k='';
-  if(r>=1)k+='<g transform="translate(72 42)"><path d="M0 0l-12-8v16zM0 0l12-8v16z" fill="#ff6fa5" stroke="'+S+'" stroke-width="1.5"/><circle r="3.5" fill="#ffd0e1" stroke="'+S+'" stroke-width="1.5"/></g>';
-  if(r===2||r===3){const g=ow?13:9;k+='<g fill="none" stroke="'+S+'" stroke-width="2"><circle cx="'+ex[0]+'" cy="61" r="'+g+'"/><circle cx="'+ex[1]+'" cy="61" r="'+g+'"/><path d="M'+(ex[0]+g)+' 61h'+(ex[1]-ex[0]-2*g)+'"/></g>';}
-  k+='<g transform="translate('+sh+' 0)">';
-  if(r===3)k+='<polygon points="26,32 50,22 74,32 50,42" fill="#3b3552" stroke="'+S+'" stroke-width="2" stroke-linejoin="round"/><path d="M50 32L72 35v11" stroke="#ffd54a" stroke-width="2" fill="none"/><circle cx="72" cy="47" r="2.5" fill="#ffd54a"/>';
-  if(r===4)k+='<g stroke="'+S+'" stroke-width="1.2"><circle cx="34" cy="38" r="4.5" fill="#fde68a"/><circle cx="43" cy="34" r="4.5" fill="#f9a8d4"/><circle cx="52" cy="33" r="5" fill="#fff"/><circle cx="61" cy="34" r="4.5" fill="#bfdbfe"/><circle cx="68" cy="38" r="4.5" fill="#fde68a"/></g>';
-  if(r===5)k+='<polygon points="34,40 38,27 44,35 50,23 56,35 62,27 66,40" fill="#e9d5ff" stroke="'+S+'" stroke-width="2" stroke-linejoin="round"/><circle cx="50" cy="33" r="3.2" fill="#7dd3fc" stroke="'+S+'" stroke-width="1"/>';
-  if(r>=6)k+='<polygon points="32,40 35,20 43,31 50,14 57,31 65,20 68,40" fill="#ffd54a" stroke="'+S+'" stroke-width="2.2" stroke-linejoin="round"/><circle cx="50" cy="32" r="2.8" fill="#ff6fa5"/>';
-  k+='</g>';
-  if(r>=5)k+='<text x="6" y="24" font-size="14">✨</text><text x="82" y="22" font-size="12">✨</text>';
-  return '<svg viewBox="0 0 100 100" width="100%" aria-hidden="true">'+e+'<ellipse cx="50" cy="64" rx="34" ry="29" fill="'+c+'" '+st+'/>'+cheeks+disc+eyes+mouth+nose+k+'</svg>';
-}
-const box=document.createElement('div');box.id='mc';
-box.innerHTML='<div class="mm idle" id="mcm"></div><div id="mcb"></div><button id="mcT" type="button" aria-label="Талісман"></button>';
-document.body.appendChild(box);
-const mm=$('mcm'),bub=$('mcb'),tb=$('mcT');
-function draw(mood){
-  mm.className='mm '+mood;mm.style.width=W()+'px';mm.innerHTML=svg(TH[th()].a,mood,rank);
-  clearTimeout(dt);if(mood!=='idle')dt=setTimeout(()=>draw('idle'),mood==='sad'?2200:mood==='dance'?3600:1500);
-}
-function say(t){if(!on)return;bub.textContent=t;bub.classList.add('on');clearTimeout(bt);bt=setTimeout(()=>bub.classList.remove('on'),2600);}
-function apply(){box.classList.toggle('off',!on);document.body.classList.toggle('mc-on',on);tb.textContent=on?'✕':'🐾';tb.title=on?'Сховати талісман':'Показати талісман';}
-tb.onclick=()=>{on=!on;store.set('pn-mascot',on?'on':'off');apply();if(on){draw('happy');say(TH[th()].hi);}};
-
+let on=store.get('pn-fx')!=='off',ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paint(){btn.classList.toggle('off',!on);btn.title=on?'Ефекти: увімкнено':'Ефекти: вимкнено';}
 function spawn(kind,n){
   if(RM.matches||!on)return;n=Math.round(n*(innerWidth<600?.55:1));
   for(let i=0;i<n;i++){
@@ -1666,31 +1601,15 @@ function fx(n){const t=th();
   else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
   else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
 }
-function answer(ok){
-  if(ok){ses++;draw('happy');if(ruFlag){ruFlag=false;return;}
-    if(ses===3||ses%5===0){fx(40);say('Серія ×'+ses+'! 🎉');}else{fx(6);say(rnd(GOOD));}}
-  else{ses=0;ruFlag=false;draw('sad');say(rnd(BAD));}
-}
-function rankUp(){ruFlag=true;draw('happy');fx(70);say('Новий ранг: '+RANKS[rank][2]+'! Новий образ 💕');}
-function celebrate(){
-  const n=Date.now();if(n-lastCel<4000)return;lastCel=n;
-  let r=0,w=0;try{r=T().r;w=T().w}catch(e){}
-  const acc=r+w?r/(r+w):1,s=acc>=.9?3:acc>=.7?2:1;
-  draw('dance');fx(120);setTimeout(()=>fx(70),1000);
-  let o=$('mcE');if(!o){o=document.createElement('div');o.id='mcE';document.body.appendChild(o);o.onclick=()=>o.classList.remove('on');}
-  o.innerHTML='<div class="ec"><div style="width:'+Math.min(140,W()+30)+'px;margin:0 auto" class="mm happy">'+svg(TH[th()].a,'happy',rank)+'</div><h2>Категорію пройдено! 🏁</h2><p>Правильно: <b>'+r+'</b> · Неправильно: <b>'+w+'</b></p><div class="stars">'+[0,1,2].map(i=>'<span style="animation-delay:'+(.3+i*.35)+'s;'+(i<s?'':'filter:grayscale(1);opacity:.35')+'">⭐</span>').join('')+'</div><small>Торкнись, щоб закрити</small></div>';
-  o.classList.add('on');clearTimeout(celebrate.t);celebrate.t=setTimeout(()=>o.classList.remove('on'),8000);
-  say('Ми впоралися! 💖');
-}
+window.toggleFx=function(){on=!on;store.set('pn-fx',on?'on':'off');paint();if(on)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
 function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
-wrap('finish',ok=>answer(!!ok));
-wrap('updateXp',xv=>{const r=rankOf(xv);if(r!==rank){rank=r;draw('idle');}});
-wrap('popXp',(d,up)=>{if(up)rankUp();});
-wrap('showComplete',celebrate);
-wrap('showReviewComplete',()=>{try{if(tabDone())celebrate();}catch(e){}});
-new MutationObserver(()=>{draw('happy');say(TH[th()].hi);fx(18);}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-try{rank=rankOf(XP);}catch(e){}
-apply();draw('idle');setTimeout(()=>say(TH[th()].hi),900);
+wrap('finish',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
+wrap('popXp',(d,up)=>{if(up)fx(70);});
+const done=()=>{fx(120);setTimeout(()=>fx(70),1000);};
+wrap('showComplete',done);
+wrap('showReviewComplete',()=>{try{if(tabDone())done();}catch(e){}});
+new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+paint();
 })();
 </script>
 </body>
