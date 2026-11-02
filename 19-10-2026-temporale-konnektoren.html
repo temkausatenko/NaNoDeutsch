@@ -4,6 +4,10 @@
 <title>Temporale Konnektoren – Trainer 19.10.2026</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
+<script>
+(function(){var T=['dark','light','sakura','candy'],t=null;try{t=localStorage.getItem('tk_theme')||localStorage.getItem('tp_v2_tk_theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'light');})();
+</script>
 <style>
 :root{
   --bg:#0c0f16;--bg-grad:#1a2035;--card:#131a24;--card-hover:#1c2532;
@@ -348,6 +352,32 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
 .toast.on{transform:translate(-50%,0)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
+:root[data-theme="sakura"]{
+  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
+  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
+  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
+  }
+:root[data-theme="candy"]{
+  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
+  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
+  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
+  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+  }
+
+:root[data-theme="sakura"] .theory-card,:root[data-theme="sakura"] .cheat{box-shadow:0 8px 30px rgba(236,95,151,.15)}
+:root[data-theme="sakura"] .tab,:root[data-theme="candy"] .tab{border-width:2px;font-weight:700}
+:root[data-theme="sakura"] .theory-card,:root[data-theme="candy"] .theory-card,
+:root[data-theme="sakura"] .cheat,:root[data-theme="candy"] .cheat{border-width:2px;border-radius:22px}
+:root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
+:root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
+:root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+@media(hover:hover) and (pointer:fine){
+  :root[data-theme="sakura"] .tab.on:hover{background:#d94a85}
+  :root[data-theme="candy"] .tab.on:hover{background:#e0428c}
+}
 </style></head><body><div class="w">
 
 <div class="header-wrap">
@@ -474,24 +504,18 @@ const store = {
   get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
   set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
 };
-const savedTheme = store.get('tk_theme') || store.get('tp_v2_tk_theme') || ((window.Telegram && Telegram.WebApp && Telegram.WebApp.colorScheme) || 'dark');
-if (savedTheme === 'light') {
-  document.documentElement.setAttribute('data-theme', 'light');
-  document.getElementById('theme-toggle').textContent = '☀️';
-}
+const THEMES = ['candy','sakura','light','dark'];
+const THEME_ICON = {candy:'🍬', sakura:'🌸', light:'☀️', dark:'🌙'};
+const THEME_NAME = {candy:'Цукеркова ніч', sakura:'Сакура', light:'Світла', dark:'Темна'};
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'light'; }
+function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
+const savedTheme = store.get('tk_theme') || store.get('tp_v2_tk_theme');
+document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'light');
+paintThemeIcon();
 function toggleTheme() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  if (isLight) {
-    document.documentElement.removeAttribute('data-theme');
-    store.set('tk_theme', 'dark');
-    document.getElementById('theme-toggle').textContent = '🌙';
-    tgChrome();
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    store.set('tk_theme', 'light');
-    document.getElementById('theme-toggle').textContent = '☀️';
-    tgChrome();
-  }
+  const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
+  document.documentElement.setAttribute('data-theme', n);
+  store.set('tk_theme', n); paintThemeIcon(); tgChrome();
 }
 
 let soundEnabled = (store.get('tk_sound') || store.get('tp_v2_tk_sound')) !== 'off';
@@ -1600,8 +1624,7 @@ const tg=(window.Telegram&&window.Telegram.WebApp)||null;
 function tgChrome(){
   if(!tg) return;
   try{
-    const light=document.documentElement.getAttribute('data-theme')==='light';
-    const col=light?'#f8fafc':'#0c0f16';
+    const col={light:'#f8fafc',dark:'#0c0f16',sakura:'#fff6f9',candy:'#241532'}[effTheme()];
     if(tg.setHeaderColor) tg.setHeaderColor(col);
     if(tg.setBackgroundColor) tg.setBackgroundColor(col);
     if(tg.setBottomBarColor) tg.setBottomBarColor(col);
