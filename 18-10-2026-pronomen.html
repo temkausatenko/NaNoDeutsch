@@ -1171,7 +1171,6 @@ function playDone(v){
 }
 function renderFin(kind){
   clearTimeout(tm);
-  if(kind !== "confirm") stageFanfare();
   const t = T(), n = reviewPool().length;
   const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
   let h;
