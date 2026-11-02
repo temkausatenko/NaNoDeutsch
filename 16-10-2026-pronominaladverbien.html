@@ -9,7 +9,7 @@
 <script src="sync.js"></script>
 <script>
 (function(){var T=['dark','light','sakura','candy'],t=null;try{t=localStorage.getItem('pa-theme')}catch(e){}
-document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'candy');})();
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'light');})();
 </script>
 <style>
 
@@ -1244,10 +1244,10 @@ const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}
 const THEMES = ['candy','sakura','light','dark'];
 const THEME_ICON = {candy:'🍬', sakura:'🌸', light:'☀️', dark:'🌙'};
 const THEME_NAME = {candy:'Цукеркова ніч', sakura:'Сакура', light:'Світла', dark:'Темна'};
-function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'candy'; }
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'light'; }
 function paintThemeIcon(){ const t = effTheme(), b = $("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('pa-theme');
-document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'candy');
+document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'light');
 paintThemeIcon();
 function toggleTheme(){
   const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
