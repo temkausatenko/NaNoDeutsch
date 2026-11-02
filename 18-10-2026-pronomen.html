@@ -185,7 +185,9 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
 .fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
 .fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
-.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 1s linear forwards;width:100%}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2.2s linear forwards;width:100%}
+.fb .nxbtn{display:inline-block;margin-top:14px;padding:13px 26px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;transition:filter .18s,transform .18s}
+.fb .nxbtn:hover{filter:brightness(1.12);transform:translateY(-1px)}
 @keyframes shrink{to{width:0}}
 .foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
 .foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
@@ -1031,10 +1033,12 @@ function showFb(ok, i){
   f.innerHTML = `<div class="k">${ok ? "✓ ПРАВИЛЬНО" + (xLocked ? " · EXP на максимумі 🏆" : " · +1 EXP") : "✗ НЕПРАВИЛЬНО" + (xLocked ? " · EXP зафіксовано 🔒" : " · −1 EXP")}</div>
     <div class="ans" title="Натисни, щоб почути">${esc(it.ans)}</div>
     ${isBuild() ? `<div class="ex" style="margin-top:2px">${esc(stripHTML(it.s))}</div>` : (it.lbl && tab !== "classify" ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : (tab === "classify" ? `<div class="ex" style="margin-top:2px">${esc(it.lbl)}</div>` : ""))}
-    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}`;
+    ${it.ex ? `<div class="ex">${esc(it.ex)}</div>` : ""}${ok ? '<div class="bar"></div>' : ''}<button class="nxbtn" type="button">Далі →</button>`;
   if(isBuild()) f.insertAdjacentHTML("beforeend", buildExplain(ok, it));
   const ansEl = f.querySelector(".ans");
   if(ansEl) ansEl.onclick = () => speak(it.sp);
+  const nx = f.querySelector(".nxbtn");
+  if(nx) nx.onclick = e => { e.stopPropagation(); clearTimeout(tm); check(); };
 }
 
 /* ============ ПРАВИЛО ВКЛАДКИ ============ */
@@ -1146,6 +1150,13 @@ const SOUNDS = {
   E: [[1568,0,.25,"sine",.08],[2093,.08,.25,"sine",.08],[2637,.16,.25,"sine",.08],[3136,.24,.7,"sine",.08]],
   F: [[523.25,0,1.1,"sine",.09],[659.25,0,1.1,"sine",.09],[783.99,0,1.1,"sine",.09]]
 };
+function stageFanfare(){
+  try{
+    if(!stage) return;
+    const p = stProg(stage), k = "pn_fan_" + stage;
+    if(p.t > 0 && p.d >= p.t && !localStorage.getItem(k)){ localStorage.setItem(k, "1"); playDone(DONE_SOUND); }
+  }catch(e){}
+}
 function playDone(v){
   try{
     const C = window.AudioContext || window.webkitAudioContext; if(!C) return;
@@ -1160,7 +1171,7 @@ function playDone(v){
 }
 function renderFin(kind){
   clearTimeout(tm);
-  if(kind !== "confirm" && !$("card").classList.contains("fin") && !window._quiet) playDone(DONE_SOUND);
+  if(kind !== "confirm") stageFanfare();
   const t = T(), n = reviewPool().length;
   const st = `Правильно: <b>${t.r}</b> · Неправильно: <b>${t.w}</b>`;
   let h;
@@ -1250,7 +1261,7 @@ function finish(ok){
     const c = $("card");
     c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
     clearTimeout(tm);
-    const wait = isBuild() ? 2200 : 1000;
+    const wait = 2200;
     if(reviewMode){
       if(reviewQueue().length === 0) tm = setTimeout(() => { if(answered) showReviewComplete(); }, 1200);
       else tm = setTimeout(() => { if(answered){ const ni = nextIdx(); if(ni >= 0) load(ni); else showReviewComplete(); } }, wait);
