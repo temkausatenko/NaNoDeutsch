@@ -1101,7 +1101,7 @@ function renderRule(){
   placeRules();
 }
 const stProg = n => { let d = 0, t = 0; TABS.forEach(x => STG[x.id].forEach((g, i) => { if(g === n){ t++; if((S[x.id].k[i] || 0) >= maxStreak()) d++; } })); return { d, t }; };
-const stOpen = n => n === 1 || (() => { const q = stProg(n - 1); return q.t === 0 || q.d >= q.t; })();
+const stOpen = n => true; // TEMP: усі етапи відкриті для перегляду
 function renderStages(){
   $("stages").innerHTML = STAGES.map(g => { const q = stProg(g.n), o = stOpen(g.n), pc = q.t ? Math.round(q.d / q.t * 100) : 0;
     return `<button class="stg ${stage === g.n ? "on" : ""} ${o ? "" : "lk"}" data-s="${g.n}">${o ? "" : "🔒 "}${g.t}<small>${pc}%</small><i style="width:${pc}%"></i></button>`; }).join("");
