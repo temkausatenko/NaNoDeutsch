@@ -146,7 +146,11 @@ html.is-hidden .fog::before,html.is-hidden .fog::after{animation-play-state:paus
 
   <div class="greet" id="greet"></div>
 
-
+  <div class="chips" id="chips">
+    <button class="chip on" data-f="all">Всі</button>
+    <button class="chip" data-f="prog">В процесі</button>
+    <button class="chip" data-f="new">Нові</button>
+    <button class="chip" data-f="done">Готово</button>
   </div>
 
   <div class="grid" id="list"></div>
@@ -210,6 +214,17 @@ function greet(){const hr=new Date().getHours();
   document.getElementById('greet').textContent=hr>=5&&hr<11?'Доброго ранку ☕':hr>=11&&hr<17?'Гарного дня 🍁':hr>=17&&hr<23?'Гарного вечора 🍂':'Доброї ночі 🌙'}
 greet();
 
+// ---- фильтры ----
+let FILTER='all';
+document.getElementById('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;FILTER=b.dataset.f;hap();
+  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));applyFilter();
+});
+function applyFilter(){
+  let shown=0;
+  document.querySelectorAll('.cell').forEach(c=>{const ok=FILTER==='all'||c.firstChild.dataset.st===FILTER;c.hidden=!ok;if(ok)shown++});
+  document.getElementById('empty').hidden=shown>0;
+}
 
 // ---- прогресс (логика EXP без изменений) ----
 let intro=0,heroV=0;
