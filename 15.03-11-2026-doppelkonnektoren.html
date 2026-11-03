@@ -613,7 +613,7 @@ const P=[
 ["Ich bekomme weder Urlaubsgeld noch Weihnachtsgeld.","Я не отримую ні відпускних, ні різдвяних виплат.","weder","noch"],
 ["Hoffentlich bekomme ich weder Erkältung noch Fieber.","Сподіваюся, я не захворію ні на застуду, ні на температуру.","weder","noch"],
 ["Ich trinke weder Kaffee noch Tee.","Я не п’ю ні каву, ні чай.","weder","noch"],
-["Daniel will weder Überstunden machen noch am Wochenende arbeiten.","Даніель не хоче ні працювати понаднормо, ні працювати у вихідні.","weder","noch"],
+["Daniel will weder Überstunden machen noch am Wochenende arbeiten.","Даніель не хоче ні працювати понаднормово, ні працювати у вихідні.","weder","noch"],
 ["Er arbeitet weder im Homeoffice noch fährt er jeden Tag ins Büro.","Він не працює вдома й не їздить щодня в офіс.","weder","noch"],
 ["Bruno hat weder über das Jobcenter noch über eine Zeitarbeitsfirma einen Job gefunden.","Бруно не знайшов роботу ні через центр зайнятості, ні через агентство тимчасового працевлаштування.","weder","noch"],
 ["Tom ist gerade arbeitslos, deshalb kann er jetzt weder in den Urlaub fahren noch sich ein neues Auto leisten.","Том зараз безробітний, тому не може ні поїхати у відпустку, ні дозволити собі нову машину.","weder","noch"],
@@ -729,7 +729,7 @@ const SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":"");
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
 const items=()=>mode=="mc"?mcOf(tab):P[tab][3];
 
-const ID="zweiteilige_konnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
+const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
 
 function publishProgress() {
@@ -796,6 +796,16 @@ function isCatOpen(i){
   return (cnt(prev,"mc")+cnt(prev,"ty"))>=total;
 }
 
+(function(){
+  const el=$('stages'); let d=false,moved=false,x0=0,s0=0;
+  if(!el) return;
+  el.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; d=true; moved=false; x0=e.clientX; s0=el.scrollLeft; });
+  window.addEventListener('pointermove',e=>{ if(!d) return; const dx=e.clientX-x0; if(Math.abs(dx)>4){ moved=true; el.classList.add('drag'); } if(moved) el.scrollLeft=s0-dx; });
+  window.addEventListener('pointerup',()=>{ d=false; el.classList.remove('drag'); });
+  document.addEventListener('click',e=>{ if(moved&&e.target.closest&&e.target.closest('#stages')){ e.stopPropagation(); e.preventDefault(); } moved=false; },true);
+  el.addEventListener('wheel',e=>{ if(el.scrollWidth>el.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){ el.scrollLeft+=e.deltaY; e.preventDefault(); } },{passive:false});
+})();
+
 function renderTabs(){
   if(rvMode) return;
   const _st=$("stages"),_sl=_st.scrollLeft;
@@ -827,7 +837,7 @@ const RS=[
 "<b>je + Komparativ, desto/umso + Komparativ</b> (чим… тим…): <code>Je länger er wartet, desto frustrierter wird er.</code> Після je дієслово в кінці, після desto — на 2-му місці.",
 "<b>entweder … oder</b> (або… або…): <code>Ich trinke entweder Kaffee oder Tee.</code> Частини рівноправні; на початку речення — інверсія. У простих випадках кома перед oder не потрібна.",
 "<b>weder … noch</b> (ні… ні…) — це вже заперечення, без nicht/kein: <code>Ich trinke weder Kaffee noch Tee.</code> Кома між частинами не ставиться.",
-"<b>nicht nur … sondern auch</b> (не лише… а й…): <code>Ich lerne nicht nur Deutsch, sondern auch Englisch.</code> Робить акцент на другій частині. Після sondern auch інверсії немає.",
+"<b>nicht nur … sondern auch</b> (не лише… а й…): <code>Ich lerne не лише Deutsch, sondern auch Englisch.</code> Робить акцент на другій частині. Після sondern auch інверсії немає.",
 "<b>sowohl … als auch</b> (як… так і…): <code>Ich lerne sowohl Deutsch als auch Englisch.</code> Нейтральне перерахування. Коми перед als auch немає.",
 "<b>zwar … aber</b> (хоч і… але…): <code>Ich bin zwar müde, aber ich gehe zur Arbeit.</code> aber — позиція 0, інверсії немає.",
 "<b>einerseits … andererseits</b> (з одного боку… з іншого…): <code>Einerseits möchte ich reisen, andererseits muss ich sparen.</code>",
