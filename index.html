@@ -32,13 +32,6 @@ body{margin:0;background:radial-gradient(1000px 560px at 50% -12%,#4a2615 0%,#24
 .go{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#0d1117;
  background:linear-gradient(135deg,#ffb347,#e8590c);box-shadow:0 0 18px rgba(240,120,40,.5)}
 
-/* ---------- Фильтры ---------- */
-.chips{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0 10px;margin:6px 0 0;scrollbar-width:none;
- background:linear-gradient(var(--bg) 70%,transparent)}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#c9d1d9;font:700 13px inherit;
- padding:8px 14px;border-radius:99px;cursor:pointer;transition:all .2s var(--ease)}
-.chip.on{background:linear-gradient(135deg,#f59e0b,#d9480f);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(240,120,30,.45)}
 
 /* ---------- Сітка ---------- */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -81,7 +74,6 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 .badge.neu{width:auto;height:auto;border-radius:99px;padding:5px 11px;color:#22d3ee;letter-spacing:.8px;border:1px solid rgba(34,211,238,.4);box-shadow:0 2px 8px rgba(0,0,0,.35),0 0 10px rgba(34,211,238,.25)}
 .badge.done svg.ring .fg{stroke:url(#gGold);filter:drop-shadow(0 0 4px rgba(255,200,80,.9))}
 .badge .ck{position:relative;width:18px;height:18px;fill:none;stroke:#ffd666;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(255,200,80,.8))}
-.empty{text-align:center;color:#8b98a5;padding:40px 0;font-size:14px}
 
 /* ---------- Осінь ---------- */
 .track{position:relative;height:30px;display:flex;align-items:center}
@@ -114,7 +106,6 @@ html.is-hidden .leaves span,html.is-hidden .pp svg,html.is-hidden .lf{animation-
 .pp.cheer .hat{display:block}
 .pp.cheer svg{animation:cheer 1.8s ease-in-out infinite}
 @keyframes cheer{0%,58%,100%{transform:translateY(0) rotate(0)}70%{transform:translateY(-8px) rotate(-7deg)}84%{transform:translateY(0) rotate(6deg)}}
-.greet{margin:16px 4px 0;font-size:14px;font-weight:700;color:#ffcf99;text-shadow:0 1px 8px rgba(255,140,60,.35);animation:rise .7s var(--ease) .9s both}
 .fog{position:fixed;left:0;right:0;bottom:0;height:26vh;pointer-events:none;z-index:19;
  background:linear-gradient(to top,rgba(255,150,70,.15),rgba(255,170,90,.05) 55%,transparent)}
 .fog::before,.fog::after{content:"";position:absolute;inset:0;
@@ -128,7 +119,7 @@ html.is-hidden .leaves span,html.is-hidden .pp svg,html.is-hidden .lf{animation-
 @keyframes sway{from{translate:calc(var(--sw,1)*-20px) 0}to{translate:calc(var(--sw,1)*20px) 0}}
 @keyframes gust{from{transform:translate(var(--x0),var(--y0)) rotate(0)}to{transform:translate(var(--x1),var(--y1)) rotate(560deg)}}
 html.is-hidden .fog::before,html.is-hidden .fog::after{animation-play-state:paused}
-@media(prefers-reduced-motion:reduce){.fog::before,.fog::after{animation:none}.greet{animation:none}.pp.out{opacity:1;left:15px;transform:none}}
+@media(prefers-reduced-motion:reduce){.fog::before,.fog::after{animation:none}.pp.out{opacity:1;left:15px;transform:none}}
 </style>
 </head>
 <body>
@@ -144,17 +135,7 @@ html.is-hidden .fog::before,html.is-hidden .fog::after{animation-play-state:paus
     <div class="go">▶</div>
   </a>
 
-  <div class="greet" id="greet"></div>
-
-  <div class="chips" id="chips">
-    <button class="chip on" data-f="all">Всі</button>
-    <button class="chip" data-f="prog">В процесі</button>
-    <button class="chip" data-f="new">Нові</button>
-    <button class="chip" data-f="done">Готово</button>
-  </div>
-
   <div class="grid" id="list"></div>
-  <div class="empty" id="empty" hidden>Тут поки порожньо 🐾</div>
 </div>
 
 
@@ -209,22 +190,6 @@ document.getElementById('hero').addEventListener('click',e=>{
   setTimeout(()=>{location.href=href},430);
 });
 window.addEventListener('pageshow',()=>{going=false;pp.classList.remove('wink','jump')});
-// ---- привітання за часом доби ----
-function greet(){const hr=new Date().getHours();
-  document.getElementById('greet').textContent=hr>=5&&hr<11?'Доброго ранку ☕':hr>=11&&hr<17?'Гарного дня 🍁':hr>=17&&hr<23?'Гарного вечора 🍂':'Доброї ночі 🌙'}
-greet();
-
-// ---- фильтры ----
-let FILTER='all';
-document.getElementById('chips').addEventListener('click',e=>{
-  const b=e.target.closest('.chip');if(!b)return;FILTER=b.dataset.f;hap();
-  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));applyFilter();
-});
-function applyFilter(){
-  let shown=0;
-  document.querySelectorAll('.cell').forEach(c=>{const ok=FILTER==='all'||c.firstChild.dataset.st===FILTER;c.hidden=!ok;if(ok)shown++});
-  document.getElementById('empty').hidden=shown>0;
-}
 
 // ---- прогресс (логика EXP без изменений) ----
 let intro=0,heroV=0;
@@ -271,10 +236,9 @@ function updateProgress(){
   else if(!intro){intro=1;h.style.setProperty('--p',0);setTimeout(()=>pp.classList.remove('out'),450);setTimeout(()=>{intro=2;applyHero()},1400)}
   pp.classList.toggle('cheer',v===100);
   heroLbl.textContent=v===100?'Усе пройдено!':v>0?'Продовжити':'Почати';heroPc.textContent=v>0?v+'% пройдено':'Новий тренажер';
-  applyFilter();
 }
 updateProgress();
-document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden){updateProgress();greet()}});
+document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden){updateProgress()}});
 window.addEventListener('focus',updateProgress);
 window.addEventListener('tpsync:updated',updateProgress);
 
