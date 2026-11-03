@@ -8,7 +8,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <script>
-(function(){var T=['light','dark','autumn','winter','spring','summer','sakura','candy'],t=null;try{t=localStorage.getItem('tk-theme')}catch(e){}
+(function(){var T=['light','dark','autumn','winter','sakura','candy'],t=null;try{t=localStorage.getItem('tk-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})();
 </script>
 <style>
@@ -507,7 +507,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
   --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
   --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;}
-/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ · Весна 🌷 · Літо 🌴 ===== */
+/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ ===== */
 :root[data-theme="autumn"]{
   --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
   --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
@@ -520,54 +520,25 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
   --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
   --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;}
-:root[data-theme="spring"]{
-  --bg:#f4fbef;--bg-grad:#dff3d3;--card:#fff;--card-hover:#f1faea;
-  --tx:#2c4a2e;--mu:#6f9370;--pr:#3fa75f;--pr-glow:rgba(63,167,95,.35);--pl:#def3d6;
-  --ok:#2e9e63;--okb:rgba(46,158,99,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
-  --go:#e0952a;--gob:rgba(224,149,42,.12);--bd:#cfe8c4;--sa:#57b97a;--pe:#f07fb0;color-scheme:light;
-  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;}
-:root[data-theme="summer"]{
-  --bg:#fff9e6;--bg-grad:#ffe9a8;--card:#fff;--card-hover:#fff6d6;
-  --tx:#4a3410;--mu:#a98a3f;--pr:#e8730c;--pr-glow:rgba(245,158,11,.4);--pl:#fff0c2;
-  --ok:#2a9d6a;--okb:rgba(42,157,106,.12);--no:#e0445a;--nob:rgba(224,68,90,.1);
-  --go:#d98a00;--gob:rgba(217,138,0,.12);--bd:#ffe0a0;--sa:#f59e0b;--pe:#0aa5b8;color-scheme:light;
-  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;}
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 .fx-toggle{right:144px}
 .fx-toggle.off{opacity:.45;filter:grayscale(1)}
-.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear forwards}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear both}
 .mp.up{top:auto;bottom:-30px;animation-name:mcRise}
-@keyframes mcFall{to{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
-@keyframes mcRise{12%{opacity:1}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcFall{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcRise{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
 .mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
 .mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
 .mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
 .mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
 @media (prefers-reduced-motion:reduce){.mp{display:none}}
-/* ===== ВИБІР ТЕМИ (Themenwahl) ===== */
-#thPick{position:fixed;inset:0;z-index:95;display:none;align-items:flex-end;justify-content:center;padding:12px max(12px,env(safe-area-inset-left,0px)) max(12px,env(safe-area-inset-bottom,0px))}
-#thPick.on{display:flex}
-#thPick .thp{width:100%;max-width:440px;border-radius:26px;padding:14px;border:1px solid var(--bd);background:rgba(30,30,45,.62);background:color-mix(in srgb,var(--card) 66%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 18px 50px rgba(0,0,0,.28);color:var(--tx);animation:thUp .28s cubic-bezier(.2,1.1,.4,1)}
-@keyframes thUp{from{transform:translateY(24px);opacity:0}}
-#thPick .thh{display:flex;align-items:center;justify-content:space-between;margin:0 4px 10px;font-weight:800;font-size:1rem}
-#thPick .thx{width:30px;height:30px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;font-size:.85rem;line-height:1;padding:0}
-#thPick .thg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#thPick .thc{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:16px;border:2px solid transparent;background:rgba(127,127,127,.12);color:var(--tx);cursor:pointer;font:inherit;font-weight:700;font-size:.92rem;text-align:left;transition:transform .12s,border-color .2s,background .2s}
-#thPick .thc:active{transform:scale(.97)}
-#thPick .thc.on{border-color:var(--pr);background:rgba(127,127,127,.22);box-shadow:0 4px 14px var(--pr-glow)}
-#thPick .sw{position:relative;flex:none;width:38px;height:38px;border-radius:12px;border:1px solid rgba(127,127,127,.35);overflow:hidden}
-#thPick .sw i{position:absolute;width:13px;height:13px;border-radius:50%}
-#thPick .sw i:nth-child(1){left:5px;bottom:5px}#thPick .sw i:nth-child(2){right:5px;top:5px}
-#thPick .fxr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 4px 12px;padding:9px 12px;border-radius:16px;background:rgba(127,127,127,.12);font-weight:700;font-size:.9rem}
-#thPick .fxr label{flex:1}
-#thPick .fxr input{flex:1 1 100%;order:3;min-width:0;accent-color:var(--pr);height:24px;cursor:pointer}
-#thPick .fxr span{flex:none;text-align:right;color:var(--mu);font-size:.8rem}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
     <h1>TEKAMOLO<small>Порядок слів у реченні · тренажер</small></h1>
+    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -1443,46 +1414,19 @@ const TIPS = {
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const THEMES = ['light','dark','autumn','winter','spring','summer','sakura','candy'];
-const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', spring:'🌷', summer:'🌴', sakura:'🌸', candy:'🍬'};
-const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', spring:'Весна', summer:'Літо', sakura:'Сакура', candy:'Цукеркова ніч'};
+const THEMES = ['light','dark','autumn','winter','sakura','candy'];
+const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', sakura:'🌸', candy:'🍬'};
+const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', sakura:'Сакура', candy:'Цукеркова ніч'};
 function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'dark'; }
 function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('tk-theme');
 document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'dark');
 paintThemeIcon();
-const PREV={"light": ["#f8fafc", "#fff", "#4f46e5", "#7c3aed"], "dark": ["#0c0f16", "#131a24", "#6366f1", "#a78bfa"], "autumn": ["#261813", "#33211a", "#d4691a", "#c9504a"], "winter": ["#0f1b2e", "#172740", "#3f8fd6", "#a9b8ff"], "spring": ["#f4fbef", "#fff", "#3fa75f", "#f07fb0"], "summer": ["#fff9e6", "#fff", "#e8730c", "#0aa5b8"], "sakura": ["#fff6f9", "#fff", "#ec5f97", "#c05cd6"], "candy": ["#241532", "#2f1c40", "#f4579f", "#b8a1ff"]};
-const THEME_DE={light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', spring:'Весна', summer:'Літо', sakura:'Сакура', candy:'Цукеркова ніч'};
-function setTheme(t){
-  document.documentElement.setAttribute('data-theme', t);
-  store.set('tk-theme', t); paintThemeIcon(); markPick();
-  try{ if(typeof tgChrome==='function') tgChrome(); }catch(e){}
-}
-const AMBN=['Вимкнено','Легкий','Середній','Густий'];
-function syncAmb(){
-  const row=document.getElementById('ambRow'); if(!row) return;
-  const t=effTheme(), ok=(t==='autumn'||t==='winter');
-  row.style.display=ok?'':'none'; if(!ok) return;
-  document.getElementById('ambLb').textContent=t==='autumn'?'🍂 Листопад':'❄️ Снігопад';
-  const v=getAmb(t); document.getElementById('ambRange').value=v; document.getElementById('ambLbl').textContent=AMBN[v];
-}
-function markPick(){ const t=effTheme(); document.querySelectorAll('#thPick .thc').forEach(b=>b.classList.toggle('on', b.dataset.t===t)); syncAmb(); }
-function closeThemePicker(){ const o=document.getElementById('thPick'); if(o) o.classList.remove('on'); }
 function toggleTheme(){
-  let o=document.getElementById('thPick');
-  if(!o){
-    o=document.createElement('div'); o.id='thPick';
-    o.innerHTML='<div class="thp" role="dialog" aria-label="Оберіть тему"><div class="thh"><span>🎨 Оберіть тему</span><button class="thx" type="button" aria-label="Закрити">✕</button></div><div class="fxr"><label for="fxRange">✨ Ефекти</label><input type="range" id="fxRange" min="0" max="3" step="1" value="'+getFxLevel()+'"><span id="fxLbl"></span></div><div class="fxr" id="ambRow" style="display:none"><label id="ambLb" for="ambRange"></label><input type="range" id="ambRange" min="0" max="3" step="1" value="0"><span id="ambLbl"></span></div><div class="thg">'+
-      THEMES.map(t=>'<button type="button" class="thc" data-t="'+t+'"><span class="sw" style="background:linear-gradient(135deg,'+PREV[t][0]+' 55%,'+PREV[t][1]+' 55%)"><i style="background:'+PREV[t][2]+'"></i><i style="background:'+PREV[t][3]+'"></i></span><span>'+THEME_ICON[t]+' '+THEME_DE[t]+'</span></button>').join('')+'</div></div>';
-    document.body.appendChild(o);
-    o.addEventListener('click',e=>{ if(e.target===o||e.target.closest('.thx')){ closeThemePicker(); return; } const b=e.target.closest('.thc'); if(b) setTheme(b.dataset.t); });
-    const rg=o.querySelector('#fxRange'),lb=o.querySelector('#fxLbl'),FXN=['Вимкнено','Мало','Середньо','Багато'];
-    const showFx=()=>{lb.textContent=FXN[+rg.value];};showFx();
-    rg.addEventListener('input',()=>{showFx();setFxLevel(+rg.value);});
-    const ar=o.querySelector('#ambRange'); ar.addEventListener('input',()=>{setAmb(effTheme(),+ar.value);syncAmb();});
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeThemePicker(); });
-  }
-  markPick(); const _r=o.querySelector('#fxRange'); _r.value=getFxLevel(); o.querySelector('#fxLbl').textContent=['Вимкнено','Мало','Середньо','Багато'][+_r.value]; o.classList.add('on');
+  const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
+  document.documentElement.setAttribute('data-theme', n);
+  store.set('tk-theme', n); paintThemeIcon();
+  try{ if(typeof tgChrome==='function') tgChrome(); }catch(e){}
 }
 
 
@@ -2400,9 +2344,11 @@ publishProgress(); // Запускаем при загрузке страниц�
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 (function(){
 const rnd=a=>a[Math.random()*a.length|0];
-const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','spring','summer','sakura','candy'].includes(t)?t:'dark'};
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','sakura','candy'].includes(t)?t:'dark'};
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
-const _fv=store.get('tk-fx');let lvl=_fv==='on'?2:(_fv>='1'&&_fv<='3'?+_fv:0),ses=0,live=0;
+const _fv=store.get('tk-fx');let lvl=(_fv==='on'||(_fv>='1'&&_fv<='3'))?2:0,ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paintFx(){btn.classList.toggle('off',!lvl);btn.title=lvl?'Ефекти: увімкнено':'Ефекти: вимкнено';}
 function spawn(kind,n,force){
   if(RM.matches||(!lvl&&!force))return;n=Math.round(n*(innerWidth<600?.55:1)*(force?1:[0,.5,1,1.8][lvl]));
   for(let i=0;i<n;i++){
@@ -2417,7 +2363,7 @@ function spawn(kind,n,force){
     else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
     else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
     else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
-    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');el.style.setProperty('--o',(.22+Math.random()*.26).toFixed(2));
     el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
     document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
   }
@@ -2427,18 +2373,10 @@ function fx(n){const t=th();
   else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
   else if(t==='autumn')spawn('leaf',n);
   else if(t==='winter')spawn('snow',n);
-  else if(t==='spring'){spawn('petal',Math.ceil(n*.6));spawn('bloom',Math.ceil(n*.4));}
-  else if(t==='summer'){spawn('sun',Math.ceil(n*.6));spawn('bub',Math.ceil(n*.4));}
   else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
   else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
 }
-window.getFxLevel=()=>lvl;
-window.setFxLevel=function(v){lvl=v;store.set('tk-fx',String(v));if(!lvl)document.querySelectorAll('.mp').forEach(e=>e.remove());else fx(18);};
-const AK='tk-fx-',amb={};
-['autumn','winter'].forEach(t=>{const v=store.get(AK+t);amb[t]=(v>='1'&&v<='3')?+v:0;});
-window.getAmb=t=>amb[t]||0;
-window.setAmb=(t,v)=>{amb[t]=v;store.set(AK+t,String(v));};
-setInterval(()=>{if(document.hidden||RM.matches)return;const t=th(),a=amb[t]||0;if(!a)return;spawn(t==='autumn'?'leaf':'snow',a,true);},700);
+window.toggleFx=function(){lvl=lvl?0:2;store.set('tk-fx',lvl?'on':'off');paintFx();if(lvl)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
 function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
 wrap('finish',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
 wrap('popXp',(d,up)=>{if(up)fx(70);});
@@ -2446,7 +2384,7 @@ const celeb=()=>{fx(120);setTimeout(()=>fx(70),1000);};
 wrap('showComplete',celeb);
 wrap('showReviewComplete',()=>{try{if(tabDone())celeb();}catch(e){}});
 new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-paint();
+paintFx();
 })();
 </script>
 </body>
