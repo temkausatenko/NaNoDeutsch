@@ -148,26 +148,81 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
   text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
 .tool:hover{color:var(--tx)}
 
-/* ===== КАТЕГОРІЇ ===== */
+/* ===== КАТЕГОРІЇ (пігулки) ===== */
 :root{--cat-0:var(--dt);--cat-1:var(--te);--cat-2:var(--ka);--cat-3:var(--mo);--cat-4:var(--lo);--cat-5:var(--ak);--cat-6:#f472b6;--cat-7:var(--pp)}
 :root[data-theme="light"]{--cat-6:#be185d}
-.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;padding:2px;margin:0 0 14px;overflow:visible}
-.stages.drag{cursor:default;user-select:auto}
-.stages.drag .stg{pointer-events:auto}
-.stg{--c:var(--cat-7);position:relative;min-width:0;display:flex;flex-direction:column;gap:6px;padding:10px 11px 11px 14px;border:1px solid var(--bd);border-radius:13px;background:var(--card);text-align:left;font:inherit;cursor:pointer;overflow:hidden;transition:transform .18s,border-color .18s,box-shadow .18s,background .18s}
-.stg::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.5px;background:var(--c);border-radius:0 4px 4px 0;opacity:.85;transition:width .18s,opacity .18s}
-.stg .sl{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:0;font-size:.82rem;font-weight:700;color:var(--tx);letter-spacing:-.01em;line-height:1.25;white-space:normal}
-.stg .sl small{margin:0;padding:2px 8px;border-radius:99px;background:color-mix(in srgb,var(--c) 20%,transparent);color:var(--c);font-size:.66rem;font-weight:700;line-height:1.4;font-variant-numeric:tabular-nums;transition:background .18s,color .18s}
-.stg .su{margin:0;font-size:.74rem;color:var(--mu);font-weight:500;line-height:1.3}
-.stg .bar{height:3px;background:var(--pl);border-radius:99px;overflow:hidden;margin-top:4px}
-.stg .bar i{display:block;height:100%;background:var(--c);border-radius:99px;transition:width .5s}
-.stg:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--c) 55%,var(--bd))}
-.stg.on{border-color:var(--c);background:linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,var(--card)),var(--card) 70%);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 30%,transparent)}
-.stg.on::before{width:5px;opacity:1}
-.stg.done .sl small{background:var(--okb);color:var(--ok)}
+
+.stages{display:flex;flex-wrap:nowrap;gap:8px;padding:2px 2px 8px;margin:0 0 10px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.stages .stg{flex:0 0 auto}
+.blank.wide{min-width:7em}
+
+.stg{
+  --c:var(--cat-7);
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:9px 14px 13px;
+  border:1px solid var(--bd);
+  border-radius:12px;
+  background:var(--card);
+  text-align:left;
+  font:inherit;
+  font-size:.84rem;
+  font-weight:600;
+  color:var(--tx);
+  cursor:pointer;
+  overflow:hidden;
+  transition:transform .18s,border-color .18s,box-shadow .18s,background .18s,color .18s,opacity .18s;
+  min-height:42px;
+  line-height:1.2;
+  -webkit-tap-highlight-color:transparent;
+  max-width:100%;
+}
+.stg .si{flex:none;font-size:.85em;line-height:1;opacity:.85}
+.stg .sn{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stg .sp{
+  flex:none;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--mu);
+  font-variant-numeric:tabular-nums;
+  margin-left:2px;
+  transition:color .18s;
+}
+.stg .bar{
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:3px;
+  background:color-mix(in srgb,var(--bd) 60%,transparent);
+  overflow:hidden;
+  border-radius:0 0 12px 12px;
+}
+.stg .bar i{
+  display:block;height:100%;width:0;
+  background:var(--c);
+  border-radius:0 0 12px 12px;
+  transition:width .5s,background .18s;
+}
+
+.stg:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--c) 55%,var(--bd))}
+
+/* активна */
+.stg.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 4px 16px var(--pr-glow)}
+.stg.on .si{opacity:1}
+.stg.on .sp{color:rgba(255,255,255,.75)}
+.stg.on .bar{background:rgba(255,255,255,.2)}
+.stg.on .bar i{background:#fff}
+
+/* завершена */
+.stg.done .bar i{background:var(--ok)}
+
+/* заблокована */
 .stg.lk{opacity:.5;cursor:not-allowed}
 .stg.lk:hover{transform:none;border-color:var(--bd)}
-.stg.c-0{--c:var(--cat-0)}.stg.c-1{--c:var(--cat-1)}.stg.c-2{--c:var(--cat-2)}.stg.c-3{--c:var(--cat-3)}.stg.c-4{--c:var(--cat-4)}.stg.c-5{--c:var(--cat-5)}.stg.c-6{--c:var(--cat-6)}.stg.c-7{--c:var(--cat-7)}
+
+.stg.c-0{--c:var(--cat-0)}.stg.c-1{--c:var(--cat-1)}.stg.c-2{--c:var(--cat-2)}.stg.c-3{--c:var(--cat-3)}
+.stg.c-4{--c:var(--cat-4)}.stg.c-5{--c:var(--cat-5)}.stg.c-6{--c:var(--cat-6)}.stg.c-7{--c:var(--cat-7)}
 
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
@@ -218,13 +273,13 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
 .cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
 @media(max-width:480px){
-  .stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  .stg{padding:9px 8px 10px 12px;border-radius:11px}
-  .stg .sl{font-size:.76rem;gap:4px}
-  .stg .sl small{padding:2px 6px;font-size:.62rem}
-  .stg .su{font-size:.68rem}
+  .stages{gap:6px}
+  .stg{padding:8px 11px 12px;font-size:.8rem;min-height:38px;gap:5px}
+  .stg .sp{font-size:.66rem}
 }
-@media(max-width:360px){.stages{grid-template-columns:repeat(2,minmax(0,1fr))}.stg .sl{font-size:.72rem}}
+@media(max-width:360px){
+  .stg{font-size:.76rem;padding:7px 10px 11px}
+}
 @media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
 .complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;
   padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
@@ -674,13 +729,24 @@ P.slice(0,7).forEach(p=>p[3].forEach(i=>i[4]=p[1]));
 const $=i=>document.getElementById(i),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
-const XP_MAX=P.slice(0,7).reduce((n,p)=>n+p[3].length,0)*2;
+
+/* ===== Конструктор: пів-речення (кожне речення в 2 варіантах) ===== */
+const _clean=t=>String(t).replace(/[.,!?;:]/g,"");
+const splitK=x=>{const w=x[0].split(" "),c2=_clean(String(x[2]).split(" ")[0]),c3=_clean(String(x[3]).split(" ")[0]);
+  let i2=w.findIndex(t=>_clean(t)===c2); if(i2<0) i2=0;
+  let k=-1; for(let i=i2+1;i<w.length;i++){ if(_clean(w[i])===c3){k=i;break} }
+  if(k<1||k>=w.length) k=Math.ceil(w.length/2); return k};
+const MCc={};
+const mcOf=i=>MCc[i]||(MCc[i]=(()=>{const mk=v=>P[i][3].map(x=>{const y=x.slice();y[5]=v;y[6]=splitK(x);return y});return mk(0).concat(mk(1))})());
+const bw=x=>{const w=x[0].split(" "),k=x[6];return x[5]===0?w.slice(k):w.slice(0,k).map((t,i,a)=>i===a.length-1?t.replace(/,$/,""):t)};
+const givenTxt=x=>{const w=x[0].split(" "),k=x[6],A=w.slice(0,k),B=w.slice(k).join(" ");return x[5]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
+const XP_MAX=P.slice(0,7).reduce((n,p)=>n+p[3].length,0)*3;
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 let S={},XP=0,seen=sg("dk2_seen",{}),tab=0,MB=sg("dk2_mb",{}),mode=MB[P[0][0]]=="ty"?"ty":"mc",cur=-1,last=-1,answered=false,tm;
 let bPool=[],bPlaced=[];
 let hintUsed=false,hintTm;
-const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?P[i][3].filter((_,j)=>s.k[j]).length:0},SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":""),T=()=>S[SK()]||(S[SK()]={k:{},r:0,w:0,x:0,p:0}),items=()=>P[tab][3],save=all=>{try{(all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{const o=S[k];if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},r:o.r||0,w:o.w||0}))})}catch(e){}};
+const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?P[i][3]:mcOf(i)).filter((_,j)=>s.k[j]).length:0},SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":""),T=()=>S[SK()]||(S[SK()]={k:{},r:0,w:0,x:0,p:0}),items=()=>mode=="mc"?mcOf(tab):P[tab][3],save=all=>{try{(all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{const o=S[k];if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},r:o.r||0,w:o.w||0}))})}catch(e){}};
 
 const ID="zweiteilige_konnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
@@ -702,22 +768,33 @@ function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m)}
 function isCatOpen(i){
   if(i===0) return true;
   if(cnt(i,"mc")+cnt(i,"ty")>0) return true;
-  const prev=i-1, total=2*P[prev][3].length;
+  const prev=i-1, total=3*P[prev][3].length;
   return (cnt(prev,"mc")+cnt(prev,"ty"))>=total;
 }
 
+(()=>{const st=document.getElementById("stages");
+  st.addEventListener("wheel",e=>{if(st.scrollWidth<=st.clientWidth)return;const d=Math.abs(e.deltaY)>Math.abs(e.deltaX)?e.deltaY:e.deltaX;st.scrollLeft+=d;e.preventDefault()},{passive:false})})();
 function renderTabs(){
+  const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
-    const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(2*n)*100),open=isCatOpen(i);
-    return "<button class='stg c-"+i+(i==tab?" on":"")+(pc==100?" done":"")+(open?"":" lk")+"' data-s='"+i+"'>"+(open?"":"🔒 ")+"<span class='sl'>"+p[1]+"<small>"+pc+"%</small></span><span class='bar'><i style='width:"+pc+"%'></i></span></button>";
+    const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(3*n)*100),open=isCatOpen(i),done=pc===100;
+    const icon = !open ? "<span class='si'>🔒</span>" : (done ? "<span class='si'>✓</span>" : "");
+    return "<button class='stg c-"+i+(i==tab?" on":"")+(done?" done":"")+(open?"":" lk")+"' data-s='"+i+"'>"+
+      icon+
+      "<span class='sn'>"+p[1]+"</span>"+
+      "<span class='sp'>"+pc+"%</span>"+
+      "<span class='bar'><i style='width:"+pc+"%'></i></span>"+
+    "</button>";
   }).join("");
   document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.s;
     if(!isCatOpen(i)) return;
     enterCat(i);showRule(!seen[P[tab][0]]);renderTabs();start();
   });
+  _st.scrollLeft=_sl;
+  if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
   $("tabs").innerHTML=[["mc","🔨 Конструктор"],["ty","⌨️ Переклади"]].map(g=>{
-    const n=P[tab][3].length,d=cnt(tab,g[0]);
+    const n=(g[0]=="mc"?2:1)*P[tab][3].length,d=cnt(tab,g[0]);
     return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
   }).join("");
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{setMode(b.dataset.g);last=-1;renderTabs();start()});
@@ -749,7 +826,7 @@ function hideHint(){clearTimeout(hintTm);$("hintAns").classList.remove("on")}
 
 function renderBuilder(){
   const x=items()[cur]; if(!x) return;
-  const words=x[0].split(" ");
+  const words=bw(x);
   $("zone").innerHTML = bPlaced.length
     ? bPlaced.map((idx,pos)=>"<button type='button' class='wc' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(words[idx])+"</button>").join("")
     : "<span class='ph'>Натискай слова нижче, щоб скласти речення</span>";
@@ -785,8 +862,8 @@ function start(){
   $("umRow").style.display = "flex";
   $("lab").innerHTML = "<div class='tr-text'>"+esc(x[1])+"</div>";
   if(isBld){
-    $("sent").innerHTML = gapped(x,false);
-    const words = x[0].split(" ");
+    $("sent").innerHTML = x[5]===0 ? esc(givenTxt(x))+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span> "+esc(givenTxt(x));
+    const words = bw(x);
     bPlaced = [];
     bPool = sh(words.map((w,i)=>i));
     renderBuilder();
@@ -802,7 +879,7 @@ const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/�
 
 function checkBuilder(){
   if(answered) return;
-  const x=items()[cur], words=x[0].split(" ");
+  const x=items()[cur], words=bw(x);
   if(bPlaced.length!==words.length) return;
   const built=bPlaced.map(i=>words[i]).join(" ");
   answered=true;
