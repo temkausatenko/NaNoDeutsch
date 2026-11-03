@@ -115,7 +115,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .lab:empty{display:none}
 .tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
 .tr-btn:hover{color:var(--tx);border-color:var(--pr)}
-.tr-text{font-size:1.2rem;font-weight:600;line-height:1.45;color:#ffffff;text-shadow:0 1px 2px rgba(0,0,0,0.3);}
+.tr-text{font-size:1rem;font-weight:500;line-height:1.5;color:var(--tx);opacity:.92;}
 .tr-hint{font-size:.95rem;line-height:1.4;color:var(--go);font-style:normal;margin-top:10px;font-weight:500;background:var(--gob);padding:6px 12px;border-radius:8px;border-left:3px solid var(--go);display:inline-block;}
 .rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
 .rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
@@ -540,14 +540,34 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .zone.bad{border-color:var(--no);background:var(--nob)}
 .pool:empty{display:none}
 
-.card.tx .tr-text { color: #ffffff !important; font-weight: bold !important; }
-.card.bd .tr-text { color: var(--mu) !important; font-weight: normal !important; }
+.stg{display:inline-flex;align-items:center;gap:7px}
+.stg .si{font-size:.85em;line-height:1}
+.stg .sp{font-size:.66rem;font-weight:600;line-height:1.4;padding:1px 7px;border-radius:99px;background:rgba(128,128,128,.18);opacity:.9}
+.stg.on .sp{background:rgba(255,255,255,.22)}
+.stg .bar{position:absolute;left:0;right:0;bottom:0;height:3px;pointer-events:none}
+
+.tabs .tab[data-g=ty]:only-child{pointer-events:none}
+
+.rule{font-size:.9rem;line-height:1.55;padding:12px 16px}
+.rule .rh{font-size:.96rem;margin-bottom:8px}
+.rule .k,.lesson .k{color:var(--go);font-weight:700}
+.rule .rf,.lesson .rf{margin:6px 0;padding:7px 12px;border-radius:9px;background:var(--pl);font-weight:600;font-size:.92rem}
+.rule .rx{margin:10px 0 2px;font-weight:600}
+.rule .rt{display:block;margin-top:1px;color:var(--mu);font-weight:400;font-size:.84rem}
+.rule .rn{margin-top:10px;font-size:.86rem;line-height:1.6;opacity:.92}
+.rule .rg{display:grid;gap:4px;margin-top:2px}
+.rule i,.lesson i{font-style:normal;font-weight:600}
+.lesson .llead .lm{font-size:1rem;margin-bottom:2px}
+.lesson .llead .lr{margin-top:6px}
+.lesson .llead .lex{margin-top:10px;color:var(--mu);font-size:.88rem}
+.sync-toggle{position:absolute;top:0;left:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;padding:0;transition:all .2s}.sync-toggle:hover{border-color:var(--pr);transform:scale(1.05)}
 </style></head><body>
 <div class="w">
   <div class="header-wrap">
     <h1>Doppelkonnektoren</h1>
     <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
+    <button class="sync-toggle" id="sync-ind" title="Синхронізація" type="button">📴</button>
     <button class="theme-toggle" id="theme" title="Тема">🌙</button>
   </div>
   <div class="stages" id="stages"></div>
@@ -592,7 +612,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 <script>
 const L={je:"je … desto",en:"entweder … oder",we:"weder … noch",nn:"nicht nur … sondern auch",so:"sowohl … als auch",zw:"zwar … aber",ei:"einerseits … andererseits"};
 const P=[
-["je","je … desto","<b>Je + Komparativ, desto/umso + Komparativ</b> (чим… тим…). <b>umso</b> — повний синонім desto. У <b>je</b>-частині дієслово в кінці; після <b>desto/umso</b> — дієслово на 2-му місці: <code>Je länger er arbeitslos ist, desto frustrierter wird er.</code> Після desto — Komparativ: <code>desto mehr</code>, не «desto mehrere». Наприклад: <code>Je mehr du übst, umso besser wird dein Deutsch.</code>",[
+["je","je … desto","<div class='lm'><b>je … desto</b> — чим… тим…</div><div class='rf'><span class='k'>je</span> + Komparativ, <span class='k'>desto</span> + Komparativ</div><div class='lr'>• Після <b>je</b> дієслово стоїть <b>у кінці</b>.</div><div class='lr'>• Після <b>desto</b> дієслово стоїть <b>на 2-му місці</b>.</div><div class='lr'>• <b>umso</b> — те саме, що <b>desto</b>.</div><div class='lr'>• Після desto завжди Komparativ: <b>desto mehr</b>, <b>desto besser</b>.</div><div class='lr lex'>Ще приклад: <i>Je mehr du übst, umso besser wird dein Deutsch.</i></div>",[
 ["Je mehr Bewerbungen ich geschickt habe, desto mehr Angebote habe ich bekommen.","Чим більше заявок я надіслав, тим більше пропозицій отримав.","Je","desto","mehr Bewerbungen geschickt, mehr Angebote bekommen"],
 ["Je länger er arbeitslos ist, desto frustrierter wird er.","Чим довше він безробітний, тим більше він розчаровується.","Je","desto","länger arbeitslos, frustrierter wird"],
 ["Je besser man qualifiziert ist, desto leichter findet man eine Stelle.","Чим краща кваліфікація, тим легше знайти роботу.","Je","desto","besser qualifiziert, leichter findet"],
@@ -603,7 +623,7 @@ const P=[
 ["Je mehr du übst, desto schneller kannst du eine Fremdsprache lernen.","Чим більше ти практикуєшся, тим швидше можеш вивчити іноземну мову.","Je","desto","mehr übst, schneller lernen"],
 ["Je früher man sich bewirbt, desto besser kann man einen Job finden.","Чим раніше подаєшся, тим краще можна знайти роботу.","Je","desto","früher bewirbt, besser finden"],
 ["Je mehr du dich bemühst, desto mehr kannst du erreichen.","Чим більше ти стараєшся, тим більше можеш досягти.","Je","desto","mehr bemühst, mehr erreichen"]]],
-["en","entweder … oder","<b>entweder … oder</b> (або… або…). Обидві частини рівноправні: <code>Er liest entweder Stellenanzeigen oder er geht zur Agentur.</code> На початку речення — інверсія: <code>Entweder liest er … oder er geht …</code> Після <b>oder</b> порядок слів прямий. У простих випадках кома перед oder не потрібна.",[
+["en","entweder … oder","<div class='lm'><b>entweder … oder</b> — або… або…</div><div class='rf'><span class='k'>entweder</span> A <span class='k'>oder</span> B</div><div class='lr'>• Обидві частини рівноправні: <i>Er liest entweder Stellenanzeigen oder er geht zur Agentur.</i></div><div class='lr'>• Якщо речення починається з <b>Entweder</b>, дієслово йде одразу після нього: <i>Entweder liest er …, oder er geht …</i></div><div class='lr'>• Після <b>oder</b> порядок слів прямий.</div><div class='lr'>• Кома перед <b>oder</b> у простих випадках не потрібна.</div><div class='lr lex'>Ще приклад: <i>In der Pause trinke ich entweder Kaffee oder Tee.</i></div>",[
 ["In der Pause trinke ich entweder Kaffee oder Tee.","У перерву я п’ю або каву, або чай.","entweder","oder","Kaffee, Tee trinke"],
 ["Beim neuen Standort muss man entweder pendeln oder umziehen.","На новому місці треба або їздити, або переїжджати.","entweder","oder","pendeln, umziehen"],
 ["Entweder liest er Stellenanzeigen oder er geht zur Agentur für Arbeit.","Або він читає оголошення, або йде в агентство з працевлаштування.","Entweder","oder","Stellenanzeigen liest, Agentur geht"],
@@ -613,29 +633,29 @@ const P=[
 ["Du musst dich entweder heute oder morgen bei der Firma melden.","Ти повинен зв'язатися з фірмою або сьогодні, або завтра.","entweder","oder","heute, morgen melden"],
 ["Man kann entweder mit dem Bus fahren oder ein Taxi nehmen.","Можна поїхати або автобусом, або взяти таксі.","entweder","oder","Bus fahren, Taxi nehmen"],
 ["Wir müssen entweder den Termin verschieben oder einen anderen Raum suchen.","Ми повинні або перенести зустріч, або знайти іншу кімнату.","entweder","oder","Termin verschieben, anderen Raum suchen"]]],
-["we","weder … noch","<b>weder … noch</b> (ні… ні…). Саме по собі вже заперечення — <b>nicht/kein</b> не потрібні: <code>Ich trinke weder Kaffee noch Tee.</code> Кома між частинами weder … noch не ставиться. Якщо з'єднує два підмети, дієслово зазвичай в однині: <code>Weder der Chef noch die Kollegen kommt</code> (хоча в розмовній мові буває й множина). Найприродніше — з однаковими елементами: <code>weder A noch B</code>.",[
+["we","weder … noch","<div class='lm'><b>weder … noch</b> — ні… ні…</div><div class='rf'><span class='k'>weder</span> A <span class='k'>noch</span> B</div><div class='lr'>• Це вже заперечення: <b>nicht</b> і <b>kein</b> не потрібні.</div><div class='lr'>• Коми між частинами немає.</div><div class='lr'>• Найприродніше сполучати однакові елементи: <b>weder</b> A <b>noch</b> A.</div><div class='lr'>• Два підмети: дієслово зазвичай узгоджується з найближчим — <i>Weder der Chef noch der Kollege kommt.</i> / <i>…die Kollegen kommen.</i></div><div class='lr lex'>Ще приклад: <i>Ich bekomme weder Urlaubsgeld noch Weihnachtsgeld.</i></div>",[
 ["Ich bekomme weder Urlaubsgeld noch Weihnachtsgeld.","Я не отримую ні відпускних, ні різдвяних виплат.","weder","noch","Urlaubsgeld, Weihnachtsgeld bekomme"],
 ["Hoffentlich bekomme ich weder Erkältung noch Fieber.","Сподіваюся, я не захворію ні на застуду, ні на температуру.","weder","noch","Erkältung, Fieber bekomme"],
 ["Ich trinke weder Kaffee noch Tee.","Я не п’ю ні каву, ні чай.","weder","noch","Kaffee, Tee trinke"],
 ["Daniel will weder Überstunden machen noch am Wochenende arbeiten.","Даніель не хоче ні працювати понаднормо, ні працювати у вихідні.","weder","noch","Überstunden machen, am Wochenende arbeiten"],
-["Er arbeitet weder im Homeoffice noch fährt er jeden Tag ins Büro.","Він не працює вдома й не їздить щодня в офіс.","weder","noch","im Homeoffice arbeitet, ins Büro fährt"],
+["Er arbeitet weder im Homeoffice noch im Büro.","Він працює ні вдома, ні в офісі.","weder","noch","im Homeoffice, im Büro arbeitet"],
 ["Bruno hat weder über das Jobcenter noch über eine Zeitarbeitsfirma einen Job gefunden.","Бруно не знайшов роботу ні через центр зайнятості, ні через агентство тимчасового працевлаштування.","weder","noch","Jobcenter, Zeitarbeitsfirma gefunden"],
 ["Tom ist gerade arbeitslos, deshalb kann er jetzt weder in den Urlaub fahren noch sich ein neues Auto leisten.","Том зараз безробітний, тому не може ні поїхати у відпустку, ні дозволити собі нову машину.","weder","noch","in Urlaub fahren, neues Auto leisten"],
 ["Ich kann weder heute noch morgen zum Meeting kommen.","Я не можу прийти на зустріч ні сьогодні, ні завтра.","weder","noch","heute, morgen kommen"],
 ["Du darfst weder hier rauchen noch Alkohol trinken.","Тобі не можна ні курити тут, ні пити алкоголь.","weder","noch","rauchen, Alkohol trinken"],
 ["Sie will weder länger warten noch mehr Geld ausgeben.","Вона не хоче ні довше чекати, ні витрачати більше грошей.","weder","noch","länger warten, mehr Geld ausgeben"]]],
-["nn","nicht nur … sondern auch","<b>nicht nur … sondern auch</b> (не тільки… а й…). Виділяє другу частину, робить на ній акцент (на відміну від нейтрального sowohl … als auch). Після <b>sondern auch</b> інверсії немає: <code>Ich lerne nicht nur Deutsch, sondern auch Englisch.</code> Якщо далі йде ціле речення, підмет стоїть перед дієсловом: <code>…, sondern ich mache auch Notizen</code>.",[
+["nn","nicht nur … sondern auch","<div class='lm'><b>nicht nur … sondern auch</b> — не лише… а й…</div><div class='rf'><span class='k'>nicht nur</span> A, <span class='k'>sondern auch</span> B</div><div class='lr'>• Ставить <b>акцент на другій частині</b> (на відміну від нейтрального sowohl … als auch).</div><div class='lr'>• Кома перед <b>sondern</b> обов’язкова.</div><div class='lr'>• Після <b>sondern auch</b> інверсії немає.</div><div class='lr'>• Якщо далі ціле речення, підмет стоїть перед дієсловом: <i>…, sondern ich mache auch Notizen.</i></div><div class='lr lex'>Ще приклад: <i>Ich lerne nicht nur Deutsch, sondern auch Englisch.</i></div>",[
 ["Ich lerne nicht nur Deutsch, sondern auch Englisch.","Я вивчаю не тільки німецьку, а й англійську.","nicht nur","sondern auch","Deutsch, Englisch lerne"],
 ["Bei einem Praktikum sammelt man nicht nur Berufserfahrung, sondern auch Kontakte.","На практиці здобувають не лише досвід, а й контакти.","nicht nur","sondern auch","Berufserfahrung, Kontakte sammelt"],
 ["Man sollte nicht nur über sich sprechen, sondern auch Interesse am Unternehmen zeigen.","Не варто говорити лише про себе, а й проявляти інтерес до компанії.","nicht nur","sondern auch","über sich sprechen, Interesse zeigen"],
 ["Bei Bewerbungen ist nicht nur der Lebenslauf wichtig, sondern auch das Anschreiben.","У заявках важливе не лише резюме, а й супровідний лист.","nicht nur","sondern auch","Lebenslauf, Anschreiben wichtig"],
 ["Ich höre nicht nur die Nachrichten, sondern mache mir dabei auch Notizen.","Я не лише слухаю новини, а й роблю при цьому нотатки.","nicht nur","sondern","Nachrichten höre, Notizen mache"],
 ["Er wechselte nicht nur zu einer neuen Firma, sondern zog auch in eine andere Stadt.","Він не лише перейшов до нової фірми, а й переїхав в інше місто.","nicht nur","sondern","neuen Firma wechselte, andere Stadt zog"],
-["Bei einem Praktikum sammelt man nicht nur Berufserfahrung, sondern auch wichtige Kontakte.","На практиці здобувають не лише професійний досвід, а й важливі контакти.","nicht nur","sondern auch","Berufserfahrung, wichtige Kontakte sammelt"],
+["Im Vorstellungsgespräch zählt nicht nur die Qualifikation, sondern auch der persönliche Eindruck.","На співбесіді важлива не лише кваліфікація, а й особисте враження.","nicht nur","sondern auch","Qualifikation, Eindruck zählt"],
 ["Man muss nicht nur die Theorie kennen, sondern auch praktisch üben.","Треба не лише знати теорію, а й практично тренуватися.","nicht nur","sondern auch","Theorie kennen, praktisch üben"],
 ["Du solltest nicht nur ans Geld denken, sondern auch an deine Gesundheit.","Тобі варто думати не лише про гроші, а й про здоров'я.","nicht nur","sondern auch","ans Geld denken, an Gesundheit denken"],
 ["Sie kann nicht nur gut kochen, sondern auch sehr schön singen.","Вона не лише добре готує, а й дуже гарно співає.","nicht nur","sondern auch","gut kochen, sehr schön singen"]]],
-["so","sowohl … als auch","<b>sowohl … als auch</b> (як… так і…). Нейтральне додавання без виділення (на відміну від nicht nur … sondern auch). Кома перед <b>als auch</b> не потрібна: <code>Ich lerne sowohl Deutsch als auch Englisch.</code> Підмет у множині: <code>Sowohl der Lebenslauf als auch das Anschreiben sind wichtig.</code>",[
+["so","sowohl … als auch","<div class='lm'><b>sowohl … als auch</b> — як… так і…</div><div class='rf'><span class='k'>sowohl</span> A <span class='k'>als auch</span> B</div><div class='lr'>• Нейтральне додавання, <b>без акценту</b> (на відміну від nicht nur … sondern auch).</div><div class='lr'>• Коми перед <b>als auch</b> немає.</div><div class='lr'>• Підмет з цією парою — у множині: <i>Sowohl der Lebenslauf als auch das Anschreiben sind wichtig.</i></div><div class='lr lex'>Ще приклад: <i>Ich lerne sowohl Deutsch als auch Englisch.</i></div>",[
 ["Ich lerne sowohl Deutsch als auch Englisch.","Я вивчаю як німецьку, так і англійську.","sowohl","als auch","Deutsch, Englisch lerne"],
 ["Er hat sowohl in einer Kantine gearbeitet als auch abends Büroräume gereinigt.","Він і працював у їдальні, і ввечері прибирав офіси.","sowohl","als auch","in Kantine gearbeitet, Büroräume gereinigt"],
 ["Man bewirbt sich sowohl per Mail als auch über Online-Formulare.","Подаються як поштою, так і через онлайн-форми.","sowohl","als auch","per Mail, über Online-Formulare bewirbt"],
@@ -645,27 +665,27 @@ const P=[
 ["Man muss sowohl Deutsch als auch Englisch sprechen können.","Треба вміти говорити як німецькою, так і англійською.","sowohl","als auch","Deutsch, Englisch sprechen können"],
 ["Du kannst sowohl im Büro als auch zu Hause arbeiten.","Ти можеш працювати як в офісі, так і вдома.","sowohl","als auch","im Büro, zu Hause arbeiten"],
 ["Er will sowohl mehr Geld verdienen als auch mehr Freizeit haben.","Він хоче як більше заробляти, так і мати більше вільного часу.","sowohl","als auch","mehr Geld verdienen, mehr Freizeit haben"]]],
-["zw","zwar … aber","<b>zwar … aber</b> (правда… але…). <b>aber</b> — позиція 0, інверсії немає: <code>Ich bin zwar müde, aber ich gehe trotzdem zur Arbeit.</code> Друга частина зазвичай протиставляється першій.",[
+["zw","zwar … aber","<div class='lm'><b>zwar … aber</b> — хоч і… але…</div><div class='rf'><span class='k'>zwar</span> A, <span class='k'>aber</span> B</div><div class='lr'>• Друга частина протиставляється першій.</div><div class='lr'>• Кома перед <b>aber</b> обов’язкова.</div><div class='lr'>• <b>aber</b> стоїть «на нулі»: порядок слів далі прямий (підмет, потім дієслово).</div><div class='lr lex'>Ще приклад: <i>Ich bin zwar müde, aber ich gehe trotzdem zur Arbeit.</i></div>",[
 ["Ich bin zwar müde, aber ich gehe trotzdem zur Arbeit.","Я хоч і втомився, але все одно йду на роботу.","zwar","aber","müde bin, zur Arbeit gehe"],
 ["Sie nimmt zwar an den Meetings teil, aber sie sagt nie etwas.","Вона хоч і бере участь у нарадах, але ніколи нічого не каже.","zwar","aber","an Meetings teilnimmt, nie etwas sagt"],
 ["Melina hat zwar eine Ausbildung als Reiseverkehrskauffrau gemacht, aber jetzt arbeitet sie als Texterin.","Меліна хоч і здобула фах турагентки, але тепер працює копірайтеркою.","zwar","aber","Ausbildung gemacht, als Texterin arbeitet"],
-["Selina will zwar Karriere machen, aber sie will auch Zeit für ihre Familie haben.","Селіна хоче робити кар’єру, але хоче мати час і для родини.","zwar","aber","Karriere machen, Zeit für Familie haben"],
+["Selina will zwar Karriere machen, aber sie will auch Zeit für ihre Familie haben.","Селіна хоч і хоче робити кар’єру, але хоче мати час і для родини.","zwar","aber","Karriere machen, Zeit für Familie haben"],
 ["Um schneller einen Arbeitsplatz zu finden, muss man sich zwar bei der Agentur für Arbeit melden, aber man kann auch parallel im Internet recherchieren.","Щоб швидше знайти роботу, потрібно звернутися до агентства з працевлаштування, але можна також паралельно шукати в інтернеті.","zwar","aber","bei Agentur melden, im Internet recherchieren"],
 ["Martha findet ihre Arbeit zwar langweilig, aber das Gehalt ist wirklich gut.","Марта вважає свою роботу нудною, але зарплата справді хороша.","zwar","aber","Arbeit langweilig, Gehalt gut"],
 ["Du kannst zwar heute länger arbeiten, aber morgen musst du früher anfangen.","Ти хоч і можеш сьогодні працювати довше, але завтра мусиш почати раніше.","zwar","aber","heute länger arbeiten, morgen früher anfangen"],
 ["Ich will zwar mitkommen, aber ich kann leider nicht.","Я хоч і хочу піти з вами, але, на жаль, не можу.","zwar","aber","mitkommen will, leider nicht kann"],
 ["Sie darf zwar im Homeoffice arbeiten, aber sie muss trotzdem erreichbar sein.","Їй хоч і можна працювати вдома, але вона все одно має бути на зв'язку.","zwar","aber","im Homeoffice arbeiten, erreichbar sein"],
 ["Ich habe zwar nicht viel Zeit, aber ich helfe dir trotzdem.","Я хоч і не маю багато часу, але все одно допоможу тобі.","zwar","aber","nicht viel Zeit, helfe trotzdem"]]],
-["ei","einerseits … andererseits","<b>einerseits … andererseits</b> (з одного боку… з іншого…). Стоїть на 1-й позиції (інверсія) або в середині: <code>Einerseits möchte ich reisen, andererseits muss ich Geld sparen.</code> / <code>Sie möchte einerseits …, andererseits …</code>",[
+["ei","einerseits … andererseits","<div class='lm'><b>einerseits … andererseits</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>einerseits</span> A, <span class='k'>andererseits</span> B</div><div class='lr'>• Між частинами стоїть кома.</div><div class='lr'>• На початку речення — інверсія: <i>Einerseits möchte ich reisen, …</i></div><div class='lr'>• Може стояти і всередині: <i>Sie möchte einerseits …, andererseits …</i></div><div class='lr lex'>Ще приклад: <i>Einerseits möchte ich reisen, andererseits muss ich Geld sparen.</i></div>",[
 ["Einerseits möchte ich reisen, andererseits muss ich Geld sparen.","З одного боку, я хочу подорожувати, з іншого — мушу заощаджувати.","Einerseits","andererseits","reisen möchte, Geld sparen muss"],
 ["Einerseits bereitet mir mein Job Freude, andererseits verdiene ich nicht so viel.","З одного боку, робота мені подобається, з іншого — заробляю небагато.","Einerseits","andererseits","Job Freude bereitet, nicht so viel verdiene"],
-["Sie möchte einerseits mehr Geld verdienen, andererseits mag sie ihren Job.","Вона хоче заробляти більше, але їй подобається її робота.","einerseits","andererseits","mehr Geld verdienen, Job mag"],
-["Helena möchte einerseits mit Menschen arbeiten, andererseits interessiert sie sich für Technik.","Гелена хоче працювати з людьми, але її цікавить і техніка.","einerseits","andererseits","mit Menschen arbeiten, für Technik interessiert"],
+["Sie möchte einerseits mehr Geld verdienen, andererseits mag sie ihren Job.","З одного боку, вона хоче заробляти більше, з іншого — їй подобається її робота.","einerseits","andererseits","mehr Geld verdienen, Job mag"],
+["Helena möchte einerseits mit Menschen arbeiten, andererseits interessiert sie sich für Technik.","З одного боку, Гелена хоче працювати з людьми, з іншого — її цікавить техніка.","einerseits","andererseits","mit Menschen arbeiten, für Technik interessiert"],
 ["Einerseits macht das Unternehmen im Moment große Gewinne, andererseits gibt es keine Gehaltserhöhungen für die Mitarbeiter.","З одного боку, компанія зараз отримує великі прибутки, з іншого — підвищення зарплат для працівників немає.","Einerseits","andererseits","große Gewinne macht, keine Gehaltserhöhungen gibt"],
 ["Einerseits will ich mehr Geld verdienen, andererseits möchte ich weniger arbeiten.","З одного боку, я хочу більше заробляти, з іншого — хочу менше працювати.","Einerseits","andererseits","mehr Geld verdienen, weniger arbeiten"],
 ["Einerseits kann man im Homeoffice flexibel arbeiten, andererseits muss man ständig erreichbar sein.","З одного боку, вдома можна працювати гнучко, з іншого — треба постійно бути на зв'язку.","Einerseits","andererseits","flexibel arbeiten, ständig erreichbar sein"],
 ["Man sollte einerseits ehrlich sein, andererseits darf man niemanden verletzen.","З одного боку, треба бути чесним, з іншого — не можна нікого ображати.","einerseits","andererseits","ehrlich sein, niemanden verletzen"]]],
-["mix","🎲 Мікс","Усі сім пар разом: визнач пару за змістом і за порядком слів.",[]]
+["mix","Мікс","Прочитай німецьке речення з пропуском і переклад, а потім обери, яка пара Doppelkonnektoren підходить. Орієнтуйся на зміст (чим… тим…, або… або…, ні… ні…) і на порядок слів.",[]]
 ];
 P[7][3]=P.slice(0,7).flatMap(p=>p[3].map(i=>[...i,p[1]]));
 P.slice(0,7).forEach(p=>p[3].forEach(i=>i[5]=p[1]));
@@ -733,10 +753,12 @@ const SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":"");
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
 const items=()=>mode=="mc"?mcOf(tab):P[tab][3];
 
-const ID="zweiteilige_konnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
+const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
 
+var _pt;function schedPush(){clearTimeout(_pt);_pt=setTimeout(function(){try{if(window.TPSync&&TPSync.supported&&TPSync.push)TPSync.push()}catch(e){}},1200)}
 function publishProgress() {
+  schedPush();
   try {
     localStorage.setItem("tp_v2_exp_" + ID, String(XP));
     localStorage.setItem("tp_v2_exp_max_" + ID, String(XP_MAX));
@@ -790,7 +812,7 @@ function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.d
  const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
 function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
  const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
-function enterCat(i){tab=i;mode=MB[P[i][0]]||"ty";last=-1;rvMode=false;}
+function enterCat(i){tab=i;mode=(i===P.length-1)?"ty":(MB[P[i][0]]||"ty");last=-1;rvMode=false;}
 function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m);rvMode=false;}
 
 function isCatOpen(i){
@@ -804,7 +826,7 @@ function renderTabs(){
   if(rvMode) return;
   const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
-    const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(3*n)*100),open=isCatOpen(i),done=pc===100;
+    const mx=i===P.length-1,n=p[3].length,d=mx?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/((mx?1:3)*n)*100),open=isCatOpen(i),done=pc===100;
     return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
       (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
       `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
@@ -816,7 +838,7 @@ function renderTabs(){
   });
   _st.scrollLeft=_sl;
   if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
-  $("tabs").innerHTML=[["mc","🔨 Конструктор"],["ty","⌨️ Переклади"]].map(g=>{
+  $("tabs").innerHTML=(tab===P.length-1?[["ty","🎯 Вибери пару"]]:[["mc","🔨 Конструктор"],["ty","⌨️ Переклади"]]).map(g=>{
     const n=(g[0]=="mc"?2:1)*P[tab][3].length,d=cnt(tab,g[0]);
     return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
   }).join("");
@@ -828,19 +850,19 @@ function renderTabs(){
 }
 
 const RS=[
-"<b>je + Komparativ, desto/umso + Komparativ</b> (чим… тим…): <code>Je länger er wartet, desto frustrierter wird er.</code> Після je дієслово в кінці, після desto — на 2-му місці.",
-"<b>entweder … oder</b> (або… або…): <code>Ich trinke entweder Kaffee oder Tee.</code> Частини рівноправні; на початку речення — інверсія. У простих випадках кома перед oder не потрібна.",
-"<b>weder … noch</b> (ні… ні…) — це вже заперечення, без nicht/kein: <code>Ich trinke weder Kaffee noch Tee.</code> Кома між частинами не ставиться.",
-"<b>nicht nur … sondern auch</b> (не лише… а й…): <code>Ich lerne nicht nur Deutsch, sondern auch Englisch.</code> Робить акцент на другій частині. Після sondern auch інверсії немає.",
-"<b>sowohl … als auch</b> (як… так і…): <code>Ich lerne sowohl Deutsch als auch Englisch.</code> Нейтральне перерахування. Коми перед als auch немає.",
-"<b>zwar … aber</b> (хоч і… але…): <code>Ich bin zwar müde, aber ich gehe zur Arbeit.</code> aber — позиція 0, інверсії немає.",
-"<b>einerseits … andererseits</b> (з одного боку… з іншого…): <code>Einerseits möchte ich reisen, andererseits muss ich sparen.</code>",
-"Усі пари впереміш: визнач конструкцію за змістом речення."];
+"<div class='rh'>💡 <b>je … desto</b> — чим… тим…</div><div class='rf'><span class='k'>je</span> + Komparativ, <span class='k'>desto</span> + Komparativ</div><div class='rx'>Je länger er wartet, desto frustrierter wird er.<span class='rt'>Чим довше він чекає, тим більше розчаровується.</span></div><div class='rn'>📌 Після <b>je</b> дієслово стоїть у кінці, після <b>desto</b> — на 2-му місці. <b>umso</b> = <b>desto</b>.</div>",
+"<div class='rh'>💡 <b>entweder … oder</b> — або… або…</div><div class='rf'><span class='k'>entweder</span> A <span class='k'>oder</span> B</div><div class='rx'>Ich trinke entweder Kaffee oder Tee.<span class='rt'>Я п’ю або каву, або чай.</span></div><div class='rn'>📌 Обидві частини рівноправні. Якщо речення починається з <b>Entweder</b>, дієслово йде одразу після нього. Кома перед <b>oder</b> зазвичай не потрібна.</div>",
+"<div class='rh'>💡 <b>weder … noch</b> — ні… ні…</div><div class='rf'><span class='k'>weder</span> A <span class='k'>noch</span> B</div><div class='rx'>Ich trinke weder Kaffee noch Tee.<span class='rt'>Я не п’ю ні каву, ні чай.</span></div><div class='rn'>📌 Це вже заперечення, тому <b>nicht</b> і <b>kein</b> не додаємо. Коми між частинами немає.</div>",
+"<div class='rh'>💡 <b>nicht nur … sondern auch</b> — не лише… а й…</div><div class='rf'><span class='k'>nicht nur</span> A, <span class='k'>sondern auch</span> B</div><div class='rx'>Ich lerne nicht nur Deutsch, sondern auch Englisch.<span class='rt'>Я вивчаю не лише німецьку, а й англійську.</span></div><div class='rn'>📌 Кома перед <b>sondern</b> обов’язкова. Акцент на другій частині. Після <b>sondern auch</b> порядок слів не змінюється.</div>",
+"<div class='rh'>💡 <b>sowohl … als auch</b> — як… так і…</div><div class='rf'><span class='k'>sowohl</span> A <span class='k'>als auch</span> B</div><div class='rx'>Ich lerne sowohl Deutsch als auch Englisch.<span class='rt'>Я вивчаю як німецьку, так і англійську.</span></div><div class='rn'>📌 Просто «і… і…», без акценту. Коми перед <b>als auch</b> немає. Підмет з цією парою — у множині: <i>Sowohl der Lebenslauf als auch das Anschreiben sind wichtig.</i></div>",
+"<div class='rh'>💡 <b>zwar … aber</b> — хоч і… але…</div><div class='rf'><span class='k'>zwar</span> A, <span class='k'>aber</span> B</div><div class='rx'>Ich bin zwar müde, aber ich gehe zur Arbeit.<span class='rt'>Я хоч і втомлений, але йду на роботу.</span></div><div class='rn'>📌 Кома перед <b>aber</b> обов’язкова. <b>aber</b> не змінює порядок слів: далі йде підмет, потім дієслово.</div>",
+"<div class='rh'>💡 <b>einerseits … andererseits</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>einerseits</span> A, <span class='k'>andererseits</span> B</div><div class='rx'>Einerseits möchte ich reisen, andererseits muss ich sparen.<span class='rt'>З одного боку, я хочу подорожувати, з іншого — мушу заощаджувати.</span></div><div class='rn'>📌 Між частинами стоїть кома. Якщо речення починається з <b>einerseits</b> або <b>andererseits</b>, дієслово йде одразу після нього.</div>",
+"<div class='rh'>💡 <b>Мікс</b> — усі сім пар разом</div><div class='rg'><div><span class='k'>je … desto</span> — чим… тим…</div><div><span class='k'>entweder … oder</span> — або… або…</div><div><span class='k'>weder … noch</span> — ні… ні…</div><div><span class='k'>nicht nur … sondern auch</span> — не лише… а й…</div><div><span class='k'>sowohl … als auch</span> — як… так і…</div><div><span class='k'>zwar … aber</span> — хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — з одного боку… з іншого…</div></div><div class='rn'>📌 Спершу прочитай переклад, потім подивись на порядок слів і коми в реченні.</div>"];
 function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
- r.innerHTML="<div>💡 "+RS[tab]+"</div><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button>";
+ r.innerHTML="<div>"+RS[tab]+"</div><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button>";
  r.hidden=!open;if(open){seen[P[tab][0]]=1;ss("dk2_seen",seen)}
  r.querySelector(".rmore").onclick=()=>rule(true)}
-function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=p[3].slice(0,3);seen[p[0]]=1;ss("dk2_seen",seen);
+function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=tab===P.length-1?[]:p[3].slice(0,3);seen[p[0]]=1;ss("dk2_seen",seen);
  $("lesson").innerHTML="<div class='lh'><span class='lbadge'>Етап "+(tab+1)+" із "+P.length+"</span><h3>"+p[1]+"</h3></div><p class='llead'>"+p[2]+"</p>"+(ex.length?"<div class='lsec'><div class='lst'>👀 Подивись на прикладах</div>"+ex.map(x=>"<div class='lx'><div><b>"+gapped(x,true)+"</b></div><div style='color:var(--mu);font-size:.88rem'>"+esc(x[1])+"</div></div>").join("")+"</div>":"")+"<button class='lgo' id='lgo' type='button'>Почати вправи ▶</button>";
  document.body.classList.add("lsn");$("lgo").onclick=()=>document.body.classList.remove("lsn")}
 
@@ -865,7 +887,9 @@ function start(){
   clearTimeout(autoAdvanceTimer);
   const t=T(),it=items(),left=it.map((_,i)=>i).filter(i=>!t.k[i]);
   $("card").classList.remove("fin","ans");
-  $("card").classList.toggle("bd", mode === "mc");
+  const isCh=tab===P.length-1;
+  $("card").classList.toggle("bd", mode === "mc" && !isCh);
+  $("card").classList.toggle("mc", isCh);
   $("card").classList.toggle("tx", mode === "ty");
   
   if(rvMode){
@@ -883,14 +907,15 @@ function start(){
     if(!left.length){fin();return}
     let c=left.filter(i=>i!=last); c=c.length?c:left;
     cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
-    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(mode=="mc"?"конструктор":"переклад німецькою");
+    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(isCh?"вибір пари":mode=="mc"?"конструктор":"переклад німецькою");
     renderTabs();
   }
 
   $("fb").className="fb"; $("fb").innerHTML="";
   $("zone").classList.remove("ok","bad");
   resetHint();
-  const isBld = mode === "mc";
+  const isBld = mode === "mc" && !isCh;
+  if(!isCh){$("opts").style.display="none";$("opts").innerHTML=""}
   $("bld").style.display = isBld ? "" : "none";
   $("inp").style.display = isBld ? "none" : "";
   $("inp").disabled = isBld;
@@ -900,7 +925,7 @@ function start(){
   $("umRow").style.display = "flex";
   
   const x = it[cur];
-  $("lab").innerHTML = "<div class='tr-text'>"+esc(x[1])+"</div>" + (mode==="ty" && x[4] ? "<div class='tr-hint'>💡 "+esc(x[4])+"</div>" : "");
+  $("lab").innerHTML = "<div class='tr-text'>"+esc(x[1])+"</div>" + (mode==="ty" && !isCh && x[4] ? "<div class='tr-hint'>💡 "+esc(x[4])+"</div>" : "");
   if(isBld){
     $("sent").innerHTML = x[6]===0 ? esc(givenTxt(x))+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span> "+esc(givenTxt(x));
     const words = bw(x);
@@ -908,14 +933,34 @@ function start(){
     bPool = sh(words.map((w,i)=>i));
     renderBuilder();
   } else {
-    $("sent").innerHTML = "";
-    setTimeout(()=>{try{$("inp").focus()}catch(e){}},60);
+    $("sent").innerHTML = isCh ? gapped(x,false) : ""; if(isCh) renderOpts(x);
+    if(!isCh) setTimeout(()=>{try{$("inp").focus()}catch(e){}},60);
   }
 }
 
 function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?" fill ok":"")+"'>"+(fill?esc(c):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
  return s.replace(x[2],"\u0001").replace(x[3],"\u0002").replace("\u0001",g(x[2])).replace("\u0002",g(x[3]))}
 const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:„“"']/g,"").replace(/\s+/g," ").trim();
+
+const altsOf=a=>{const r=[a];if(/\bdesto\b/.test(a))r.push(a.replace(/\bdesto\b/g,"umso"));if(/\bumso\b/.test(a))r.push(a.replace(/\bumso\b/g,"desto"));return r};
+const commaSig=t=>t.replace(/\s*,\s*oder\b/gi," oder").replace(/\s*,\s*/g,", ").replace(/[.!?;:„“"']/g,"").trim().split(/\s+/).map(w=>/,$/.test(w)?1:0).join("");
+
+function renderOpts(x){
+  const ci=P.findIndex(p=>p[1]===x[5]);
+  const ids=sh([ci].concat(sh(P.slice(0,P.length-1).map((_,i)=>i).filter(i=>i!==ci)).slice(0,3)));
+  const o=$("opts");o.className="opts grid4";o.style.display="";
+  o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
+  o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
+}
+function pickOpt(b,ci){
+  if(answered) return;
+  answered=true;
+  const ok=+b.dataset.k===ci;
+  $("opts").querySelectorAll(".opt").forEach(e=>{e.disabled=true;if(+e.dataset.k===ci)e.classList.add("ok")});
+  if(!ok) b.classList.add("er");
+  $("sent").innerHTML=gapped(items()[cur],true);
+  done(ok);
+}
 
 function checkBuilder(){
   if(answered) return;
@@ -937,10 +982,11 @@ function hintOrShow(){
     hideHint(); showSol();
   }
 }
-function showSol(){ if(answered) return; answered=true; done(false); }
+function showSol(){ if(answered) return; answered=true; if(tab===P.length-1){const ci=P.findIndex(p=>p[1]===items()[cur][5]);$("opts").querySelectorAll(".opt").forEach(e=>{e.disabled=true;if(+e.dataset.k===ci)e.classList.add("ok")});$("sent").innerHTML=gapped(items()[cur],true)} done(false); }
 
-function done(ok){
+function done(ok,cmOnly){
   const t=T(), x=items()[cur];
+  if(!rvMode||ok){t.x=(t.x||0)+1;t.p=(t.p||0)+1}
   hapticAll(ok);
   playSound(ok?"correct":"wrong");
   
@@ -974,6 +1020,8 @@ function done(ok){
     "</div>"+
     "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
     "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
+    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto і einerseits … andererseits; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
+    (!ok && RS[P.findIndex(p=>p[1]===x[5])] ? "<div class='rule' style='margin:12px 0 0'>"+RS[P.findIndex(p=>p[1]===x[5])]+"</div>" : "")+
     (ok ? "<div class='bar'></div>" : "")+
     "<button class='nx' type='button'>Далі →</button>";
   f.querySelector(".ans").onclick = e=>{e.stopPropagation(); speak(x[0]);};
@@ -1031,6 +1079,7 @@ function fin(){
     };
   }
   $("again").onclick=reset;
+  if(tab===P.length-1){$("alt").style.display="none";$("nxt").style.display="none"}
   $("alt").onclick=()=>{setMode(mode=="mc"?"ty":"mc");last=-1;renderTabs();start()};
   $("nxt").onclick=()=>{
     if(!canNext) return;
@@ -1053,7 +1102,8 @@ $("chk").onclick = ()=>{
     if(!v.trim()) return;
     answered = true;
     $("inp").disabled = true;
-    done(norm(v) === norm(items()[cur][0]));
+    const al=altsOf(items()[cur][0]),wOk=al.some(a=>norm(v)===norm(a)),cOk=wOk&&al.some(a=>norm(v)===norm(a)&&commaSig(v)===commaSig(a));
+    done(cOk, wOk&&!cOk);
   }
 };
 $("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); $("chk").click(); } };
@@ -1062,6 +1112,7 @@ $("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); $("chk").clic
 document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (document.body.classList.contains("lsn")) return;
+  if (tab===P.length-1 && !answered && /^[1-4]$/.test(e.key)) { const b=$("opts").querySelectorAll(".opt")[+e.key-1]; if(b) b.click(); return; }
   if (mode === "mc" && !answered) {
     if (e.key === 'Backspace' && bPlaced.length > 0) {
       tapHaptic();
@@ -1101,9 +1152,13 @@ $("theme").onclick=()=>{const n=THEMES[(THEMES.indexOf(eff())+1)%THEMES.length];
 
 /* ===== Синхронізація (index & sync) ===== */
 function applyStorage() {
+  const sig=()=>ALLSK.map(k=>S[k]?Object.keys(S[k].k).filter(i=>S[k].k[i]).length+":"+(S[k].x||0)+":"+(S[k].p||0):"-").join("|");
+  const before=sig();
   load();
   updateXp();
-  renderTabs();
+  const changed=sig()!==before;
+  const idle=!answered&&bPlaced.length===0&&!$("inp").value&&!hintUsed&&!rvMode&&!document.body.classList.contains("lsn");
+  if(changed&&idle) start(); else renderTabs();
 }
 
 window.addEventListener("tpsync:updated", applyStorage);
@@ -1115,6 +1170,27 @@ const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.syn
 document.addEventListener('visibilitychange', () => { if(!document.hidden) tpSyncNow(); });
 setInterval(() => { if(!document.hidden && answered) tpSyncNow(); }, 30000);
 
+(function(){const st=$("stages");let down=false,sx=0,sl=0,moved=false;
+st.addEventListener("mousedown",e=>{if(e.button!==0)return;down=true;moved=false;sx=e.pageX;sl=st.scrollLeft});
+window.addEventListener("mousemove",e=>{if(!down)return;const dx=e.pageX-sx;if(!moved&&Math.abs(dx)>5){moved=true;st.classList.add("drag")}if(moved){st.scrollLeft=sl-dx;e.preventDefault()}});
+window.addEventListener("mouseup",()=>{if(!down)return;down=false;st.classList.remove("drag")});
+st.addEventListener("click",e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true);
+st.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&st.scrollWidth>st.clientWidth){st.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
+})();
+(function migrateId(){
+  try{
+    const OLD="tp_v2_zweiteilige_konnektoren_";
+    if(ALLSK.some(k=>localStorage.getItem(PFX+k)!=null))return;
+    ALLSK.forEach(k=>{const v=localStorage.getItem(OLD+k);if(v!=null)localStorage.setItem(PFX+k,v)});
+  }catch(e){}
+})();
+(function(){
+  const b=document.getElementById("sync-ind");
+  const IC={off:"📴",syncing:"🔄",ok:"☁️",error:"⚠️"},TT={off:"Синхронізація недоступна: відкрий тренажер через Telegram",syncing:"Синхронізація…",ok:"Прогрес синхронізовано",error:"Помилка синхронізації. Натисни, щоб повторити"};
+  const paintS=()=>{const s=(window.TPSync&&TPSync.status)||"off";b.textContent=IC[s]||"📴";b.title=TT[s]||""};
+  b.onclick=()=>{try{if(window.TPSync&&TPSync.supported)TPSync.sync()}catch(e){}};
+  window.addEventListener("tpsync:status",paintS);paintS();
+})();
 migrateOld();
 load();
 try{const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();
