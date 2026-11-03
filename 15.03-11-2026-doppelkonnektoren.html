@@ -738,20 +738,22 @@ const MCc={};
 const mcOf=i=>MCc[i]||(MCc[i]=(()=>{const mk=v=>P[i][3].map(x=>{const y=x.slice();y[6]=v;y[7]=splitK(x);return y});return mk(0).concat(mk(1))})());
 const bw=x=>{const w=x[0].split(" "),k=x[7];return x[6]===0?w.slice(k):w.slice(0,k).map((t,i,a)=>i===a.length-1?t.replace(/,$/,""):t)};
 const givenTxt=x=>{const w=x[0].split(" "),k=x[7],A=w.slice(0,k),B=w.slice(k).join(" ");return x[6]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
-const XP_MAX=P.slice(0,7).reduce((n,p)=>n+p[3].length,0)*3;
+const TYN=5;
+const tyList=i=>i===P.length-1?P[i][3]:P[i][3].slice(0,TYN);
+const XP_MAX=P.slice(0,7).reduce((n,p)=>n+p[3].length*2+Math.min(TYN,p[3].length),0);
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
-let tab=0,MB=sg("dk2_mb",{}),mode=MB[P[0][0]]||"ty",cur=-1,last=-1,answered=false,autoAdvanceTimer=null;
+let tab=0,MB=sg("dk2_mb",{}),mode=MB[P[0][0]]||"mc",cur=-1,last=-1,answered=false,autoAdvanceTimer=null;
 let S={},XP=0,seen=sg("dk2_seen",{});
 let bPool=[],bPlaced=[];
 let hintUsed=false,hintTm;
 let rvMode=false, rvPool=[], rvInitial=0;
 
-const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?P[i][3]:mcOf(i)).filter((_,j)=>s.k[j]).length:0};
+const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?tyList(i):mcOf(i)).filter((_,j)=>s.k[j]).length:0};
 const SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":"");
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
-const items=()=>mode=="mc"?mcOf(tab):P[tab][3];
+const items=()=>mode=="mc"?mcOf(tab):tyList(tab);
 
 const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
@@ -812,13 +814,13 @@ function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.d
  const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
 function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
  const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
-function enterCat(i){tab=i;mode=(i===P.length-1)?"ty":(MB[P[i][0]]||"ty");last=-1;rvMode=false;}
+function enterCat(i){tab=i;mode=(i===P.length-1)?"ty":(MB[P[i][0]]||"mc");last=-1;rvMode=false;}
 function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m);rvMode=false;}
 
 function isCatOpen(i){
   if(i===0) return true;
   if(cnt(i,"mc")+cnt(i,"ty")>0) return true;
-  const prev=i-1, total=3*P[prev][3].length;
+  const prev=i-1, total=2*P[prev][3].length+tyList(prev).length;
   return (cnt(prev,"mc")+cnt(prev,"ty"))>=total;
 }
 
@@ -826,7 +828,7 @@ function renderTabs(){
   if(rvMode) return;
   const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
-    const mx=i===P.length-1,n=p[3].length,d=mx?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/((mx?1:3)*n)*100),open=isCatOpen(i),done=pc===100;
+    const mx=i===P.length-1,n=p[3].length,d=mx?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(mx?n:2*n+tyList(i).length)*100),open=isCatOpen(i),done=pc===100;
     return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
       (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
       `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
@@ -839,7 +841,7 @@ function renderTabs(){
   _st.scrollLeft=_sl;
   if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
   $("tabs").innerHTML=(tab===P.length-1?[["ty","🎯 Вибери пару"]]:[["mc","🔨 Конструктор"],["ty","⌨️ Переклади"]]).map(g=>{
-    const n=(g[0]=="mc"?2:1)*P[tab][3].length,d=cnt(tab,g[0]);
+    const n=g[0]=="mc"?2*P[tab][3].length:tyList(tab).length,d=cnt(tab,g[0]);
     return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
   }).join("");
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{setMode(b.dataset.g);last=-1;renderTabs();start()});
