@@ -7,433 +7,225 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <style>
-  :root {
-    --bg: #0d1117;
-    --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-    --ok: #10b981;
-    --no: #ef4444;
-  }
+:root{--bg:#0d1117;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(900px 500px at 50% -10%,#1b2236 0%,var(--bg) 60%) fixed;color:#f0f6fc;
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+ padding:calc(14px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));min-height:100vh}
+.wrap{max-width:800px;margin:0 auto}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@property --h{syntax:'<angle>';initial-value:0deg;inherits:false}
 
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+/* ---------- Шапка ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 12px}
+.top h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.3px}
+.top h1 span{background:linear-gradient(90deg,#ffd86b,#ff8a5b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stats{display:flex;gap:8px;font-size:12px;font-weight:700}
+.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:99px;padding:5px 10px;white-space:nowrap}
+.stat b{color:#ffd86b}
+.total{height:5px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 2px 14px}
+.total i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#ff4b6e,#a855f7,#22d3ee,#84e36b);transition:width 1s var(--ease)}
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: #f0f6fc;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    padding: calc(16px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));
-    min-height: 100vh;
-  }
+/* ---------- Продолжить ---------- */
+.hero{display:flex;align-items:center;gap:14px;padding:12px;border-radius:20px;text-decoration:none;color:inherit;position:relative;overflow:hidden;
+ --c1:#a855f7;--c2:#22d3ee;--p:0;
+ background:linear-gradient(135deg,rgba(168,85,247,.22),rgba(34,211,238,.10)),#151b28;border:1px solid rgba(255,255,255,.1);
+ box-shadow:0 8px 28px rgba(0,0,0,.45);transition:transform .15s var(--ease);animation:rise .6s var(--ease) both}
+.hero:active{transform:scale(.98)}
+.hero img{width:88px;height:88px;border-radius:14px;object-fit:cover;flex:none;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.hero .tx{flex:1;min-width:0}
+.hero small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#22d3ee}
+.hero h2{margin:3px 0 8px;font-size:19px;line-height:1.15}
+.bar{height:7px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar i{display:block;height:100%;width:calc(var(--p)*1%);border-radius:9px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 1s var(--ease)}
+.hero .pc{font-size:12px;opacity:.75;margin-top:5px}
+.go{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#0d1117;
+ background:linear-gradient(135deg,#ffd86b,#ff9a3c);box-shadow:0 0 18px rgba(255,170,70,.45)}
 
-  /* Сетка для карточек-картинок */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки на телефонах */
-    gap: 12px;
-    animation: fadeIn 0.6s var(--ease) both;
-  }
+/* ---------- Фильтры ---------- */
+.chips{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0 10px;margin:6px 0 0;scrollbar-width:none;
+ background:linear-gradient(var(--bg) 70%,transparent)}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#c9d1d9;font:700 13px inherit;
+ padding:8px 14px;border-radius:99px;cursor:pointer;transition:all .2s var(--ease)}
+.chip.on{background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(120,120,255,.4)}
 
-  /* На больших экранах (планшетах и ПК) делаем 3 колонки */
-  @media (min-width: 600px) {
-    .grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
+/* ---------- Сітка ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+.cell{animation:rise .55s var(--ease) backwards;animation-delay:calc(var(--i)*55ms)}
+.cell[hidden]{display:none}
 
-  @property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-  @property --h { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+/* ---------- Карточка ---------- */
+.card{display:block;position:relative;border-radius:16px;overflow:hidden;border:3px solid transparent;aspect-ratio:1/1;
+ --p:0;--c1:#ff4b6e;--c2:#ff8a5b;--glow:rgba(255,90,100,.35);--rx:0deg;--ry:0deg;--s:1;
+ background:linear-gradient(#1a202c,#1a202c) padding-box,conic-gradient(from 0deg,var(--c1) 0%,var(--c2) calc(var(--p)*1%),rgba(255,255,255,.08) calc(var(--p)*1%)) border-box;
+ box-shadow:0 4px 16px rgba(0,0,0,.4);transform:perspective(700px) rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+ transition:transform .18s var(--ease),box-shadow .3s ease;will-change:transform}
+.card.press{--s:.965}
+.card img{width:100%;height:100%;object-fit:cover;display:block;border-radius:13px}
+.card.prog{box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 16px var(--glow)}
+.card.hot{animation:hot 2.2s ease-in-out infinite}
+@keyframes hot{50%{box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 30px var(--c2)}}
+.card.done{background:linear-gradient(#1a202c,#1a202c) padding-box,conic-gradient(from var(--a),#ffd86b,#ff9a3c,#fff3b0,#ffb347,#ffd86b) border-box;
+ animation:spin 4s linear infinite;box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 22px rgba(255,190,70,.4)}
+@keyframes spin{to{--a:360deg}}
+.card.done::before,.card.done::after{content:"";position:absolute;inset:0;border-radius:13px;pointer-events:none;z-index:2}
+.card.done::before{background:conic-gradient(from var(--h) at 50% 50%,rgba(255,90,170,.16),rgba(90,200,255,.16),rgba(255,225,110,.16),rgba(130,255,190,.16),rgba(255,90,170,.16));mix-blend-mode:screen;opacity:.85;animation:holoSpin 9s linear infinite}
+.card.done::after{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.05) 38%,rgba(120,220,255,.16) 44%,rgba(255,255,255,.24) 50%,rgba(255,150,230,.16) 56%,rgba(255,230,140,.08) 62%,transparent 70%);
+ background-size:300% 100%;background-position:120% 0;mix-blend-mode:screen;animation:holoSweep 6s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes holoSpin{to{--h:360deg}}
+@keyframes holoSweep{0%{background-position:120% 0}55%,100%{background-position:-20% 0}}
+html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.card,.card::before,.card::after,.cell,.hero{animation:none!important}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
-  .card {
-    display: block;
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 3px solid transparent;
-    aspect-ratio: 1 / 1;
-    --p: 0;
-    --c1: #ff4b6e;
-    --c2: #ff8a5b;
-    --glow: rgba(255, 90, 100, 0.35);
-    /* внутри - картинка, снаружи - рамка-прогресс по периметру */
-    background:
-      linear-gradient(#1a202c, #1a202c) padding-box,
-      conic-gradient(from 0deg,
-        var(--c1) 0%,
-        var(--c2) calc(var(--p) * 1%),
-        rgba(255, 255, 255, 0.08) calc(var(--p) * 1%)) border-box;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    transition: transform 0.15s var(--ease), box-shadow 0.3s ease;
-  }
-
-  .card:active { transform: scale(0.95); }
-
-  .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 13px;
-  }
-
-  /* В процессе: мягкое фиолетовое свечение */
-  .card.prog {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 16px var(--glow);
-  }
-
-  /* 100%: вращающаяся золотая рамка */
-  .card.done {
-    background:
-      linear-gradient(#1a202c, #1a202c) padding-box,
-      conic-gradient(from var(--a), #ffd86b, #ff9a3c, #fff3b0, #ffb347, #ffd86b) border-box;
-    animation: spin 4s linear infinite;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 190, 70, 0.4);
-  }
-
-  @keyframes spin { to { --a: 360deg; } }
-
-  /* --- Голографический эффект для 100% --- */
-  .card.done::before,
-  .card.done::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 13px;
-    pointer-events: none;
-    z-index: 2;
-  }
-  /* Мягкое радужное мерцание: плавно вращается без рывков */
-  .card.done::before {
-    background: conic-gradient(from var(--h) at 50% 50%,
-      rgba(255, 90, 170, 0.16),
-      rgba(90, 200, 255, 0.16),
-      rgba(255, 225, 110, 0.16),
-      rgba(130, 255, 190, 0.16),
-      rgba(255, 90, 170, 0.16));
-    mix-blend-mode: screen;
-    opacity: 0.85;
-    animation: holoSpin 9s linear infinite;
-  }
-  /* Широкий мягкий блик, проплывающий по карточке */
-  .card.done::after {
-    background: linear-gradient(115deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.05) 38%,
-      rgba(120, 220, 255, 0.16) 44%,
-      rgba(255, 255, 255, 0.24) 50%,
-      rgba(255, 150, 230, 0.16) 56%,
-      rgba(255, 230, 140, 0.08) 62%,
-      transparent 70%);
-    background-size: 300% 100%;
-    background-position: 120% 0;
-    mix-blend-mode: screen;
-    animation: holoSweep 6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  }
-
-  @keyframes holoSpin { to { --h: 360deg; } }
-  @keyframes holoSweep {
-    0%   { background-position: 120% 0; }
-    55%  { background-position: -20% 0; }
-    100% { background-position: -20% 0; }
-  }
-
-  /* Пока приложение свернуто, анимации стоят: экономия батареи */
-  html.is-hidden .card.done,
-  html.is-hidden .card.done::before,
-  html.is-hidden .card.done::after { animation-play-state: paused; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .card.done, .card.done::before, .card.done::after { animation: none; }
-  }
-
-
-  /* --- Бейдж справа снизу --- */
-  .badge {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: rgba(13, 17, 23, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #f0f6fc;
-    font-size: 10.5px;
-    font-weight: 800;
-    pointer-events: none;
-    z-index: 3;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  }
-
-  .badge svg.ring {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
-  .badge svg.ring circle { fill: none; stroke-width: 3; stroke-linecap: round; }
-  .badge svg.ring .tr { stroke: rgba(255, 255, 255, 0.12); }
-  .badge svg.ring .fg {
-    stroke: var(--c2);
-    stroke-dasharray: 100;
-    stroke-dashoffset: calc(100 - var(--p));
-    filter: drop-shadow(0 0 3px var(--glow));
-    transition: stroke-dashoffset 1s var(--ease);
-  }
-  .badge .num { position: relative; }
-
-  /* Новый тренажёр */
-  .badge.neu {
-    width: auto;
-    height: auto;
-    border-radius: 99px;
-    padding: 5px 11px;
-    color: #22d3ee;
-    letter-spacing: 0.8px;
-    border: 1px solid rgba(34, 211, 238, 0.4);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 10px rgba(34, 211, 238, 0.25);
-  }
-
-  /* 100%: золотой круг с галочкой */
-  .badge.done svg.ring .fg {
-    stroke: url(#gGold);
-    filter: drop-shadow(0 0 4px rgba(255, 200, 80, 0.9));
-  }
-  .badge .ck {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    fill: none;
-    stroke: #ffd666;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    filter: drop-shadow(0 0 3px rgba(255, 200, 80, 0.8));
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* ---------- Бейдж ---------- */
+.badge{position:absolute;right:8px;bottom:8px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(13,17,23,.75);
+ backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#f0f6fc;font-size:10.5px;font-weight:800;pointer-events:none;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.badge svg.ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.badge svg.ring circle{fill:none;stroke-width:3;stroke-linecap:round}
+.badge svg.ring .tr{stroke:rgba(255,255,255,.12)}
+.badge svg.ring .fg{stroke:var(--c2);stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p));filter:drop-shadow(0 0 3px var(--glow));transition:stroke-dashoffset 1s var(--ease)}
+.badge .num{position:relative}
+.badge.neu{width:auto;height:auto;border-radius:99px;padding:5px 11px;color:#22d3ee;letter-spacing:.8px;border:1px solid rgba(34,211,238,.4);box-shadow:0 2px 8px rgba(0,0,0,.35),0 0 10px rgba(34,211,238,.25)}
+.badge.done svg.ring .fg{stroke:url(#gGold);filter:drop-shadow(0 0 4px rgba(255,200,80,.9))}
+.badge .ck{position:relative;width:18px;height:18px;fill:none;stroke:#ffd666;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(255,200,80,.8))}
+.empty{text-align:center;color:#8b98a5;padding:40px 0;font-size:14px}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd86b"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient></defs></svg>
 
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <linearGradient id="gRing" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ff6b81"/><stop offset="0.5" stop-color="#a855f7"/><stop offset="1" stop-color="#22d3ee"/>
-      </linearGradient>
-      <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffd86b"/><stop offset="1" stop-color="#ff9a3c"/>
-      </linearGradient>
-    </defs>
-  </svg>
+<div class="wrap">
+  <div class="top">
+    <h1>NaNo <span>Deutsch</span></h1>
+    <div class="stats"><div class="stat">✓ <b id="stDone">0</b>/<span id="stAll">0</span></div><div class="stat">Ø <b id="stAvg">0</b>%</div></div>
+  </div>
+  <div class="total"><i id="totBar"></i></div>
 
-  <div class="grid">
-    
-    <!-- 28.10 (Negation) -->
-    <a href="14.28-10-2026-negation.html" class="card">
-      <img src="icons/14.28-10-2026-negation.jpg" alt="Negation Trainer" loading="lazy">
-      <span class="badge" data-id="negation">—</span>
-    </a>
+  <a class="hero" id="hero" href="#">
+    <img id="heroImg" alt="">
+    <div class="tx"><small id="heroLbl">Продовжити</small><h2 id="heroTit"></h2>
+      <div class="bar"><i></i></div><div class="pc" id="heroPc"></div></div>
+    <div class="go">▶</div>
+  </a>
 
-    <!-- 24.10 -->
-    <a href="24-10-2026-partizip-I.html" class="card">
-      <img src="icons/24.10.2026_partizip-I.jpg" alt="Partizip I" loading="lazy">
-      <span class="badge" data-id="partizip1">—</span>
-    </a>
-
-    <!-- 22.10 -->
-    <a href="22-10-2026-tekamolo.html" class="card">
-      <img src="icons/22.10.2026_tekamolo.jpg" alt="TEKAMOLO" loading="lazy">
-      <span class="badge" data-id="tekamolo">—</span>
-    </a>
-
-    <!-- 19.10 -->
-    <a href="19-10-2026-temporale-konnektoren.html" class="card">
-      <img src="icons/19.10.2026_temporale-konnektoren.jpg" alt="Temporale Konnektoren" loading="lazy">
-      <span class="badge" data-id="temporale_konnektoren">—</span>
-    </a>
-
-    <!-- 18.10 -->
-    <a href="18-10-2026-pronomen.html" class="card">
-      <img src="icons/18.10.2026_pronomen.jpg" alt="Pronomen Trainer" loading="lazy">
-      <span class="badge" data-id="pronomen">—</span>
-    </a>
-
-    <!-- 16.10 -->
-    <a href="16-10-2026-pronominaladverbien.html" class="card">
-      <img src="icons/16.10.2026_pronominaladverbien.jpg" alt="Pronominaladverbien" loading="lazy">
-      <span class="badge" data-id="pronominaladverbien">—</span>
-    </a>
-
-    <!-- 15.10 -->
-    <a href="15.10.2026-konjuktiv-II.html" class="card">
-      <img src="icons/15.10.2026_konjunktiv-II.jpg" alt="Konjunktiv II" loading="lazy">
-      <span class="badge" data-id="konjunktiv2">—</span>
-    </a>
-
-    <!-- 14.10 -->
-    <a href="14-10-2026-wechsel-akk-dativ-prapositionen.html" class="card">
-      <img src="icons/14.10.2026_wechsel-akk-dativ-prapositionen.jpg" alt="Präpositionen Trainer" loading="lazy">
-      <span class="badge" data-id="wechselpraep">—</span>
-    </a>
-
-    <!-- 07.10 -->
-    <a href="07-10-2026-temporale-prapositionen.html" class="card">
-      <img src="icons/07.10.2026_temporale-prapositionen.jpg" alt="Temporale Präpositionen" loading="lazy">
-      <span class="badge" data-id="temporalpraep">—</span>
-    </a>
-
-    <!-- 30.09 -->
-    <a href="30-09-2026-alle-konnektoren.html" class="card">
-      <img src="icons/30.09.2026_alle-konnektoren.jpg" alt="Alle Konnektoren" loading="lazy">
-      <span class="badge" data-id="allekonnektoren">—</span>
-    </a>
-
-    <!-- 28.09 -->
-    <a href="28-09-2026-adjektivdeklination.html" class="card">
-      <img src="icons/28.09.2026_adjektivdeklination.jpg" alt="Adjektivdeklination" loading="lazy">
-      <span class="badge" data-id="adjektivdekl">—</span>
-    </a>
-
-    <!-- 25.09 -->
-    <a href="25-09-2026-komparation-der-adjektive.html" class="card">
-      <img src="icons/25.09.2026_komparation-der-adjektive.jpg" alt="Komparation" loading="lazy">
-      <span class="badge" data-id="komparation">—</span>
-    </a>
-
-    <!-- 21.09 -->
-    <a href="21-09-2026-futur-i.html" class="card">
-      <img src="icons/21.09.2026_futur-i.jpg" alt="Futur I" loading="lazy">
-      <span class="badge" data-id="futur1">—</span>
-    </a>
-
-    <!-- 15.09 -->
-    <a href="15-09-2026-perfekt-prateritum.html" class="card">
-      <img src="icons/15.09.2026_perfekt-prateritum.jpg" alt="Perfekt & Präteritum" loading="lazy">
-      <span class="badge" data-id="perfekt">—</span>
-    </a>
-
+  <div class="chips" id="chips">
+    <button class="chip on" data-f="all">Всі</button>
+    <button class="chip" data-f="prog">В процесі</button>
+    <button class="chip" data-f="new">Нові</button>
+    <button class="chip" data-f="done">Готово</button>
   </div>
 
-  <script>
-    const tg = (window.Telegram && window.Telegram.WebApp) || {
-      ready() {}, expand() {}, setHeaderColor() {}, setBackgroundColor() {},
-      HapticFeedback: { impactOccurred() {} }
-    };
-    tg.ready();
-    tg.expand();
-    
-    try {
-      tg.setHeaderColor('#0d1117');
-      tg.setBackgroundColor('#0d1117');
-    } catch (e) {}
+  <div class="grid" id="list"></div>
+  <div class="empty" id="empty" hidden>Тут поки порожньо 🐾</div>
+</div>
 
-    // Легкая вибрация при нажатии на карточку
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('touchstart', () => {
-        try { tg.HapticFeedback.impactOccurred('light'); } catch (e) {}
-      }, { passive: true });
-    });
 
-    // --- ЛОГИКА ОБНОВЛЕНИЯ ПРОГРЕССА (НА ОСНОВЕ EXP) ---
-    const RING = '<svg class="ring" viewBox="0 0 42 42"><circle class="tr" cx="21" cy="21" r="18" pathLength="100"/><circle class="fg" cx="21" cy="21" r="18" pathLength="100"/></svg>';
-    const CHECK = '<svg class="ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+<script>
+const tg=(window.Telegram&&window.Telegram.WebApp)||{ready(){},expand(){},setHeaderColor(){},setBackgroundColor(){},HapticFeedback:{impactOccurred(){},selectionChanged(){}}};
+tg.ready();tg.expand();
+try{tg.setHeaderColor('#0d1117');tg.setBackgroundColor('#0d1117')}catch(e){}
+const hap=(t)=>{try{t?tg.HapticFeedback.impactOccurred(t):tg.HapticFeedback.selectionChanged()}catch(e){}};
 
-    // Цвета по уровням прогресса: до 25 / до 50 / до 75 / до 99, на 100 - золото (в CSS)
-    const TIERS = [
-      { max: 25, c1: '#ff4b6e', c2: '#ff8a5b', glow: 'rgba(255, 90, 100, 0.35)' },
-      { max: 50, c1: '#a855f7', c2: '#ec4899', glow: 'rgba(168, 85, 247, 0.35)' },
-      { max: 75, c1: '#3b82f6', c2: '#22d3ee', glow: 'rgba(34, 211, 238, 0.35)' },
-      { max: 99, c1: '#10b981', c2: '#84e36b', glow: 'rgba(16, 185, 129, 0.38)' }
-    ];
-    function computeExpFromState(trainerId) {
-      // Тренажер публикует список своих вкладок; считаем только их (как calcXp в самом тренажере).
-      // Если списка еще нет - берем все ключи с префиксом.
-      let allowed = null;
-      try {
-        const raw = localStorage.getItem('tp_v2_exp_tabs_' + trainerId);
-        if (raw) allowed = JSON.parse(raw);
-      } catch (e) {}
+// [id, посилання, картинка, назва]  (порядок = новые сверху)
+const T=[
+['negation','14.28-10-2026-negation.html','icons/14.28-10-2026-negation.jpg','Negation','sat'],
+['partizip1','24-10-2026-partizip-I.html','icons/24.10.2026_partizip-I.jpg','Partizip I','verb'],
+['tekamolo','22-10-2026-tekamolo.html','icons/22.10.2026_tekamolo.jpg','TEKAMOLO','sat'],
+['temporale_konnektoren','19-10-2026-temporale-konnektoren.html','icons/19.10.2026_temporale-konnektoren.jpg','Temporale Konnektoren','konn'],
+['pronomen','18-10-2026-pronomen.html','icons/18.10.2026_pronomen.jpg','Pronomen','sat'],
+['pronominaladverbien','16-10-2026-pronominaladverbien.html','icons/16.10.2026_pronominaladverbien.jpg','Pronominaladverbien','sat'],
+['konjunktiv2','15.10.2026-konjuktiv-II.html','icons/15.10.2026_konjunktiv-II.jpg','Konjunktiv II','verb'],
+['wechselpraep','14-10-2026-wechsel-akk-dativ-prapositionen.html','icons/14.10.2026_wechsel-akk-dativ-prapositionen.jpg','Wechsel Akk-Dativ-Präpositionen','prep'],
+['temporalpraep','07-10-2026-temporale-prapositionen.html','icons/07.10.2026_temporale-prapositionen.jpg','Temporale Präpositionen','prep'],
+['allekonnektoren','30-09-2026-alle-konnektoren.html','icons/30.09.2026_alle-konnektoren.jpg','Alle Konnektoren','konn'],
+['adjektivdekl','28-09-2026-adjektivdeklination.html','icons/28.09.2026_adjektivdeklination.jpg','Adjektivdeklination','adj'],
+['komparation','25-09-2026-komparation-der-adjektive.html','icons/25.09.2026_komparation-der-adjektive.jpg','Komparation der Adjektive','adj'],
+['futur1','21-09-2026-futur-i.html','icons/21.09.2026_futur-i.jpg','Futur I','verb'],
+['perfekt','15-09-2026-perfekt-prateritum.html','icons/15.09.2026_perfekt-prateritum.jpg','Perfekt & Präteritum','verb']
+];
 
-      let totalX = 0, totalP = 0;
-      const prefix = 'tp_v2_' + trainerId + '_';
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && k.startsWith(prefix)) {
-          if (Array.isArray(allowed) && allowed.indexOf(k.slice(prefix.length)) === -1) continue;
-          try {
-            const val = JSON.parse(localStorage.getItem(k));
-            if (val && typeof val === 'object') {
-              totalX += Number(val.x) || 0;
-              totalP += Number(val.p) || 0;
-            }
-          } catch(e) {}
-        }
-      }
-      return Math.max(0, totalX - totalP);
-    }
+// ---- разметка (одна сітка, порядок за датою) ----
+const list=document.getElementById('list');
+T.forEach((t,n)=>{
+  const c=document.createElement('div');c.className='cell';c.style.setProperty('--i',n);
+  c.innerHTML='<a href="'+t[1]+'" class="card" data-id="'+t[0]+'"><img src="'+t[2]+'" alt="'+t[3]+'" loading="lazy"><span class="badge">—</span></a>';
+  list.appendChild(c);
+});
 
-    function updateProgress() {
-      document.querySelectorAll('.badge').forEach(badge => {
-        const trainerId = badge.getAttribute('data-id');
-        const card = badge.closest('.card');
+// ---- наклон и вибрация ----
+list.addEventListener('pointerdown',e=>{const c=e.target.closest('.card');if(c){c.classList.add('press');tilt(c,e);hap('light')}});
+list.addEventListener('pointermove',e=>{const c=e.target.closest('.card.press');if(c)tilt(c,e)});
+['pointerup','pointercancel','pointerleave'].forEach(ev=>list.addEventListener(ev,()=>{
+  list.querySelectorAll('.card.press').forEach(c=>{c.classList.remove('press');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')})},true));
+function tilt(c,e){const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  c.style.setProperty('--rx',(-y*12).toFixed(1)+'deg');c.style.setProperty('--ry',(x*12).toFixed(1)+'deg')}
+list.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)try{localStorage.setItem('tp_last',c.dataset.id)}catch(_){}});
+document.getElementById('hero').addEventListener('click',e=>{try{localStorage.setItem('tp_last',e.currentTarget.dataset.id)}catch(_){}hap('medium')});
 
-        // EXP считаем из реального состояния вкладок (tp_v2_<id>_*), а не из залипшего tp_v2_exp_<id>
-        const expMax = parseInt(localStorage.getItem('tp_v2_exp_max_' + trainerId) || '0', 10);
-        // Максимум НЕ подгоняем под опыт: если он неизвестен, прогресса нет. Опыт не больше максимума.
-        const exp = Math.min(computeExpFromState(trainerId), expMax > 0 ? expMax : 0);
+// ---- фильтры ----
+let FILTER='all';
+document.getElementById('chips').addEventListener('click',e=>{
+  const b=e.target.closest('.chip');if(!b)return;FILTER=b.dataset.f;hap();
+  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));applyFilter();
+});
+function applyFilter(){
+  let shown=0;
+  document.querySelectorAll('.cell').forEach(c=>{const ok=FILTER==='all'||c.firstChild.dataset.st===FILTER;c.hidden=!ok;if(ok)shown++});
+  document.getElementById('empty').hidden=shown>0;
+}
 
-        // 100% и золото - только при реально набранном максимуме; иначе от 1 до 99
-        let val = 0;
-        const finished = expMax > 0 && exp >= expMax;
-        if (finished) val = 100;
-        else if (expMax > 0 && exp > 0) val = Math.min(99, Math.max(1, Math.floor((exp / expMax) * 100)));
-
-        badge.classList.remove('neu', 'done');
-        card.classList.remove('prog', 'done');
-        card.style.setProperty('--p', val);
-        badge.style.setProperty('--p', val);
-
-        if (val <= 0) {
-          badge.classList.add('neu');
-          badge.innerHTML = 'NEU';
-        } else if (finished) {
-          badge.classList.add('done');
-          card.classList.add('done');
-          badge.innerHTML = RING + CHECK;
-        } else {
-          card.classList.add('prog');
-          const t = TIERS.find(x => val <= x.max) || TIERS[TIERS.length - 1];
-          card.style.setProperty('--c1', t.c1);
-          card.style.setProperty('--c2', t.c2);
-          card.style.setProperty('--glow', t.glow);
-          badge.innerHTML = RING + '<span class="num">' + val + '%</span>';
-        }
-      });
-    }
-
-    // Запускаем при загрузке
-    updateProgress();
-
-    // Обновляем, когда пользователь возвращается с тренажера
-    document.addEventListener('visibilitychange', () => {
-      document.documentElement.classList.toggle('is-hidden', document.hidden);
-      if (!document.hidden) updateProgress();
-    });
-    window.addEventListener('focus', updateProgress);
-    
-    // Слушаем событие синхронизации от sync.js
-    window.addEventListener('tpsync:updated', updateProgress);
-  </script>
+// ---- прогресс (логика EXP без изменений) ----
+const RING='<svg class="ring" viewBox="0 0 42 42"><circle class="tr" cx="21" cy="21" r="18" pathLength="100"/><circle class="fg" cx="21" cy="21" r="18" pathLength="100"/></svg>';
+const CHECK='<svg class="ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const TIERS=[{max:25,c1:'#ff4b6e',c2:'#ff8a5b',glow:'rgba(255,90,100,.35)'},{max:50,c1:'#a855f7',c2:'#ec4899',glow:'rgba(168,85,247,.35)'},
+ {max:75,c1:'#3b82f6',c2:'#22d3ee',glow:'rgba(34,211,238,.35)'},{max:99,c1:'#10b981',c2:'#84e36b',glow:'rgba(16,185,129,.38)'}];
+function computeExpFromState(id){
+  let allowed=null;try{const raw=localStorage.getItem('tp_v2_exp_tabs_'+id);if(raw)allowed=JSON.parse(raw)}catch(e){}
+  let x=0,p=0;const prefix='tp_v2_'+id+'_';
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);
+    if(k&&k.startsWith(prefix)){if(Array.isArray(allowed)&&allowed.indexOf(k.slice(prefix.length))===-1)continue;
+      try{const v=JSON.parse(localStorage.getItem(k));if(v&&typeof v==='object'){x+=Number(v.x)||0;p+=Number(v.p)||0}}catch(e){}}}
+  return Math.max(0,x-p);
+}
+function updateProgress(){
+  const vals={};
+  document.querySelectorAll('.card').forEach(card=>{
+    const id=card.dataset.id,badge=card.querySelector('.badge');
+    const expMax=parseInt(localStorage.getItem('tp_v2_exp_max_'+id)||'0',10);
+    const exp=Math.min(computeExpFromState(id),expMax>0?expMax:0);
+    let val=0;const finished=expMax>0&&exp>=expMax;
+    if(finished)val=100;else if(expMax>0&&exp>0)val=Math.min(99,Math.max(1,Math.floor(exp/expMax*100)));
+    vals[id]=val;
+    badge.classList.remove('neu','done');card.classList.remove('prog','done','hot');
+    card.style.setProperty('--p',val);badge.style.setProperty('--p',val);
+    if(val<=0){card.dataset.st='new';badge.classList.add('neu');badge.innerHTML='NEU'}
+    else if(finished){card.dataset.st='done';badge.classList.add('done');card.classList.add('done');badge.innerHTML=RING+CHECK}
+    else{card.dataset.st='prog';card.classList.add('prog');if(val>=80)card.classList.add('hot');
+      const t=TIERS.find(x=>val<=x.max)||TIERS[3];
+      card.style.setProperty('--c1',t.c1);card.style.setProperty('--c2',t.c2);card.style.setProperty('--glow',t.glow);
+      badge.innerHTML=RING+'<span class="num">'+val+'%</span>'}
+  });
+  // общая статистика
+  const ids=T.map(t=>t[0]),done=ids.filter(i=>vals[i]===100).length,avg=Math.round(ids.reduce((a,i)=>a+vals[i],0)/ids.length);
+  stDone.textContent=done;stAll.textContent=ids.length;stAvg.textContent=avg;totBar.style.width=avg+'%';
+  // «Продолжить»
+  let last=null;try{last=localStorage.getItem('tp_last')}catch(e){}
+  let pick=(last&&vals[last]!==undefined&&vals[last]<100)?last:null;
+  if(!pick){const pr=ids.filter(i=>vals[i]>0&&vals[i]<100).sort((a,b)=>vals[b]-vals[a]);pick=pr[0]||ids.find(i=>vals[i]===0)||ids[0]}
+  const t=T.find(x=>x[0]===pick),v=vals[pick],h=document.getElementById('hero'),tier=TIERS.find(x=>v<=x.max)||TIERS[3];
+  h.href=t[1];h.dataset.id=pick;heroImg.src=t[2];heroTit.textContent=t[3];
+  h.style.setProperty('--p',v);h.style.setProperty('--c1',v?tier.c1:'#a855f7');h.style.setProperty('--c2',v?tier.c2:'#22d3ee');
+  heroLbl.textContent=v>0?'Продовжити':'Почати';heroPc.textContent=v>0?v+'% пройдено':'Новий тренажер';
+  applyFilter();
+}
+updateProgress();
+document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden)updateProgress()});
+window.addEventListener('focus',updateProgress);
+window.addEventListener('tpsync:updated',updateProgress);
+</script>
 </body>
 </html>
