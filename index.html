@@ -3,44 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0d1117">
+<meta name="theme-color" content="#120d0b">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <style>
-:root{--bg:#0d1117;--ease:cubic-bezier(.2,.8,.2,1)}
+:root{--bg:#120d0b;--ease:cubic-bezier(.2,.8,.2,1)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:radial-gradient(900px 500px at 50% -10%,#1b2236 0%,var(--bg) 60%) fixed;color:#f0f6fc;
+body{margin:0;background:radial-gradient(1000px 560px at 50% -12%,#4a2615 0%,#241510 38%,var(--bg) 72%) fixed;color:#f0f6fc;
  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;
  padding:calc(14px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));min-height:100vh}
 .wrap{max-width:800px;margin:0 auto}
 @property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
 @property --h{syntax:'<angle>';initial-value:0deg;inherits:false}
 
-/* ---------- Шапка ---------- */
-.top{display:flex;align-items:center;justify-content:space-between;margin:2px 2px 12px}
-.top h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.3px}
-.top h1 span{background:linear-gradient(90deg,#ffd86b,#ff8a5b);-webkit-background-clip:text;background-clip:text;color:transparent}
-.stats{display:flex;gap:8px;font-size:12px;font-weight:700}
-.stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:99px;padding:5px 10px;white-space:nowrap}
-.stat b{color:#ffd86b}
-.total{height:5px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 2px 14px}
-.total i{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,#ff4b6e,#a855f7,#22d3ee,#84e36b);transition:width 1s var(--ease)}
-
 /* ---------- Продолжить ---------- */
 .hero{display:flex;align-items:center;gap:14px;padding:12px;border-radius:20px;text-decoration:none;color:inherit;position:relative;overflow:hidden;
  --c1:#a855f7;--c2:#22d3ee;--p:0;
- background:linear-gradient(135deg,rgba(168,85,247,.22),rgba(34,211,238,.10)),#151b28;border:1px solid rgba(255,255,255,.1);
+ background:linear-gradient(135deg,rgba(232,89,12,.24),rgba(251,191,36,.07)),#1d1511;border:1px solid rgba(255,170,90,.18);
  box-shadow:0 8px 28px rgba(0,0,0,.45);transition:transform .15s var(--ease);animation:rise .6s var(--ease) both}
 .hero:active{transform:scale(.98)}
 .hero img{width:88px;height:88px;border-radius:14px;object-fit:cover;flex:none;box-shadow:0 4px 14px rgba(0,0,0,.5)}
 .hero .tx{flex:1;min-width:0}
-.hero small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#22d3ee}
+.hero small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#ffa94d}
 .hero h2{margin:3px 0 8px;font-size:19px;line-height:1.15}
 .bar{height:7px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden}
-.bar i{display:block;height:100%;width:calc(var(--p)*1%);border-radius:9px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width 1s var(--ease)}
+.bar i{display:block;height:100%;width:calc(15px + (100% - 30px)*var(--p)/100);border-radius:9px;background:linear-gradient(90deg,#9a3412,#ea580c,#fbbf24);box-shadow:0 0 8px rgba(251,146,60,.5);transition:width 1.2s var(--ease)}
 .hero .pc{font-size:12px;opacity:.75;margin-top:5px}
 .go{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#0d1117;
- background:linear-gradient(135deg,#ffd86b,#ff9a3c);box-shadow:0 0 18px rgba(255,170,70,.45)}
+ background:linear-gradient(135deg,#ffb347,#e8590c);box-shadow:0 0 18px rgba(240,120,40,.5)}
 
 /* ---------- Фильтры ---------- */
 .chips{position:sticky;top:0;z-index:10;display:flex;gap:8px;overflow-x:auto;padding:12px 0 10px;margin:6px 0 0;scrollbar-width:none;
@@ -48,7 +38,7 @@ body{margin:0;background:radial-gradient(900px 500px at 50% -10%,#1b2236 0%,var(
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#c9d1d9;font:700 13px inherit;
  padding:8px 14px;border-radius:99px;cursor:pointer;transition:all .2s var(--ease)}
-.chip.on{background:linear-gradient(135deg,#a855f7,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(120,120,255,.4)}
+.chip.on{background:linear-gradient(135deg,#f59e0b,#d9480f);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(240,120,30,.45)}
 
 /* ---------- Сітка ---------- */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
@@ -92,6 +82,25 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 .badge.done svg.ring .fg{stroke:url(#gGold);filter:drop-shadow(0 0 4px rgba(255,200,80,.9))}
 .badge .ck{position:relative;width:18px;height:18px;fill:none;stroke:#ffd666;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(255,200,80,.8))}
 .empty{text-align:center;color:#8b98a5;padding:40px 0;font-size:14px}
+
+/* ---------- Осінь ---------- */
+.track{position:relative;height:30px;display:flex;align-items:center}
+.track .bar{width:100%}
+.pp{position:absolute;top:50%;left:calc(15px + (100% - 30px)*var(--p)/100);width:30px;height:30px;margin:-15px 0 0 -15px;
+ transform:rotate(calc(var(--p)*5deg));transition:left 1.2s var(--ease),transform 1.2s var(--ease);filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+.pp svg{display:block;animation:bob 1.3s ease-in-out infinite alternate}
+@keyframes bob{from{translate:0 -1.5px}to{translate:0 1.5px}}
+.lf{display:none;position:absolute;z-index:4;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));animation:lsw 3.2s ease-in-out infinite alternate}
+.card.done .lf{display:block}
+.lf.l1{top:3px;left:5px;font-size:17px;rotate:-24deg}
+.lf.l2{bottom:6px;left:7px;font-size:13px;rotate:18deg;animation-delay:-1.4s}
+@keyframes lsw{from{translate:0 0}to{translate:2px 3px}}
+.leaves{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+.leaves span{position:absolute;top:0;opacity:.55;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));animation:fall linear infinite,sway ease-in-out infinite alternate}
+@keyframes fall{from{transform:translateY(-40px) rotate(0)}to{transform:translateY(112vh) rotate(380deg)}}
+@keyframes sway{from{translate:-20px 0}to{translate:20px 0}}
+html.is-hidden .leaves span,html.is-hidden .pp svg,html.is-hidden .lf{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.leaves{display:none}.pp svg,.lf{animation:none}}
 </style>
 </head>
 <body>
@@ -99,16 +108,10 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd86b"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient></defs></svg>
 
 <div class="wrap">
-  <div class="top">
-    <h1>NaNo <span>Deutsch</span></h1>
-    <div class="stats"><div class="stat">✓ <b id="stDone">0</b>/<span id="stAll">0</span></div><div class="stat">Ø <b id="stAvg">0</b>%</div></div>
-  </div>
-  <div class="total"><i id="totBar"></i></div>
-
   <a class="hero" id="hero" href="#">
     <img id="heroImg" alt="">
     <div class="tx"><small id="heroLbl">Продовжити</small><h2 id="heroTit"></h2>
-      <div class="bar"><i></i></div><div class="pc" id="heroPc"></div></div>
+      <div class="track"><div class="bar"><i></i></div><span class="pp"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 10c0-3 1-5.5 4-6.5" stroke="#4d7c0f" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M19 6c3-1 5 0 6 2-3 1-5 .5-6-2z" fill="#65a30d"/><ellipse cx="16" cy="20" rx="13.5" ry="10.5" fill="#ea580c"/><ellipse cx="9.5" cy="20" rx="6.5" ry="10.3" fill="#fb923c"/><ellipse cx="22.5" cy="20" rx="6.5" ry="10.3" fill="#f97316"/><ellipse cx="16" cy="20" rx="4.3" ry="10.5" fill="#fdba74"/><circle cx="12" cy="19" r="1.3" fill="#431407"/><circle cx="20" cy="19" r="1.3" fill="#431407"/><path d="M12.5 23.5q3.5 2.6 7 0" stroke="#431407" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></span></div><div class="pc" id="heroPc"></div></div>
     <div class="go">▶</div>
   </a>
 
@@ -127,7 +130,7 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 <script>
 const tg=(window.Telegram&&window.Telegram.WebApp)||{ready(){},expand(){},setHeaderColor(){},setBackgroundColor(){},HapticFeedback:{impactOccurred(){},selectionChanged(){}}};
 tg.ready();tg.expand();
-try{tg.setHeaderColor('#0d1117');tg.setBackgroundColor('#0d1117')}catch(e){}
+try{tg.setHeaderColor('#120d0b');tg.setBackgroundColor('#120d0b')}catch(e){}
 const hap=(t)=>{try{t?tg.HapticFeedback.impactOccurred(t):tg.HapticFeedback.selectionChanged()}catch(e){}};
 
 // [id, посилання, картинка, назва]  (порядок = новые сверху)
@@ -152,7 +155,7 @@ const T=[
 const list=document.getElementById('list');
 T.forEach((t,n)=>{
   const c=document.createElement('div');c.className='cell';c.style.setProperty('--i',n);
-  c.innerHTML='<a href="'+t[1]+'" class="card" data-id="'+t[0]+'"><img src="'+t[2]+'" alt="'+t[3]+'" loading="lazy"><span class="badge">—</span></a>';
+  c.innerHTML='<a href="'+t[1]+'" class="card" data-id="'+t[0]+'"><img src="'+t[2]+'" alt="'+t[3]+'" loading="lazy"><span class="badge">—</span><span class="lf l1">🍂</span><span class="lf l2">🍁</span></a>';
   list.appendChild(c);
 });
 
@@ -209,9 +212,7 @@ function updateProgress(){
       card.style.setProperty('--c1',t.c1);card.style.setProperty('--c2',t.c2);card.style.setProperty('--glow',t.glow);
       badge.innerHTML=RING+'<span class="num">'+val+'%</span>'}
   });
-  // общая статистика
-  const ids=T.map(t=>t[0]),done=ids.filter(i=>vals[i]===100).length,avg=Math.round(ids.reduce((a,i)=>a+vals[i],0)/ids.length);
-  stDone.textContent=done;stAll.textContent=ids.length;stAvg.textContent=avg;totBar.style.width=avg+'%';
+  const ids=T.map(t=>t[0]);
   // «Продолжить»
   let last=null;try{last=localStorage.getItem('tp_last')}catch(e){}
   let pick=(last&&vals[last]!==undefined&&vals[last]<100)?last:null;
@@ -226,6 +227,12 @@ updateProgress();
 document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden)updateProgress()});
 window.addEventListener('focus',updateProgress);
 window.addEventListener('tpsync:updated',updateProgress);
+
+// ---- осіннє листя ----
+(function(){const box=document.createElement('div');box.className='leaves';
+for(let i=0;i<8;i++){const s=document.createElement('span');s.textContent=i%2?'🍂':'🍁';
+ s.style.cssText='left:'+(Math.random()*94).toFixed(1)+'%;font-size:'+(14+Math.random()*10).toFixed(0)+'px;animation-duration:'+(15+Math.random()*10).toFixed(1)+'s,'+(3+Math.random()*2).toFixed(1)+'s;animation-delay:'+(-Math.random()*22).toFixed(1)+'s,'+(-Math.random()*3).toFixed(1)+'s';box.appendChild(s)}
+document.body.appendChild(box)})();
 </script>
 </body>
 </html>
