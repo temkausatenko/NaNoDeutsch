@@ -6,6 +6,10 @@
 <title>Perfekt & Präteritum 25.10.2026</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
+<script>
+(function(){var T=['light','dark','autumn','winter','sakura','candy'],t=null;try{t=localStorage.getItem('pp-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})();
+</script>
 <style>
 :root{
   --bg:#0c0f16;--bg-grad:#1a2035;
@@ -20,7 +24,7 @@
   --sa:#818cf8;--pe:#a78bfa;
   --radius:16px;color-scheme:dark;
 }
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+@media (prefers-color-scheme:light){:root:not([data-theme]){
   --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
   --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
   --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
@@ -42,11 +46,11 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
   background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+.theme-toggle,.sound-toggle,.theory-top-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
   color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
 .theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
-.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
 .tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
   padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
@@ -258,12 +262,60 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .card-tools>*{position:static}
 .card h2{padding-right:195px}
 @media(max-width:480px){.card-tools{top:18px;right:18px}.card h2{padding-right:185px}}
+
+/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ ===== */
+:root[data-theme="autumn"]{
+  --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
+  --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
+  --ok:#a8d160;--okb:rgba(168,209,96,.14);--no:#ff7a5c;--nob:rgba(255,122,92,.14);
+  --go:#ffc15a;--gob:rgba(255,193,90,.14);--bd:#5a3825;--sa:#f4a259;--pe:#c9504a;color-scheme:dark;
+  }
+:root[data-theme="winter"]{
+  --bg:#0f1b2e;--bg-grad:#1b3354;--card:#172740;--card-hover:#1f3352;
+  --tx:#e8f3ff;--mu:#8fb0d1;--pr:#3f8fd6;--pr-glow:rgba(74,163,223,.4);--pl:#20395c;
+  --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
+  --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
+  }
+/* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
+:root[data-theme="sakura"]{
+  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
+  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
+  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
+  }
+:root[data-theme="candy"]{
+  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
+  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
+  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
+  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+  }
+
+:root[data-theme="sakura"] .theory-card,:root[data-theme="sakura"] .cheat{box-shadow:0 8px 30px rgba(236,95,151,.15)}
+:root[data-theme="sakura"] .tab,:root[data-theme="candy"] .tab{border-width:2px;font-weight:700}
+:root[data-theme="sakura"] .theory-card,:root[data-theme="candy"] .theory-card,
+:root[data-theme="sakura"] .cheat,:root[data-theme="candy"] .cheat{border-width:2px;border-radius:22px}
+:root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
+:root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
+:root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+.fx-toggle{right:144px}
+.fx-toggle.off{opacity:.45;filter:grayscale(1)}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear both}
+.mp.up{top:auto;bottom:-30px;animation-name:mcRise}
+@keyframes mcFall{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcRise{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+.mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
+.mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
+.mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
+@media (prefers-reduced-motion:reduce){.mp{display:none}}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
     <h1>Perfekt & Präteritum<small>Минулі часи в німецькій мові · Теорія та практика</small></h1>
+    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -310,7 +362,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   <div class="xp" id="xp" data-r="0">
     <div class="xh">
       <span class="xl"><i class="xg"></i>EXP цієї категорії</span>
-      <span class="xv"><b id="xt">0</b><small id="xn">/ 300</small><em class="xpop" id="xpop"></em></span>
+      <span class="xv"><b id="xt">0</b><small id="xn">/ 24</small><em class="xpop" id="xpop"></em></span>
     </div>
     <div class="xrank">
       <span class="xrn" id="xr">🌱 Новачок</span>
@@ -472,15 +524,16 @@ const norm = s => String(s || "").toLowerCase().replace(/ß/g, "ss").replace(/[.
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const mqLight = window.matchMedia('(prefers-color-scheme: light)');
-function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
-function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
+const THEMES = ['light','dark','autumn','winter','sakura','candy'];
+const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', sakura:'🌸', candy:'🍬'};
+const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', sakura:'Сакура', candy:'Цукеркова ніч'};
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'dark'; }
+function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('pp-theme');
-if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'dark');
 paintThemeIcon();
-if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
 function toggleTheme(){
-  const n = effTheme() === 'light' ? 'dark' : 'light';
+  const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
   document.documentElement.setAttribute('data-theme', n);
   store.set('pp-theme', n); paintThemeIcon();
 }
@@ -713,18 +766,34 @@ RAW_VERBS.forEach(v => {
   });
 });
 
-const KEY = id => "pp_v1_" + id;
-const XP_MAX = 300;
-const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0 });
-const S = {};
-TABS.forEach(t => {
+const KEY = id => "tp_v2_perfekt_" + id;   // префікс tp_v2_<id> збігається з data-id у index.html; ці ключі синхронізує sync.js
+const OLD_KEY = id => "pp_v1_" + id;         // старий формат (x = EXP), лише для одноразової міграції
+/* x і p лише зростають (для sync.js): кожна відповідь x+1, а p+0 / p+1 / p+2 дає EXP +1 / 0 / −1. EXP категорії = x − p. */
+const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0, p:0 });
+function migrateOldKeys(){
   try {
-    const v = JSON.parse(localStorage.getItem(KEY(t.id)));
-    if(v && v.k){ if(!v.err) v.err = {}; S[t.id] = v; }
+    TABS.forEach(t => {
+      let n = null, o = null;
+      try { n = JSON.parse(localStorage.getItem(KEY(t.id))); } catch(e){}
+      if(n && n.k) return;                       // нові дані вже є
+      try { o = JSON.parse(localStorage.getItem(OLD_KEY(t.id))); } catch(e){}
+      if(o && o.k){ o.x = Number(o.x) || 0; o.p = 0; localStorage.setItem(KEY(t.id), JSON.stringify(o)); }
+    });
   } catch(e){}
-  if(!S[t.id]) S[t.id] = blankState();
-  S[t.id].x = S[t.id].x || 0;
-});
+}
+migrateOldKeys();
+const readState = id => {
+  try { const v = JSON.parse(localStorage.getItem(KEY(id))); if(v && v.k){ if(!v.err) v.err = {}; v.x = Number(v.x) || 0; v.p = Number(v.p) || 0; return v; } } catch(e){}
+  return null;
+};
+const S = {};
+TABS.forEach(t => { S[t.id] = readState(t.id) || blankState(); });
+/* максимум EXP категорії = кількість її завдань; сума максимумів = кількість усіх завдань */
+const catMax = id => ITEMS[id].length;
+const XP_MAX = TABS.reduce((a, t) => a + catMax(t.id), 0);
+const catXp = id => Math.max(0, Math.min(catMax(id), (S[id].x || 0) - (S[id].p || 0)));
+const calcXp = () => TABS.reduce((a, t) => a + catXp(t.id), 0);
+const bump = (t, net) => { t.x++; t.p += 1 - net; };   // net = зміна EXP: +1, 0 або −1
 
 let tab = TABS[0].id, cur = 0, answered = false, picked = -1, curOpts = [], tm, reviewMode = false;
 const TB = () => TABS.find(t => t.id === tab);
@@ -736,7 +805,7 @@ const pool = () => items().map((_, i) => i);
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); if(typeof publishProgress === 'function') publishProgress(); } catch(e){} };
 
 function speak(text){
   if(!window.speechSynthesis || !text) return;
@@ -789,7 +858,7 @@ function renderCard(){
   $("stat-correct").textContent = t.r;
   $("stat-wrong").textContent = t.w;
   $("bar").style.width = `${Math.min(done, total) / total * 100}%`;
-  updateXp(t.x || 0);
+  updateXp(catXp(tab));
   renderTabs();
 }
 function renderOpts(){
@@ -869,8 +938,8 @@ function showComplete(){
 function repeatReview(){ hideComplete(); startReview(); }
 function finalRestart(){
   const e = T().err;
-  const xKeep = T().x || 0;
-  S[tab] = blankState(); S[tab].err = e; S[tab].x = xKeep; reviewDoneSets[tab] = new Set();
+  const bx = (T().x || 0) + 1, bp = (T().p || 0) + 1;   // x і p лише зростають: EXP не змінюється
+  S[tab] = blankState(); S[tab].err = e; S[tab].x = bx; S[tab].p = bp; reviewDoneSets[tab] = new Set();
   save(); hideComplete(); reviewMode = false;
   load(pool()[0]);
 }
@@ -886,19 +955,21 @@ function showReviewComplete(){
 }
 function hideComplete(){ $("complete").hidden = true; }
 
-const RANKS=[[0,'🌱','Новачок'],[30,'🌿','Учень'],[75,'🧭','Дослідник'],[135,'⚡','Знавець'],[205,'🔥','Профі'],[265,'💎','Майстер'],[300,'🏆','Легенда']];
-const rankOf = x => { let r = 0; RANKS.forEach((q, i) => { if(x >= q[0]) r = i; }); return r; };
+const RANK_Q = [[0,'🌱','Новачок'],[.1,'🌿','Учень'],[.24,'🧭','Дослідник'],[.44,'⚡','Знавець'],[.68,'🔥','Профі'],[.92,'💎','Майстер'],[1,'🏆','Легенда']];
+const ranks = () => RANK_Q.map(q => [Math.round(q[0] * catMax(tab)), q[1], q[2]]);
+const rankOf = x => { let r = 0; ranks().forEach((q, i) => { if(x >= q[0]) r = i; }); return r; };
 function updateXp(xv){
-  const r = rankOf(xv), R = RANKS[r], N = RANKS[r+1], box = $("xp");
+  const RK = ranks(), M = catMax(tab);
+  const r = rankOf(xv), R = RK[r], N = RK[r+1], box = $("xp");
   box.dataset.r = r;
-  box.classList.toggle("max", xv >= XP_MAX);
-  $("xf").style.width = `${xv / XP_MAX * 100}%`;
+  box.classList.toggle("max", xv >= M);
+  $("xf").style.width = `${xv / M * 100}%`;
   $("xt").textContent = xv;
-  $("xn").textContent = xv >= XP_MAX ? "MAX" : `/ ${XP_MAX}`;
+  $("xn").textContent = xv >= M ? "MAX" : `/ ${M}`;
   $("xr").textContent = `${R[1]} ${R[2]}`;
   $("xnext").textContent = N ? `ще ${N[0] - xv} до «${N[2]}»` : "максимальний ранг";
   const tk = $("xticks");
-  if(!tk.firstChild) tk.innerHTML = RANKS.slice(1, -1).map(q => `<u style="left:${q[0]/XP_MAX*100}%"></u>`).join("");
+  tk.innerHTML = RK.slice(1, -1).map(q => `<u style="left:${q[0]/M*100}%"></u>`).join("");
 }
 function popXp(d, up){
   const p = $("xpop"), b = $("xt"), box = $("xp");
@@ -909,13 +980,13 @@ function popXp(d, up){
 }
 
 function finish(ok){
-  const t = T(), xBefore = t.x || 0;
+  const t = T(), xBefore = catXp(tab), xLocked = xBefore >= catMax(tab);
   answered = true;
   playSound(ok ? 'correct' : 'wrong');
-  if(ok){ t.r++; t.x = Math.min(XP_MAX, (t.x || 0) + 1); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
-  else  { t.w++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
+  if(ok){ t.r++; bump(t, xLocked ? 0 : 1); t.k[cur] = Math.min(maxStreak(), streak(cur) + 1); if(reviewMode) rd().add(cur); }
+  else  { t.w++; bump(t, (xLocked || xBefore <= 0) ? 0 : -1); t.k[cur] = 0; t.err[cur] = true; if(reviewMode) rd().delete(cur); }
   save(); showFb(ok, cur); markOpts(); renderCard(); renderReviewBtn();
-  { const d = (t.x || 0) - xBefore; if(d) popXp(d, rankOf(t.x || 0) > rankOf(xBefore)); }
+  { const xNow = catXp(tab), d = xNow - xBefore; if(d) popXp(d, rankOf(xNow) > rankOf(xBefore)); }
   if(ok){
     const c = $("card");
     c.classList.remove("win"); void c.offsetWidth; c.classList.add("win");
@@ -952,12 +1023,14 @@ function showSol(){
   if(answered) return;
   answered = true;
   const t = T();
-  t.l++; t.x = Math.max(0, (t.x || 0) - 1); t.k[cur] = 0; t.err[cur] = true;
+  { const xb = catXp(tab); bump(t, (xb >= catMax(tab) || xb <= 0) ? 0 : -1); }
+  t.l++; t.k[cur] = 0; t.err[cur] = true;
   save(); showFb(false, cur); markOpts(); renderCard(); renderReviewBtn();
 }
 
 function resetTab(){
-  S[tab] = blankState(); save(); hideComplete();
+  { const st = T(), nx = Math.max(st.x || 0, st.p || 0) + 1; S[tab] = blankState(); S[tab].x = nx; S[tab].p = nx; }   // EXP категорії обнуляється, але x лише зростає
+  save(); hideComplete();
   reviewMode = false; load(pool()[0]);
 }
 function askConfirm(msg, yes){
@@ -990,7 +1063,7 @@ let clearArmed = false;
 function clearErrors(){
   const b = $("errs-clear");
   if(!clearArmed){ clearArmed = true; b.textContent = "Точно очистити?"; setTimeout(() => { clearArmed = false; const bb = $("errs-clear"); if(bb) bb.textContent = "🗑 Очистити список"; }, 3000); return; }
-  clearArmed = false; T().err = {}; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); openErrors();
+  clearArmed = false; T().err = {}; T().x++; T().p++; reviewDoneSets[tab] = new Set(); save(); renderReviewBtn(); openErrors();
 }
 function trainErrors(){ closeErrors(); startReview(); try{ $("card").scrollIntoView({ behavior: "smooth", block: "start" }); }catch(e){} }
 
@@ -1119,6 +1192,27 @@ document.addEventListener("keydown", e => { if(e.key === "Escape"){ if(!$("compl
 
 { const st = store.get('pp-tab'); setTab(TABS.some(t => t.id === st) ? st : TABS[0].id); }
 
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_perfekt_*) === */
+function applyStorage(){
+  try {
+    migrateOldKeys();
+    TABS.forEach(t => {
+      if(answered && t.id === tab) return;   // не ламаємо відповідь, що зараз на екрані
+      const v = readState(t.id);
+      if(v) S[t.id] = v;
+    });
+    publishProgress();
+    if(answered){ updateXp(catXp(tab)); renderTabs(); }
+    else { renderCard(); renderReviewBtn(); }
+  } catch(e){}
+}
+window.addEventListener('tpsync:updated', applyStorage);
+try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
+const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
+document.addEventListener('visibilitychange', () => { if(!document.hidden) tpSyncNow(); });
+setInterval(() => { if(!document.hidden && !answered) tpSyncNow(); }, 30000);
+
+
 document.addEventListener('touchstart', function unlockAudio() {
   try{
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1129,13 +1223,71 @@ document.addEventListener('touchstart', function unlockAudio() {
 
 if (window.Telegram && window.Telegram.WebApp) {
   const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
-  tg.BackButton.show();
-  tg.BackButton.onClick(() => {
-    window.location.href = 'index.html';
-  });
+  try { tg.ready(); } catch(e){}
+  try { tg.expand(); } catch(e){}
+  try {
+    tg.BackButton.show();
+    tg.BackButton.onClick(() => { window.location.href = 'index.html'; });
+  } catch(e){}
 }
+
+/* ============ ВІДПРАВКА ПРОГРЕСУ НА ГОЛОВНУ ============ */
+function publishProgress() {
+  try {
+    // ID має збігатися з data-id у index.html
+    const trainerId = 'perfekt';
+    localStorage.setItem('tp_v2_exp_' + trainerId, calcXp());
+    localStorage.setItem('tp_v2_exp_max_' + trainerId, XP_MAX);
+    localStorage.setItem('tp_v2_exp_tabs_' + trainerId, JSON.stringify(TABS.map(t => t.id)));
+  } catch(e) {}
+}
+publishProgress(); // при завантаженні
+</script>
+<script>
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+(function(){
+const rnd=a=>a[Math.random()*a.length|0];
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','sakura','candy'].includes(t)?t:'dark'};
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+let on=store.get('pp-fx')==='on',ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paint(){btn.classList.toggle('off',!on);btn.title=on?'Ефекти: увімкнено':'Ефекти: вимкнено';}
+function spawn(kind,n){
+  if(RM.matches||!on)return;n=Math.round(n*(innerWidth<600?.55:1));
+  for(let i=0;i<n;i++){
+    if(live>140)return;const el=document.createElement('div');el.className='mp';let dur=3+Math.random()*3,z;
+    if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
+    else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
+    else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='leaf'){const p=Math.random()<.25;el.textContent=p?'🎃':rnd(['🍂','🍁','🍃','🍂']);el.style.fontSize=((p?22:16)+Math.random()*14)+'px';dur=4+Math.random()*3;}
+    else if(kind==='snow'){if(Math.random()<.45){el.textContent='❄️';el.style.fontSize=(12+Math.random()*10)+'px';}else{el.classList.add('snow');z=4+Math.random()*6;el.style.width=el.style.height=z+'px';}dur=5+Math.random()*4;}
+    else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
+    else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
+    else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');el.style.setProperty('--o',(.22+Math.random()*.26).toFixed(2));
+    el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
+    document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
+  }
+}
+function fx(n){const t=th();
+  if(t==='sakura')spawn('petal',n);
+  else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  else if(t==='autumn')spawn('leaf',n);
+  else if(t==='winter')spawn('snow',n);
+  else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
+  else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
+}
+window.toggleFx=function(){on=!on;store.set('pp-fx',on?'on':'off');paint();if(on)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
+function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
+wrap('finish',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
+wrap('popXp',(d,up)=>{if(up)fx(70);});
+let lastC=0;const celeb=()=>{const n=Date.now();if(n-lastC<4000)return;lastC=n;fx(120);setTimeout(()=>fx(70),1000);};
+wrap('showComplete',celeb);
+if(typeof window.showComplete!=='function')wrap('closeTab',celeb);
+wrap('showReviewComplete',()=>{try{if(tabDone())celeb();}catch(e){}});
+new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+paint();
+})();
 </script>
 </body>
 </html>
