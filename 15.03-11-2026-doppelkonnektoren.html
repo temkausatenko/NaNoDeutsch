@@ -148,7 +148,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
   text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
 .tool:hover{color:var(--tx)}
 
-/* ===== КАТЕГОРІЇ (пігулки) ===== */
+/* ===== КАТЕГОРІЇ (Stages) з temporale-konnektoren ===== */
 .stages{display:grid;grid-auto-flow:column;grid-template-rows:auto;grid-auto-columns:max-content;gap:6px;overflow-x:auto;cursor:grab;padding:2px 2px 8px;margin:0 0 10px;scrollbar-width:none}
 .stages::-webkit-scrollbar{display:none}
 .stages.drag{cursor:grabbing;user-select:none}.stages.drag .stg{pointer-events:none}
@@ -718,28 +718,35 @@ const XP_MAX=P.slice(0,7).reduce((n,p)=>n+p[3].length,0)*3;
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
-let tab=0,MB=sg("dk2_mb",{}),mode=MB[P[0][0]]||"ty",cur=-1,last=-1,answered=false,tm,autoAdvanceTimer=null;
+let tab=0,MB=sg("dk2_mb",{}),mode=MB[P[0][0]]||"ty",cur=-1,last=-1,answered=false,autoAdvanceTimer=null;
 let S={},XP=0,seen=sg("dk2_seen",{});
 let bPool=[],bPlaced=[];
 let hintUsed=false,hintTm;
-const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?P[i][3]:mcOf(i)).filter((_,j)=>s.k[j]).length:0},SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":""),T=()=>S[SK()]||(S[SK()]={k:{},r:0,w:0,x:0,p:0}),items=()=>mode=="mc"?mcOf(tab):P[tab][3],save=all=>{try{(all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{const o=S[k];if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},r:o.r||0,w:o.w||0}))})}catch(e){}};
+let rvMode=false, rvPool=[], rvInitial=0;
+
+const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?P[i][3]:mcOf(i)).filter((_,j)=>s.k[j]).length:0};
+const SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":"");
+const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
+const items=()=>mode=="mc"?mcOf(tab):P[tab][3];
+const save=all=>{try{(all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{const o=S[k];if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},e:o.e||{},r:o.r||0,w:o.w||0}))})}catch(e){publishMeta();}};
 
 const ID="zweiteilige_konnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
 function load(){S={};ALLSK.forEach(k=>{let o=null;try{o=JSON.parse(localStorage.getItem(PFX+k))}catch(e){}
- if(o&&typeof o=="object")S[k]={k:o.k&&typeof o.k=="object"?o.k:{},r:+o.r||0,w:+o.w||0,x:+o.x||0,p:+o.p||0}});XP=calcXp()}
+ if(o&&typeof o=="object")S[k]={k:o.k&&typeof o.k=="object"?o.k:{},e:o.e&&typeof o.e=="object"?o.e:{},r:+o.r||0,w:+o.w||0,x:+o.x||0,p:+o.p||0}});XP=calcXp()}
 function migrateOld(){try{if(ALLSK.some(k=>localStorage.getItem(PFX+k)!=null))return;const old=sg("dk2_s",null);
  if(!old||typeof old!="object")return;const ks=Object.keys(old);if(!ks.length||!ks.every(k=>ALLSK.includes(k)))return;
- let sum=0;ks.forEach(k=>{const o=old[k]||{},n=Object.keys(o.k||{}).length;sum+=n;S[k]={k:o.k||{},r:+o.r||0,w:+o.w||0,x:n,p:0}});
+ let sum=0;ks.forEach(k=>{const o=old[k]||{},n=Object.keys(o.k||{}).length;sum+=n;S[k]={k:o.k||{},e:{},r:+o.r||0,w:+o.w||0,x:n,p:0}});
  const diff=Math.min(XP_MAX,Math.max(0,+sg("dk2_xp",0)||0))-sum,f=S[ks[0]];if(diff>0)f.x+=diff;else f.p+=-diff;save(true)}catch(e){}}
 function publishMeta(){try{localStorage.setItem("tp_v2_exp_max_"+ID,String(XP_MAX));localStorage.setItem("tp_v2_exp_tabs_"+ID,JSON.stringify(ALLSK))}catch(e){}}
 function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.dataset.r=r;box.classList.toggle("max",XP>=XP_MAX);
  $("xf").style.width=XP/XP_MAX*100+"%";$("xt").textContent=XP;$("xn").textContent=XP>=XP_MAX?"MAX":"/ "+XP_MAX;$("xr").textContent=R[1]+" "+R[2];
  $("xnext").textContent=N?"ще "+(N[0]-XP)+" до «"+N[2]+"»":"EXP зафіксовано 🔒";
  const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
-function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
-function enterCat(i){tab=i;mode=MB[P[i][0]]||"ty";last=-1}
-function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m)}
+function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
+ const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
+function enterCat(i){tab=i;mode=MB[P[i][0]]||"ty";last=-1;rvMode=false;}
+function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m);rvMode=false;}
 
 function isCatOpen(i){
   if(i===0) return true;
@@ -759,12 +766,13 @@ function isCatOpen(i){
 })();
 
 function renderTabs(){
+  if(rvMode) return;
   const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
     const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(3*n)*100),open=isCatOpen(i),done=pc===100;
     return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
-      (!open ? `<span class="si">🔒</span>` : done ? `<span class="si">✓</span>` : ``) +
-      `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
+      (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
+      `${p[1]}<small>${pc}%</small><i style="width:${pc}%"></i></button>`;
   }).join("");
   document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.s;
@@ -824,11 +832,26 @@ function start(){
   $("card").classList.remove("fin","ans");
   $("card").classList.toggle("bd", mode === "mc");
   $("card").classList.toggle("tx", mode === "ty");
-  if(!left.length){fin();return}
-  let c=left.filter(i=>i!=last); c=c.length?c:left;
-  cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
-  const x=it[cur];
-  $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(mode=="mc"?"конструктор":"переклад німецькою");
+  
+  if(rvMode){
+    if(rvPool.length === 0){ rvMode = false; fin(); return; }
+    cur = rvPool[0];
+    last = cur;
+    answered = false;
+    $("title").textContent = "Робота над помилками";
+    $("stages").innerHTML = `<div class="rv-pill" style="margin: 0 auto; text-align: center; padding: 8px 14px; background: var(--nob); color: var(--no); border: 1px solid var(--no); border-radius: 99px; font-weight: 500; font-size: .85rem;">🔁 Робота над помилками · залишилось <span class="rv-count" style="display:inline-block; margin-left:8px; padding:2px 11px; border-radius:99px; background:var(--pr); color:#fff; font-weight:700; font-size:.95em; box-shadow:0 2px 8px var(--pr-glow);">${rvPool.length}<i>/</i>${rvInitial}</span><button class='xrst' style='margin-left:12px; border-color:var(--no); color:var(--no)' onclick='rvMode=false; start()'>✕</button></div>`;
+    $("tabs").style.display = "none";
+    $("sd").parentElement.parentElement.style.display = "none";
+  } else {
+    $("tabs").style.display = "flex";
+    $("sd").parentElement.parentElement.style.display = "grid";
+    if(!left.length){fin();return}
+    let c=left.filter(i=>i!=last); c=c.length?c:left;
+    cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
+    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(mode=="mc"?"конструктор":"переклад німецькою");
+    renderTabs();
+  }
+
   $("fb").className="fb"; $("fb").innerHTML="";
   $("zone").classList.remove("ok","bad");
   resetHint();
@@ -840,6 +863,8 @@ function start(){
   $("chk").textContent = "Перевірити ✓";
   $("chk").disabled = false;
   $("umRow").style.display = "flex";
+  
+  const x = it[cur];
   $("lab").innerHTML = "<div class='tr-text'>"+esc(x[1])+"</div>";
   if(isBld){
     $("sent").innerHTML = x[5]===0 ? esc(givenTxt(x))+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span> "+esc(givenTxt(x));
@@ -851,8 +876,8 @@ function start(){
     $("sent").innerHTML = "";
     setTimeout(()=>{try{$("inp").focus()}catch(e){}},60);
   }
-  renderTabs();
 }
+
 function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?" fill ok":"")+"'>"+(fill?esc(c):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
  return s.replace(x[2],"\u0001").replace(x[3],"\u0002").replace("\u0001",g(x[2])).replace("\u0002",g(x[3]))}
 const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:„“"']/g,"").replace(/\s+/g," ").trim();
@@ -883,18 +908,34 @@ function done(ok){
   const t=T(), x=items()[cur];
   hapticAll(ok);
   playSound(ok?"correct":"wrong");
-  if(ok){t.r++; t.k[cur]=1; bump(1);}
-  else  {t.w++; t.k[cur]=0; bump(-1);}
+  
+  if(rvMode){
+    if(ok) {
+      delete t.e[cur];
+      rvPool.shift();
+    } else {
+      const item = rvPool.shift();
+      rvPool.push(item);
+    }
+  } else {
+    if(ok) {
+      t.r++; t.k[cur]=1; bump(1);
+    } else {
+      t.w++; t.k[cur]=0; t.e[cur]=true; bump(-1);
+    }
+  }
+
   if(mode==="mc"){
     $("zone").classList.remove("ok","bad");
     $("zone").classList.add(ok?"ok":"bad");
     renderBuilder();
   }
   save();
+  
   const f=$("fb"); f.className="fb "+(ok?"ok":"er");
   f.innerHTML =
     "<div class='k'>"+(ok?"✓ ПРАВИЛЬНО":"✗ НЕПРАВИЛЬНО")+
-    (XP>=XP_MAX?" · EXP на максимумі 🏆":ok?" · +1 EXP":" · −1 EXP")+
+    (rvMode ? " · Робота над помилками" : (XP>=XP_MAX?" · EXP на максимумі 🏆":ok?" · +1 EXP":" · −1 EXP"))+
     "</div>"+
     "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
     "<div class='ex'>"+esc(x[4])+" · "+esc(x[1])+"</div>"+
@@ -906,12 +947,15 @@ function done(ok){
   $("chk").textContent = "Далі →";
   $("chk").disabled = false;
   $("showBtn").disabled = true;
-  const d=items().filter((_,j)=>t.k[j]).length;
-  $("sd").textContent = d+" / "+items().length;
-  $("sc").textContent = t.r;
-  $("sw").textContent = t.w;
-  $("bar").style.width = d/items().length*100+"%";
-  renderTabs();
+  
+  if(!rvMode){
+    const d=items().filter((_,j)=>t.k[j]).length;
+    $("sd").textContent = d+" / "+items().length;
+    $("sc").textContent = t.r;
+    $("sw").textContent = t.w;
+    $("bar").style.width = d/items().length*100+"%";
+    renderTabs();
+  }
   
   if (ok) {
     autoAdvanceTimer = setTimeout(()=>{ if(answered) start(); }, 2200);
@@ -926,14 +970,31 @@ function fin(){
   $("title").textContent="Вкладку пройдено";
   const nextTab=(tab+1)%P.length;
   const canNext = nextTab!==0 && isCatOpen(nextTab);
+  
+  const errCount = Object.keys(t.e).length;
+  let rvBtnStr = "";
+  if(errCount > 0){
+    rvBtnStr = `<button class='btn danger' id='rvBtn' style='border:1px solid var(--no);background:var(--no);color:#fff'>🔁 Робота над помилками (${errCount})</button>`;
+  }
+
   $("finBox").innerHTML =
     "<p class='ft'>🎉 "+P[tab][1]+" — усе виконано!</p>"+
     "<p>Правильно: <b>"+t.r+"</b> · Помилок: <b>"+t.w+"</b> · Завдань: <b>"+n+"</b></p>"+
     "<div class='fin-actions'>"+
+    rvBtnStr +
     "<button class='cancel' id='again'>↺ Ще раз</button>"+
     "<button class='cancel' id='alt'>"+(mode=="mc"?"⌨️ Завдання 2: переклад":"🔨 Завдання 1: конструктор")+"</button>"+
     "<button class='go' id='nxt'"+(canNext?"":" disabled")+">"+(canNext?"Наступна вкладка →":"Наступна заблокована 🔒")+"</button>"+
     "</div>";
+  
+  if(errCount > 0){
+    $("rvBtn").onclick = () => {
+      rvMode = true;
+      rvPool = Object.keys(t.e).map(Number);
+      rvInitial = rvPool.length;
+      start();
+    };
+  }
   $("again").onclick=reset;
   $("alt").onclick=()=>{setMode(mode=="mc"?"ty":"mc");last=-1;renderTabs();start()};
   $("nxt").onclick=()=>{
@@ -942,7 +1003,8 @@ function fin(){
   };
   renderTabs();
 }
-function reset(){const o=T();S[SK()]={k:{},r:0,w:0,x:(o.x||0)+1,p:(o.p||0)+1};save();last=-1;renderTabs();start()}
+
+function reset(){const o=T();S[SK()]={k:{},e:{},r:0,w:0,x:(o.x||0)+1,p:(o.p||0)+1};save();last=-1;renderTabs();start()}
 
 function speak(t){try{if(!window.speechSynthesis||!t)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
 
@@ -960,6 +1022,36 @@ $("chk").onclick = ()=>{
   }
 };
 $("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); $("chk").click(); } };
+
+// Глобальні клавіші (гарячі клавіші для конструктора)
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (document.body.classList.contains("lsn")) return;
+  if (mode === "mc" && !answered) {
+    if (e.key === 'Backspace' && bPlaced.length > 0) {
+      tapHaptic();
+      bPlaced.pop();
+      renderBuilder();
+      return;
+    }
+    if (/^[1-9]$/.test(e.key)) {
+      const idx = parseInt(e.key) - 1;
+      const available = bPool.filter(i => !bPlaced.includes(i));
+      if (idx < available.length) {
+        tapHaptic();
+        bPlaced.push(available[idx]);
+        renderBuilder();
+      }
+      return;
+    }
+    if (e.key === 'Enter' && bPlaced.length === bw(items()[cur]).length) {
+      $("chk").click();
+      return;
+    }
+  } else if (answered && e.key === 'Enter') {
+     $("chk").click();
+  }
+});
 
 $("sp").onclick = ()=>speak(items()[cur] && items()[cur][0]);
 $("rs").onclick = reset;
