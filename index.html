@@ -27,7 +27,7 @@ body{margin:0;background:radial-gradient(1000px 560px at 50% -12%,#4a2615 0%,#24
 .hero small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#ffa94d}
 .hero h2{margin:3px 0 8px;font-size:19px;line-height:1.15}
 .bar{height:7px;border-radius:9px;background:rgba(255,255,255,.1);overflow:hidden}
-.bar i{display:block;height:100%;width:calc(15px + (100% - 30px)*var(--p)/100);border-radius:9px;background:linear-gradient(90deg,#9a3412,#ea580c,#fbbf24);box-shadow:0 0 8px rgba(251,146,60,.5);transition:width 1.2s var(--ease)}
+.bar i{display:block;height:100%;width:calc(15px + (100% - 30px)*var(--p)/100);border-radius:9px;background:linear-gradient(90deg,#9a3412,#ea580c,#fbbf24);box-shadow:0 0 8px rgba(251,146,60,.5);transition:width 1.7s cubic-bezier(.3,.7,.2,1)}
 .hero .pc{font-size:12px;opacity:.75;margin-top:5px}
 .go{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#0d1117;
  background:linear-gradient(135deg,#ffb347,#e8590c);box-shadow:0 0 18px rgba(240,120,40,.5)}
@@ -87,7 +87,7 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 .track{position:relative;height:30px;display:flex;align-items:center}
 .track .bar{width:100%}
 .pp{position:absolute;top:50%;left:calc(15px + (100% - 30px)*var(--p)/100);width:30px;height:30px;margin:-15px 0 0 -15px;
- transform:rotate(calc(var(--p)*5deg));transition:left 1.2s var(--ease),transform 1.2s var(--ease);filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
+ transform:rotate(var(--rot,0deg));transition:left 1.7s cubic-bezier(.3,.7,.2,1),transform 1.7s cubic-bezier(.3,.7,.2,1),opacity .3s;filter:drop-shadow(0 2px 4px rgba(0,0,0,.55))}
 .pp svg{display:block;animation:bob 1.3s ease-in-out infinite alternate}
 @keyframes bob{from{translate:0 -1.5px}to{translate:0 1.5px}}
 .lf{display:none;position:absolute;z-index:4;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));animation:lsw 3.2s ease-in-out infinite alternate}
@@ -97,13 +97,42 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 @keyframes lsw{from{translate:0 0}to{translate:2px 3px}}
 .leaves{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
 .leaves span{position:absolute;top:0;opacity:.55;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));animation:fall linear infinite,sway ease-in-out infinite alternate}
+.leaves span.y{opacity:.78}.leaves svg{width:1em;height:1em;display:block}
 @keyframes fall{from{transform:translateY(-40px) rotate(0)}to{transform:translateY(112vh) rotate(380deg)}}
 @keyframes sway{from{translate:-20px 0}to{translate:20px 0}}
 html.is-hidden .leaves span,html.is-hidden .pp svg,html.is-hidden .lf{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.leaves{display:none}.pp svg,.lf{animation:none}}
+
+/* ---------- Осінь 2: глибина, туман, реакції ---------- */
+.pp.out{left:-34px;transform:rotate(-360deg);opacity:0}
+.pp svg{overflow:visible}
+.pp .eR{transform-box:fill-box;transform-origin:center;transition:transform .12s}
+.pp.wink .eR{transform:scaleY(.12)}
+.pp.jump svg{animation:jump .5s cubic-bezier(.3,.8,.4,1)}
+@keyframes jump{0%{transform:translateY(0) scale(1,1)}25%{transform:translateY(2px) scale(1.14,.86)}55%{transform:translateY(-12px) scale(.93,1.09)}100%{transform:translateY(0) scale(1,1)}}
+.pp .hat{display:none}
+.pp.cheer .hat{display:block}
+.pp.cheer svg{animation:cheer 1.8s ease-in-out infinite}
+@keyframes cheer{0%,58%,100%{transform:translateY(0) rotate(0)}70%{transform:translateY(-8px) rotate(-7deg)}84%{transform:translateY(0) rotate(6deg)}}
+.greet{margin:16px 4px 0;font-size:14px;font-weight:700;color:#ffcf99;text-shadow:0 1px 8px rgba(255,140,60,.35);animation:rise .7s var(--ease) .9s both}
+.fog{position:fixed;left:0;right:0;bottom:0;height:26vh;pointer-events:none;z-index:19;
+ background:linear-gradient(to top,rgba(255,150,70,.15),rgba(255,170,90,.05) 55%,transparent)}
+.fog::before,.fog::after{content:"";position:absolute;inset:0;
+ background:radial-gradient(ellipse 45% 60% at 30% 100%,rgba(255,190,120,.16),transparent 70%),radial-gradient(ellipse 40% 55% at 75% 100%,rgba(255,140,80,.12),transparent 70%);
+ animation:fogm 26s ease-in-out infinite alternate}
+.fog::after{animation-duration:34s;animation-direction:alternate-reverse;opacity:.7}
+@keyframes fogm{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.leaves.near{z-index:22}
+.leaves.near span{opacity:.42;filter:blur(3.5px) drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+.leaves.near span.y{opacity:.5}
+@keyframes sway{from{translate:calc(var(--sw,1)*-20px) 0}to{translate:calc(var(--sw,1)*20px) 0}}
+@keyframes gust{from{transform:translate(var(--x0),var(--y0)) rotate(0)}to{transform:translate(var(--x1),var(--y1)) rotate(560deg)}}
+html.is-hidden .fog::before,html.is-hidden .fog::after{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.fog::before,.fog::after{animation:none}.greet{animation:none}.pp.out{opacity:1;left:15px;transform:none}}
 </style>
 </head>
 <body>
+<div class="fog"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd86b"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient></defs></svg>
 
@@ -111,9 +140,11 @@ html.is-hidden .leaves span,html.is-hidden .pp svg,html.is-hidden .lf{animation-
   <a class="hero" id="hero" href="#">
     <img id="heroImg" alt="">
     <div class="tx"><small id="heroLbl">Продовжити</small><h2 id="heroTit"></h2>
-      <div class="track"><div class="bar"><i></i></div><span class="pp"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 10c0-3 1-5.5 4-6.5" stroke="#4d7c0f" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M19 6c3-1 5 0 6 2-3 1-5 .5-6-2z" fill="#65a30d"/><ellipse cx="16" cy="20" rx="13.5" ry="10.5" fill="#ea580c"/><ellipse cx="9.5" cy="20" rx="6.5" ry="10.3" fill="#fb923c"/><ellipse cx="22.5" cy="20" rx="6.5" ry="10.3" fill="#f97316"/><ellipse cx="16" cy="20" rx="4.3" ry="10.5" fill="#fdba74"/><circle cx="12" cy="19" r="1.3" fill="#431407"/><circle cx="20" cy="19" r="1.3" fill="#431407"/><path d="M12.5 23.5q3.5 2.6 7 0" stroke="#431407" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></span></div><div class="pc" id="heroPc"></div></div>
+      <div class="track"><div class="bar"><i></i></div><span class="pp out" id="pp"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M16 10c0-3 1-5.5 4-6.5" stroke="#4d7c0f" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M19 6c3-1 5 0 6 2-3 1-5 .5-6-2z" fill="#65a30d"/><ellipse cx="16" cy="20" rx="13.5" ry="10.5" fill="#ea580c"/><ellipse cx="9.5" cy="20" rx="6.5" ry="10.3" fill="#fb923c"/><ellipse cx="22.5" cy="20" rx="6.5" ry="10.3" fill="#f97316"/><ellipse cx="16" cy="20" rx="4.3" ry="10.5" fill="#fdba74"/><circle cx="12" cy="19" r="1.3" fill="#431407"/><circle class="eR" cx="20" cy="19" r="1.3" fill="#431407"/><path d="M12.5 23.5q3.5 2.6 7 0" stroke="#431407" stroke-width="1.4" fill="none" stroke-linecap="round"/><g class="hat"><ellipse cx="16" cy="10.5" rx="10.5" ry="2.7" fill="#5b21b6"/><path d="M10.5 10 L15 -6.5 Q16 -8.5 17.2 -6.5 L21.5 10Z" fill="#7c3aed"/><rect x="11" y="4.6" width="10" height="2.5" rx="1" fill="#fbbf24"/></g></svg></span></div><div class="pc" id="heroPc"></div></div>
     <div class="go">▶</div>
   </a>
+
+  <div class="greet" id="greet"></div>
 
   <div class="chips" id="chips">
     <button class="chip on" data-f="all">Всі</button>
@@ -167,7 +198,20 @@ list.addEventListener('pointermove',e=>{const c=e.target.closest('.card.press');
 function tilt(c,e){const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
   c.style.setProperty('--rx',(-y*12).toFixed(1)+'deg');c.style.setProperty('--ry',(x*12).toFixed(1)+'deg')}
 list.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)try{localStorage.setItem('tp_last',c.dataset.id)}catch(_){}});
-document.getElementById('hero').addEventListener('click',e=>{try{localStorage.setItem('tp_last',e.currentTarget.dataset.id)}catch(_){}hap('medium')});
+let going=false;
+document.getElementById('hero').addEventListener('click',e=>{
+  try{localStorage.setItem('tp_last',e.currentTarget.dataset.id)}catch(_){}
+  hap('medium');if(going){e.preventDefault();return}
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  e.preventDefault();going=true;const href=e.currentTarget.href;
+  pp.classList.add('wink','jump');
+  setTimeout(()=>{location.href=href},430);
+});
+window.addEventListener('pageshow',()=>{going=false;pp.classList.remove('wink','jump')});
+// ---- привітання за часом доби ----
+function greet(){const hr=new Date().getHours();
+  document.getElementById('greet').textContent=hr>=5&&hr<11?'Доброго ранку ☕':hr>=11&&hr<17?'Гарного дня 🍁':hr>=17&&hr<23?'Гарного вечора 🍂':'Доброї ночі 🌙'}
+greet();
 
 // ---- фильтры ----
 let FILTER='all';
@@ -182,6 +226,7 @@ function applyFilter(){
 }
 
 // ---- прогресс (логика EXP без изменений) ----
+let intro=0,heroV=0;
 const RING='<svg class="ring" viewBox="0 0 42 42"><circle class="tr" cx="21" cy="21" r="18" pathLength="100"/><circle class="fg" cx="21" cy="21" r="18" pathLength="100"/></svg>';
 const CHECK='<svg class="ck" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const TIERS=[{max:25,c1:'#ff4b6e',c2:'#ff8a5b',glow:'rgba(255,90,100,.35)'},{max:50,c1:'#a855f7',c2:'#ec4899',glow:'rgba(168,85,247,.35)'},
@@ -219,20 +264,55 @@ function updateProgress(){
   if(!pick){const pr=ids.filter(i=>vals[i]>0&&vals[i]<100).sort((a,b)=>vals[b]-vals[a]);pick=pr[0]||ids.find(i=>vals[i]===0)||ids[0]}
   const t=T.find(x=>x[0]===pick),v=vals[pick],h=document.getElementById('hero'),tier=TIERS.find(x=>v<=x.max)||TIERS[3];
   h.href=t[1];h.dataset.id=pick;heroImg.src=t[2];heroTit.textContent=t[3];
-  h.style.setProperty('--p',v);h.style.setProperty('--c1',v?tier.c1:'#a855f7');h.style.setProperty('--c2',v?tier.c2:'#22d3ee');
-  heroLbl.textContent=v>0?'Продовжити':'Почати';heroPc.textContent=v>0?v+'% пройдено':'Новий тренажер';
+  heroV=v;
+  const applyHero=()=>{h.style.setProperty('--p',heroV);h.style.setProperty('--rot',(Math.round(heroV/35)*360)+'deg')};
+  if(intro===2)applyHero();
+  else if(!intro){intro=1;h.style.setProperty('--p',0);setTimeout(()=>pp.classList.remove('out'),450);setTimeout(()=>{intro=2;applyHero()},1400)}
+  pp.classList.toggle('cheer',v===100);
+  heroLbl.textContent=v===100?'Усе пройдено!':v>0?'Продовжити':'Почати';heroPc.textContent=v>0?v+'% пройдено':'Новий тренажер';
   applyFilter();
 }
 updateProgress();
-document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden)updateProgress()});
+document.addEventListener('visibilitychange',()=>{document.documentElement.classList.toggle('is-hidden',document.hidden);if(!document.hidden){updateProgress();greet()}});
 window.addEventListener('focus',updateProgress);
 window.addEventListener('tpsync:updated',updateProgress);
 
-// ---- осіннє листя ----
-(function(){const box=document.createElement('div');box.className='leaves';
-for(let i=0;i<8;i++){const s=document.createElement('span');s.textContent=i%2?'🍂':'🍁';
- s.style.cssText='left:'+(Math.random()*94).toFixed(1)+'%;font-size:'+(14+Math.random()*10).toFixed(0)+'px;animation-duration:'+(15+Math.random()*10).toFixed(1)+'s,'+(3+Math.random()*2).toFixed(1)+'s;animation-delay:'+(-Math.random()*22).toFixed(1)+'s,'+(-Math.random()*3).toFixed(1)+'s';box.appendChild(s)}
-document.body.appendChild(box)})();
+// ---- осіннє листя, глибина, вітер ----
+(function(){
+const R=(a,b)=>a+Math.random()*(b-a);
+const YEL=['#fcd34d','#fbbf24','#f5c542','#ffd84d','#eab308'];
+const SVG=[c=>'<svg viewBox="0 0 24 24"><path d="M12 22.5C3.5 17.5 2 8.5 12 1.5c10 7 8.5 16 0 21z" fill="'+c+'"/><path d="M12 22V6M12 15l-4-4M12 12l4-3.5" stroke="rgba(120,70,0,.55)" stroke-width="1" fill="none" stroke-linecap="round"/></svg>',
+ c=>'<svg viewBox="0 0 24 24"><path d="M12 22l-1-9C3 12 1.5 5 6 2.5c2 2 4 1.5 6 .5 2 1 4 1.5 6-.5 4.5 2.5 3 9.5-5 10.5z" fill="'+c+'"/><path d="M12 22V9M12 12L7 6M12 12l5-6" stroke="rgba(120,70,0,.5)" stroke-width="1" fill="none" stroke-linecap="round"/></svg>'];
+function leaf(i,yellow,size,fall,sway){const s=document.createElement('span');
+  if(yellow){s.innerHTML=SVG[i%2](YEL[i%YEL.length]);s.classList.add('y')}else s.textContent=i%2?'🍂':'🍁';
+  s.style.cssText='left:'+R(0,94).toFixed(1)+'%;font-size:'+size+'px;animation-duration:'+fall+'s,'+sway+'s;animation-delay:'+(-R(0,fall)).toFixed(1)+'s,'+(-R(0,3)).toFixed(1)+'s';return s}
+const far=document.createElement('div');far.className='leaves';
+const near=document.createElement('div');near.className='leaves near';
+for(let i=0;i<16;i++)far.appendChild(leaf(i,i<9,R(15,26).toFixed(0),R(14,26).toFixed(1),R(3,5).toFixed(1)));
+for(let i=0;i<4;i++)near.appendChild(leaf(i,i%2===0,R(62,92).toFixed(0),R(22,32).toFixed(1),R(5,7).toFixed(1)));
+document.body.append(far,near);
+
+// ---- вітер: листя прискорюється й сильніше гойдається при прокрутці ----
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const A=[...far.getAnimations({subtree:true}),...near.getAnimations({subtree:true})];
+  let wind=0,target=0,raf=0,lastY=scrollY;
+  const set=w=>{far.style.setProperty('--sw',(1+w*1.6).toFixed(2));near.style.setProperty('--sw',(1+w*1.2).toFixed(2));A.forEach(a=>a.playbackRate=1+w*3.5)};
+  const loop=()=>{wind+=(target-wind)*.08;target*=.96;set(wind);
+    if(wind>.01||target>.01)raf=requestAnimationFrame(loop);else{raf=0;set(0)}};
+  const kick=v=>{target=Math.max(target,Math.min(1,v));if(!raf)raf=requestAnimationFrame(loop)};
+  addEventListener('scroll',()=>{const y=scrollY,d=Math.abs(y-lastY);lastY=y;kick(target+d/60)},{passive:true});
+
+  // ---- заставка: пориви вітру, листя влітає ----
+  setTimeout(()=>{kick(1);
+    for(let i=0;i<9;i++){const g=leaf(i,i%3!==0,R(16,30).toFixed(0),10,4);
+      g.style.left='0';g.style.top='0';g.style.opacity='.6';
+      g.style.setProperty('--x0',R(60,110).toFixed(0)+'vw');g.style.setProperty('--y0',R(-8,25).toFixed(0)+'vh');
+      g.style.setProperty('--x1',R(-40,0).toFixed(0)+'vw');g.style.setProperty('--y1',R(55,100).toFixed(0)+'vh');
+      g.style.animation='gust '+R(1.8,2.8).toFixed(1)+'s cubic-bezier(.2,.6,.3,1) '+R(0,.6).toFixed(2)+'s both';
+      far.appendChild(g);setTimeout(()=>g.remove(),3800)}
+  },150);
+}
+})();
 </script>
 </body>
 </html>
