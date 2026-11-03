@@ -6,6 +6,10 @@
 <title>Konjunktiv II Master 28.10.2026</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
+<script>
+(function(){var T=['light','dark','autumn','winter','sakura','candy'],t=null;try{t=localStorage.getItem('k2-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})();
+</script>
 <style>
 :root{
   --bg:#0c0f16;--bg-grad:#1a2035;
@@ -20,7 +24,7 @@
   --sa:#818cf8;--pe:#a78bfa;
   --radius:16px;color-scheme:dark;
 }
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){
+@media (prefers-color-scheme:light){:root:not([data-theme]){
   --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
   --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
   --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
@@ -42,11 +46,11 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
   background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+.theme-toggle,.sound-toggle,.theory-top-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
   color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
 .theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
-.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
 .tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
   padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
@@ -313,7 +317,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 /* ===== TEKAMOLO: кольори ролей ===== */
 :root{--te:#f59e0b;--ka:#fb7185;--mo:#a78bfa;--lo:#2dd4bf;--dt:#60a5fa;--ak:#a3e635;--pp:#94a3b8;--ne:#cbd5e1}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
 :root[data-theme="light"]{--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}
 .r-te{--c:var(--te)}.r-ka{--c:var(--ka)}.r-mo{--c:var(--mo)}.r-lo{--c:var(--lo)}
 .r-dat,.r-pd{--c:var(--dt)}.r-akk,.r-pa{--c:var(--ak)}.r-prep{--c:var(--pp)}
@@ -412,7 +416,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 /* ===== PARTIZIP: кольори ролей ===== */
 :root{--c-art:#94a3b8;--c-pi:#f59e0b;--c-n:#60a5fa;--c-adv:#2dd4bf;--c-ref:#fb7185;--c-zu:#a78bfa;--c-v:#a3e635;--c-obj:#f472b6;--c-d:#fcd34d}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309}}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309}}
 :root[data-theme="light"]{--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309}
 .r-art{--c:var(--c-art)}.r-pi{--c:var(--c-pi)}.r-n{--c:var(--c-n)}.r-adv{--c:var(--c-adv)}.r-ref,.r-p2{--c:var(--c-ref)}.r-zu{--c:var(--c-zu)}.r-v{--c:var(--c-v)}.r-obj{--c:var(--c-obj)}.r-d{--c:var(--c-d)}
 .opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
@@ -429,18 +433,66 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 /* ===== KONJUNKTIV II: кольори ролей ===== */
 :root{--c-s:#94a3b8;--c-k:#f59e0b;--c-inf:#a3e635;--c-pp:#60a5fa;--c-cj:#a78bfa;--c-o:#f472b6;--c-adv:#2dd4bf;--c-neg:#fb7185;--c-i:#cbd5e1;--c-w:#fcd34d}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--c-s:#64748b;--c-k:#d97706;--c-inf:#4d7c0f;--c-pp:#2563eb;--c-cj:#7c3aed;--c-o:#be185d;--c-adv:#0d9488;--c-neg:#e11d48;--c-i:#475569;--c-w:#b45309}}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--c-s:#64748b;--c-k:#d97706;--c-inf:#4d7c0f;--c-pp:#2563eb;--c-cj:#7c3aed;--c-o:#be185d;--c-adv:#0d9488;--c-neg:#e11d48;--c-i:#475569;--c-w:#b45309}}
 :root[data-theme="light"]{--c-s:#64748b;--c-k:#d97706;--c-inf:#4d7c0f;--c-pp:#2563eb;--c-cj:#7c3aed;--c-o:#be185d;--c-adv:#0d9488;--c-neg:#e11d48;--c-i:#475569;--c-w:#b45309}
 .r-s{--c:var(--c-s)}.r-k{--c:var(--c-k)}.r-inf{--c:var(--c-inf)}.r-pp{--c:var(--c-pp)}.r-cj{--c:var(--c-cj)}.r-o{--c:var(--c-o)}.r-adv{--c:var(--c-adv)}.r-neg{--c:var(--c-neg)}.r-i{--c:var(--c-i)}.r-w{--c:var(--c-w)}
 .theory-card .tk th.h-k,.theory-card .tk td.h-k{color:var(--c-k);font-weight:700}
 .theory-card .tk td{white-space:normal}
 .sent .u{text-decoration-color:var(--c-k)}
+
+/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ ===== */
+:root[data-theme="autumn"]{
+  --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
+  --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
+  --ok:#a8d160;--okb:rgba(168,209,96,.14);--no:#ff7a5c;--nob:rgba(255,122,92,.14);
+  --go:#ffc15a;--gob:rgba(255,193,90,.14);--bd:#5a3825;--sa:#f4a259;--pe:#c9504a;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;--c-art:#94a3b8;--c-pi:#f59e0b;--c-n:#60a5fa;--c-adv:#2dd4bf;--c-ref:#fb7185;--c-zu:#a78bfa;--c-v:#a3e635;--c-obj:#f472b6;--c-d:#fcd34d;--c-s:#94a3b8;--c-k:#f59e0b;--c-inf:#a3e635;--c-pp:#60a5fa;--c-cj:#a78bfa;--c-o:#f472b6;--c-adv:#2dd4bf;--c-neg:#fb7185;--c-i:#cbd5e1;--c-w:#fcd34d;}
+:root[data-theme="winter"]{
+  --bg:#0f1b2e;--bg-grad:#1b3354;--card:#172740;--card-hover:#1f3352;
+  --tx:#e8f3ff;--mu:#8fb0d1;--pr:#3f8fd6;--pr-glow:rgba(74,163,223,.4);--pl:#20395c;
+  --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
+  --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;--c-art:#94a3b8;--c-pi:#f59e0b;--c-n:#60a5fa;--c-adv:#2dd4bf;--c-ref:#fb7185;--c-zu:#a78bfa;--c-v:#a3e635;--c-obj:#f472b6;--c-d:#fcd34d;--c-s:#94a3b8;--c-k:#f59e0b;--c-inf:#a3e635;--c-pp:#60a5fa;--c-cj:#a78bfa;--c-o:#f472b6;--c-adv:#2dd4bf;--c-neg:#fb7185;--c-i:#cbd5e1;--c-w:#fcd34d;}
+/* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
+:root[data-theme="sakura"]{
+  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
+  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
+  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
+  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309;--c-s:#64748b;--c-k:#d97706;--c-inf:#4d7c0f;--c-pp:#2563eb;--c-cj:#7c3aed;--c-o:#be185d;--c-adv:#0d9488;--c-neg:#e11d48;--c-i:#475569;--c-w:#b45309;}
+:root[data-theme="candy"]{
+  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
+  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
+  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
+  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;--c-art:#94a3b8;--c-pi:#f59e0b;--c-n:#60a5fa;--c-adv:#2dd4bf;--c-ref:#fb7185;--c-zu:#a78bfa;--c-v:#a3e635;--c-obj:#f472b6;--c-d:#fcd34d;--c-s:#94a3b8;--c-k:#f59e0b;--c-inf:#a3e635;--c-pp:#60a5fa;--c-cj:#a78bfa;--c-o:#f472b6;--c-adv:#2dd4bf;--c-neg:#fb7185;--c-i:#cbd5e1;--c-w:#fcd34d;}
+
+:root[data-theme="sakura"] .theory-card,:root[data-theme="sakura"] .cheat{box-shadow:0 8px 30px rgba(236,95,151,.15)}
+:root[data-theme="sakura"] .tab,:root[data-theme="candy"] .tab{border-width:2px;font-weight:700}
+:root[data-theme="sakura"] .theory-card,:root[data-theme="candy"] .theory-card,
+:root[data-theme="sakura"] .cheat,:root[data-theme="candy"] .cheat{border-width:2px;border-radius:22px}
+:root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
+:root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
+:root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+.fx-toggle{right:144px}
+.fx-toggle.off{opacity:.45;filter:grayscale(1)}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear both}
+.mp.up{top:auto;bottom:-30px;animation-name:mcRise}
+@keyframes mcFall{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcRise{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+.mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
+.mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
+.mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
+@media (prefers-reduced-motion:reduce){.mp{display:none}}
 </style>
 </head>
 <body>
 <div class="w">
   <div class="header-wrap">
     <h1>Konjunktiv II<small>Wünsche · Bedingungen · Höflichkeit · тренажер</small></h1>
+    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="theory-top-toggle" onclick="openTheory()" title="Перейти до теорії">📖</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Тема">🌙</button>
@@ -493,7 +545,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <div class="fb" id="fb"></div>
   </div>
 
-  <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 420</small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+  <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn">/ 463</small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span></div><div class="xrank"><span class="xrn" id="xr">🌱 Новачок</span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
 
   <div class="foot">
     <div class="foot-row">
@@ -688,15 +740,16 @@ const stripHTML = s => String(s || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const mqLight = window.matchMedia('(prefers-color-scheme: light)');
-function effTheme(){ return document.documentElement.getAttribute('data-theme') || (mqLight.matches ? 'light' : 'dark'); }
-function paintThemeIcon(){ $("theme-toggle").textContent = effTheme() === 'light' ? '☀️' : '🌙'; }
+const THEMES = ['light','dark','autumn','winter','sakura','candy'];
+const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', sakura:'🌸', candy:'🍬'};
+const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', sakura:'Сакура', candy:'Цукеркова ніч'};
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'dark'; }
+function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('k2-theme');
-if(savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'dark');
 paintThemeIcon();
-if(mqLight.addEventListener) mqLight.addEventListener('change', paintThemeIcon);
 function toggleTheme(){
-  const n = effTheme() === 'light' ? 'dark' : 'light';
+  const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
   document.documentElement.setAttribute('data-theme', n);
   store.set('k2-theme', n); paintThemeIcon();
 }
@@ -785,9 +838,23 @@ const TIPS = {
 };
 
 /* ============ STATE ============ */
-const KEY = id => "tp_v2_konj2_" + id;   // префікс tp_v2_ — ці ключі синхронізує sync.js
+const KEY = id => "tp_v2_konjunktiv2_" + id;   // префікс tp_v2_<id> збігається з data-id у index.html; ці ключі синхронізує sync.js
+/* міграція зі старого префікса tp_v2_konj2_*: переносимо прогрес, якщо там більше дій (x лише зростає) */
+const OLD_KEY = id => "tp_v2_konj2_" + id;
+function migrateOldKeys(){
+  try {
+    TABS.forEach(t => {
+      let o = null, n = null;
+      try { o = JSON.parse(localStorage.getItem(OLD_KEY(t.id))); } catch(e){}
+      try { n = JSON.parse(localStorage.getItem(KEY(t.id))); } catch(e){}
+      if(!o || !o.k) return;
+      if(!n || !n.k || (Number(o.x) || 0) > (Number(n.x) || 0)) localStorage.setItem(KEY(t.id), JSON.stringify(o));
+    });
+  } catch(e){}
+}
+migrateOldKeys();
 const TOTAL = Object.keys(ITEMS).reduce((a, k) => a + ITEMS[k].length, 0);
-const XP_MAX = Math.ceil(TOTAL / 10) * 10;   // стільки EXP, скільки всього завдань (округлено вгору до десятків)
+const XP_MAX = TOTAL;   // максимум EXP = кількість усіх завдань
 /* x і p лише зростають (для sync.js): кожна відповідь x+1, а p+0 / p+1 / p+2 дає EXP +1 / 0 / −1. Загальний EXP = Σ(x − p) по всіх вкладках. */
 const blankState = () => ({ k:{}, r:0, w:0, l:0, err:{}, x:0, p:0 });
 const S = {};
@@ -814,7 +881,7 @@ const pool = () => items().map((_, i) => i).filter(i => !stage || STG[tab][i] ==
 const streak = i => T().k[i] || 0;
 const maxStreak = () => 1;   // завдання «вивчене» після 1 правильної відповіді — більше воно не повертається (помилкові повертаються)
 const errCount = () => Object.keys(T().err).filter(k => T().err[k]).length;
-const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); } catch(e){} };
+const save = () => { try { localStorage.setItem(KEY(tab), JSON.stringify(S[tab])); if(typeof publishProgress === 'function') publishProgress(); } catch(e){} };
 
 /* ============ SPEECH ============ */
 function speak(text){
@@ -1018,6 +1085,7 @@ $("xrst").addEventListener("click", () => {
   if(!confirm("Скинути весь EXP до нуля? Прогрес завдань залишиться.")) return;
   TABS.forEach(t => { const st = S[t.id]; st.x = Math.max(st.x, st.p) + 1; st.p = st.x; try { localStorage.setItem(KEY(t.id), JSON.stringify(st)); } catch(e){} }); // x та p лише зростають — sync.js бачить новішу версію
   XP = calcXp(); updateXp(XP); renderTabs();
+  if(typeof publishProgress === 'function') publishProgress();
 });
 $("stages").addEventListener("click", e => { const b = e.target.closest(".stg"); if(b) openStage(+b.dataset.s); });
 $("rule").addEventListener("click", e => { if(e.target.closest(".lsl")) showLesson(stage); });
@@ -1337,9 +1405,10 @@ document.addEventListener('touchstart', function unlockAudio() {
   document.removeEventListener('touchstart', unlockAudio);
 }, { once: true });
 
-/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_konj2_*) === */
+/* === СИНХРОНІЗАЦІЯ через sync.js (ключі tp_v2_konjunktiv2_*) === */
 function applyStorage(){
   try {
+    migrateOldKeys();
     TABS.forEach(t => {
       if(answered && t.id === tab) return; // не ламаємо відповідь, що зараз на екрані
       const v = readState(t.id);
@@ -1347,11 +1416,13 @@ function applyStorage(){
     });
     META = readMeta();
     XP = calcXp();
+    if(typeof publishProgress === 'function') publishProgress();
     if(answered){ updateXp(XP); renderTabs(); }
     else { renderCard(); renderReviewBtn(); syncFin(); }
   } catch(e){}
 }
 window.addEventListener("tpsync:updated", applyStorage);
+try { if(window.TPSync && TPSync.ready) TPSync.ready.then(applyStorage); } catch(e){}
 if(stage && !localStorage.getItem("k2_seen_" + stage)){ const vis = TABS.filter(t => STG[t.id].some(g => g === stage)); if(vis.length){ if(!vis.some(t => t.id === tab)) setTab(vis[0].id); showLesson(stage); } }
 const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
 document.addEventListener("visibilitychange", () => { if(!document.hidden) tpSyncNow(); });
@@ -1376,6 +1447,64 @@ if (window.Telegram && window.Telegram.WebApp) {
   window.addEventListener("pointerup", () => { d = false; el.classList.remove("drag"); });
   document.addEventListener("click", e => { if(moved && e.target.closest && e.target.closest("#stages")){ e.stopPropagation(); e.preventDefault(); } moved = false; }, true);
   el.addEventListener("wheel", e => { if(el.scrollWidth > el.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)){ el.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive:false });
+})();
+
+/* ============ ВІДПРАВКА ПРОГРЕСУ НА ГОЛОВНУ ============ */
+function publishProgress() {
+  try {
+    // ID має збігатися з data-id у index.html
+    const trainerId = 'konjunktiv2';
+    localStorage.setItem('tp_v2_exp_' + trainerId, calcXp());
+    localStorage.setItem('tp_v2_exp_max_' + trainerId, XP_MAX);
+    localStorage.setItem('tp_v2_exp_tabs_' + trainerId, JSON.stringify(TABS.map(t => t.id)));
+  } catch(e) {}
+}
+publishProgress(); // при завантаженні
+</script>
+<script>
+/* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
+(function(){
+const rnd=a=>a[Math.random()*a.length|0];
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','sakura','candy'].includes(t)?t:'dark'};
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+let on=store.get('k2-fx')==='on',ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paint(){btn.classList.toggle('off',!on);btn.title=on?'Ефекти: увімкнено':'Ефекти: вимкнено';}
+function spawn(kind,n){
+  if(RM.matches||!on)return;n=Math.round(n*(innerWidth<600?.55:1));
+  for(let i=0;i<n;i++){
+    if(live>140)return;const el=document.createElement('div');el.className='mp';let dur=3+Math.random()*3,z;
+    if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
+    else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
+    else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='leaf'){const p=Math.random()<.25;el.textContent=p?'🎃':rnd(['🍂','🍁','🍃','🍂']);el.style.fontSize=((p?22:16)+Math.random()*14)+'px';dur=4+Math.random()*3;}
+    else if(kind==='snow'){if(Math.random()<.45){el.textContent='❄️';el.style.fontSize=(12+Math.random()*10)+'px';}else{el.classList.add('snow');z=4+Math.random()*6;el.style.width=el.style.height=z+'px';}dur=5+Math.random()*4;}
+    else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
+    else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
+    else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');el.style.setProperty('--o',(.22+Math.random()*.26).toFixed(2));
+    el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
+    document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
+  }
+}
+function fx(n){const t=th();
+  if(t==='sakura')spawn('petal',n);
+  else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  else if(t==='autumn')spawn('leaf',n);
+  else if(t==='winter')spawn('snow',n);
+  else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
+  else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
+}
+window.toggleFx=function(){on=!on;store.set('k2-fx',on?'on':'off');paint();if(on)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
+function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
+wrap('finish',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
+wrap('popXp',(d,up)=>{if(up)fx(70);});
+let lastC=0;const celeb=()=>{const n=Date.now();if(n-lastC<4000)return;lastC=n;fx(120);setTimeout(()=>fx(70),1000);};
+wrap('showComplete',celeb);
+if(typeof window.showComplete!=='function')wrap('closeTab',celeb);
+wrap('showReviewComplete',()=>{try{if(tabDone())celeb();}catch(e){}});
+new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+paint();
 })();
 </script>
 </body></html>
