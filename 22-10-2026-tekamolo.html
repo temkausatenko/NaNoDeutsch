@@ -8,7 +8,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <script>
-(function(){var T=['dark','light','sakura','candy'],t=null;try{t=localStorage.getItem('tk-theme')}catch(e){}
+(function(){var T=['light','dark','autumn','winter','spring','summer'],t=null;try{t=localStorage.getItem('tk-theme')}catch(e){}
 document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'light');})();
 </script>
 <style>
@@ -494,27 +494,31 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 
 .r-pt{--c:var(--pp)}.r-kj{--c:var(--go)}.r-rp{--c:var(--go)}.r-bz{--c:var(--sa)}.r-vf,.r-ad{--c:var(--ne)}.r-kein{--c:var(--no)}
 
-/* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
-:root[data-theme="sakura"]{
-  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
-  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
-  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
-  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
-  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;}
-:root[data-theme="candy"]{
-  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
-  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
-  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
-  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ · Весна 🌷 · Літо 🌴 ===== */
+:root[data-theme="autumn"]{
+  --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
+  --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
+  --ok:#a8d160;--okb:rgba(168,209,96,.14);--no:#ff7a5c;--nob:rgba(255,122,92,.14);
+  --go:#ffc15a;--gob:rgba(255,193,90,.14);--bd:#5a3825;--sa:#f4a259;--pe:#c9504a;color-scheme:dark;
   --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;}
-
-:root[data-theme="sakura"] .theory-card,:root[data-theme="sakura"] .cheat{box-shadow:0 8px 30px rgba(236,95,151,.15)}
-:root[data-theme="sakura"] .tab,:root[data-theme="candy"] .tab{border-width:2px;font-weight:700}
-:root[data-theme="sakura"] .theory-card,:root[data-theme="candy"] .theory-card,
-:root[data-theme="sakura"] .cheat,:root[data-theme="candy"] .cheat{border-width:2px;border-radius:22px}
-:root[data-theme="sakura"] .theme-toggle,:root[data-theme="candy"] .theme-toggle,
-:root[data-theme="sakura"] .sound-toggle,:root[data-theme="candy"] .sound-toggle,
-:root[data-theme="sakura"] .theory-top-toggle,:root[data-theme="candy"] .theory-top-toggle{border-width:2px}
+:root[data-theme="winter"]{
+  --bg:#0f1b2e;--bg-grad:#1b3354;--card:#172740;--card-hover:#1f3352;
+  --tx:#e8f3ff;--mu:#8fb0d1;--pr:#3f8fd6;--pr-glow:rgba(74,163,223,.4);--pl:#20395c;
+  --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
+  --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;}
+:root[data-theme="spring"]{
+  --bg:#f4fbef;--bg-grad:#dff3d3;--card:#fff;--card-hover:#f1faea;
+  --tx:#2c4a2e;--mu:#6f9370;--pr:#3fa75f;--pr-glow:rgba(63,167,95,.35);--pl:#def3d6;
+  --ok:#2e9e63;--okb:rgba(46,158,99,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e0952a;--gob:rgba(224,149,42,.12);--bd:#cfe8c4;--sa:#57b97a;--pe:#f07fb0;color-scheme:light;
+  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;}
+:root[data-theme="summer"]{
+  --bg:#fff9e6;--bg-grad:#ffe9a8;--card:#fff;--card-hover:#fff6d6;
+  --tx:#4a3410;--mu:#a98a3f;--pr:#e8730c;--pr-glow:rgba(245,158,11,.4);--pl:#fff0c2;
+  --ok:#2a9d6a;--okb:rgba(42,157,106,.12);--no:#e0445a;--nob:rgba(224,68,90,.1);
+  --go:#d98a00;--gob:rgba(217,138,0,.12);--bd:#ffe0a0;--sa:#f59e0b;--pe:#0aa5b8;color-scheme:light;
+  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;}
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 .fx-toggle{right:144px}
 .fx-toggle.off{opacity:.45;filter:grayscale(1)}
@@ -523,6 +527,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 @keyframes mcFall{to{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
 @keyframes mcRise{12%{opacity:1}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
 .mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
 .mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
 .mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
 @media (prefers-reduced-motion:reduce){.mp{display:none}}
@@ -1408,9 +1413,9 @@ const TIPS = {
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const THEMES = ['candy','sakura','light','dark'];
-const THEME_ICON = {candy:'🍬', sakura:'🌸', light:'☀️', dark:'🌙'};
-const THEME_NAME = {candy:'Цукеркова ніч', sakura:'Сакура', light:'Світла', dark:'Темна'};
+const THEMES = ['light','dark','autumn','winter','spring','summer'];
+const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', spring:'🌷', summer:'🌴'};
+const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', spring:'Весна', summer:'Літо'};
 function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'light'; }
 function paintThemeIcon(){ const t = effTheme(), b = document.getElementById("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('tk-theme');
@@ -2336,7 +2341,7 @@ publishProgress(); // Запускаем при загрузке страниц�
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 (function(){
 const rnd=a=>a[Math.random()*a.length|0];
-const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['candy','sakura','light','dark'].includes(t)?t:'light'};
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','spring','summer'].includes(t)?t:'light'};
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
 let on=store.get('tk-fx')!=='off',ses=0,live=0;
 const btn=document.getElementById('fx-toggle');
@@ -2346,8 +2351,10 @@ function spawn(kind,n){
   for(let i=0;i<n;i++){
     if(live>140)return;const el=document.createElement('div');el.className='mp';let dur=3+Math.random()*3,z;
     if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
-    else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
-    else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='leaf'){const p=Math.random()<.25;el.textContent=p?'🎃':rnd(['🍂','🍁','🍃','🍂']);el.style.fontSize=((p?22:16)+Math.random()*14)+'px';dur=4+Math.random()*3;}
+    else if(kind==='snow'){if(Math.random()<.45){el.textContent='❄️';el.style.fontSize=(12+Math.random()*10)+'px';}else{el.classList.add('snow');z=4+Math.random()*6;el.style.width=el.style.height=z+'px';}dur=5+Math.random()*4;}
+    else if(kind==='bloom'){el.textContent=rnd(['🌷','🌼','🌸']);el.style.fontSize=(14+Math.random()*12)+'px';dur=4+Math.random()*3;}
+    else if(kind==='sun'){el.classList.add('up');el.textContent=rnd(['🦋','🌻','☀️','🍋']);el.style.fontSize=(14+Math.random()*12)+'px';dur=4+Math.random()*3;}
     else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
     else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
     else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
@@ -2357,8 +2364,10 @@ function spawn(kind,n){
   }
 }
 function fx(n){const t=th();
-  if(t==='sakura')spawn('petal',n);
-  else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  if(t==='autumn')spawn('leaf',n);
+  else if(t==='winter')spawn('snow',n);
+  else if(t==='spring'){spawn('petal',Math.ceil(n*.6));spawn('bloom',Math.ceil(n*.4));}
+  else if(t==='summer'){spawn('sun',Math.ceil(n*.6));spawn('bub',Math.ceil(n*.4));}
   else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
   else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
 }
