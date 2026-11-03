@@ -8,8 +8,8 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
 <script>
-(function(){var T=['dark','light','sakura','candy'],t=null;try{t=localStorage.getItem('pa-theme')}catch(e){}
-document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'light');})();
+(function(){var T=['light','dark','autumn','winter','sakura','candy'],t=null;try{t=localStorage.getItem('pa-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})();
 </script>
 <style>
 
@@ -443,6 +443,21 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .opts.afit{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}
 .scheme .np{color:var(--tx);font-weight:600}
 
+/* ===== ТЕМИ: Осінь 🍂 · Зима ❄️ ===== */
+:root[data-theme="autumn"]{
+  --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
+  --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
+  --ok:#a8d160;--okb:rgba(168,209,96,.14);--no:#ff7a5c;--nob:rgba(255,122,92,.14);
+  --go:#ffc15a;--gob:rgba(255,193,90,.14);--bd:#5a3825;--sa:#f4a259;--pe:#c9504a;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-da:#6fe3d0;--c-wo:#ffc46b;--c-r:#ff8fb1;--c-pr:#c3a2d6;--c-s:#8ec5ff;--c-p:#ff9ccc;--c-v:#b8f07a;--c-wn:#c4b0ff;--c-wm:#6fe3d0;--c-pn:#ffd98f}
+:root[data-theme="winter"]{
+  --bg:#0f1b2e;--bg-grad:#1b3354;--card:#172740;--card-hover:#1f3352;
+  --tx:#e8f3ff;--mu:#8fb0d1;--pr:#3f8fd6;--pr-glow:rgba(74,163,223,.4);--pl:#20395c;
+  --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
+  --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-da:#6fe3d0;--c-wo:#ffc46b;--c-r:#ff8fb1;--c-pr:#c3a2d6;--c-s:#8ec5ff;--c-p:#ff9ccc;--c-v:#b8f07a;--c-wn:#c4b0ff;--c-wm:#6fe3d0;--c-pn:#ffd98f}
 /* ===== ТЕМИ: Сакура 🌸 та Цукеркова ніч 🍬 ===== */
 :root[data-theme="sakura"]{
   --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
@@ -472,11 +487,12 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 .fx-toggle{right:144px}
 .fx-toggle.off{opacity:.45;filter:grayscale(1)}
-.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear forwards}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear both}
 .mp.up{top:auto;bottom:-30px;animation-name:mcRise}
-@keyframes mcFall{to{transform:translate(var(--dx),112vh) rotate(var(--rot))}}
-@keyframes mcRise{12%{opacity:1}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcFall{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcRise{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
 .mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
 .mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
 .mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
 @media (prefers-reduced-motion:reduce){.mp{display:none}}
@@ -1253,13 +1269,13 @@ const ulSet = () => { try { return JSON.parse(localStorage.getItem(UL_KEY)) || [
 
 /* ============ THEME ============ */
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const THEMES = ['candy','sakura','light','dark'];
-const THEME_ICON = {candy:'🍬', sakura:'🌸', light:'☀️', dark:'🌙'};
-const THEME_NAME = {candy:'Цукеркова ніч', sakura:'Сакура', light:'Світла', dark:'Темна'};
-function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'light'; }
+const THEMES = ['light','dark','autumn','winter','sakura','candy'];
+const THEME_ICON = {light:'☀️', dark:'🌙', autumn:'🍂', winter:'❄️', sakura:'🌸', candy:'🍬'};
+const THEME_NAME = {light:'Світла', dark:'Темна', autumn:'Осінь', winter:'Зима', sakura:'Сакура', candy:'Цукеркова ніч'};
+function effTheme(){ const t = document.documentElement.getAttribute('data-theme'); return THEMES.includes(t) ? t : 'dark'; }
 function paintThemeIcon(){ const t = effTheme(), b = $("theme-toggle"); b.textContent = THEME_ICON[t]; b.title = 'Тема: ' + THEME_NAME[t]; }
 const savedTheme = store.get('pa-theme');
-document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'light');
+document.documentElement.setAttribute('data-theme', THEMES.includes(savedTheme) ? savedTheme : 'dark');
 paintThemeIcon();
 function toggleTheme(){
   const n = THEMES[(THEMES.indexOf(effTheme()) + 1) % THEMES.length];
@@ -1873,9 +1889,9 @@ publishProgress(); // при завантаженні
 /* ===== ЕФЕКТИ-ДОЩИКИ ПІД ТЕМУ ===== */
 (function(){
 const rnd=a=>a[Math.random()*a.length|0];
-const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['candy','sakura','light','dark'].includes(t)?t:'light'};
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','sakura','candy'].includes(t)?t:'dark'};
 const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
-let on=store.get('pa-fx')!=='off',ses=0,live=0;
+let on=store.get('pa-fx')==='on',ses=0,live=0;
 const btn=document.getElementById('fx-toggle');
 function paint(){btn.classList.toggle('off',!on);btn.title=on?'Ефекти: увімкнено':'Ефекти: вимкнено';}
 function spawn(kind,n){
@@ -1885,10 +1901,12 @@ function spawn(kind,n){
     if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
     else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
     else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='leaf'){const p=Math.random()<.25;el.textContent=p?'🎃':rnd(['🍂','🍁','🍃','🍂']);el.style.fontSize=((p?22:16)+Math.random()*14)+'px';dur=4+Math.random()*3;}
+    else if(kind==='snow'){if(Math.random()<.45){el.textContent='❄️';el.style.fontSize=(12+Math.random()*10)+'px';}else{el.classList.add('snow');z=4+Math.random()*6;el.style.width=el.style.height=z+'px';}dur=5+Math.random()*4;}
     else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
     else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
     else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
-    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');el.style.setProperty('--o',(.22+Math.random()*.26).toFixed(2));
     el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
     document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
   }
@@ -1896,6 +1914,8 @@ function spawn(kind,n){
 function fx(n){const t=th();
   if(t==='sakura')spawn('petal',n);
   else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  else if(t==='autumn')spawn('leaf',n);
+  else if(t==='winter')spawn('snow',n);
   else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
   else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
 }
