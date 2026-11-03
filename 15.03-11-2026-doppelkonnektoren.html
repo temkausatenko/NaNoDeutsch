@@ -613,7 +613,7 @@ const P=[
 ["Ich bekomme weder Urlaubsgeld noch Weihnachtsgeld.","Я не отримую ні відпускних, ні різдвяних виплат.","weder","noch"],
 ["Hoffentlich bekomme ich weder Erkältung noch Fieber.","Сподіваюся, я не захворію ні на застуду, ні на температуру.","weder","noch"],
 ["Ich trinke weder Kaffee noch Tee.","Я не п’ю ні каву, ні чай.","weder","noch"],
-["Daniel will weder Überstunden machen noch am Wochenende arbeiten.","Даніель не хоче ні працювати понаднормово, ні працювати у вихідні.","weder","noch"],
+["Daniel will weder Überstunden machen noch am Wochenende arbeiten.","Даніель не хоче ні працювати понаднормо, ні працювати у вихідні.","weder","noch"],
 ["Er arbeitet weder im Homeoffice noch fährt er jeden Tag ins Büro.","Він не працює вдома й не їздить щодня в офіс.","weder","noch"],
 ["Bruno hat weder über das Jobcenter noch über eine Zeitarbeitsfirma einen Job gefunden.","Бруно не знайшов роботу ні через центр зайнятості, ні через агентство тимчасового працевлаштування.","weder","noch"],
 ["Tom ist gerade arbeitslos, deshalb kann er jetzt weder in den Urlaub fahren noch sich ein neues Auto leisten.","Том зараз безробітний, тому не може ні поїхати у відпустку, ні дозволити собі нову машину.","weder","noch"],
@@ -728,17 +728,58 @@ const cnt=(i,m)=>{const s=S[P[i][0]+(m=="ty"?"_ty":"")];return s?(m=="ty"?P[i][3
 const SK=(i=tab)=>P[i][0]+(mode=="ty"?"_ty":"");
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
 const items=()=>mode=="mc"?mcOf(tab):P[tab][3];
-const save=all=>{try{(all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{const o=S[k];if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},e:o.e||{},r:o.r||0,w:o.w||0}))})}catch(e){publishMeta();}};
 
 const ID="zweiteilige_konnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
-function load(){S={};ALLSK.forEach(k=>{let o=null;try{o=JSON.parse(localStorage.getItem(PFX+k))}catch(e){}
- if(o&&typeof o=="object")S[k]={k:o.k&&typeof o.k=="object"?o.k:{},e:o.e&&typeof o.e=="object"?o.e:{},r:+o.r||0,w:+o.w||0,x:+o.x||0,p:+o.p||0}});XP=calcXp()}
-function migrateOld(){try{if(ALLSK.some(k=>localStorage.getItem(PFX+k)!=null))return;const old=sg("dk2_s",null);
- if(!old||typeof old!="object")return;const ks=Object.keys(old);if(!ks.length||!ks.every(k=>ALLSK.includes(k)))return;
- let sum=0;ks.forEach(k=>{const o=old[k]||{},n=Object.keys(o.k||{}).length;sum+=n;S[k]={k:o.k||{},e:{},r:+o.r||0,w:+o.w||0,x:n,p:0}});
- const diff=Math.min(XP_MAX,Math.max(0,+sg("dk2_xp",0)||0))-sum,f=S[ks[0]];if(diff>0)f.x+=diff;else f.p+=-diff;save(true)}catch(e){}}
-function publishMeta(){try{localStorage.setItem("tp_v2_exp_max_"+ID,String(XP_MAX));localStorage.setItem("tp_v2_exp_tabs_"+ID,JSON.stringify(ALLSK))}catch(e){}}
+
+function publishProgress() {
+  try {
+    localStorage.setItem("tp_v2_exp_" + ID, String(XP));
+    localStorage.setItem("tp_v2_exp_max_" + ID, String(XP_MAX));
+    localStorage.setItem("tp_v2_exp_tabs_" + ID, JSON.stringify(ALLSK));
+  } catch(e) {}
+}
+
+const save=all=>{
+  try{
+    (all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{
+      const o=S[k];
+      if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},e:o.e||{},r:o.r||0,w:o.w||0}))
+    })
+  }catch(e){}
+  publishProgress();
+};
+
+function load(){
+  S={};
+  ALLSK.forEach(k=>{
+    let o=null;
+    try{o=JSON.parse(localStorage.getItem(PFX+k))}catch(e){}
+    if(o&&typeof o=="object")S[k]={k:o.k&&typeof o.k=="object"?o.k:{},e:o.e&&typeof o.e=="object"?o.e:{},r:+o.r||0,w:+o.w||0,x:+o.x||0,p:+o.p||0};
+  });
+  XP=calcXp();
+  publishProgress();
+}
+
+function migrateOld(){
+  try{
+    if(ALLSK.some(k=>localStorage.getItem(PFX+k)!=null))return;
+    const old=sg("dk2_s",null);
+    if(!old||typeof old!="object")return;
+    const ks=Object.keys(old);
+    if(!ks.length||!ks.every(k=>ALLSK.includes(k)))return;
+    let sum=0;
+    ks.forEach(k=>{
+      const o=old[k]||{},n=Object.keys(o.k||{}).length;
+      sum+=n;
+      S[k]={k:o.k||{},e:{},r:+o.r||0,w:+o.w||0,x:n,p:0};
+    });
+    const diff=Math.min(XP_MAX,Math.max(0,+sg("dk2_xp",0)||0))-sum,f=S[ks[0]];
+    if(diff>0)f.x+=diff;else f.p+=-diff;
+    save(true);
+  }catch(e){}
+}
+
 function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.dataset.r=r;box.classList.toggle("max",XP>=XP_MAX);
  $("xf").style.width=XP/XP_MAX*100+"%";$("xt").textContent=XP;$("xn").textContent=XP>=XP_MAX?"MAX":"/ "+XP_MAX;$("xr").textContent=R[1]+" "+R[2];
  $("xnext").textContent=N?"ще "+(N[0]-XP)+" до «"+N[2]+"»":"EXP зафіксовано 🔒";
@@ -755,16 +796,6 @@ function isCatOpen(i){
   return (cnt(prev,"mc")+cnt(prev,"ty"))>=total;
 }
 
-(function(){
-  const el=$('stages'); let d=false,moved=false,x0=0,s0=0;
-  if(!el) return;
-  el.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse'||e.button!==0) return; d=true; moved=false; x0=e.clientX; s0=el.scrollLeft; });
-  window.addEventListener('pointermove',e=>{ if(!d) return; const dx=e.clientX-x0; if(Math.abs(dx)>4){ moved=true; el.classList.add('drag'); } if(moved) el.scrollLeft=s0-dx; });
-  window.addEventListener('pointerup',()=>{ d=false; el.classList.remove('drag'); });
-  document.addEventListener('click',e=>{ if(moved&&e.target.closest&&e.target.closest('#stages')){ e.stopPropagation(); e.preventDefault(); } moved=false; },true);
-  el.addEventListener('wheel',e=>{ if(el.scrollWidth>el.clientWidth&&Math.abs(e.deltaY)>Math.abs(e.deltaX)){ el.scrollLeft+=e.deltaY; e.preventDefault(); } },{passive:false});
-})();
-
 function renderTabs(){
   if(rvMode) return;
   const _st=$("stages"),_sl=_st.scrollLeft;
@@ -772,7 +803,7 @@ function renderTabs(){
     const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(3*n)*100),open=isCatOpen(i),done=pc===100;
     return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
       (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
-      `${p[1]}<small>${pc}%</small><i style="width:${pc}%"></i></button>`;
+      `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
   }).join("");
   document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.s;
@@ -1063,10 +1094,27 @@ const THEMES=['light','dark','autumn','winter','sakura','candy'],TI={light:'☀�
 const eff=()=>{const t=document.documentElement.getAttribute('data-theme');return THEMES.includes(t)?t:'dark'};
 function paint(){const t=eff(),b=$("theme");b.textContent=TI[t];b.title="Тема: "+TN[t]}
 $("theme").onclick=()=>{const n=THEMES[(THEMES.indexOf(eff())+1)%THEMES.length];document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("pi-theme",n)}catch(e){}paint()};
-migrateOld();load();publishMeta();
+
+/* ===== Синхронізація (index & sync) ===== */
+function applyStorage() {
+  load();
+  updateXp();
+  renderTabs();
+}
+
+window.addEventListener("tpsync:updated", applyStorage);
+if (window.TPSync && window.TPSync.ready) {
+  window.TPSync.ready.then(applyStorage).catch(function(){});
+}
+
+const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
+document.addEventListener('visibilitychange', () => { if(!document.hidden) tpSyncNow(); });
+setInterval(() => { if(!document.hidden && answered) tpSyncNow(); }, 30000);
+
+migrateOld();
+load();
 try{const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();
  if(tg.BackButton&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.1")){tg.BackButton.show();tg.BackButton.onClick(()=>{location.href="index.html"})}}}catch(e){}
-window.addEventListener("tpsync:updated",()=>{load();updateXp();renderTabs()});
 paint();updateXp();showRule(!seen[P[0][0]]);renderTabs();start();
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 let soundEnabled = store.get('pi-sound') !== 'off';
