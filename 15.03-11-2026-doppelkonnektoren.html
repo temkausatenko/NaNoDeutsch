@@ -170,7 +170,7 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
 .card h2#title{padding-right:290px}
 @media(max-width:480px){.ctl{top:18px;right:98px}.card h2#title{padding-right:255px}}
 .lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
-.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font-weight:700;cursor:pointer;font-family:inherit}
 .lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
 .lsl:hover{color:var(--tx)}
 .rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
@@ -633,7 +633,7 @@ const P=[
 ["Sie kann nicht nur gut kochen, sondern auch sehr schön singen.","Вона не лише добре готує, а й дуже гарно співає.","nicht nur","sondern auch"]]],
 ["so","sowohl … als auch","<b>sowohl … als auch</b> (як… так і…). Нейтральне додавання без виділення (на відміну від nicht nur … sondern auch). Кома перед <b>als auch</b> не потрібна: <code>Ich lerne sowohl Deutsch als auch Englisch.</code> Підмет у множині: <code>Sowohl der Lebenslauf als auch das Anschreiben sind wichtig.</code>",[
 ["Ich lerne sowohl Deutsch als auch Englisch.","Я вивчаю як німецьку, так і англійську.","sowohl","als auch"],
-["Er hat sowohl in einer Kantine worked als auch abends Büroräume gereinigt.","Він і працював у їдальні, і ввечері прибирав офіси.","sowohl","als auch"],
+["Er hat sowohl in einer Kantine gearbeitet als auch abends Büroräume gereinigt.","Він і працював у їдальні, і ввечері прибирав офіси.","sowohl","als auch"],
 ["Man bewirbt sich sowohl per Mail als auch über Online-Formulare.","Подаються як поштою, так і через онлайн-форми.","sowohl","als auch"],
 ["Bei einer Bewerbung sind sowohl der Lebenslauf als auch das Anschreiben wichtig.","Для заявки важливі і резюме, і супровідний лист.","sowohl","als auch"],
 ["Ich habe sowohl mein Profil immer aktuell gehalten als auch über soziale Netzwerke gesucht.","Я і підтримував свій профіль в актуальному стані, і шукав через соціальні мережі.","sowohl","als auch"],
@@ -694,6 +694,16 @@ const haptic=(()=>{
 })();
 function hapticAll(ok){if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.HapticFeedback){try{window.Telegram.WebApp.HapticFeedback.notificationOccurred(ok?'success':'error');}catch(e){}}else haptic(ok);}
 
+function tapHaptic() {
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+      window.Telegram.WebApp.HapticFeedback.selectionChanged(); 
+    } else if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  } catch(e) {}
+}
+
 /* ===== Конструктор: пів-речення (кожне речення в 2 варіантах) ===== */
 const _clean=t=>String(t).replace(/[.,!?;:]/g,"");
 const splitK=x=>{const w=x[0].split(" "),c2=_clean(String(x[2]).split(" ")[0]),c3=_clean(String(x[3]).split(" ")[0]);
@@ -752,7 +762,9 @@ function renderTabs(){
   const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
     const n=p[3].length,d=cnt(i,"mc")+cnt(i,"ty"),pc=Math.round(d/(3*n)*100),open=isCatOpen(i),done=pc===100;
-    return `<button class="stg ${i==tab?'on':''} ${open?'':'lk'}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">${open?'':'🔒 '}${done?'✓ ':''}${p[1]}<small>${pc}%</small><i style="width:${pc}%"></i></button>`;
+    return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
+      (!open ? `<span class="si">🔒</span>` : done ? `<span class="si">✓</span>` : ``) +
+      `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
   }).join("");
   document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.s;
@@ -800,8 +812,8 @@ function renderBuilder(){
     : "<span class='ph'>Натискай слова нижче, щоб скласти речення</span>";
   $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc' data-bi='"+i+"'>"+esc(words[i])+"</button>").join("");
   if(!answered){
-    $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
-    $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ bPlaced.push(+b.dataset.bi); renderBuilder(); });
+    $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
+    $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
   }
   if(!answered) $("chk").disabled = bPlaced.length !== words.length;
 }
