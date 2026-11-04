@@ -92,7 +92,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 @keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
 .card.win{border-color:var(--ok);animation:glow .9s ease-out}
 #finBox{display:none}
-.card.fin > :not(h2):not(.rst):not(#finBox){display:none!important}
+.card.fin > :not(.chead):not(#finBox){display:none!important}
 .card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
 #finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
 #finBox .ft.rv{color:var(--pr)}
@@ -565,6 +565,20 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .tabs .tab{padding:5px 6px 5px 11px;font-size:.76rem;gap:6px;border-radius:10px}
 .tabs .tab small{font-size:.6rem;padding:3px 7px}
 @media(max-width:480px){.tabs{border-radius:12px}.tabs .tab{padding:5px 5px 5px 9px;font-size:.73rem}}
+
+/* ===== Шапка картки: один flex-ряд (без absolute) ===== */
+.chead{display:flex;align-items:center;gap:8px;margin:0 0 16px;min-height:34px}
+.card .chead h2{flex:1 1 auto;min-width:0;margin:0!important;padding:0!important;height:auto!important;min-height:0!important;line-height:1.3!important;overflow-wrap:anywhere}
+.chead .ctl{position:static!important;display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.chead .speak,.chead .rst{position:static!important;flex:none;width:34px;height:34px;top:auto!important;right:auto!important}
+.chead .rulesbtn{height:34px}
+.card.fin .chead .speak,.card.fin .chead .rulesbtn{display:none}
+@media(max-width:380px){.chead .rulesbtn{padding:0 10px;font-size:.76rem}.chead .speak,.chead .rst{width:32px;height:32px}}
+
+/* ===== Заблоковані етапи ===== */
+.stg.lk{opacity:.55;border-style:dashed}
+.stg.lk.nope{animation:shake .4s}
+.toast{white-space:normal;text-align:center;border-radius:16px;line-height:1.35}
 </style></head><body>
 <div class="w">
   <div class="header-wrap">
@@ -585,10 +599,14 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
     <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="sw">0</div></div>
   </div>
   <div class="card" id="card">
-    <h2 id="title"></h2>
-    <div class="ctl"><button class="rulesbtn" id="rb" type="button" title="Показати правила">📘 Правила</button></div>
-    <button class="speak" id="sp" title="Озвучити німецькою">🔊</button>
-    <button class="rst" id="rs" title="Скинути прогрес цієї вкладки">↺</button>
+    <div class="chead">
+      <h2 id="title"></h2>
+      <div class="ctl">
+        <button class="rulesbtn" id="rb" type="button" title="Показати правила">📘 Правила</button>
+        <button class="speak" id="sp" type="button" title="Озвучити німецькою">🔊</button>
+        <button class="rst" id="rs" type="button" title="Скинути прогрес цієї вкладки">↺</button>
+      </div>
+    </div>
     <div id="finBox"></div>
     <p class="sent" id="sent"></p>
     <div class="lab" id="lab"></div>
@@ -980,6 +998,19 @@ function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.
 function enterCat(i){tab=i;ss("dk2_tab",i);mode=isChoice(i)?"ty":(MODES.includes(MB[P[i][0]])?MB[P[i][0]]:"mc");last=-1;rvMode=false;}
 function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);rvMode=false;}
 
+let _toastTm;
+function showToast(msg){
+  let t=document.querySelector(".toast.lockmsg");
+  if(!t){t=document.createElement("div");t.className="toast lockmsg";t.setAttribute("role","status");document.body.appendChild(t)}
+  t.textContent=msg;void t.offsetWidth;t.classList.add("on");
+  clearTimeout(_toastTm);_toastTm=setTimeout(()=>t.classList.remove("on"),2800);
+}
+function lockedHint(b,i){
+  const p=prevOf(i),pc=Math.round(reqDone(p)/reqTotal(p)*100);
+  showToast("🔒 Спочатку пройди «"+P[p][1]+"» на 100% — зараз "+pc+"%");
+  if(b){b.classList.remove("nope");void b.offsetWidth;b.classList.add("nope")}
+  try{hapticAll(false)}catch(e){}
+}
 function isCatOpen(i){
   if(i===0) return true;
   if(reqDone(i)>0) return true;
@@ -997,7 +1028,7 @@ function renderTabs(){
   }).join("");
   document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
     const i=+b.dataset.s;
-    if(!isCatOpen(i)) return;
+    if(!isCatOpen(i)){lockedHint(b,i);return}
     enterCat(i);showRule(!seen[P[tab][0]]);renderTabs();start();
   });
   _st.scrollLeft=_sl;
