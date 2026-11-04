@@ -850,7 +850,48 @@ const SUF={mc:"",ty:"_ty",gl:"_gl"};
 const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gl:"🧩 Склей"};
 const MT={mc:"конструктор",ty:"переклад німецькою",gl:"склей речення з блоків"};
 const tyList=i=>isChoice(i)?P[i][3]:P[i][0]==="ex"?P[i][3].filter((_,j)=>j%3<2):P[i][3].slice(0,TYN);
-const glList=i=>isChoice(i)?[]:P[i][0]==="ex"?[0,3,6,9,1,7].map(j=>P[i][3][j]):P[i][3].slice(0,6);
+const GLX={
+je:[["Je später es wird, desto müder werde ich.","Чим пізніше, тим більше я втомлююся.","Je","desto"],
+["Je mehr ich darüber nachdenke, desto weniger verstehe ich es.","Чим більше я про це думаю, тим менше розумію.","Je","desto"],
+["Je näher der Urlaub kommt, desto besser wird meine Laune.","Чим ближче відпустка, тим краще мій настрій.","Je","desto"],
+["Je älter man wird, desto schneller vergeht die Zeit.","Чим старшим стаєш, тим швидше спливає час.","Je","desto"]],
+en:[["Wir gehen heute Abend entweder ins Kino oder wir bleiben zu Hause.","Сьогодні ввечері ми або йдемо в кіно, або залишаємося вдома.","entweder","oder"],
+["Ich nehme entweder den Bus oder die Bahn.","Я поїду або автобусом, або потягом.","entweder","oder"],
+["Entweder rufst du ihn an, oder ich schreibe ihm eine Nachricht.","Або ти йому телефонуєш, або я пишу йому повідомлення.","Entweder","oder"],
+["Wir können entweder Pizza bestellen oder selbst kochen.","Ми можемо або замовити піцу, або приготувати самі.","entweder","oder"]],
+we:[["Ich habe heute weder Zeit noch Lust.","Сьогодні я не маю ні часу, ні бажання.","weder","noch"],
+["Er antwortet weder auf meine Anrufe noch auf meine Nachrichten.","Він не відповідає ні на мої дзвінки, ні на повідомлення.","weder","noch"],
+["Das ist weder teuer noch kompliziert.","Це ні дорого, ні складно.","weder","noch"],
+["Meine Schwester isst weder Fleisch noch Fisch.","Моя сестра не їсть ні м'яса, ні риби.","weder","noch"]],
+nn:[["Das Essen war nicht nur lecker, sondern auch günstig.","Їжа була не лише смачною, а й недорогою.","nicht nur","sondern auch"],
+["Ich muss morgen nicht nur arbeiten, sondern auch noch einkaufen gehen.","Завтра мені треба не лише працювати, а й ще піти по покупки.","nicht nur","sondern auch"],
+["Er ist nicht nur mein Chef, sondern auch ein guter Freund.","Він не лише мій начальник, а й добрий друг.","nicht nur","sondern auch"],
+["Das Wetter ist heute nicht nur kalt, sondern auch windig.","Погода сьогодні не лише холодна, а й вітряна.","nicht nur","sondern auch"]],
+so:[["Der Supermarkt hat sowohl frisches Obst als auch Gemüse aus der Region.","У супермаркеті є і свіжі фрукти, і овочі з регіону.","sowohl","als auch"],
+["Das Handy gibt es sowohl in Schwarz als auch in Weiß.","Цей телефон є і чорного, і білого кольору.","sowohl","als auch"],
+["Sowohl mein Bruder als auch ich fahren morgen nach Berlin.","І мій брат, і я завтра їдемо до Берліна.","Sowohl","als auch"],
+["Man kann hier sowohl mit Karte als auch bar bezahlen.","Тут можна розраховуватися і карткою, і готівкою.","sowohl","als auch"]],
+zw:[["Das Wetter ist zwar schlecht, aber wir gehen trotzdem spazieren.","Погода хоч і погана, але ми все одно йдемо гуляти.","zwar","aber"],
+["Ich habe zwar Hunger, aber ich habe keine Lust zu kochen.","Я хоч і голодний, але не маю бажання готувати.","zwar","aber"],
+["Die Wohnung ist zwar klein, aber sehr gemütlich.","Квартира хоч і маленька, але дуже затишна.","zwar","aber"],
+["Er ist zwar nett, aber manchmal ein bisschen unpünktlich.","Він хоч і милий, але іноді трохи непунктуальний.","zwar","aber"]],
+ei:[["Einerseits ist das Angebot günstig, andererseits kenne ich die Firma nicht.","З одного боку, пропозиція вигідна, з іншого — я не знаю цієї фірми.","Einerseits","andererseits"],
+["Ich würde einerseits gern umziehen, andererseits mag ich meine Nachbarn.","З одного боку, я б залюбки переїхав, з іншого — мені подобаються мої сусіди.","einerseits","andererseits"],
+["Einerseits möchte ich heute Abend ausgehen, andererseits bin ich ziemlich müde.","З одного боку, я хочу сьогодні ввечері кудись піти, з іншого — я досить втомлений.","Einerseits","andererseits"],
+["Die Stadt ist einerseits sehr schön, andererseits sind die Mieten dort wahnsinnig hoch.","Місто з одного боку дуже гарне, з іншого — оренда там шалено висока.","einerseits","andererseits"]],
+tl:[["Die Aufgaben sind teils einfach, teils ziemlich schwierig.","Завдання почасти прості, почасти досить складні.","teils","teils"],
+["Ich fahre teils mit dem Rad, teils mit der Bahn zur Arbeit.","На роботу я їжджу почасти на велосипеді, почасти потягом.","teils","teils"],
+["Die Leute im Kurs sind teils jung, teils schon älter.","Люди на курсі почасти молоді, почасти вже старші.","teils","teils"],
+["Das Essen in der Kantine ist teils gut, teils nicht so besonders.","Їжа в їдальні почасти хороша, почасти не надто.","teils","teils"]],
+as:[["Auf der einen Seite arbeite ich gern, auf der anderen Seite brauche ich auch mal Urlaub.","З одного боку, я люблю працювати, з іншого — мені іноді потрібна відпустка.","Auf der einen Seite","auf der anderen Seite"],
+["Auf der einen Seite ist das Haus schön, auf der anderen Seite liegt es weit weg vom Zentrum.","З одного боку, будинок гарний, з іншого — він далеко від центру.","Auf der einen Seite","auf der anderen Seite"],
+["Auf der einen Seite will ich sparen, auf der anderen Seite brauche ich ein neues Handy.","З одного боку, я хочу заощаджувати, з іншого — мені потрібен новий телефон.","Auf der einen Seite","auf der anderen Seite"],
+["Auf der einen Seite macht mir der Job Spaß, auf der anderen Seite ist er sehr stressig.","З одного боку, робота мені подобається, з іншого — вона дуже напружена.","Auf der einen Seite","auf der anderen Seite"]],
+ex:[["Zum einen spare ich dadurch Geld, zum anderen schone ich die Umwelt.","З одного боку, я так заощаджую гроші, з іншого — бережу довкілля.","Zum einen","zum anderen",EXL[0]],
+["Im Büro ist es bald zu warm, bald zu kalt.","В офісі то надто тепло, то надто холодно.","bald","bald",EXL[1]],
+["Wir treffen uns nicht heute, sondern erst morgen.","Ми зустрічаємося не сьогодні, а лише завтра.","nicht","sondern",EXL[2]],
+["Ich weiß nicht, ob er heute oder morgen kommt.","Я не знаю, прийде він сьогодні чи завтра.","ob","oder",EXL[3]]]};
+const glList=i=>isChoice(i)?[]:(P[i][0]==="ex"?[0,3,6,9,1,7].map(j=>P[i][3][j]):P[i][3].slice(0,6)).concat((GLX[P[i][0]]||[]).map(a=>[a[0],a[1],a[2],a[3],"",a[4]||P[i][1]]));
 const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?glList(i):tyList(i);
 const reqTotal=i=>isChoice(i)?P[i][3].length:2*P[i][3].length+tyList(i).length+glList(i).length;
 const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty")+cnt(i,"gl");
