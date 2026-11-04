@@ -1095,7 +1095,7 @@ function start(){
   const x = it[cur], ua = "<div class='tr-text'>"+esc(x[1])+"</div>";
   $("lab").innerHTML = ua;
   if(isBld){
-    if(mode==="gl") $("sent").innerHTML = "🧩 <span class='u'>"+esc(x[5])+"</span>";
+    if(mode==="gl"){ $("sent").innerHTML = esc(x[1]); $("lab").innerHTML = ""; }
     else {const g=givenTxt(x);$("sent").innerHTML = x[6]===0 ? esc(g)+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span>"+(g.charAt(0)===","?"":" ")+esc(g);}
     const words = bwx(x);
     bPlaced = [];
