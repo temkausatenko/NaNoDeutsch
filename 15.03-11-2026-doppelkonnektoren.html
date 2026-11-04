@@ -850,11 +850,12 @@ const SUF={mc:"",ty:"_ty",gl:"_gl"};
 const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gl:"🧩 Склей"};
 const MT={mc:"конструктор",ty:"переклад німецькою",gl:"склей речення з блоків"};
 const tyList=i=>isChoice(i)?P[i][3]:P[i][0]==="ex"?P[i][3].filter((_,j)=>j%3<2):P[i][3].slice(0,TYN);
-const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?P[i][3]:tyList(i);
-const reqTotal=i=>isChoice(i)?P[i][3].length:3*P[i][3].length+tyList(i).length;
+const glList=i=>isChoice(i)?[]:P[i][0]==="ex"?[0,3,6,9,1,7].map(j=>P[i][3][j]):P[i][3].slice(0,6);
+const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?glList(i):tyList(i);
+const reqTotal=i=>isChoice(i)?P[i][3].length:2*P[i][3].length+tyList(i).length+glList(i).length;
 const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty")+cnt(i,"gl");
 const prevOf=i=>i>=NC?PN-1:i-1;
-const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*3+tyList(i).length,0);
+const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*2+tyList(i).length+glList(i).length,0);
 const SYN={ei:"as",as:"ei"};
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
@@ -993,14 +994,15 @@ function rule(open){if(!open){document.body.classList.remove("lsn");return}const
 function resetHint(){hintUsed=false;hideHint();$("showTxt").textContent="Підказка";$("showBtn").classList.remove("rev");$("showBtn").disabled=false}
 function hideHint(){clearTimeout(hintTm);$("hintAns").classList.remove("on")}
 
+const dw=t=>t;
 const bwx=x=>mode==="gl"?glChunks(x).t:bw(x);
 function renderBuilder(){
   const x=items()[cur]; if(!x) return;
   const words=bwx(x),cf=mode==="gl"?glChunks(x).c:[];
   $("zone").innerHTML = bPlaced.length
-    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(words[idx])+"</button>").join("")
+    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
     : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова нижче, щоб скласти речення")+"</span>";
-  $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc"+(cf[i]?" col r-pi":"")+"' data-bi='"+i+"'>"+esc(words[i])+"</button>").join("");
+  $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc"+(cf[i]?" col r-pi":"")+"' data-bi='"+i+"'>"+esc(dw(words[i]))+"</button>").join("");
   if(!answered){
     $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
     $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
