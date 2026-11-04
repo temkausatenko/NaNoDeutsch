@@ -1081,7 +1081,7 @@ function start(){
     if(!left.length){fin();return}
     let c=left.filter(i=>i!=last); c=c.length?c:left;
     cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
-    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(ch?(tab===NC?"розрізни пару":tab===NC+1?"завдання з підручника":"вибір пари"):MT[mode]);
+    $("title").textContent="";
     renderTabs();
   }
 
