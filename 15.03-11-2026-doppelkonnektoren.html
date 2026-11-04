@@ -977,7 +977,7 @@ function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.d
  const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
 function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
  const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
-function enterCat(i){tab=i;mode=isChoice(i)?"ty":(MODES.includes(MB[P[i][0]])?MB[P[i][0]]:"mc");last=-1;rvMode=false;}
+function enterCat(i){tab=i;ss("dk2_tab",i);mode=isChoice(i)?"ty":(MODES.includes(MB[P[i][0]])?MB[P[i][0]]:"mc");last=-1;rvMode=false;}
 function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);rvMode=false;}
 
 function isCatOpen(i){
@@ -1401,7 +1401,8 @@ migrateOld();
 load();
 try{const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();
  if(tg.BackButton&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.1")){tg.BackButton.show();tg.BackButton.onClick(()=>{location.href="index.html"})}}}catch(e){}
-paint();updateXp();showRule(!seen[P[0][0]]);renderTabs();start();
+(function restoreTab(){const t=sg("dk2_tab",0);if(Number.isInteger(t)&&t>0&&t<P.length&&isCatOpen(t))enterCat(t);else if(!isCatOpen(tab)){enterCat(0)}})();
+paint();updateXp();showRule(!seen[P[tab][0]]);renderTabs();start();
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 let soundEnabled = store.get('pi-sound') !== 'off';
 function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
