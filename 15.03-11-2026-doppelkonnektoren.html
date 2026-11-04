@@ -1055,6 +1055,13 @@ function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?
  return s.replace(x[2],"\u0001").replace(x[3],"\u0002").replace("\u0001",g(x[2])).replace("\u0002",g(x[3]))}
 const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:„“"']/g,"").replace(/\s+/g," ").trim();
 
+const osa=(a,b)=>{const m=a.length,n=b.length,d=[];for(let i=0;i<=m;i++){d[i]=[i];for(let j=1;j<=n;j++)d[i][j]=i?0:j}
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c);
+    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1)}
+  return d[m][n]};
+const typoOk=(v,a,x)=>{const nv=norm(v),na=norm(a),tol=na.length>=55?2:1;
+  if(osa(nv,na)>tol) return false;
+  return [x[2],x[3]].every(c=>(" "+nv+" ").includes(" "+norm(String(c))+" "))};
 const altsOf=a=>{const r=[a];if(/\bdesto\b/.test(a))r.push(a.replace(/\bdesto\b/g,"umso"));if(/\bumso\b/.test(a))r.push(a.replace(/\bumso\b/g,"desto"));return r};
 const commaSig=t=>t.replace(/\s*,\s*oder\b/gi," oder").replace(/\s*,\s*/g,", ").replace(/[.!?;:„“"']/g,"").trim().split(/\s+/).map(w=>/,$/.test(w)?1:0).join("");
 
@@ -1227,8 +1234,10 @@ $("chk").onclick = ()=>{
     if(!v.trim()) return;
     answered = true;
     $("inp").disabled = true;
-    const al=altsOf(items()[cur][0]),wOk=al.some(a=>norm(v)===norm(a)),cOk=wOk&&al.some(a=>norm(v)===norm(a)&&commaSig(v)===commaSig(a));
-    done(cOk, wOk&&!cOk);
+    const x=items()[cur],al=altsOf(x[0]);
+    const ex=al.find(a=>norm(v)===norm(a)),ty=ex?null:al.find(a=>typoOk(v,a,x)),hit=ex||ty,wOk=!!hit;
+    const cOk=!!(wOk&&(commaSig(v)===commaSig(hit)||(ty&&v.trim().split(/\s+/).length!==hit.split(/\s+/).length)));
+    done(cOk, wOk&&!cOk, cOk&&ty?"✏️ Є дрібна одруківка — зараховано. Правильний варіант дивись вище.":undefined);
   }
 };
 $("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); $("chk").click(); } };
