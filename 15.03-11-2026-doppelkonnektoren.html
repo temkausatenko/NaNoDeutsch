@@ -367,6 +367,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .wc.bad{border-color:var(--no);background:var(--nob);animation:shake .4s}
 .wc.ok{border-color:var(--ok);background:var(--okb)}
 .wc:disabled{opacity:.9}
+.wc .kn{display:inline-block;min-width:1.15em;margin-right:6px;padding:0 4px;border-radius:6px;background:color-mix(in srgb,var(--mu) 20%,transparent);color:var(--mu);font-size:.72em;font-weight:700;text-align:center;line-height:1.5;vertical-align:1px}
+.wc .kn:empty{display:none}
+.wc.used{opacity:.22;cursor:default;pointer-events:none;transform:none}
+@media(hover:none){.wc .kn{display:none}}
 .un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
 .un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
 .un .wc{cursor:default}
@@ -529,7 +533,8 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
 @media (prefers-reduced-motion:reduce){.mp{display:none}}
 
-.rule .rmore{display:block;margin-top:3px;padding:0;border:0;background:none;color:var(--mu);font:inherit;font-size:.76rem;cursor:pointer}.rule .rmore:hover{color:var(--tx)}
+.rule .rfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}.rule .rhide{margin-left:auto;padding:3px 11px;border:1px solid color-mix(in srgb,var(--mu) 35%,transparent);border-radius:99px;background:color-mix(in srgb,var(--mu) 12%,transparent);color:var(--mu);font:inherit;font-size:.74rem;cursor:pointer;opacity:.75;transition:all .18s;white-space:nowrap}.rule .rhide:hover{opacity:1;color:var(--tx);border-color:var(--mu)}
+.rule .rmore{display:block;margin-top:0;padding:0;border:0;background:none;color:var(--mu);font:inherit;font-size:.76rem;cursor:pointer}.rule .rmore:hover{color:var(--tx)}
 .rule code{background:var(--pl);padding:1px 6px;border-radius:6px;font-size:.92em}
 
 
@@ -1062,9 +1067,9 @@ const RS=[
 "<div class='rh'>📖 <b>Підручник</b> — завдання з книги</div><div class='rn'>📌 Прочитай речення з пропуском, подивись на коми та смисл і обери пару. Під відповіддю буде вказано, з якого завдання книги це речення.</div>",
 "<div class='rh'>💡 <b>Мікс</b> — усі сім пар разом</div><div class='rg'><div><span class='k'>je … desto</span> — чим… тим…</div><div><span class='k'>entweder … oder</span> — або… або…</div><div><span class='k'>weder … noch</span> — ні… ні…</div><div><span class='k'>nicht nur … sondern auch</span> — не лише… а й…</div><div><span class='k'>sowohl … als auch</span> — як… так і…</div><div><span class='k'>zwar … aber</span> — хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — з одного боку… з іншого…</div></div><div class='rn'>📌 Спершу прочитай переклад, потім подивись на порядок слів і коми в реченні.</div>"];
 function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
- r.innerHTML="<div>"+RS[tab]+"</div><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button>";
+ r.innerHTML="<div>"+RS[tab]+"</div><div class='rfoot'><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button><button class='rhide' type='button'>Приховати правила</button></div>";
  r.hidden=!open;if(open){seen[P[tab][0]]=1;ss("dk2_seen",seen)}
- r.querySelector(".rmore").onclick=()=>rule(true)}
+ r.querySelector(".rmore").onclick=()=>rule(true);r.querySelector(".rhide").onclick=()=>{r.hidden=true}}
 function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=isChoice(tab)?[]:p[0]==="ex"?[0,3,6,9].map(k=>p[3][k]):p[3].slice(0,3);seen[p[0]]=1;ss("dk2_seen",seen);
  $("lesson").innerHTML="<div class='lh'><span class='lbadge'>Етап "+(tab+1)+" із "+P.length+"</span><h3>"+p[1]+"</h3></div><div class='llead'>"+p[2]+"</div>"+(ex.length?"<div class='lsec'><div class='lst'>👀 Подивись на прикладах</div>"+ex.map(x=>"<div class='lx'><div><b>"+gapped(x,true)+"</b></div><div style='color:var(--mu);font-size:.88rem'>"+esc(x[1])+"</div></div>").join("")+"</div>":"")+"<button class='lgo' id='lgo' type='button'>Почати вправи ▶</button>";
  document.body.classList.add("lsn");$("lgo").onclick=()=>document.body.classList.remove("lsn")}
@@ -1080,7 +1085,7 @@ function renderBuilder(){
   $("zone").innerHTML = bPlaced.length
     ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
     : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова нижче, щоб скласти речення")+"</span>";
-  $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc"+(cf[i]?" col r-pi":"")+"' data-bi='"+i+"'>"+esc(dw(words[i]))+"</button>").join("");
+  $("pool").innerHTML = answered ? "" : bPool.map((i,n)=>{const u=bPlaced.includes(i);return "<button type='button' class='wc"+(cf[i]?" col r-pi":"")+(u?" used":"")+"'"+(u?" disabled tabindex='-1'":" data-bi='"+i+"'")+"><span class='kn'>"+(n<9?n+1:n==9?0:"")+"</span>"+esc(dw(words[i]))+"</button>"}).join("");
   if(!answered){
     $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
     $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
@@ -1350,12 +1355,12 @@ document.addEventListener('keydown', e => {
       renderBuilder();
       return;
     }
-    if (/^[1-9]$/.test(e.key)) {
-      const idx = parseInt(e.key) - 1;
-      const available = bPool.filter(i => !bPlaced.includes(i));
-      if (idx < available.length) {
+    if (/^[0-9]$/.test(e.key)) {
+      const idx = e.key === '0' ? 9 : parseInt(e.key) - 1;
+      const w = bPool[idx];
+      if (w !== undefined && !bPlaced.includes(w)) {
         tapHaptic();
-        bPlaced.push(available[idx]);
+        bPlaced.push(w);
         renderBuilder();
       }
       return;
