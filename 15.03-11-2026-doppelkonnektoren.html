@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Zweiteilige Konnektoren · тренажер</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script src="sync.js"></script>
@@ -35,6 +35,9 @@ document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})(
   --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
   --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
 *{box-sizing:border-box}[hidden]{display:none!important}
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+button,.wc,.opt,.stg,.tab,.sent,.q{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.row input{font-size:16px!important}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
@@ -829,18 +832,29 @@ const MCc={};
 const mcOf=i=>MCc[i]||(MCc[i]=(()=>{const mk=v=>P[i][3].map(x=>{const y=x.slice();y[6]=v;y[7]=splitK(x);return y});return mk(0).concat(mk(1))})());
 const bw=x=>{const w=x[0].split(" "),k=x[7];return x[6]===0?w.slice(k):w.slice(0,k).map((t,i,a)=>i===a.length-1?t.replace(/,$/,""):t)};
 const givenTxt=x=>{const w=x[0].split(" "),k=x[7],A=w.slice(0,k),B=w.slice(k).join(" ");return x[6]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
+const GLc={};
+const glChunks=x=>GLc[x[0]]||(GLc[x[0]]=(()=>{
+  const w=x[0].split(" "),W=w.map(t=>_clean(t).toLowerCase()),cw=c=>String(c).split(" ").map(t=>_clean(t).toLowerCase());
+  const find=(c,from)=>{const a=cw(c);for(let i=from;i+a.length<=W.length;i++)if(a.every((t,j)=>W[i+j]===t))return i;return -1};
+  let p1=find(x[2],0);if(p1<0)p1=0;
+  const l1=cw(x[2]).length,l2=cw(x[3]).length,p2=find(x[3],p1+l1),R=[];
+  R.push([0,p1,0],[p1,p1+l1,1]);
+  if(p2>=0)R.push([p1+l1,p2,0],[p2,p2+l2,1],[p2+l2,w.length,0]);else R.push([p1+l1,w.length,0]);
+  const f=R.filter(r=>r[1]>r[0]);
+  return {t:f.map(r=>w.slice(r[0],r[1]).join(" ")),c:f.map(r=>!!r[2])};
+})());
 const NC=10,PN=9,TYN=5;
 const isChoice=i=>i>=NC;
-const MODES=["mc","ty"];
-const SUF={mc:"",ty:"_ty"};
-const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади"};
-const MT={mc:"конструктор",ty:"переклад німецькою"};
+const MODES=["mc","ty","gl"];
+const SUF={mc:"",ty:"_ty",gl:"_gl"};
+const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gl:"🧩 Склей"};
+const MT={mc:"конструктор",ty:"переклад німецькою",gl:"склей речення з блоків"};
 const tyList=i=>isChoice(i)?P[i][3]:P[i][0]==="ex"?P[i][3].filter((_,j)=>j%3<2):P[i][3].slice(0,TYN);
-const list=(i,m)=>m=="mc"?mcOf(i):tyList(i);
-const reqTotal=i=>isChoice(i)?P[i][3].length:2*P[i][3].length+tyList(i).length;
-const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty");
+const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?P[i][3]:tyList(i);
+const reqTotal=i=>isChoice(i)?P[i][3].length:3*P[i][3].length+tyList(i).length;
+const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty")+cnt(i,"gl");
 const prevOf=i=>i>=NC?PN-1:i-1;
-const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*2+tyList(i).length,0);
+const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*3+tyList(i).length,0);
 const SYN={ei:"as",as:"ei"};
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
@@ -856,7 +870,7 @@ const SK=(i=tab)=>P[i][0]+SUF[mode];
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
 const items=()=>list(tab,mode);
 
-const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
+const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty",p[0]+"_gl"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
 
 var _pt;function schedPush(){clearTimeout(_pt);_pt=setTimeout(function(){try{if(window.TPSync&&TPSync.supported&&TPSync.push)TPSync.push()}catch(e){}},1200)}
@@ -979,13 +993,14 @@ function rule(open){if(!open){document.body.classList.remove("lsn");return}const
 function resetHint(){hintUsed=false;hideHint();$("showTxt").textContent="Підказка";$("showBtn").classList.remove("rev");$("showBtn").disabled=false}
 function hideHint(){clearTimeout(hintTm);$("hintAns").classList.remove("on")}
 
+const bwx=x=>mode==="gl"?glChunks(x).t:bw(x);
 function renderBuilder(){
   const x=items()[cur]; if(!x) return;
-  const words=bw(x);
+  const words=bwx(x),cf=mode==="gl"?glChunks(x).c:[];
   $("zone").innerHTML = bPlaced.length
-    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(words[idx])+"</button>").join("")
-    : "<span class='ph'>Натискай слова нижче, щоб скласти речення</span>";
-  $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc' data-bi='"+i+"'>"+esc(words[i])+"</button>").join("");
+    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(words[idx])+"</button>").join("")
+    : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова нижче, щоб скласти речення")+"</span>";
+  $("pool").innerHTML = answered ? "" : bPool.filter(i=>!bPlaced.includes(i)).map(i=>"<button type='button' class='wc"+(cf[i]?" col r-pi":"")+"' data-bi='"+i+"'>"+esc(words[i])+"</button>").join("");
   if(!answered){
     $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
     $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
@@ -998,7 +1013,7 @@ function start(){
   const t=T(),it=items(),left=it.map((_,i)=>i).filter(i=>!t.k[i]);
   $("card").classList.remove("fin","ans");
   const ch=isChoice(tab),cu=ch;
-  $("card").classList.toggle("bd", mode === "mc" && !ch);
+  $("card").classList.toggle("bd", (mode === "mc" || mode === "gl") && !ch);
   $("card").classList.toggle("mc", cu);
   $("card").classList.toggle("tx", mode === "ty");
 
@@ -1024,7 +1039,7 @@ function start(){
   $("fb").className="fb"; $("fb").innerHTML="";
   $("zone").classList.remove("ok","bad");
   resetHint();
-  const isBld = mode === "mc" && !ch;
+  const isBld = (mode === "mc" || mode === "gl") && !ch;
   $("opts").style.display="none";$("opts").innerHTML="";
   $("bld").style.display = isBld ? "" : "none";
   $("inp").style.display = isBld ? "none" : "";
@@ -1037,8 +1052,9 @@ function start(){
   const x = it[cur], ua = "<div class='tr-text'>"+esc(x[1])+"</div>";
   $("lab").innerHTML = ua;
   if(isBld){
-    {const g=givenTxt(x);$("sent").innerHTML = x[6]===0 ? esc(g)+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span>"+(g.charAt(0)===","?"":" ")+esc(g);}
-    const words = bw(x);
+    if(mode==="gl") $("sent").innerHTML = "🧩 <span class='u'>"+esc(x[5])+"</span>";
+    else {const g=givenTxt(x);$("sent").innerHTML = x[6]===0 ? esc(g)+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span>"+(g.charAt(0)===","?"":" ")+esc(g);}
+    const words = bwx(x);
     bPlaced = [];
     bPool = sh(words.map((w,i)=>i));
     renderBuilder();
@@ -1087,7 +1103,7 @@ function pickOpt(b,ci){
 }
 function checkBuilder(){
   if(answered) return;
-  const x=items()[cur], words=bw(x);
+  const x=items()[cur], words=bwx(x);
   if(bPlaced.length!==words.length) return;
   const built=bPlaced.map(i=>words[i]).join(" ");
   answered=true;
@@ -1133,7 +1149,7 @@ function done(ok,cmOnly,extra){
     }
   }
 
-  if(mode==="mc"){
+  if(mode==="mc"||mode==="gl"){
     $("zone").classList.remove("ok","bad");
     $("zone").classList.add(ok?"ok":"bad");
     renderBuilder();
@@ -1228,7 +1244,7 @@ function speak(t){try{if(!window.speechSynthesis||!t)return;speechSynthesis.canc
 $("showBtn").onclick = hintOrShow;
 $("chk").onclick = ()=>{
   if(answered){ start(); return; }
-  if(mode==="mc"){ checkBuilder(); }
+  if(mode==="mc"||mode==="gl"){ checkBuilder(); }
   else {
     const v = $("inp").value;
     if(!v.trim()) return;
@@ -1247,7 +1263,7 @@ document.addEventListener('keydown', e => {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (document.body.classList.contains("lsn")) return;
   if ($("card").classList.contains("mc") && $("opts").style.display!=="none" && !answered && /^[1-4]$/.test(e.key)) { const b=$("opts").querySelectorAll(".opt")[+e.key-1]; if(b) b.click(); return; }
-  if (mode === "mc" && !answered) {
+  if ((mode === "mc" || mode === "gl") && !answered) {
     if (e.key === 'Backspace' && bPlaced.length > 0) {
       tapHaptic();
       bPlaced.pop();
@@ -1264,7 +1280,7 @@ document.addEventListener('keydown', e => {
       }
       return;
     }
-    if (e.key === 'Enter' && bPlaced.length === bw(items()[cur]).length) {
+    if (e.key === 'Enter' && bPlaced.length === bwx(items()[cur]).length) {
       $("chk").click();
       return;
     }
@@ -1329,6 +1345,9 @@ st.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&st.scr
   b.onclick=()=>{try{if(window.TPSync&&TPSync.supported)TPSync.sync()}catch(e){}};
   window.addEventListener("tpsync:status",paintS);paintS();
 })();
+(function(){var lt=0;
+document.addEventListener("touchend",function(e){var n=Date.now();if(n-lt<350&&e.target.closest&&e.target.closest("button,.wc,.opt"))e.preventDefault();lt=n},{passive:false});
+["gesturestart","gesturechange","gestureend"].forEach(function(g){document.addEventListener(g,function(e){e.preventDefault()})});})();
 migrateOld();
 load();
 try{const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();
