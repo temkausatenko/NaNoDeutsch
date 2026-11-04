@@ -46,11 +46,11 @@ body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle
 h1{font-size:1.6rem;font-weight:700;letter-spacing:-.5px;margin:0;
   background:linear-gradient(135deg,var(--sa),var(--pe));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
 h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-text-fill-color:var(--mu);margin-top:6px;letter-spacing:.5px}
-.theme-toggle,.sound-toggle,.theory-top-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
+.theme-toggle,.sound-toggle,.fx-toggle{position:absolute;top:0;background:var(--card);border:1px solid var(--bd);
   color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   cursor:pointer;transition:all .2s;font-size:1.1rem;padding:0}
-.theme-toggle{right:0}.sound-toggle{right:48px}.theory-top-toggle{right:96px}
-.theme-toggle:hover,.sound-toggle:hover,.theory-top-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
+.theme-toggle{right:0}.sound-toggle{right:48px}.fx-toggle{right:96px}
+.theme-toggle:hover,.sound-toggle:hover,.fx-toggle:hover{border-color:var(--pr);color:var(--tx);transform:scale(1.05)}
 .tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
 .tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
   padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
@@ -103,11 +103,10 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 .fin-actions .cancel:hover{border-color:var(--pr)}
 .tab.cl small::before{content:"✓ "}
 .card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
-.speak,.mode-toggle{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
+.speak{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
   background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
 .speak{right:22px;}
-.mode-toggle{right:62px;font-size:1.1rem;}
-.speak:hover,.mode-toggle:hover{color:var(--tx);border-color:var(--pr)}
+.speak:hover{color:var(--tx);border-color:var(--pr)}
 .sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
 .sent:hover{opacity:.85}.sent:active{opacity:.7}
 .u{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--sa)}
@@ -166,7 +165,7 @@ h1 small{display:block;font-size:.72rem;font-weight:500;color:var(--mu);-webkit-
 
 .lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
 body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
-.ctl{position:absolute;top:22px;right:102px;display:flex;align-items:center;gap:6px;z-index:2}.ctl .mode-toggle{position:static;top:auto;right:auto}
+.ctl{position:absolute;top:22px;right:102px;display:flex;align-items:center;gap:6px;z-index:2}
 .rulesbtn{height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
 .card h2#title{padding-right:290px}
 @media(max-width:480px){.ctl{top:18px;right:98px}.card h2#title{padding-right:255px}}
@@ -256,9 +255,8 @@ body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
   .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
   .tool{margin-left:0}.card{padding:18px}h1{font-size:1.35rem}.complete-card{padding:22px 18px}
   .theory-card{padding:16px}.header-wrap{padding-top:48px}
-  .speak,.mode-toggle{top:18px;height:32px;width:32px;}
+  .speak{top:18px;height:32px;width:32px;}
   .speak{right:18px;}
-  .mode-toggle{right:58px;}
   .card h2{padding-right:82px;line-height:32px;height:32px;}
 }
 @media(hover:hover) and (pointer:fine){
@@ -318,11 +316,9 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 :root.xp-legend .header-wrap h1 small{-webkit-text-fill-color:var(--mu)}
 @keyframes xgold{to{background-position:200% 0}}
 
-.mode-toggle{width:auto;padding:0 12px;gap:6px;border-radius:99px;font-size:.8rem;font-weight:600;white-space:nowrap}
 .card h2{padding-right:175px;height:auto;min-height:32px}
 @media(max-width:480px){
-  .speak,.mode-toggle{top:18px}
-  .mode-toggle{width:auto;right:58px}
+  .speak{top:18px}
   .card h2{padding-right:160px;height:auto;min-height:32px}
 }
 
@@ -407,17 +403,16 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .card.tx h2{padding-right:150px}
 @media(max-width:480px){.card:not(.tx) h2{padding-right:50px}.card.tx h2{padding-right:140px}}
 
-.speak,.rst,.mode-toggle{top:22px}
+.speak,.rst{top:22px}
 .rst{position:absolute;right:22px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1.15rem}
 .rst:hover{color:var(--tx);border-color:var(--pr)}
 .speak{right:62px}
-.mode-toggle{right:102px;font-size:.8rem}
 .card:not(.tx) h2{padding-right:100px}
 .card.tx h2{padding-right:200px}
 .um-row{justify-content:flex-end}
 @media(max-width:480px){
-  .speak,.rst,.mode-toggle{top:18px}
-  .rst{right:18px}.speak{right:58px}.mode-toggle{right:98px}
+  .speak,.rst{top:18px}
+  .rst{right:18px}.speak{right:58px}
   .card:not(.tx) h2{padding-right:96px}
   .card.tx h2{padding-right:196px}
 }
@@ -560,13 +555,12 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .lesson .llead .lm{font-size:1rem;margin-bottom:2px}
 .lesson .llead .lr{margin-top:6px}
 .lesson .llead .lex{margin-top:10px;color:var(--mu);font-size:.88rem}
-.sync-toggle{position:absolute;top:0;left:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;padding:0;transition:all .2s}.sync-toggle:hover{border-color:var(--pr);transform:scale(1.05)}
-#sent .wc{margin:0 4px 8px 0;font-size:1rem}
+.sync-toggle{display:none!important;position:absolute;top:0;left:0;background:var(--card);border:1px solid var(--bd);color:var(--mu);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.05rem;padding:0;transition:all .2s}.sync-toggle:hover{border-color:var(--pr);transform:scale(1.05)}
 </style></head><body>
 <div class="w">
   <div class="header-wrap">
     <h1>Doppelkonnektoren</h1>
-    <button class="fx-toggle theory-top-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
+    <button class="fx-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
     <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
     <button class="sync-toggle" id="sync-ind" title="Синхронізація" type="button">📴</button>
     <button class="theme-toggle" id="theme" title="Тема">🌙</button>
@@ -583,7 +577,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   </div>
   <div class="card" id="card">
     <h2 id="title"></h2>
-    <div class="ctl"><button class="rulesbtn" id="rb" type="button" title="Показати правила">📘 Правила</button><button class="mode-toggle" id="mb" title="Змінити режим" style="display:none"></button></div>
+    <div class="ctl"><button class="rulesbtn" id="rb" type="button" title="Показати правила">📘 Правила</button></div>
     <button class="speak" id="sp" title="Озвучити німецькою">🔊</button>
     <button class="rst" id="rs" title="Скинути прогрес цієї вкладки">↺</button>
     <div id="finBox"></div>
@@ -704,6 +698,19 @@ const P=[
 ["Auf der einen Seite lerne ich gern Deutsch, auf der anderen Seite habe ich wenig Zeit zum Üben.","З одного боку, я залюбки вивчаю німецьку, з іншого — маю мало часу на практику.","Auf der einen Seite","auf der anderen Seite","gern Deutsch lerne, wenig Zeit habe"],
 ["Auf der einen Seite ist das Auto praktisch, auf der anderen Seite kostet es viel Geld.","З одного боку, авто практичне, з іншого — коштує багато грошей.","Auf der einen Seite","auf der anderen Seite","Auto praktisch ist, viel Geld kostet"],
 ["Das Internet hat auf der einen Seite viele Vorteile, auf der anderen Seite gibt es auch Risiken.","В інтернету з одного боку багато переваг, з іншого — є й ризики.","auf der einen Seite","auf der anderen Seite","viele Vorteile hat, auch Risiken gibt"]]],
+["ex","Extra","<div class='lm'><b>Extra</b> — ще чотири корисні конструкції</div><div class='lr'>• <b>zum einen … zum anderen</b> — з одного боку… з іншого (по-перше… по-друге). Між частинами кома, після кожного з них дієслово на 2-му місці.</div><div class='lr'>• <b>bald … bald</b> — то… то… (зміна в часі). Між частинами кома.</div><div class='lr'>• <b>nicht …, sondern</b> — не…, а… (без nur і auch). Кома перед sondern обов’язкова.</div><div class='lr'>• <b>ob … oder</b> — чи… чи… у непрямому питанні. Дієслово в кінці, кома стоїть перед ob, а перед oder її немає.</div>",[
+["Zum einen ist die Wohnung günstig, zum anderen liegt sie direkt im Zentrum.","З одного боку, квартира недорога, з іншого — вона розташована прямо в центрі.","Zum einen","zum anderen","Wohnung günstig ist, im Zentrum liegt"],
+["Ich lerne Deutsch zum einen für den Beruf, zum anderen für meine Reisen.","Я вчу німецьку, по-перше, для роботи, а по-друге, для подорожей.","zum einen","zum anderen","für den Beruf, für meine Reisen"],
+["Zum einen fehlt mir die Zeit, zum anderen habe ich keine Lust.","З одного боку, мені бракує часу, з іншого — в мене немає бажання.","Zum einen","zum anderen","Zeit fehlt, keine Lust habe"],
+["Im April ist das Wetter bald sonnig, bald regnerisch.","У квітні погода то сонячна, то дощова.","bald","bald","sonnig, regnerisch"],
+["Bald arbeitet er im Büro, bald arbeitet er zu Hause.","То він працює в офісі, то вдома.","Bald","bald","im Büro arbeitet, zu Hause arbeitet"],
+["Mein kleiner Bruder ist bald fröhlich, bald traurig.","Мій молодший брат то веселий, то сумний.","bald","bald","fröhlich, traurig"],
+["Ich fahre nicht mit dem Auto, sondern mit dem Fahrrad zur Arbeit.","Я їжджу на роботу не на машині, а на велосипеді.","nicht","sondern","mit dem Auto, mit dem Fahrrad fahre"],
+["Das ist nicht mein Handy, sondern das Handy meiner Schwester.","Це не мій телефон, а телефон моєї сестри.","nicht","sondern","mein Handy, Handy meiner Schwester"],
+["Er ist nicht faul, sondern einfach müde.","Він не ледачий, а просто втомлений.","nicht","sondern","faul ist, einfach müde"],
+["Ich weiß noch nicht, ob ich ins Kino oder ins Theater gehen soll.","Я ще не знаю, піти мені в кіно чи в театр.","ob","oder","ins Kino, ins Theater gehen soll"],
+["Sie fragt mich, ob ich Kaffee oder Tee möchte.","Вона питає мене, чи хочу я каву, чи чай.","ob","oder","Kaffee, Tee möchte"],
+["Es ist egal, ob wir mit dem Bus oder mit der Bahn fahren.","Байдуже, поїдемо ми автобусом чи потягом.","ob","oder","mit dem Bus, mit der Bahn fahren"]]],
 ["conf","Плутанина","Ці пари легко сплутати. Прочитай переклад, подивись на коми та на сам смисл (акцент чи нейтрально, поступка чи дві сторони, вибір чи заперечення) і обери правильну з двох.",[
 ["Der Chef lobt nicht nur die Idee, sondern auch den Mut des Teams.","Керівник хвалить не лише ідею, а ще й сміливість команди.","nicht nur","sondern auch","Акцент на другій частині («а ще й…»). Перед sondern — кома.",L.nn,L.so],
 ["Sie hat sowohl Deutsch als auch Französisch studiert.","Вона вивчала як німецьку, так і французьку.","sowohl","als auch","Нейтральне «і… і…», без особливого акценту. Коми перед als auch немає.",L.so,L.nn],
@@ -768,14 +775,15 @@ ei:[["Einerseits würde ich gern jeden Tag in dem Restaurant essen, andererseits
 ["Das Internet ist einerseits ein gutes Informationsmedium, andererseits werden dort auch falsche Informationen verbreitet.","Інтернет з одного боку — хороше джерело інформації, з іншого — там поширюють і хибну інформацію.","einerseits","andererseits","Informationsmedium, falsche Informationen verbreitet"],
 ["Das digitale Zeichenbrett ist einerseits einfach zu bedienen, andererseits ist es nicht günstig.","Цифрова дошка для малювання з одного боку проста в обслуговуванні, з іншого — недешева.","einerseits","andererseits","einfach zu bedienen, nicht günstig"]]};
 P.forEach(p=>{if(ADD[p[0]])p[3].push(...ADD[p[0]])});
-P[11][3]=P.slice(0,9).flatMap(p=>p[3].map(i=>[...i,p[1]]));
+P[P.length-1][3]=P.slice(0,9).flatMap(p=>p[3].map(i=>[...i,p[1]]));
 P.slice(0,9).forEach(p=>p[3].forEach(i=>i[5]=p[1]));
+const EXL=["zum einen … zum anderen","bald … bald","nicht …, sondern","ob … oder"];
+P.find(p=>p[0]==="ex")[3].forEach((i,j)=>i[5]=EXL[j/3|0]);
 
 const $=i=>document.getElementById(i),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 const rnd=a=>a[Math.random()*a.length|0];
-const matchCase=(src,w)=>/^[A-ZÄÖÜ]/.test(src)?w.charAt(0).toUpperCase()+w.slice(1):w;
 
 /* Вібрація */
 const haptic=(()=>{
@@ -821,55 +829,19 @@ const MCc={};
 const mcOf=i=>MCc[i]||(MCc[i]=(()=>{const mk=v=>P[i][3].map(x=>{const y=x.slice();y[6]=v;y[7]=splitK(x);return y});return mk(0).concat(mk(1))})());
 const bw=x=>{const w=x[0].split(" "),k=x[7];return x[6]===0?w.slice(k):w.slice(0,k).map((t,i,a)=>i===a.length-1?t.replace(/,$/,""):t)};
 const givenTxt=x=>{const w=x[0].split(" "),k=x[7],A=w.slice(0,k),B=w.slice(k).join(" ");return x[6]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
-const NC=9,TYN=5;
+const NC=10,PN=9,TYN=5;
 const isChoice=i=>i>=NC;
 const MODES=["mc","ty"];
-const SUF={mc:"",ty:"_ty",gp:"_gp",er:"_er",cb:"_cb"};
-const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gp:"🧩 Пропуск",er:"🔎 Помилка",cb:"🔗 Склей"};
-const MT={mc:"конструктор",ty:"переклад німецькою",gp:"вибери пропущене слово",er:"знайди помилку",cb:"склей речення"};
-const tyList=i=>isChoice(i)?P[i][3]:P[i][3].slice(0,TYN);
-const gpList=i=>isChoice(i)?[]:P[i][3].slice(-5);
-const erList=i=>isChoice(i)?[]:P[i][3].slice(2,7);
-const CBD={
-je:[["Du übst mehr.","Du lernst schneller.","Чим більше ти практикуєшся, тим швидше вчишся.","Je mehr du übst, desto schneller lernst du."],
-["Ich arbeite lange.","Ich werde müde.","Чим довше я працюю, тим більше втомлююся.","Je länger ich arbeite, desto müder werde ich."],
-["Du bewirbst dich früh.","Deine Chancen sind gut.","Чим раніше ти подаєшся, тим кращі твої шанси.","Je früher du dich bewirbst, desto besser sind deine Chancen."],
-["Er hat viel Erfahrung.","Er findet leicht eine Stelle.","Чим більше в нього досвіду, тим легше він знаходить роботу.","Je mehr Erfahrung er hat, desto leichter findet er eine Stelle."]],
-en:[["Wir fahren mit dem Bus.","Wir nehmen ein Taxi.","Ми їдемо або автобусом, або беремо таксі.","Wir fahren entweder mit dem Bus oder wir nehmen ein Taxi."],
-["Ich rufe dich heute an.","Ich schreibe dir morgen.","Або я зателефоную тобі сьогодні, або напишу завтра.","Entweder rufe ich dich heute an, oder ich schreibe dir morgen."],
-["Du kommst jetzt mit.","Du bleibst hier.","Ти або йдеш з нами зараз, або залишаєшся тут.","Du kommst entweder jetzt mit oder du bleibst hier."],
-["Sie studiert Medizin.","Sie studiert Biologie.","Вона вивчає або медицину, або біологію.","Sie studiert entweder Medizin oder Biologie."]],
-we:[["Er hat keine Zeit.","Er hat kein Geld.","У нього немає ні часу, ні грошей.","Er hat weder Zeit noch Geld."],
-["Ich mag keinen Fisch.","Ich mag kein Fleisch.","Я не люблю ні рибу, ні м’ясо.","Ich mag weder Fisch noch Fleisch."],
-["Er kommt nicht heute.","Er kommt nicht morgen.","Він не прийде ні сьогодні, ні завтра.","Er kommt weder heute noch morgen."],
-["Wir haben keinen Hunger.","Wir haben keinen Durst.","Ми не відчуваємо ні голоду, ні спраги.","Wir haben weder Hunger noch Durst."]],
-nn:[["Er spricht Deutsch.","Er spricht Spanisch.","Він говорить не лише німецькою, а й іспанською.","Er spricht nicht nur Deutsch, sondern auch Spanisch."],
-["Das Praktikum ist interessant.","Das Praktikum ist gut bezahlt.","Практика не лише цікава, а й добре оплачується.","Das Praktikum ist nicht nur interessant, sondern auch gut bezahlt."],
-["Ich lese die E-Mails.","Ich antworte sofort.","Я не лише читаю листи, а й одразу відповідаю.","Ich lese nicht nur die E-Mails, sondern antworte auch sofort."],
-["Sie ist freundlich.","Sie ist sehr hilfsbereit.","Вона не лише привітна, а й дуже чуйна.","Sie ist nicht nur freundlich, sondern auch sehr hilfsbereit."]],
-so:[["Ich spreche Deutsch.","Ich spreche Englisch.","Я говорю як німецькою, так і англійською.","Ich spreche sowohl Deutsch als auch Englisch."],
-["Das Gehalt ist wichtig.","Die Atmosphäre ist wichtig.","І зарплата, і атмосфера важливі.","Sowohl das Gehalt als auch die Atmosphäre sind wichtig."],
-["Er arbeitet im Büro.","Er arbeitet zu Hause.","Він працює як в офісі, так і вдома.","Er arbeitet sowohl im Büro als auch zu Hause."],
-["Wir haben Zeit.","Wir haben Lust.","У нас є як час, так і бажання.","Wir haben sowohl Zeit als auch Lust."]],
-zw:[["Das Wetter ist schlecht.","Wir gehen spazieren.","Хоч погода погана, але ми йдемо гуляти.","Das Wetter ist zwar schlecht, aber wir gehen spazieren."],
-["Ich habe Hunger.","Ich habe keine Zeit zum Essen.","Я хоч і голодний, але не маю часу поїсти.","Ich habe zwar Hunger, aber ich habe keine Zeit zum Essen."],
-["Der Job ist gut bezahlt.","Der Job ist anstrengend.","Робота хоч і добре оплачується, але виснажлива.","Der Job ist zwar gut bezahlt, aber er ist anstrengend."],
-["Er ist jung.","Er hat viel Erfahrung.","Він хоч і молодий, але має багато досвіду.","Er ist zwar jung, aber er hat viel Erfahrung."]],
-ei:[["Ich möchte eine Wohnung in der Stadt.","Ich möchte Ruhe auf dem Land.","З одного боку, я хочу квартиру в місті, з іншого — спокій на селі.","Einerseits möchte ich eine Wohnung in der Stadt, andererseits möchte ich Ruhe auf dem Land."],
-["Das Angebot ist attraktiv.","Das Risiko ist hoch.","З одного боку, пропозиція приваблива, з іншого — ризик високий.","Einerseits ist das Angebot attraktiv, andererseits ist das Risiko hoch."],
-["Er will mehr verdienen.","Er will mehr Freizeit.","З одного боку, він хоче більше заробляти, з іншого — мати більше вільного часу.","Er will einerseits mehr verdienen, andererseits will er mehr Freizeit."],
-["Ich lerne gern.","Ich habe wenig Zeit.","З одного боку, я люблю вчитися, з іншого — маю мало часу.","Einerseits lerne ich gern, andererseits habe ich wenig Zeit."]]};
-const CBL=P.slice(0,NC).map(p=>(CBD[p[0]]||[]).map(r=>[r[3],r[2],p[3][0][2],p[3][0][3],"",p[1],r[0],r[1]]));
-const cbList=i=>isChoice(i)?[]:CBL[i];
-const list=(i,m)=>m=="mc"?mcOf(i):m=="ty"?tyList(i):m=="gp"?gpList(i):m=="er"?erList(i):cbList(i);
+const SUF={mc:"",ty:"_ty"};
+const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади"};
+const MT={mc:"конструктор",ty:"переклад німецькою"};
+const tyList=i=>isChoice(i)?P[i][3]:P[i][0]==="ex"?P[i][3].filter((_,j)=>j%3<2):P[i][3].slice(0,TYN);
+const list=(i,m)=>m=="mc"?mcOf(i):tyList(i);
 const reqTotal=i=>isChoice(i)?P[i][3].length:2*P[i][3].length+tyList(i).length;
 const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty");
-const prevOf=i=>i>=NC?NC-1:i-1;
+const prevOf=i=>i>=NC?PN-1:i-1;
 const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*2+tyList(i).length,0);
-const SEC_D={je:["oder","aber"],en:["noch","sondern"],we:["oder","aber"],nn:["als auch","oder"],so:["sondern auch","noch"],zw:["sondern","andererseits"],ei:["oder","zwar"]};
-const FIR_D={je:["wenn","weder"],en:["weder","zwar"],we:["entweder","sowohl"],nn:["sowohl","zwar"],so:["nicht nur","einerseits"],zw:["sowohl","entweder"],ei:["zwar","entweder"]};
 const SYN={ei:"as",as:"ei"};
-const TW={en:"we",we:"en",nn:"so",so:"nn",zw:"ei",ei:"zw",je:"nn"};
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
 
@@ -884,7 +856,7 @@ const SK=(i=tab)=>P[i][0]+SUF[mode];
 const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
 const items=()=>list(tab,mode);
 
-const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty",p[0]+"_gp",p[0]+"_er",p[0]+"_cb"]);
+const ID="doppelkonnektoren",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
 const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
 
 var _pt;function schedPush(){clearTimeout(_pt);_pt=setTimeout(function(){try{if(window.TPSync&&TPSync.supported&&TPSync.push)TPSync.push()}catch(e){}},1200)}
@@ -944,7 +916,7 @@ function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.d
 function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
  const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
 function enterCat(i){tab=i;mode=isChoice(i)?"ty":(MODES.includes(MB[P[i][0]])?MB[P[i][0]]:"mc");last=-1;rvMode=false;}
-function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);ss("dk2_m",m);rvMode=false;}
+function setMode(m){mode=m;MB[P[tab][0]]=m;ss("dk2_mb",MB);rvMode=false;}
 
 function isCatOpen(i){
   if(i===0) return true;
@@ -975,10 +947,13 @@ function renderTabs(){
   document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{setMode(b.dataset.g);last=-1;renderTabs();start()});
   const t=T(),n=items().length,d=items().filter((_,j)=>t.k[j]).length;
   $("sd").textContent=d+" / "+n;$("sc").textContent=t.r;$("sw").textContent=t.w;$("bar").style.width=d/n*100+"%";
-  $("mb").textContent=mode=="mc"?"🔨":"⌨️";
-  $("mb").title=mode=="mc"?"Конструктор. Натисни для перекладу.":"Переклад. Натисни для конструктора.";
 }
 
+const RSX={
+"zum einen … zum anderen":"<div class='rh'>💡 <b>zum einen … zum anderen</b> — з одного боку… з іншого</div><div class='rf'><span class='k'>zum einen</span> A, <span class='k'>zum anderen</span> B</div><div class='rx'>Zum einen fehlt mir die Zeit, zum anderen habe ich keine Lust.<span class='rt'>З одного боку, мені бракує часу, з іншого — в мене немає бажання.</span></div><div class='rn'>📌 Між частинами кома. Після кожного з них дієслово на 2-му місці.</div>",
+"bald … bald":"<div class='rh'>💡 <b>bald … bald</b> — то… то…</div><div class='rf'><span class='k'>bald</span> A, <span class='k'>bald</span> B</div><div class='rx'>Mein Bruder ist bald fröhlich, bald traurig.<span class='rt'>Мій брат то веселий, то сумний.</span></div><div class='rn'>📌 Зміна в часі. Між частинами кома.</div>",
+"nicht …, sondern":"<div class='rh'>💡 <b>nicht …, sondern</b> — не…, а…</div><div class='rf'>nicht A<span class='k'>,</span> <span class='k'>sondern</span> B</div><div class='rx'>Er ist nicht faul, sondern einfach müde.<span class='rt'>Він не ледачий, а просто втомлений.</span></div><div class='rn'>📌 Без nur і auch. Кома перед sondern обов’язкова.</div>",
+"ob … oder":"<div class='rh'>💡 <b>ob … oder</b> — чи… чи…</div><div class='rf'>…<span class='k'>,</span> <span class='k'>ob</span> A <span class='k'>oder</span> B …</div><div class='rx'>Sie fragt mich, ob ich Kaffee oder Tee möchte.<span class='rt'>Вона питає мене, чи хочу я каву, чи чай.</span></div><div class='rn'>📌 Непряме питання: дієслово в кінці, кома перед ob, перед oder коми немає.</div>"};
 const RS=[
 "<div class='rh'>💡 <b>je … desto</b> — чим… тим…</div><div class='rf'><span class='k'>je</span> + Komparativ, <span class='k'>desto</span> + Komparativ</div><div class='rx'>Je länger er wartet, desto frustrierter wird er.<span class='rt'>Чим довше він чекає, тим більше розчаровується.</span></div><div class='rn'>📌 Після <b>je</b> дієслово стоїть у кінці, після <b>desto</b> — на 2-му місці. <b>umso</b> = <b>desto</b>.</div>",
 "<div class='rh'>💡 <b>entweder … oder</b> — або… або…</div><div class='rf'><span class='k'>entweder</span> A <span class='k'>oder</span> B</div><div class='rx'>Ich trinke entweder Kaffee oder Tee.<span class='rt'>Я п’ю або каву, або чай.</span></div><div class='rn'>📌 Обидві частини рівноправні. Якщо речення починається з <b>Entweder</b>, дієслово йде одразу після нього. Кома перед <b>oder</b> зазвичай не потрібна.</div>",
@@ -989,6 +964,7 @@ const RS=[
 "<div class='rh'>💡 <b>einerseits … andererseits</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>einerseits</span> A, <span class='k'>andererseits</span> B</div><div class='rx'>Einerseits möchte ich reisen, andererseits muss ich sparen.<span class='rt'>З одного боку, я хочу подорожувати, з іншого — мушу заощаджувати.</span></div><div class='rn'>📌 Між частинами стоїть кома. Якщо речення починається з <b>einerseits</b> або <b>andererseits</b>, дієслово йде одразу після нього.</div>",
 "<div class='rh'>💡 <b>teils … teils</b> — почасти… почасти…</div><div class='rf'><span class='k'>teils</span> A, <span class='k'>teils</span> B</div><div class='rx'>Ich arbeite teils im Büro, teils im Homeoffice.<span class='rt'>Я працюю почасти в офісі, почасти вдома.</span></div><div class='rn'>📌 «Трохи одне, трохи інше». Між частинами стоїть кома. Поєднуй однакові елементи.</div>",
 "<div class='rh'>💡 <b>auf der einen Seite … auf der anderen Seite</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>auf der einen Seite</span> A, <span class='k'>auf der anderen Seite</span> B</div><div class='rx'>Auf der einen Seite verdiene ich gut, auf der anderen Seite habe ich wenig Freizeit.<span class='rt'>З одного боку, я добре заробляю, з іншого — маю мало вільного часу.</span></div><div class='rn'>📌 Те саме, що <b>einerseits … andererseits</b>. Між частинами кома; на початку речення — інверсія.</div>",
+"<div class='rh'>✨ <b>Extra</b> — ще чотири конструкції</div><div class='rg'><div><span class='k'>zum einen … zum anderen</span> — з одного боку… з іншого</div><div><span class='k'>bald … bald</span> — то… то…</div><div><span class='k'>nicht …, sondern</span> — не…, а…</div><div><span class='k'>ob … oder</span> — чи… чи… (непряме питання)</div></div><div class='rn'>📌 Кома: між частинами zum einen/zum anderen і bald/bald, перед sondern, перед ob. Перед oder у парі ob … oder коми немає.</div>",
 "<div class='rh'>💡 <b>Плутанина</b> — схожі пари</div><div class='rg'><div><span class='k'>nicht nur … sondern auch</span> — акцент на другій частині; кома перед sondern</div><div><span class='k'>sowohl … als auch</span> — нейтральне «і… і…»; коми немає</div><div><span class='k'>zwar … aber</span> — поступка: хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — дві сторони однієї оцінки</div><div><span class='k'>entweder … oder</span> — вибір із двох</div><div><span class='k'>weder … noch</span> — заперечення обох</div></div><div class='rn'>📌 Дивись на переклад і на кому: вона часто підказує правильну пару.</div>",
 "<div class='rh'>📖 <b>Підручник</b> — завдання з книги</div><div class='rn'>📌 Прочитай речення з пропуском, подивись на коми та смисл і обери пару. Під відповіддю буде вказано, з якого завдання книги це речення.</div>",
 "<div class='rh'>💡 <b>Мікс</b> — усі сім пар разом</div><div class='rg'><div><span class='k'>je … desto</span> — чим… тим…</div><div><span class='k'>entweder … oder</span> — або… або…</div><div><span class='k'>weder … noch</span> — ні… ні…</div><div><span class='k'>nicht nur … sondern auch</span> — не лише… а й…</div><div><span class='k'>sowohl … als auch</span> — як… так і…</div><div><span class='k'>zwar … aber</span> — хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — з одного боку… з іншого…</div></div><div class='rn'>📌 Спершу прочитай переклад, потім подивись на порядок слів і коми в реченні.</div>"];
@@ -996,8 +972,8 @@ function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
  r.innerHTML="<div>"+RS[tab]+"</div><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button>";
  r.hidden=!open;if(open){seen[P[tab][0]]=1;ss("dk2_seen",seen)}
  r.querySelector(".rmore").onclick=()=>rule(true)}
-function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=isChoice(tab)?[]:p[3].slice(0,3);seen[p[0]]=1;ss("dk2_seen",seen);
- $("lesson").innerHTML="<div class='lh'><span class='lbadge'>Етап "+(tab+1)+" із "+P.length+"</span><h3>"+p[1]+"</h3></div><p class='llead'>"+p[2]+"</p>"+(ex.length?"<div class='lsec'><div class='lst'>👀 Подивись на прикладах</div>"+ex.map(x=>"<div class='lx'><div><b>"+gapped(x,true)+"</b></div><div style='color:var(--mu);font-size:.88rem'>"+esc(x[1])+"</div></div>").join("")+"</div>":"")+"<button class='lgo' id='lgo' type='button'>Почати вправи ▶</button>";
+function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=isChoice(tab)?[]:p[0]==="ex"?[0,3,6,9].map(k=>p[3][k]):p[3].slice(0,3);seen[p[0]]=1;ss("dk2_seen",seen);
+ $("lesson").innerHTML="<div class='lh'><span class='lbadge'>Етап "+(tab+1)+" із "+P.length+"</span><h3>"+p[1]+"</h3></div><div class='llead'>"+p[2]+"</div>"+(ex.length?"<div class='lsec'><div class='lst'>👀 Подивись на прикладах</div>"+ex.map(x=>"<div class='lx'><div><b>"+gapped(x,true)+"</b></div><div style='color:var(--mu);font-size:.88rem'>"+esc(x[1])+"</div></div>").join("")+"</div>":"")+"<button class='lgo' id='lgo' type='button'>Почати вправи ▶</button>";
  document.body.classList.add("lsn");$("lgo").onclick=()=>document.body.classList.remove("lsn")}
 
 function resetHint(){hintUsed=false;hideHint();$("showTxt").textContent="Підказка";$("showBtn").classList.remove("rev");$("showBtn").disabled=false}
@@ -1021,7 +997,7 @@ function start(){
   clearTimeout(autoAdvanceTimer);
   const t=T(),it=items(),left=it.map((_,i)=>i).filter(i=>!t.k[i]);
   $("card").classList.remove("fin","ans");
-  const ch=isChoice(tab),cu=ch||mode==="gp"||mode==="er"||mode==="cb";
+  const ch=isChoice(tab),cu=ch;
   $("card").classList.toggle("bd", mode === "mc" && !ch);
   $("card").classList.toggle("mc", cu);
   $("card").classList.toggle("tx", mode === "ty");
@@ -1061,91 +1037,18 @@ function start(){
   const x = it[cur], ua = "<div class='tr-text'>"+esc(x[1])+"</div>";
   $("lab").innerHTML = ua;
   if(isBld){
-    $("sent").innerHTML = x[6]===0 ? esc(givenTxt(x))+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span> "+esc(givenTxt(x));
+    {const g=givenTxt(x);$("sent").innerHTML = x[6]===0 ? esc(g)+" <span class='blank wide'>&nbsp;</span>" : "<span class='blank wide'>&nbsp;</span>"+(g.charAt(0)===","?"":" ")+esc(g);}
     const words = bw(x);
     bPlaced = [];
     bPool = sh(words.map((w,i)=>i));
     renderBuilder();
   } else if(ch){
     $("sent").innerHTML = gapped(x,false); renderOpts(x);
-  } else if(mode==="gp"){ renderGap(x); }
-  else if(mode==="er"){ renderErr(x); }
-  else if(mode==="cb"){ renderCb(x); }
-  else {
+  } else {
     $("sent").innerHTML = "";
     if(x[4]) $("lab").innerHTML = ua+"<div class='tr-hint'>💡 "+esc(x[4])+"</div>";
     setTimeout(()=>{try{$("inp").focus()}catch(e){}},60);
   }
-}
-
-/* ===== нові режими ===== */
-let GP=null,ER=null;
-function renderGap(x){
-  const key=P[tab][0],second=Math.random()<.5,cor=second?x[3]:x[2];
-  const d=matchCase(cor,rnd((second?SEC_D:FIR_D)[key]));
-  const base=esc(x[0]).replace(x[2],"\u0001").replace(x[3],"\u0002");
-  const BL="<span class='blank'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-  const fill=f=>f?"<span class='blank fill ok'>"+esc(cor)+"</span>":BL;
-  GP={cor,html:f=>base.replace("\u0001",second?esc(x[2]):fill(f)).replace("\u0002",second?fill(f):esc(x[3]))};
-  $("sent").innerHTML=GP.html(false);
-  const o=$("opts");o.className="opts grid4";o.style.display="";
-  o.innerHTML=sh([cor,d]).map(w=>"<button type='button' class='opt' data-w=\""+esc(w)+"\">"+esc(w)+"</button>").join("");
-  o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickGap(b));
-}
-function endGap(){
-  $("opts").querySelectorAll(".opt").forEach(e=>{e.disabled=true;if(e.dataset.w===GP.cor)e.classList.add("ok")});
-  $("sent").innerHTML=GP.html(true);
-}
-function pickGap(b){
-  if(answered) return;
-  answered=true;
-  const ok=b.dataset.w===GP.cor;
-  endGap();
-  if(!ok) b.classList.add("er");
-  done(ok);
-}
-function genErr(x){
-  const key=P[tab][0],lab=P[tab][1],tk=x[0].split(" "),cl=t=>_clean(t).toLowerCase();
-  const find=(txt,from)=>{const w=txt.split(" ").map(cl);for(let i=from;i+w.length<=tk.length;i++){if(w.every((q,j)=>cl(tk[i+j])===q))return i}return -1};
-  const n2=x[2].split(" ").length,n3=x[3].split(" ").length,i2=find(x[2],0),i3=i2<0?-1:find(x[3],i2+n2);
-  const rp=(i,n,w)=>{const t=tk.slice(),tail=(t[i+n-1].match(/[.,!?;:]+$/)||[""])[0],ws=w.split(" ");ws[0]=matchCase(t[i],ws[0]);ws[ws.length-1]+=tail;t.splice(i,n,...ws);return{t,bad:ws.map((_,k)=>i+k)}};
-  const C=[];
-  if(i2>=0&&i3>=0){
-    C.push(()=>{const w=rnd(SEC_D[key]),r=rp(i3,n3,w);r.why="Хибний сполучник: «"+w+"» не підходить до пари «"+lab+"».";return r});
-    C.push(()=>{const w=rnd(FIR_D[key]),r=rp(i2,n2,w);r.why="Хибний сполучник: «"+w+"» не підходить до пари «"+lab+"».";return r});
-    if(["je","nn","zw","ei"].includes(key)&&i3>0&&/,$/.test(tk[i3-1])) C.push(()=>{const t=tk.slice();t[i3-1]=t[i3-1].replace(/,$/,"");return{t,bad:[i3-1,i3],why:"Пропущена кома перед «"+x[3]+"»: у парі «"+lab+"» вона обов’язкова."}});
-    if(key==="we"&&i2>0) C.push(()=>{const t=tk.slice();t.splice(i2,0,"nicht");return{t,bad:[i2],why:"Зайве «nicht»: weder … noch вже саме є запереченням."}});
-    if(key==="zw"){const a=tk[i3+1],b=tk[i3+2];if(a&&b&&/^(ich|sie|er|es|man|wir|du|ihr)$/i.test(a)&&/^[a-zäöüß]/.test(b)&&!/[.,!?;:]$/.test(a)&&!/[.,!?;:]$/.test(b)) C.push(()=>{const t=tk.slice();t[i3+1]=b;t[i3+2]=a;return{t,bad:[i3+1,i3+2],why:"Після «aber» порядок слів прямий (підмет → дієслово): aber не викликає інверсії."}})}
-  }
-  if(!C.length) return {t:tk,bad:new Set(),why:""};
-  const c=rnd(C)();
-  return {t:c.t,bad:new Set(c.bad),why:c.why};
-}
-function renderErr(x){
-  ER=genErr(x);
-  $("lab").innerHTML="<div class='tr-text'>"+esc(x[1])+"</div><div class='tr-hint'>🔎 У реченні є одна помилка. Тапни слово з помилкою (якщо проблема в комі — слово біля неї).</div>";
-  $("sent").innerHTML=ER.t.map((w,i)=>"<button type='button' class='wc' data-t='"+i+"'>"+esc(w)+"</button>").join("");
-  $("sent").querySelectorAll(".wc").forEach(b=>b.onclick=()=>pickTok(+b.dataset.t));
-}
-function endErr(p){
-  $("sent").querySelectorAll(".wc").forEach((b,i)=>{b.disabled=true;if(ER.bad.has(i))b.classList.add("ok");else if(i===p)b.classList.add("bad")});
-}
-function pickTok(i){
-  if(answered) return;
-  answered=true;
-  const ok=ER.bad.has(i);
-  endErr(i);
-  done(ok,false,ER.why);
-}
-function renderCb(x){
-  const ci=P.findIndex(p=>p[1]===x[5]),tw=P.findIndex(p=>p[0]===TW[P[ci][0]]);
-  const others=sh(P.slice(0,NC).map((_,i)=>i).filter(i=>i!==ci&&i!==tw)).slice(0,2);
-  const ids=sh([ci,tw].concat(others));
-  $("lab").innerHTML="<div class='tr-text'>"+esc(x[1])+"</div><div class='tr-hint'>🔗 З’єднай два речення потрібною парою (орієнтуйся на переклад).</div>";
-  $("sent").innerHTML="<div>"+esc(x[6])+"</div><div>"+esc(x[7])+"</div>";
-  const o=$("opts");o.className="opts grid4";o.style.display="";
-  o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
-  o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
 }
 
 function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?" fill ok":"")+"'>"+(fill?esc(c):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
@@ -1157,7 +1060,7 @@ const commaSig=t=>t.replace(/\s*,\s*oder\b/gi," oder").replace(/\s*,\s*/g,", ").
 
 function renderOpts(x){
   const ci=P.findIndex(p=>p[1]===x[5]);
-  const ids=tab===NC?sh([ci,P.findIndex(p=>p[1]===x[6])]):sh([ci].concat(sh(P.slice(0,NC).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
+  const ids=tab===NC?sh([ci,P.findIndex(p=>p[1]===x[6])]):sh([ci].concat(sh(P.slice(0,PN).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
   const o=$("opts");o.className="opts grid4";o.style.display="";
   o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
   o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
@@ -1165,7 +1068,7 @@ function renderOpts(x){
 function endOpts(ci){
   $("opts").querySelectorAll(".opt").forEach(e=>{e.disabled=true;if(+e.dataset.k===ci)e.classList.add("ok")});
   const x=items()[cur];
-  $("sent").innerHTML=mode==="cb"?"<b>"+esc(x[0])+"</b>":gapped(x,true);
+  $("sent").innerHTML=gapped(x,true);
 }
 function pickOpt(b,ci){
   if(answered) return;
@@ -1197,10 +1100,8 @@ function hintOrShow(){
 }
 function showSol(){
   if(answered) return; answered=true;
-  if(isChoice(tab)||mode==="cb") endOpts(P.findIndex(p=>p[1]===items()[cur][5]));
-  else if(mode==="gp") endGap();
-  else if(mode==="er") endErr(-1);
-  done(false,false,mode==="er"&&ER?ER.why:"");
+  if(isChoice(tab)) endOpts(P.findIndex(p=>p[1]===items()[cur][5]));
+  done(false);
 }
 
 function done(ok,cmOnly,extra){
@@ -1219,7 +1120,7 @@ function done(ok,cmOnly,extra){
     }
   } else {
     if(ok) {
-      t.r++; t.k[cur]=1; bump(1);
+      t.r++; t.k[cur]=1; delete t.e[cur]; bump(1);
     } else {
       t.w++; t.k[cur]=0; t.e[cur]=true; bump(-1);
     }
@@ -1240,8 +1141,8 @@ function done(ok,cmOnly,extra){
     "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
     "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
     (function(){const m=extra||(tab===NC||tab===NC+1?x[4]:"");return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
-    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto, einerseits … andererseits, teils … teils і auf der einen Seite … auf der anderen Seite; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
-    (!ok && RS[P.findIndex(p=>p[1]===x[5])] ? "<div class='rule' style='margin:12px 0 0'>"+RS[P.findIndex(p=>p[1]===x[5])]+"</div>" : "")+
+    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto, einerseits … andererseits, teils … teils, bald … bald, zum einen … zum anderen і auf der einen Seite … auf der anderen Seite; перед sondern (в nicht …, sondern) і перед ob; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
+    (!ok && (RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]]) ? "<div class='rule' style='margin:12px 0 0'>"+(RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]])+"</div>" : "")+
     (ok ? "<div class='bar'></div>" : "")+
     "<button class='nx' type='button'>Далі →</button>";
   f.querySelector(".ans").onclick = e=>{e.stopPropagation(); speak(x[0]);};
@@ -1270,6 +1171,9 @@ function done(ok,cmOnly,extra){
 function nextMode(){const k=MODES.indexOf(mode);for(let q=1;q<=MODES.length;q++){const m=MODES[(k+q)%MODES.length];if(cnt(tab,m)<list(tab,m).length)return m}return MODES[(k+1)%MODES.length]}
 function fin(){
   const t=T(),n=items().length;
+  $("tabs").style.display="flex";
+  $("sd").parentElement.parentElement.style.display="grid";
+  if(!rvMode) renderTabs();
   $("card").classList.add("fin");
   $("title").textContent="Вкладку пройдено";
   const nextTab=(tab+1)%P.length;
@@ -1362,9 +1266,13 @@ document.addEventListener('keydown', e => {
 
 $("sp").onclick = ()=>speak(items()[cur] && items()[cur][0]);
 $("rs").onclick = reset;
-$("mb").onclick = ()=>{ setMode(mode=="mc"?"ty":"mc"); last=-1; start(); };
 $("rb").onclick = ()=>showRule($("rule").hidden);
-$("xrst").onclick = ()=>{ if(confirm("Скинути EXP?")){ ALLSK.forEach(k=>{const o=S[k];if(o){o.x=(o.x||0)+1;o.p=o.x}}); XP=calcXp(); save(true); updateXp(); } };
+$("xrst").onclick = ()=>{
+  const doReset=()=>{ ALLSK.forEach(k=>{const o=S[k];if(o){o.x=(o.x||0)+1;o.p=o.x}}); XP=calcXp(); save(true); updateXp(); };
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  if(tg&&tg.showConfirm&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.2")){ try{ tg.showConfirm("Скинути EXP?",ok=>{if(ok)doReset()}); return; }catch(e){} }
+  if(confirm("Скинути EXP?")) doReset();
+};
 
 const THEMES=['light','dark','autumn','winter','sakura','candy'],TI={light:'☀️',dark:'🌙',autumn:'🍂',winter:'❄️',sakura:'🌸',candy:'🍬'},TN={light:'Світла',dark:'Темна',autumn:'Осінь',winter:'Зима',sakura:'Сакура',candy:'Цукеркова ніч'};
 const eff=()=>{const t=document.documentElement.getAttribute('data-theme');return THEMES.includes(t)?t:'dark'};
@@ -1430,19 +1338,6 @@ function playSound(type){
     if(audioCtx.state === 'suspended') audioCtx.resume();
     if ('audioSession' in navigator) navigator.audioSession.type = 'playback';
     const now = audioCtx.currentTime;
-    if(type === 'open' || type === 'close'){
-      const notes = type === 'open' ? [392, 523.25, 659.25] : [659.25, 523.25, 392];
-      notes.forEach((f, k) => {
-        const o = audioCtx.createOscillator(), g = audioCtx.createGain(), t0 = now + k * 0.07;
-        o.type = 'sine'; o.frequency.setValueAtTime(f, t0);
-        g.gain.setValueAtTime(0, t0);
-        g.gain.linearRampToValueAtTime(0.07, t0 + 0.03);
-        g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.28);
-        o.connect(g); g.connect(audioCtx.destination);
-        o.start(t0); o.stop(t0 + 0.3);
-      });
-      return;
-    }
     const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
     osc.connect(gain); gain.connect(audioCtx.destination);
     if(type === 'correct'){
