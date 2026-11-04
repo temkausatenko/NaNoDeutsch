@@ -611,7 +611,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
   <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn"></small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span></div><div class="xrank"><span class="xrn" id="xr"></span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
 </div>
 <script>
-const L={je:"je … desto",en:"entweder … oder",we:"weder … noch",nn:"nicht nur … sondern auch",so:"sowohl … als auch",zw:"zwar … aber",ei:"einerseits … andererseits"};
+const L={je:"je … desto",en:"entweder … oder",we:"weder … noch",nn:"nicht nur … sondern auch",so:"sowohl … als auch",zw:"zwar … aber",ei:"einerseits … andererseits",tl:"teils … teils",as:"auf der einen Seite … auf der anderen Seite"};
 const P=[
 ["je","je … desto","<div class='lm'><b>je … desto</b> — чим… тим…</div><div class='rf'><span class='k'>je</span> + Komparativ, <span class='k'>desto</span> + Komparativ</div><div class='lr'>• Після <b>je</b> дієслово стоїть <b>у кінці</b>.</div><div class='lr'>• Після <b>desto</b> дієслово стоїть <b>на 2-му місці</b>.</div><div class='lr'>• <b>umso</b> — те саме, що <b>desto</b>.</div><div class='lr'>• Після desto завжди Komparativ: <b>desto mehr</b>, <b>desto besser</b>.</div><div class='lr lex'>Ще приклад: <i>Je mehr du übst, umso besser wird dein Deutsch.</i></div>",[
 ["Je mehr Bewerbungen ich geschickt habe, desto mehr Angebote habe ich bekommen.","Чим більше заявок я надіслав, тим більше пропозицій отримав.","Je","desto","mehr Bewerbungen geschickt, mehr Angebote bekommen"],
@@ -686,6 +686,24 @@ const P=[
 ["Einerseits will ich mehr Geld verdienen, andererseits möchte ich weniger arbeiten.","З одного боку, я хочу більше заробляти, з іншого — хочу менше працювати.","Einerseits","andererseits","mehr Geld verdienen, weniger arbeiten"],
 ["Einerseits kann man im Homeoffice flexibel arbeiten, andererseits muss man ständig erreichbar sein.","З одного боку, вдома можна працювати гнучко, з іншого — треба постійно бути на зв'язку.","Einerseits","andererseits","flexibel arbeiten, ständig erreichbar sein"],
 ["Man sollte einerseits ehrlich sein, andererseits darf man niemanden verletzen.","З одного боку, треба бути чесним, з іншого — не можна нікого ображати.","einerseits","andererseits","ehrlich sein, niemanden verletzen"]]],
+["tl","teils … teils","<div class='lm'><b>teils … teils</b> — почасти… почасти…</div><div class='rf'><span class='k'>teils</span> A, <span class='k'>teils</span> B</div><div class='lr'>• «Трохи одне, трохи інше»: обидві частини правдиві водночас.</div><div class='lr'>• Між частинами стоїть кома.</div><div class='lr'>• Зазвичай поєднує однакові елементи: <i>teils zum Telefonieren, teils als Internetzugang</i>.</div><div class='lr lex'>Ще приклад: <i>Ich arbeite teils im Büro, teils im Homeoffice.</i></div>",[
+["Ich arbeite teils im Büro, teils im Homeoffice.","Я працюю почасти в офісі, почасти вдома.","teils","teils","im Büro arbeite, im Homeoffice"],
+["Mein Job ist teils anstrengend, teils sehr entspannt.","Моя робота почасти виснажлива, почасти дуже спокійна.","teils","teils","anstrengend, sehr entspannt"],
+["Viele Menschen benutzen ihr Smartphone teils zum Telefonieren, teils als mobilen Internetzugang.","Багато людей користуються смартфоном почасти для дзвінків, почасти як мобільним доступом до інтернету.","teils","teils","zum Telefonieren, als Internetzugang"],
+["Die Gerichte sind teils mit Knoblauch, teils mit frischen Kräutern gewürzt.","Страви приправлені почасти часником, почасти свіжими травами.","teils","teils","mit Knoblauch, mit frischen Kräutern gewürzt"],
+["Das Wetter war teils sonnig, teils bewölkt.","Погода була почасти сонячною, почасти хмарною.","teils","teils","sonnig, bewölkt"],
+["Der Film war teils lustig, teils traurig.","Фільм був почасти смішним, почасти сумним.","teils","teils","lustig, traurig"],
+["Die Kollegen kommen teils aus Deutschland, teils aus dem Ausland.","Колеги родом почасти з Німеччини, почасти з-за кордону.","teils","teils","aus Deutschland, aus dem Ausland kommen"],
+["Ich habe teils Lust, teils Angst, ins Ausland zu gehen.","Я почасти хочу, почасти боюся їхати за кордон.","teils","teils","Lust haben, Angst haben"]]],
+["as","auf der einen Seite … auf der anderen Seite","<div class='lm'><b>auf der einen Seite … auf der anderen Seite</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>auf der einen Seite</span> A, <span class='k'>auf der anderen Seite</span> B</div><div class='lr'>• Те саме, що <b>einerseits … andererseits</b>, лише довша форма.</div><div class='lr'>• Між частинами стоїть кома.</div><div class='lr'>• На початку речення — інверсія: <i>Auf der einen Seite kann ich …</i></div><div class='lr lex'>Ще приклад: <i>Auf der einen Seite verdiene ich gut, auf der anderen Seite habe ich wenig Freizeit.</i></div>",[
+["Auf der einen Seite kann ich eine Katze tagsüber allein zu Hause lassen, auf der anderen Seite zerkratzt sie meine Möbel.","З одного боку, я можу залишати кішку вдома саму на день, з іншого — вона дряпає мої меблі.","Auf der einen Seite","auf der anderen Seite","Katze lassen kann, Möbel zerkratzt"],
+["Auf der einen Seite möchte Nhan gern studieren, auf der anderen Seite dauert es dann sehr lange, bis er Geld verdienen kann.","З одного боку, Нян хоче вчитися, з іншого — тоді дуже довго не зможе заробляти гроші.","Auf der einen Seite","auf der anderen Seite","studieren möchte, sehr lange dauert"],
+["Auf der einen Seite verdiene ich gut, auf der anderen Seite habe ich wenig Freizeit.","З одного боку, я добре заробляю, з іншого — маю мало вільного часу.","Auf der einen Seite","auf der anderen Seite","gut verdiene, wenig Freizeit habe"],
+["Auf der einen Seite ist das Homeoffice bequem, auf der anderen Seite fehlt der Kontakt zu den Kollegen.","З одного боку, вдома зручно, з іншого — бракує контакту з колегами.","Auf der einen Seite","auf der anderen Seite","Homeoffice bequem ist, Kontakt fehlt"],
+["Auf der einen Seite möchte ich eine größere Wohnung, auf der anderen Seite ist sie zu teuer.","З одного боку, я хочу більшу квартиру, з іншого — вона надто дорога.","Auf der einen Seite","auf der anderen Seite","größere Wohnung möchte, zu teuer ist"],
+["Auf der einen Seite lerne ich gern Deutsch, auf der anderen Seite habe ich wenig Zeit zum Üben.","З одного боку, я залюбки вивчаю німецьку, з іншого — маю мало часу на практику.","Auf der einen Seite","auf der anderen Seite","gern Deutsch lerne, wenig Zeit habe"],
+["Auf der einen Seite ist das Auto praktisch, auf der anderen Seite kostet es viel Geld.","З одного боку, авто практичне, з іншого — коштує багато грошей.","Auf der einen Seite","auf der anderen Seite","Auto praktisch ist, viel Geld kostet"],
+["Das Internet hat auf der einen Seite viele Vorteile, auf der anderen Seite gibt es auch Risiken.","В інтернету з одного боку багато переваг, з іншого — є й ризики.","auf der einen Seite","auf der anderen Seite","viele Vorteile hat, auch Risiken gibt"]]],
 ["conf","Плутанина","Ці пари легко сплутати. Прочитай переклад, подивись на коми та на сам смисл (акцент чи нейтрально, поступка чи дві сторони, вибір чи заперечення) і обери правильну з двох.",[
 ["Der Chef lobt nicht nur die Idee, sondern auch den Mut des Teams.","Керівник хвалить не лише ідею, а ще й сміливість команди.","nicht nur","sondern auch","Акцент на другій частині («а ще й…»). Перед sondern — кома.",L.nn,L.so],
 ["Sie hat sowohl Deutsch als auch Französisch studiert.","Вона вивчала як німецьку, так і французьку.","sowohl","als auch","Нейтральне «і… і…», без особливого акценту. Коми перед als auch немає.",L.so,L.nn],
@@ -699,10 +717,59 @@ const P=[
 ["Ich kann weder heute noch morgen kommen.","Я не можу прийти ні сьогодні, ні завтра.","weder","noch","Заперечення вже в самій парі: nicht не потрібно.",L.we,L.en],
 ["Wir essen entweder Pizza oder Pasta.","Ми їмо або піцу, або пасту.","entweder","oder","Одне з двох: або піца, або паста.",L.en,L.we],
 ["Wir essen weder Pizza noch Pasta.","Ми не їмо ні піци, ні пасти.","weder","noch","Обидва варіанти відкинуті: weder … noch.",L.we,L.en]]],
+["bk","Підручник","Завдання з підручника: прочитай речення з пропуском, подивись на коми та на смисл і обери потрібну пару. Під відповіддю буде вказано, з якого завдання речення.",[
+["Ich habe nicht nur nette Kollegen, sondern auch einen guten Chef.","У мене не лише приємні колеги, а й хороший начальник.","nicht nur","sondern auch","📖 Übungen · Aufg. 1 · Nr. 1",L.nn],
+["Und ich habe sowohl günstige Arbeitszeiten als auch lange Ferien.","І в мене як вигідний робочий графік, так і довга відпустка.","sowohl","als auch","📖 Übungen · Aufg. 1 · Nr. 2",L.so],
+["Außerdem habe ich weder eine langweilige noch eine nutzlose Arbeit.","До того ж у мене немає ні нудної, ні марної роботи.","weder","noch","📖 Übungen · Aufg. 1 · Nr. 3",L.we],
+["Je länger ich Lehrer bin, desto lieber unterrichte ich.","Чим довше я вчителюю, тим охочіше викладаю.","Je","desto","📖 Übungen · Aufg. 1 · Nr. 4",L.je],
+["Entweder bleibe ich bis zur Rente auf diesem Arbeitsplatz, oder ich arbeite später einmal im Ausland.","Або я залишуся на цьому місці до пенсії, або колись працюватиму за кордоном.","Entweder","oder","📖 Übungen · Aufg. 1 · Nr. 5",L.en],
+["Einerseits möchte ich in dieser Schule bleiben, andererseits ist ein Auslandsaufenthalt auch sehr interessant.","З одного боку, я хочу залишитися в цій школі, з іншого — перебування за кордоном теж дуже цікаве.","Einerseits","andererseits","📖 Übungen · Aufg. 1 · Nr. 6",L.ei],
+["Im Ausland würde ich zwar meinen Horizont erweitern, aber ich müsste meine wunderbare Stelle hier aufgeben.","За кордоном я хоч і розширив би кругозір, але мусив би залишити свою чудову роботу тут.","zwar","aber","📖 Übungen · Aufg. 1 · Nr. 7",L.zw],
+["Ich habe teils Lust, teils Angst, ins Ausland zu gehen.","Я почасти хочу, почасти боюся їхати за кордон.","teils","teils","📖 Übungen · Aufg. 1 · Nr. 8",L.tl],
+["Das handgemachte Notizbuch ist zwar nachhaltig hergestellt, aber etwas teurer als Massenware.","Блокнот ручної роботи хоч і виготовлений екологічно, але трохи дорожчий за масовий товар.","zwar","aber","📖 Thema 7 · Aufg. 1 · Nr. 1",L.zw],
+["Der 3D-Drucker bietet einerseits kreative Möglichkeiten, andererseits ist die Bedienung für Anfänger nicht immer einfach.","3D-принтер з одного боку дає творчі можливості, з іншого — користуватися ним новачкам не завжди просто.","einerseits","andererseits","📖 Thema 7 · Aufg. 1 · Nr. 2",L.ei],
+["Das Bastelset für Erwachsene ist nicht nur leicht zu benutzen, sondern auch hochwertig verarbeitet.","Набір для рукоділля для дорослих не лише простий у користуванні, а й якісно виготовлений.","nicht nur","sondern auch","📖 Thema 7 · Aufg. 1 · Nr. 3",L.nn],
+["Die Online-Lernplattform hat nicht nur Kurse für Anfänger, sondern sie bietet auch spezialisierte Themen für Fortgeschrittene.","Онлайн-платформа має не лише курси для початківців, а й пропонує спеціалізовані теми для просунутих.","nicht nur","sondern","📖 Thema 7 · Aufg. 1 · Nr. 4",L.nn],
+["Die personalisierte Kalender-App überzeugt sowohl durch eine moderne Oberfläche als auch durch viele nützliche Funktionen.","Персоналізований застосунок-календар переконує і сучасним інтерфейсом, і багатьма корисними функціями.","sowohl","als auch","📖 Thema 7 · Aufg. 1 · Nr. 5",L.so],
+["Das personalisierte Fotobuch ist einerseits eine schöne Geschenkidee, andererseits braucht es Zeit, um es zu erstellen.","Персоналізований фотоальбом з одного боку — гарна ідея подарунка, з іншого — на його створення потрібен час.","einerseits","andererseits","📖 Thema 7 · Aufg. 3 · Nr. 1",L.ei],
+["Das digitale Lernpaket bietet sowohl digitale Übungsaufgaben als auch Videoaufzeichnungen.","Цифровий навчальний пакет пропонує як цифрові вправи, так і відеозаписи.","sowohl","als auch","📖 Thema 7 · Aufg. 3 · Nr. 2",L.so],
+["Der Workshop für Kerzenherstellung ist zwar kreativ, aber auch ein wenig kostenintensiv.","Майстер-клас зі створення свічок хоч і творчий, але також трохи дорогий.","zwar","aber","📖 Thema 7 · Aufg. 3 · Nr. 3",L.zw]]],
 ["mix","Мікс","Прочитай німецьке речення з пропуском і переклад, а потім обери, яка пара Doppelkonnektoren підходить. Орієнтуйся на зміст (чим… тим…, або… або…, ні… ні…) і на порядок слів.",[]]
 ];
-P[8][3]=P.slice(0,7).flatMap(p=>p[3].map(i=>[...i,p[1]]));
-P.slice(0,7).forEach(p=>p[3].forEach(i=>i[5]=p[1]));
+const ADD={
+je:[["Je öfter ich in dieses Restaurant gehe, desto begeisterter bin ich.","Чим частіше я ходжу в цей ресторан, тим більше мене це захоплює.","Je","desto","öfter gehe, begeisterter bin"]],
+en:[["Im Restaurant können Sie entweder bar oder mit Kreditkarte bezahlen.","У ресторані можна розрахуватися або готівкою, або карткою.","entweder","oder","bar, mit Kreditkarte bezahlen"],
+["Entweder fahren wir jetzt sofort los, oder wir kommen zu spät zum Essen bei Oma und Opa.","Або ми їдемо просто зараз, або запізнимося на обід до бабусі й дідуся.","Entweder","oder","sofort losfahren, zu spät kommen"],
+["Entweder reparieren Sie die defekte Waschmaschine, oder Sie erstatten mir den Kaufbetrag.","Або ви ремонтуєте несправну пральну машину, або повертаєте мені гроші за покупку.","Entweder","oder","Waschmaschine reparieren, Kaufbetrag erstatten"],
+["Entweder studiert Max nach dem Abitur Medizin, oder er macht eine Ausbildung.","Або Макс після абітуру вивчає медицину, або проходить професійне навчання.","Entweder","oder","nach Abitur Medizin studiert, Ausbildung macht"]],
+we:[["In der Nähe gibt es weder ein gutes Restaurant noch eine gemütliche Kneipe.","Поблизу немає ні хорошого ресторану, ні затишної пивнички.","weder","noch","gutes Restaurant, gemütliche Kneipe"],
+["Ich mag weder Wein noch Bier.","Я не люблю ні вино, ні пиво.","weder","noch","Wein, Bier mag"],
+["Wir haben weder Kartoffeln noch Nudeln noch Reis.","У нас немає ні картоплі, ні макаронів, ні рису.","weder","noch","Kartoffeln, Nudeln, Reis"]],
+nn:[["Der Wein hat nicht nur einen exzellenten Geschmack, sondern auch genau die richtige Temperatur.","Вино має не лише чудовий смак, а й саме потрібну температуру.","nicht nur","sondern auch","exzellenten Geschmack, richtige Temperatur"],
+["Paul ist nicht nur ein guter Sänger, sondern auch ein hervorragender Gitarrist.","Пауль не лише добрий співак, а й видатний гітарист.","nicht nur","sondern auch","guter Sänger, hervorragender Gitarrist"],
+["Malaika ist nicht nur freundlich, sondern auch hilfsbereit.","Малайка не лише привітна, а й готова допомогти.","nicht nur","sondern auch","freundlich, hilfsbereit"],
+["Die Kochbox enthält nicht nur regionale Produkte, sondern bietet auch Rezepte für Anfänger.","Кулінарний набір містить не лише регіональні продукти, а й пропонує рецепти для початківців.","nicht nur","sondern","regionale Produkte enthält, Rezepte bietet"],
+["Linda studiert nicht nur an der Uni, sondern arbeitet auch jeden Tag.","Лінда не лише навчається в університеті, а й щодня працює.","nicht nur","sondern","an der Uni studiert, jeden Tag arbeitet"],
+["Die Kochbox bietet nicht nur regionale Zutaten, sondern enthält auch vegane Rezepte.","Кулінарний набір пропонує не лише регіональні інгредієнти, а й містить веганські рецепти.","nicht nur","sondern","regionale Zutaten bietet, vegane Rezepte enthält"]],
+so:[["Als Vorspeise gibt es sowohl kalte als auch warme Speisen.","Як закуски є і холодні, і гарячі страви.","sowohl","als auch","kalte Speisen, warme Speisen"],
+["Ich kenne sowohl Emma als auch ihren Bruder Ben.","Я знаю як Емму, так і її брата Бена.","sowohl","als auch","Emma, Bruder Ben kenne"],
+["Im Internet kann man sowohl Zeitung lesen als auch einkaufen.","В інтернеті можна як читати газету, так і робити покупки.","sowohl","als auch","Zeitung lesen, einkaufen"],
+["Die Kaffeemaschine ist sowohl kompakt als auch leicht zu bedienen.","Кавомашина і компактна, і проста в обслуговуванні.","sowohl","als auch","kompakt, leicht zu bedienen"]],
+zw:[["Die Fahrt zum Restaurant ist zwar ziemlich weit, aber sie lohnt sich.","Дорога до ресторану хоч і доволі далека, але вона того варта.","zwar","aber","ziemlich weit, lohnt sich"],
+["Der Film, der heute im Kino läuft, ist zwar sehr interessant, aber ich bleibe lieber zu Hause, denn ich habe Kopfschmerzen.","Фільм, що сьогодні в кіно, хоч і дуже цікавий, але я краще залишуся вдома, бо в мене болить голова.","zwar","aber","sehr interessant, zu Hause bleibe"],
+["Das DIY-Kit ist zwar einfach zu verwenden, aber es benötigt auch viel Zeit.","DIY-набір хоч і простий у використанні, але потребує також багато часу.","zwar","aber","einfach zu verwenden, viel Zeit benötigt"],
+["Das Zeichenbrett ist zwar leicht transportierbar, aber es ist anfällig für Kratzer.","Дошка для малювання хоч і легка в транспортуванні, але вразлива до подряпин.","zwar","aber","leicht transportierbar, anfällig für Kratzer"],
+["Im Internet zu surfen ist zwar interessant, aber es kostet auch viel Zeit.","Серфінг в інтернеті хоч і цікавий, але забирає також багато часу.","zwar","aber","interessant, viel Zeit kostet"],
+["Die handgemachten Seifen sind zwar umweltfreundlich, aber sie haben einen höheren Preis.","Мило ручної роботи хоч і екологічне, але має вищу ціну.","zwar","aber","umweltfreundlich sind, höheren Preis haben"]],
+ei:[["Einerseits würde ich gern jeden Tag in dem Restaurant essen, andererseits ist es zu Hause auch gemütlich.","З одного боку, я б залюбки щодня їв у цьому ресторані, з іншого — вдома теж затишно.","Einerseits","andererseits","jeden Tag im Restaurant essen, zu Hause gemütlich"],
+["Einerseits gefällt uns die Wohnung sehr gut, andererseits ist die Miete ein bisschen zu hoch.","З одного боку, квартира нам дуже подобається, з іншого — оренда трохи завелика.","Einerseits","andererseits","Wohnung gefällt, Miete zu hoch"],
+["Einerseits ist das personalisierte Buch individuell gestaltet, andererseits ist es nicht günstig.","З одного боку, персоналізована книга оформлена індивідуально, з іншого — вона недешева.","Einerseits","andererseits","individuell gestaltet, nicht günstig"],
+["Einerseits bietet das Upcycling-Kit kreative Möglichkeiten, andererseits ist es anspruchsvoll für Einsteiger.","З одного боку, набір для апсайклінгу дає творчі можливості, з іншого — він складний для початківців.","Einerseits","andererseits","kreative Möglichkeiten bietet, anspruchsvoll für Einsteiger"],
+["Das Internet ist einerseits ein gutes Informationsmedium, andererseits werden dort auch falsche Informationen verbreitet.","Інтернет з одного боку — хороше джерело інформації, з іншого — там поширюють і хибну інформацію.","einerseits","andererseits","Informationsmedium, falsche Informationen verbreitet"],
+["Das digitale Zeichenbrett ist einerseits einfach zu bedienen, andererseits ist es nicht günstig.","Цифрова дошка для малювання з одного боку проста в обслуговуванні, з іншого — недешева.","einerseits","andererseits","einfach zu bedienen, nicht günstig"]]};
+P.forEach(p=>{if(ADD[p[0]])p[3].push(...ADD[p[0]])});
+P[11][3]=P.slice(0,9).flatMap(p=>p[3].map(i=>[...i,p[1]]));
+P.slice(0,9).forEach(p=>p[3].forEach(i=>i[5]=p[1]));
 
 const $=i=>document.getElementById(i),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
@@ -754,7 +821,7 @@ const MCc={};
 const mcOf=i=>MCc[i]||(MCc[i]=(()=>{const mk=v=>P[i][3].map(x=>{const y=x.slice();y[6]=v;y[7]=splitK(x);return y});return mk(0).concat(mk(1))})());
 const bw=x=>{const w=x[0].split(" "),k=x[7];return x[6]===0?w.slice(k):w.slice(0,k).map((t,i,a)=>i===a.length-1?t.replace(/,$/,""):t)};
 const givenTxt=x=>{const w=x[0].split(" "),k=x[7],A=w.slice(0,k),B=w.slice(k).join(" ");return x[6]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
-const NC=7,TYN=5;
+const NC=9,TYN=5;
 const isChoice=i=>i>=NC;
 const MODES=["mc","ty"];
 const SUF={mc:"",ty:"_ty",gp:"_gp",er:"_er",cb:"_cb"};
@@ -792,15 +859,16 @@ ei:[["Ich möchte eine Wohnung in der Stadt.","Ich möchte Ruhe auf dem Land.","
 ["Das Angebot ist attraktiv.","Das Risiko ist hoch.","З одного боку, пропозиція приваблива, з іншого — ризик високий.","Einerseits ist das Angebot attraktiv, andererseits ist das Risiko hoch."],
 ["Er will mehr verdienen.","Er will mehr Freizeit.","З одного боку, він хоче більше заробляти, з іншого — мати більше вільного часу.","Er will einerseits mehr verdienen, andererseits will er mehr Freizeit."],
 ["Ich lerne gern.","Ich habe wenig Zeit.","З одного боку, я люблю вчитися, з іншого — маю мало часу.","Einerseits lerne ich gern, andererseits habe ich wenig Zeit."]]};
-const CBL=P.slice(0,NC).map(p=>CBD[p[0]].map(r=>[r[3],r[2],p[3][0][2],p[3][0][3],"",p[1],r[0],r[1]]));
+const CBL=P.slice(0,NC).map(p=>(CBD[p[0]]||[]).map(r=>[r[3],r[2],p[3][0][2],p[3][0][3],"",p[1],r[0],r[1]]));
 const cbList=i=>isChoice(i)?[]:CBL[i];
 const list=(i,m)=>m=="mc"?mcOf(i):m=="ty"?tyList(i):m=="gp"?gpList(i):m=="er"?erList(i):cbList(i);
 const reqTotal=i=>isChoice(i)?P[i][3].length:2*P[i][3].length+tyList(i).length;
 const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty");
-const prevOf=i=>i===NC+1?NC-1:i-1;
+const prevOf=i=>i>=NC?NC-1:i-1;
 const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+p[3].length*2+tyList(i).length,0);
 const SEC_D={je:["oder","aber"],en:["noch","sondern"],we:["oder","aber"],nn:["als auch","oder"],so:["sondern auch","noch"],zw:["sondern","andererseits"],ei:["oder","zwar"]};
 const FIR_D={je:["wenn","weder"],en:["weder","zwar"],we:["entweder","sowohl"],nn:["sowohl","zwar"],so:["nicht nur","einerseits"],zw:["sowohl","entweder"],ei:["zwar","entweder"]};
+const SYN={ei:"as",as:"ei"};
 const TW={en:"we",we:"en",nn:"so",so:"nn",zw:"ei",ei:"zw",je:"nn"};
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
@@ -900,7 +968,7 @@ function renderTabs(){
   });
   _st.scrollLeft=_sl;
   if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
-  $("tabs").innerHTML=(isChoice(tab)?[["ty",tab===NC?"⚖️ Розрізни пару":"🎯 Вибери пару"]]:MODES.map(m=>[m,MLAB[m]])).map(g=>{
+  $("tabs").innerHTML=(isChoice(tab)?[["ty",tab===NC?"⚖️ Розрізни пару":tab===NC+1?"📖 Підручник":"🎯 Вибери пару"]]:MODES.map(m=>[m,MLAB[m]])).map(g=>{
     const n=list(tab,g[0]).length,d=cnt(tab,g[0]);
     return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
   }).join("");
@@ -919,7 +987,10 @@ const RS=[
 "<div class='rh'>💡 <b>sowohl … als auch</b> — як… так і…</div><div class='rf'><span class='k'>sowohl</span> A <span class='k'>als auch</span> B</div><div class='rx'>Ich lerne sowohl Deutsch als auch Englisch.<span class='rt'>Я вивчаю як німецьку, так і англійську.</span></div><div class='rn'>📌 Просто «і… і…», без акценту. Коми перед <b>als auch</b> немає. Підмет з цією парою — у множині: <i>Sowohl der Lebenslauf als auch das Anschreiben sind wichtig.</i></div>",
 "<div class='rh'>💡 <b>zwar … aber</b> — хоч і… але…</div><div class='rf'><span class='k'>zwar</span> A, <span class='k'>aber</span> B</div><div class='rx'>Ich bin zwar müde, aber ich gehe zur Arbeit.<span class='rt'>Я хоч і втомлений, але йду на роботу.</span></div><div class='rn'>📌 Кома перед <b>aber</b> обов’язкова. <b>aber</b> не змінює порядок слів: далі йде підмет, потім дієслово.</div>",
 "<div class='rh'>💡 <b>einerseits … andererseits</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>einerseits</span> A, <span class='k'>andererseits</span> B</div><div class='rx'>Einerseits möchte ich reisen, andererseits muss ich sparen.<span class='rt'>З одного боку, я хочу подорожувати, з іншого — мушу заощаджувати.</span></div><div class='rn'>📌 Між частинами стоїть кома. Якщо речення починається з <b>einerseits</b> або <b>andererseits</b>, дієслово йде одразу після нього.</div>",
+"<div class='rh'>💡 <b>teils … teils</b> — почасти… почасти…</div><div class='rf'><span class='k'>teils</span> A, <span class='k'>teils</span> B</div><div class='rx'>Ich arbeite teils im Büro, teils im Homeoffice.<span class='rt'>Я працюю почасти в офісі, почасти вдома.</span></div><div class='rn'>📌 «Трохи одне, трохи інше». Між частинами стоїть кома. Поєднуй однакові елементи.</div>",
+"<div class='rh'>💡 <b>auf der einen Seite … auf der anderen Seite</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>auf der einen Seite</span> A, <span class='k'>auf der anderen Seite</span> B</div><div class='rx'>Auf der einen Seite verdiene ich gut, auf der anderen Seite habe ich wenig Freizeit.<span class='rt'>З одного боку, я добре заробляю, з іншого — маю мало вільного часу.</span></div><div class='rn'>📌 Те саме, що <b>einerseits … andererseits</b>. Між частинами кома; на початку речення — інверсія.</div>",
 "<div class='rh'>💡 <b>Плутанина</b> — схожі пари</div><div class='rg'><div><span class='k'>nicht nur … sondern auch</span> — акцент на другій частині; кома перед sondern</div><div><span class='k'>sowohl … als auch</span> — нейтральне «і… і…»; коми немає</div><div><span class='k'>zwar … aber</span> — поступка: хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — дві сторони однієї оцінки</div><div><span class='k'>entweder … oder</span> — вибір із двох</div><div><span class='k'>weder … noch</span> — заперечення обох</div></div><div class='rn'>📌 Дивись на переклад і на кому: вона часто підказує правильну пару.</div>",
+"<div class='rh'>📖 <b>Підручник</b> — завдання з книги</div><div class='rn'>📌 Прочитай речення з пропуском, подивись на коми та смисл і обери пару. Під відповіддю буде вказано, з якого завдання книги це речення.</div>",
 "<div class='rh'>💡 <b>Мікс</b> — усі сім пар разом</div><div class='rg'><div><span class='k'>je … desto</span> — чим… тим…</div><div><span class='k'>entweder … oder</span> — або… або…</div><div><span class='k'>weder … noch</span> — ні… ні…</div><div><span class='k'>nicht nur … sondern auch</span> — не лише… а й…</div><div><span class='k'>sowohl … als auch</span> — як… так і…</div><div><span class='k'>zwar … aber</span> — хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — з одного боку… з іншого…</div></div><div class='rn'>📌 Спершу прочитай переклад, потім подивись на порядок слів і коми в реченні.</div>"];
 function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
  r.innerHTML="<div>"+RS[tab]+"</div><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button>";
@@ -970,7 +1041,7 @@ function start(){
     if(!left.length){fin();return}
     let c=left.filter(i=>i!=last); c=c.length?c:left;
     cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
-    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(ch?(tab===NC?"розрізни пару":"вибір пари"):MT[mode]);
+    $("title").textContent="Завдання "+(it.length-left.length+1)+" / "+it.length+" · "+(ch?(tab===NC?"розрізни пару":tab===NC+1?"завдання з підручника":"вибір пари"):MT[mode]);
     renderTabs();
   }
 
@@ -1086,7 +1157,7 @@ const commaSig=t=>t.replace(/\s*,\s*oder\b/gi," oder").replace(/\s*,\s*/g,", ").
 
 function renderOpts(x){
   const ci=P.findIndex(p=>p[1]===x[5]);
-  const ids=tab===NC?sh([ci,P.findIndex(p=>p[1]===x[6])]):sh([ci].concat(sh(P.slice(0,NC).map((_,i)=>i).filter(i=>i!==ci)).slice(0,3)));
+  const ids=tab===NC?sh([ci,P.findIndex(p=>p[1]===x[6])]):sh([ci].concat(sh(P.slice(0,NC).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
   const o=$("opts");o.className="opts grid4";o.style.display="";
   o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
   o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
@@ -1168,8 +1239,8 @@ function done(ok,cmOnly,extra){
     "</div>"+
     "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
     "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
-    (function(){const m=extra||(tab===NC?x[4]:"");return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
-    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto і einerseits … andererseits; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
+    (function(){const m=extra||(tab===NC||tab===NC+1?x[4]:"");return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
+    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto, einerseits … andererseits, teils … teils і auf der einen Seite … auf der anderen Seite; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
     (!ok && RS[P.findIndex(p=>p[1]===x[5])] ? "<div class='rule' style='margin:12px 0 0'>"+RS[P.findIndex(p=>p[1]===x[5])]+"</div>" : "")+
     (ok ? "<div class='bar'></div>" : "")+
     "<button class='nx' type='button'>Далі →</button>";
