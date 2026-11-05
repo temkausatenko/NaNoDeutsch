@@ -538,6 +538,10 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .rule code{background:var(--pl);padding:1px 6px;border-radius:6px;font-size:.92em}
 
 
+/* ===== Конструктор: без стрибків сторінки ===== */
+html,body,.card,.frame,.pool,.fb{overflow-anchor:none}
+.frame{align-content:flex-start}
+.zone{min-height:0}
 /* ===== Конструктор: підсвітка контейнера ===== */
 .zone.ok{border-color:var(--ok);background:var(--okb)}
 .zone.bad{border-color:var(--no);background:var(--nob)}
@@ -1079,9 +1083,20 @@ function hideHint(){clearTimeout(hintTm);$("hintAns").classList.remove("on")}
 
 const dw=t=>t;
 const bwx=x=>mode==="gl"?glChunks(x).t:bw(x);
+function fitFrame(){
+  const x=items()[cur],fr=document.querySelector("#bld .frame"),z=$("zone");
+  if(!x||!fr) return;
+  const saved=z.innerHTML;
+  fr.style.minHeight="";
+  z.innerHTML=bwx(x).map(w=>"<button type='button' class='wc'>"+esc(dw(w))+"</button>").join("");
+  const h=fr.offsetHeight;
+  z.innerHTML=saved;
+  fr.style.minHeight=h+"px";
+}
 function renderBuilder(){
   const x=items()[cur]; if(!x) return;
   const words=bwx(x),cf=mode==="gl"?glChunks(x).c:[];
+  if(answered&&$("pool").children.length) $("pool").style.minHeight=$("pool").offsetHeight+"px";
   $("zone").innerHTML = bPlaced.length
     ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
     : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова нижче, щоб скласти речення")+"</span>";
@@ -1142,7 +1157,9 @@ function start(){
     const words = bwx(x);
     bPlaced = [];
     bPool = sh(words.map((w,i)=>i));
+    $("pool").style.minHeight="";
     renderBuilder();
+    fitFrame();
   } else if(ch){
     $("sent").innerHTML = gapped(x,false); renderOpts(x);
   } else {
