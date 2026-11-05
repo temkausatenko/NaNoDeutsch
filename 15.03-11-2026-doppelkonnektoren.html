@@ -620,6 +620,16 @@ html,body,.card,.frame,.pool,.fb{overflow-anchor:none}
   .stg{padding:5px 7px 5px 10px;font-size:.74rem;min-height:0}
   .stg .sp{font-size:.6rem;padding:1px 5px}
 }
+/* ===== Склей: компактно на телефоні ===== */
+@media(max-width:600px){
+.card.gl .sent{font-size:1.02rem;line-height:1.4;margin-bottom:4px}
+.card.gl .frame{padding:8px;gap:6px;min-height:0;border-radius:12px}
+.card.gl .zone{gap:6px;padding:0}
+.card.gl .zone .ph{padding:6px 4px;font-size:.78rem}
+.card.gl .wc{padding:6px 9px;font-size:.88rem;line-height:1.2;border-radius:9px}
+.card.gl .pool{gap:6px;margin-top:10px;min-height:0}
+.card.gl .bld{margin-top:2px}
+}
 </style></head><body>
 <div class="w">
   <div class="header-wrap">
@@ -914,7 +924,10 @@ const MODES=["mc","ty","gl"];
 const SUF={mc:"",ty:"_ty",gl:"_gl"};
 const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gl:"🧩 Склей"};
 const MT={mc:"конструктор",ty:"переклад німецькою",gl:"склей речення з блоків"};
-const tyList=i=>isChoice(i)?P[i][3]:P[i][0]==="ex"?P[i][3].filter((_,j)=>j%3<2):P[i][3].slice(0,TYN);
+const nWords=x=>x[0].split(" ").length;
+const simplest=(arr,n)=>arr.map((x,j)=>[x,j]).sort((a,b)=>nWords(a[0])-nWords(b[0])||a[1]-b[1]).slice(0,n).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
+const TYC={};
+const tyList=i=>isChoice(i)?P[i][3]:(TYC[i]||(TYC[i]=P[i][0]==="ex"?[0,3,6,9].flatMap(g=>simplest(P[i][3].slice(g,g+3),2)):simplest(P[i][3],TYN)));
 const GLX={
 je:[["Je später es wird, desto müder werde ich.","Чим пізніше, тим більше я втомлююся.","Je","desto"],
 ["Je mehr ich darüber nachdenke, desto weniger verstehe ich es.","Чим більше я про це думаю, тим менше розумію.","Je","desto"],
@@ -971,6 +984,7 @@ let S={},XP=0,seen=sg("dk2_seen",{});
 let bPool=[],bPlaced=[];
 let hintUsed=false,hintTm;
 let rvMode=false, rvPool=[], rvInitial=0;
+let lastInput="", answeredAt=0;
 
 const cnt=(i,m)=>{const s=S[P[i][0]+SUF[m]];return s?list(i,m).filter((_,j)=>s.k[j]).length:0};
 const SK=(i=tab)=>P[i][0]+SUF[mode];
@@ -1118,6 +1132,7 @@ const bwx=x=>mode==="gl"?glChunks(x).t:bw(x);
 function fitFrame(){
   const x=items()[cur],fr=document.querySelector("#bld .frame"),z=$("zone");
   if(!x||!fr) return;
+  if(mode==="gl"&&window.innerWidth<=600){fr.style.minHeight="";return}
   const saved=z.innerHTML;
   fr.style.minHeight="";
   z.innerHTML=bwx(x).map(w=>"<button type='button' class='wc'>"+esc(dw(w))+"</button>").join("");
@@ -1148,6 +1163,7 @@ function start(){
   $("card").classList.toggle("bd", (mode === "mc" || mode === "gl") && !ch);
   $("card").classList.toggle("mc", cu);
   $("card").classList.toggle("tx", mode === "ty");
+  $("card").classList.toggle("gl", mode === "gl" && !ch);
 
   if(rvMode){
     if(rvPool.length === 0){ rvMode = false; fin(); return; }
@@ -1256,13 +1272,57 @@ function hintOrShow(){
   }
 }
 function showSol(){
-  if(answered) return; answered=true;
+  if(answered) return; answered=true; lastInput="";
   if(isChoice(tab)) endOpts(P.findIndex(p=>p[1]===items()[cur][5]));
   done(false);
 }
 
+const ORD={
+je:"після <b>je</b> дієслово стоїть у кінці частини, а після <b>desto</b> — одразу на 2-му місці.",
+en:"дієслово в реченні стоїть на 2-му місці; <b>entweder</b> і <b>oder</b> ставимо перед рівноправними частинами.",
+we:"<b>weder</b> і <b>noch</b> стоять безпосередньо перед тими частинами, які перелічуємо (<i>weder A noch B</i>).",
+nn:"спочатку <b>nicht nur</b> + частина А, потім кома і <b>sondern auch</b> + частина Б.",
+so:"<b>sowohl</b> + частина А + <b>als auch</b> + частина Б, без коми перед <b>als auch</b>.",
+zw:"після <b>aber</b> порядок слів не змінюється: спочатку підмет, потім дієслово.",
+ei:"якщо речення починається з <b>einerseits</b> або <b>andererseits</b>, дієслово йде одразу після нього.",
+tl:"<b>teils</b> + частина А, кома, <b>teils</b> + частина Б; обидві частини однотипні.",
+as:"якщо речення починається з <b>auf der einen Seite</b> або <b>auf der anderen Seite</b>, дієслово йде одразу після нього."
+};
+function explainTy(x,v){
+  const key=P[tab][0];
+  const wrap=L=>L.length?"<div class='why'><b>🔍 Що не так</b>"+L.map(t=>"<div>• "+t+"</div>").join("")+"</div>":"";
+  if(!v||!v.trim()) return wrap(["Ти відкрив відповідь без спроби. Знайди в реченні пару <b>"+esc(x[5])+"</b> і зверни увагу на порядок слів. Це речення ще повернеться."]);
+  const raw=t=>t.replace(/[.,!?;:„“"']/g,"").split(/\s+/).filter(Boolean);
+  const nv=norm(v),al=altsOf(x[0]);
+  const a=al[0],nz=w=>w==="umso"?"desto":w;
+  const ct=raw(a),cn=ct.map(t=>nz(norm(t))),ut=raw(v),un=ut.map(t=>nz(norm(t))),L=[];
+  const c1={};un.forEach(w=>{c1[w]=(c1[w]||0)+1});
+  let miss=[];cn.forEach((w,i)=>{if(c1[w]>0)c1[w]--;else miss.push(ct[i])});
+  const c2={};cn.forEach(w=>{c2[w]=(c2[w]||0)+1});
+  let extra=[];un.forEach((w,i)=>{if(c2[w]>0)c2[w]--;else extra.push(ut[i])});
+  const ml=[x[2],x[3]].filter(c=>{const k=norm(String(c)),has=z=>(" "+nv+" ").includes(" "+z+" ");return !(has(k)||(k==="desto"&&has("umso")))});
+  if(ml.length===2) L.push("У твоїй відповіді немає пари <b>"+esc(x[5])+"</b>, а саме вона тут потрібна.");
+  else if(ml.length===1) L.push("Не вистачає частини <b>«"+esc(ml[0])+"»</b> з пари <b>"+esc(x[5])+"</b>.");
+  const sp=[];
+  for(let i=miss.length-1;i>=0;i--){
+    const m=norm(miss[i]); if(m.length<5) continue;
+    const j=extra.findIndex(e=>osa(norm(e),m)<=Math.max(1,Math.floor(m.length/4)));
+    if(j>=0){sp.push([extra[j],miss[i]]);extra.splice(j,1);miss.splice(i,1)}
+  }
+  sp.reverse().forEach(q=>L.push("Орфографія: ти написав <b>"+esc(q[0])+"</b>, а треба <b>"+esc(q[1])+"</b>."));
+  if(key==="we"){
+    const ng=extra.filter(w=>/^(nicht|kein\w*)$/.test(norm(w)));
+    if(ng.length){L.push("<b>weder … noch</b> — це вже заперечення, тому <b>nicht</b> і <b>kein</b> не потрібні.");extra=extra.filter(w=>!ng.includes(w))}
+  }
+  const lim=arr=>arr.slice(0,6).map(esc).join(", ")+(arr.length>6?" …":"");
+  if(miss.length) L.push("Не вистачає або інше слово: <b>"+lim(miss)+"</b>.");
+  if(extra.length) L.push("Зайве або не те слово: <b>"+lim(extra)+"</b>.");
+  if(!L.length) L.push("Слова правильні, але порядок слів інший"+(ORD[key]?": "+ORD[key]:". Порівняй зі зразком вище."));
+  return wrap(L);
+}
 function done(ok,cmOnly,extra){
   const t=T(), x=items()[cur];
+  answeredAt=Date.now();
   if(!rvMode||ok){t.x=(t.x||0)+1;t.p=(t.p||0)+1}
   hapticAll(ok);
   playSound(ok?"correct":"wrong");
@@ -1299,6 +1359,7 @@ function done(ok,cmOnly,extra){
     "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
     (function(){const m=extra||(tab===NC||tab===NC+1?x[4]:"");return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
     (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto, einerseits … andererseits, teils … teils, bald … bald, zum einen … zum anderen і auf der einen Seite … auf der anderen Seite; перед sondern (в nicht …, sondern) і перед ob; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
+    (!ok && mode==="ty" && !isChoice(tab) && !cmOnly ? explainTy(x,lastInput) : "")+
     (!ok && (RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]]) ? "<div class='rule' style='margin:12px 0 0'>"+(RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]])+"</div>" : "")+
     (ok ? "<div class='bar'></div>" : "")+
     "<button class='nx' type='button'>Далі →</button>";
@@ -1377,12 +1438,12 @@ function speak(t){try{if(!window.speechSynthesis||!t)return;speechSynthesis.canc
 /* ===== Обробники ===== */
 $("showBtn").onclick = hintOrShow;
 $("chk").onclick = ()=>{
-  if(answered){ start(); return; }
+  if(answered){ if(Date.now()-answeredAt<400) return; start(); return; }
   if(mode==="mc"||mode==="gl"){ checkBuilder(); }
   else {
     const v = $("inp").value;
     if(!v.trim()) return;
-    answered = true;
+    answered = true; lastInput = v;
     $("inp").disabled = true;
     const x=items()[cur],al=altsOf(x[0]);
     const ex=al.find(a=>norm(v)===norm(a)),ty=ex?null:al.find(a=>typoOk(v,a,x)),hit=ex||ty,wOk=!!hit;
@@ -1390,7 +1451,7 @@ $("chk").onclick = ()=>{
     done(cOk, wOk&&!cOk, cOk&&ty?"✏️ Є дрібна одруківка — зараховано. Правильний варіант дивись вище.":undefined);
   }
 };
-$("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); $("chk").click(); } };
+$("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); e.stopPropagation(); $("chk").click(); } };
 
 // Глобальні клавіші (гарячі клавіші для конструктора)
 document.addEventListener('keydown', e => {
@@ -1419,7 +1480,7 @@ document.addEventListener('keydown', e => {
       return;
     }
   } else if (answered && e.key === 'Enter') {
-     $("chk").click();
+     if(!e.repeat) $("chk").click();
   }
 });
 
