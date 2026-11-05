@@ -588,6 +588,38 @@ html,body,.card,.frame,.pool,.fb{overflow-anchor:none}
 .stg.lk{opacity:.55;border-style:dashed}
 .stg.lk.nope{animation:shake .4s}
 .toast{white-space:normal;text-align:center;border-radius:16px;line-height:1.35}
+
+/* ===== Категорії: легкі пілюлі в стилі режимів ===== */
+.stages{gap:6px;padding:2px 2px 6px;margin:0 0 12px}
+.stg{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 8px 6px 12px;border:1px solid var(--bd);border-radius:999px;
+  background:transparent;color:var(--mu);font-size:.78rem;font-weight:600;line-height:1.2;
+  box-shadow:none;transition:background .2s,color .2s,box-shadow .2s,transform .15s;
+}
+.stg:hover:not(.lk){color:var(--tx);background:color-mix(in srgb,var(--mu) 10%,transparent);border-color:var(--bd)}
+.stg:active:not(.lk){transform:scale(.97)}
+.stg.on,.stg.on:hover{
+  background:color-mix(in srgb,var(--pr) 14%,transparent);color:var(--tx);border-color:transparent;
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pr) 55%,transparent);
+}
+.stg.lk{opacity:.5;border-style:dashed;border-color:var(--bd)}
+.stg .sp{
+  font-size:.62rem;font-weight:700;padding:2px 6px;border-radius:99px;opacity:1;
+  background:color-mix(in srgb,var(--mu) 14%,transparent);color:var(--mu);font-variant-numeric:tabular-nums;
+}
+.stg.on .sp{background:color-mix(in srgb,var(--pr) 22%,transparent);color:var(--sa)}
+.stg.done .sp{background:var(--okb);color:var(--ok)}
+.stg .si{font-size:.7rem;line-height:1}
+.stg.done .si{color:var(--ok)}
+.stg .bar{height:2px;left:12px;right:12px;bottom:0;border-radius:2px;background:transparent}
+.stg .bar i{height:2px;border-radius:2px;background:var(--ok)}
+.stg.on .bar i{background:var(--pr)}
+@media(max-width:480px){
+  .stages{gap:5px}
+  .stg{padding:5px 7px 5px 10px;font-size:.74rem;min-height:0}
+  .stg .sp{font-size:.6rem;padding:1px 5px}
+}
 </style></head><body>
 <div class="w">
   <div class="header-wrap">
