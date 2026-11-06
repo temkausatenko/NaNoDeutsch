@@ -683,7 +683,6 @@ html,body,.card,.frame,.pool,.fb{overflow-anchor:none}
   <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn"></small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span></div><div class="xrank"><span class="xrn" id="xr"></span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
 </div>
 <script>
-const L={je:"je … desto",en:"entweder … oder",we:"weder … noch",nn:"nicht nur … sondern auch",so:"sowohl … als auch",zw:"zwar … aber",ei:"einerseits … andererseits",tl:"teils … teils",as:"auf der einen Seite … auf der anderen Seite"};
 const P=[
 ["je","je … desto","<div class='lm'><b>je … desto</b> — чим… тим…</div><div class='rf'><span class='k'>je</span> + Komparativ, <span class='k'>desto</span> + Komparativ</div><div class='lr'>• Після <b>je</b> дієслово стоїть <b>у кінці</b>.</div><div class='lr'>• Після <b>desto</b> дієслово стоїть <b>на 2-му місці</b>.</div><div class='lr'>• <b>umso</b> — те саме, що <b>desto</b>.</div><div class='lr'>• Після desto завжди Komparativ: <b>desto mehr</b>, <b>desto besser</b>.</div><div class='lr lex'>Ще приклад: <i>Je mehr du übst, umso besser wird dein Deutsch.</i></div>",[
 ["Je mehr Bewerbungen ich geschickt habe, desto mehr Angebote habe ich bekommen.","Чим більше заявок я надіслав, тим більше пропозицій отримав.","Je","desto","mehr Bewerbungen geschickt, mehr Angebote bekommen"],
@@ -789,36 +788,6 @@ const P=[
 ["Ich weiß noch nicht, ob ich ins Kino oder ins Theater gehen soll.","Я ще не знаю, піти мені в кіно чи в театр.","ob","oder","ins Kino, ins Theater gehen soll"],
 ["Sie fragt mich, ob ich Kaffee oder Tee möchte.","Вона питає мене, чи хочу я каву, чи чай.","ob","oder","Kaffee, Tee möchte"],
 ["Es ist egal, ob wir mit dem Bus oder mit der Bahn fahren.","Байдуже, поїдемо ми автобусом чи потягом.","ob","oder","mit dem Bus, mit der Bahn fahren"]]],
-["conf","Плутанина","Ці пари легко сплутати. Прочитай переклад, подивись на коми та на сам смисл (акцент чи нейтрально, поступка чи дві сторони, вибір чи заперечення) і обери правильну з двох.",[
-["Der Chef lobt nicht nur die Idee, sondern auch den Mut des Teams.","Керівник хвалить не лише ідею, а ще й сміливість команди.","nicht nur","sondern auch","Акцент на другій частині («а ще й…»). Перед sondern — кома.",L.nn,L.so],
-["Sie hat sowohl Deutsch als auch Französisch studiert.","Вона вивчала як німецьку, так і французьку.","sowohl","als auch","Нейтральне «і… і…», без особливого акценту. Коми перед als auch немає.",L.so,L.nn],
-["Die Reise war nicht nur teuer, sondern auch anstrengend.","Подорож була не лише дорогою, а ще й виснажливою.","nicht nur","sondern auch","Друга риса звучить як «додатково ще й це». Перед sondern — кома.",L.nn,L.so],
-["Sowohl die Kinder als auch die Eltern waren begeistert.","І діти, і батьки були в захваті.","Sowohl","als auch","Просто «і… і…», обидва рівноправні. Підмет у множині (waren), коми немає.",L.so,L.nn],
-["Das Auto ist zwar teuer, aber es ist sehr zuverlässig.","Машина хоч і дорога, але дуже надійна.","zwar","aber","Поступка: друге речення протиставляється першому («хоч і… але…»).",L.zw,L.ei],
-["Einerseits ist das Auto teuer, andererseits ist es sehr zuverlässig.","З одного боку, машина дорога, з іншого — дуже надійна.","Einerseits","andererseits","Дві сторони однієї оцінки, обидві враховуються. Після Einerseits — інверсія (ist das Auto).",L.ei,L.zw],
-["Ich bin zwar neu im Team, aber ich kenne die Aufgaben gut.","Я хоч і новий у команді, але добре знаю завдання.","zwar","aber","Поступка («хоч і… але…»). aber не змінює порядок слів: ich kenne.",L.zw,L.ei],
-["Man kann einerseits im Homeoffice sparen, andererseits fehlt der Kontakt zu den Kollegen.","З одного боку, вдома можна заощаджувати, з іншого — бракує контакту з колегами.","einerseits","andererseits","Плюс і мінус поруч. Після andererseits — інверсія (fehlt der Kontakt).",L.ei,L.zw],
-["Du kannst entweder heute oder morgen kommen.","Ти можеш прийти або сьогодні, або завтра.","entweder","oder","Вибір одного з двох варіантів, заперечення немає.",L.en,L.we],
-["Ich kann weder heute noch morgen kommen.","Я не можу прийти ні сьогодні, ні завтра.","weder","noch","Заперечення вже в самій парі: nicht не потрібно.",L.we,L.en],
-["Wir essen entweder Pizza oder Pasta.","Ми їмо або піцу, або пасту.","entweder","oder","Одне з двох: або піца, або паста.",L.en,L.we],
-["Wir essen weder Pizza noch Pasta.","Ми не їмо ні піци, ні пасти.","weder","noch","Обидва варіанти відкинуті: weder … noch.",L.we,L.en]]],
-["bk","Підручник","Завдання з підручника: прочитай речення з пропуском, подивись на коми та на смисл і обери потрібну пару. Під відповіддю буде вказано, з якого завдання речення.",[
-["Ich habe nicht nur nette Kollegen, sondern auch einen guten Chef.","У мене не лише приємні колеги, а й хороший начальник.","nicht nur","sondern auch","📖 Übungen · Aufg. 1 · Nr. 1",L.nn],
-["Und ich habe sowohl günstige Arbeitszeiten als auch lange Ferien.","І в мене як вигідний робочий графік, так і довга відпустка.","sowohl","als auch","📖 Übungen · Aufg. 1 · Nr. 2",L.so],
-["Außerdem habe ich weder eine langweilige noch eine nutzlose Arbeit.","До того ж у мене немає ні нудної, ні марної роботи.","weder","noch","📖 Übungen · Aufg. 1 · Nr. 3",L.we],
-["Je länger ich Lehrer bin, desto lieber unterrichte ich.","Чим довше я вчителюю, тим охочіше викладаю.","Je","desto","📖 Übungen · Aufg. 1 · Nr. 4",L.je],
-["Entweder bleibe ich bis zur Rente auf diesem Arbeitsplatz, oder ich arbeite später einmal im Ausland.","Або я залишуся на цьому місці до пенсії, або колись працюватиму за кордоном.","Entweder","oder","📖 Übungen · Aufg. 1 · Nr. 5",L.en],
-["Einerseits möchte ich in dieser Schule bleiben, andererseits ist ein Auslandsaufenthalt auch sehr interessant.","З одного боку, я хочу залишитися в цій школі, з іншого — перебування за кордоном теж дуже цікаве.","Einerseits","andererseits","📖 Übungen · Aufg. 1 · Nr. 6",L.ei],
-["Im Ausland würde ich zwar meinen Horizont erweitern, aber ich müsste meine wunderbare Stelle hier aufgeben.","За кордоном я хоч і розширив би кругозір, але мусив би залишити свою чудову роботу тут.","zwar","aber","📖 Übungen · Aufg. 1 · Nr. 7",L.zw],
-["Ich habe teils Lust, teils Angst, ins Ausland zu gehen.","Я почасти хочу, почасти боюся їхати за кордон.","teils","teils","📖 Übungen · Aufg. 1 · Nr. 8",L.tl],
-["Das handgemachte Notizbuch ist zwar nachhaltig hergestellt, aber etwas teurer als Massenware.","Блокнот ручної роботи хоч і виготовлений екологічно, але трохи дорожчий за масовий товар.","zwar","aber","📖 Thema 7 · Aufg. 1 · Nr. 1",L.zw],
-["Der 3D-Drucker bietet einerseits kreative Möglichkeiten, andererseits ist die Bedienung für Anfänger nicht immer einfach.","3D-принтер з одного боку дає творчі можливості, з іншого — користуватися ним новачкам не завжди просто.","einerseits","andererseits","📖 Thema 7 · Aufg. 1 · Nr. 2",L.ei],
-["Das Bastelset für Erwachsene ist nicht nur leicht zu benutzen, sondern auch hochwertig verarbeitet.","Набір для рукоділля для дорослих не лише простий у користуванні, а й якісно виготовлений.","nicht nur","sondern auch","📖 Thema 7 · Aufg. 1 · Nr. 3",L.nn],
-["Die Online-Lernplattform hat nicht nur Kurse für Anfänger, sondern sie bietet auch spezialisierte Themen für Fortgeschrittene.","Онлайн-платформа має не лише курси для початківців, а й пропонує спеціалізовані теми для просунутих.","nicht nur","sondern","📖 Thema 7 · Aufg. 1 · Nr. 4",L.nn],
-["Die personalisierte Kalender-App überzeugt sowohl durch eine moderne Oberfläche als auch durch viele nützliche Funktionen.","Персоналізований застосунок-календар переконує і сучасним інтерфейсом, і багатьма корисними функціями.","sowohl","als auch","📖 Thema 7 · Aufg. 1 · Nr. 5",L.so],
-["Das personalisierte Fotobuch ist einerseits eine schöne Geschenkidee, andererseits braucht es Zeit, um es zu erstellen.","Персоналізований фотоальбом з одного боку — гарна ідея подарунка, з іншого — на його створення потрібен час.","einerseits","andererseits","📖 Thema 7 · Aufg. 3 · Nr. 1",L.ei],
-["Das digitale Lernpaket bietet sowohl digitale Übungsaufgaben als auch Videoaufzeichnungen.","Цифровий навчальний пакет пропонує як цифрові вправи, так і відеозаписи.","sowohl","als auch","📖 Thema 7 · Aufg. 3 · Nr. 2",L.so],
-["Der Workshop für Kerzenherstellung ist zwar kreativ, aber auch ein wenig kostenintensiv.","Майстер-клас зі створення свічок хоч і творчий, але також трохи дорогий.","zwar","aber","📖 Thema 7 · Aufg. 3 · Nr. 3",L.zw]]],
 ["mix","Мікс","Прочитай німецьке речення з пропуском і переклад, а потім обери, яка пара Doppelkonnektoren підходить. Орієнтуйся на зміст (чим… тим…, або… або…, ні… ні…) і на порядок слів.",[]]
 ];
 const ADD={
@@ -1106,7 +1075,7 @@ function renderTabs(){
   });
   _st.scrollLeft=_sl;
   if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
-  $("tabs").innerHTML=(isChoice(tab)?[["ty",tab===NC?"⚖️ Розрізни пару":tab===NC+1?"📖 Підручник":"🎯 Вибери пару"]]:MODES.map(m=>[m,MLAB[m]])).map(g=>{
+  $("tabs").innerHTML=(isChoice(tab)?[["ty","🎯 Вибери пару"]]:MODES.map(m=>[m,MLAB[m]])).map(g=>{
     const n=list(tab,g[0]).length,d=cnt(tab,g[0]);
     return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
   }).join("");
@@ -1131,8 +1100,6 @@ const RS=[
 "<div class='rh'>💡 <b>teils … teils</b> — почасти… почасти…</div><div class='rf'><span class='k'>teils</span> A, <span class='k'>teils</span> B</div><div class='rx'>Ich arbeite teils im Büro, teils im Homeoffice.<span class='rt'>Я працюю почасти в офісі, почасти вдома.</span></div><div class='rn'>📌 «Трохи одне, трохи інше». Між частинами стоїть кома. Поєднуй однакові елементи.</div>",
 "<div class='rh'>💡 <b>auf der einen Seite … auf der anderen Seite</b> — з одного боку… з іншого…</div><div class='rf'><span class='k'>auf der einen Seite</span> A, <span class='k'>auf der anderen Seite</span> B</div><div class='rx'>Auf der einen Seite verdiene ich gut, auf der anderen Seite habe ich wenig Freizeit.<span class='rt'>З одного боку, я добре заробляю, з іншого — маю мало вільного часу.</span></div><div class='rn'>📌 Те саме, що <b>einerseits … andererseits</b>. Між частинами кома; на початку речення — інверсія.</div>",
 "<div class='rh'>✨ <b>Extra</b> — ще чотири конструкції</div><div class='rg'><div><span class='k'>zum einen … zum anderen</span> — з одного боку… з іншого</div><div><span class='k'>bald … bald</span> — то… то…</div><div><span class='k'>nicht …, sondern</span> — не…, а…</div><div><span class='k'>ob … oder</span> — чи… чи… (непряме питання)</div></div><div class='rn'>📌 Кома: між частинами zum einen/zum anderen і bald/bald, перед sondern, перед ob. Перед oder у парі ob … oder коми немає.</div>",
-"<div class='rh'>💡 <b>Плутанина</b> — схожі пари</div><div class='rg'><div><span class='k'>nicht nur … sondern auch</span> — акцент на другій частині; кома перед sondern</div><div><span class='k'>sowohl … als auch</span> — нейтральне «і… і…»; коми немає</div><div><span class='k'>zwar … aber</span> — поступка: хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — дві сторони однієї оцінки</div><div><span class='k'>entweder … oder</span> — вибір із двох</div><div><span class='k'>weder … noch</span> — заперечення обох</div></div><div class='rn'>📌 Дивись на переклад і на кому: вона часто підказує правильну пару.</div>",
-"<div class='rh'>📖 <b>Підручник</b> — завдання з книги</div><div class='rn'>📌 Прочитай речення з пропуском, подивись на коми та смисл і обери пару. Під відповіддю буде вказано, з якого завдання книги це речення.</div>",
 "<div class='rh'>💡 <b>Мікс</b> — усі сім пар разом</div><div class='rg'><div><span class='k'>je … desto</span> — чим… тим…</div><div><span class='k'>entweder … oder</span> — або… або…</div><div><span class='k'>weder … noch</span> — ні… ні…</div><div><span class='k'>nicht nur … sondern auch</span> — не лише… а й…</div><div><span class='k'>sowohl … als auch</span> — як… так і…</div><div><span class='k'>zwar … aber</span> — хоч і… але…</div><div><span class='k'>einerseits … andererseits</span> — з одного боку… з іншого…</div></div><div class='rn'>📌 Спершу прочитай переклад, потім подивись на порядок слів і коми в реченні.</div>"];
 function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
  r.innerHTML="<div>"+RS[tab]+"</div><div class='rfoot'><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button><button class='rhide' type='button'>Приховати правила</button></div>";
@@ -1251,7 +1218,7 @@ const commaSig=t=>t.replace(/\s*,\s*oder\b/gi," oder").replace(/\s*,\s*/g,", ").
 
 function renderOpts(x){
   const ci=P.findIndex(p=>p[1]===x[5]);
-  const ids=tab===NC?sh([ci,P.findIndex(p=>p[1]===x[6])]):sh([ci].concat(sh(P.slice(0,PN).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
+  const ids=sh([ci].concat(sh(P.slice(0,PN).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
   const o=$("opts");o.className="opts grid4";o.style.display="";
   o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
   o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
@@ -1375,7 +1342,7 @@ function done(ok,cmOnly,extra){
     "</div>"+
     "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
     "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
-    (function(){const m=extra||(tab===NC||tab===NC+1?x[4]:"");return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
+    (function(){const m=extra||"";return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
     (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова перед sondern і aber та між частинами je … desto, einerseits … andererseits, teils … teils, bald … bald, zum einen … zum anderen і auf der einen Seite … auf der anderen Seite; перед sondern (в nicht …, sondern) і перед ob; перед noch, als auch і (зазвичай) oder її немає.</div>" : "")+
     (!ok && mode==="ty" && !isChoice(tab) && !cmOnly ? explainTy(x,lastInput) : "")+
     (!ok && (RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]]) ? "<div class='rule' style='margin:12px 0 0'>"+(RS[P.findIndex(p=>p[1]===x[5])]||RSX[x[5]])+"</div>" : "")+
