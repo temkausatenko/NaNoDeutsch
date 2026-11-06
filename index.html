@@ -50,15 +50,18 @@ body{margin:0;background:radial-gradient(1000px 560px at 50% -12%,#4a2615 0%,#24
 .card.prog{box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 16px var(--glow)}
 .card.hot{animation:hot 2.2s ease-in-out infinite}
 @keyframes hot{50%{box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 30px var(--c2)}}
-.card.done{background:linear-gradient(#1a202c,#1a202c) padding-box,conic-gradient(from var(--a),#ffd86b,#ff9a3c,#fff3b0,#ffb347,#ffd86b) border-box;
- animation:spin 4s linear infinite;box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 22px rgba(255,190,70,.4)}
+/* ✦ Завершено: золота «медаль» — м'яка рамка, віньєтка, один плавний відблиск */
+.card.done{background:linear-gradient(#1a202c,#1a202c) padding-box,conic-gradient(from var(--a),#b8741a,#ffe08a,#f2a93b,#fff1c1,#c9821f,#ffe08a,#b8741a) border-box;
+ animation:spin 8s linear infinite;
+ box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 1px rgba(255,214,120,.18),0 0 26px rgba(255,176,60,.28)}
 @keyframes spin{to{--a:360deg}}
 .card.done::before,.card.done::after{content:"";position:absolute;inset:0;border-radius:13px;pointer-events:none;z-index:2}
-.card.done::before{background:conic-gradient(from var(--h) at 50% 50%,rgba(255,90,170,.16),rgba(90,200,255,.16),rgba(255,225,110,.16),rgba(130,255,190,.16),rgba(255,90,170,.16));mix-blend-mode:screen;opacity:.85;animation:holoSpin 9s linear infinite}
-.card.done::after{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.05) 38%,rgba(120,220,255,.16) 44%,rgba(255,255,255,.24) 50%,rgba(255,150,230,.16) 56%,rgba(255,230,140,.08) 62%,transparent 70%);
- background-size:300% 100%;background-position:120% 0;mix-blend-mode:screen;animation:holoSweep 6s cubic-bezier(.45,0,.55,1) infinite}
-@keyframes holoSpin{to{--h:360deg}}
-@keyframes holoSweep{0%{background-position:120% 0}55%,100%{background-position:-20% 0}}
+.card.done::before{background:radial-gradient(120% 90% at 50% 0%,rgba(255,226,150,.14),transparent 55%),linear-gradient(to top,rgba(30,16,4,.62),transparent 46%);
+ box-shadow:inset 0 0 0 1px rgba(255,230,160,.28),inset 0 0 18px rgba(255,190,80,.18)}
+.card.done::after{background:linear-gradient(115deg,transparent 40%,rgba(255,244,205,.0) 44%,rgba(255,244,205,.22) 50%,rgba(255,244,205,0) 56%,transparent 60%);
+ background-size:320% 100%;background-position:130% 0;mix-blend-mode:screen;animation:holoSweep 5.5s cubic-bezier(.45,0,.55,1) infinite}
+.card.done img{filter:saturate(1.08) contrast(1.03)}
+@keyframes holoSweep{0%{background-position:130% 0}45%,100%{background-position:-30% 0}}
 html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){.card,.card::before,.card::after,.cell,.hero{animation:none!important}}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -72,8 +75,12 @@ html.is-hidden .card,html.is-hidden .card::before,html.is-hidden .card::after{an
 .badge svg.ring .fg{stroke:var(--c2);stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p));filter:drop-shadow(0 0 3px var(--glow));transition:stroke-dashoffset 1s var(--ease)}
 .badge .num{position:relative}
 .badge.neu{width:auto;height:auto;border-radius:99px;padding:5px 11px;color:#22d3ee;letter-spacing:.8px;border:1px solid rgba(34,211,238,.4);box-shadow:0 2px 8px rgba(0,0,0,.35),0 0 10px rgba(34,211,238,.25)}
-.badge.done svg.ring .fg{stroke:url(#gGold);filter:drop-shadow(0 0 4px rgba(255,200,80,.9))}
-.badge .ck{position:relative;width:18px;height:18px;fill:none;stroke:#ffd666;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(255,200,80,.8))}
+.badge.done{background:radial-gradient(circle at 32% 28%,#fff3c4 0%,#ffd466 38%,#e8951c 100%);
+ border:1.5px solid rgba(255,244,200,.85);backdrop-filter:none;-webkit-backdrop-filter:none;
+ box-shadow:0 3px 10px rgba(0,0,0,.45),0 0 14px rgba(255,190,70,.55),inset 0 -2px 4px rgba(150,80,0,.35),inset 0 1px 2px rgba(255,255,255,.7)}
+.badge.done svg.ring{display:none}
+.badge.done::after{content:"";position:absolute;inset:3px;border-radius:50%;border:1px dashed rgba(120,60,0,.35)}
+.badge .ck{position:relative;width:19px;height:19px;fill:none;stroke:#5a2d00;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 0 rgba(255,240,190,.7))}
 
 /* ---------- Осінь ---------- */
 .track{position:relative;height:30px;display:flex;align-items:center}
