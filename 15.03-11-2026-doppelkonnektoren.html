@@ -1062,14 +1062,30 @@ function showToast(msg){
   t.textContent=msg;void t.offsetWidth;t.classList.add("on");
   clearTimeout(_toastTm);_toastTm=setTimeout(()=>t.classList.remove("on"),2800);
 }
+let UNL=sg("dk2_unl",[]);if(!Array.isArray(UNL))UNL=[];
 function lockedHint(b,i){
-  const p=prevOf(i),pc=Math.round(reqDone(p)/reqTotal(p)*100);
-  showToast("🔒 Спочатку пройди «"+P[p][1]+"» на 100% — зараз "+pc+"%");
-  if(b){b.classList.remove("nope");void b.offsetWidth;b.classList.add("nope")}
   try{hapticAll(false)}catch(e){}
+  const p=prevOf(i),pc=Math.round(reqDone(p)/reqTotal(p)*100);
+  const old=document.getElementById("unlDlg");if(old)old.remove();
+  const o=document.createElement("div");o.className="complete";o.id="unlDlg";
+  o.innerHTML="<div class='complete-card' style='border-color:var(--go)'><h2 style='color:var(--go)'>🔒 Етап закритий</h2>"+
+    "<p>Щоб відкрити «<span class='cmax'>"+esc(P[i][1])+"</span>», спочатку потрібно пройти «<span class='cmax'>"+esc(P[p][1])+"</span>» на 100% — зараз <span class='cmax'>"+pc+"%</span>.</p>"+
+    "<p style='margin-top:10px'>Можна відкрити цей етап достроково.</p>"+
+    "<div class='complete-actions'><button class='cancel' id='unlNo' type='button'>Скасувати</button><button class='go' id='unlYes' type='button' style='border-color:var(--go);background:var(--go)'>🔓 Відкрити достроково</button></div></div>";
+  document.body.appendChild(o);
+  const close=()=>o.remove();
+  o.onclick=e=>{if(e.target===o)close()};
+  $("unlNo").onclick=close;
+  $("unlYes").onclick=()=>{
+    if(!UNL.includes(i)){UNL.push(i);ss("dk2_unl",UNL)}
+    close();
+    try{hapticAll(true)}catch(e){}
+    enterCat(i);showRule(!seen[P[tab][0]]);renderTabs();start();
+  };
 }
 function isCatOpen(i){
   if(i===0) return true;
+  if(UNL.includes(i)) return true;
   if(reqDone(i)>0) return true;
   return reqDone(prevOf(i))>=reqTotal(prevOf(i));
 }
@@ -1079,7 +1095,7 @@ function renderTabs(){
   const _st=$("stages"),_sl=_st.scrollLeft;
   $("stages").innerHTML=P.map((p,i)=>{
     const pc=Math.round(reqDone(i)/reqTotal(i)*100),open=isCatOpen(i),done=pc===100;
-    return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Пройди попередній етап на 100%'}">`+
+    return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Натисни, щоб відкрити достроково'}">`+
       (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
       `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
   }).join("");
