@@ -1195,6 +1195,8 @@ function start(){
     fitFrame();
   } else if(ch){
     $("sent").innerHTML = gapped(x,false); renderOpts(x);
+    $("lab").innerHTML="<button type='button' class='tr-btn' id='trBtn'>Перекласти</button>";
+    $("trBtn").onclick=()=>{$("lab").innerHTML=ua};
   } else {
     $("sent").innerHTML = "";
     if(x[4]) $("lab").innerHTML = ua+"<div class='tr-hint'>💡 "+esc(x[4])+"</div>";
