@@ -302,6 +302,7 @@ button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid v
 .big{font-size:1.7rem;font-weight:700;line-height:1.25;letter-spacing:-.2px;padding:6px 0}
 .sent .blank{min-width:56px}
 .blank.fill{border-bottom-style:solid}
+.blank.zu{min-width:30px;margin:0 2px}
 .u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:var(--sa)}
 .opt.rl:not(.ok):not(.er){border-color:color-mix(in srgb,var(--c) 50%,var(--bd))}
 .opt.rl b{color:var(--c);font-weight:800;letter-spacing:.02em}
@@ -697,6 +698,44 @@ body{background-image:none;background-color:var(--bg);overflow-x:hidden}
 @keyframes aur2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-10vmax,12vmax) scale(1.18)}}
 @keyframes aur3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,-10vmax) scale(1.1)}}
 .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>")}
+
+/* === дизайн: типографіка, конструктор, фінал, анімації === */
+:root{--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Source Serif 4",Charter,Georgia,"Times New Roman",serif}
+@keyframes cardIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.wc{font-family:var(--serif);font-size:1.08rem;letter-spacing:.005em}
+.wc .kn{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wc.cn{border-color:var(--c-zu);background:color-mix(in srgb,var(--c-zu) 18%,var(--card));font-weight:700}
+.wc.rm{border-color:color-mix(in srgb,var(--c-n) 55%,var(--bd));background:color-mix(in srgb,var(--c-n) 11%,var(--card))}
+.wc.rs{border-color:color-mix(in srgb,var(--c-adv) 55%,var(--bd));background:color-mix(in srgb,var(--c-adv) 11%,var(--card))}
+.wc.cn.rs{border-color:var(--c-zu);background:color-mix(in srgb,var(--c-zu) 22%,var(--card))}
+.wc.cm.rm,.wc.cm.rs{background:transparent}
+.card.mc .sent{font-family:var(--serif);font-size:1.5rem;line-height:1.6;font-weight:500;letter-spacing:.005em}
+#inp{font-family:var(--serif);font-size:18px!important}
+.fb .ans{font-family:var(--serif);font-size:1.3rem;line-height:1.45;font-weight:500}
+.kwb{font-family:var(--serif);font-size:1rem}
+.hl .hv.de{font-family:var(--serif);font-size:1.05rem}
+.rule .rx,.lesson .lx b{font-family:var(--serif);font-size:1.03rem}
+.rule .rx .rt{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.card.fin #finBox{padding:6px 2px 4px}
+.fring{position:relative;width:132px;height:132px;margin:2px auto 14px}
+.fring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.fring circle{fill:none;stroke-width:9;stroke-linecap:round}
+.fring .fr-bg{stroke:var(--pl)}
+.fring .fr-fg{stroke:var(--fc,var(--ok));stroke-dasharray:326.7;stroke-dashoffset:326.7;transition:stroke-dashoffset 1.1s cubic-bezier(.4,0,.2,1);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--fc,var(--ok)) 55%,transparent))}
+.fring .fr-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fring .fr-c b{font-size:2.1rem;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;color:var(--tx)}
+.fring .fr-c small{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mu);margin-top:5px;font-weight:600}
+#finBox .ft{font-size:1.15rem;margin:0 0 4px}
+.fstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 2px}
+.fstats>div{padding:10px 4px;border:1px solid var(--bd);border-radius:12px;background:var(--pl)}
+.fstats b{display:block;font-size:1.3rem;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+.fstats small{display:block;font-size:.6rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);margin-top:4px;font-weight:600}
+.fstats .o b{color:var(--ok)}.fstats .x b{color:var(--no)}
+.fin-actions{flex-direction:column;align-items:stretch;gap:10px;margin-top:16px}
+.fin-actions .go.big{width:100%;padding:14px 18px;font-size:1.02rem;border-radius:12px;box-shadow:0 6px 18px -6px color-mix(in srgb,var(--ok) 70%,transparent)}
+.fin-actions .go:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+.fin-sec{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.fin-sec button{padding:9px 14px;font-size:.88rem}
 </style></head><body>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="grain" aria-hidden="true"></div>
@@ -1010,7 +1049,7 @@ const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?glList(i):tyList(i);
 const reqTotal=i=>isChoice(i)?P[i][3].length:mcOf(i).length+tyList(i).length;
 const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty");
 const prevOf=i=>i>=NC?PN-1:i-1;
-const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+mcOf(i).length+tyList(i).length,0);
+const XP_MAX=P.reduce((n,p,i)=>n+reqTotal(i),0);
 const SYN={in:"dd",dd:"in"};
 const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
 const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
@@ -1062,7 +1101,7 @@ function load(){
 }
 
 function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.dataset.r=r;box.classList.toggle("max",XP>=XP_MAX);
- $("xf").style.width=XP/XP_MAX*100+"%";$("xt").textContent=XP;$("xn").textContent=XP>=XP_MAX?"MAX":"/ "+XP_MAX;$("xr").textContent=R[1]+" "+R[2];
+ $("xf").style.width=XP/XP_MAX*100+"%";countTo($("xt"),XP);$("xn").textContent=XP>=XP_MAX?"MAX":"/ "+XP_MAX;$("xr").textContent=R[1]+" "+R[2];
  $("xnext").textContent=N?"ще "+(N[0]-XP)+" до «"+N[2]+"»":"EXP зафіксовано 🔒";
  const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
 function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
@@ -1166,23 +1205,52 @@ function fitFrame(){
   z.innerHTML=saved;
   fr.style.minHeight=h+"px";
 }
+const RMO=()=>{try{return matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}};
+function roleMap(toks,x){
+  const c=String(x[2]).split(" ")[0].toLowerCase(),L=toks.map(t=>t.toLowerCase()),n=toks.length,R=L.map(t=>t===","?"k":"m"),kc=L.indexOf(c);
+  if(kc<0)return R;
+  let end=n;
+  for(let j=kc+1;j<n;j++){if(L[j]===","&&!(c==="dadurch"&&j===kc+1)){end=j;break}}
+  for(let i=kc;i<end;i++)if(R[i]!=="k")R[i]="s";
+  R[kc]="c";
+  let j=kc+1;if(L[j]===",")j++;
+  if(L[j]==="dass"&&j<end)R[j]="c";
+  else if(["um","anstatt","ohne"].includes(c)){let z=-1;for(let i=kc+1;i<end;i++)if(L[i]==="zu")z=i;if(z>0)R[z]="c"}
+  return R;
+}
+function fly(r,el){
+  if(!el||!r||RMO()||!el.animate)return;
+  const n=el.getBoundingClientRect(),dx=r.left-n.left,dy=r.top-n.top;
+  if(!dx&&!dy)return;
+  el.animate([{transform:"translate("+dx+"px,"+dy+"px) scale(.92)",opacity:.55},{transform:"none",opacity:1}],{duration:240,easing:"cubic-bezier(.2,.8,.2,1)"});
+}
+function countTo(el,v,suf){
+  suf=suf||"";const from=el._v!=null?el._v:(parseInt(el.textContent)||0);el._v=v;
+  if(RMO()||from===v){el.textContent=v+suf;return}
+  const t0=performance.now(),d=Math.min(900,300+Math.abs(v-from)*8);cancelAnimationFrame(el._r);
+  const st=t=>{const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=Math.round(from+(v-from)*e)+suf;if(k<1)el._r=requestAnimationFrame(st)};
+  el._r=requestAnimationFrame(st);
+}
 function renderBuilder(){
   const x=items()[cur]; if(!x) return;
   const words=bwx(x),cf=mode==="gl"?glChunks(x).c:[];
+  const rm=mode==="mc"?roleMap(words,x):[],pr=(mode==="mc"&&answered&&$("zone").classList.contains("ok"))?roleMap(bPlaced.map(i=>words[i]),x):null;
+  const zr=(idx,pos)=>pr?(pr[pos]==="m"?" rm":pr[pos]==="s"?" rs":pr[pos]==="c"?" rs cn":""):(rm[idx]==="c"?" cn":"");
   if(answered&&$("pool").children.length) $("pool").style.minHeight=$("pool").offsetHeight+"px";
   $("zone").innerHTML = bPlaced.length
-    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+(words[idx]===","?" cm":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
+    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+(words[idx]===","?" cm":"")+zr(idx,pos)+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
     : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова та коми нижче, щоб скласти речення")+"</span>";
-  $("pool").innerHTML = answered ? "" : bPool.map((i,n)=>{const u=bPlaced.includes(i);return "<button type='button' class='wc"+(cf[i]?" col r-pi":"")+(words[i]===","?" cm":"")+(u?" used":"")+"'"+(u?" disabled tabindex='-1'":" data-bi='"+i+"'")+"><span class='kn'>"+(n<9?n+1:n==9?0:"")+"</span>"+esc(dw(words[i]))+"</button>"}).join("");
+  $("pool").innerHTML = answered ? "" : bPool.map((i,n)=>{const u=bPlaced.includes(i);return "<button type='button' class='wc"+(cf[i]?" col r-pi":"")+(words[i]===","?" cm":"")+(rm[i]==="c"?" cn":"")+(u?" used":"")+"'"+(u?" disabled tabindex='-1'":" data-bi='"+i+"'")+"><span class='kn'>"+(n<9?n+1:n==9?0:"")+"</span>"+esc(dw(words[i]))+"</button>"}).join("");
   if(!answered){
-    $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
-    $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ if(bPlaced.length>=need(x)) return; tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
+    $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); const r=b.getBoundingClientRect(),idx=bPlaced[+b.dataset.bp]; bPlaced.splice(+b.dataset.bp,1); renderBuilder(); fly(r,$("pool").querySelector("[data-bi='"+idx+"']")); });
+    $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ if(bPlaced.length>=need(x)) return; tapHaptic(); const r=b.getBoundingClientRect(); bPlaced.push(+b.dataset.bi); renderBuilder(); fly(r,$("zone").lastElementChild); });
   }
   if(!answered) $("chk").disabled = bPlaced.length !== need(x);
 }
 
 function start(){
   clearTimeout(autoAdvanceTimer);
+  {const c=$("card");c.style.animation="none";void c.offsetWidth;c.style.animation="cardIn .32s cubic-bezier(.16,1,.3,1) both"}
   const t=T(),it=items(),left=it.map((_,i)=>i).filter(i=>!t.k[i]);
   $("card").classList.remove("fin","ans");
   const ch=isChoice(tab),cu=ch;
@@ -1247,8 +1315,32 @@ function start(){
   }
 }
 
-function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?" fill ok":"")+"'>"+(fill?esc(c):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
- return s.replace(x[2],"\u0001").replace(x[3],"\u0002").replace("\u0001",g(x[2])).replace("\u0002",g(x[3]))}
+const ZUP="vor|an|auf|ab|aus|ein|mit|weg|fest|statt|um|her|hin|nach|fort|zurück|heraus|hinein|los|teil|frei|dar|bei|durch|über|unter|wieder|zusammen|hinaus|herunter|raus|rein|rauf|hoch|nieder|vorbei|entgegen|weiter|zurecht|heim|kennen|spazieren";
+function gapParts(x){
+  const w=x[0].split(" "),lw=t=>_clean(t).toLowerCase(),c2=lw(String(x[2]).split(" ")[0]),a3=lw(String(x[3]).split(" ")[0]);
+  let i2=w.findIndex(t=>lw(t)===c2);if(i2<0)i2=0;
+  const sp=t=>{const s=(t.match(/[.,!?;:]+$/)||[""])[0];return [t.slice(0,t.length-s.length),s]};
+  const M={};
+  {const [c,s]=sp(w[i2]);M[i2]={pre:"",t:c,post:"",s:s,sm:0}}
+  if(a3==="dass"){const d=w.findIndex((t,i)=>i>i2&&lw(t)==="dass");if(d>i2){const [c,s]=sp(w[d]);M[d]={pre:"",t:c,post:"",s:s,sm:0}}}
+  else if(c2!=="damit"&&c2!=="indem"){
+    let z=-1;w.forEach((t,i)=>{if(i>i2&&lw(t)==="zu")z=i});
+    if(z>i2){const [c,s]=sp(w[z]);M[z]={pre:"",t:c,post:"",s:s,sm:1}}
+    else{
+      const re=new RegExp("^("+ZUP+")(zu)(.{3,})$","i");
+      for(let i=w.length-1;i>i2;i--){const [c,s]=sp(w[i]),m=c.match(re);if(m){M[i]={pre:m[1],t:m[2],post:m[3],s:s,sm:1};break}}
+    }
+  }
+  return M;
+}
+function gapped(x,fill){
+  const M=gapParts(x);
+  return esc(x[0]).split(" ").map((_,i)=>{
+    const t=x[0].split(" ")[i],m=M[i];if(!m)return esc(t);
+    const g="<span class='blank"+(m.sm?" zu":"")+(fill?" fill ok":"")+"'>"+(fill?esc(m.t):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
+    return esc(m.pre)+g+esc(m.post)+m.s;
+  }).join(" ");
+}
 const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:„“"']/g,"").replace(/\s+/g," ").trim();
 
 const osa=(a,b)=>{const m=a.length,n=b.length,d=[];for(let i=0;i<=m;i++){d[i]=[i];for(let j=1;j<=n;j++)d[i][j]=i?0:j}
@@ -1442,15 +1534,16 @@ function fin(){
     rvBtnStr = `<button class='btn danger' id='rvBtn' style='border:1px solid var(--no);background:var(--no);color:#fff'>🔁 Робота над помилками (${errCount})</button>`;
   }
 
+  const tot=t.r+t.w,pct=tot?Math.round(t.r/tot*100):100,fc=pct>=85?"var(--ok)":pct>=60?"var(--go)":"var(--no)";
   $("finBox").innerHTML =
-    "<p class='ft'>🎉 "+P[tab][1]+" — усе виконано!</p>"+
-    "<p>Правильно: <b>"+t.r+"</b> · Помилок: <b>"+t.w+"</b> · Завдань: <b>"+n+"</b></p>"+
+    "<div class='fring' style='--fc:"+fc+"'><svg viewBox='0 0 120 120' aria-hidden='true'><circle class='fr-bg' cx='60' cy='60' r='52'/><circle class='fr-fg' cx='60' cy='60' r='52'/></svg><div class='fr-c'><b>0%</b><small>точність</small></div></div>"+
+    "<p class='ft'>🎉 "+esc(P[tab][1])+" — усе виконано!</p>"+
+    "<div class='fstats'><div class='o'><b>"+t.r+"</b><small>Правильно</small></div><div class='x'><b>"+t.w+"</b><small>Помилок</small></div><div><b>"+n+"</b><small>Завдань</small></div></div>"+
     "<div class='fin-actions'>"+
-    rvBtnStr +
-    "<button class='cancel' id='again'>↺ Ще раз</button>"+
-    "<button class='cancel' id='alt'>"+("→ "+MLAB[nextMode()])+"</button>"+
-    "<button class='go' id='nxt'"+(canNext?"":" disabled")+">"+(canNext?"Наступна вкладка →":"Наступна заблокована 🔒")+"</button>"+
-    "</div>";
+    "<button class='go big' id='nxt'"+(canNext?"":" disabled")+">"+(canNext?"Наступна вкладка →":"Наступна заблокована 🔒")+"</button>"+
+    "<div class='fin-sec'>"+rvBtnStr+"<button class='cancel' id='again'>↺ Ще раз</button><button class='cancel' id='alt'>"+("→ "+MLAB[nextMode()])+"</button></div></div>";
+  {const rg=$("finBox").querySelector(".fr-fg"),nb=$("finBox").querySelector(".fr-c b");nb._v=0;
+   requestAnimationFrame(()=>requestAnimationFrame(()=>{rg.style.strokeDashoffset=String(326.7*(1-pct/100));countTo(nb,pct,"%")}))}
 
   if(errCount > 0){
     $("rvBtn").onclick = () => {
@@ -1507,8 +1600,10 @@ document.addEventListener('keydown', e => {
       const w = bPool[idx];
       if (w !== undefined && !bPlaced.includes(w) && bPlaced.length < need(items()[cur])) {
         tapHaptic();
+        const _b=$("pool").querySelector("[data-bi='"+w+"']"),_r=_b&&_b.getBoundingClientRect();
         bPlaced.push(w);
         renderBuilder();
+        fly(_r,$("zone").lastElementChild);
       }
       return;
     }
