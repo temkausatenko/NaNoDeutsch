@@ -1,0 +1,1683 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Finale und modale Sätze · тренажер</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="sync.js"></script>
+<script>
+(function(){var T=['light','dark','autumn','winter','sakura','candy'],t=null;try{t=localStorage.getItem('pi-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',T.indexOf(t)>-1?t:'dark');})();
+</script>
+<style>
+:root{
+  --bg:#0c0f16;--bg-grad:#1a2035;
+  --card:#131a24;--card-hover:#1c2532;
+  --tx:#e8eef5;--mu:#8892a7;
+  --pr:#6366f1;--pr-glow:rgba(99,102,241,.35);
+  --pl:#1e293b;
+  --ok:#10b981;--okb:rgba(16,185,129,.12);
+  --no:#ef4444;--nob:rgba(239,68,68,.12);
+  --go:#f59e0b;--gob:rgba(245,158,11,.12);
+  --bd:#1e293b;
+  --sa:#818cf8;--pe:#a78bfa;
+  --radius:16px;color-scheme:dark;
+}
+@media (prefers-color-scheme:light){:root:not([data-theme]){
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f8fafc;--bg-grad:#eef2ff;--card:#fff;--card-hover:#f1f5f9;
+  --tx:#0f172a;--mu:#64748b;--pr:#4f46e5;--pr-glow:rgba(79,70,229,.2);--pl:#eef2ff;
+  --ok:#059669;--okb:rgba(5,150,105,.1);--no:#dc2626;--nob:rgba(220,38,38,.1);
+  --go:#d97706;--gob:rgba(217,119,6,.1);--bd:#e2e8f0;--sa:#6366f1;--pe:#7c3aed;color-scheme:light}
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+button,.wc,.opt,.stg,.tab,.sent,.q{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.row input{font-size:16px!important}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(circle at top,var(--bg-grad) 0%,var(--bg) 100%);
+  color:var(--tx);font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;min-height:100vh;transition:background-color .3s,color .3s}
+.w{max-width:720px;margin:0 auto;padding-block:24px 60px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));position:relative}
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap;justify-content:center}
+.tab{flex-shrink:0;border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:99px;
+  padding:7px 14px;cursor:pointer;font-family:inherit;font-weight:500;font-size:.85rem;transition:all .2s ease;
+  display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.tab small{font-weight:500;color:var(--mu);font-size:.7rem;padding:1px 7px;background:var(--pl);border-radius:99px;line-height:1.4}
+.tab.on{background:var(--pr);border-color:var(--pr);color:#fff;box-shadow:0 2px 8px var(--pr-glow)}
+.tab.on small{color:#fff;background:rgba(255,255,255,.2)}
+.xp{margin-top:14px;padding:14px 18px 16px;border:1px solid transparent;border-radius:14px;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,rgba(245,158,11,.6),var(--bd) 38%,var(--bd) 62%,rgba(167,139,250,.45)) border-box;transition:box-shadow .5s}
+.xp.max{box-shadow:0 0 0 1px rgba(245,158,11,.35),0 8px 28px rgba(245,158,11,.2)}
+.xrst{margin-left:10px;width:24px;height:24px;padding:0;border:1px solid var(--bd);border-radius:50%;background:transparent;color:var(--mu);font-size:.85rem;line-height:1;cursor:pointer;transition:all .18s}
+.xrst:hover{color:var(--tx);border-color:var(--pr)}
+.xh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.xl{display:flex;align-items:center;gap:9px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mu);font-weight:600}
+.xg{display:block;width:9px;height:9px;transform:rotate(45deg);border-radius:2px;background:linear-gradient(135deg,#fcd34d,var(--go));box-shadow:0 0 9px rgba(245,158,11,.65)}
+.xv{display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums}
+.xv b{font-size:1.35rem;line-height:1;font-weight:700;color:var(--tx)}
+.xv small{font-size:.8rem;font-weight:600;color:var(--mu)}
+.xp.max .xv b,.xp.max .xv small{color:var(--go)}
+.xb{position:relative;height:12px;background:var(--pl);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+.xb::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 2px),var(--card) calc(20% - 2px),var(--card) 20%)}
+.xb i{position:relative;display:block;height:100%;width:0;overflow:hidden;border-radius:99px;background:linear-gradient(90deg,#b45309,var(--go) 55%,#fcd34d);transition:width .7s cubic-bezier(.4,0,.2,1)}
+.xb i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:xs 3.4s ease-in-out infinite}
+@keyframes xs{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+.pg{margin:10px 0 14px;height:6px;background:var(--pl);border-radius:99px;overflow:hidden}
+.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sa),var(--pe));border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.stats-panel{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:18px}
+.stat-box{background:var(--card);padding:10px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.stat-label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mu);margin-bottom:2px;font-weight:600}
+.stat-val{font-size:1.2rem;font-weight:800;color:var(--tx);line-height:1.1}
+.stat-val.ok{color:var(--ok)}.stat-val.no{color:var(--no)}.stat-val.go{color:var(--go)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);animation:slideUp .4s cubic-bezier(.16,1,.3,1) forwards;position:relative}
+@keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}100%{box-shadow:0 0 0 18px rgba(16,185,129,0)}}
+@keyframes pop{0%{transform:scale(.97);opacity:0}100%{transform:scale(1);opacity:1}}
+.card.win{border-color:var(--ok);animation:glow .9s ease-out}
+#finBox{display:none}
+.card.fin > :not(.chead):not(#finBox){display:none!important}
+.card.fin #finBox{display:block!important;text-align:center;padding:14px 4px 6px;animation:pop .35s ease-out}
+#finBox .ft{font-size:1.3rem;font-weight:700;color:var(--ok);margin:0 0 10px}
+#finBox .ft.rv{color:var(--pr)}
+#finBox p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.55}
+#finBox p b{color:var(--tx)}
+.fin-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.fin-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.fin-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.fin-actions .go:hover{filter:brightness(1.1)}
+.fin-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.fin-actions .cancel:hover{border-color:var(--pr)}
+.tab.cl small::before{content:"✓ "}
+.card h2{margin:0 0 16px;font-size:.66rem;font-weight:600;letter-spacing:.16em;color:var(--mu);padding-right:86px;text-transform:uppercase;line-height:32px;height:32px;}
+.speak{position:absolute;top:22px;height:32px;width:32px;border-radius:50%;border:1px solid var(--bd);
+  background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1rem}
+.speak{right:22px;}
+.speak:hover{color:var(--tx);border-color:var(--pr)}
+.sent,.q{font-size:1.2rem;font-weight:500;margin:0 0 8px;line-height:1.5;cursor:pointer;user-select:text;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.sent:hover{opacity:.85}.sent:active{opacity:.7}
+.u{text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--sa)}
+.lab{margin:0 0 16px;font-size:1.15rem;line-height:1.4;font-weight:500;color:var(--tx)}
+.lab:empty{display:none}
+.tr-btn{font:inherit;font-size:.78rem;font-weight:500;color:var(--mu);background:transparent;border:1px dashed var(--bd);border-radius:99px;padding:4px 12px;cursor:pointer;transition:all .18s}
+.tr-btn:hover{color:var(--tx);border-color:var(--pr)}
+.tr-text{font-size:1rem;font-weight:500;line-height:1.5;color:var(--tx);opacity:.92;}
+.tr-hint{font-size:.95rem;line-height:1.4;color:var(--go);font-style:normal;margin-top:10px;font-weight:500;background:var(--gob);padding:6px 12px;border-radius:8px;border-left:3px solid var(--go);display:inline-block;}
+.rv-count{display:inline-block;margin-left:8px;padding:2px 11px;border-radius:99px;background:var(--pr);color:#fff;font-weight:700;font-size:.95em;letter-spacing:0;text-transform:none;vertical-align:middle;box-shadow:0 2px 8px var(--pr-glow)}
+.rv-count i{font-style:normal;opacity:.7;font-weight:500;margin:0 2px}
+.scheme{font-size:.95rem;color:var(--mu);margin:8px 0 0;line-height:1.5}
+.scheme .np{color:var(--tx);font-weight:500}
+.blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--sa);margin:0 4px;vertical-align:baseline;text-align:center;color:var(--sa);transition:all .3s}
+.blank.ok{color:var(--ok);border-color:var(--ok)}.blank.no{color:var(--no);border-color:var(--no)}
+.opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.opt{flex:1 1 auto;min-height:44px;padding:11px 20px;font-size:1rem;text-align:center;
+  border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;font:inherit;font-weight:600;cursor:pointer;transition:all .2s}
+.opt.ok,.opt.ok:hover{border-color:var(--ok);background:var(--okb);color:var(--ok)}
+.opt.er,.opt.er:hover{border-color:var(--no);background:var(--nob);color:var(--no);animation:shake .4s}
+.opt:disabled{cursor:default}.opt:disabled:not(.ok):not(.er){opacity:.45}
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.row input{flex:1;min-width:0;padding:12px 16px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);
+  font:inherit;font-size:1rem;outline:none;transition:border-color .2s}
+.row input:focus{border-color:var(--pr);box-shadow:0 0 0 3px var(--pr-glow)}
+.chk,.next{padding:12px 20px;border-radius:12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
+.chk{border:2px solid var(--pr);background:var(--pr);color:#fff}
+.chk:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.next{border:2px solid var(--bd);background:transparent;color:var(--tx)}.next:hover{border-color:var(--pr)}
+.card:not(.mc) .opts{display:none}
+.card.mc .row input,.card.mc .chk,.card.mc .um-row .um{display:none}
+.card.mc .row .next{padding:12px 20px}
+.card.mc .row{display:none}
+.card.mc .fb{cursor:pointer}
+.um-row{display:flex;gap:6px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.um{width:36px;height:34px;border-radius:8px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-size:.95rem;cursor:pointer;transition:all .18s}
+.um:hover{color:var(--tx);border-color:var(--pr)}
+.tool{margin-left:auto;padding:6px 2px;border:0;background:none;color:var(--mu);font-size:.85rem;
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;transition:color .15s}
+.tool:hover{color:var(--tx)}
+.blank.wide{min-width:7em}
+.lesson{display:none}body.lsn .lesson{display:block;margin:0 0 14px;padding:16px;border:1px solid var(--bd);border-radius:14px}
+body.lsn #tabs,body.lsn #rule,body.lsn #card{display:none}
+.ctl{position:absolute;top:22px;right:102px;display:flex;align-items:center;gap:6px;z-index:2}
+.rulesbtn{height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--mu);font:inherit;font-size:.8rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}.rulesbtn:hover{color:var(--tx);border-color:var(--pr)}
+.card h2#title{padding-right:290px}
+@media(max-width:480px){.ctl{top:18px;right:98px}.card h2#title{padding-right:255px}}
+.lesson h3{margin:0 0 8px;font-size:1.05rem}.lesson p{line-height:1.6;font-size:.92rem}.lesson .tip{padding:8px 12px;border-left:4px solid var(--go);background:var(--gob);border-radius:8px}
+.lx{margin:10px 0}.lgo{margin-top:10px;padding:12px 20px;border:0;border-radius:12px;background:var(--pr);color:#fff;font-weight:700;cursor:pointer;font-family:inherit}
+.lsl{display:inline-block;margin-top:4px;cursor:pointer;color:var(--mu);font-size:.72rem;transition:color .15s}
+.lsl:hover{color:var(--tx)}
+.rule{margin:0 0 12px;padding:9px 14px;border:1px solid color-mix(in srgb,var(--go) 22%,transparent);border-left:3px solid var(--go);border-radius:12px;background:linear-gradient(90deg,var(--gob),transparent 85%);color:var(--tx);font-size:.84rem;line-height:1.55}
+.rule:empty{display:none}
+.rule b{font-weight:700}
+.sch{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.fb .why{margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--nob);font-size:.86rem;line-height:1.5}
+.fb{margin-top:18px;padding:14px 16px;border-radius:10px;border-left:4px solid;display:none;animation:pop .4s ease}
+.fb.ok{display:block;background:var(--okb);border-color:var(--ok)}
+.fb.er{display:block;background:var(--nob);border-color:var(--no);animation:shake .4s}
+.fb.hint{display:block;background:var(--gob);border-color:var(--go)}
+.fb .k{font-size:.66rem;letter-spacing:.16em;font-weight:700}
+.fb.ok .k{color:var(--ok)}.fb.er .k{color:var(--no)}.fb.hint .k{color:var(--go)}
+.fb .ans{font-size:1.1rem;font-weight:500;margin:6px 0 4px;cursor:pointer;user-select:none;display:inline-block}
+.fb .ans:hover{text-decoration:underline;text-underline-offset:4px}
+.fb .ans::after{content:" 🔊";font-size:.8em;opacity:.6}
+.fb .ex{color:var(--mu);font-size:.88rem;margin-top:4px}
+.fb .bar{height:2px;background:var(--ok);border-radius:2px;margin-top:12px;animation:shrink 2.2s linear forwards;width:100%}
+@keyframes shrink{to{width:0}}
+.foot{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:24px;width:100%}
+.foot-row{display:flex;gap:10px;justify-content:center;width:100%;flex-wrap:wrap;margin-bottom:12px}
+.btn{font:inherit;font-weight:600;border-radius:10px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);transition:all .2s;font-size:.85rem}
+.btn:hover{border-color:var(--pr);transform:translateY(-1px)}
+.btn.g{font-weight:500;font-size:.82rem;padding:8px 14px;color:var(--mu);border-color:transparent;background:transparent}
+.btn.g:hover{color:var(--tx);background:var(--pl);transform:none}
+.btn.danger{background:var(--nob);color:var(--no);border-color:var(--no)}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.p:hover{filter:brightness(1.1);box-shadow:0 4px 15px var(--pr-glow)}
+.theory-btn{width:100%;padding:14px;font-size:1rem;margin-top:4px}
+.cheat{margin:24px 0;padding:16px 18px;background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.cheat-title{margin:0 0 2px;font-size:1.05rem;font-weight:700;color:var(--tx)}
+.cheat-sub{margin:0 0 12px;font-size:.78rem;color:var(--mu)}
+.cheat-pills{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.cheat-pill{font:inherit;font-size:.8rem;font-weight:500;color:var(--mu);background:transparent;border:1px solid var(--bd);border-radius:99px;padding:5px 12px;cursor:pointer;transition:all .15s}
+.cheat-pill:hover{color:var(--tx);border-color:var(--c,var(--sa))}
+.cheat-pill.on{color:var(--tx);border-color:var(--c,var(--sa));background:var(--pl);box-shadow:inset 0 -2px 0 var(--c,var(--sa))}
+.cheat-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:22px}
+.cheat-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px solid var(--bd)}
+.cheat-row b{font-size:.88rem;font-weight:600;color:var(--tx);line-height:1.35}
+.cheat-row span{font-size:.76rem;color:var(--mu);text-align:right;line-height:1.35}
+@media(max-width:480px){.cheat{padding:14px}.cheat-list{grid-template-columns:1fr}}
+.complete{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;
+  padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  animation:pop .35s ease}
+.complete-card{background:var(--card);border:1px solid var(--ok);border-radius:16px;padding:28px 24px;
+  max-width:440px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.complete-card h2{margin:0 0 10px;font-size:1.4rem;font-weight:600;color:var(--ok)}
+.complete-card p{margin:0;color:var(--mu);font-size:.95rem;line-height:1.5}
+.complete-card .cmax{color:var(--tx);font-weight:600}
+.complete-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.complete-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.complete-actions .go{border:1px solid var(--ok);background:var(--ok);color:#fff}
+.complete-actions .go:hover{filter:brightness(1.1)}
+.complete-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.complete-actions .cancel:hover{border-color:var(--pr)}
+#theory-section{display:none;margin-top:28px;animation:slideUp .5s cubic-bezier(.16,1,.3,1)}
+#theory-section.show{display:block}
+.theory-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.theory-card h2{font-size:1.2rem;color:var(--sa);border-bottom:1px solid var(--bd);padding-bottom:6px;margin-top:24px}
+.theory-card h2:first-child{margin-top:0}
+.theory-card p,.theory-card li{color:var(--mu);font-size:.92rem;line-height:1.6}
+.theory-card ul{padding-left:20px;margin:10px 0}
+.theory-card .rule-box{background:var(--gob);border-left:4px solid var(--go);padding:11px 14px;margin:16px 0;
+  border-radius:6px;color:var(--go);font-size:.92rem}
+.theory-card .example{background:var(--pl);border-left:4px solid var(--sa);padding:11px 14px;margin:10px 0;
+  font-style:italic;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .example span.hl{color:var(--sa);font-weight:bold}
+.table-wrap{overflow-x:auto}
+.theory-card table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.85em}
+.theory-card th,.theory-card td{border:1px solid var(--bd);padding:8px 10px;text-align:left}
+.theory-card th{background:var(--pl);color:var(--tx)}
+@media(max-width:480px){
+  .stats-panel{grid-template-columns:repeat(3,1fr)}
+  .row{flex-direction:column}.chk,.next{padding:12px}.card.mc .next{padding:12px 20px}
+  .tool{margin-left:0}.card{padding:18px}.complete-card{padding:22px 18px}
+  .theory-card{padding:16px}
+  .speak{top:18px;height:32px;width:32px;}
+  .speak{right:18px;}
+  .card h2{padding-right:82px;line-height:32px;height:32px;}
+}
+@media(hover:hover) and (pointer:fine){
+  .tab:hover{color:var(--tx)}
+  .opt:hover:not(:disabled){border-color:var(--pr);transform:translateY(-1px)}
+  .btn:hover{transform:translateY(-1px)}.btn.g:hover{transform:none}
+}
+.errs-card{background:var(--card);border:1px solid var(--no);border-radius:16px;padding:22px 20px;width:min(560px,92vw);max-height:86vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.errs-card h2{margin:0 0 4px;font-size:1.25rem;font-weight:600;color:var(--no)}
+.errs-sub{margin:0 0 12px;color:var(--mu);font-size:.85rem}
+.errs-list{overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding-right:2px;min-height:0}
+.err-item{background:var(--nob);border:1px solid var(--bd);border-left:4px solid var(--no);border-radius:10px;padding:10px 12px}
+.err-item .e-de{color:var(--tx);font-size:.95rem;line-height:1.45}
+.err-item .e-de b{color:var(--ok)}
+.err-item .e-ua{color:var(--mu);font-size:.82rem;margin-top:3px}
+.err-item .e-ex{color:var(--mu);font-size:.8rem;margin-top:3px;font-style:italic}
+.errs-empty{text-align:center;color:var(--mu);padding:26px 8px;font-size:.95rem}
+.errs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.errs-actions button{padding:11px 20px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;transition:all .18s}
+.errs-actions .go{border:1px solid var(--no);background:var(--no);color:#fff}
+.errs-actions .go:hover{filter:brightness(1.1)}
+.errs-actions .cancel{border:1px solid var(--bd);background:transparent;color:var(--tx)}
+.errs-actions .cancel:hover{border-color:var(--pr)}
+button:focus-visible,input:focus-visible,.sent:focus-visible{outline:2px solid var(--pr);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.xv{position:relative}
+.xp{--xa:#475569;--xz:#94a3b8}
+.xp[data-r="1"]{--xa:#047857;--xz:#34d399}
+.xp[data-r="2"]{--xa:#1d4ed8;--xz:#60a5fa}
+.xp[data-r="3"]{--xa:#6d28d9;--xz:#c4b5fd}
+.xp[data-r="4"]{--xa:#be123c;--xz:#fb7185}
+.xp[data-r="5"]{--xa:#c2410c;--xz:#fdba74}
+.xp[data-r="6"]{--xa:#b45309;--xz:#fcd34d}
+.xb i{background:linear-gradient(90deg,var(--xa),var(--xz));box-shadow:0 0 12px color-mix(in srgb,var(--xz) 55%,transparent)}
+.xb::after{display:none}
+.xb s{position:absolute;inset:0;pointer-events:none;text-decoration:none;z-index:2}
+.xb u{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:var(--card);opacity:.9;text-decoration:none}
+.xrank{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:-2px 0 9px}
+.xrn{font-size:.9rem;font-weight:700;color:var(--xz);letter-spacing:.02em}
+.xnx{font-size:.74rem;color:var(--mu)}
+.xp[data-r="1"] .xg,.xp[data-r="2"] .xg,.xp[data-r="3"] .xg,.xp[data-r="4"] .xg,.xp[data-r="5"] .xg,.xp[data-r="6"] .xg{background:linear-gradient(135deg,var(--xz),var(--xa));box-shadow:0 0 9px var(--xz)}
+.xpop{position:absolute;right:0;top:-6px;font-style:normal;font-weight:800;font-size:1rem;opacity:0;pointer-events:none}
+.xpop.up{color:var(--ok)}.xpop.dn{color:var(--no)}
+.xpop.go{animation:xpop .9s ease-out forwards}
+@keyframes xpop{0%{opacity:0;transform:translateY(4px) scale(.8)}20%{opacity:1}100%{opacity:0;transform:translateY(-26px) scale(1.15)}}
+.xv b.bump{animation:xbump .35s ease-out}
+@keyframes xbump{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xp.lvl{animation:xlvl 1.2s ease-out}
+@keyframes xlvl{0%{box-shadow:0 0 0 0 var(--xz)}100%{box-shadow:0 0 0 22px transparent}}
+.xp.lvl .xrn{animation:xbump .6s ease-out}
+.xp.max .xb i{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;animation:xgold 2.2s linear infinite}
+.xp.max .xrn{font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 8px rgba(245,158,11,.45))}
+.xp.max .xnx{color:var(--go);font-weight:600}
+:root.xp-legend h1{background:linear-gradient(90deg,#b45309,#f59e0b,#fcd34d,#f59e0b,#b45309);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:xgold 2.2s linear infinite;filter:drop-shadow(0 0 10px rgba(245,158,11,.4))}
+:root.xp-legend .brand-txt h1 small{-webkit-text-fill-color:var(--mu)}
+@keyframes xgold{to{background-position:200% 0}}
+
+.card h2{padding-right:175px;height:auto;min-height:32px}
+@media(max-width:480px){
+  .speak{top:18px}
+  .card h2{padding-right:160px;height:auto;min-height:32px}
+}
+
+:root{--te:#f59e0b;--ka:#fb7185;--mo:#a78bfa;--lo:#2dd4bf;--dt:#60a5fa;--ak:#a3e635;--pp:#94a3b8;--ne:#cbd5e1}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}}
+:root[data-theme="light"]{--te:#d97706;--ka:#e11d48;--mo:#7c3aed;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#64748b;--ne:#475569}
+.r-te{--c:var(--te)}.r-ka{--c:var(--ka)}.r-mo{--c:var(--mo)}.r-lo{--c:var(--lo)}
+.r-dat,.r-pd{--c:var(--dt)}.r-akk,.r-pa{--c:var(--ak)}.r-prep{--c:var(--pp)}
+.r-s,.r-v1,.r-v2,.r-p1,.r-refl{--c:var(--ne)}.r-neg{--c:var(--no)}
+.c-te{color:var(--te)}.c-ka{color:var(--ka)}.c-mo{color:var(--mo)}.c-lo{color:var(--lo)}.c-dt{color:var(--dt)}.c-ak{color:var(--ak)}.c-pp{color:var(--pp)}
+.big{font-size:1.7rem;font-weight:700;line-height:1.25;letter-spacing:-.2px;padding:6px 0}
+.sent .blank{min-width:56px}
+.blank.fill{border-bottom-style:solid}
+.u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:var(--sa)}
+.opt.rl:not(.ok):not(.er){border-color:color-mix(in srgb,var(--c) 50%,var(--bd))}
+.opt.rl b{color:var(--c);font-weight:800;letter-spacing:.02em}
+.opt.rl small{display:block;font-weight:500;font-size:.72rem;color:var(--mu);margin-top:1px}
+.opts.grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.opts.grid4 .opt{padding:12px 10px}
+@media(min-width:640px){.opts.grid4.c4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.opts.col{flex-direction:column}
+.opts.col .opt{flex:none;text-align:left;font-weight:500;line-height:1.4}
+.card:not(.bd) .bld{display:none}
+.card.bd .row input,.card.bd .um-row .um{display:none}
+.card.bd .row{display:flex}
+.card.bd.bt .row input{display:block;flex:1;min-width:0}
+.card.mc .um-row,.card.bd .um-row{display:none}
+.bld{margin-top:6px}
+.frame{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;padding:12px;border:1px solid var(--bd);border-radius:14px;background:var(--bg);min-height:62px}
+.zone{flex:1 1 100%;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;min-width:0;min-height:40px;padding:2px;border-radius:10px;border:1.5px dashed var(--bd)}
+.zone.done{display:contents}
+.zone .ph{color:var(--mu);font-size:.8rem;padding:8px 6px;line-height:1.3}
+.pool{display:flex;flex-wrap:wrap;gap:10px 8px;margin-top:14px;min-height:46px}
+.wc{display:inline-block;padding:9px 13px;border-radius:11px;border:1.5px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;font-size:.98rem;font-weight:500;line-height:1.25;cursor:pointer;transition:transform .12s,border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.wc:hover{border-color:var(--pr)}
+.wc:active{transform:scale(.96)}
+.wc.lk{cursor:default;background:var(--pl);border-color:transparent;color:var(--mu)}
+.wc.lk:hover{border-color:transparent}
+.wc.hint,.wc.col{border-color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+.wc.bad{border-color:var(--no);background:var(--nob);animation:shake .4s}
+.wc.ok{border-color:var(--ok);background:var(--okb)}
+.wc:disabled{opacity:.9}
+.wc .kn{display:inline-block;min-width:1.15em;margin-right:6px;padding:0 4px;border-radius:6px;background:color-mix(in srgb,var(--mu) 20%,transparent);color:var(--mu);font-size:.72em;font-weight:700;text-align:center;line-height:1.5;vertical-align:1px}
+.wc .kn:empty{display:none}
+.wc.used{opacity:.22;cursor:default;pointer-events:none;transform:none}
+.wc.cm{min-width:42px;text-align:center;font-weight:800;color:var(--go);border-style:dashed}
+.wc.cm .kn{margin-right:4px}
+@media(hover:none){.wc .kn{display:none}}
+.un{display:inline-flex;flex-direction:column;align-items:center;gap:3px}
+.un .cap{font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--c)}
+.un .wc{cursor:default}
+.legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:.72rem;color:var(--mu)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--c);margin-right:5px;vertical-align:-1px}
+.bl-tools{display:none}
+.bl-tools .tool{margin:0}
+.um-row .tool{margin-left:auto}
+
+.mf{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0 4px}
+.mf span{display:flex;flex-direction:column;align-items:center;min-width:64px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);font-weight:800;font-size:1.25rem;color:var(--c);line-height:1}
+.mf small{font-size:.62rem;font-weight:600;color:var(--mu);margin-top:5px;letter-spacing:.03em}
+.mf em{align-self:center;color:var(--mu);font-style:normal;font-weight:700}
+.theory-card h3{font-size:1rem;color:var(--tx);margin:18px 0 4px}
+.theory-card .tk td,.theory-card .tk th{white-space:nowrap;font-size:.82rem;padding:7px 9px}
+.theory-card .tk th.h-te,.theory-card .tk td.h-te{color:var(--te)}
+.theory-card .tk th.h-ka,.theory-card .tk td.h-ka{color:var(--ka)}
+.theory-card .tk th.h-mo,.theory-card .tk td.h-mo{color:var(--mo)}
+.theory-card .tk th.h-lo,.theory-card .tk td.h-lo{color:var(--lo)}
+.theory-card .tk th.h-dt,.theory-card .tk td.h-dt{color:var(--dt)}
+.theory-card .tk th.h-ak,.theory-card .tk td.h-ak{color:var(--ak)}
+.theory-card .tk th.h-pp,.theory-card .tk td.h-pp{color:var(--pp)}
+.theory-card .tk th.h-no,.theory-card .tk td.h-no{color:var(--no)}
+.theory-card .tk th.h-v,.theory-card .tk td.h-v{background:var(--pl);color:var(--tx)}
+.theory-card .tk td.n{color:var(--mu);text-align:center}
+.theory-card .bad{background:var(--nob);border-left:4px solid var(--no);padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .bad .hl{color:var(--ok);font-weight:700}
+.theory-card .bad s{color:var(--no);text-decoration-thickness:2px}
+.theory-card .bad em{color:var(--mu)}
+.theory-card .tip{background:var(--pl);border-left:4px solid var(--pr);padding:10px 14px;margin:12px 0;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--tx)}
+.theory-card .tip b{color:var(--sa)}
+.theory-card p b,.theory-card li b{color:var(--tx)}
+.xlg{display:inline-flex;gap:6px;align-items:center}
+.lab .tr-text{font-size:1.18rem;font-weight:600;line-height:1.45}
+.kw{display:flex;flex-wrap:wrap;align-items:center;gap:6px 7px;margin-top:10px}
+.kwl{font-size:.62rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--mu);margin-right:2px}
+.kwb{display:inline-block;padding:4px 11px;border:1px solid color-mix(in srgb,var(--acc) 38%,var(--bd));border-radius:99px;background:color-mix(in srgb,var(--acc) 9%,transparent);font-size:.9rem;font-weight:600;color:var(--tx);line-height:1.3}
+.hintans.rich{text-align:left;font-size:.88rem;font-weight:500}
+.hintans.rich.on{max-height:140px;opacity:1;margin-top:10px}
+.hl{display:grid;gap:4px;padding:8px 12px;border-left:3px solid var(--go);border-radius:0 10px 10px 0;background:var(--gob)}
+.hl .hr{display:flex;gap:10px;align-items:baseline}
+.hl .hk{flex:none;min-width:54px;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--go)}
+.hl .hv{color:var(--mu);line-height:1.4;font-size:.84rem}
+.hl .hv.de{color:var(--tx);font-weight:700;font-size:.98rem}
+.tg-note{display:none}
+
+.card:not(.tx) h2{padding-right:50px}
+.card.tx h2{padding-right:150px}
+@media(max-width:480px){.card:not(.tx) h2{padding-right:50px}.card.tx h2{padding-right:140px}}
+
+.speak,.rst{top:22px}
+.rst{position:absolute;right:22px;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .18s;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;z-index:2;font-size:1.15rem}
+.rst:hover{color:var(--tx);border-color:var(--pr)}
+.speak{right:62px}
+.card:not(.tx) h2{padding-right:100px}
+.card.tx h2{padding-right:200px}
+.um-row{justify-content:flex-end}
+@media(max-width:480px){
+  .speak,.rst{top:18px}
+  .rst{right:18px}.speak{right:58px}
+  .card:not(.tx) h2{padding-right:96px}
+  .card.tx h2{padding-right:196px}
+}
+
+:root{--c-art:#94a3b8;--c-pi:#f59e0b;--c-n:#60a5fa;--c-adv:#2dd4bf;--c-ref:#fb7185;--c-zu:#a78bfa;--c-v:#a3e635;--c-obj:#f472b6;--c-d:#fcd34d}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309}}
+:root[data-theme="light"]{--c-art:#64748b;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#7c3aed;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309}
+.r-art{--c:var(--c-art)}.r-pi{--c:var(--c-pi)}.r-n{--c:var(--c-n)}.r-adv{--c:var(--c-adv)}.r-ref,.r-p2{--c:var(--c-ref)}.r-zu{--c:var(--c-zu)}.r-v{--c:var(--c-v)}.r-obj{--c:var(--c-obj)}.r-d{--c:var(--c-d)}
+.opt.rl small.ua{color:var(--tx);opacity:.85;font-size:.8rem;font-weight:600}
+.opts.afit{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.mf .r-d{min-width:40px}
+.theory-card .tk th.h-pi,.theory-card .tk td.h-pi{color:var(--c-pi);font-weight:700}
+.theory-card .tk td.h-ref{color:var(--c-ref)}.theory-card .tk td.h-adv{color:var(--c-adv)}.theory-card .tk td.h-n{color:var(--c-n)}.theory-card .tk td.h-obj{color:var(--c-obj)}
+.sent .u{text-decoration-color:var(--c-pi)}
+.fb .nx{display:block;margin-top:12px;padding:10px 20px;border-radius:10px;border:2px solid var(--pr);background:var(--pr);color:#fff;font:inherit;font-weight:600;cursor:pointer;transition:filter .18s}.fb .nx:hover{filter:brightness(1.1)}
+.card.ans .row{display:none!important}
+
+.lesson{padding:18px 16px}
+.lh{display:flex;align-items:center;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.lbadge{flex:none;padding:3px 10px;border-radius:99px;background:var(--pr);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.lesson h3{margin:0;font-size:1.12rem;line-height:1.25}
+.lesson .llead{margin:0 0 4px;padding:12px 14px;border-radius:12px;background:var(--pl);border:1px solid var(--bd);line-height:1.65;font-size:.95rem}
+.lsec{margin:18px 0 0}
+.lst{margin:0 0 8px;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mu)}
+.lsteps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ls}
+.lsteps li{counter-increment:ls;position:relative;padding:9px 12px 9px 46px;border:1px solid var(--bd);border-radius:12px;background:var(--card);line-height:1.55;font-size:.9rem}
+.lsteps li::before{content:counter(ls);position:absolute;left:11px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--pr);color:#fff;font-weight:700;font-size:.82rem;display:flex;align-items:center;justify-content:center}
+.ltw{overflow-x:auto;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.ltb{width:100%;border-collapse:collapse;font-size:.86rem;line-height:1.45}
+.ltb th{background:var(--pl);font-weight:700;padding:9px 10px;text-align:center;font-size:.78rem;white-space:nowrap}
+.ltb th small{display:block;font-weight:500;color:var(--mu);font-size:.7rem}
+.ltb th:first-child,.ltb td:first-child{text-align:left}
+.ltb td{padding:9px 10px;border-top:1px solid var(--bd);text-align:center;vertical-align:middle}
+.ltb td.e{color:var(--c-pi);font-weight:700;background:color-mix(in srgb,var(--c-pi) 11%,transparent)}
+.ltb td.x{color:var(--no);font-weight:700;background:var(--nob)}
+.ltb.txt td,.ltb.txt th{text-align:left;vertical-align:top}
+.ltb.txt{font-size:.82rem}.ltb.txt td{padding:8px 9px}
+.lnote{margin:8px 2px 0;font-size:.86rem;line-height:1.6;color:var(--tx)}
+.lesson .lx{margin:12px 0}
+.lwarn{display:flex;gap:10px;margin:18px 0 0;padding:11px 14px;border-left:4px solid var(--no);background:var(--nob);border-radius:0 12px 12px 0;font-size:.88rem;line-height:1.6}
+.lwi{flex:none}
+.lesson .tip{margin:14px 0 0;line-height:1.6}
+.lesson .lgo{margin-top:16px;width:100%}
+.lesson i{font-style:italic}
+.lesson s{opacity:.7}
+.r-vf,.r-rc{--c:var(--c-v)}.r-pr{--c:var(--c-n)}.r-ar{--c:var(--c-d)}
+
+.tabs{display:flex;gap:4px;padding:4px;margin:0 auto 16px;width:fit-content;max-width:100%;background:var(--pl);border:1px solid var(--bd);border-radius:16px;justify-content:center;flex-wrap:wrap;box-shadow:inset 0 1px 3px rgba(0,0,0,.18)}
+.tabs .tab{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:8px 8px 8px 15px;background:transparent;color:var(--mu);font-size:.86rem;font-weight:600;box-shadow:none;transition:background .2s,color .2s,box-shadow .2s,transform .15s}
+.tabs .tab small{font-size:.68rem;font-weight:700;line-height:1;padding:4px 8px;border-radius:99px;background:color-mix(in srgb,var(--mu) 14%,transparent);color:var(--mu);font-variant-numeric:tabular-nums;transition:all .2s}
+.tabs .tab:hover{color:var(--tx);background:color-mix(in srgb,var(--mu) 10%,transparent)}
+.tabs .tab:active{transform:scale(.97)}
+.tabs .tab.on,.tabs .tab.on:hover{background:color-mix(in srgb,var(--pr) 14%,transparent);color:var(--tx);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--pr) 55%,transparent)}
+.tabs .tab.on small{background:color-mix(in srgb,var(--pr) 22%,transparent);color:var(--sa)}
+.tabs .tab.cl small{background:var(--okb);color:var(--ok)}
+.tabs .tab.on.cl small{background:var(--okb);color:var(--ok)}
+@media(max-width:480px){.tabs{width:100%;border-radius:14px}.tabs .tab{flex:1 1 auto;justify-content:center;padding:8px 6px 8px 11px;font-size:.82rem}}
+
+.pairs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 10px;margin:12px 0}
+.showbtn{display:inline-flex;align-items:center;gap:6px;padding:5px 13px 5px 9px;border-radius:99px;border:1px solid var(--bd);background:var(--pl);color:var(--mu);font:inherit;font-size:.78rem;font-weight:600;white-space:nowrap;cursor:pointer;transition:all .18s}
+.showbtn svg{width:14px;height:14px;flex:none;color:var(--go)}
+.showbtn:not(.rev) .ic-a,.showbtn.rev .ic-h{display:none}
+.showbtn:hover{color:var(--tx);border-color:var(--go);transform:translateY(-1px)}
+.showbtn.rev{color:var(--go);border-color:color-mix(in srgb,var(--go) 50%,var(--bd));background:var(--gob)}
+.showbtn:active{transform:none}
+.showbtn:disabled{opacity:.4;cursor:default;transform:none}
+.hintans{max-height:0;opacity:0;overflow:hidden;margin:0;text-align:center;font-size:1.05rem;font-weight:500;color:var(--tx);transition:opacity .35s,max-height .35s,margin .35s}
+.hintans.on{max-height:200px;opacity:.5;margin-top:12px;word-break:break-word}
+.confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
+.toast{position:fixed;top:max(14px,env(safe-area-inset-top,0px));left:50%;transform:translate(-50%,-170%);z-index:210;max-width:92vw;padding:11px 20px;border-radius:99px;background:var(--card);border:1px solid var(--go);color:var(--tx);font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(245,158,11,.14);transition:transform .5s cubic-bezier(.2,1.25,.3,1)}
+.toast.on{transform:translate(-50%,0)}
+
+:root[data-theme="sakura"]{
+  --bg:#fff6f9;--bg-grad:#ffe3ee;--card:#fff;--card-hover:#fff0f6;
+  --tx:#4a2838;--mu:#a1708a;--pr:#ec5f97;--pr-glow:rgba(236,95,151,.35);--pl:#ffe3ee;
+  --ok:#2fae85;--okb:rgba(47,174,133,.12);--no:#e5486b;--nob:rgba(229,72,107,.1);
+  --go:#e08a1e;--gob:rgba(224,138,30,.12);--bd:#ffd0e1;--sa:#ec5f97;--pe:#c05cd6;color-scheme:light;
+  --te:#d97706;--ka:#e11d48;--mo:#9333ea;--lo:#0d9488;--dt:#2563eb;--ak:#4d7c0f;--pp:#8a6a7e;--ne:#6b4a5c;
+  --c-art:#8a6a7e;--c-pi:#d97706;--c-n:#2563eb;--c-adv:#0d9488;--c-ref:#e11d48;--c-zu:#9333ea;--c-v:#4d7c0f;--c-obj:#be185d;--c-d:#b45309;
+  --cat-6:#be185d}
+:root[data-theme="candy"]{
+  --bg:#241532;--bg-grad:#3b2050;--card:#2f1c40;--card-hover:#3a2350;
+  --tx:#fbe9f6;--mu:#c3a2d6;--pr:#f4579f;--pr-glow:rgba(255,122,184,.4);--pl:#43275a;
+  --ok:#6fe3b8;--okb:rgba(111,227,184,.14);--no:#ff7a96;--nob:rgba(255,122,150,.14);
+  --go:#ffc46b;--gob:rgba(255,196,107,.14);--bd:#4f2f69;--sa:#ff9ccc;--pe:#b8a1ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-art:#c3a2d6;--c-pi:#ffc46b;--c-n:#8ec5ff;--c-adv:#6fe3d0;--c-ref:#ff8fb1;--c-zu:#c4b0ff;--c-v:#b8f07a;--c-obj:#ff9ccc;--c-d:#ffd98f;}
+:root[data-theme="autumn"]{
+  --bg:#261813;--bg-grad:#3d2416;--card:#33211a;--card-hover:#3f291f;
+  --tx:#fbeedd;--mu:#cfa98a;--pr:#d4691a;--pr-glow:rgba(232,131,58,.4);--pl:#4a2c1c;
+  --ok:#a8d160;--okb:rgba(168,209,96,.14);--no:#ff7a5c;--nob:rgba(255,122,92,.14);
+  --go:#ffc15a;--gob:rgba(255,193,90,.14);--bd:#5a3825;--sa:#f4a259;--pe:#c9504a;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-art:#c3a2d6;--c-pi:#ffc46b;--c-n:#8ec5ff;--c-adv:#6fe3d0;--c-ref:#ff8fb1;--c-zu:#c4b0ff;--c-v:#b8f07a;--c-obj:#ff9ccc;--c-d:#ffd98f;}
+:root[data-theme="winter"]{
+  --bg:#0f1b2e;--bg-grad:#1b3354;--card:#172740;--card-hover:#1f3352;
+  --tx:#e8f3ff;--mu:#8fb0d1;--pr:#3f8fd6;--pr-glow:rgba(74,163,223,.4);--pl:#20395c;
+  --ok:#6fe3c8;--okb:rgba(111,227,200,.14);--no:#ff8aa0;--nob:rgba(255,138,160,.14);
+  --go:#ffd27a;--gob:rgba(255,210,122,.14);--bd:#2b4a75;--sa:#8fd0ff;--pe:#a9b8ff;color-scheme:dark;
+  --te:#ffc46b;--ka:#ff8fb1;--mo:#c4b0ff;--lo:#6fe3d0;--dt:#8ec5ff;--ak:#b8f07a;--pp:#c3a2d6;--ne:#f0dcf7;
+  --c-art:#c3a2d6;--c-pi:#ffc46b;--c-n:#8ec5ff;--c-adv:#6fe3d0;--c-ref:#ff8fb1;--c-zu:#c4b0ff;--c-v:#b8f07a;--c-obj:#ff9ccc;--c-d:#ffd98f;}
+.mp{position:fixed;top:-30px;pointer-events:none;z-index:60;animation:mcFall linear both}
+.mp.up{top:auto;bottom:-30px;animation-name:mcRise}
+@keyframes mcFall{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),112vh) rotate(var(--rot));opacity:0}}
+@keyframes mcRise{0%{opacity:0}12%{opacity:var(--o,.4)}85%{opacity:var(--o,.4)}to{transform:translate(var(--dx),-112vh) rotate(var(--rot));opacity:0}}
+.mp.petal{background:linear-gradient(135deg,#ffd0e1,#ff8fba);border-radius:150% 0 150% 0}
+.mp.snow{border-radius:50%;background:#fff;border:1px solid rgba(150,190,230,.8);box-shadow:0 0 5px rgba(180,215,255,.9)}
+.mp.bub{border-radius:50%;border:2px solid rgba(255,255,255,.85);background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.9),rgba(150,195,255,.35));box-shadow:0 0 0 1px rgba(110,150,255,.35)}
+.mp.fly{border-radius:50%;background:#fff3a0;box-shadow:0 0 10px 4px rgba(255,235,120,.7)}
+@media (prefers-reduced-motion:reduce){.mp{display:none}}
+
+.rule .rfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}.rule .rhide{margin-left:auto;padding:3px 11px;border:1px solid color-mix(in srgb,var(--mu) 35%,transparent);border-radius:99px;background:color-mix(in srgb,var(--mu) 12%,transparent);color:var(--mu);font:inherit;font-size:.74rem;cursor:pointer;opacity:.75;transition:all .18s;white-space:nowrap}.rule .rhide:hover{opacity:1;color:var(--tx);border-color:var(--mu)}
+.rule .rmore{display:block;margin-top:0;padding:0;border:0;background:none;color:var(--mu);font:inherit;font-size:.76rem;cursor:pointer}.rule .rmore:hover{color:var(--tx)}
+.rule code{background:var(--pl);padding:1px 6px;border-radius:6px;font-size:.92em}
+
+html,body,.card,.frame,.pool,.fb{overflow-anchor:none}
+.frame{align-content:flex-start}
+.zone{min-height:0}
+.zone.ok{border-color:var(--ok);background:var(--okb)}
+.zone.bad{border-color:var(--no);background:var(--nob)}
+.pool:empty{display:none}
+
+.tabs .tab[data-g=ty]:only-child{pointer-events:none}
+
+.rule{font-size:.9rem;line-height:1.55;padding:12px 16px}
+.rule .rh{font-size:.96rem;margin-bottom:8px}
+.rule .k,.lesson .k{color:var(--go);font-weight:700}
+.rule .rf,.lesson .rf{margin:6px 0;padding:7px 12px;border-radius:9px;background:var(--pl);font-weight:600;font-size:.92rem}
+.rule .rx{margin:10px 0 2px;font-weight:600}
+.rule .rt{display:block;margin-top:1px;color:var(--mu);font-weight:400;font-size:.84rem}
+.rule .rn{margin-top:10px;font-size:.86rem;line-height:1.6;opacity:.92}
+.rule .rg{display:grid;gap:4px;margin-top:2px}
+.rule i,.lesson i{font-style:normal;font-weight:600}
+.lesson .llead .lm{font-size:1rem;margin-bottom:2px}
+.lesson .llead .lr{margin-top:6px}
+.lesson .llead .lex{margin-top:10px;color:var(--mu);font-size:.88rem}
+
+.tabs{padding:3px;margin-bottom:14px;border-radius:14px}
+.tabs .tab{padding:5px 6px 5px 11px;font-size:.76rem;gap:6px;border-radius:10px}
+.tabs .tab small{font-size:.6rem;padding:3px 7px}
+@media(max-width:480px){.tabs{border-radius:12px}.tabs .tab{padding:5px 5px 5px 9px;font-size:.73rem}}
+
+.chead{display:flex;align-items:center;gap:8px;margin:0 0 16px;min-height:34px}
+.card .chead h2{flex:1 1 auto;min-width:0;margin:0!important;padding:0!important;height:auto!important;min-height:0!important;line-height:1.3!important;overflow-wrap:anywhere}
+.chead .ctl{position:static!important;display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.chead .speak,.chead .rst{position:static!important;flex:none;width:34px;height:34px;top:auto!important;right:auto!important}
+.chead .rulesbtn{height:34px}
+.card.fin .chead .speak,.card.fin .chead .rulesbtn{display:none}
+@media(max-width:380px){.chead .rulesbtn{padding:0 10px;font-size:.76rem}.chead .speak,.chead .rst{width:32px;height:32px}}
+
+.toast{white-space:normal;text-align:center;border-radius:16px;line-height:1.35}
+
+@media(max-width:600px){
+.card.gl .sent{font-size:1.02rem;line-height:1.4;margin-bottom:4px}
+.card.gl .frame{padding:8px;gap:6px;min-height:0;border-radius:12px}
+.card.gl .zone{gap:6px;padding:0}
+.card.gl .zone .ph{padding:6px 4px;font-size:.78rem}
+.card.gl .wc{padding:6px 9px;font-size:.88rem;line-height:1.2;border-radius:9px}
+.card.gl .pool{gap:6px;margin-top:10px;min-height:0}
+.card.gl .bld{margin-top:2px}
+}
+
+:root{
+  --pl-2:color-mix(in srgb,var(--tx) 8%,transparent);
+  --bd-2:color-mix(in srgb,var(--tx) 16%,transparent);
+  --card-solid:var(--card);
+  --acc:var(--pr);--acc-b:color-mix(in srgb,var(--pr) 16%,transparent);
+  --sh-1:0 1px 2px rgba(0,0,0,.30);
+  --sh-2:0 10px 30px -8px rgba(0,0,0,.45);
+  --glass-blur:blur(22px) saturate(150%);
+  --r-lg:24px;
+}
+.app-header{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:12px 14px;margin-bottom:14px;
+  background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);
+  box-shadow:var(--sh-2);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  position:relative;overflow:hidden;
+}
+.app-header::before{content:"";position:absolute;inset:0 0 auto;height:1px;
+  background:linear-gradient(90deg,transparent,var(--bd-2) 30%,var(--bd-2) 70%,transparent)}
+.brand{display:flex;align-items:center;gap:11px;flex:1 1 auto;min-width:0}
+.app-header{flex-wrap:nowrap}
+.brand-mark{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--pr),var(--pe));box-shadow:0 6px 18px -4px var(--pr-glow);position:relative}
+.brand-mark svg{width:23px;height:23px;color:#fff}
+.brand-mark::after{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(255,255,255,.22)}
+.brand-txt{min-width:0}
+h1{margin:0;font-size:1.22rem;font-weight:800;letter-spacing:-.35px;line-height:1.15;
+  background:linear-gradient(120deg,var(--sa),var(--pe));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+h1 small{display:block;font-size:.64rem;font-weight:600;color:var(--mu);-webkit-text-fill-color:var(--mu);
+  margin-top:3px;letter-spacing:.09em;text-transform:uppercase}
+.h-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:99px;
+  border:1px solid var(--bd);background:var(--pl);color:var(--tx);font:inherit;font-size:.82rem;font-weight:700;
+  cursor:pointer;transition:all .2s;white-space:nowrap}
+.chip .ic{font-size:.95rem;line-height:1}
+.chip b{font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--bd-2);background:var(--pl-2);transform:translateY(-1px)}
+.chip.streak{border-color:rgba(245,158,11,.30);background:rgba(245,158,11,.10);color:var(--go)}
+.chip.streak.on{border-color:rgba(245,158,11,.55);background:rgba(245,158,11,.18);box-shadow:0 0 18px -4px rgba(245,158,11,.6)}
+.chip.streak.zero{opacity:.55}
+.chip.xpchip{border-color:color-mix(in srgb,var(--pr) 40%,transparent);background:color-mix(in srgb,var(--pr) 13%,transparent);color:var(--sa)}
+.chip.xpchip:hover{border-color:var(--pr)}
+.ibtn-group{display:flex;align-items:center;gap:4px;padding:3px;border-radius:99px;background:var(--pl);border:1px solid var(--bd)}
+.ibtn{width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:var(--mu);
+  cursor:pointer;display:grid;place-items:center;font-size:1rem;line-height:1;padding:0;transition:all .18s}
+.ibtn:hover{color:var(--tx);background:var(--pl-2);transform:translateY(-1px)}
+.ibtn:active{transform:scale(.9)}
+.theme-toggle,.sound-toggle,.fx-toggle,.sync-toggle{position:static!important;width:32px;height:32px;border-radius:50%;
+  border:0;background:transparent;color:var(--mu);display:grid;place-items:center;cursor:pointer;transition:all .18s;font-size:1rem;padding:0}
+.fx-toggle.off{opacity:.4;filter:grayscale(1)}
+#sync-ind{display:none!important}
+
+.stages{display:flex;gap:7px;overflow-x:auto;cursor:grab;padding:3px 3px 10px;margin:0 0 12px;scrollbar-width:none;scroll-snap-type:x proximity;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent 100%);
+  mask-image:linear-gradient(90deg,#000 calc(100% - 26px),transparent 100%)}
+.stages::-webkit-scrollbar{display:none}
+.stages.drag{cursor:grabbing;user-select:none}
+.stages.drag .stg{pointer-events:none}
+@media (hover:hover) and (pointer:fine){.stages{scroll-snap-type:none;scroll-behavior:auto}}
+.stg{position:relative;flex:none;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;
+  padding:7px 8px 10px 13px;border:1px solid var(--bd);border-radius:999px;background:var(--card);
+  color:var(--mu);font:inherit;font-size:.79rem;font-weight:700;line-height:1.2;cursor:pointer;
+  box-shadow:var(--sh-1);transition:transform .18s,border-color .18s,color .18s,background .18s,box-shadow .18s;scroll-snap-align:center}
+.stg .sn{font-weight:700}
+.stg .si{font-size:.72rem;line-height:1}
+.stg .sp{font-size:.62rem;font-weight:800;padding:2px 7px;border-radius:99px;
+  background:var(--pl-2);color:var(--mu);font-variant-numeric:tabular-nums}
+.stg .bar{position:absolute;left:13px;right:13px;bottom:5px;height:2px;border-radius:2px;background:var(--pl-2);overflow:hidden}
+.stg .bar i{display:block;height:100%;width:0;border-radius:2px;background:var(--ok);transition:width .6s cubic-bezier(.4,0,.2,1)}
+.stg:hover:not(.lk){color:var(--tx);transform:translateY(-2px);border-color:var(--bd-2)}
+.stg.on{background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 24%,transparent),color-mix(in srgb,var(--acc) 8%,transparent));
+  color:var(--tx);border-color:color-mix(in srgb,var(--acc) 55%,transparent);
+  box-shadow:0 8px 22px -8px var(--pr-glow),inset 0 0 0 1px color-mix(in srgb,var(--acc) 30%,transparent);transform:translateY(-2px)}
+.stg.on .sp{background:color-mix(in srgb,var(--acc) 26%,transparent);color:var(--tx)}
+.stg.on .bar i{background:var(--acc)}
+.stg.done .sp{background:var(--okb);color:var(--ok)}
+.stg.done .si{color:var(--ok)}
+.stg.lk{opacity:.48;border-style:dashed;cursor:pointer}
+.stg.lk.nope{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+.btn,.chk,.chip,.ibtn,.opt,.showbtn,.fb .nx,.lgo{position:relative;overflow:hidden}
+.rip{animation:rip .6s ease-out forwards}
+@keyframes rip{0%{transform:scale(0);opacity:.32}100%{transform:scale(1);opacity:0}}
+@media(max-width:560px){
+  .app-header{padding:11px 12px;border-radius:18px;gap:10px}
+  .brand-mark{width:36px;height:36px;border-radius:12px}
+  .brand-mark svg{width:20px;height:20px}
+  h1{font-size:1.08rem}
+  h1 small{font-size:.58rem}
+  .h-tools{width:auto;justify-content:flex-end}
+  .chip{height:32px;font-size:.78rem;padding:0 10px}
+  .ibtn,.theme-toggle,.sound-toggle,.fx-toggle,.sync-toggle{width:30px;height:30px;font-size:.92rem}
+  .ibtn-group{gap:2px;padding:2px}
+  .stg{font-size:.74rem;padding:6px 7px 9px 11px}
+  .stg .sp{font-size:.58rem;padding:1px 5px}
+}
+.brand{gap:0}
+.brand-txt h1{font-size:1.45rem;letter-spacing:-.5px}
+.brand-txt h1 small{margin-top:4px;font-size:.62rem;letter-spacing:.14em}
+@media(max-width:560px){.brand-txt h1{font-size:1.2rem}}
+.app-header{background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:6px 2px 14px;margin-bottom:10px;border-radius:0;overflow:visible}
+.app-header::before{display:none}
+.app-header::after{content:"";position:absolute;left:2px;right:2px;bottom:0;height:1px;background:linear-gradient(90deg,var(--acc),color-mix(in srgb,var(--acc) 25%,transparent) 45%,transparent)}
+.brand-txt h1{font-size:1.9rem;font-weight:800;letter-spacing:-.8px;line-height:1.1;background:linear-gradient(100deg,var(--acc),var(--pe));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:filter .3s}
+.ibtn-group{background:none;border:0;padding:0;gap:8px}
+.ibtn{width:40px;height:40px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:1.05rem;box-shadow:var(--sh-1)}
+.ibtn:hover{border-color:var(--acc);background:var(--pl-2);box-shadow:0 6px 16px -6px var(--acc)}
+@media(max-width:560px){
+  .app-header{padding:4px 0 12px}
+  .brand-txt h1{font-size:1.4rem;letter-spacing:-.5px}
+    .ibtn-group{gap:6px}
+  .ibtn{width:34px;height:34px;font-size:.95rem}
+}
+.app-header{align-items:flex-end;padding:6px 2px 10px}
+.brand{align-items:flex-end}
+.brand-txt h1{padding-top:10px}
+.ibtn-group{margin-bottom:2px}
+@media(max-width:560px){.app-header{padding:4px 0 9px}.brand-txt h1{padding-top:6px}}
+:root{--aur-1:rgba(99,102,241,.30);--aur-2:rgba(167,139,250,.22);--aur-3:rgba(45,212,191,.16)}
+:root[data-theme="dark"]{--bg:#070a10;--aur-1:rgba(99,102,241,.30);--aur-2:rgba(167,139,250,.22);--aur-3:rgba(45,212,191,.16)}
+:root[data-theme="light"]{--bg:#eef1f8;--aur-1:rgba(99,102,241,.20);--aur-2:rgba(168,85,247,.16);--aur-3:rgba(13,148,136,.14)}
+:root[data-theme="sakura"]{--bg:#fdf3f7;--aur-1:rgba(236,95,151,.22);--aur-2:rgba(192,92,214,.18);--aur-3:rgba(255,196,107,.18)}
+:root[data-theme="candy"]{--bg:#20122e;--aur-1:rgba(244,87,159,.28);--aur-2:rgba(184,161,255,.24);--aur-3:rgba(111,227,208,.18)}
+:root[data-theme="autumn"]{--bg:#221409;--aur-1:rgba(232,131,58,.24);--aur-2:rgba(201,80,74,.20);--aur-3:rgba(255,193,90,.14)}
+:root[data-theme="winter"]{--bg:#0c1727;--aur-1:rgba(63,143,214,.26);--aur-2:rgba(143,208,255,.18);--aur-3:rgba(255,210,122,.12)}
+@media (prefers-color-scheme:light){:root:not([data-theme]){--bg:#eef1f8;--aur-1:rgba(99,102,241,.20);--aur-2:rgba(168,85,247,.16);--aur-3:rgba(13,148,136,.14)}}
+body{background-image:none;background-color:var(--bg);overflow-x:hidden}
+.w{z-index:1}
+.aurora{position:fixed;inset:-30vmax;z-index:-2;pointer-events:none;overflow:hidden}
+.aurora i{position:absolute;display:block;border-radius:50%;filter:blur(70px);opacity:.9;will-change:transform}
+.aurora i:nth-child(1){width:46vmax;height:46vmax;left:-6vmax;top:-8vmax;background:var(--aur-1);animation:aur1 26s ease-in-out infinite}
+.aurora i:nth-child(2){width:40vmax;height:40vmax;right:-8vmax;top:2vmax;background:var(--aur-2);animation:aur2 32s ease-in-out infinite}
+.aurora i:nth-child(3){width:36vmax;height:36vmax;left:18vmax;bottom:-14vmax;background:var(--aur-3);animation:aur3 38s ease-in-out infinite}
+@keyframes aur1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(12vmax,8vmax) scale(1.12)}}
+@keyframes aur2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-10vmax,12vmax) scale(1.18)}}
+@keyframes aur3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(8vmax,-10vmax) scale(1.1)}}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>")}
+</style></head><body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="w">
+  <header class="app-header">
+    <div class="brand">
+            <span class="brand-txt">
+        <h1>Finale &amp; modale Sätze</h1>
+      </span>
+    </div>
+    <div class="h-tools">
+      <div class="ibtn-group">
+        <button class="ibtn sync-toggle" id="sync-ind" title="Синхронізація" type="button">📴</button>
+        <button class="ibtn sound-toggle" id="sound-toggle" onclick="toggleSound()" title="Звукові ефекти">🔔</button>
+        <button class="ibtn fx-toggle" id="fx-toggle" onclick="toggleFx()" title="Ефекти">✨</button>
+        <button class="ibtn theme-toggle" id="theme" title="Тема">🌙</button>
+      </div>
+    </div>
+  </header>
+  <div class="stages" id="stages"></div>
+  <div class="lesson" id="lesson"></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="pg"><i id="bar"></i></div>
+  <div class="rule" id="rule" hidden></div>
+  <div class="stats-panel">
+    <div class="stat-box"><div class="stat-label">Завдань</div><div class="stat-val" id="sd">0 / 0</div></div>
+    <div class="stat-box"><div class="stat-label">Правильно</div><div class="stat-val ok" id="sc">0</div></div>
+    <div class="stat-box"><div class="stat-label">Неправильно</div><div class="stat-val no" id="sw">0</div></div>
+  </div>
+  <div class="card" id="card">
+    <div class="chead">
+      <h2 id="title"></h2>
+      <div class="ctl">
+        <button class="rulesbtn" id="rb" type="button" title="Показати правила">📘 Правила</button>
+        <button class="speak" id="sp" type="button" title="Озвучити німецькою">🔊</button>
+        <button class="rst" id="rs" type="button" title="Скинути прогрес цієї вкладки">↺</button>
+      </div>
+    </div>
+    <div id="finBox"></div>
+    <p class="sent" id="sent"></p>
+    <div class="lab" id="lab"></div>
+    <div class="opts" id="opts" style="display:none"></div>
+    <div class="bld" id="bld">
+      <div class="frame"><div class="zone" id="zone"><span class="ph">Натискай слова нижче, щоб скласти речення</span></div></div>
+      <div class="pool" id="pool"></div>
+    </div>
+    <div class="row" id="checkRow">
+      <input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Напиши німецькою …" enterkeyhint="done">
+      <button class="chk" id="chk">Перевірити ✓</button>
+    </div>
+    <div class="um-row" id="umRow">
+      <button class="showbtn" id="showBtn" type="button">
+        <svg class="ic-h" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+        <svg class="ic-a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span id="showTxt">Підказка</span>
+      </button>
+    </div>
+    <div class="hintans" id="hintAns"></div>
+    <div class="fb" id="fb"></div>
+  </div>
+  <div class="xp" id="xp" data-r="0"><div class="xh"><span class="xl"><i class="xg"></i>EXP</span><span class="xv"><b id="xt">0</b><small id="xn"></small><em class="xpop" id="xpop"></em><button class="xrst" id="xrst" type="button" title="Скинути EXP">↺</button></span></div><div class="xrank"><span class="xrn" id="xr"></span><span class="xnx" id="xnext"></span></div><div class="xb"><i id="xf"></i><s id="xticks"></s></div></div>
+</div>
+<script>
+const P=[
+["um","um … zu","<div class='lm'><b>um … zu</b> — щоб… (мета)</div><div class='rf'><span class='k'>um</span> … <span class='k'>zu</span> + Infinitiv</div><div class='lr'>• Вживається, коли <b>підмет у головному й підрядному реченні однаковий</b>.</div><div class='lr'>• <b>zu</b> стоїть перед інфінітивом у кінці речення; у відокремлюваних дієсловах — між префіксом і основою: <b>aufzustehen</b>.</div><div class='lr'>• Підрядна частина не має підмета.</div><div class='lr lex'>Ще приклад: <i>Ich stehe früh auf, um pünktlich zur Arbeit zu kommen.</i></div>",[
+["Ich treibe jeden Tag Sport, um fit zu bleiben.","Я щодня займаюся спортом, щоб залишатися у формі.","um","fit zu bleiben","Sport treiben, fit bleiben"],
+["Ich lerne Deutsch, um in Deutschland zu arbeiten.","Я вчу німецьку, щоб працювати в Німеччині.","um","in Deutschland zu arbeiten","Deutsch lernen, in Deutschland arbeiten"],
+["Sie steht früh auf, um pünktlich zur Arbeit zu kommen.","Вона рано встає, щоб вчасно приходити на роботу.","um","pünktlich zur Arbeit zu kommen","früh aufstehen, pünktlich kommen"],
+["Wir sparen Geld, um eine große Reise zu machen.","Ми заощаджуємо гроші, щоб здійснити велику подорож.","um","eine große Reise zu machen","Geld sparen, Reise machen"],
+["Er lernt fleißig, um die Prüfung zu bestehen.","Він старанно вчиться, щоб скласти іспит.","um","die Prüfung zu bestehen","fleißig lernen, Prüfung bestehen"],
+["Wir fahren früh los, um den Stau zu vermeiden.","Ми виїжджаємо рано, щоб уникнути затору.","um","den Stau zu vermeiden","früh losfahren, Stau vermeiden"],
+["Die Studenten lernen zusammen, um sich besser vorzubereiten.","Студенти вчаться разом, щоб краще підготуватися.","um","sich besser vorzubereiten","zusammen lernen, besser vorbereiten"]]],
+["damit","damit","<div class='lm'><b>damit</b> — щоб… (мета, підрядне речення)</div><div class='rf'>Hauptsatz, <span class='k'>damit</span> + Nebensatz (Verb am Ende)</div><div class='lr'>• Вживається, коли <b>підмети в головному й підрядному реченні різні</b>.</div><div class='lr'>• <b>damit</b> стоїть на початку підрядного речення.</div><div class='lr'>• Дієслово в підрядному реченні стоїть <b>у кінці</b>.</div><div class='lr lex'>Ще приклад: <i>Ich koche ohne Fett, damit mein Mann abnimmt.</i></div>",[
+["Ich koche ohne Fett, damit mein Mann abnimmt.","Я готую без жиру, щоб мій чоловік схуднув.","damit","mein Mann abnimmt","ohne Fett kochen, abnehmen"],
+["Ich rufe dich an, damit du Bescheid weißt.","Я тобі телефоную, щоб ти знав.","damit","du Bescheid weißt","anrufen, Bescheid wissen"],
+["Die Eltern arbeiten viel, damit ihre Kinder studieren können.","Батьки багато працюють, щоб їхні діти могли вчитися.","damit","ihre Kinder studieren können","viel arbeiten, studieren können"],
+["Ich melde die Kinder im Sportverein an, damit sie Sport treiben.","Я записую дітей у спортивний клуб, щоб вони займалися спортом.","damit","sie Sport treiben","Kinder im Verein anmelden, Sport treiben"],
+["Ich helfe meinem Sohn jeden Tag, damit er die Prüfung besteht.","Я щодня допомагаю своєму синові, щоб він склав іспит.","damit","er die Prüfung besteht","Sohn helfen, Prüfung bestehen"],
+["Wir fahren früh los, damit die Kinder pünktlich ankommen.","Ми виїжджаємо рано, щоб діти вчасно приїхали.","damit","die Kinder pünktlich ankommen","früh losfahren, pünktlich ankommen"],
+["Ich kaufe meinem Mann ein Fahrrad, damit er mehr Sport macht.","Я купую своєму чоловікові велосипед, щоб він більше займався спортом.","damit","er mehr Sport macht","Fahrrad kaufen, mehr Sport machen"]]],
+["az","anstatt … zu","<div class='lm'><b>anstatt … zu</b> — замість того, щоб… (альтернатива)</div><div class='rf'><span class='k'>anstatt</span> … <span class='k'>zu</span> + Infinitiv</div><div class='lr'>• <b>Підмет однаковий.</b> Підрядна частина не має підмета.</div><div class='lr'>• <b>zu</b> + інфінітив — у кінці.</div><div class='lr'>• Виражає альтернативу / заміну.</div><div class='lr lex'>Ще приклад: <i>Ich esse zu Hause Obst, anstatt ins Café zu gehen.</i></div>",[
+["Ich esse zu Hause Obst, anstatt ins Café zu gehen.","Я їм фрукти вдома, замість того, щоб іти в кафе.","anstatt","ins Café zu gehen","Obst essen, ins Café gehen"],
+["Er sieht sich Dokumentarfilme an, anstatt Actionfilme zu schauen.","Він дивиться документальні фільми, замість того, щоб дивитися бойовики.","anstatt","Actionfilme zu schauen","Dokumentarfilme ansehen, Actionfilme schauen"],
+["Am Samstag begleite ich meine Frau beim Einkaufen, anstatt die Sportschau zu sehen.","У суботу я супроводжую дружину за покупками, замість того, щоб дивитися спортивну передачу.","anstatt","die Sportschau zu sehen","beim Einkaufen begleiten, Sportschau sehen"],
+["Ich mache jeden Tag Fitnesstraining, anstatt ins Fitnessstudio zu gehen.","Я щодня займаюся фітнесом, замість того, щоб ходити до фітнес-студії.","anstatt","ins Fitnessstudio zu gehen","Fitnesstraining machen, ins Fitnessstudio gehen"],
+["Morgens gehe ich schwimmen, anstatt im Park zu joggen.","Зранку я ходжу плавати, замість того, щоб бігати в парку.","anstatt","im Park zu joggen","schwimmen gehen, im Park joggen"],
+["Ich würde gern tanzen gehen, anstatt zu Hause zu bleiben.","Я б залюбки пішов танцювати, замість того, щоб залишатися вдома.","anstatt","zu Hause zu bleiben","tanzen gehen, zu Hause bleiben"],
+["Er kocht selbst, anstatt im Restaurant zu essen.","Він готує сам, замість того, щоб їсти в ресторані.","anstatt","im Restaurant zu essen","selbst kochen, im Restaurant essen"]]],
+["ad","anstatt dass","<div class='lm'><b>anstatt dass</b> — замість того, щоб… (альтернатива, підрядне)</div><div class='rf'>Hauptsatz, <span class='k'>anstatt dass</span> + Nebensatz (Verb am Ende)</div><div class='lr'>• <b>Підмети різні.</b></div><div class='lr'>• <b>anstatt dass</b> стоїть на початку підрядного речення.</div><div class='lr'>• Дієслово — у кінці.</div><div class='lr lex'>Ще приклад: <i>Ich bleibe zu Hause, anstatt dass die Kinder allein sind.</i></div>",[
+["Lieber koche ich meinem Mann ein kalorienarmes Mittagessen, anstatt dass er in der Kantine isst.","Краще я приготую своєму чоловікові низькокалорійний обід, замість того, щоб він їв у їдальні.","anstatt","dass er in der Kantine isst","Mittagessen kochen, in der Kantine essen"],
+["Ich koche selbst, anstatt dass wir teures Essen bestellen.","Я готую сам, замість того, щоб ми замовляли дорогу їжу.","anstatt","dass wir teures Essen bestellen","selbst kochen, teures Essen bestellen"],
+["Ich bleibe zu Hause, anstatt dass die Kinder allein sind.","Я залишаюся вдома, замість того, щоб діти були самі.","anstatt","dass die Kinder allein sind","zu Hause bleiben, Kinder allein sein"],
+["Er nimmt den Bus, anstatt dass seine Frau ihn fährt.","Він їде автобусом, замість того, щоб дружина підвозила його.","anstatt","dass seine Frau ihn fährt","Bus nehmen, Frau fährt"],
+["Meine Frau kocht zu Hause, anstatt dass wir ins Restaurant gehen.","Моя дружина готує вдома, замість того, щоб ми йшли в ресторан.","anstatt","dass wir ins Restaurant gehen","zu Hause kochen, ins Restaurant gehen"],
+["Sie lernt selbst, anstatt dass ein Lehrer ihr alles erklärt.","Вона вчиться сама, замість того, щоб учитель їй усе пояснював.","anstatt","dass ein Lehrer ihr alles erklärt","selbst lernen, Lehrer erklärt alles"],
+["Ich fahre mit dem Fahrrad, anstatt dass mich jemand mitnimmt.","Я їду велосипедом, замість того, щоб хтось мене підвозив.","anstatt","dass mich jemand mitnimmt","mit dem Fahrrad fahren, jemand nimmt mit"]]],
+["oz","ohne … zu","<div class='lm'><b>ohne … zu</b> — не… (без того, щоб…)</div><div class='rf'><span class='k'>ohne</span> … <span class='k'>zu</span> + Infinitiv</div><div class='lr'>• <b>Підмет однаковий.</b> Підрядна частина не має підмета.</div><div class='lr'>• <b>zu</b> + інфінітив — у кінці.</div><div class='lr'>• Виражає відсутність очікуваного наслідку.</div><div class='lr lex'>Ще приклад: <i>Ich jogge seit einer Stunde, ohne eine Pause zu machen.</i></div>",[
+["Ich jogge seit einer Stunde, ohne eine Pause zu machen.","Я бігаю вже годину, не роблячи перерви.","ohne","eine Pause zu machen","joggen, keine Pause machen"],
+["Er isst jeden Tag fettarm, ohne Sport zu machen.","Він щодня їсть нежирне, не займаючись спортом.","ohne","Sport zu machen","fettarm essen, keinen Sport machen"],
+["Sie kocht jeden Tag, ohne frische Zutaten zu kaufen.","Вона готує щодня, не купуючи свіжих продуктів.","ohne","frische Zutaten zu kaufen","jeden Tag kochen, Zutaten kaufen"],
+["Er verlässt das Haus, ohne sich zu verabschieden.","Він виходить із дому, не прощаючись.","ohne","sich zu verabschieden","Haus verlassen, sich verabschieden"],
+["Du kannst nicht mitmachen, ohne dich vorher zu informieren.","Ти не можеш брати участь, не поінформувавшись заздалегідь.","ohne","dich vorher zu informieren","mitmachen, sich informieren"],
+["Wir gehen ins Kino, ohne vorher zu reservieren.","Ми йдемо в кіно, не бронюючи заздалегідь.","ohne","vorher zu reservieren","ins Kino gehen, reservieren"],
+["Sie geht schlafen, ohne die Tür zu schließen.","Вона йде спати, не зачиняючи двері.","ohne","die Tür zu schließen","schlafen gehen, Tür schließen"]]],
+["od","ohne dass","<div class='lm'><b>ohne dass</b> — не… (без того, щоб…, підрядне)</div><div class='rf'>Hauptsatz, <span class='k'>ohne dass</span> + Nebensatz (Verb am Ende)</div><div class='lr'>• <b>Підмети різні.</b></div><div class='lr'>• <b>ohne dass</b> стоїть на початку підрядного речення.</div><div class='lr'>• Дієслово — у кінці.</div><div class='lr lex'>Ще приклад: <i>Ich koche fettarm, ohne dass mein Mann abnimmt.</i></div>",[
+["Ich jogge mit meinem Mann, ohne dass er abnimmt.","Я бігаю зі своїм чоловіком, а він при цьому не худне.","ohne","dass er abnimmt","mit Mann joggen, nicht abnehmen"],
+["Ich koche fettarm, ohne dass mein Mann abnimmt.","Я готую нежирно, а мій чоловік при цьому не худне.","ohne","dass mein Mann abnimmt","fettarm kochen, nicht abnehmen"],
+["Er verlässt das Haus, ohne dass es jemand merkt.","Він виходить із дому, а ніхто цього не помічає.","ohne","dass es jemand merkt","Haus verlassen, niemand merkt"],
+["Ich räume die Küche auf, ohne dass die Kinder helfen.","Я прибираю кухню, а діти не допомагають.","ohne","dass die Kinder helfen","Küche aufräumen, Kinder helfen nicht"],
+["Sie geht früh los, ohne dass ihr Mann aufsteht.","Вона рано виходить, а її чоловік не встає.","ohne","dass ihr Mann aufsteht","früh losgehen, Mann steht nicht auf"],
+["Der Lehrer erklärt alles, ohne dass die Schüler zuhören.","Вчитель усе пояснює, а учні не слухають.","ohne","dass die Schüler zuhören","alles erklären, Schüler hören nicht zu"],
+["Ich beende meine Arbeit, ohne dass mein Chef es bemerkt.","Я закінчую свою роботу, а мій шеф цього не помічає.","ohne","dass mein Chef es bemerkt","Arbeit beenden, Chef merkt nicht"]]],
+["in","indem","<div class='lm'><b>indem</b> — шляхом того, що… / роблячи… (спосіб, засіб)</div><div class='rf'>Hauptsatz, <span class='k'>indem</span> + Nebensatz (Verb am Ende)</div><div class='lr'>• Відповідає на питання <b>Wie? / Auf welche Weise?</b> — як, яким способом.</div><div class='lr'>• Зазвичай <b>підмет однаковий</b> у головному й підрядному реченні (якщо підмети різні, кажуть <b>dadurch, dass</b>).</div><div class='lr'>• <b>indem</b> стоїть на початку підрядного речення, дієслово — <b>у кінці</b>. Перед indem — кома.</div><div class='lr lex'>Ще приклад: <i>Man lernt eine Sprache, indem man viel spricht.</i></div>",[
+["Man lernt eine Sprache, indem man viel spricht.","Мову вивчають, багато розмовляючи.","indem","man viel spricht","Sprache lernen, viel sprechen"],
+["Ich spare Geld, indem ich selten ins Restaurant gehe.","Я заощаджую гроші, рідко ходячи в ресторан.","indem","ich selten ins Restaurant gehe","Geld sparen, selten ins Restaurant gehen"],
+["Er bleibt fit, indem er jeden Morgen joggt.","Він залишається у формі, щоранку бігаючи.","indem","er jeden Morgen joggt","fit bleiben, jeden Morgen joggen"],
+["Sie verbessert ihr Deutsch, indem sie deutsche Filme anschaut.","Вона покращує свою німецьку, дивлячись німецькі фільми.","indem","sie deutsche Filme anschaut","Deutsch verbessern, Filme anschauen"],
+["Wir helfen der Umwelt, indem wir weniger Plastik verbrauchen.","Ми допомагаємо довкіллю, споживаючи менше пластику.","indem","wir weniger Plastik verbrauchen","Umwelt helfen, weniger Plastik verbrauchen"],
+["Er löst das Problem, indem er ehrlich mit seinem Chef spricht.","Він розв'язує проблему, чесно поговоривши зі своїм шефом.","indem","er ehrlich mit seinem Chef spricht","Problem lösen, ehrlich sprechen"],
+["Ich entspanne mich, indem ich abends Musik höre.","Я розслабляюся, слухаючи ввечері музику.","indem","ich abends Musik höre","sich entspannen, Musik hören"]]],
+["dd","dadurch, dass","<div class='lm'><b>dadurch, dass</b> — завдяки тому, що… / через те, що… (спосіб, засіб, причина)</div><div class='rf'>Hauptsatz, <span class='k'>dadurch, dass</span> + Nebensatz (Verb am Ende)</div><div class='lr'>• Відповідає на питання <b>Wie? / Wodurch?</b> — завдяки чому, яким чином.</div><div class='lr'>• Підмети в головному й підрядному реченні можуть бути <b>різними</b> (при однаковому підметі частіше кажуть <b>indem</b>).</div><div class='lr'>• Дієслово — <b>у кінці</b>. Кома стоїть перед dadurch і, як правило, ще й між <b>dadurch</b> та <b>dass</b>.</div><div class='lr lex'>Ще приклад: <i>Er nimmt ab, dadurch, dass seine Frau fettarm kocht.</i></div>",[
+["Er nimmt ab, dadurch, dass seine Frau fettarm kocht.","Він худне завдяки тому, що його дружина готує нежирно.","dadurch","dass seine Frau fettarm kocht","abnehmen, Frau kocht fettarm"],
+["Ich lerne schneller, dadurch, dass mein Lehrer langsam spricht.","Я вчуся швидше завдяки тому, що мій учитель говорить повільно.","dadurch","dass mein Lehrer langsam spricht","schneller lernen, Lehrer spricht langsam"],
+["Sie spart Geld, dadurch, dass ihre Eltern die Wohnung bezahlen.","Вона заощаджує гроші завдяки тому, що її батьки платять за квартиру.","dadurch","dass ihre Eltern die Wohnung bezahlen","Geld sparen, Eltern bezahlen Wohnung"],
+["Wir kommen pünktlich an, dadurch, dass die Straßen frei sind.","Ми приїжджаємо вчасно завдяки тому, що дороги вільні.","dadurch","dass die Straßen frei sind","pünktlich ankommen, Straßen frei"],
+["Er versteht die Grammatik, dadurch, dass die Lehrerin sie gut erklärt.","Він розуміє граматику завдяки тому, що вчителька добре її пояснює.","dadurch","dass die Lehrerin sie gut erklärt","Grammatik verstehen, Lehrerin erklärt gut"],
+["Ich bleibe gesund, dadurch, dass meine Frau frisch kocht.","Я залишаюся здоровим завдяки тому, що моя дружина готує свіже.","dadurch","dass meine Frau frisch kocht","gesund bleiben, Frau kocht frisch"],
+["Sie fühlt sich wohl, dadurch, dass ihre Kollegen so freundlich sind.","Вона почувається добре завдяки тому, що її колеги такі привітні.","dadurch","dass ihre Kollegen so freundlich sind","sich wohlfühlen, Kollegen freundlich"]]],
+["mix","Мікс","Прочитай німецьке речення з пропуском і переклад, а потім обери, яка конструкція підходить. Орієнтуйся на зміст (мета, альтернатива, відсутність наслідку, спосіб) та на спільний/різний підмет.",[]]
+];
+const ADD={};
+P.forEach(p=>{if(ADD[p[0]])p[3].push(...ADD[p[0]])});
+P.slice(0,8).forEach(p=>p[3].forEach(i=>i[5]=p[1]));
+/* Додаткові речення лише для режиму «Конструктор» (mc); «Переклади» та «Мікс» не змінюються */
+const MCX={
+"um":[
+["Ich öffne das Fenster, um frische Luft zu bekommen.","Я відчиняю вікно, щоб отримати свіже повітря.","um","frische Luft zu bekommen"],
+["Er nimmt einen Kredit auf, um ein Haus zu kaufen.","Він бере кредит, щоб купити будинок.","um","ein Haus zu kaufen"],
+["Wir besuchen unsere Großeltern, um das Wochenende gemeinsam zu verbringen.","Ми відвідуємо бабусю й дідуся, щоб провести вихідні разом.","um","das Wochenende gemeinsam zu verbringen"],
+["Sie macht einen Sprachkurs, um besser Deutsch zu sprechen.","Вона йде на мовний курс, щоб краще розмовляти німецькою.","um","besser Deutsch zu sprechen"]],
+"damit":[
+["Ich erkläre es noch einmal, damit alle es verstehen.","Я пояснюю це ще раз, щоб усі зрозуміли.","damit","alle es verstehen"],
+["Sie schreibt die Adresse auf, damit er das Haus findet.","Вона записує адресу, щоб він знайшов будинок.","damit","er das Haus findet"],
+["Wir kaufen ein größeres Auto, damit die ganze Familie Platz hat.","Ми купуємо більшу машину, щоб уся родина мала місце.","damit","die ganze Familie Platz hat"],
+["Der Arzt spricht langsam, damit der Patient ihn versteht.","Лікар говорить повільно, щоб пацієнт його розумів.","damit","der Patient ihn versteht"]],
+"az":[
+["Er fährt mit dem Zug, anstatt mit dem Auto zu fahren.","Він їде потягом, замість того, щоб їхати машиною.","anstatt","mit dem Auto zu fahren"],
+["Ich lese ein Buch, anstatt Computerspiele zu spielen.","Я читаю книжку, замість того, щоб грати в комп'ютерні ігри.","anstatt","Computerspiele zu spielen"],
+["Sie geht zu Fuß, anstatt den Bus zu nehmen.","Вона йде пішки, замість того, щоб їхати автобусом.","anstatt","den Bus zu nehmen"],
+["Wir bleiben im Garten, anstatt in die Stadt zu fahren.","Ми залишаємося в саду, замість того, щоб їхати в місто.","anstatt","in die Stadt zu fahren"]],
+"ad":[
+["Er schläft lange, anstatt dass er seiner Frau im Haushalt hilft.","Він довго спить, замість того, щоб допомагати дружині по господарству.","anstatt","dass er seiner Frau im Haushalt hilft"],
+["Ich bringe die Kinder zur Schule, anstatt dass sie allein gehen.","Я відводжу дітей до школи, замість того, щоб вони йшли самі.","anstatt","dass sie allein gehen"],
+["Mein Bruder repariert das Auto selbst, anstatt dass ein Mechaniker es macht.","Мій брат сам ремонтує машину, замість того, щоб це робив механік.","anstatt","dass ein Mechaniker es macht"],
+["Wir spielen im Garten, anstatt dass die Kinder den ganzen Tag vor dem Fernseher sitzen.","Ми граємо в саду, замість того, щоб діти цілий день сиділи перед телевізором.","anstatt","dass die Kinder den ganzen Tag vor dem Fernseher sitzen"]],
+"oz":[
+["Er fährt Auto, ohne den Gurt anzulegen.","Він їде на машині, не пристібнувши ремінь безпеки.","ohne","den Gurt anzulegen"],
+["Sie liest den Vertrag, ohne ihn zu verstehen.","Вона читає договір, не розуміючи його.","ohne","ihn zu verstehen"],
+["Ich trinke Kaffee, ohne Zucker zu nehmen.","Я п'ю каву, не додаючи цукру.","ohne","Zucker zu nehmen"],
+["Wir sprechen stundenlang, ohne müde zu werden.","Ми розмовляємо годинами, не втомлюючись.","ohne","müde zu werden"]],
+"od":[
+["Sie zieht um, ohne dass ihre Eltern davon wissen.","Вона переїжджає, а її батьки про це не знають.","ohne","dass ihre Eltern davon wissen"],
+["Er löst die Aufgabe, ohne dass der Lehrer ihm hilft.","Він розв'язує завдання, а вчитель йому не допомагає.","ohne","dass der Lehrer ihm hilft"],
+["Das Kind geht aus dem Zimmer, ohne dass die Mutter es sieht.","Дитина виходить із кімнати, а мама цього не бачить.","ohne","dass die Mutter es sieht"],
+["Ich bezahle die Rechnung, ohne dass mein Mann es merkt.","Я плачу за рахунок, а мій чоловік цього не помічає.","ohne","dass mein Mann es merkt"]],
+"in":[
+["Sie sagt Danke, indem sie ihrer Nachbarin Blumen schenkt.","Вона дякує, даруючи сусідці квіти.","indem","sie ihrer Nachbarin Blumen schenkt"],
+["Wir sparen Strom, indem wir das Licht ausschalten.","Ми економимо електрику, вимикаючи світло.","indem","wir das Licht ausschalten"],
+["Er findet neue Freunde, indem er einem Sportverein beitritt.","Він знаходить нових друзів, вступаючи до спортивного клубу.","indem","er einem Sportverein beitritt"],
+["Ich vermeide Stress, indem ich meinen Tag gut plane.","Я уникаю стресу, добре плануючи свій день.","indem","ich meinen Tag gut plane"]],
+"dd":[
+["Du sparst Zeit, dadurch, dass dein Computer schneller arbeitet.","Ти економиш час завдяки тому, що твій комп'ютер працює швидше.","dadurch","dass dein Computer schneller arbeitet"],
+["Ich verliere den Überblick, dadurch, dass meine Kollegen ständig anrufen.","Я втрачаю лад у справах через те, що мої колеги постійно телефонують.","dadurch","dass meine Kollegen ständig anrufen"],
+["Wir sparen Energie, dadurch, dass die Stadt nachts das Licht ausschaltet.","Ми економимо енергію завдяки тому, що місто вночі вимикає світло.","dadurch","dass die Stadt nachts das Licht ausschaltet"],
+["Sie wird nervös, dadurch, dass die Kinder so laut sind.","Вона нервує через те, що діти такі галасливі.","dadurch","dass die Kinder so laut sind"]]
+};
+P.slice(0,8).forEach(p=>{(MCX[p[0]]||[]).forEach(i=>{i[4]="";i[5]=p[1]})});
+/* «Мікс»: спочатку початкові 42 речення (щоб зберегти індекси прогресу), потім нові */
+P[P.length-1][3]=P.slice(0,6).flatMap(p=>p[3].map(i=>i.slice()))
+  .concat(P.slice(0,6).flatMap(p=>(MCX[p[0]]||[]).map(i=>i.slice())))
+  .concat(P.slice(6,8).flatMap(p=>p[3].concat(MCX[p[0]]||[]).map(i=>i.slice())));
+/* Альтернативний порядок слів: підрядна частина на початку речення */
+const PRON=["ich","du","er","sie","es","wir","ihr","man"];
+const ALTX={
+"Die Studenten lernen zusammen, um sich besser vorzubereiten.":["Um sich besser vorzubereiten, lernen die Studenten zusammen."],
+"Die Eltern arbeiten viel, damit ihre Kinder studieren können.":["Damit ihre Kinder studieren können, arbeiten die Eltern viel."],
+"Der Arzt spricht langsam, damit der Patient ihn versteht.":["Damit der Patient ihn versteht, spricht der Arzt langsam."],
+"Am Samstag begleite ich meine Frau beim Einkaufen, anstatt die Sportschau zu sehen.":["Anstatt die Sportschau zu sehen, begleite ich am Samstag meine Frau beim Einkaufen."],
+"Morgens gehe ich schwimmen, anstatt im Park zu joggen.":["Anstatt im Park zu joggen, gehe ich morgens schwimmen."],
+"Lieber koche ich meinem Mann ein kalorienarmes Mittagessen, anstatt dass er in der Kantine isst.":["Anstatt dass er in der Kantine isst, koche ich meinem Mann lieber ein kalorienarmes Mittagessen."],
+"Meine Frau kocht zu Hause, anstatt dass wir ins Restaurant gehen.":["Anstatt dass wir ins Restaurant gehen, kocht meine Frau zu Hause."],
+"Mein Bruder repariert das Auto selbst, anstatt dass ein Mechaniker es macht.":["Anstatt dass ein Mechaniker es macht, repariert mein Bruder das Auto selbst."],
+"Der Lehrer erklärt alles, ohne dass die Schüler zuhören.":["Ohne dass die Schüler zuhören, erklärt der Lehrer alles."],
+"Das Kind geht aus dem Zimmer, ohne dass die Mutter es sieht.":["Ohne dass die Mutter es sieht, geht das Kind aus dem Zimmer."]
+};
+const frontAlt=x=>{
+  const w=x[0].replace(/[.!?]+$/,"").split(" "),c=String(x[2]).split(" ")[0];
+  let k=-1;for(let i=1;i<w.length;i++){if(/,$/.test(w[i-1])&&w[i].replace(/,$/,"")===c){k=i;break}}
+  if(k<2)return null;
+  const M=w.slice(0,k).join(" ").replace(/,$/,"").split(" ");
+  if(M.length<2||!PRON.includes(M[0].toLowerCase()))return null;
+  const C=w.slice(k).join(" ");
+  return C.charAt(0).toUpperCase()+C.slice(1)+", "+[M[1],M[0].toLowerCase()].concat(M.slice(2)).join(" ")+".";
+};
+const ALTc={};
+const altsOf=x=>ALTc[x[0]]||(ALTc[x[0]]=(()=>{
+  const r=[x[0]],f=frontAlt(x);
+  if(f)r.push(f);
+  (ALTX[x[0]]||[]).forEach(v=>r.push(v));
+  r.slice().forEach(v=>{if(/dadurch, dass/i.test(v)){const n=v.replace(/(dadurch), dass/i,"$1 dass");if(!r.includes(n))r.push(n)}});
+  return r;
+})());
+
+try{ if('audioSession' in navigator) navigator.audioSession.type='ambient'; }catch(e){}
+const $=i=>document.getElementById(i),sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const sg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},ss=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const rnd=a=>a[Math.random()*a.length|0];
+
+const haptic=(()=>{
+  let lbl=null;
+  function tap(){
+    try{
+      if(!lbl){
+        const i=document.createElement('input');
+        i.type='checkbox';i.setAttribute('switch','');i.id='hpt-sw';
+        const l=document.createElement('label');l.htmlFor='hpt-sw';
+        l.style.cssText='position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none';
+        l.appendChild(i);document.body.appendChild(l);lbl=l;
+      }
+      lbl.click();
+    }catch(e){}
+  }
+  return ok=>{
+    try{
+      if(navigator.vibrate){navigator.vibrate(ok?30:[120,60,120]);return}
+      if(ok){tap()}else{tap();setTimeout(tap,90);setTimeout(tap,180)}
+    }catch(e){}
+  };
+})();
+function hapticAll(ok){if(window.Telegram&&window.Telegram.WebApp&&window.Telegram.WebApp.HapticFeedback){try{window.Telegram.WebApp.HapticFeedback.notificationOccurred(ok?'success':'error');}catch(e){}}else haptic(ok);}
+
+function tapHaptic() {
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback) {
+      window.Telegram.WebApp.HapticFeedback.selectionChanged(); 
+    } else if (navigator.vibrate) {
+      navigator.vibrate(10);
+    }
+  } catch(e) {}
+}
+
+const _clean=t=>String(t).replace(/[.,!?;:]/g,"");
+const splitK=x=>{const w=x[0].split(" "),c2=_clean(String(x[2]).split(" ")[0]),c3=_clean(String(x[3]).split(" ")[0]);
+  let i2=w.findIndex(t=>_clean(t)===c2); if(i2<0) i2=0;
+  let k=-1; for(let i=i2+1;i<w.length;i++){ if(_clean(w[i])===c3){k=i;break} }
+  if(k<1||k>=w.length) k=Math.ceil(w.length/2); return k};
+const MCc={};
+const mcOf=i=>MCc[i]||(MCc[i]=P[i][3].concat(MCX[P[i][0]]||[]).map(x=>{const y=x.slice();y[6]=0;y[7]=splitK(x);return y}));
+const FMC={},FMD={};
+const fmMiss=x=>FMC[x[0]]||(FMC[x[0]]=(()=>{
+  const w=x[0].split(" "),lw=t=>_clean(t).toLowerCase(),c2=lw(String(x[2]).split(" ")[0]),a3=lw(String(x[3]).split(" ")[0]);
+  let i2=w.findIndex(t=>lw(t)===c2);if(i2<0)i2=0;
+  const r=[i2];
+  if(a3==="dass"){const d=w.findIndex((t,i)=>i>i2&&lw(t)==="dass");if(d>i2)r.push(d)}
+  else if(c2!=="damit"){let z=-1;w.forEach((t,i)=>{if(i>i2&&lw(t)==="zu")z=i});if(z>i2)r.push(z)}
+  return r.map(i=>({i:i,t:_clean(w[i]),s:(w[i].match(/[.,!?;:]+$/)||[""])[0]}));
+})());
+const fmDec=(x,m)=>{const k=x[0]+"|"+x[6];return FMD[k]||(FMD[k]=(()=>{const core=sh(["um","damit","anstatt","ohne","zu","dass"].filter(t=>!m.some(q=>q.t.toLowerCase()===t)));return x[6]===1?core.concat(sh(["weil","obwohl"])).slice(0,5):core.slice(0,3)})())};
+const bw=x=>{const r=[];x[0].split(" ").forEach(t=>{const w=t.replace(/[.!?;:]+$/,"");if(/,$/.test(w)){r.push(w.slice(0,-1),",")}else r.push(w)});return r.filter(Boolean)};
+const need=x=>bwx(x).length;
+function renderSent(x,words){
+  const m=fmMiss(x),w=x[0].split(" "),pl=bPlaced.map(i=>words[i]);
+  $("sent").innerHTML=w.map((t,i)=>{
+    const k=m.findIndex(q=>q.i===i);if(k<0)return esc(t);
+    let cls="blank",txt="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+    if(answered){txt=esc(m[k].t);cls+=(pl[k]===m[k].t?" ok":" no")}
+    else if(pl[k]!=null){txt=esc(pl[k]);cls+=" fill"}
+    return "<span class='"+cls+"' data-bk='"+k+"'>"+txt+"</span>"+m[k].s;
+  }).join(" ");
+  $("sent").querySelectorAll("[data-bk]").forEach(b=>b.onclick=ev=>{
+    ev.stopPropagation();if(answered)return;const k=+b.dataset.bk;
+    if(k<bPlaced.length){tapHaptic();bPlaced.splice(k,1);renderBuilder()}
+  });
+}
+const givenTxt=x=>{const w=x[0].split(" "),k=x[7],A=w.slice(0,k),B=w.slice(k).join(" ");return x[6]===0?A.join(" "):((/,$/.test(A[A.length-1])?", ":"")+B)};
+const GLc={};
+const glChunks=x=>GLc[x[0]]||(GLc[x[0]]=(()=>{
+  const w=x[0].split(" "),W=w.map(t=>_clean(t).toLowerCase()),cw=c=>String(c).split(" ").map(t=>_clean(t).toLowerCase());
+  const find=(c,from)=>{const a=cw(c);for(let i=from;i+a.length<=W.length;i++)if(a.every((t,j)=>W[i+j]===t))return i;return -1};
+  let p1=find(x[2],0);if(p1<0)p1=0;
+  const l1=cw(x[2]).length,l2=cw(x[3]).length,p2=find(x[3],p1+l1),R=[];
+  R.push([0,p1,0],[p1,p1+l1,1]);
+  if(p2>=0)R.push([p1+l1,p2,0],[p2,p2+l2,1],[p2+l2,w.length,0]);else R.push([p1+l1,w.length,0]);
+  const f=R.filter(r=>r[1]>r[0]);
+  return {t:f.map(r=>w.slice(r[0],r[1]).join(" ")),c:f.map(r=>!!r[2])};
+})());
+const NC=8,PN=8,TYN=5;
+const isChoice=i=>i>=NC;
+const MODES=["mc","ty"];
+const SUF={mc:"",ty:"_ty",gl:"_gl"};
+const MLAB={mc:"🔨 Конструктор",ty:"⌨️ Переклади",gl:"🧩 Склей"};
+const MT={mc:"конструктор",ty:"переклад німецькою",gl:"склей речення з блоків"};
+const nWords=x=>x[0].split(" ").length;
+const simplest=(arr,n)=>arr.map((x,j)=>[x,j]).sort((a,b)=>nWords(a[0])-nWords(b[0])||a[1]-b[1]).slice(0,n).sort((a,b)=>a[1]-b[1]).map(a=>a[0]);
+const TYC={};
+const tyList=i=>isChoice(i)?P[i][3]:(TYC[i]||(TYC[i]=simplest(P[i][3],TYN)));
+const GLX={};
+const glList=i=>isChoice(i)?[]:P[i][3].slice(0,6).concat((GLX[P[i][0]]||[]).map(a=>[a[0],a[1],a[2],a[3],"",a[4]||P[i][1]]));
+const list=(i,m)=>m=="mc"?mcOf(i):m=="gl"?glList(i):tyList(i);
+const reqTotal=i=>isChoice(i)?P[i][3].length:mcOf(i).length+tyList(i).length;
+const reqDone=i=>isChoice(i)?cnt(i,"ty"):cnt(i,"mc")+cnt(i,"ty");
+const prevOf=i=>i>=NC?PN-1:i-1;
+const XP_MAX=P.slice(0,NC).reduce((n,p,i)=>n+mcOf(i).length+tyList(i).length,0);
+const SYN={in:"dd",dd:"in"};
+const RANKS=[[0,"🌱","Новачок"],[.10,"🌿","Учень"],[.24,"🧭","Дослідник"],[.44,"⚡","Знавець"],[.68,"🔥","Профі"],[.92,"💎","Майстер"],[1,"🏆","Легенда"]].map(r=>[Math.round(r[0]*XP_MAX),r[1],r[2]]);
+const rankOf=x=>{let r=0;RANKS.forEach((q,i)=>{if(x>=q[0])r=i});return r};
+
+let tab=0,MB=sg("fm_mb",{}),mode=MODES.includes(MB[P[0][0]])?MB[P[0][0]]:"mc",cur=-1,last=-1,answered=false,autoAdvanceTimer=null;
+let S={},XP=0,seen=sg("fm_seen",{});
+let bPool=[],bPlaced=[];
+let hintUsed=false,hintTm,hintLvl=0;
+let rvMode=false, rvPool=[], rvInitial=0;
+let lastInput="", answeredAt=0;
+
+const cnt=(i,m)=>{const s=S[P[i][0]+SUF[m]];return s?list(i,m).filter((_,j)=>s.k[j]).length:0};
+const SK=(i=tab)=>P[i][0]+SUF[mode];
+const T=()=>S[SK()]||(S[SK()]={k:{}, e:{}, r:0, w:0, x:0, p:0});
+const items=()=>list(tab,mode);
+
+const ID="finale_modale",PFX="tp_v2_"+ID+"_",ALLSK=P.flatMap(p=>[p[0],p[0]+"_ty"]);
+const calcXp=()=>{let a=0,b=0;ALLSK.forEach(k=>{const o=S[k];if(o){a+=o.x||0;b+=o.p||0}});return Math.min(XP_MAX,Math.max(0,a-b))};
+
+var _pt;function schedPush(){clearTimeout(_pt);_pt=setTimeout(function(){try{if(window.TPSync&&TPSync.supported&&TPSync.push)TPSync.push()}catch(e){}},1200)}
+function publishProgress() {
+  schedPush();
+  try {
+    localStorage.setItem("tp_v2_exp_" + ID, String(XP));
+    localStorage.setItem("tp_v2_exp_max_" + ID, String(XP_MAX));
+    localStorage.setItem("tp_v2_exp_tabs_" + ID, JSON.stringify(ALLSK));
+  } catch(e) {}
+}
+
+const save=all=>{
+  try{
+    (all?ALLSK.filter(k=>S[k]):[SK()]).forEach(k=>{
+      const o=S[k];
+      if(o)localStorage.setItem(PFX+k,JSON.stringify({x:o.x||0,p:o.p||0,k:o.k||{},e:o.e||{},r:o.r||0,w:o.w||0}))
+    })
+  }catch(e){}
+  publishProgress();
+};
+
+function load(){
+  S={};
+  ALLSK.forEach(k=>{
+    let o=null;
+    try{o=JSON.parse(localStorage.getItem(PFX+k))}catch(e){}
+    if(o&&typeof o=="object")S[k]={k:o.k&&typeof o.k=="object"?o.k:{},e:o.e&&typeof o.e=="object"?o.e:{},r:+o.r||0,w:+o.w||0,x:+o.x||0,p:+o.p||0};
+  });
+  XP=calcXp();
+  publishProgress();
+}
+
+function updateXp(){const r=rankOf(XP),R=RANKS[r],N=RANKS[r+1],box=$("xp");box.dataset.r=r;box.classList.toggle("max",XP>=XP_MAX);
+ $("xf").style.width=XP/XP_MAX*100+"%";$("xt").textContent=XP;$("xn").textContent=XP>=XP_MAX?"MAX":"/ "+XP_MAX;$("xr").textContent=R[1]+" "+R[2];
+ $("xnext").textContent=N?"ще "+(N[0]-XP)+" до «"+N[2]+"»":"EXP зафіксовано 🔒";
+ const tk=$("xticks");if(!tk.firstChild)tk.innerHTML=RANKS.slice(1,-1).map(q=>"<u style='left:"+q[0]/XP_MAX*100+"%'></u>").join("")}
+function bump(d){if(XP>=XP_MAX||(d<0&&XP<=0))return 0;const o=T();if(d>0)o.x=(o.x||0)+d;else o.p=(o.p||0)-d;XP=calcXp();updateXp();
+ const p=$("xpop");p.textContent=(d>0?"+":"−")+Math.abs(d);p.className="xpop "+(d>0?"up":"dn");void p.offsetWidth;p.classList.add("go");return d}
+function enterCat(i){tab=i;ss("fm_tab",i);mode=isChoice(i)?"ty":(MODES.includes(MB[P[i][0]])?MB[P[i][0]]:"mc");last=-1;rvMode=false;}
+function setMode(m){mode=m;MB[P[tab][0]]=m;ss("fm_mb",MB);rvMode=false;}
+
+let _toastTm;
+function showToast(msg){
+  let t=document.querySelector(".toast.lockmsg");
+  if(!t){t=document.createElement("div");t.className="toast lockmsg";t.setAttribute("role","status");document.body.appendChild(t)}
+  t.textContent=msg;void t.offsetWidth;t.classList.add("on");
+  clearTimeout(_toastTm);_toastTm=setTimeout(()=>t.classList.remove("on"),2800);
+}
+let UNL=sg("fm_unl",[]);if(!Array.isArray(UNL))UNL=[];
+if(!sg("fm_v8",0)){UNL=UNL.map(i=>i>=6?i+2:i);ss("fm_unl",UNL);const t0=sg("fm_tab",0);if(Number.isInteger(t0)&&t0>=6)ss("fm_tab",t0+2);ss("fm_v8",1)}
+function lockedHint(b,i){
+  try{hapticAll(false)}catch(e){}
+  const p=prevOf(i),pc=Math.round(reqDone(p)/reqTotal(p)*100);
+  const old=document.getElementById("unlDlg");if(old)old.remove();
+  const o=document.createElement("div");o.className="complete";o.id="unlDlg";
+  o.innerHTML="<div class='complete-card' style='border-color:var(--go)'><h2 style='color:var(--go)'>🔒 Етап закритий</h2>"+
+    "<p>Щоб відкрити «<span class='cmax'>"+esc(P[i][1])+"</span>», спочатку потрібно пройти «<span class='cmax'>"+esc(P[p][1])+"</span>» на 100% — зараз <span class='cmax'>"+pc+"%</span>.</p>"+
+    "<p style='margin-top:10px'>Можна відкрити цей етап достроково.</p>"+
+    "<div class='complete-actions'><button class='cancel' id='unlNo' type='button'>Скасувати</button><button class='go' id='unlYes' type='button' style='border-color:var(--go);background:var(--go)'>🔓 Відкрити достроково</button></div></div>";
+  document.body.appendChild(o);
+  const close=()=>o.remove();
+  o.onclick=e=>{if(e.target===o)close()};
+  $("unlNo").onclick=close;
+  $("unlYes").onclick=()=>{
+    if(!UNL.includes(i)){UNL.push(i);ss("fm_unl",UNL)}
+    close();
+    try{hapticAll(true)}catch(e){}
+    enterCat(i);showRule(!seen[P[tab][0]]);renderTabs();start();
+  };
+}
+function isCatOpen(i){
+  if(i===0) return true;
+  if(UNL.includes(i)) return true;
+  if(reqDone(i)>0) return true;
+  return reqDone(prevOf(i))>=reqTotal(prevOf(i));
+}
+
+function renderTabs(){
+  if(rvMode) return;
+  const _st=$("stages"),_sl=_st.scrollLeft;
+  $("stages").innerHTML=P.map((p,i)=>{
+    const pc=Math.round(reqDone(i)/reqTotal(i)*100),open=isCatOpen(i),done=pc===100;
+    return `<button class="stg c-${i} ${i==tab?'on':''} ${open?'':'lk'} ${done?'done':''}" data-s="${i}" title="${open?'':'🔒 Натисни, щоб відкрити достроково'}">`+
+      (!open ? `<span class="si">🔒</span> ` : done ? `<span class="si">✓</span> ` : ``) +
+      `<span class="sn">${p[1]}</span><span class="sp">${pc}%</span><span class="bar"><i style="width:${pc}%"></i></span></button>`;
+  }).join("");
+  document.querySelectorAll(".stg").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.s;
+    if(!isCatOpen(i)){lockedHint(b,i);return}
+    enterCat(i);showRule(!seen[P[tab][0]]);renderTabs();start();
+  });
+  _st.scrollLeft=_sl;
+  if(window._lt!==tab){window._lt=tab;const on=_st.querySelector(".stg.on");if(on)_st.scrollLeft=on.offsetLeft-(_st.clientWidth-on.offsetWidth)/2}
+  $("tabs").innerHTML=(isChoice(tab)?[["ty","🎯 Вибери конструкцію"]]:MODES.map(m=>[m,MLAB[m]])).map(g=>{
+    const n=list(tab,g[0]).length,d=cnt(tab,g[0]);
+    return "<button class='tab"+(mode==g[0]?" on":"")+(d==n?" cl":"")+"' data-g='"+g[0]+"'>"+g[1]+"<small>"+d+"/"+n+"</small></button>";
+  }).join("");
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{setMode(b.dataset.g);last=-1;renderTabs();start()});
+  const t=T(),n=items().length,d=items().filter((_,j)=>t.k[j]).length;
+  $("sd").textContent=d+" / "+n;$("sc").textContent=t.r;$("sw").textContent=t.w;$("bar").style.width=d/n*100+"%";
+}
+
+const RSX={};
+const RS=[
+"<div class='rh'>💡 <b>um … zu</b> — щоб… (мета, інфінітив)</div><div class='rf'><span class='k'>um</span> … <span class='k'>zu</span> + Infinitiv</div><div class='rx'>Ich treibe Sport, um fit zu bleiben.<span class='rt'>Я займаюся спортом, щоб залишатися у формі.</span></div><div class='rn'>📌 Вживається при <b>однаковому підметі</b>. <b>zu</b> стоїть перед інфінітивом у кінці; у відокремлюваних дієсловах — між префіксом і основою: <b>aufzustehen</b>. Підрядна частина не має підмета.</div>",
+"<div class='rh'>💡 <b>damit</b> — щоб… (мета, підрядне)</div><div class='rf'>Hauptsatz, <span class='k'>damit</span> + Nebensatz (Verb am Ende)</div><div class='rx'>Ich koche ohne Fett, damit mein Mann abnimmt.<span class='rt'>Я готую без жиру, щоб мій чоловік схуднув.</span></div><div class='rn'>📌 Вживається при <b>різних підметах</b>. <b>damit</b> стоїть на початку підрядного речення, дієслово — у кінці.</div>",
+"<div class='rh'>💡 <b>anstatt … zu</b> — замість того, щоб… (інфінітив)</div><div class='rf'><span class='k'>anstatt</span> … <span class='k'>zu</span> + Infinitiv</div><div class='rx'>Ich esse zu Hause Obst, anstatt ins Café zu gehen.<span class='rt'>Я їм фрукти вдома, замість того, щоб іти в кафе.</span></div><div class='rn'>📌 <b>Однаковий підмет.</b> <b>zu</b> + інфінітив — у кінці. Виражає альтернативу / заміну.</div>",
+"<div class='rh'>💡 <b>anstatt dass</b> — замість того, щоб… (підрядне)</div><div class='rf'>Hauptsatz, <span class='k'>anstatt dass</span> + Nebensatz</div><div class='rx'>Ich bleibe zu Hause, anstatt dass die Kinder allein sind.<span class='rt'>Я залишаюся вдома, замість того, щоб діти були самі.</span></div><div class='rn'>📌 <b>Підмети різні.</b> <b>anstatt dass</b> на початку підрядного, дієслово — у кінці.</div>",
+"<div class='rh'>💡 <b>ohne … zu</b> — не… (без того, щоб…, інфінітив)</div><div class='rf'><span class='k'>ohne</span> … <span class='k'>zu</span> + Infinitiv</div><div class='rx'>Ich jogge seit einer Stunde, ohne eine Pause zu machen.<span class='rt'>Я бігаю вже годину, не роблячи перерви.</span></div><div class='rn'>📌 <b>Однаковий підмет.</b> <b>zu</b> + інфінітив — у кінці. Виражає відсутність очікуваного наслідку.</div>",
+"<div class='rh'>💡 <b>ohne dass</b> — не… (без того, щоб…, підрядне)</div><div class='rf'>Hauptsatz, <span class='k'>ohne dass</span> + Nebensatz</div><div class='rx'>Ich koche fettarm, ohne dass mein Mann abnimmt.<span class='rt'>Я готую нежирно, а мій чоловік при цьому не худне.</span></div><div class='rn'>📌 <b>Підмети різні.</b> <b>ohne dass</b> на початку підрядного, дієслово — у кінці.</div>",
+"<div class='rh'>💡 <b>indem</b> — шляхом того, що… / роблячи… (спосіб, засіб)</div><div class='rf'>Hauptsatz, <span class='k'>indem</span> + Nebensatz</div><div class='rx'>Man lernt eine Sprache, indem man viel spricht.<span class='rt'>Мову вивчають, багато розмовляючи.</span></div><div class='rn'>📌 Відповідає на питання <b>Wie?</b> (як, яким способом). Зазвичай <b>підмет однаковий</b>. <b>indem</b> стоїть на початку підрядного речення, дієслово — у кінці, перед indem — кома.</div>",
+"<div class='rh'>💡 <b>dadurch, dass</b> — завдяки тому, що… (спосіб, засіб, причина)</div><div class='rf'>Hauptsatz, <span class='k'>dadurch, dass</span> + Nebensatz</div><div class='rx'>Er nimmt ab, dadurch, dass seine Frau fettarm kocht.<span class='rt'>Він худне завдяки тому, що його дружина готує нежирно.</span></div><div class='rn'>📌 Можливі <b>різні підмети</b>. Дієслово — у кінці. Кома стоїть перед dadurch і, як правило, між <b>dadurch</b> та <b>dass</b>.</div>",
+"<div class='rh'>💡 <b>Мікс</b> — усі вісім конструкцій разом</div><div class='rg'><div><span class='k'>um … zu</span> — щоб… (мета, однаковий підмет)</div><div><span class='k'>damit</span> — щоб… (мета, різні підмети)</div><div><span class='k'>anstatt … zu</span> — замість того, щоб… (однаковий підмет)</div><div><span class='k'>anstatt dass</span> — замість того, щоб… (різні підмети)</div><div><span class='k'>ohne … zu</span> — не… (однаковий підмет)</div><div><span class='k'>ohne dass</span> — не… (різні підмети)</div><div><span class='k'>indem</span> — шляхом того, що… (спосіб, зазвичай однаковий підмет)</div><div><span class='k'>dadurch, dass</span> — завдяки тому, що… (спосіб/причина, можуть бути різні підмети)</div></div><div class='rn'>📌 Головне правило: <b>однаковий підмет → zu + інфінітив</b>; <b>різні підмети → підрядне речення (damit / anstatt dass / ohne dass)</b>. Зверни увагу на коми й порядок слів.</div>"];
+function showRule(open){document.body.classList.remove("lsn");const r=$("rule");
+ r.innerHTML="<div>"+RS[tab]+"</div><div class='rfoot'><button class='rmore' type='button'>Урок етапу "+(tab+1)+" ›</button><button class='rhide' type='button'>Приховати правила</button></div>";
+ r.hidden=!open;if(open){seen[P[tab][0]]=1;ss("fm_seen",seen)}
+ r.querySelector(".rmore").onclick=()=>rule(true);r.querySelector(".rhide").onclick=()=>{r.hidden=true}}
+function rule(open){if(!open){document.body.classList.remove("lsn");return}const p=P[tab],ex=isChoice(tab)?[]:p[3].slice(0,3);seen[p[0]]=1;ss("fm_seen",seen);
+ $("lesson").innerHTML="<div class='lh'><span class='lbadge'>Етап "+(tab+1)+" із "+P.length+"</span><h3>"+p[1]+"</h3></div><div class='llead'>"+p[2]+"</div>"+(ex.length?"<div class='lsec'><div class='lst'>👀 Подивись на прикладах</div>"+ex.map(x=>"<div class='lx'><div><b>"+gapped(x,true)+"</b></div><div style='color:var(--mu);font-size:.88rem'>"+esc(x[1])+"</div></div>").join("")+"</div>":"")+"<button class='lgo' id='lgo' type='button'>Почати вправи ▶</button>";
+ document.body.classList.add("lsn");$("lgo").onclick=()=>document.body.classList.remove("lsn")}
+
+function resetHint(){hintUsed=false;hintLvl=0;hideHint();{const h=$("hintAns");h.className="hintans";h.innerHTML=""}$("showTxt").textContent="Підказка";$("showBtn").classList.remove("rev");$("showBtn").disabled=false}
+function hideHint(){clearTimeout(hintTm);$("hintAns").classList.remove("on")}
+
+const dw=t=>t;
+const bwx=x=>mode==="gl"?glChunks(x).t:bw(x);
+function fitFrame(){
+  const x=items()[cur],fr=document.querySelector("#bld .frame"),z=$("zone");
+  if(!x||!fr) return;
+  if(mode==="gl"&&window.innerWidth<=600){fr.style.minHeight="";return}
+  const saved=z.innerHTML;
+  fr.style.minHeight="";
+  z.innerHTML=bwx(x).map(w=>"<button type='button' class='wc'>"+esc(dw(w))+"</button>").join("");
+  const h=fr.offsetHeight;
+  z.innerHTML=saved;
+  fr.style.minHeight=h+"px";
+}
+function renderBuilder(){
+  const x=items()[cur]; if(!x) return;
+  const words=bwx(x),cf=mode==="gl"?glChunks(x).c:[];
+  if(answered&&$("pool").children.length) $("pool").style.minHeight=$("pool").offsetHeight+"px";
+  $("zone").innerHTML = bPlaced.length
+    ? bPlaced.map((idx,pos)=>"<button type='button' class='wc"+(cf[idx]?" col r-pi":"")+(words[idx]===","?" cm":"")+"' data-bp='"+pos+"'"+(answered?" disabled":"")+">"+esc(dw(words[idx]))+"</button>").join("")
+    : "<span class='ph'>"+(mode==="gl"?"Натискай блоки нижче, щоб склеїти речення":"Натискай слова та коми нижче, щоб скласти речення")+"</span>";
+  $("pool").innerHTML = answered ? "" : bPool.map((i,n)=>{const u=bPlaced.includes(i);return "<button type='button' class='wc"+(cf[i]?" col r-pi":"")+(words[i]===","?" cm":"")+(u?" used":"")+"'"+(u?" disabled tabindex='-1'":" data-bi='"+i+"'")+"><span class='kn'>"+(n<9?n+1:n==9?0:"")+"</span>"+esc(dw(words[i]))+"</button>"}).join("");
+  if(!answered){
+    $("zone").querySelectorAll("[data-bp]").forEach(b=>b.onclick=()=>{ tapHaptic(); bPlaced.splice(+b.dataset.bp,1); renderBuilder(); });
+    $("pool").querySelectorAll("[data-bi]").forEach(b=>b.onclick=()=>{ if(bPlaced.length>=need(x)) return; tapHaptic(); bPlaced.push(+b.dataset.bi); renderBuilder(); });
+  }
+  if(!answered) $("chk").disabled = bPlaced.length !== need(x);
+}
+
+function start(){
+  clearTimeout(autoAdvanceTimer);
+  const t=T(),it=items(),left=it.map((_,i)=>i).filter(i=>!t.k[i]);
+  $("card").classList.remove("fin","ans");
+  const ch=isChoice(tab),cu=ch;
+  $("card").classList.toggle("bd", (mode === "mc" || mode === "gl") && !ch);
+  $("card").classList.toggle("mc", cu);
+  $("card").classList.toggle("tx", mode === "ty");
+  $("card").classList.toggle("gl", mode === "gl" && !ch);
+
+  if(rvMode){
+    if(rvPool.length === 0){ rvMode = false; fin(); return; }
+    cur = rvPool[0];
+    last = cur;
+    answered = false;
+    $("title").textContent = "Робота над помилками";
+    $("stages").innerHTML = `<div class="rv-pill" style="margin: 0 auto; text-align: center; padding: 8px 14px; background: var(--nob); color: var(--no); border: 1px solid var(--no); border-radius: 99px; font-weight: 500; font-size: .85rem;">🔁 Робота над помилками · залишилось <span class="rv-count" style="display:inline-block; margin-left:8px; padding:2px 11px; border-radius:99px; background:var(--pr); color:#fff; font-weight:700; font-size:.95em; box-shadow:0 2px 8px var(--pr-glow);">${rvPool.length}<i>/</i>${rvInitial}</span><button class='xrst' style='margin-left:12px; border-color:var(--no); color:var(--no)' onclick='rvMode=false; start()'>✕</button></div>`;
+    $("tabs").style.display = "none";
+    $("sd").parentElement.parentElement.style.display = "none";
+  } else {
+    $("tabs").style.display = "flex";
+    $("sd").parentElement.parentElement.style.display = "grid";
+    if(!left.length){fin();return}
+    let c=left.filter(i=>i!=last); c=c.length?c:left;
+    cur=c[Math.floor(Math.random()*c.length)]; last=cur; answered=false;
+    $("title").textContent="";
+    renderTabs();
+  }
+
+  $("fb").className="fb"; $("fb").innerHTML="";
+  $("zone").classList.remove("ok","bad");
+  resetHint();
+  const isBld = (mode === "mc" || mode === "gl") && !ch;
+  $("opts").style.display="none";$("opts").innerHTML="";
+  $("bld").style.display = isBld ? "" : "none";
+  {const fr=document.querySelector("#bld .frame");if(fr)fr.style.display="";}
+  $("inp").style.display = isBld ? "none" : "";
+  $("inp").disabled = isBld;
+  $("inp").value = "";
+  $("chk").textContent = "Перевірити ✓";
+  $("chk").disabled = false;
+  $("umRow").style.display = "flex";
+
+  const x = it[cur], ua = "<div class='tr-text'>"+esc(x[1])+"</div>";
+  $("lab").innerHTML = ua;
+  if(isBld){
+    $("sent").innerHTML = esc(x[1]); $("lab").innerHTML = "";
+    const words = bwx(x);
+    bPlaced = [];
+    bPool = sh(words.map((w,i)=>i));
+    $("pool").style.minHeight="";
+    renderBuilder();
+    fitFrame();
+  } else if(ch){
+    if(!rvMode) $("title").textContent="Яка це конструкція?";
+    $("sent").innerHTML = gapped(x,false); renderOpts(x);
+    $("lab").innerHTML="<button type='button' class='tr-btn' id='trBtn'>🌐 Перекласти</button>";
+    $("trBtn").onclick=()=>{$("lab").innerHTML=ua};
+  } else {
+    $("sent").innerHTML = "";
+    if(!rvMode) $("title").textContent="Переклади німецькою";
+    if(x[4]) $("lab").innerHTML = ua+kwHtml(x[4]);
+    setTimeout(()=>{try{$("inp").focus()}catch(e){}},60);
+  }
+}
+
+function gapped(x,fill){let s=esc(x[0]);const g=(c)=>"<span class='blank"+(fill?" fill ok":"")+"'>"+(fill?esc(c):"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")+"</span>";
+ return s.replace(x[2],"\u0001").replace(x[3],"\u0002").replace("\u0001",g(x[2])).replace("\u0002",g(x[3]))}
+const norm=s=>s.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue").replace(/ß/g,"ss").replace(/[.,!?;:„“"']/g,"").replace(/\s+/g," ").trim();
+
+const osa=(a,b)=>{const m=a.length,n=b.length,d=[];for(let i=0;i<=m;i++){d[i]=[i];for(let j=1;j<=n;j++)d[i][j]=i?0:j}
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){const c=a[i-1]===b[j-1]?0:1;d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+c);
+    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1)}
+  return d[m][n]};
+const typoOk=(v,a,x)=>{const nv=norm(v),na=norm(a),tol=na.length>=55?2:1;
+  if(osa(nv,na)>tol) return false;
+  return [x[2],x[3]].every(c=>(" "+nv+" ").includes(" "+norm(String(c))+" "))};
+const commaSig=t=>t.replace(/\s*,\s*/g,", ").replace(/[.!?;:„“"']/g,"").trim().split(/\s+/).map(w=>/,$/.test(w)?1:0).join("");
+
+function renderOpts(x){
+  const ci=P.findIndex(p=>p[1]===x[5]);
+  const ids=sh([ci].concat(sh(P.slice(0,PN).map((_,i)=>i).filter(i=>i!==ci&&P[i][0]!==SYN[P[ci][0]])).slice(0,3)));
+  const o=$("opts");o.className="opts grid4";o.style.display="";
+  o.innerHTML=ids.map(k=>"<button type='button' class='opt' data-k='"+k+"'>"+esc(P[k][1])+"</button>").join("");
+  o.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickOpt(b,ci));
+}
+function endOpts(ci){
+  $("opts").querySelectorAll(".opt").forEach(e=>{e.disabled=true;if(+e.dataset.k===ci)e.classList.add("ok")});
+  const x=items()[cur];
+  $("sent").innerHTML=gapped(x,true);
+}
+function pickOpt(b,ci){
+  if(answered) return;
+  answered=true;
+  const ok=+b.dataset.k===ci;
+  endOpts(ci);
+  if(!ok) b.classList.add("er");
+  done(ok);
+}
+function checkBuilder(){
+  if(answered) return;
+  const x=items()[cur], words=bwx(x);
+  if(bPlaced.length!==need(x)) return;
+  const b=bPlaced.map(i=>words[i]),strip=a=>a.filter(w=>w!==",").join(" "),lw=a=>a.map(w=>w.toLowerCase()).join(" ");
+  let ok=b.join(" ")===words.join(" "),alt=false;
+  if(!ok&&mode==="mc"){const bl=lw(b);alt=altsOf(x).slice(1).some(v=>lw(bw([v]))===bl);ok=alt}
+  answered=true;
+  done(ok,!ok&&mode==="mc"&&strip(b)===strip(words),alt?"✓ Інший порядок слів (підрядна частина на початку) теж правильний.":undefined);
+}
+
+const HS={um:["Hauptsatz, um … zu + Infinitiv","однаковий підмет"],damit:["Hauptsatz, damit + підмет … дієслово в кінці","різні підмети"],az:["Hauptsatz, anstatt … zu + Infinitiv","однаковий підмет"],ad:["Hauptsatz, anstatt dass + підмет … дієслово в кінці","різні підмети"],oz:["Hauptsatz, ohne … zu + Infinitiv","однаковий підмет"],od:["Hauptsatz, ohne dass + підмет … дієслово в кінці","різні підмети"],in:["Hauptsatz, indem + підмет … дієслово в кінці","зазвичай однаковий підмет"],dd:["Hauptsatz, dadurch, dass + підмет … дієслово в кінці","підмети можуть бути різні"]};
+const startOf=x=>{const w=x[0].split(" "),c=String(x[2]).split(" ")[0];let k=-1;for(let i=1;i<w.length;i++){if(/,$/.test(w[i-1])&&w[i].replace(/,$/,"")===c){k=i;break}}if(k<0)k=Math.max(1,Math.ceil(w.length/2));return w.slice(0,k+1).join(" ")+" …"};
+const kwHtml=h=>"<div class='kw'>"+h.split(", ").map(t=>"<span class='kwb'>"+esc(t)+"</span>").join("")+"</div>";
+function hintLadder(){
+  if(hintLvl>=1){hideHint();showSol();return}
+  hintLvl=1;hintUsed=true;
+  const x=items()[cur],h=$("hintAns"),hs=HS[P[tab][0]]||["",""];
+  h.className="hintans rich on";
+  h.innerHTML="<div class='hl'><div class='hr'><span class='hk'>Початок</span><span class='hv de'>"+esc(startOf(x))+"</span></div><div class='hr'><span class='hk'>Схема</span><span class='hv'>"+esc(hs[0])+"</span></div></div>";
+  $("showTxt").textContent="Показати відповідь";$("showBtn").classList.add("rev");
+  try{tapHaptic()}catch(e){}
+}
+function hintOrShow(){
+  if(answered) return;
+  if(mode==="ty"&&!isChoice(tab)){hintLadder();return}
+  if(!hintUsed){
+    hintUsed=true;
+    const h=$("hintAns"); h.textContent = items()[cur][0]; h.classList.add("on");
+    clearTimeout(hintTm); hintTm=setTimeout(hideHint, 2200);
+    $("showTxt").textContent = "Відповідь"; $("showBtn").classList.add("rev");
+  } else {
+    hideHint(); showSol();
+  }
+}
+function showSol(){
+  if(answered) return; answered=true; lastInput="";
+  if(isChoice(tab)) endOpts(P.findIndex(p=>p[1]===items()[cur][5]));
+  done(false);
+}
+
+const ORD={
+"um":"після головного речення стоїть <b>um</b>, а в кінці — <b>zu</b> + інфінітив.",
+"damit":"<b>damit</b> стоїть на початку підрядного речення, дієслово — у кінці.",
+"az":"<b>anstatt</b> стоїть на початку інфінітивної конструкції, <b>zu</b> + інфінітив — у кінці.",
+"ad":"<b>anstatt dass</b> стоїть на початку підрядного речення, дієслово — у кінці.",
+"oz":"<b>ohne</b> стоїть на початку інфінітивної конструкції, <b>zu</b> + інфінітив — у кінці.",
+"od":"<b>ohne dass</b> стоїть на початку підрядного речення, дієслово — у кінці.",
+"in":"<b>indem</b> стоїть на початку підрядного речення (перед ним кома), дієслово — у кінці.",
+"dd":"<b>dadurch, dass</b> стоїть на початку підрядного речення, дієслово — у кінці. Кома — перед dadurch і між dadurch та dass.",
+"mix":"зверни увагу: однаковий підмет → <b>zu</b> + інфінітив; різні підмети → підрядне речення з <b>damit</b> / <b>anstatt dass</b> / <b>ohne dass</b>. Спосіб дії → <b>indem</b> / <b>dadurch, dass</b>."
+};
+function explainTy(x,v){
+  const key=P[tab][0];
+  const wrap=L=>L.length?"<div class='why'><b>🔍 Що не так</b>"+L.map(t=>"<div>• "+t+"</div>").join("")+"</div>":"";
+  if(!v||!v.trim()) return wrap(["Ти відкрив відповідь без спроби. Знайди в реченні конструкцію <b>"+esc(x[5])+"</b> і зверни увагу на порядок слів."]);
+  const raw=t=>t.replace(/[.,!?;:„“"']/g,"").split(/\s+/).filter(Boolean);
+  const nv=norm(v),ct=raw(x[0]),cn=ct.map(t=>norm(t)),ut=raw(v),un=ut.map(t=>norm(t)),L=[];
+  const c1={};un.forEach(w=>{c1[w]=(c1[w]||0)+1});
+  let miss=[];cn.forEach((w,i)=>{if(c1[w]>0)c1[w]--;else miss.push(ct[i])});
+  const c2={};cn.forEach(w=>{c2[w]=(c2[w]||0)+1});
+  let extra=[];un.forEach((w,i)=>{if(c2[w]>0)c2[w]--;else extra.push(ut[i])});
+  const ml=[x[2],x[3]].filter(c=>{const k=norm(String(c));return !(" "+nv+" ").includes(" "+k+" ")});
+  if(ml.length===2) L.push("У твоїй відповіді немає конструкції <b>"+esc(x[5])+"</b>.");
+  else if(ml.length===1) L.push("Не вистачає частини <b>«"+esc(ml[0])+"»</b>.");
+  const sp=[];
+  for(let i=miss.length-1;i>=0;i--){
+    const m=norm(miss[i]); if(m.length<5) continue;
+    const j=extra.findIndex(e=>osa(norm(e),m)<=Math.max(1,Math.floor(m.length/4)));
+    if(j>=0){sp.push([extra[j],miss[i]]);extra.splice(j,1);miss.splice(i,1)}
+  }
+  sp.reverse().forEach(q=>L.push("Орфографія: ти написав <b>"+esc(q[0])+"</b>, а треба <b>"+esc(q[1])+"</b>."));
+  const lim=arr=>arr.slice(0,6).map(esc).join(", ")+(arr.length>6?" …":"");
+  if(miss.length) L.push("Не вистачає або інше слово: <b>"+lim(miss)+"</b>.");
+  if(extra.length) L.push("Зайве або не те слово: <b>"+lim(extra)+"</b>.");
+  if(!L.length) L.push("Слова правильні, але порядок слів інший"+(ORD[key]?": "+ORD[key]:". Порівняй зі зразком вище."));
+  return wrap(L);
+}
+function done(ok,cmOnly,extra){
+  const t=T(), x=items()[cur];
+  $("hintAns").classList.remove("on");
+  answeredAt=Date.now();
+  if(!rvMode||ok){t.x=(t.x||0)+1;t.p=(t.p||0)+1}
+  hapticAll(ok);
+  playSound(ok?"correct":"wrong");
+
+  if(rvMode){
+    if(ok) {
+      delete t.e[cur];
+      rvPool.shift();
+    } else {
+      const item = rvPool.shift();
+      rvPool.push(item);
+    }
+  } else {
+    if(ok) {
+      t.r++; t.k[cur]=1; delete t.e[cur]; bump(1);
+    } else {
+      t.w++; t.k[cur]=0; t.e[cur]=true; bump(-1);
+    }
+  }
+
+  if(mode==="mc"||mode==="gl"){
+    $("zone").classList.remove("ok","bad");
+    $("zone").classList.add(ok?"ok":"bad");
+    renderBuilder();
+  }
+  save();
+
+  const f=$("fb"); f.className="fb "+(ok?"ok":"er");
+  f.innerHTML =
+    "<div class='k'>"+(ok?"✓ ПРАВИЛЬНО":"✗ НЕПРАВИЛЬНО")+
+    (rvMode ? " · Робота над помилками" : (XP>=XP_MAX?" · EXP на максимумі 🏆":ok?" · +1 EXP":" · −1 EXP"))+
+    "</div>"+
+    "<div class='ans' title='Натисни, щоб почути'>"+esc(x[0])+"</div>"+
+    "<div class='ex'>"+esc(x[5])+" · "+esc(x[1])+"</div>"+
+    (function(){const m=extra||"";return m?"<div class='ex' style='color:var(--go)'>"+esc(m)+"</div>":""})()+
+    (cmOnly ? "<div class='ex' style='color:var(--go)'>⚠️ Слова правильні, але коми стоять не так. Кома обов'язкова між головним і підрядним реченням, а також перед підрядною частиною з damit, anstatt dass, ohne dass. У конструкціях um … zu, anstatt … zu, ohne … zu кома стоїть перед um / anstatt / ohne. Перед indem і dadurch, dass кома теж обов'язкова. Якщо підрядна частина стоїть на початку речення, кома ставиться після неї.</div>" : "")+
+    (!ok && mode==="ty" && !isChoice(tab) && !cmOnly ? explainTy(x,lastInput) : "")+
+    (!ok && RS[P.findIndex(p=>p[1]===x[5])] ? "<div class='rule' style='margin:12px 0 0'>"+RS[P.findIndex(p=>p[1]===x[5])]+"</div>" : "")+
+    (ok ? "<div class='bar'></div>" : "")+
+    "<button class='nx' type='button'>Далі →</button>";
+  f.querySelector(".ans").onclick = e=>{e.stopPropagation(); speak(x[0]);};
+  f.querySelector(".nx").onclick = ()=>{ start(); };
+  $("card").classList.add("ans");
+  $("chk").textContent = "Далі →";
+  $("chk").disabled = false;
+  $("showBtn").disabled = true;
+
+  if(!rvMode){
+    const d=items().filter((_,j)=>t.k[j]).length;
+    $("sd").textContent = d+" / "+items().length;
+    $("sc").textContent = t.r;
+    $("sw").textContent = t.w;
+    $("bar").style.width = d/items().length*100+"%";
+    renderTabs();
+  }
+
+  if (ok) {
+    autoAdvanceTimer = setTimeout(()=>{ if(answered) start(); }, 2200);
+  } else {
+    setTimeout(()=>{try{document.querySelector('#fb').scrollIntoView({behavior:'smooth',block:'nearest'})}catch(e){}},60);
+  }
+}
+
+function nextMode(){const k=MODES.indexOf(mode);for(let q=1;q<=MODES.length;q++){const m=MODES[(k+q)%MODES.length];if(cnt(tab,m)<list(tab,m).length)return m}return MODES[(k+1)%MODES.length]}
+function fin(){
+  const t=T(),n=items().length;
+  $("tabs").style.display="flex";
+  $("sd").parentElement.parentElement.style.display="grid";
+  if(!rvMode) renderTabs();
+  $("card").classList.add("fin");
+  $("title").textContent="Вкладку пройдено";
+  const nextTab=(tab+1)%P.length;
+  const canNext = nextTab!==0 && isCatOpen(nextTab);
+
+  const errCount = Object.keys(t.e).length;
+  let rvBtnStr = "";
+  if(errCount > 0){
+    rvBtnStr = `<button class='btn danger' id='rvBtn' style='border:1px solid var(--no);background:var(--no);color:#fff'>🔁 Робота над помилками (${errCount})</button>`;
+  }
+
+  $("finBox").innerHTML =
+    "<p class='ft'>🎉 "+P[tab][1]+" — усе виконано!</p>"+
+    "<p>Правильно: <b>"+t.r+"</b> · Помилок: <b>"+t.w+"</b> · Завдань: <b>"+n+"</b></p>"+
+    "<div class='fin-actions'>"+
+    rvBtnStr +
+    "<button class='cancel' id='again'>↺ Ще раз</button>"+
+    "<button class='cancel' id='alt'>"+("→ "+MLAB[nextMode()])+"</button>"+
+    "<button class='go' id='nxt'"+(canNext?"":" disabled")+">"+(canNext?"Наступна вкладка →":"Наступна заблокована 🔒")+"</button>"+
+    "</div>";
+
+  if(errCount > 0){
+    $("rvBtn").onclick = () => {
+      rvMode = true;
+      rvPool = Object.keys(t.e).map(Number);
+      rvInitial = rvPool.length;
+      start();
+    };
+  }
+  $("again").onclick=reset;
+  if(isChoice(tab))$("alt").style.display="none";if(tab===P.length-1)$("nxt").style.display="none";
+  $("alt").onclick=()=>{setMode(nextMode());last=-1;renderTabs();start()};
+  $("nxt").onclick=()=>{
+    if(!canNext) return;
+    enterCat(nextTab); showRule(!seen[P[tab][0]]); renderTabs(); start();
+  };
+  renderTabs();
+}
+
+function reset(){const o=T();S[SK()]={k:{},e:{},r:0,w:0,x:(o.x||0)+1,p:(o.p||0)+1};save();last=-1;renderTabs();start()}
+
+function speak(t){try{if(!window.speechSynthesis||!t)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+
+$("showBtn").onclick = hintOrShow;
+$("chk").onclick = ()=>{
+  if(answered){ if(Date.now()-answeredAt<400) return; start(); return; }
+  if(mode==="mc"||mode==="gl"){ checkBuilder(); }
+  else {
+    const v = $("inp").value;
+    if(!v.trim()) return;
+    answered = true; lastInput = v;
+    $("inp").disabled = true;
+    const x=items()[cur],al=altsOf(x);
+    const nm=al.filter(a=>norm(v)===norm(a)),ex=nm.find(a=>commaSig(v)===commaSig(a))||nm[0],ty=ex?null:al.find(a=>typoOk(v,a,x)),hit=ex||ty,wOk=!!hit;
+    const cOk=!!(wOk&&(commaSig(v)===commaSig(hit)||(ty&&v.trim().split(/\s+/).length!==hit.split(/\s+/).length)));
+    done(cOk, wOk&&!cOk, cOk&&ty?"✏️ Є дрібна одруківка — зараховано. Правильний варіант дивись вище.":undefined);
+  }
+};
+$("inp").onkeydown = e=>{ if(e.key==="Enter"){ e.preventDefault(); e.stopPropagation(); $("chk").click(); } };
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (document.body.classList.contains("lsn")) return;
+  if ($("card").classList.contains("mc") && $("opts").style.display!=="none" && !answered && /^[1-4]$/.test(e.key)) { const b=$("opts").querySelectorAll(".opt")[+e.key-1]; if(b) b.click(); return; }
+  if ((mode === "mc" || mode === "gl") && !answered) {
+    if (e.key === 'Backspace' && bPlaced.length > 0) {
+      tapHaptic();
+      bPlaced.pop();
+      renderBuilder();
+      return;
+    }
+    if (/^[0-9]$/.test(e.key)) {
+      const idx = e.key === '0' ? 9 : parseInt(e.key) - 1;
+      const w = bPool[idx];
+      if (w !== undefined && !bPlaced.includes(w) && bPlaced.length < need(items()[cur])) {
+        tapHaptic();
+        bPlaced.push(w);
+        renderBuilder();
+      }
+      return;
+    }
+    if (e.key === 'Enter' && bPlaced.length === need(items()[cur])) {
+      $("chk").click();
+      return;
+    }
+  } else if (answered && e.key === 'Enter') {
+     if(!e.repeat) $("chk").click();
+  }
+});
+
+$("sp").onclick = ()=>speak(items()[cur] && items()[cur][0]);
+$("rs").onclick = reset;
+$("rb").onclick = ()=>showRule($("rule").hidden);
+$("xrst").onclick = ()=>{
+  const doReset=()=>{ ALLSK.forEach(k=>{const o=S[k];if(o){o.x=(o.x||0)+1;o.p=o.x}}); XP=calcXp(); save(true); updateXp(); };
+  const tg=window.Telegram&&window.Telegram.WebApp;
+  if(tg&&tg.showConfirm&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.2")){ try{ tg.showConfirm("Скинути EXP?",ok=>{if(ok)doReset()}); return; }catch(e){} }
+  if(confirm("Скинути EXP?")) doReset();
+};
+
+const THEMES=['light','dark','autumn','winter','sakura','candy'],TI={light:'☀️',dark:'🌙',autumn:'🍂',winter:'❄️',sakura:'🌸',candy:'🍬'},TN={light:'Світла',dark:'Темна',autumn:'Осінь',winter:'Зима',sakura:'Сакура',candy:'Цукеркова ніч'};
+const eff=()=>{const t=document.documentElement.getAttribute('data-theme');return THEMES.includes(t)?t:'dark'};
+function paint(){const t=eff(),b=$("theme");b.textContent=TI[t];b.title="Тема: "+TN[t]}
+$("theme").onclick=()=>{const n=THEMES[(THEMES.indexOf(eff())+1)%THEMES.length];document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("pi-theme",n)}catch(e){}paint()};
+
+function applyStorage() {
+  const sig=()=>ALLSK.map(k=>S[k]?Object.keys(S[k].k).filter(i=>S[k].k[i]).length+":"+(S[k].x||0)+":"+(S[k].p||0):"-").join("|");
+  const before=sig();
+  load();
+  updateXp();
+  const changed=sig()!==before;
+  const idle=!answered&&bPlaced.length===0&&!$("inp").value&&!hintUsed&&!rvMode&&!document.body.classList.contains("lsn");
+  if(changed&&idle) start(); else renderTabs();
+}
+
+window.addEventListener("tpsync:updated", applyStorage);
+if (window.TPSync && window.TPSync.ready) {
+  window.TPSync.ready.then(applyStorage).catch(function(){});
+}
+
+const tpSyncNow = () => { try { if(window.TPSync && TPSync.supported) TPSync.sync(); } catch(e){} };
+document.addEventListener('visibilitychange', () => { if(!document.hidden) tpSyncNow(); });
+setInterval(() => { if(!document.hidden && answered) tpSyncNow(); }, 30000);
+
+(function(){const st=$("stages");let down=false,sx=0,sl=0,moved=false;
+st.addEventListener("mousedown",e=>{if(e.button!==0)return;down=true;moved=false;sx=e.pageX;sl=st.scrollLeft});
+window.addEventListener("mousemove",e=>{if(!down)return;const dx=e.pageX-sx;if(!moved&&Math.abs(dx)>5){moved=true;st.classList.add("drag")}if(moved){st.scrollLeft=sl-dx;e.preventDefault()}});
+window.addEventListener("mouseup",()=>{if(!down)return;down=false;st.classList.remove("drag")});
+st.addEventListener("click",e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true);
+st.addEventListener("wheel",e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)&&st.scrollWidth>st.clientWidth){st.scrollLeft+=e.deltaY;e.preventDefault()}},{passive:false});
+})();
+(function(){
+  const b=document.getElementById("sync-ind");
+  const IC={off:"📴",syncing:"🔄",ok:"☁️",error:"⚠️"},TT={off:"Синхронізація недоступна: відкрий тренажер через Telegram",syncing:"Синхронізація…",ok:"Прогрес синхронізовано",error:"Помилка синхронізації. Натисни, щоб повторити"};
+  const paintS=()=>{const s=(window.TPSync&&TPSync.status)||"off";b.textContent=IC[s]||"📴";b.title=TT[s]||""};
+  b.onclick=()=>{try{if(window.TPSync&&TPSync.supported)TPSync.sync()}catch(e){}};
+  window.addEventListener("tpsync:status",paintS);paintS();
+})();
+(function(){var lt=0;
+document.addEventListener("touchend",function(e){var n=Date.now();if(n-lt<350&&e.target.closest&&e.target.closest("button,.wc,.opt"))e.preventDefault();lt=n},{passive:false});
+["gesturestart","gesturechange","gestureend"].forEach(function(g){document.addEventListener(g,function(e){e.preventDefault()})});})();
+load();
+try{const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();
+ if(tg.BackButton&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.1")){tg.BackButton.show();tg.BackButton.onClick(()=>{location.href="index.html"})}}}catch(e){}
+(function restoreTab(){const t=sg("fm_tab",0);if(Number.isInteger(t)&&t>0&&t<P.length&&isCatOpen(t))enterCat(t);else if(!isCatOpen(tab)){enterCat(0)}})();
+paint();updateXp();showRule(!seen[P[tab][0]]);renderTabs();start();
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let soundEnabled = store.get('pi-sound') !== 'off';
+function updateSoundIcon(){ $("sound-toggle").textContent = soundEnabled ? '🔔' : '🔕'; }
+updateSoundIcon();
+function toggleSound(){ soundEnabled = !soundEnabled; store.set('pi-sound', soundEnabled ? 'on' : 'off'); updateSoundIcon(); if(soundEnabled) playSound('correct'); }
+let audioCtx;
+function playSound(type){
+  if(!soundEnabled) return;
+  try{
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    if(type === 'correct'){
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, now);
+      osc.frequency.setValueAtTime(659.25, now + 0.1);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+      osc.start(now); osc.stop(now + 0.6);
+    } else {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.start(now); osc.stop(now + 0.4);
+    }
+  }catch(e){}
+}
+
+updateSoundIcon();
+
+(function(){
+const rnd=a=>a[Math.random()*a.length|0];
+const th=()=>{const t=document.documentElement.getAttribute('data-theme');return ['light','dark','autumn','winter','sakura','candy'].includes(t)?t:'dark'};
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+const _fv=store.get('pi-fx');let lvl=(_fv==='on'||(_fv>='1'&&_fv<='3'))?2:0,ses=0,live=0;
+const btn=document.getElementById('fx-toggle');
+function paintFx(){btn.classList.toggle('off',!lvl);btn.title=lvl?'Ефекти: увімкнено':'Ефекти: вимкнено';}
+function spawn(kind,n,force){
+  if(RM.matches||(!lvl&&!force))return;n=Math.round(n*(innerWidth<600?.55:1)*(force?1:[0,.5,1,1.8][lvl]));
+  for(let i=0;i<n;i++){
+    if(live>140)return;const el=document.createElement('div');el.className='mp';let dur=3+Math.random()*3,z;
+    if(kind==='petal'){el.classList.add('petal');z=9+Math.random()*10;el.style.width=el.style.height=z+'px';}
+    else if(kind==='star'){el.textContent=rnd(['⭐','✨','💖','🌟','🍬']);el.style.fontSize=(12+Math.random()*16)+'px';}
+    else if(kind==='conf'){el.style.width='8px';el.style.height='13px';el.style.borderRadius='2px';el.style.background=rnd(['#ff7ab8','#b8a1ff','#6fe3d0','#ffc46b','#8ec5ff']);dur=2.2+Math.random()*2.2;}
+    else if(kind==='leaf'){const p=Math.random()<.25;el.textContent=p?'🎃':rnd(['🍂','🍁','🍃','🍂']);el.style.fontSize=((p?22:16)+Math.random()*14)+'px';dur=4+Math.random()*3;}
+    else if(kind==='snow'){if(Math.random()<.45){el.textContent='❄️';el.style.fontSize=(12+Math.random()*10)+'px';}else{el.classList.add('snow');z=4+Math.random()*6;el.style.width=el.style.height=z+'px';}dur=5+Math.random()*4;}
+    else if(kind==='bloom'){el.textContent=rnd(['🌷','🌼','🌸']);el.style.fontSize=(14+Math.random()*12)+'px';dur=4+Math.random()*3;}
+    else if(kind==='sun'){el.classList.add('up');el.textContent=rnd(['🦋','🌻','☀️','🍋']);el.style.fontSize=(14+Math.random()*12)+'px';dur=4+Math.random()*3;}
+    else if(kind==='bub'){el.classList.add('bub','up');z=14+Math.random()*20;el.style.width=el.style.height=z+'px';dur=4+Math.random()*3;}
+    else if(kind==='fly'){el.classList.add('fly','up');z=5+Math.random()*5;el.style.width=el.style.height=z+'px';dur=4+Math.random()*4;}
+    else{el.textContent=rnd(th()==='dark'?['✨','🌙','⭐']:['✨','💛','🌼']);el.style.fontSize=(12+Math.random()*12)+'px';}
+    el.style.left=Math.random()*100+'vw';el.style.setProperty('--dx',(Math.random()*160-80)+'px');el.style.setProperty('--rot',(Math.random()*720-360)+'deg');el.style.setProperty('--o',(.22+Math.random()*.26).toFixed(2));
+    el.style.animationDuration=dur+'s';el.style.animationDelay=Math.random()*.8+'s';
+    document.body.appendChild(el);live++;setTimeout(()=>{el.remove();live--;},(dur+1)*1000);
+  }
+}
+function fx(n){const t=th();
+  if(t==='sakura')spawn('petal',n);
+  else if(t==='candy'){spawn('star',Math.ceil(n*.5));spawn('conf',Math.ceil(n*.6));}
+  else if(t==='autumn')spawn('leaf',n);
+  else if(t==='winter')spawn('snow',n);
+  else if(t==='light'){spawn('bub',Math.ceil(n*.7));spawn('spark',Math.ceil(n*.3));}
+  else{spawn('fly',Math.ceil(n*.8));spawn('spark',Math.ceil(n*.25));}
+}
+window.toggleFx=function(){lvl=lvl?0:2;store.set('pi-fx',lvl?'on':'off');paintFx();if(lvl)fx(25);else document.querySelectorAll('.mp').forEach(e=>e.remove());};
+function wrap(nm,f){const o=window[nm];if(typeof o==='function')window[nm]=function(){const r=o.apply(this,arguments);try{f.apply(null,arguments)}catch(e){}return r;};}
+wrap('done',ok=>{if(ok){ses++;fx(ses===3||ses%5===0?40:6);}else ses=0;});
+const celeb=()=>{fx(120);setTimeout(()=>fx(70),1000);};
+wrap('fin',celeb);
+new MutationObserver(()=>fx(18)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+paintFx();
+})();
+</script>
+<script>
+/* Aurora UI: акцент етапу + ripple на кнопках */
+(function(){
+const ACC=[{d:'#818cf8',l:'#4f46e5'},{d:'#fbbf24',l:'#b45309'},{d:'#fb7185',l:'#be123c'},{d:'#38bdf8',l:'#0369a1'},{d:'#2dd4bf',l:'#0f766e'},{d:'#a3e635',l:'#4d7c0f'},{d:'#e879f9',l:'#a21caf'},{d:'#22d3ee',l:'#0e7490'},{d:'#c084fc',l:'#7e22ce'},{d:'#f59e0b',l:'#b45309'},{d:'#facc15',l:'#a16207'}];
+const isLight=()=>{const t=document.documentElement.getAttribute('data-theme');return t==='light'||t==='sakura'};
+const rgb=h=>{h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
+window.applyAccent=function(i){
+  const a=ACC[((i%ACC.length)+ACC.length)%ACC.length],c=isLight()?a.l:a.d,[r,g,b]=rgb(c),root=document.documentElement;
+  root.style.setProperty('--acc',c);
+  root.style.setProperty('--acc-b','rgba('+r+','+g+','+b+',.16)');
+};
+const _rt=window.renderTabs;
+window.renderTabs=function(){applyAccent(typeof tab!=='undefined'?tab:0);return _rt.apply(this,arguments)};
+new MutationObserver(()=>applyAccent(typeof tab!=='undefined'?tab:0)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+document.addEventListener('pointerdown',e=>{
+  const t=e.target.closest('.btn,.chk,.chip,.ibtn,.opt,.showbtn,.fb .nx,.lgo');
+  if(!t)return;
+  const r=t.getBoundingClientRect(),sz=Math.max(r.width,r.height)*1.6,sp=document.createElement('span');
+  sp.className='rip';
+  sp.style.cssText='position:absolute;left:'+(e.clientX-r.left)+'px;top:'+(e.clientY-r.top)+'px;width:'+sz+'px;height:'+sz+'px;margin:'+(-sz/2)+'px 0 0 '+(-sz/2)+'px;border-radius:50%;background:currentColor;opacity:.30;pointer-events:none';
+  t.appendChild(sp);setTimeout(()=>sp.remove(),650);
+});
+applyAccent(typeof tab!=='undefined'?tab:0);
+})();
+</script></body></html>
